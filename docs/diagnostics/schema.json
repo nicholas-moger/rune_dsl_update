@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:rune-dsl-review:docs/diagnostics/schema.json",
+  "title": "Rune diagnostics codes-registry schema",
+  "type": "object",
+  "required": ["bands", "codes"],
+  "properties": {
+    "bands": {
+      "type": "object",
+      "description": "Mapping from numeric band → category name. Each code's numeric segment must fall in a defined band.",
+      "patternProperties": {
+        "^[0-9]{3}-[0-9]{3}$": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "codes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["code", "name", "category", "since", "status", "doc", "doc_status"],
+        "properties": {
+          "code": { "type": "string", "pattern": "^RUNE-[0-9]{3}$" },
+          "name": { "type": "string" },
+          "category": { "type": "string", "enum": ["PARSER", "SCOPE", "TYPE", "VALIDATION", "CODEGEN", "INTERNAL"] },
+          "since": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+          "status": { "type": "string", "enum": ["active", "deprecated", "removed"] },
+          "doc": { "type": "string", "pattern": "^RUNE-[0-9]{3}\\.md$" },
+          "doc_status": { "type": "string", "enum": ["ready", "stub"] },
+          "antlr_exception": { "type": "string" }
+        }
+      }
+    }
+  }
+}

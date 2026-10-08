@@ -1,0 +1,4 @@
+namespace chaos.s34.a2dangle.h
+version "1.0.0"
+type C34Aux: <"Helper - relocated by the import axis.">
+    aux string (1..1)

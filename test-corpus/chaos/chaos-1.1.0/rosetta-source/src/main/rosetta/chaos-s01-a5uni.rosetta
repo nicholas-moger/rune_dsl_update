@@ -1,0 +1,12 @@
+namespace chaos.s01.a5uni
+version "1.0.0"
+type C1Ref: <"éüµ – A referenced component the import-style axis relocates.">
+    refCode string (1..1)
+type C1Base: <"Root of the S01 inheritance chain.">
+    baseId string (1..1)
+    note string (0..1)
+type A5UniProbe: <"Non-ASCII literal probe – müßig 試験.">
+    p string (0..1)
+        [label as "µ–label §7"]
+enum A5UniProbeEnum: <"displayName probe.">
+    V displayName "µ–„display“"

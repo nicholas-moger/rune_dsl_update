@@ -1,0 +1,18 @@
+namespace chaos.s02.a3third.p2
+version "1.0.0"
+import chaos.s02.a3third.p1.*
+import chaos.s02.a3third.p3.*
+enum C2BaseEnum: <"Extension base.">
+    Alpha
+    Beta displayName "B"
+enum C2ExtEnum extends C2BaseEnum: <"Extends across a block boundary.">
+    Gamma displayName "G3" <"Third letter.">
+type C2Use: <"Enum-typed attributes and enum-literal conditions.">
+    dir C2DirEnum (1..1)
+    exts C2ExtEnum (0..*)
+    tags C2Tag (0..*)
+    condition C2NotHold:
+        dir <> C2DirEnum -> Hold
+    condition C2HasAlpha:
+        if exts exists
+        then exts contains C2ExtEnum -> Alpha or exts contains C2ExtEnum -> Gamma

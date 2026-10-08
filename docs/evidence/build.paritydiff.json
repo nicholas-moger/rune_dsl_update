@@ -1,0 +1,67 @@
+{
+  "id": "build.paritydiff",
+  "section": "build",
+  "title": "Generated-tree byte parity: legacy 9.83.0 vs rune-dsl-plus fork",
+  "command": "pwsh -File demo/build/diff-trees.ps1 -A \"<development-root>\\demo\\work\\build-legacy-out\" -B \"<development-root>\\demo\\work\\build-plus-out\" -AlsoAgainst \"<development-root>\\demo\\work\\gen-m1\" -NormalizeEol",
+  "startedAt": "2026-08-20T01:37:42Z",
+  "durationMs": 1107042,
+  "metrics": {
+    "normalizeEol": true,
+    "identicalFiles": 19216,
+    "differingFiles": 3,
+    "onlyInA": 0,
+    "onlyInB": 0,
+    "totalPaths": 19219,
+    "rootA": "<development-root>\\demo\\work\\build-legacy-out",
+    "rootB": "<development-root>\\demo\\work\\build-plus-out",
+    "filesInA": 19219,
+    "filesInB": 19219,
+    "firstDiffering": [
+      "cdm/observable/asset/calculatedrate/package-info.java",
+      "cdm/observable/asset/package-info.java",
+      "cdm/product/asset/floatingrate/package-info.java"
+    ],
+    "firstOnlyInA": [],
+    "firstOnlyInB": [],
+    "alsoAgainst": {
+      "root": "<development-root>\\demo\\work\\gen-m1",
+      "aVsC": {
+        "rootA": "<development-root>\\demo\\work\\build-legacy-out",
+        "rootB": "<development-root>\\demo\\work\\gen-m1",
+        "totalPaths": 19219,
+        "filesInA": 19219,
+        "filesInB": 19219,
+        "identicalFiles": 19216,
+        "differingFiles": 3,
+        "onlyInA": 0,
+        "onlyInB": 0,
+        "firstDiffering": [
+          "cdm/observable/asset/calculatedrate/package-info.java",
+          "cdm/observable/asset/package-info.java",
+          "cdm/product/asset/floatingrate/package-info.java"
+        ],
+        "firstOnlyInA": [],
+        "firstOnlyInB": []
+      },
+      "bVsC": {
+        "rootA": "<development-root>\\demo\\work\\build-plus-out",
+        "rootB": "<development-root>\\demo\\work\\gen-m1",
+        "totalPaths": 19219,
+        "filesInA": 19219,
+        "filesInB": 19219,
+        "identicalFiles": 19219,
+        "differingFiles": 0,
+        "onlyInA": 0,
+        "onlyInB": 0,
+        "firstDiffering": [],
+        "firstOnlyInA": [],
+        "firstOnlyInB": []
+      }
+    }
+  },
+  "notes": "SHA-256 byte compare over the union of relative paths; length checked first as a cheap early-out. Paths compared case-sensitively (ordinal). Differences are the RESULT, not a failure: exit stays 0. alsoAgainst holds the same comparison run against a third tree (onlyInB there means \"only in the third tree\"). Wrapper-verified addendum: the 3 differing paths are all package-info.java files whose two description lines appear in SWAPPED ORDER on the legacy leg (direct diff; content otherwise identical) - upstream emits package-info descriptions in model-load order, a known upstream reproducible-builds defect, while the fork emits a stable order. alsoAgainst.bVsC shows the fork Maven tree byte-identical to the fork direct-driver tree, 19,219/19,219.",
+  "host": {
+    "cpu": "Intel(R) Core(TM) Ultra 9 285K",
+    "os": "Microsoft Windows 11 Pro Insider Preview"
+  }
+}

@@ -1,0 +1,4 @@
+namespace chaos.s26.a2dangle.unused
+version "1.0.0"
+type C26TagUnusedT:
+    stub string (0..1)

@@ -1,0 +1,32 @@
+namespace chaos.s04.x13half.p2
+version "1.0.0"
+import chaos.s04.x13half.p1.*
+func C4Grow: <"add-operation seats - scalar, expression, list-literal extract.">
+    inputs:
+        seedv number (1..1)
+        n number (1..1)
+    output:
+        outs number (0..*)
+    add outs: seedv
+    add outs: seedv * n
+    add outs: [seedv, n] extract item + 1
+    add outs: C4Add(seedv, n)
+func C4Build: <"Alias, condition, constructor, post-condition seats.">
+    inputs:
+        xs number (0..*)
+    output:
+        p C4Pair (1..1)
+    alias lo: xs first default 0
+    alias hiV: xs last default 0
+    condition C4NonNeg:
+        xs all >= 0
+    set p: C4Pair { left: lo, right: hiV }
+    post-condition C4BothSet:
+        p -> left exists and p -> right exists
+func C4Add: <"Minimal set seat.">
+    inputs:
+        a number (1..1)
+        b number (1..1)
+    output:
+        s number (1..1)
+    set s: a + b

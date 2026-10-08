@@ -1,0 +1,383 @@
+{
+  "id": "ai.context",
+  "section": "ai",
+  "title": "LLM context cost by representation (no JVM)",
+  "command": "py -3 ai_context.py --roots \"../corpus/builtins;../corpus/cdm-5.38.0;../corpus/iso20022-1.38.0;../corpus/drr-6.34.1\" --receipt ../receipts/ai.context.json",
+  "startedAt": "2026-08-20T04:53:00Z",
+  "durationMs": 93443,
+  "host": {
+    "os": "Windows 11",
+    "cpu": "Intel64 Family 6 Model 198 Stepping 2, GenuineIntel",
+    "python": "3.13.5"
+  },
+  "metrics": {
+    "lane": "plus-nojvm-ai",
+    "encoding": "o200k_base",
+    "files": 349,
+    "filesParsed": 351,
+    "declarations": 7661,
+    "parseMs": 91653,
+    "indexMs": 576,
+    "digestMs": 14,
+    "tokenizeMs": 513,
+    "wallMs": 93493,
+    "task1": {
+      "baselineSource": {
+        "tokens": 1894552,
+        "chars": 8524902,
+        "bytes": 8525110,
+        "files": 351
+      },
+      "forkDigest": {
+        "tokens": 284248,
+        "chars": 959471,
+        "bytes": 959471,
+        "declarations": 7661
+      },
+      "ratio": 6.67,
+      "tokensSaved": 1610304,
+      "reductionPct": 85.0,
+      "attribution": {
+        "sourceWithoutDocs": {
+          "tokens": 926355,
+          "chars": 4142677,
+          "bytes": 4142677
+        },
+        "tokensThatWereDocumentation": 968197,
+        "documentationShareOfBaselinePct": 51.1,
+        "tokensFromStructuralReEncoding": 642107,
+        "ratioVsSourceWithoutDocs": 3.26,
+        "removed": "descriptions <\"...\">, [docReference ...], synonyms and mappings, and //- and /* */ comments; located by parse-tree context class and by comment TOKEN TYPE on the hidden channel, never by matching text",
+        "note": "an analytical artifact, not a usable representation - it exists only to say how much of the task-1 reduction is prose removal and how much is re-encoding"
+      }
+    },
+    "task2": {
+      "type": "drr.regulation.esma.emir.refit.margin.PartiesToTheDerivative",
+      "typeFile": "drr-6.34.1/regulation-esma-emir-refit-margin-type.rosetta",
+      "closureDecls": 77,
+      "closureInBand": true,
+      "closureByKind": {
+        "enum": 32,
+        "type": 43,
+        "typeAlias": 2
+      },
+      "closureFiles": 9,
+      "selection": "largest closure inside the band, drr. preferred, then cdm., ties by qualified name",
+      "baselineSourceFiles": {
+        "tokens": 39824,
+        "chars": 155692,
+        "bytes": 155692,
+        "files": 9
+      },
+      "forkDigestSlice": {
+        "tokens": 8725,
+        "chars": 28052,
+        "bytes": 28052,
+        "declarations": 77
+      },
+      "closureMs": 93,
+      "bandStats": {
+        "candidates": 295,
+        "byteRatioMin": 1.1,
+        "byteRatioMedian": 23.81,
+        "byteRatioMax": 142.54,
+        "chosenByteRatio": 5.78,
+        "chosenPercentile": 19.7,
+        "instrument": "whole source-file bytes / summed rendered declaration bytes; identical on both sides"
+      },
+      "closureTypeRefs": {
+        "resolutions": 327,
+        "unresolved": 0,
+        "ambiguous": 3
+      },
+      "candidateSweepTypeRefs": {
+        "resolutions": 252453,
+        "unresolved": 0,
+        "ambiguous": 1050
+      },
+      "baselineGeneratedJava": {
+        "tokens": 383652,
+        "chars": 1449219,
+        "bytes": 1449219,
+        "files": 251,
+        "declsWithNoPrimaryJava": 2,
+        "prefixOvermatchAvoided": 28,
+        "scope": "each declaration's own class plus its meta/ and validation/ companions; metafields/ and functions/ excluded"
+      },
+      "ratioGeneratedJava": 43.97,
+      "baselineGeneratedJavaPrimaryOnly": {
+        "tokens": 286433,
+        "chars": 1068348,
+        "bytes": 1068348,
+        "files": 75,
+        "scope": "ONLY each declaration's own class - the narrowest defensible Java baseline"
+      },
+      "ratioGeneratedJavaPrimaryOnly": 32.83,
+      "ratioSourceFiles": 4.56
+    },
+    "task3": {
+      "baseline": {
+        "tokens": 1894552,
+        "chars": 8524902,
+        "bytes": 8525110,
+        "files": 351,
+        "note": "identical to task 1 (a)"
+      },
+      "fork": {
+        "tokens": 95,
+        "chars": 229,
+        "bytes": 229
+      },
+      "ratio": 19942.65,
+      "answers": {
+        "q1": {
+          "types": 2243,
+          "enums": 763,
+          "functions": 1649,
+          "rules": 2272
+        },
+        "q2": {
+          "metaAnnotatedTypes": 206
+        },
+        "q3": {
+          "referencesToTarget": 26
+        },
+        "q4": {
+          "deepestExtendsChain": 5
+        }
+      },
+      "queryMs": 6
+    },
+    "task4": {
+      "report": "report CFTC Part43 in T+1 from TransactionReportInstruction when IsReportableEvent with type CFTCPart43TransactionReport",
+      "reportFile": "drr-6.34.1/regulation-cftc-rewrite-trade-rule.rosetta",
+      "reportFrom": "TransactionReportInstruction",
+      "rootType": "drr.regulation.cftc.rewrite.trade.CFTCPart43TransactionReport",
+      "hops": 62,
+      "maxDepth": 3,
+      "depthCap": 6,
+      "declarationsTouched": 21,
+      "filesCrossed": 11,
+      "leaves": 58,
+      "cyclesStopped": 0,
+      "depthCapped": 0,
+      "unresolvedHops": 0,
+      "hopCapHit": false,
+      "baselineSourceFiles": {
+        "tokens": 118212,
+        "chars": 524146,
+        "bytes": 524218,
+        "files": 11
+      },
+      "forkWalk": {
+        "tokens": 1147,
+        "chars": 3945,
+        "bytes": 3945,
+        "hops": 62
+      },
+      "ratio": 103.06,
+      "selection": "MEDIAN hop count among every report whose `with type` resolves - deliberately not the largest",
+      "candidates": 23,
+      "hopsMin": 16,
+      "hopsMax": 710,
+      "selectionPercentile": 47.8,
+      "typeRefs": {
+        "resolutions": 62,
+        "unresolved": 0,
+        "ambiguous": 5
+      },
+      "walkMs": 19
+    },
+    "task5": {
+      "function": "drr.regulation.common.FXNearLeg",
+      "functionFile": "drr-6.34.1/regulation-common-func.rosetta",
+      "counts": {
+        "inputs": 1,
+        "outputs": 1,
+        "calleeSites": 10,
+        "distinctCallees": 4,
+        "calleesResolved": 4,
+        "calleesUnresolved": 0,
+        "attributeReadSites": 18,
+        "distinctAttributesRead": 9,
+        "conditions": 0,
+        "aliases": 1,
+        "operations": 1,
+        "distinctDeclarationsTouched": 7,
+        "distinctFilesTouched": 3
+      },
+      "baselineSourceFiles": {
+        "tokens": 110346,
+        "chars": 513813,
+        "bytes": 513825,
+        "files": 3
+      },
+      "forkBreakdown": {
+        "tokens": 333,
+        "chars": 1287,
+        "bytes": 1287
+      },
+      "ratio": 331.37,
+      "selection": "MEDIAN of the TOP QUARTILE by body-complexity score (distinct callees + distinct attribute names read + conditions) among every non-builtin function that calls something - the brief asked for a non-trivial body, so the band is narrowed and the overall percentile is recorded",
+      "candidates": 1016,
+      "scoreChosen": 13,
+      "scoreMin": 1,
+      "scoreMax": 122,
+      "selectionPercentile": 87.3,
+      "typeRefs": {
+        "resolutions": 2,
+        "unresolved": 0,
+        "ambiguous": 0
+      },
+      "extraction": "callees resolved by NAME against the declaration index; attributes read are feature-call NAMES with NO receiver type - this lane does no type inference",
+      "corpusCalleeResolution": {
+        "distinctCalleeNames": 4938,
+        "resolved": 4938,
+        "unresolved": 0,
+        "guessedFirstOfSeveral": 216,
+        "byMatchKind": {
+          "exact": 14,
+          "first": 216,
+          "sameNamespace": 1377,
+          "unique": 3331
+        },
+        "note": "counted over every declaration in the corpus, not just the chosen function. `exact` is a qualified-name match, `unique` the only candidate, `sameNamespace` / `sameFile` are preference steps, and `first` is a GUESS among several same-named candidates - those edges are marked `?` in the impact report"
+      },
+      "breakdownMs": 21
+    },
+    "task6": {
+      "type": "drr.regulation.common.TransactionReportInstruction",
+      "typeFile": "drr-6.34.1/regulation-common-type.rosetta",
+      "attribute": "reportingSide",
+      "attributeType": "ReportingSide",
+      "attributeNameMentionsInExpressions": 33,
+      "directReferences": 1818,
+      "transitiveReferences": 1952,
+      "depthReached": 5,
+      "depthCap": 12,
+      "filesAffected": 88,
+      "shareOfAllDeclarationsPct": 25.5,
+      "byKind": {
+        "func": 163,
+        "report": 10,
+        "rule": 1777,
+        "type": 2
+      },
+      "byReferenceKind": {
+        "calls": 3,
+        "calls?": 1,
+        "functionInput": 155,
+        "functionOutput": 4,
+        "referencesRule?": 15,
+        "reportFrom": 10,
+        "ruleFrom": 1764
+      },
+      "baselineWholeCorpus": {
+        "tokens": 1894552,
+        "chars": 8524902,
+        "bytes": 8525110,
+        "files": 351,
+        "note": "the whole corpus - without an index an agent must read everything to be sure it has missed no reference"
+      },
+      "forkImpactReport": {
+        "tokens": 43671,
+        "chars": 158586,
+        "bytes": 158586
+      },
+      "ratio": 43.38,
+      "selection": "HIGHEST direct in-degree among non-builtin data types - the least favourable choice for the ratio, because it produces the largest answer",
+      "candidates": 2221,
+      "inDegreeChosen": 1818,
+      "inDegreeMax": 1818,
+      "selectionPercentile": 100.0,
+      "granularity": "type edges (attribute / extends / choiceOption / typeAliasTarget / ruleFrom / reportFrom / reportType) are grammar-positional; `calls` and `referencesRule` are NAME-resolved from expressions; a feature call's receiver type is not resolved, so `x -> y` yields no edge",
+      "edgeStats": {
+        "callsResolved": 4938,
+        "calls_unique": 3331,
+        "calls_first": 216,
+        "calls_sameNamespace": 1377,
+        "calls_exact": 14,
+        "ruleRefs": 1480,
+        "ruleRefs_sameNamespace": 1040,
+        "ruleRefs_first": 349,
+        "ruleRefs_unique": 91
+      },
+      "typeRefs": {
+        "resolutions": 16132,
+        "unresolved": 0,
+        "ambiguous": 952,
+        "callsResolved": 4938,
+        "calls_unique": 3331,
+        "calls_first": 216,
+        "calls_sameNamespace": 1377,
+        "calls_exact": 14,
+        "ruleRefs": 1480,
+        "ruleRefs_sameNamespace": 1040,
+        "ruleRefs_first": 349,
+        "ruleRefs_unique": 91
+      },
+      "impactMs": 37
+    },
+    "startupMs": 52,
+    "peakRssMb": 253.6,
+    "aux": {
+      "tiktokenVersion": "0.14.0",
+      "tokenizeCalls": 13,
+      "charsTokenized": 17530367,
+      "python": "3.13.5",
+      "predictionMode": "SLL-then-LL",
+      "sllBailouts": 122,
+      "parseErrors": 0,
+      "errorFiles": [],
+      "unknownElements": 0,
+      "parserReadyMs": 217,
+      "ioMs": 54,
+      "attributionWalkMs": 181,
+      "attributesWithoutCardinality": 0,
+      "runeAtAnnotations": 0,
+      "choiceDeclarations": 0,
+      "declsByKind": {
+        "annotation": 2,
+        "body": 41,
+        "corpus": 93,
+        "enum": 763,
+        "func": 1649,
+        "metaType": 6,
+        "report": 23,
+        "rule": 2317,
+        "ruleSource": 6,
+        "segment": 36,
+        "synonymSource": 19,
+        "type": 2243,
+        "typeAlias": 435
+      },
+      "builtinDeclarations": 28,
+      "attributes": 13201,
+      "namespaces": 196,
+      "siblingLanes": {
+        "plus-jvm": {
+          "startupMs": 92,
+          "parseMs": 4465,
+          "resolveMs": null,
+          "wallMs": 7676,
+          "peakRssMb": 2239,
+          "files": 349,
+          "source": "analytics.plus-jvm.json"
+        },
+        "legacy-emf": {
+          "startupMs": 926,
+          "parseMs": 2256,
+          "resolveMs": 87587,
+          "wallMs": 90799,
+          "peakRssMb": 1483,
+          "files": 349,
+          "source": "analytics.legacy-emf.json"
+        }
+      },
+      "digestPath": "<development-root>/demo/work/ai/model-digest.txt",
+      "closureSlicePath": "<development-root>/demo/work/ai/closure-slice.txt",
+      "limit": null
+    }
+  },
+  "notes": "No JVM anywhere in this run: the corpus is parsed by the ANTLR4 Python3 parser generated from the fork's own grammars, and every token count is an EXACT tiktoken count under the o200k_base encoding (tiktoken 0.14.0), never an estimate. Characters and UTF-8 bytes are reported beside every token count so no claim rests on the tokenizer alone. WHAT THE DIGEST KEEPS: namespace, declaration kind and name, supertype, every attribute's name / declared type (as written) / cardinality, the [annotation qualifier] pairs on declarations and on attributes, enum values, choice options, the function input/output split, the reporting-rule input type, and the header line of every other declaration kind. WHAT THE DIGEST DROPS, deliberately and exhaustively: descriptions (<\"...\">), [docReference ...] blocks, synonyms and mappings (including the whole body of a synonym source and of a rule source), comments, and EVERY expression body - conditions, aliases, operations, post-conditions and reporting-rule logic. It is information-preserving for STRUCTURAL questions (what exists, what it is called, what it extends, what it holds, with what cardinality and what metadata) and it is NOT a substitute for the source when the question is about behaviour, mappings or documentation. TASK 1 compares the same population on both sides - every parsed file against every parsed declaration, builtins included. The baseline is the files concatenated with a single newline and NO added filename headers, which is the smallest honest form of 'paste the model'; adding per-file headers would raise the baseline and flatter the ratio. Result: 1894552 -> 284248 tokens = 6.67x. The obvious objection to that ratio - 'you just deleted the documentation' - is answered by measurement rather than by assertion: stripping descriptions, docReferences, synonyms/mappings and comments out of the SOURCE (located by parse-tree context class and by comment token type, never by matching text) leaves 926355 tokens, so 968197 tokens (51.1% of the baseline) were prose and mapping, and the remaining 642107 tokens of the saving come from re-encoding what is left. Structure against structure, the digest is 3.26x smaller than the de-prosed source. That stripped text is an analytical artifact, not a representation anyone would paste. TASK 2 fixes one type and takes the transitive closure over supertypes and attribute types, stopping at the builtin (com.rosetta*) namespaces, which are ungenerated and need no context. Root drr.regulation.esma.emir.refit.margin.PartiesToTheDerivative, closure 77 declarations across 9 source files. (a) is the WHOLE text of each of those files, because a reader without a toolchain does not know which lines matter; (c) is the same digest restricted to the closure. The root was not hand-picked: it is the largest closure inside the band, drr. preferred. 295 data types have an in-band closure, and on one shared byte instrument (whole source files over summed rendered declarations, applied identically to every candidate and to the chosen root) the chosen root scores 5.78 against a band median of 23.81 and a maximum of 142.54 - it sits at the 19.7th percentile, so the selection rule is not flattering the result. Type references are resolved exactly as queries.py resolves `extends` (qualified name, then unique simple name, then same-namespace, then same-file, then first). Over the chosen root's own closure that was 327 resolutions with 0 unresolved and 3 falling back to the first candidate; this lane does not read `import` statements, so an ambiguous simple name is a real (counted) approximation. (b) is the generated Java for the same declarations, 251 files read from the mode-1 tree: the type's own class plus its meta/ and validation/ companions, attributed by LONGEST declaration-name prefix so a file like PartyRoleValidator.java is charged to PartyRole and not to Party (28 files re-attributed that way). metafields/ and functions/ companions are NOT included, which makes that baseline smaller than a full paste would be. Because 'nobody would paste the validators' is a fair objection, the narrowest defensible Java baseline is reported beside it: each declaration's OWN class and nothing else, 75 files / 286433 tokens = 32.83x against the digest slice. Quote that number, not the wider one, if the question is only about shape. TASK 3 is the one large ratio and it must be read for what it is: it compares READING THE CORPUS YOURSELF against ASKING AN INDEX THAT HAS ALREADY PARSED IT. The index earned that answer by parsing all 351 files in 91653 ms in this same process; the ratio is a statement about where the work happens, not about free information. It also excludes the question text itself, and it presumes the four questions are the ones asked - a fifth question needs no new parse but does need new query code. Answer set: {\"q1\":{\"types\":2243,\"enums\":763,\"functions\":1649,\"rules\":2272},\"q2\":{\"metaAnnotatedTypes\":206},\"q3\":{\"referencesToTarget\":26},\"q4\":{\"deepestExtendsChain\":5}}. The Q1-Q4 values are produced by the same queries.py the analytics.nojvm lane uses, over an index built by the same extractor, so they are directly comparable with that receipt. THE CAPABILITY POINT (tasks 4-6). Tasks 1-3 measure how big the model is in different representations. Tasks 4-6 measure what an agent can DO with it. Walking a report down to its leaf fields, breaking a function into its inputs, callees and conditions, and answering 'what breaks if I change this type' are not text operations - they are graph operations, and an agent can only perform them programmatically if something has already parsed the model and built an index. Under the legacy toolchain that something is a JVM with Xtext and EMF, and the model is not queryable until a global EcoreUtil.resolveAll has finished. This lane did all of it in bare CPython: no JVM, no Xtext, no EMF, one pure-Python dependency, because the fork's front end is a plain ANTLR4 grammar with no embedded actions and no semantic predicates, so the SAME grammar files that drive the Java engine generate a Python parser. THE COST, WITHOUT SPIN: the pure-Python ANTLR runtime parsed the corpus in 91653 ms. The JVM parses the same corpus far faster. The plus-jvm lane's receipt (analytics.plus-jvm.json) records 4465 ms to parse the same 349 files - 20.5x quicker than this run - for 7676 ms of wall clock. The legacy-emf lane (analytics.legacy-emf.json) parses in 2256 ms, but then pays 87587 ms in EcoreUtil.resolveAll and a 1483 MiB peak before the first question can be asked at all, for 90799 ms of wall clock. This lane's peak was 253.6 MiB. The parse is paid ONCE per process; every walk, breakdown and impact query below then ran in milliseconds against the in-memory index (task 4 19 ms, task 5 21 ms, task 6 37 ms). The claim is about REACHABILITY - that the model is programmatically walkable with no JVM in the chain - not about the Python parser being fast. TASK 4 walked drr.regulation.cftc.rewrite.trade.CFTCPart43TransactionReport, reached from the report in drr-6.34.1/regulation-cftc-rewrite-trade-rule.rosetta (62 hops, depth 3 against a cap of 6, 21 declarations, 11 files crossed, 58 leaves, 0 branches stopped on a cycle, 0 stopped at the depth cap). The cycle guard is not decoration: the CDM type graph is cyclic and an unguarded walk does not terminate, so the depth cap is a real bound on the answer and the trace records every place it bit. The report was chosen as the MEDIAN hop count among 23 candidate reports (47.8th percentile, range 16-710), not the largest. TASK 5 broke down drr.regulation.common.FXNearLeg: 1 inputs, 1 output, 4 distinct callees over 10 call sites, 9 distinct attribute names read over 18 sites, 0 conditions, 1 aliases, 1 assignments. WHAT WAS AND WAS NOT EXTRACTED, precisely: the parser records a call as a `qualifiedName` inside a #FunctionCallExpr, not as a binding, so callees are matched by NAME against the declaration index - for this function 4 resolved and 0 did not resolve to any function, rule or library function, and unresolved names are listed in the breakdown rather than dropped. Across the WHOLE corpus that method resolves 4938 of 4938 distinct callee names with 0 unresolved - but the match kinds are {\"exact\": 14, \"first\": 216, \"sameNamespace\": 1377, \"unique\": 3331}, and the 216 `first` ones are GUESSES among several same-named candidates. A clean 'zero unresolved' must not be read as a clean 'zero wrong'; guessed edges are marked `?` in the task-6 report rather than presented as facts. Attributes read are the validID of each #FeatureCallExpr / #DeepFeatureCallExpr: a NAME with NO receiver type attached. This lane performs no type inference, so it cannot say WHICH type an attribute was read from, only that a feature of that name was read. Conditions, aliases and set/add operations are read from their own grammar productions and are exact. The expression's shape, its operators and its logic are NOT extracted at all. The function was chosen as the MEDIAN body-complexity score among 1016 functions that call something (87.3th percentile, score 13 in a range of 1-122). TASK 6 asked what changing `reportingSide` on drr.regulation.common.TransactionReportInstruction affects: 1818 direct and 1952 transitive references across 88 files, depth 5 against a cap of 12. That answer covers 25.5% of every declaration in the corpus, which is why the ratio here is modest and should be: a genuinely central type reaches most of the model, and saying so is the answer. The baseline is the WHOLE corpus and that is the honest one: without an index an agent cannot know it has missed a reference without reading everything. GRANULARITY, stated plainly: the edges are TYPE-level - an edge means a declaration names this type in an attribute, an extends, a choice option, a type-alias target, a rule's `from`, or a report's `from`/`with type`. Expression-level reads are NOT edges, because the parser sees a feature call as a name with no receiver type; separately, 33 feature-call sites in the corpus use the NAME `reportingSide`, and that figure is a name count, not a resolved reference. The type was chosen by HIGHEST direct in-degree among 2221 data types (100.0th percentile) - the least favourable choice available, because the most-referenced type produces the largest answer and therefore the smallest ratio. SCOPE, stated plainly: the digest is emitted by THIS harness from the parse trees; it is not an artifact the engine ships today. What is being measured is what the fork's parser makes possible in a bare CPython process, not a released feature. This receipt uses section \"ai\", which is a new section beyond the six enumerated in CONTRACTS.md section 2."
+}

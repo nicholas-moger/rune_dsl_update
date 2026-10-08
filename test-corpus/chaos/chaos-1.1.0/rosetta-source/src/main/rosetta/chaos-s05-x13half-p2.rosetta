@@ -1,0 +1,37 @@
+namespace chaos.s05.x13half.p2
+version "1.0.0"
+import chaos.s05.x13half.p1.*
+func C5Chain: <"then-chain over a list-of-list with implicit-LHS navigation at every hop.">
+    inputs:
+        items C5Item (0..*)
+    output:
+        total number (1..1)
+    set total:
+        items
+            then extract sub
+            then flatten
+            then extract vals
+            then flatten
+            then filter item >= 0
+            then sum
+func C5Seats: <"The SAME construct (if-exists-then-else-0) at the alias, condition, and set seats.">
+    inputs:
+        it C5Item (1..1)
+    output:
+        r number (1..1)
+    alias seatAlias: if it -> opt exists then it -> opt else 0
+    condition SeatCond:
+        (if it -> opt exists then it -> opt else 0) >= 0
+    set r: (if it -> opt exists then it -> opt else 0) + seatAlias
+metaType key string
+metaType reference string
+enum C5KindEnum: <"to-enum target.">
+    Spot
+    Fwd
+type C5Item: <"The shape battery: single, optional, multi, list-of-list rung, and a meta-wrapped seat (charter 2.2b).">
+    one string (1..1)
+    opt number (0..1)
+    many number (0..*)
+    sub C5Sub (0..*)
+    subRef C5Sub (0..1)
+        [metadata reference]

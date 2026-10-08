@@ -1,0 +1,92 @@
+namespace conformance.b2
+version "1.0.0"
+
+// B2 — the shape drr 7.x actually writes, which b1 does not reach: a THREE-deep
+// if/else chain in which only the FIRST arm names its enum explicitly, sitting
+// inside nested extract bodies.
+//
+// Distilled verbatim in shape from drr 7.0.0
+// regulation-hkma-rewrite-trade-rule.rosetta:63-74:
+//
+//     extract reportInstruction [
+//         extract reportingSide -> reportingCounterparty
+//         then extract
+//             if personRole -> role any = [ ... ] only-element
+//             then PartyIdentifierFormat2Enum -> NaturalPerson
+//             else if partyId -> identifierType any = LEI
+//             then Lei
+//             else if partyId -> identifierType any = BIC
+//             then SWIFTBIC
+//             else Other
+//     ]
+//
+// Every arm of a chain shares one type, so the single explicit arm fixes the
+// expected enum for the rest (spec R13). `Other` and `Cash` are declared by the
+// DECOY enum too, and the decoy is declared FIRST, so a global simple-name
+// search binds the wrong one — which is what produces the wrong-enum TYPE_ERRORs
+// on every drr 7.x cell.
+
+enum DecoyEnum:
+    Other
+    Cash
+    Wire
+
+enum FormatEnum:
+    NaturalPerson
+    Other
+    Cash
+
+type Party:
+    identifierType string (0..1)
+    role string (0..1)
+
+type Side:
+    counterparty Party (0..*)
+
+type Instruction:
+    side Side (0..1)
+
+func B2ChainInNestedExtract:
+    inputs:
+        instruction Instruction (0..*)
+    output:
+        result FormatEnum (0..*)
+    set result:
+        instruction
+            extract
+                side -> counterparty
+                then extract
+                    if role exists
+                    then FormatEnum -> NaturalPerson
+                    else if identifierType exists
+                    then Cash
+                    else Other
+            then flatten
+
+// The same chain WITHOUT the nesting, as the control: if this one resolves and
+// the nested one does not, the blocker is the enclosing context rather than the
+// chain.
+func B2ChainAtTopLevel:
+    inputs:
+        party Party (1..1)
+    output:
+        result FormatEnum (1..1)
+    set result:
+        if party -> role exists
+        then FormatEnum -> NaturalPerson
+        else if party -> identifierType exists
+        then Cash
+        else Other
+
+// The SAME chain again, this time as a REPORTING RULE rather than a func — the
+// form every failing drr 7.x carrier actually uses. A rule declares no output
+// type, so nothing can be pushed down from a declaration; the chain's own
+// explicit arm is the only seed there is.
+reporting rule B2ChainInRule from Instruction: <"chain in a rule">
+    extract side -> counterparty
+    then extract
+        if role exists
+        then FormatEnum -> NaturalPerson
+        else if identifierType exists
+        then Cash
+        else Other

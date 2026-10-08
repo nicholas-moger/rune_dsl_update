@@ -1,0 +1,10 @@
+STRUCT test.model.Base [abstract=false]
+  namespace "test.model"
+  FIELD id : string [ONE_TO_ONE]
+    typeRef BASIC_TYPE name="string"
+    bounds (1..1)
+STRUCT test.model.Child : Base [abstract=false]
+  namespace "test.model"
+  FIELD extra : int [ZERO_TO_ONE]
+    typeRef BASIC_TYPE name="int"
+    bounds (0..1)

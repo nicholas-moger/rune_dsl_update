@@ -1,0 +1,10 @@
+namespace test.fomit057
+
+func F1:
+	inputs:
+		a int (0..*)
+	output:
+		result int (0..*)
+	
+	add result:
+		a extract [* 2]

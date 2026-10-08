@@ -1,0 +1,27 @@
+SOURCE EXTRACT — not a new run
+Source: docs/upgrades/U021-deferred-mapper-path-lineage.md
+Inspected revision: 691e0b160ab7dc189b9d33b5387d8462f36630b5
+
+
+Lines 185–205:
+  18/0/0/0 · optsuite 11/0/0/0 ×2 · benchmarks 7/0/0/0.
+- **The leg-jar digestdiff**: 6,462 class entries per shade jar, class-set
+  identical, content diff EXACTLY the MapperPath family (3 class files) and
+  zero others (`target-550-legjar-digestdiff.log`; the runtime-jar twin:
+  227 entries, same three).
+- **The paired same-session 6-fork JMH A/B** (OLD vs NEW runtime, both legs
+  the reference tree, workload census `survivors=23` echoed 6/6 forks both
+  legs; `target-550-jmh-drr-{oldrt,newrt}6f1.log`): time 2,617.369 ±
+  228.362 → 2,031.881 ± 127.596 ms/op (**−585.488 ms/op = −22.4%, 1.29×**),
+  CI-disjoint (the effect = 2.56× the old-leg CI / 4.59× the new-leg CI;
+  not iteration-disjoint — old min 1,878.068 vs new max 2,340.940);
+  allocation 10,096.20 ± 15.69 → 8,271.87 ± 2.11 MB/op (**−1,824.32 MB/op =
+  −18.1%**), massively disjoint. The § 16f(6) JFR arbitration (1 fork,
+  5w+15m per leg) explains the below-floor landing: the lineage family's
+  charged share 33.5% → 22.7% — the copy machinery collapsed (24.3 → 4.3%)
+  and the eager derivations vanished (9.0 → 0.6%) while the residual O(1)
+  cons-node construction charges under bare `MapperPath` (0.2 → 17.8%) —
+  B2 is a replace-shape lever, so only the removed slice was recoverable
+  (census § 16g).
+
+## Coverage

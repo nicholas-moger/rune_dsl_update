@@ -1,0 +1,70 @@
+namespace test.aliascond
+
+typeAlias EvenNat: <"An int-grained alias with ONE condition on the implicit item (the chaos s08 C8Even shape).">
+    number(fractionalDigits: 0)
+    condition NonNeg:
+        item >= 0
+
+typeAlias Pct: <"A number alias with TWO conditions.">
+    number(min: 0)
+    condition Capped:
+        item <= 100
+    condition NotHalf:
+        item <> 50
+
+typeAlias Code3: <"A string alias with a condition.">
+    string(minLength: 3, maxLength: 3)
+    condition NotPlaceholder:
+        item <> "XXX"
+
+typeAlias Flag: <"A boolean alias with a condition.">
+    boolean
+    condition MustHold:
+        item = True
+
+typeAlias Nested: <"An alias OF a conditioned alias, carrying its own condition (the alias-hierarchy walk).">
+    EvenNat
+    condition Small:
+        item < 1000
+
+typeAlias Unnamed: <"An UNNAMED condition on an alias (the count-all-named law at an alias owner).">
+    number(fractionalDigits: 0)
+    condition:
+        item > 0
+
+typeAlias Plain: <"An alias with NO condition - the simple wing must stay byte-frozen beside the new one.">
+    number(min: 0)
+
+func IsOk: <"A function an alias condition depends on (the datarule @Inject wing at an alias owner).">
+    inputs:
+        v number (1..1)
+    output:
+        ok boolean (1..1)
+    set ok: v > 0
+
+typeAlias Checked: <"An alias whose condition CALLS a function with the implicit item.">
+    number
+    condition Ok:
+        IsOk(item)
+
+type Holder: <"Alias-typed attributes at every cardinality, plus the type's OWN condition beside them.">
+    one EvenNat (1..1)
+    opt EvenNat (0..1)
+    many EvenNat (0..*)
+    some EvenNat (1..*)
+    pct Pct (0..1)
+    pcts Pct (0..*)
+    code Code3 (0..1)
+    flag Flag (0..1)
+    nested Nested (0..1)
+    nesteds Nested (0..*)
+    unnamed Unnamed (0..1)
+    checked Checked (0..1)
+    plain Plain (0..1)
+    condition HolderOk:
+        one > 0
+
+type Bare: <"A type with NO alias-conditioned attribute - the simple wing only.">
+    qty Plain (0..1)
+    text string (0..1)
+        [metadata scheme]

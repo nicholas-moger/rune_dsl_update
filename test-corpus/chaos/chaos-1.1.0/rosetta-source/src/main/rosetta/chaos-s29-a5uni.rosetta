@@ -1,0 +1,37 @@
+namespace chaos.s29.a5uni
+version "1.0.0"
+type C29Leaf: <"éüµ – Helper - relocated by the import axis.">
+    v number (1..1)
+    tags string (0..*)
+metaType scheme string
+type C29In1: <"Inner option 1.">
+    deep string (0..1)
+type C29In2: <"Inner option 2.">
+    deep string (0..1)
+choice C29Inner: <"The inner choice, reached through both outer options.">
+    C29In1
+    C29In2
+type C29Note: <"Outer option 1 - every attribute is shared with C29Wrap so the deep path resolves through both.">
+    text string (0..1)
+    leaves C29Leaf (0..*)
+    code string (0..1)
+        [metadata scheme]
+    codes string (0..*)
+        [metadata scheme]
+    inners C29Inner (0..*)
+type C29Wrap: <"Outer option 2 - the same attributes.">
+    text string (0..1)
+    leaves C29Leaf (0..*)
+    code string (0..1)
+        [metadata scheme]
+    codes string (0..*)
+        [metadata scheme]
+    inners C29Inner (0..*)
+choice C29Outer: <"The outer choice.">
+    C29Note
+    C29Wrap
+type A5UniProbe: <"Non-ASCII literal probe – müßig 試験.">
+    p string (0..1)
+        [label as "µ–label §7"]
+enum A5UniProbeEnum: <"displayName probe.">
+    V displayName "µ–„display“"

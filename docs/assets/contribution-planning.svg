@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="950" viewBox="0 0 1120 950" role="img" aria-labelledby="title desc">
+<title id="title">Contribution stages and priorities</title>
+<desc id="desc">Historical snapshot, 22 September 2026, not a delivery schedule, ETA or percentage-complete claim. Foundation stages 1.0 compiler, 2.0 IR foundation, 3.0 optimised AST route and runtime, 3.1 resolution, 3.2 adversarial. Active in this snapshot: 3.3 complete IR route. Next: 3.3.1 simplify. Later planned: 3.4 SDK and LSP; 3.5 agent MCP. Stage 3.3 names the completion goal, not a statement that full IR compatibility has already been delivered. Root prose separately describes current progress.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9" fill="none" stroke="#a9b7cb" stroke-width="1.4"/></marker></defs>
+<rect width="1120" height="950" rx="22" fill="#121923"/>
+<g font-family="Segoe UI, Arial, sans-serif">
+<text x="30" y="47" fill="#eef2f8" font-size="32" font-weight="600" text-anchor="start">
+<tspan x="30" dy="0" xml:space="preserve">Contribution stages and priorities</tspan>
+</text>
+<text x="30" y="85" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="30" dy="0" xml:space="preserve">Historical snapshot · 22 September 2026</tspan>
+</text>
+<rect x="30" y="130" width="1060" height="290" rx="14" fill="#18222f" stroke="#a2c6e6" stroke-width="1.5"/>
+<text x="53" y="168" fill="#a2c6e6" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="53" dy="0" xml:space="preserve">Foundation · 1.0–3.2</tspan>
+</text>
+<text x="53" y="200" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="53" dy="0" xml:space="preserve">Historical stages</tspan>
+</text>
+<rect x="30" y="480" width="515" height="145" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="31" y="499" width="4" height="107" rx="2" fill="#d0b487"/>
+<text x="53" y="517" fill="#d0b487" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="53" dy="0" xml:space="preserve">3.3 · Complete IR</tspan>
+</text>
+<text x="53" y="550" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="53" dy="0" xml:space="preserve">Active in this snapshot</tspan>
+<tspan x="53" dy="30" xml:space="preserve">Compatibility route through IR</tspan>
+</text>
+<rect x="575" y="480" width="515" height="145" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="576" y="499" width="4" height="107" rx="2" fill="#a6b0ec"/>
+<text x="598" y="517" fill="#a6b0ec" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="598" dy="0" xml:space="preserve">3.3.1 · Simplify</tspan>
+</text>
+<text x="598" y="550" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="598" dy="0" xml:space="preserve">Next</tspan>
+<tspan x="598" dy="30" xml:space="preserve">Simplify after the complete IR route</tspan>
+</text>
+<rect x="30" y="670" width="1060" height="210" rx="14" fill="#18222f" stroke="#92d5c6" stroke-width="1.5"/>
+<text x="53" y="708" fill="#92d5c6" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="53" dy="0" xml:space="preserve">Later · planned interfaces</tspan>
+</text>
+<rect x="55" y="745" width="490" height="110" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="56" y="764" width="4" height="72" rx="2" fill="#92d5c6"/>
+<text x="78" y="782" fill="#92d5c6" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="78" dy="0" xml:space="preserve">3.4 · SDK / LSP</tspan>
+</text>
+<text x="78" y="815" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="78" dy="0" xml:space="preserve">Planned developer services</tspan>
+</text>
+<rect x="575" y="745" width="490" height="110" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="576" y="764" width="4" height="72" rx="2" fill="#92d5c6"/>
+<text x="598" y="782" fill="#92d5c6" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="598" dy="0" xml:space="preserve">3.5 · Agent MCP</tspan>
+</text>
+<text x="598" y="815" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="598" dy="0" xml:space="preserve">Planned agent integrations</tspan>
+</text>
+<text x="30" y="916" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="30" dy="0" xml:space="preserve">Historical snapshot: 22 September 2026 · not a delivery date or schedule.</tspan>
+</text>
+<rect x="55" y="240" width="190" height="150" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="56" y="259" width="4" height="112" rx="2" fill="#a2c6e6"/>
+<text x="78" y="277" fill="#a2c6e6" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="78" dy="0" xml:space="preserve">1.0</tspan>
+</text>
+<text x="78" y="310" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="78" dy="0" xml:space="preserve">Compiler</tspan>
+</text>
+<rect x="262" y="240" width="190" height="150" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="263" y="259" width="4" height="112" rx="2" fill="#a2c6e6"/>
+<text x="285" y="277" fill="#a2c6e6" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="285" dy="0" xml:space="preserve">2.0</tspan>
+</text>
+<text x="285" y="310" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="285" dy="0" xml:space="preserve">IR foundation</tspan>
+</text>
+<rect x="469" y="240" width="190" height="150" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="470" y="259" width="4" height="112" rx="2" fill="#a2c6e6"/>
+<text x="492" y="277" fill="#a2c6e6" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="492" dy="0" xml:space="preserve">3.0</tspan>
+</text>
+<text x="492" y="310" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="492" dy="0" xml:space="preserve">Optimised AST</tspan>
+<tspan x="492" dy="30" xml:space="preserve">route / runtime</tspan>
+</text>
+<rect x="676" y="240" width="190" height="150" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="677" y="259" width="4" height="112" rx="2" fill="#a2c6e6"/>
+<text x="699" y="277" fill="#a2c6e6" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="699" dy="0" xml:space="preserve">3.1</tspan>
+</text>
+<text x="699" y="310" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="699" dy="0" xml:space="preserve">Resolution</tspan>
+</text>
+<rect x="883" y="240" width="190" height="150" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="884" y="259" width="4" height="112" rx="2" fill="#a2c6e6"/>
+<text x="906" y="277" fill="#a2c6e6" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="906" dy="0" xml:space="preserve">3.2</tspan>
+</text>
+<text x="906" y="310" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="906" dy="0" xml:space="preserve">Adversarial</tspan>
+</text>
+</g>
+</svg>

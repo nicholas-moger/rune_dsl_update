@@ -1,0 +1,20 @@
+namespace holdout.typenamedguava
+version "0.0.0"
+
+type ImmutableList: <"com.google.common.collect.ImmutableList - written by the POJO's immutable constructor over a multi attribute (v3.2 seat 11, M1's class).">
+    xs string (0..*)
+    x string (0..1)
+
+type ImmutableMap: <"com.google.common.collect.ImmutableMap - written by the only-exists validator's field map.">
+    xs string (0..*)
+    x string (0..1)
+
+type Lists: <"com.google.common.collect.Lists - written by the cardinality and type-format validators (Lists.newArrayList).">
+    xs string (0..*)
+    x string (0..1)
+
+type GuavaRefs: <"A sibling referencing every guava-named type singly, its own multi string last.">
+    immutableList ImmutableList (0..1)
+    immutableMap ImmutableMap (0..1)
+    lists Lists (0..1)
+    names string (0..*)

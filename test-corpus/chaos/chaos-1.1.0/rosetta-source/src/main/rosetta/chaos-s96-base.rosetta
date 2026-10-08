@@ -1,0 +1,13 @@
+namespace chaos.s96.base
+version "1.0.0"
+type C96Twig: <"REFUSAL-PARITY s96 (base only): the DIRECT nested shadow - an inner lambda re-using the enclosing parameter's name - upstream refuses ('Duplicate name.', the PR-1 l1-run8 receipt recorded in the would-have-caught table); the fork's scope walk answers the innermost node.">
+    n number (1..1)
+type C96Trunk: <"Depth 1.">
+    twigs C96Twig (0..*)
+func C96Shade:
+    inputs:
+        trunks C96Trunk (0..*)
+    output:
+        total number (1..1)
+    set total:
+        trunks extract t [ t -> twigs extract t [ t -> n ] ] then flatten then sum

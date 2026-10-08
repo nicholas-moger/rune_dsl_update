@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="174" viewBox="0 0 520 174" role="img" aria-labelledby="title desc">
+<title id="title">3. Rune in CDM and DRR</title><desc id="desc">From domain models to applications. Open this guide.</desc>
+<rect x="1" y="1" width="518" height="172" rx="13" fill="#18222f" stroke="#344153"/>
+<rect x="1" y="1" width="4" height="172" rx="2" fill="#a2c6e6"/>
+<g font-family="'Segoe UI',Arial,sans-serif">
+<text x="26" y="33" font-size="12" font-weight="700" letter-spacing="1.6" fill="#a2c6e6">INTEGRATION</text>
+<text x="26" y="88" font-size="27" font-weight="650" fill="#eef2f8">Rune in CDM and DRR</text><text x="26" y="126" font-size="16" fill="#a9b7cb">From domain models to applications</text>
+<text x="479" y="33" font-size="13" font-weight="700" text-anchor="end" fill="#8090a7">3</text></g>
+<g transform="translate(416 53) scale(.75)" fill="none" stroke="#a2c6e6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity=".9"><rect x="0" y="0" width="28" height="35" rx="4"/><rect x="36" y="0" width="28" height="35" rx="4"/><path d="M8 10H20M8 19H20M44 10H56M44 19H56M14 35V44H50V35"/></g>
+<path d="M457 143H482M475 136L482 143L475 150" fill="none" stroke="#a2c6e6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

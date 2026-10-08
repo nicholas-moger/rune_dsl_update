@@ -1,0 +1,8 @@
+namespace chaos.s15.a3third.p1
+version "1.0.0"
+import chaos.s15.a3third.p2.*
+import chaos.s15.a3third.p3.*
+type C15Aux: <"Self-contained helper - relocated by the import axis.">
+    ax string (1..1)
+basicType c15token <"A model-declared basic type - normally builtin-only; ORACLE-ARBITRATED (charter S15).">
+basicType c15scaled(c15digits int) <"A parameterised model-declared basic type.">

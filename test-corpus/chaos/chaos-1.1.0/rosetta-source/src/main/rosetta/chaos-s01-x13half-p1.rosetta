@@ -1,0 +1,30 @@
+namespace chaos.s01.x13half.p1
+version "1.0.0"
+import chaos.s01.x13half.p2.*
+type C1Ref: <"A referenced component the import-style axis relocates.">
+    refCode string (1..1)
+type C1Times: <"Every temporal record type at every cardinality form.">
+    d date (0..1)
+    t time (0..1)
+    dt dateTime (0..1)
+    z zonedDateTime (0..1)
+    ds date (0..*)
+    stamp dateTime (1..1)
+
+func C1Widen: <"Conditional arms of SIBLING SUBTYPES - the common-supertype/wildcard decl class (v3.1 F9).">
+    inputs:
+        b boolean (1..1)
+        m C1Mid (1..1)
+        l C1Leaf (1..1)
+    output:
+        out C1Base (1..1)
+    set out:
+        if b then l else m
+type C1Cond: <"Type-level condition seats.">
+    lo number (0..1)
+    hi number (0..1)
+    condition C1Bounds: <"Ordered when both present.">
+        if lo exists and hi exists
+        then lo <= hi
+    condition:
+        lo exists or hi exists

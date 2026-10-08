@@ -1,0 +1,64 @@
+package holdout.voidcollapse.meta;
+
+import com.rosetta.model.lib.annotations.RosettaMeta;
+import com.rosetta.model.lib.meta.RosettaMetaData;
+import com.rosetta.model.lib.qualify.QualifyFunctionFactory;
+import com.rosetta.model.lib.qualify.QualifyResult;
+import com.rosetta.model.lib.validation.Validator;
+import com.rosetta.model.lib.validation.ValidatorFactory;
+import com.rosetta.model.lib.validation.ValidatorWithArg;
+import holdout.voidcollapse.Carrier;
+import holdout.voidcollapse.validation.CarrierTypeFormatValidator;
+import holdout.voidcollapse.validation.CarrierValidator;
+import holdout.voidcollapse.validation.exists.CarrierOnlyExistsValidator;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
+import java.util.function.Function;
+
+
+/**
+ * @version 0.0.0
+ */
+@RosettaMeta(model=Carrier.class)
+public class CarrierMeta implements RosettaMetaData<Carrier> {
+
+	@Override
+	public List<Validator<? super Carrier>> dataRules(ValidatorFactory factory) {
+		return Arrays.asList(
+		);
+	}
+	
+	@Override
+	public List<Function<? super Carrier, QualifyResult>> getQualifyFunctions(QualifyFunctionFactory factory) {
+		return Collections.emptyList();
+	}
+	
+	@Override
+	public Validator<? super Carrier> validator(ValidatorFactory factory) {
+		return factory.<Carrier>create(CarrierValidator.class);
+	}
+
+	@Override
+	public Validator<? super Carrier> typeFormatValidator(ValidatorFactory factory) {
+		return factory.<Carrier>create(CarrierTypeFormatValidator.class);
+	}
+
+	@Deprecated
+	@Override
+	public Validator<? super Carrier> validator() {
+		return new CarrierValidator();
+	}
+
+	@Deprecated
+	@Override
+	public Validator<? super Carrier> typeFormatValidator() {
+		return new CarrierTypeFormatValidator();
+	}
+	
+	@Override
+	public ValidatorWithArg<? super Carrier, Set<String>> onlyExistsValidator() {
+		return new CarrierOnlyExistsValidator();
+	}
+}

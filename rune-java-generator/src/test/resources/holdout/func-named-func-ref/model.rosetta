@@ -1,0 +1,92 @@
+namespace com.rosetta.test.model
+version "${project.version}"
+
+func Incr:
+	inputs:
+		a int (1..1)
+	output:
+		result int (1..1)
+	
+	set result:
+		a + 1
+
+func IsAnswerToTheUniverse:
+	inputs:
+		a int (1..1)
+	output:
+		result boolean (1..1)
+	
+	set result:
+		a = 42
+
+func ClosestToTen:
+	inputs:
+		a int (1..1)
+		b int (1..1)
+	output:
+		result int (1..1)
+	
+	set result:
+		if a < 10 then
+			if b < 10 then
+				if a > b then a else b
+			else
+				if 10 - a < b - 10 then a else b
+		else
+			if b < 10 then
+				if a - 10 < 10 - b then a else b
+			else
+				if a < b then a else b
+
+func F1:
+	inputs:
+		list int (0..*)
+	output:
+		res int (0..*)
+	
+	add res:
+		list
+			extract Incr
+
+func F2:
+	inputs:
+		list int (0..*)
+	output:
+		res boolean (0..*)
+	
+	add res:
+		list
+			extract IsLeapYear
+
+func F3:
+	inputs:
+		list int (0..*)
+	output:
+		res int (0..*)
+	
+	add res:
+		list
+			filter IsAnswerToTheUniverse
+
+func F4:
+	inputs:
+		list int (0..*)
+	output:
+		res int (1..1)
+	
+	set res:
+		list
+			reduce acc, v [ ClosestToTen(acc, v) ]
+
+func F5:
+	inputs:
+		list int (0..*)
+	output:
+		res int (0..*)
+	
+	add res:
+		list
+			extract Incr
+			then extract Incr
+			then extract item + 1
+			then extract a [ a extract Incr ]

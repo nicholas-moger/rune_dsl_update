@@ -1,0 +1,21 @@
+namespace com.rosetta.test.model.agreement
+version "test"
+
+type Top:
+	foo Foo (1..1)
+
+type Foo:
+	bar1 Bar (0..1)
+	bar2 Bar (0..1)
+
+type Bar:
+	id number (1..1)
+
+func ExtractBar: <"Extracts a bar">
+	inputs: top Top (1..1)
+	output: topOut Top (1..1)
+	alias fooAlias : topOut -> foo
+	set fooAlias -> bar1:
+		top -> foo -> bar1
+	set topOut -> foo -> bar2:
+		top -> foo -> bar2

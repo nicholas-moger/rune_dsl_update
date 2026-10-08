@@ -1,0 +1,6 @@
+model:
+  name: Just another Rosetta model
+  enableExperimentalFeatures:
+    - scopes
+dependencies:
+generators:

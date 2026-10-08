@@ -1,0 +1,13 @@
+namespace test.qcn.b
+version "0.0.0"
+
+import test.qcn.a.*
+
+func Qualify_QcnB: <"Product qualification against the declared root.">
+    [qualification Product]
+    inputs:
+        terms QcnTerms (1..1)
+    output:
+        is_product boolean (1..1)
+    set is_product:
+        terms -> notional exists

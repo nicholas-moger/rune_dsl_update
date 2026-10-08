@@ -1,0 +1,6 @@
+namespace chaos.s05.a2wild.h
+version "1.0.0"
+type C5Sub: <"List-of-list rung and reference target - relocated by the import axis.">
+    [metadata key]
+    vals number (0..*)
+    name string (1..1)

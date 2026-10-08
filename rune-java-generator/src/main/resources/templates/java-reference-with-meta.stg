@@ -1,0 +1,421 @@
+delimiters "<", ">"
+
+referenceWithMetaFile(m) ::= <<
+package <m.packageName>;
+
+<m.imports:{imp | import <imp>;
+}>
+import static java.util.Optional.ofNullable;
+
+@RosettaDataType(value="<m.className>", builder=<m.className>.<m.className>BuilderImpl.class, version="0.0.0")
+@RuneDataType(value="<m.className>", model="<m.modelName>", builder=<m.className>.<m.className>BuilderImpl.class, version="0.0.0")
+public interface <m.className> extends RosettaModelObject, ReferenceWithMeta\<<m.wrappedTypeName>\> {
+
+	<m.className>Meta metaData = new <m.className>Meta();
+
+	/*********************** Getter Methods  ***********************/
+	<m.wrappedTypeName> getValue();
+	String getGlobalReference();
+	String getExternalReference();
+	Reference getReference();
+
+	/*********************** Build Methods  ***********************/
+	<m.className> build();
+<\t>
+	<m.className>.<m.className>Builder toBuilder();
+<\t>
+	static <m.className>.<m.className>Builder builder() {
+		return new <m.className>.<m.className>BuilderImpl();
+	}
+
+	/*********************** Utility Methods  ***********************/
+	@Override
+	default RosettaMetaData\<? extends <m.className>\> metaData() {
+		return metaData;
+	}
+<\t>
+	@Override
+	@RuneAttribute("@type")
+	default Class\<? extends <m.className>\> getType() {
+		return <m.className>.class;
+	}
+<\t>
+	@Override
+	default Class\<<m.wrappedTypeName>\> getValueType() {
+		return <m.wrappedTypeName>.class;
+	}
+<\t>
+	@Override
+	default void process(RosettaPath path, Processor processor) {
+<if(m.isComposite)>
+		processRosetta(path.newSubPath("value"), processor, <m.wrappedTypeName>.class, getValue());
+<else>
+		processor.processBasic(path.newSubPath("value"), <m.wrappedTypeName>.class, getValue(), this);
+<endif>
+		processor.processBasic(path.newSubPath("globalReference"), String.class, getGlobalReference(), this, AttributeMeta.META);
+		processor.processBasic(path.newSubPath("externalReference"), String.class, getExternalReference(), this, AttributeMeta.META);
+		processRosetta(path.newSubPath("reference"), processor, Reference.class, getReference());
+	}
+<\t>
+
+	/*********************** Builder Interface  ***********************/
+	interface <m.className>Builder extends <m.className>, RosettaModelObjectBuilder, ReferenceWithMeta.ReferenceWithMetaBuilder\<<m.wrappedTypeName>\> {
+<if(m.isComposite)>
+		<m.wrappedTypeName>.<m.wrappedTypeName>Builder getOrCreateValue();
+		@Override
+		<m.wrappedTypeName>.<m.wrappedTypeName>Builder getValue();
+<endif>
+		Reference.ReferenceBuilder getOrCreateReference();
+		@Override
+		Reference.ReferenceBuilder getReference();
+		<m.className>.<m.className>Builder setValue(<m.wrappedTypeName> value);
+		<m.className>.<m.className>Builder setGlobalReference(String globalReference);
+		<m.className>.<m.className>Builder setExternalReference(String externalReference);
+		<m.className>.<m.className>Builder setReference(Reference reference);
+
+		@Override
+		default void process(RosettaPath path, BuilderProcessor processor) {
+<if(m.isComposite)>
+			processRosetta(path.newSubPath("value"), processor, <m.wrappedTypeName>.<m.wrappedTypeName>Builder.class, getValue());
+<else>
+			processor.processBasic(path.newSubPath("value"), <m.wrappedTypeName>.class, getValue(), this);
+<endif>
+			processor.processBasic(path.newSubPath("globalReference"), String.class, getGlobalReference(), this, AttributeMeta.META);
+			processor.processBasic(path.newSubPath("externalReference"), String.class, getExternalReference(), this, AttributeMeta.META);
+			processRosetta(path.newSubPath("reference"), processor, Reference.ReferenceBuilder.class, getReference());
+		}
+<\t><\t>
+
+		<m.className>.<m.className>Builder prune();
+	}
+
+	/*********************** Immutable Implementation of <m.className>  ***********************/
+	class <m.className>Impl implements <m.className> {
+		private final <m.wrappedTypeName> value;
+		private final String globalReference;
+		private final String externalReference;
+		private final Reference reference;
+<\t><\t>
+		protected <m.className>Impl(<m.className>.<m.className>Builder builder) {
+<if(m.isComposite)>
+			this.value = ofNullable(builder.getValue()).map(f->f.build()).orElse(null);
+<else>
+			this.value = builder.getValue();
+<endif>
+			this.globalReference = builder.getGlobalReference();
+			this.externalReference = builder.getExternalReference();
+			this.reference = ofNullable(builder.getReference()).map(f->f.build()).orElse(null);
+		}
+<\t><\t>
+		@Override
+		@RosettaAttribute("value")
+		@Accessor(AccessorType.GETTER)
+		@RuneAttribute("@data")
+<if(m.isComposite)>
+		@RuneMetaType
+<endif>
+		public <m.wrappedTypeName> getValue() {
+			return value;
+		}
+<\t><\t>
+		@Override
+		@RosettaAttribute("globalReference")
+		@Accessor(AccessorType.GETTER)
+		@RuneAttribute("@ref")
+		public String getGlobalReference() {
+			return globalReference;
+		}
+<\t><\t>
+		@Override
+		@RosettaAttribute("externalReference")
+		@Accessor(AccessorType.GETTER)
+		@RuneAttribute("@ref:external")
+		public String getExternalReference() {
+			return externalReference;
+		}
+<\t><\t>
+		@Override
+		@RosettaAttribute("address")
+		@Accessor(AccessorType.GETTER)
+		@RuneAttribute("@ref:scoped")
+		@RuneMetaType
+		public Reference getReference() {
+			return reference;
+		}
+<\t><\t>
+		@Override
+		public <m.className> build() {
+			return this;
+		}
+<\t><\t>
+		@Override
+		public <m.className>.<m.className>Builder toBuilder() {
+			<m.className>.<m.className>Builder builder = builder();
+			setBuilderFields(builder);
+			return builder;
+		}
+<\t><\t>
+		protected void setBuilderFields(<m.className>.<m.className>Builder builder) {
+			ofNullable(getValue()).ifPresent(builder::setValue);
+			ofNullable(getGlobalReference()).ifPresent(builder::setGlobalReference);
+			ofNullable(getExternalReference()).ifPresent(builder::setExternalReference);
+			ofNullable(getReference()).ifPresent(builder::setReference);
+		}
+
+		@Override
+		public boolean equals(Object o) {
+			if (this == o) return true;
+			if (o == null || !(o instanceof RosettaModelObject) || !getType().equals(((RosettaModelObject)o).getType())) return false;
+<\t><\t>
+			<m.className> _that = getType().cast(o);
+<\t><\t>
+			if (!Objects.equals(value, _that.getValue())) return false;
+			if (!Objects.equals(globalReference, _that.getGlobalReference())) return false;
+			if (!Objects.equals(externalReference, _that.getExternalReference())) return false;
+			if (!Objects.equals(reference, _that.getReference())) return false;
+			return true;
+		}
+<\t><\t>
+		@Override
+		public int hashCode() {
+			int _result = 0;
+<if(m.isEnum)>
+			_result = 31 * _result + (value != null ? value.getClass().getName().hashCode() : 0);
+<else>
+			_result = 31 * _result + (value != null ? value.hashCode() : 0);
+<endif>
+			_result = 31 * _result + (globalReference != null ? globalReference.hashCode() : 0);
+			_result = 31 * _result + (externalReference != null ? externalReference.hashCode() : 0);
+			_result = 31 * _result + (reference != null ? reference.hashCode() : 0);
+			return _result;
+		}
+<\t><\t>
+		@Override
+		public String toString() {
+			return "<m.className> {" +
+				"value=" + this.value + ", " +
+				"globalReference=" + this.globalReference + ", " +
+				"externalReference=" + this.externalReference + ", " +
+				"reference=" + this.reference +
+			'}';
+		}
+	}
+
+	/*********************** Builder Implementation of <m.className>  ***********************/
+	class <m.className>BuilderImpl implements <m.className>.<m.className>Builder {
+<\t>
+<if(m.isComposite)>
+		protected <m.wrappedTypeName>.<m.wrappedTypeName>Builder value;
+<else>
+		protected <m.wrappedTypeName> value;
+<endif>
+		protected String globalReference;
+		protected String externalReference;
+		protected Reference.ReferenceBuilder reference;
+<\t><\t>
+		@Override
+		@RosettaAttribute("value")
+		@Accessor(AccessorType.GETTER)
+		@RuneAttribute("@data")
+<if(m.isComposite)>
+		@RuneMetaType
+		public <m.wrappedTypeName>.<m.wrappedTypeName>Builder getValue() {
+<else>
+		public <m.wrappedTypeName> getValue() {
+<endif>
+			return value;
+		}
+<\t><\t>
+<if(m.isComposite)>
+		@Override
+		public <m.wrappedTypeName>.<m.wrappedTypeName>Builder getOrCreateValue() {
+			<m.wrappedTypeName>.<m.wrappedTypeName>Builder result;
+			if (value!=null) {
+				result = value;
+			}
+			else {
+				result = value = <m.wrappedTypeName>.builder();
+			}
+<\t><\t><\t>
+			return result;
+		}
+<\t><\t>
+<endif>
+		@Override
+		@RosettaAttribute("globalReference")
+		@Accessor(AccessorType.GETTER)
+		@RuneAttribute("@ref")
+		public String getGlobalReference() {
+			return globalReference;
+		}
+<\t><\t>
+		@Override
+		@RosettaAttribute("externalReference")
+		@Accessor(AccessorType.GETTER)
+		@RuneAttribute("@ref:external")
+		public String getExternalReference() {
+			return externalReference;
+		}
+<\t><\t>
+		@Override
+		@RosettaAttribute("address")
+		@Accessor(AccessorType.GETTER)
+		@RuneAttribute("@ref:scoped")
+		@RuneMetaType
+		public Reference.ReferenceBuilder getReference() {
+			return reference;
+		}
+<\t><\t>
+		@Override
+		public Reference.ReferenceBuilder getOrCreateReference() {
+			Reference.ReferenceBuilder result;
+			if (reference!=null) {
+				result = reference;
+			}
+			else {
+				result = reference = Reference.builder();
+			}
+<\t><\t><\t>
+			return result;
+		}
+<\t><\t>
+		@RosettaAttribute("value")
+		@Accessor(AccessorType.SETTER)
+		@RuneAttribute("@data")
+<if(m.isComposite)>
+		@RuneMetaType
+<endif>
+		@Override
+		public <m.className>.<m.className>Builder setValue(<m.wrappedTypeName> _value) {
+<if(m.isComposite)>
+			this.value = _value == null ? null : _value.toBuilder();
+<else>
+			this.value = _value == null ? null : _value;
+<endif>
+			return this;
+		}
+<\t><\t>
+		@RosettaAttribute("globalReference")
+		@Accessor(AccessorType.SETTER)
+		@RuneAttribute("@ref")
+		@Override
+		public <m.className>.<m.className>Builder setGlobalReference(String _globalReference) {
+			this.globalReference = _globalReference == null ? null : _globalReference;
+			return this;
+		}
+<\t><\t>
+		@RosettaAttribute("externalReference")
+		@Accessor(AccessorType.SETTER)
+		@RuneAttribute("@ref:external")
+		@Override
+		public <m.className>.<m.className>Builder setExternalReference(String _externalReference) {
+			this.externalReference = _externalReference == null ? null : _externalReference;
+			return this;
+		}
+<\t><\t>
+		@RosettaAttribute("address")
+		@Accessor(AccessorType.SETTER)
+		@RuneAttribute("@ref:scoped")
+		@RuneMetaType
+		@Override
+		public <m.className>.<m.className>Builder setReference(Reference _reference) {
+			this.reference = _reference == null ? null : _reference.toBuilder();
+			return this;
+		}
+<\t><\t>
+		@Override
+		public <m.className> build() {
+			return new <m.className>.<m.className>Impl(this);
+		}
+<\t><\t>
+		@Override
+		public <m.className>.<m.className>Builder toBuilder() {
+			return this;
+		}
+<\t>
+		@SuppressWarnings("unchecked")
+		@Override
+		public <m.className>.<m.className>Builder prune() {
+<if(m.isComposite)>
+			if (value!=null && !value.prune().hasData()) value = null;
+<endif>
+			if (reference!=null && !reference.prune().hasData()) reference = null;
+			return this;
+		}
+<\t><\t>
+		@Override
+		public boolean hasData() {
+<if(m.isComposite)>
+			if (getValue()!=null && getValue().hasData()) return true;
+<else>
+			if (getValue()!=null) return true;
+<endif>
+			if (getGlobalReference()!=null) return true;
+			if (getExternalReference()!=null) return true;
+			if (getReference()!=null && getReference().hasData()) return true;
+			return false;
+		}
+<\t>
+		@SuppressWarnings("unchecked")
+		@Override
+		public <m.className>.<m.className>Builder merge(RosettaModelObjectBuilder other, BuilderMerger merger) {
+			<m.className>.<m.className>Builder o = (<m.className>.<m.className>Builder) other;
+<\t><\t><\t>
+<if(m.isComposite)>
+			merger.mergeRosetta(getValue(), o.getValue(), this::setValue);
+<endif>
+			merger.mergeRosetta(getReference(), o.getReference(), this::setReference);
+<\t><\t><\t>
+<if(!m.isComposite)>
+			merger.mergeBasic(getValue(), o.getValue(), this::setValue);
+<endif>
+			merger.mergeBasic(getGlobalReference(), o.getGlobalReference(), this::setGlobalReference);
+			merger.mergeBasic(getExternalReference(), o.getExternalReference(), this::setExternalReference);
+			return this;
+		}
+<\t>
+		@Override
+		public boolean equals(Object o) {
+			if (this == o) return true;
+			if (o == null || !(o instanceof RosettaModelObject) || !getType().equals(((RosettaModelObject)o).getType())) return false;
+<\t><\t>
+			<m.className> _that = getType().cast(o);
+<\t><\t>
+			if (!Objects.equals(value, _that.getValue())) return false;
+			if (!Objects.equals(globalReference, _that.getGlobalReference())) return false;
+			if (!Objects.equals(externalReference, _that.getExternalReference())) return false;
+			if (!Objects.equals(reference, _that.getReference())) return false;
+			return true;
+		}
+<\t><\t>
+		@Override
+		public int hashCode() {
+			int _result = 0;
+<if(m.isEnum)>
+			_result = 31 * _result + (value != null ? value.getClass().getName().hashCode() : 0);
+<else>
+			_result = 31 * _result + (value != null ? value.hashCode() : 0);
+<endif>
+			_result = 31 * _result + (globalReference != null ? globalReference.hashCode() : 0);
+			_result = 31 * _result + (externalReference != null ? externalReference.hashCode() : 0);
+			_result = 31 * _result + (reference != null ? reference.hashCode() : 0);
+			return _result;
+		}
+<\t><\t>
+		@Override
+		public String toString() {
+			return "<m.className>Builder {" +
+				"value=" + this.value + ", " +
+				"globalReference=" + this.globalReference + ", " +
+				"externalReference=" + this.externalReference + ", " +
+				"reference=" + this.reference +
+			'}';
+		}
+	}
+}
+
+class <m.className>Meta extends BasicRosettaMetaData\<<m.className>\> {
+
+}
+
+>>

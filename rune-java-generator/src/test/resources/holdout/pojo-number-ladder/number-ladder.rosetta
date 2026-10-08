@@ -1,0 +1,6 @@
+namespace test.numberladder
+
+type A:
+    integers number(digits: 8, fractionalDigits: 0) (0..*)
+    long number(digits: 10, fractionalDigits: 0) (1..1)
+    bigInteger number(digits: 20, fractionalDigits: 0) (1..1)

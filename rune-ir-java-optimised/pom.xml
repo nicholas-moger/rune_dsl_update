@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.finos.rune</groupId>
+    <artifactId>rune-ir-java-optimised</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>Rune DSL Optimised IR-routed Java Generation</name>
+    <description>The v3 OPTIMISED Java backend over the shared IR (route 3 of the
+        one-IR/three-backends architecture — the phase plan
+        the development plan "2026-08-10-p3-optimised-codegen-phase-plan" § 2; PR-3 lands
+        the skeleton). Registers the rune-java-generator
+        OptimisedIRGenerationProvider service under its OWN service file — the
+        route activates only behind -Drosetta.generator.ir.optimised=true with
+        this jar on the classpath; flag-off is byte-identical by construction on
+        both standing routes, and the skeleton provider DECLINES every seam
+        (Path-1 fallback) until emission families land (PR-4+). Consumes rune-ir
+        READ-ONLY; zero code-path sharing with the reference backend
+        (rune-ir-java) beyond the shared SPI types. OUTSIDE the release six
+        until the phase ships.</description>
+
+    <properties>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <junit.version>5.11.3</junit.version>
+        <maven.build.cache.skip>true</maven.build.cache.skip>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.finos.rune</groupId>
+            <artifactId>rune-ir</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.finos.rune</groupId>
+            <artifactId>rune-java-generator</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.5.2</version>
+            </plugin>
+        </plugins>
+    </build>
+</project>

@@ -1,0 +1,38 @@
+namespace oracle.control
+version "1.0.0"
+
+// THE POSITIVE CONTROL FOR THE ORACLE'S VALIDATION LEG.
+//
+// This model contains one deliberate, unambiguous type error: an if-condition
+// of type `string`. Upstream 9.83.0's checkConditionalExpression rejects it
+// outright, so a working validator MUST report
+//
+//     Expected type `boolean`, but got `string` instead.
+//
+// The driver loads and validates this file — in its OWN resource set, so it
+// can never perturb a dump — before every run, and REFUSES TO WRITE THE DUMP
+// if the error does not appear.
+//
+// WHY THIS EXISTS. The oracle's validation leg once returned ZERO ISSUES FOR
+// EVERY INPUT: the uber-jar was shaded, a shaded jar cannot carry two files at
+// the same path, nearly every Eclipse/EMF artifact ships a plugin.properties,
+// EMF could not build its diagnostic root, and validation came back empty —
+// indistinguishable from a language with no complaints. Readings taken in that
+// state ("upstream reports no errors here") were worthless, and two conclusions
+// had to be retracted. A control that only runs when someone remembers to run
+// it would not have caught it; this one runs every time.
+//
+// DO NOT "FIX" THIS FILE. The error is the point.
+
+type ControlBox:
+    controlCaption string (0..1)
+
+func OracleControlIfConditionIsAString:
+    inputs:
+        controlBox ControlBox (1..1)
+    output:
+        controlResult string (1..1)
+    set controlResult:
+        if controlBox -> controlCaption
+        then "yes"
+        else "no"

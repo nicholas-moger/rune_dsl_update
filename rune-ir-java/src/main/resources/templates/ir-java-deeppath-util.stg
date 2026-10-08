@@ -1,0 +1,25 @@
+delimiters "<", ">"
+
+// Deep-path util (<pkg>.util.<T>DeepPathUtil) — coverage burn-down wave C.
+// Byte laws: NO javadoc/version stamp anywhere in the family; the
+// ExpressionOperatorsNullSafe wildcard static import appears iff the class has
+// methods (every method body references exists()); an eligible type with ZERO
+// deep features renders the EMPTY class — package line + three blank lines +
+// empty body (golden UnitTypeDeepPathUtil); every in-class blank separator is a
+// single-tab line and lives inside m.classBody (generator-rendered — see
+// DeepPathUtilGenerator). Rendered via renderNoIndent, the FUNCTION-template
+// convention for generator-computed multi-line bodies.
+deepPathUtilFile(m) ::= <<
+package <m.packageName>;
+
+<if(m.hasMethods)><m.imports:{imp | import <imp>;
+}>
+import static com.rosetta.model.lib.expression.ExpressionOperatorsNullSafe.*;
+
+<else>
+
+
+<endif>public class <m.className> {
+<m.classBody>}
+
+>>

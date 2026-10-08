@@ -1,0 +1,30 @@
+namespace test.dispatchcollision
+
+type MathInput:
+    mathInput string (1..1)
+    math Math (1..1)
+
+func AddOne:
+    inputs: arg string (1..1)
+    output: out string (1..1)
+
+func SubOne:
+    inputs: arg string (1..1)
+    output: out string (1..1)
+
+
+enum Math:
+    INCR
+    DECR
+
+func MathFunc:
+    inputs:
+        in1 Math (1..1)
+        in2 MathInput (1..1)
+    output: arg1 string (1..1)
+
+func MathFunc (in1 : Math -> INCR ):
+    set arg1: AddOne(in2 -> mathInput)
+
+func MathFunc (in1 : Math -> DECR ):
+    set arg1: SubOne(in2 -> mathInput)

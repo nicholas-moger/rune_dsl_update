@@ -1,0 +1,91 @@
+namespace chaos.s18.a1o3
+version "1.0.0"
+type C18Sub: <"Self-contained helper - relocated by the import axis.">
+    s string (1..1)
+func C18Grade: <"String-literal guards.">
+    inputs:
+        g string (1..1)
+    output:
+        n number (1..1)
+    set n:
+        g switch
+            "A" then 1,
+            "B" then 2,
+            default 0
+func C18Band: <"Integer-literal guards.">
+    inputs:
+        i number (1..1)
+    output:
+        b string (1..1)
+    set b:
+        i switch
+            1 then "one",
+            2 then "two",
+            default "many"
+func C18Pull: <"Choice type guards narrowing the item in each arm.">
+    inputs:
+        eth C18Either (1..1)
+    output:
+        out string (1..1)
+    set out:
+        eth switch
+            C18OptA then item -> av,
+            C18OptB then item -> bv to-string,
+            default "none"
+func C18ToKind: <"to-enum at a SINGLE assignment sink (v3.1 F20) + an extract-embedded switch (F15b) + a choice switch INSIDE a lambda (F29).">
+    inputs:
+        raw string (1..1)
+        eths C18Either (0..*)
+    output:
+        k C18KindEnum (0..1)
+    alias switched: [raw] extract (item switch "r" then "Red", "g" then "Green", default "Blue")
+    alias pulled: eths extract (item switch C18OptA then item -> av, C18OptB then item -> bv to-string, default "none")
+    set k:
+        if (pulled count = switched count) or pulled is absent
+        then raw to-enum C18KindEnum
+func C18Maybe: <"The switch under an OPTIONAL subject - the cardinality-shape dimension.">
+    inputs:
+        k C18KindEnum (0..1)
+    output:
+        hx string (0..1)
+    set hx:
+        if k exists
+        then k switch
+            Red then "ff0000",
+            default "xx"
+
+enum C18KindEnum: <"Enum-guard subject.">
+    Red
+    Green
+    Blue
+type C18OptA: <"Choice-guard option A.">
+    av string (1..1)
+type C18OptB: <"Choice-guard option B.">
+    bv number (1..1)
+choice C18Either: <"Choice-guard subject.">
+    C18OptA
+    C18OptB
+func C18Colour: <"Enum guards with default.">
+    inputs:
+        k C18KindEnum (1..1)
+    output:
+        hex string (1..1)
+    set hex:
+        k switch
+            Red then "ff0000",
+            Green then "00ff00",
+            default "0000ff"
+metaType scheme string
+type C18Coded: <"The meta-shape dimension at the switch subject's feeder (charter 2.2b).">
+    kind string (0..1)
+        [metadata scheme]
+func C18FromCoded: <"Switch over a scheme-carrying scalar.">
+    inputs:
+        c C18Coded (1..1)
+    output:
+        n number (1..1)
+    set n:
+        c -> kind switch
+            "spot" then 1,
+            "fwd" then 2,
+            default 0

@@ -1,0 +1,85 @@
+namespace chaos.s26.a2wild
+version "1.0.0"
+import chaos.s26.a2wild.h.*
+enum C26KindEnum: <"Enum-guard subject.">
+    Red
+    Green
+    Blue
+func C26Lit: <"Number and boolean literal ARMS and DEFAULTS under literal guards in a lambda-item switch (seat 7's banked kinds beyond string and int).">
+    inputs:
+        raws string (0..*)
+    output:
+        n number (1..1)
+    alias nums: raws extract (item switch "a" then 1.5, "b" then 2.25, default 0.5)
+    alias flags: raws extract (item switch "a" then True, "b" then False, default False)
+    set n: (nums then sum) + (flags then filter item = True then count)
+func C26Upper: <"The callee taking a string.">
+    inputs:
+        s string (1..1)
+    output:
+        t string (1..1)
+    set t: s + "!"
+func C26Name: <"The callee taking the enum - the bare function-name arm's target.">
+    inputs:
+        k C26KindEnum (1..1)
+    output:
+        s string (1..1)
+    set s: k to-string
+func C26AliasArms: <"The other admitted arm kinds under LITERAL guards INSIDE an alias - the bare item, a function call, an item-rooted nav, a to-string over one - the alias signature walk's raw-name fallback (seat 7's banked class) and a closure-parameter SUBJECT.">
+    inputs:
+        raws string (0..*)
+        tags C26Tag (0..*)
+    output:
+        outs string (0..*)
+    alias bare: raws extract (item switch "keep" then item, default "other")
+    alias called: raws extract (item switch "up" then C26Upper(item), default item)
+    alias navved: tags extract (item -> code switch "x" then item -> code, default "y")
+    alias stringed: tags extract (item -> code switch "n" then item -> code count to-string, default "0")
+    alias paramed: raws extract p [ p switch "r" then "red", default "grey" ]
+    add outs: bare
+    add outs: called
+    add outs: navved
+    add outs: stringed
+    add outs: paramed
+func C26Nested: <"A switch arm whose body is a switch, a switch as a comparison operand, and an enum switch under an OPTIONAL subject in a then-arm.">
+    inputs:
+        k C26KindEnum (0..1)
+        g string (1..1)
+    output:
+        r string (1..1)
+    alias inner: g switch
+        "a" then (k switch Red then "ar", default "ax"),
+        "b" then (k switch Green then "bg", default "bx"),
+        default "z"
+    alias cmp: (g switch "a" then 1, default 0) = 1
+    set r:
+        if k exists and cmp
+        then inner
+        else (if k exists then (k switch Blue then "blue", default "none") else "absent")
+type C26OptA: <"Choice option A.">
+    av string (1..1)
+type C26OptB: <"Choice option B.">
+    bv number (1..1)
+choice C26Either: <"Choice-guard subject.">
+    C26OptA
+    C26OptB
+type C26Bag: <"The rule and datarule carrier.">
+    eths C26Either (0..*)
+    kind C26KindEnum (0..1)
+    condition C26Colour: <"A switch in a data rule over an optional enum subject.">
+        if kind exists
+        then (kind switch Red then True, Green then True, default False)
+reporting rule C26PickAv from C26Bag: <"A switch in a reporting rule body - the choice-guarded lambda-direct class.">
+    extract eths then extract (item switch C26OptA then item -> av, C26OptB then item -> bv to-string, default "none")
+reporting rule C26Kind from C26Bag: <"An enum switch in a rule over an optional subject with a bare function-name arm (the vendored lambda-direct class).">
+    extract [kind] then extract (item switch Red then C26Name, default "d")
+func C26Hoist: <"A LITERAL-guarded switch at a then-hoist seat, a bare function-name arm, a disguised to-string arm, a default-operator arm and an ABSENT default (the vendored lambda-direct classes the seat-7 laws do not admit).">
+    inputs:
+        raws string (0..*)
+        k C26KindEnum (1..1)
+    output:
+        outs string (0..*)
+    add outs: raws then extract (item switch "a" then "A", default item) then distinct
+    add outs: [k] extract (item switch Red then C26Name, Green then item to-string, default "d")
+    add outs: [k] extract (item switch Red then (item to-string), default (C26Name(item) default "q"))
+    add outs: [k] extract (item switch Red then "r", Green then "g", Blue then "b")

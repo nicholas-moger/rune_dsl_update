@@ -1,0 +1,22 @@
+namespace chaos.s31.a3third.p3
+version "1.0.0"
+import chaos.s31.a3third.p1.*
+import chaos.s31.a3third.p2.*
+func C31Which: <"Bare enum-value switch guards over the E2 pair, and a switch over the escaped enum.">
+    inputs:
+        s C31SideEnum (1..1)
+        esc C31EscEnum (1..1)
+    output:
+        r string (1..1)
+    set r:
+        (s switch Long then "side-long", Short then "side-short")
+        + (esc switch Quote then "q", Slash then "s", default esc to-string)
+func C31Keys: <"The keyword-named values at compare, switch and to-enum seats.">
+    inputs:
+        k C31KeyEnum (1..1)
+        raw string (1..1)
+    output:
+        ok boolean (1..1)
+    set ok:
+        k = C31KeyEnum -> class
+        or (k switch long then True, new then False, default (raw to-enum C31KeyEnum = k))

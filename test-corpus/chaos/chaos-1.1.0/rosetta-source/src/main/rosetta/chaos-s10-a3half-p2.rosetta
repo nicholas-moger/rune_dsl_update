@@ -1,0 +1,16 @@
+namespace chaos.s10.a3half.p2
+version "1.0.0"
+import chaos.s10.a3half.p1.*
+type C10Marked: <"Annotated type - bare ref, attribute-selecting ref, prefixed ref.">
+    [c10approved]
+    [c10owner team]
+    [c10stage live]
+    mid string (1..1)
+    aux C10Aux (0..1)
+func C10Tag: <"Annotated function.">
+    [c10approved]
+    inputs:
+        s string (1..1)
+    output:
+        t string (1..1)
+    set t: s + "!"

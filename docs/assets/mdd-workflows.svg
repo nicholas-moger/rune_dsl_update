@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="860" viewBox="0 0 1120 860" role="img" aria-labelledby="title desc">
+<title id="title">Two workflows, shared language services</title>
+<desc id="desc">The model author repeatedly edits models, reads diagnostics, generates or runs and tests behaviour. The language maintainer changes syntax and metamodel, semantics and transforms, emitters, then tests and releases. Reusable language services support both workflows. SDK or library APIs and CLI are access surfaces; an editor can use LSP. These are alongside the workflows rather than mandatory processing stages.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9" fill="none" stroke="#a9b7cb" stroke-width="1.4"/></marker></defs>
+<rect width="1120" height="860" rx="22" fill="#121923"/>
+<g font-family="Segoe UI, Arial, sans-serif">
+<text x="30" y="47" fill="#eef2f8" font-size="31" font-weight="600" text-anchor="start">
+<tspan x="30" dy="0" xml:space="preserve">Two workflows, shared language services</tspan>
+</text>
+<text x="30" y="80" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="30" dy="0" xml:space="preserve">Language access surfaces sit alongside these loops; they are not mandatory processing stages</tspan>
+</text>
+<rect x="30" y="125" width="515" height="378" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<text x="54" y="162" fill="#92d5c6" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="54" dy="0" xml:space="preserve">Model author</tspan>
+</text>
+<text x="54" y="191" fill="#a9b7cb" font-size="19" font-weight="400" text-anchor="start">
+<tspan x="54" dy="0" xml:space="preserve">Own a model and its behaviour</tspan>
+</text>
+<rect x="78" y="216" width="443" height="49" rx="9" fill="#121923" stroke="#344153" stroke-width="1.5"/>
+<text x="96" y="250" fill="#eef2f8" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="96" dy="0" xml:space="preserve">Edit model</tspan>
+</text>
+<polyline points="299.5,265 299.5,282" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<rect x="78" y="282" width="443" height="49" rx="9" fill="#121923" stroke="#344153" stroke-width="1.5"/>
+<text x="96" y="316" fill="#eef2f8" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="96" dy="0" xml:space="preserve">Read diagnostics</tspan>
+</text>
+<polyline points="299.5,331 299.5,348" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<rect x="78" y="348" width="443" height="49" rx="9" fill="#121923" stroke="#344153" stroke-width="1.5"/>
+<text x="96" y="382" fill="#eef2f8" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="96" dy="0" xml:space="preserve">Generate or run</tspan>
+</text>
+<polyline points="299.5,397 299.5,414" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<rect x="78" y="414" width="443" height="49" rx="9" fill="#121923" stroke="#344153" stroke-width="1.5"/>
+<text x="96" y="448" fill="#eef2f8" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="96" dy="0" xml:space="preserve">Test behaviour</tspan>
+</text>
+<polyline points="78,438.5 53,438.5 53,240.5 78,240.5" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<rect x="575" y="125" width="515" height="378" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<text x="599" y="162" fill="#a6b0ec" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="599" dy="0" xml:space="preserve">Language maintainer</tspan>
+</text>
+<text x="599" y="191" fill="#a9b7cb" font-size="19" font-weight="400" text-anchor="start">
+<tspan x="599" dy="0" xml:space="preserve">Own the language and toolchain</tspan>
+</text>
+<rect x="623" y="216" width="443" height="49" rx="9" fill="#121923" stroke="#344153" stroke-width="1.5"/>
+<text x="641" y="250" fill="#eef2f8" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="641" dy="0" xml:space="preserve">Syntax + metamodel</tspan>
+</text>
+<polyline points="844.5,265 844.5,282" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<rect x="623" y="282" width="443" height="49" rx="9" fill="#121923" stroke="#344153" stroke-width="1.5"/>
+<text x="641" y="316" fill="#eef2f8" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="641" dy="0" xml:space="preserve">Semantics + transforms</tspan>
+</text>
+<polyline points="844.5,331 844.5,348" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<rect x="623" y="348" width="443" height="49" rx="9" fill="#121923" stroke="#344153" stroke-width="1.5"/>
+<text x="641" y="382" fill="#eef2f8" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="641" dy="0" xml:space="preserve">Emitters</tspan>
+</text>
+<polyline points="844.5,397 844.5,414" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<rect x="623" y="414" width="443" height="49" rx="9" fill="#121923" stroke="#344153" stroke-width="1.5"/>
+<text x="641" y="448" fill="#eef2f8" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="641" dy="0" xml:space="preserve">Test + release</tspan>
+</text>
+<polyline points="623,438.5 598,438.5 598,240.5 623,240.5" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="285,503 285,543" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="832,503 832,543" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<text x="310" y="533" fill="#a9b7cb" font-size="18" font-weight="400" text-anchor="start">
+<tspan x="310" dy="0" xml:space="preserve">uses</tspan>
+</text>
+<text x="856" y="533" fill="#a9b7cb" font-size="18" font-weight="400" text-anchor="start">
+<tspan x="856" dy="0" xml:space="preserve">maintains</tspan>
+</text>
+<rect x="30" y="550" width="1060" height="116" rx="14" fill="#18222f" stroke="#a2c6e6" stroke-width="1.5"/>
+<text x="560" y="589" fill="#a2c6e6" font-size="27" font-weight="600" text-anchor="middle">
+<tspan x="560" dy="0" xml:space="preserve">Shared language services</tspan>
+</text>
+<text x="560" y="623" fill="#eef2f8" font-size="23" font-weight="400" text-anchor="middle">
+<tspan x="560" dy="0" xml:space="preserve">Parser · resolution + checks · generation or execution</tspan>
+</text>
+<text x="560" y="651" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="middle">
+<tspan x="560" dy="0" xml:space="preserve">Reusable through several access surfaces</tspan>
+</text>
+<polyline points="197,666 197,709" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="562,666 562,709" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="927,666 927,709" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<rect x="30" y="716" width="335" height="91" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="31" y="735" width="4" height="53" rx="2" fill="#a2c6e6"/>
+<text x="53" y="753" fill="#a2c6e6" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="53" dy="0" xml:space="preserve">Library / SDK APIs</tspan>
+</text>
+<text x="53" y="786" fill="#a9b7cb" font-size="19" font-weight="400" text-anchor="start">
+<tspan x="53" dy="0" xml:space="preserve">Call services directly</tspan>
+</text>
+<rect x="395" y="716" width="335" height="91" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="396" y="735" width="4" height="53" rx="2" fill="#d0b487"/>
+<text x="418" y="753" fill="#d0b487" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="418" dy="0" xml:space="preserve">CLI</tspan>
+</text>
+<text x="418" y="786" fill="#a9b7cb" font-size="19" font-weight="400" text-anchor="start">
+<tspan x="418" dy="0" xml:space="preserve">Scripts and command-line tools</tspan>
+</text>
+<rect x="760" y="716" width="335" height="91" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="761" y="735" width="4" height="53" rx="2" fill="#92d5c6"/>
+<text x="783" y="753" fill="#92d5c6" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="783" dy="0" xml:space="preserve">Editor + LSP</tspan>
+</text>
+<text x="783" y="786" fill="#a9b7cb" font-size="19" font-weight="400" text-anchor="start">
+<tspan x="783" dy="0" xml:space="preserve">Protocol for language features</tspan>
+</text>
+<text x="30" y="842" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="30" dy="0" xml:space="preserve">Model tests check behaviour; language tests also check syntax, semantics, generation and compatibility.</tspan>
+</text>
+</g>
+</svg>

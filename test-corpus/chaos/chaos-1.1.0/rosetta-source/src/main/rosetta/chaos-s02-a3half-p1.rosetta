@@ -1,0 +1,14 @@
+namespace chaos.s02.a3half.p1
+version "1.0.0"
+import chaos.s02.a3half.p2.*
+type C2Tag: <"Helper the import-style axis relocates.">
+    tagLine string (1..1)
+enum C2DirEnum: <"Directions with displayName and docs.">
+    Buy displayName "BUY" <"Buy side.">
+    Sell displayName "SELL"
+    Hold <"No action.">
+enum C2BaseEnum: <"Extension base.">
+    Alpha
+    Beta displayName "B"
+enum C2ExtEnum extends C2BaseEnum: <"Extends across a block boundary.">
+    Gamma displayName "G3" <"Third letter.">

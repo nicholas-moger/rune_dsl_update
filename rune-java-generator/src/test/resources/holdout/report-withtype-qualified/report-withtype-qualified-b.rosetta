@@ -1,0 +1,31 @@
+namespace test.rwq.b
+version "0.0.0"
+
+import test.rwq.a.*
+
+body Authority RwqAUTH <"The authority.">
+corpus Regulation "Rwq Regulation" RwqReg <"The corpus.">
+segment rwqarticle
+
+type RwqTrade: <"A same-named DECOY from-type in the report's own namespace - the report names a's by qualified name.">
+    utid string (1..1)
+    notional number (0..1)
+
+reporting rule RwqUtid from RwqTrade: <"A same-named decoy rule.">
+    extract utid
+        as "UTI"
+
+type RwqReport: <"A same-named DECOY report type in the report's own namespace.">
+    utiField string (1..1)
+        [ruleReference RwqUtid]
+
+corpus Standard "Rwq Standard" RwqStd <"The standard.">
+rule source RwqRS
+{
+}
+report RwqAUTH RwqReg in T+1
+    from test.rwq.a.RwqTrade
+    when test.rwq.a.RwqEligible
+    using standard RwqStd
+    with type test.rwq.a.RwqReport
+    with source RwqRS

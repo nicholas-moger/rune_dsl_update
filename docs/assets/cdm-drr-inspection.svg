@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="765" viewBox="0 0 1120 765" role="img" aria-labelledby="title desc">
+<title id="title">Inspect definitions and analyse data</title>
+<desc id="desc">A semantic definition question, such as a field&#x27;s type, cardinality or referenced declaration, can reach existing JVM Rune language services over a loaded EMF source model through the editor/LSP, or through an illustrative custom inspection adapter. Results are definition details and source references. A separate transaction/example decision uses generated code and runtime in Java, or Python where supported, to compute an application-data result. EMF source models are not trade instances. Source text can also be read directly without a Rune JVM. Custom adapters do not imply a shipped general query API.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9" fill="none" stroke="#a9b7cb" stroke-width="1.4"/></marker></defs>
+<rect width="1120" height="765" rx="22" fill="#121923"/>
+<g font-family="Segoe UI, Arial, sans-serif">
+<text x="30" y="47" fill="#eef2f8" font-size="31" font-weight="600" text-anchor="start">
+<tspan x="30" dy="0" xml:space="preserve">Inspect definitions and analyse data</tspan>
+</text>
+<text x="30" y="80" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="30" dy="0" xml:space="preserve">Source definitions and application instances answer different questions</tspan>
+</text>
+<rect x="30" y="125" width="1065" height="335" rx="14" fill="#18222f" stroke="#a6b0ec" stroke-width="1.5"/>
+<text x="53" y="163" fill="#a6b0ec" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="53" dy="0" xml:space="preserve">Definition question · source model</tspan>
+</text>
+<rect x="55" y="200" width="230" height="120" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="56" y="219" width="4" height="82" rx="2" fill="#a2c6e6"/>
+<text x="78" y="237" fill="#a2c6e6" font-size="23" font-weight="600" text-anchor="start">
+<tspan x="78" dy="0" xml:space="preserve">Definition</tspan>
+<tspan x="78" dy="32" xml:space="preserve">question</tspan>
+</text>
+<text x="78" y="296" fill="#a9b7cb" font-size="18" font-weight="400" text-anchor="start">
+<tspan x="78" dy="0" xml:space="preserve">Type / cardinality</tspan>
+</text>
+<rect x="330" y="200" width="300" height="120" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="331" y="219" width="4" height="82" rx="2" fill="#a2c6e6"/>
+<text x="353" y="237" fill="#a2c6e6" font-size="22" font-weight="600" text-anchor="start">
+<tspan x="353" dy="0" xml:space="preserve">Editor / LSP</tspan>
+<tspan x="353" dy="30" xml:space="preserve">or custom adapter</tspan>
+</text>
+<text x="353" y="296" fill="#a9b7cb" font-size="19" font-weight="400" text-anchor="start">
+<tspan x="353" dy="0" xml:space="preserve">Adapter is illustrative</tspan>
+</text>
+<rect x="675" y="200" width="395" height="120" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="676" y="219" width="4" height="82" rx="2" fill="#a6b0ec"/>
+<text x="698" y="237" fill="#a6b0ec" font-size="21" font-weight="600" text-anchor="start">
+<tspan x="698" dy="0" xml:space="preserve">Rune language services · JVM</tspan>
+</text>
+<text x="698" y="270" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="698" dy="0" xml:space="preserve">Loaded EMF source model</tspan>
+<tspan x="698" dy="28" xml:space="preserve">Names · types · references</tspan>
+</text>
+<rect x="675" y="355" width="395" height="80" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="676" y="374" width="4" height="42" rx="2" fill="#92d5c6"/>
+<text x="698" y="392" fill="#92d5c6" font-size="23" font-weight="600" text-anchor="start">
+<tspan x="698" dy="0" xml:space="preserve">Definition details</tspan>
+</text>
+<text x="698" y="418" fill="#a9b7cb" font-size="18" font-weight="400" text-anchor="start">
+<tspan x="698" dy="0" xml:space="preserve">Type / cardinality + source references</tspan>
+</text>
+<polyline points="285,260 330,260" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="630,260 675,260" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="872,320 872,355" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<rect x="30" y="495" width="1065" height="155" rx="14" fill="#18222f" stroke="#92d5c6" stroke-width="1.5"/>
+<text x="53" y="533" fill="#92d5c6" font-size="22" font-weight="600" text-anchor="start">
+<tspan x="53" dy="0" xml:space="preserve">Data decision · application instances</tspan>
+</text>
+<rect x="55" y="550" width="230" height="80" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="56" y="569" width="4" height="42" rx="2" fill="#a2c6e6"/>
+<text x="78" y="587" fill="#a2c6e6" font-size="23" font-weight="600" text-anchor="start">
+<tspan x="78" dy="0" xml:space="preserve">Data question</tspan>
+</text>
+<text x="78" y="612" fill="#a9b7cb" font-size="18" font-weight="400" text-anchor="start">
+<tspan x="78" dy="0" xml:space="preserve">Transaction / example</tspan>
+</text>
+<rect x="330" y="550" width="430" height="80" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="331" y="569" width="4" height="42" rx="2" fill="#d0b487"/>
+<text x="353" y="587" fill="#d0b487" font-size="23" font-weight="600" text-anchor="start">
+<tspan x="353" dy="0" xml:space="preserve">Generated code + runtime</tspan>
+</text>
+<text x="353" y="612" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="353" dy="0" xml:space="preserve">Java; Python where supported</tspan>
+</text>
+<rect x="805" y="550" width="265" height="80" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="806" y="569" width="4" height="42" rx="2" fill="#92d5c6"/>
+<text x="828" y="587" fill="#92d5c6" font-size="23" font-weight="600" text-anchor="start">
+<tspan x="828" dy="0" xml:space="preserve">Computed result</tspan>
+</text>
+<text x="828" y="612" fill="#a9b7cb" font-size="18" font-weight="400" text-anchor="start">
+<tspan x="828" dy="0" xml:space="preserve">Application instances</tspan>
+</text>
+<polyline points="285,590 330,590" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="760,590 805,590" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<text x="30" y="705" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="30" dy="0" xml:space="preserve">Source text can be read directly without a Rune JVM.</tspan>
+<tspan x="30" dy="28" xml:space="preserve">Custom inspection adapters are illustrative, not a shipped general query API.</tspan>
+</text>
+</g>
+</svg>

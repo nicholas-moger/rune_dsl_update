@@ -1,0 +1,48 @@
+delimiters "<", ">"
+
+// v3.2 seat 11 (D50 — the file-scope first-claim law): rendered in TWO steps — see
+// java-validator-cardinality.stg. The body's TYPE positions are first-claim sentinels
+// (the library tokens through <t.X>, the data class and the casts through the model);
+// the generator resolves them in text order from the validator class as the one seed
+// and drops the losers' imports; the file template wraps m.body. ONE literal stays:
+// `Map.Entry::getValue` / `::getKey` are LITERAL text in the released plugin's template
+// (never a scoped type write), so a model type named Map that wins the simple name
+// leaves them bare - non-compiling upstream Java (oracle group type-named-util,
+// MapOnlyExistsValidator: `java.util.Map<String, Boolean>` canonical, `Map.Entry` bare).
+onlyExistsValidator(m) ::= <<
+package <m.packageName>;
+
+<m.imports:{imp | import <imp>;
+}>
+<if(m.staticImports)>
+<m.staticImports:{imp | import static <imp>;
+}>
+<endif>
+<m.body>
+>>
+
+onlyExistsValidatorBody(m, t) ::= <<
+public class <m.validatorClassName> implements <t.ValidatorWithArg>\<<m.dataClassJavaType>, <t.Set>\<String\>\> {
+
+	/* Casting is required to ensure types are output to ensure recompilation in Rosetta */
+	@Override
+	public \<T2 extends <m.dataClassJavaType>\> <t.ValidationResult>\<<m.dataClassJavaType>\> validate(<t.RosettaPath> path, T2 o, <t.Set>\<String\> fields) {
+		<t.Map>\<String, Boolean\> fieldExistenceMap = <t.ImmutableMap>.\<String, Boolean\>builder()
+<m.checks:{c | 				<c.checkExpr>
+}>				.build();
+<\t><\t>
+		// Find the fields that are set
+		<t.Set>\<String\> setFields = fieldExistenceMap.entrySet().stream()
+				.filter(Map.Entry::getValue)
+				.map(Map.Entry::getKey)
+				.collect(<t.Collectors>.toSet());
+<\t><\t>
+		if (setFields.equals(fields)) {
+			return success("<m.dataClassName>", <t.ValidationResult>.ValidationType.ONLY_EXISTS, "<m.dataClassName>", path, "");
+		}
+		return failure("<m.dataClassName>", <t.ValidationResult>.ValidationType.ONLY_EXISTS, "<m.dataClassName>", path, "",
+				String.format("[%s] should only be set.  Set fields: %s", fields, setFields));
+	}
+}
+
+>>

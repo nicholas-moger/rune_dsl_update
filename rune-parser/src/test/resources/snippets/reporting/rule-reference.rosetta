@@ -1,0 +1,7 @@
+namespace test.reports
+
+type TradeReport:
+    tradeId string (1..1)
+        [ruleReference TradeIdRule]
+    partyId string (0..1)
+        [ruleReference empty]

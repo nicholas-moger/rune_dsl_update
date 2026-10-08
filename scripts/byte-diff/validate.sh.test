@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+# validate.sh.test — smoke test for validate.sh.
+# Exercises three fixtures: good-entry passes; both bad-* fail.
+set -euo pipefail
+
+THIS_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+FIX="$THIS_DIR/fixtures"
+SCRIPT="$THIS_DIR/validate.sh"
+
+if [[ ! -x "$SCRIPT" && ! -f "$SCRIPT" ]]; then
+    echo "FAIL: $SCRIPT not found" >&2
+    exit 1
+fi
+
+# 1. good-entry must pass
+if ! bash "$SCRIPT" "$FIX/good-entry.json" >/dev/null 2>&1; then
+    echo "FAIL: validate.sh rejected good-entry.json" >&2
+    exit 1
+fi
+
+# 2. bad-missing-field must fail
+if bash "$SCRIPT" "$FIX/bad-missing-field.json" >/dev/null 2>&1; then
+    echo "FAIL: validate.sh accepted bad-missing-field.json (missing 'status')" >&2
+    exit 1
+fi
+
+# 3. bad-wrong-enum must fail
+if bash "$SCRIPT" "$FIX/bad-wrong-enum.json" >/dev/null 2>&1; then
+    echo "FAIL: validate.sh accepted bad-wrong-enum.json (typo 'cosmet')" >&2
+    exit 1
+fi
+
+echo "validate.sh.test: all 3 fixtures behave correctly"

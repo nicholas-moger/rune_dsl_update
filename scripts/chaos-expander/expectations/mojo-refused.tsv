@@ -1,0 +1,13 @@
+# THE MOJO-REFUSED VERDICTS (charter § 4b: "the two upstream oracles can disagree" - a file
+# the executing 9.83.0 VALIDATOR admits (L1-clean, no row in oracle-diagnostics.tsv) that the
+# released rosetta-maven-plugin's GENERATOR cannot produce goldens for; the holdout
+# golden-free-bar precedent). Written at v3.2 seat 10 (chaos-1.1.0, D49).
+# file<TAB>verdict<TAB>evidence
+#   pin-chaos-goldens.sh reads this file as a SECOND exclusion set (the mojo's licence is the
+#   whole invocation: one generator exception and nothing is emitted for any file) and its
+#   --judge-alone mode judges each row's file ALONE like an EXPECTED one (judged-alone.tsv is
+#   the receipt). The fork's emissions for these files are golden-free BY THIS VERDICT and
+#   belong to the asserted expected-noGolden set (chaos-golden-free.txt, the § 4b union).
+#   A row here is an UPSTREAM finding to report (fork defect vs upstream fact vs own bug:
+#   an upstream fact - the generator, not the language, refuses the shape).
+chaos-s98-base.rosetta	MOJO-CRASH	GenerationException: The null type has no name. (the released plugin's FunctionGenerator hoists a local of the null type for `set w -> partRef: empty as-key`; probe target/v32-seat10-instruments/probe/pa-emptykey/run.log and the first pin run's target/chaos-goldens/work/run1.log, local)

@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="460" viewBox="0 0 1120 460" role="img" aria-labelledby="title desc">
+<title id="title">Four different things</title>
+<desc id="desc">Teaching distinctions: a language metamodel defines allowed kinds such as Type, Field and Rule. A domain model defines Order with quantity and unitPrice and its rules. Model data is a particular Order with quantity 3 and unitPrice 12.50. Grammar defines permitted textual spelling. An AST represents parsed constructs; its relationship to the domain model depends on the language.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9" fill="none" stroke="#a9b7cb" stroke-width="1.4"/></marker></defs>
+<rect width="1120" height="460" rx="22" fill="#121923"/>
+<g font-family="Segoe UI, Arial, sans-serif">
+<text x="30" y="47" fill="#eef2f8" font-size="31" font-weight="600" text-anchor="start">
+<tspan x="30" dy="0" xml:space="preserve">Four different things</tspan>
+</text>
+<text x="30" y="80" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="30" dy="0" xml:space="preserve">Teaching distinctions · a model’s structure is different from its data and textual spelling</tspan>
+</text>
+<rect x="30" y="120" width="248" height="230" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<text x="51" y="155" fill="#a6b0ec" font-size="22" font-weight="600" text-anchor="start">
+<tspan x="51" dy="0" xml:space="preserve">Language</tspan>
+<tspan x="51" dy="29" xml:space="preserve">metamodel</tspan>
+</text>
+<text x="51" y="231" fill="#eef2f8" font-size="18" font-weight="400" text-anchor="start">
+<tspan x="51" dy="0" xml:space="preserve">Allowed kinds:</tspan>
+<tspan x="51" dy="29" xml:space="preserve">Type · Field · Rule</tspan>
+</text>
+<text x="51" y="326" fill="#a9b7cb" font-size="16" font-weight="400" text-anchor="start">
+<tspan x="51" dy="0" xml:space="preserve">Language structure</tspan>
+</text>
+<rect x="302" y="120" width="248" height="230" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<text x="323" y="155" fill="#a2c6e6" font-size="22" font-weight="600" text-anchor="start">
+<tspan x="323" dy="0" xml:space="preserve">Domain model</tspan>
+</text>
+<text x="323" y="207" fill="#eef2f8" font-size="18" font-weight="400" text-anchor="start">
+<tspan x="323" dy="0" xml:space="preserve">Order</tspan>
+<tspan x="323" dy="29" xml:space="preserve">quantity: integer</tspan>
+<tspan x="323" dy="29" xml:space="preserve">unitPrice: decimal</tspan>
+</text>
+<text x="323" y="326" fill="#a9b7cb" font-size="16" font-weight="400" text-anchor="start">
+<tspan x="323" dy="0" xml:space="preserve">Domain structure + rules</tspan>
+</text>
+<rect x="574" y="120" width="248" height="230" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<text x="595" y="155" fill="#92d5c6" font-size="22" font-weight="600" text-anchor="start">
+<tspan x="595" dy="0" xml:space="preserve">Model data</tspan>
+</text>
+<text x="595" y="207" fill="#eef2f8" font-size="18" font-weight="400" text-anchor="start">
+<tspan x="595" dy="0" xml:space="preserve">One Order</tspan>
+<tspan x="595" dy="29" xml:space="preserve">quantity = 3</tspan>
+<tspan x="595" dy="29" xml:space="preserve">unitPrice = 12.50</tspan>
+</text>
+<text x="595" y="326" fill="#a9b7cb" font-size="16" font-weight="400" text-anchor="start">
+<tspan x="595" dy="0" xml:space="preserve">Values for the model</tspan>
+</text>
+<rect x="846" y="120" width="248" height="230" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<text x="867" y="155" fill="#d0b487" font-size="22" font-weight="600" text-anchor="start">
+<tspan x="867" dy="0" xml:space="preserve">Grammar</tspan>
+</text>
+<text x="867" y="207" fill="#eef2f8" font-size="18" font-weight="400" text-anchor="start">
+<tspan x="867" dy="0" xml:space="preserve">How text is written</tspan>
+<tspan x="867" dy="29" xml:space="preserve">type … { … }</tspan>
+<tspan x="867" dy="29" xml:space="preserve">total = … * …</tspan>
+</text>
+<text x="867" y="326" fill="#a9b7cb" font-size="16" font-weight="400" text-anchor="start">
+<tspan x="867" dy="0" xml:space="preserve">Permitted spelling</tspan>
+</text>
+<text x="30" y="395" fill="#a9b7cb" font-size="23" font-weight="400" text-anchor="start">
+<tspan x="30" dy="0" xml:space="preserve">An AST represents parsed constructs.</tspan>
+<tspan x="30" dy="31" xml:space="preserve">Its relationship to the domain model depends on the language.</tspan>
+</text>
+</g>
+</svg>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="174" viewBox="0 0 520 174" role="img" aria-labelledby="title desc">
+<title id="title">1. Model-driven software development</title><desc id="desc">The concepts behind executable models. Open this guide.</desc>
+<rect x="1" y="1" width="518" height="172" rx="13" fill="#18222f" stroke="#344153"/>
+<rect x="1" y="1" width="4" height="172" rx="2" fill="#a6b0ec"/>
+<g font-family="'Segoe UI',Arial,sans-serif">
+<text x="26" y="33" font-size="12" font-weight="700" letter-spacing="1.6" fill="#a6b0ec">FOUNDATIONS</text>
+<text x="26" y="88" font-size="27" font-weight="650" fill="#eef2f8">Model-driven</text><text x="26" y="119" font-size="27" font-weight="650" fill="#eef2f8">software development</text><text x="26" y="143" font-size="16" fill="#a9b7cb">The concepts behind executable models</text>
+<text x="479" y="33" font-size="13" font-weight="700" text-anchor="end" fill="#8090a7">1</text></g>
+<g transform="translate(416 53) scale(.75)" fill="none" stroke="#a6b0ec" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity=".9"><path d="M0 0H32V38H0ZM8 10H24M8 19H24M8 28H18M39 19H55M50 14L55 19L50 24"/><circle cx="67" cy="19" r="8"/></g>
+<path d="M457 143H482M475 136L482 143L475 150" fill="none" stroke="#a6b0ec" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

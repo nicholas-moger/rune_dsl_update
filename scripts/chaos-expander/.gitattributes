@@ -1,0 +1,12 @@
+# The charter § 2.1 byte-integrity law: the A5 axis's payload is BYTES, and
+# seeds are asserted LF-only by expand.py's parser - git must never rewrite
+# them at checkout on any machine.
+seeds/** -text
+controls/** -text
+expectations/** -text
+*.tsv -text
+# The instruments themselves stay LF (the cq review's SF-8: a CRLF checkout
+# of the .sh breaks WSL bash - the repo's own recorded lesson; .py LF keeps
+# the committed digests meaningful).
+*.sh text eol=lf
+*.py text eol=lf

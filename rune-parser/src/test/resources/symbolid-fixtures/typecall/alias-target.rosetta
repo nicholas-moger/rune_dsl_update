@@ -1,0 +1,7 @@
+namespace com.test
+
+typeAlias SomeAlias:
+    string
+
+type FooWithAlias:
+    a SomeAlias (1..1)

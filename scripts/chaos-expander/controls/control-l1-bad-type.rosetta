@@ -1,0 +1,7 @@
+namespace chaos.control.l1bad
+version "1.0.0"
+type ControlBroken: <"The L1 positive control - a type error deliberately NOT in the EXPECTED census. Staged transiently by the control lane; NEVER part of the corpus (charter § 4: prove the instrument can fail).">
+    flag boolean (1..1)
+    condition ControlIsBroken:
+        if flag = "not-a-boolean"
+        then True

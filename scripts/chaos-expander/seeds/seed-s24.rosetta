@@ -1,0 +1,114 @@
+//== header
+namespace chaos.s24.seed
+version "0.0.0"
+//== helper C24Ref
+type C24Ref: <"Helper - relocated by the import axis.">
+    mark string (1..1)
+//== element C24Types
+metaType scheme string
+metaType reference string
+metaType key string
+basicType c24tok <"A model-declared basic type - Void in the generated Java (D47).">
+type C24Carrier: <"Void-typed attributes at every cardinality and meta shape beside plain ones.">
+    tok c24tok (0..1)
+    toks c24tok (0..*)
+    coded c24tok (0..1)
+        [metadata scheme]
+    name string (0..1)
+    flag boolean (0..1)
+    ref C24Ref (0..1)
+type C24Keyed: <"A keyed root for the as-key seats.">
+    [metadata key]
+    kid string (1..1)
+type C24Out: <"The output type: a Void leaf, a Void meta leaf, a Void list leaf, a keyed reference, a plain leaf and a nested carrier for the two-hop seat.">
+    v c24tok (0..1)
+    vm c24tok (0..1)
+        [metadata scheme]
+    vs c24tok (0..*)
+    kref C24Keyed (0..1)
+        [metadata reference]
+    s string (0..1)
+    car C24Carrier (0..1)
+//== element C24Meta
+func C24WithMetaPlain: <"A with-meta over `nothing` into a PLAIN output - upstream mints ReferenceWithMetaVoid and its own setValue does not compile (the parked with-meta-plain-output group, seat 9 round 2).">
+    inputs:
+        href string (0..1)
+    output:
+        r C24Ref (0..1)
+    set r: empty with-meta { reference: href }
+func C24WithMetaExists: <"The with-meta over `nothing` as an EXISTENCE operand (the parked with-meta-under-exists group).">
+    inputs:
+        href string (0..1)
+    output:
+        r boolean (1..1)
+    set r: (empty with-meta { reference: href }) exists
+func C24IntoMeta: <"A Void value SET into a scheme-annotated Void output - the EMPTY wrapper upstream, the fork's toBuilder(<Void>) non-compiling (SetMetaVoid, DECLARED at #630).">
+    inputs:
+        c C24Carrier (0..1)
+    output:
+        t c24tok (0..1)
+            [metadata scheme]
+    set t: c -> tok
+//== element C24Ops
+func C24Pass: <"The callee with a Void input and output.">
+    inputs:
+        t c24tok (0..1)
+    output:
+        u c24tok (0..1)
+    set u: t
+func C24Compare: <"Void operands of an equality, an inequality and a logical - the coercion seats no oracle group pins (the render law declines to today's bytes there).">
+    inputs:
+        c C24Carrier (1..1)
+        d C24Carrier (1..1)
+    output:
+        r boolean (1..1)
+    set r:
+        c -> tok = d -> tok
+        or c -> tok <> d -> tok
+        or (c -> tok exists and d -> tok is absent)
+func C24Arg: <"A Void value as a call ARGUMENT, in a list literal, under default, and in a switch arm.">
+    inputs:
+        c C24Carrier (1..1)
+        d C24Carrier (1..1)
+        k string (1..1)
+    output:
+        r c24tok (0..1)
+    alias viaCall: C24Pass(c -> tok)
+    alias listed: [c -> tok, d -> tok] first
+    alias defaulted: c -> tok default d -> tok
+    set r:
+        k switch
+            "a" then viaCall,
+            "b" then listed,
+            default defaulted
+func C24Multi: <"multiple exists and single exists over a Void list, and a multi Void segment SET later mutated by ADD (the render law's unwitnessed multi arms).">
+    inputs:
+        c C24Carrier (1..1)
+    output:
+        out C24Out (1..1)
+    condition C24Many:
+        c -> toks multiple exists or c -> toks single exists or c -> toks is absent
+    set out -> vs: c -> toks
+    add out -> vs: c -> tok
+//== element C24Seg
+func C24Segments: <"Void CONDITIONAL values into a META segment leaf, a MULTI segment leaf, a plain leaf and a two-hop segment leaf (seat 9 round 3's banked sub-shapes), and an as-key conditional at a reference leaf.">
+    inputs:
+        flag boolean (1..1)
+        c C24Carrier (0..1)
+        d C24Carrier (0..1)
+        k C24Keyed (0..1)
+    output:
+        out C24Out (1..1)
+    set out -> vm: if flag then c -> tok else d -> tok
+    set out -> vs: if flag then c -> toks else d -> toks
+    set out -> v: if flag then c -> tok else d -> tok
+    set out -> car -> tok: if flag then c -> tok else d -> tok
+    set out -> kref: (if flag then k else empty) as-key
+    set out -> s: if flag then c -> name else "n"
+//== element C24Rule
+reporting rule C24Tok from C24Carrier: <"A RULE's operation over a Void attribute (the rule Void-OUTPUT arm is a different law - banked at #630).">
+    extract tok
+        as "Void Token"
+reporting rule C24TokPresence from C24Carrier: <"A Void attribute under exists inside a rule's conditional.">
+    extract if tok exists then name else "absent"
+        as "Void Presence"

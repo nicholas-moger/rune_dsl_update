@@ -1,0 +1,29 @@
+namespace conformance.p4
+version "1.0.0"
+
+// P4 — a BARE enum value in the THEN arm, seeded only by the ELSE arm, in a
+// context with NO container expectation (a reporting rule has no declared
+// output type). Upstream's ExpectedTypeProvider gives the IFTHEN arm the
+// container's expected type ONLY (no sibling fallback — the typeof(ifthen)
+// fallback exists solely for the ELSETHEN arm), so the bare `Other` cannot
+// resolve here.
+//
+// The fork's Cat 13 seeds the whole chain from ANY typed leaf (then-first,
+// else-descend) and pushes it into EVERY branch, so it binds `Other` where
+// upstream refuses — an over-acceptance divergence invisible on upstream-valid
+// corpora.
+//
+// Expected upstream: `Other` UNRESOLVED (+ errors); `Beta -> Extra` resolves.
+
+enum Beta:
+    Other
+    Extra
+
+type Party4:
+    role string (0..1)
+
+reporting rule P4BareThenArm from Party4: <"P4 probe">
+    extract
+        if role exists
+        then Other
+        else Beta -> Extra

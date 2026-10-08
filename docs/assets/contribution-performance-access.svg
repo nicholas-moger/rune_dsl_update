@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="1180" viewBox="0 0 1120 1180" role="img" aria-labelledby="title desc">
+<title id="title">Model access and context measurements</title>
+<desc id="desc">Two separate retained experiments. Java first prepared model access: 90.799 to 7.676 seconds, including process startup, parsing, semantic preparation, extraction/indexing and the same four structural answer sets over 351 source files. One fresh process per Java lane; both require the JVM. Median or warm request latency is not established. Peak Windows working set increases from 1,483 to 2,239 MiB. Separate Python parser/index context experiment over 351 files and 7,661 declarations: full Rune source 1,894,552 tokens versus selected structural digest 284,248 tokens, using o200k_base and tiktoken0.14.0. The digest omits prose, mappings and expression/rule bodies; it does not replace full source semantics. Warm requests, network latency and AI answer quality were not measured. Neither experiment demonstrates a complete standalone SDK or JVM-free Java model access. No ratio or combined performance claim.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9" fill="none" stroke="#a9b7cb" stroke-width="1.4"/></marker></defs>
+<rect width="1120" height="1180" rx="22" fill="#121923"/>
+<g font-family="Segoe UI, Arial, sans-serif">
+<text x="30" y="47" fill="#eef2f8" font-size="32" font-weight="600" text-anchor="start">
+<tspan x="30" dy="0" xml:space="preserve">Model access and context measurements</tspan>
+</text>
+<text x="30" y="85" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="30" dy="0" xml:space="preserve">Java prepared access and Python selected context are separate experiments</tspan>
+</text>
+<rect x="30" y="130" width="1060" height="450" rx="14" fill="#18222f" stroke="#a2c6e6" stroke-width="1.5"/>
+<text x="53" y="168" fill="#a2c6e6" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="53" dy="0" xml:space="preserve">Java model access · first prepared access</tspan>
+</text>
+<text x="53" y="200" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="53" dy="0" xml:space="preserve">351 source files · four matching structural answer sets</tspan>
+</text>
+<text x="55" y="255" fill="#eef2f8" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="55" dy="0" xml:space="preserve">First access · seconds</tspan>
+</text>
+<text x="595" y="255" fill="#eef2f8" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="595" dy="0" xml:space="preserve">Peak Windows working set</tspan>
+</text>
+<text x="55" y="295" fill="#a2c6e6" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="55" dy="0" xml:space="preserve">Reference: 90.799 s</tspan>
+</text>
+<rect x="55" y="311" width="465.0" height="24" rx="4" fill="#a2c6e6" stroke="#a2c6e6" stroke-width="1.5"/>
+<text x="55" y="366" fill="#92d5c6" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="55" dy="0" xml:space="preserve">Replacement: 7.676 s</tspan>
+</text>
+<rect x="55" y="382" width="39.310344827586206" height="24" rx="4" fill="#92d5c6" stroke="#92d5c6" stroke-width="1.5"/>
+<text x="595" y="295" fill="#a2c6e6" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="595" dy="0" xml:space="preserve">Reference: 1,483 MiB</tspan>
+</text>
+<rect x="595" y="311" width="307.99240732469855" height="24" rx="4" fill="#a2c6e6" stroke="#a2c6e6" stroke-width="1.5"/>
+<text x="595" y="366" fill="#92d5c6" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="595" dy="0" xml:space="preserve">Replacement: 2,239 MiB</tspan>
+</text>
+<rect x="595" y="382" width="465.0" height="24" rx="4" fill="#92d5c6" stroke="#92d5c6" stroke-width="1.5"/>
+<text x="55" y="449" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="55" dy="0" xml:space="preserve">Startup / parsing / semantic preparation / indexing + the same answers</tspan>
+<tspan x="55" dy="30" xml:space="preserve">One fresh process per Java lane · both lanes run on the JVM</tspan>
+</text>
+<text x="55" y="525" fill="#d0b487" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="55" dy="0" xml:space="preserve">Peak Windows working set increased</tspan>
+</text>
+<rect x="30" y="630" width="1060" height="400" rx="14" fill="#18222f" stroke="#a6b0ec" stroke-width="1.5"/>
+<text x="53" y="668" fill="#a6b0ec" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="53" dy="0" xml:space="preserve">Python context comparison · separate token experiment</tspan>
+</text>
+<text x="53" y="700" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="53" dy="0" xml:space="preserve">351 files · 7,661 declarations · o200k_base / tiktoken 0.14.0</tspan>
+</text>
+<text x="55" y="755" fill="#eef2f8" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="55" dy="0" xml:space="preserve">Tokens · selected structural context</tspan>
+</text>
+<text x="55" y="795" fill="#a2c6e6" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="55" dy="0" xml:space="preserve">Full Rune source: 1,894,552 tokens</tspan>
+</text>
+<rect x="55" y="811" width="1005.0" height="24" rx="4" fill="#a2c6e6" stroke="#a2c6e6" stroke-width="1.5"/>
+<text x="55" y="866" fill="#92d5c6" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="55" dy="0" xml:space="preserve">Selected structural digest: 284,248 tokens</tspan>
+</text>
+<rect x="55" y="882" width="150.78458654077588" height="24" rx="4" fill="#92d5c6" stroke="#92d5c6" stroke-width="1.5"/>
+<text x="55" y="965" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="55" dy="0" xml:space="preserve">Python parser / index; digest omits prose, mappings and expression / rule bodies.</tspan>
+<tspan x="55" dy="30" xml:space="preserve">Selected structural context; full source semantics are not replaced.</tspan>
+</text>
+<text x="30" y="1080" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="30" dy="0" xml:space="preserve">Warm requests / network latency / AI answer quality: unmeasured.</tspan>
+<tspan x="30" dy="30" xml:space="preserve">These bounded experiments do not establish complete standalone SDK delivery.</tspan>
+</text>
+</g>
+</svg>

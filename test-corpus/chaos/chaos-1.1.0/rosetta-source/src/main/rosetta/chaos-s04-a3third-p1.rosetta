@@ -1,0 +1,26 @@
+namespace chaos.s04.a3third.p1
+version "1.0.0"
+import chaos.s04.a3third.p2.*
+import chaos.s04.a3third.p3.*
+type C4Pair: <"Constructed and segment-set output type.">
+    left number (1..1)
+    right number (1..1)
+func C4Add: <"Minimal set seat.">
+    inputs:
+        a number (1..1)
+        b number (1..1)
+    output:
+        s number (1..1)
+    set s: a + b
+func C4Build: <"Alias, condition, constructor, post-condition seats.">
+    inputs:
+        xs number (0..*)
+    output:
+        p C4Pair (1..1)
+    alias lo: xs first default 0
+    alias hiV: xs last default 0
+    condition C4NonNeg:
+        xs all >= 0
+    set p: C4Pair { left: lo, right: hiV }
+    post-condition C4BothSet:
+        p -> left exists and p -> right exists

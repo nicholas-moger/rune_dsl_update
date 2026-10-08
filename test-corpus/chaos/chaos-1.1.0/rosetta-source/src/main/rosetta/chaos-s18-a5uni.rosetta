@@ -1,0 +1,20 @@
+namespace chaos.s18.a5uni
+version "1.0.0"
+type C18Sub: <"éüµ – Self-contained helper - relocated by the import axis.">
+    s string (1..1)
+enum C18KindEnum: <"Enum-guard subject.">
+    Red
+    Green
+    Blue
+type C18OptA: <"Choice-guard option A.">
+    av string (1..1)
+type C18OptB: <"Choice-guard option B.">
+    bv number (1..1)
+choice C18Either: <"Choice-guard subject.">
+    C18OptA
+    C18OptB
+type A5UniProbe: <"Non-ASCII literal probe – müßig 試験.">
+    p string (0..1)
+        [label as "µ–label §7"]
+enum A5UniProbeEnum: <"displayName probe.">
+    V displayName "µ–„display“"

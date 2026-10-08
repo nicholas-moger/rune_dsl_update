@@ -1,0 +1,12 @@
+namespace chaos.s17.a3third.p1
+version "1.0.0"
+import chaos.s17.a3third.p2.*
+import chaos.s17.a3third.p3.*
+type C17Held: <"Self-contained helper - relocated by the import axis.">
+    h string (1..1)
+enum C17SideEnum: <"First enum - owns Buy and Sell.">
+    Buy
+    Sell
+enum C17ActionEnum: <"Second enum in the SAME scope re-using Buy (the E2 wrong-enum class).">
+    Buy
+    Amend

@@ -1,0 +1,83 @@
+namespace conformance.a1
+version "1.0.0"
+
+// A1 — choice-option navigation, the four LHS species.
+//
+// Upstream has ONE rule for `a -> b`: `b` is looked up in the feature scope of
+// `a`'s type, and for a choice type that scope IS the options (Choice extends
+// Data; its options are its attributes). The species of `a` never enters into
+// it. This file writes the same navigation off four different kinds of `a`.
+//
+// Distilled from drr 7.x base-trade-underlier-func / base-trade-basket-func /
+// regulation-common-func, where all four appear and three of them fail.
+
+type Security:
+    identifier string (1..1)
+
+type Loan:
+    identifier string (1..1)
+
+type Cash:
+    currency string (1..1)
+
+choice Instrument:
+    Security
+    Loan
+
+choice Asset:
+    Cash
+    Instrument
+
+type Basket:
+    identifier string (1..1)
+
+choice Observable:
+    Asset
+    Basket
+
+type Holder:
+    observable Observable (1..*)
+    chosenOne Observable (1..1)
+
+// (a) LHS is an ATTRIBUTE — the shape CDM 6.20.6 already exercises 78 times
+//     and the fork already handles. The regression witness.
+func A1AttributeLhs:
+    inputs:
+        holder Holder (1..1)
+    output:
+        result string (0..1)
+    set result:
+        holder -> chosenOne -> Asset -> Instrument -> Security -> identifier
+
+// (b) LHS is a FUNCTION INPUT.
+func A1InputLhs:
+    inputs:
+        observable Observable (1..1)
+    output:
+        result string (0..1)
+    set result:
+        observable -> Asset -> Instrument -> Loan -> identifier
+
+// (c) LHS is an ALIAS (shortcut).
+func A1AliasLhs:
+    inputs:
+        holder Holder (1..1)
+    output:
+        result string (0..1)
+    alias chosen:
+        holder -> chosenOne
+    set result:
+        chosen -> Asset -> Instrument -> Security -> identifier
+
+// (d) LHS is the IMPLICIT VARIABLE, inside an extract body.
+func A1ImplicitLhs:
+    inputs:
+        holder Holder (1..1)
+    output:
+        result string (0..*)
+    set result:
+        holder -> observable
+            extract
+                if Asset -> Instrument -> Security exists
+                then Asset -> Instrument -> Security -> identifier
+                else Asset -> Cash -> currency

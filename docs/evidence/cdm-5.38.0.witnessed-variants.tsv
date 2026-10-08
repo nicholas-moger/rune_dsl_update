@@ -1,0 +1,16 @@
+# Accepted content of the CDM 5.38.0 reference Java files whose bytes differed between independent
+# runs of the released generator (rosetta-maven-plugin 9.83.0 on the pinned public commit).
+# EVERY row is a form produced by a released-generator run named in cdm-5.38.0.mode0-witnesses.json;
+# nothing here was rendered by the replacement implementation. A form no witnessed run produced is
+# NOT accepted: the verifier reports it as unverifiedOrdering.
+# Columns: path (relative to test-corpus/), variant index, SHA-256 raw, SHA-256 after CRLF->LF, witnesses
+# (R = the retained frozen baseline reference; W1, W2 = the two independent 2026-09-22 regenerations),
+# retainedReference (true for the form recorded in cdm-5.38.0.sha256).
+cdm/cdm-5.38.0/rosetta-source/src/generated/java/cdm/event/common/meta/BusinessEventMeta.java	0	64b140be11badc9304f04678cd0d92378ad00de71d2a0820c2dd6803f0292bc4	b1b67d3917035565cb90950356304a94a7554e232a7c92cf1e81f6d44857241f	R,W1	true
+cdm/cdm-5.38.0/rosetta-source/src/generated/java/cdm/event/common/meta/BusinessEventMeta.java	1	6ac215f420920e95344ac37a16a6652abad56ddfb53a849b3f6d308422fd0b2a	a74738bdcd17c2ef1cf99820c86eacd7506f7094b54735df5ae519fa4e13c8e9	W2	false
+cdm/cdm-5.38.0/rosetta-source/src/generated/java/cdm/observable/asset/calculatedrate/package-info.java	0	97b66ca6441825eaf780f31210e992f5ca0082aa3e74bf8383525a58bcca1dea	ad4cf5b84462c204d2873386691886fe3bf7e469f43d8e3c98762f27775a81c1	R	true
+cdm/cdm-5.38.0/rosetta-source/src/generated/java/cdm/observable/asset/calculatedrate/package-info.java	1	1bc5747cf775a9d161902b4f44263f6dce2c82458554519aea80ab1594b7bfaf	6c1ff06ee784e77f2b94575030fcbee0f9a3009285b17552280f6218515cbfdd	W1	false
+cdm/cdm-5.38.0/rosetta-source/src/generated/java/cdm/observable/asset/calculatedrate/package-info.java	2	ac8eb42cee686866b5bbad1613eaa654ab8d89d0e642cda5f7dff21e07acf067	49e1909af99f5d018f53fc2a8721c5aaf1cd64b9a04e4ac895751d013c504c31	W2	false
+cdm/cdm-5.38.0/rosetta-source/src/generated/java/cdm/product/asset/floatingrate/package-info.java	0	a56ac2c40730cbadaf34f61e8bb8e377c095b8c8f050d9fd3c89e308851c398b	df6fc3ccd02073687a14affa375a342c05d1753b2bc59eb8bb04d535c3761d15	R	true
+cdm/cdm-5.38.0/rosetta-source/src/generated/java/cdm/product/asset/floatingrate/package-info.java	1	48a324af09a6cbad77d185b93ad562837f571e07f29b367d10d3fabfe4a1887d	4fa7966e6d0b392d6b183ab28006e88f06ae562ce2533b46b471b0f200ed4786	W1	false
+cdm/cdm-5.38.0/rosetta-source/src/generated/java/cdm/product/asset/floatingrate/package-info.java	2	8c7636fe695d6ab5819f6350bece58140e058407d65d3580a5a92e0120a19229	880a760a1123c278fa137f6c4829e6f07188f14f74da77a24e55f9a99052be68	W2	false

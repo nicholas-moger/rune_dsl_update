@@ -1,0 +1,39 @@
+namespace conformance.p2
+version "1.0.0"
+
+// P2 — a FUNCTION INPUT named the same as an OPTION of the implicit item.
+// Spec R3 + R4.2: the parent chain (which holds the input) OUTRANKS the
+// implicit item's features, so upstream binds the INPUT.
+//
+// The fork's v3.1 C1 option arm (TypeInferenceEngine ~445-460) stamps the
+// authority slot gated only on resolvedFeatureNode-empty — it does not check
+// whether pass 5 already bound a GENUINE upstream symbol (an input), so the
+// differential's authority read would report the ChoiceOption where upstream
+// reports the input's Attribute.
+//
+// Expected upstream: the bare `Credit` inside the extract binds
+//   Attribute conformance.p2.P2InputShadowsOption.Credit  (the input),
+// NOT ChoiceOption conformance.p2.Idx.Credit.
+
+type Credit:
+    id string (1..1)
+
+type Equity:
+    id string (1..1)
+
+choice Idx:
+    Credit
+    Equity
+
+type Holder2:
+    u Idx (1..*)
+
+func P2InputShadowsOption:
+    inputs:
+        holder Holder2 (1..1)
+        Credit string (0..1)
+    output:
+        result boolean (0..*)
+    set result:
+        holder -> u
+            extract [ Credit exists ]

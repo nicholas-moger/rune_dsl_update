@@ -1,0 +1,15 @@
+//== header
+namespace chaos.s97.seed
+version "0.0.0"
+//== element C97Multi
+metaType scheme string
+type C97Holder: <"REFUSAL-PARITY s97 (base only): `with-meta` on a MULTI-cardinality argument - upstream refuses ('Expecting single cardinality'); the fork's port from seat 5 (ExpressionValidator.checkWithMetaSingle) must refuse too - the one row of the band expected FORK-REFUSES.">
+    codes string (0..*)
+        [metadata scheme]
+func C97Stamp:
+    inputs:
+        h C97Holder (1..1)
+    output:
+        cs string (0..*)
+            [metadata scheme]
+    set cs: h -> codes with-meta { scheme: "chaos-scheme" }

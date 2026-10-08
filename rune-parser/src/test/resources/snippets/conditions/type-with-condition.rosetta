@@ -1,0 +1,7 @@
+namespace test.conditions
+
+type Foo:
+    bar number (0..1)
+    baz number (0..1)
+    condition OneRequired:
+        bar exists or baz exists

@@ -1,0 +1,34 @@
+/* chaos a9: a block-comment banner before the first token */
+// chaos a9: a line comment before namespace
+namespace chaos.s29.a9comment // a9
+version "1.0.0" // a9
+type C29Leaf: <"Helper - relocated by the import axis."> // a9
+    v number (1..1) // a9
+    tags string (0..*) // a9
+metaType scheme string // a9
+type C29In1: <"Inner option 1."> // a9
+    deep string (0..1) // a9
+type C29In2: <"Inner option 2."> // a9
+    deep string (0..1) // a9
+choice C29Inner: <"The inner choice, reached through both outer options."> // a9
+    C29In1 // a9
+    C29In2 // a9
+type C29Note: <"Outer option 1 - every attribute is shared with C29Wrap so the deep path resolves through both."> // a9
+    text string (0..1) // a9
+    leaves C29Leaf (0..*) // a9
+    code string (0..1) // a9
+        [metadata scheme] // a9
+    codes string (0..*) // a9
+        [metadata scheme] // a9
+    inners C29Inner (0..*) // a9
+type C29Wrap: <"Outer option 2 - the same attributes."> // a9
+    text string (0..1) // a9
+    leaves C29Leaf (0..*) // a9
+    code string (0..1) // a9
+        [metadata scheme] // a9
+    codes string (0..*) // a9
+        [metadata scheme] // a9
+    inners C29Inner (0..*) // a9
+choice C29Outer: <"The outer choice."> // a9
+    C29Note // a9
+    C29Wrap // a9

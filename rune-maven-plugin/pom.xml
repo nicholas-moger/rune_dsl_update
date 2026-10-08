@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.finos.rune</groupId>
+    <artifactId>rune-maven-plugin</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>maven-plugin</packaging>
+
+    <name>Rune Maven Plugin (fork)</name>
+    <description>Drop-in Maven plugin for the rune-dsl-plus toolchain (Leg P of the
+        drop-in parity program). Exposes the released 9.83.0 rosetta-maven-plugin's
+        generate/testGenerate goal surface (goal names, parameter names, types and
+        defaults) backed by the fork's own parser + Java generator pipeline, so a
+        CDM/DRR consumer swaps the plugin GAV in its pom and keeps the entire
+        execution configuration unchanged.</description>
+
+    <properties>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <junit.version>5.11.3</junit.version>
+        <maven-plugin-tools.version>3.15.1</maven-plugin-tools.version>
+        <!-- Skip build-cache: plugin descriptor generation + local-repo dependency
+             on live fork-built parser/generator jars make cache reuse unsafe. -->
+        <maven.build.cache.skip>true</maven.build.cache.skip>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.finos.rune</groupId>
+            <artifactId>rune-parser</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.finos.rune</groupId>
+            <artifactId>rune-java-generator</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <!-- rosetta-config.yml reader (generators.namespaces + doNotPrune).
+             Same version rune-java-generator pins in test scope. -->
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+            <version>2.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-plugin-api</artifactId>
+            <version>3.9.11</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-core</artifactId>
+            <version>3.9.11</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven.plugin-tools</groupId>
+            <artifactId>maven-plugin-annotations</artifactId>
+            <version>${maven-plugin-tools.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- v3.3 seat 9 (PR #645 commit 14b) - THE ROUTE PROVIDERS, TEST SCOPE ONLY.
+             RunePluginRunner constructs and dispatches every pass through the IRGeneration
+             seams; RunePluginRunnerRouteTest drives the runner once per route and asserts
+             which classes actually ran, so both providers must be ON THE TEST CLASSPATH of
+             every build. NEVER compile scope: the plugin artefact must not drag a route into
+             a consumer's build - a consumer opts in with -Drosetta.generator.ir=true AND the
+             provider jar declared under <plugin><dependencies> (the development IR page).
+             Not a profile: a profile would make the ON lock a silent skip in the default
+             build, and D53 forbids a silent gate. Both jars on one classpath is lawful -
+             the two providers are registered under separate service files and looked up
+             separately (IRGeneration :141-147). No cycle: rune-ir-java depends on
+             rune-java-generator, never on this module, and this repository has no reactor. -->
+        <dependency>
+            <groupId>org.finos.rune</groupId>
+            <artifactId>rune-ir-java</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.finos.rune</groupId>
+            <artifactId>rune-ir-java-optimised</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-plugin-plugin</artifactId>
+                <version>${maven-plugin-tools.version}</version>
+                <configuration>
+                    <goalPrefix>rune</goalPrefix>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.5.2</version>
+            </plugin>
+        </plugins>
+    </build>
+</project>

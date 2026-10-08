@@ -1,0 +1,33 @@
+namespace chaos.s02.a2alias
+version "1.0.0"
+import chaos.s02.a2alias.h.* as C2TagNs
+import chaos.s02.a2alias.h.C2Tag
+enum C2DirEnum: <"Directions with displayName and docs.">
+    Buy displayName "BUY" <"Buy side.">
+    Sell displayName "SELL"
+    Hold <"No action.">
+enum C2BaseEnum: <"Extension base.">
+    Alpha
+    Beta displayName "B"
+enum C2ExtEnum extends C2BaseEnum: <"Extends across a block boundary.">
+    Gamma displayName "G3" <"Third letter.">
+type C2Use: <"Enum-typed attributes and enum-literal conditions.">
+    dir C2DirEnum (1..1)
+    exts C2ExtEnum (0..*)
+    tags C2Tag (0..*)
+    condition C2NotHold:
+        dir <> C2DirEnum -> Hold
+    condition C2HasAlpha:
+        if exts exists
+        then exts contains C2ExtEnum -> Alpha or exts contains C2ExtEnum -> Gamma
+func C2Flip: <"Enum in function seats - compare, if/else, literal result.">
+    inputs:
+        d C2DirEnum (1..1)
+    output:
+        r C2DirEnum (1..1)
+    set r:
+        if d = C2DirEnum -> Buy
+        then C2DirEnum -> Sell
+        else if d = C2DirEnum -> Sell
+        then C2DirEnum -> Buy
+        else C2DirEnum -> Hold

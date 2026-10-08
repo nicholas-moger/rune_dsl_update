@@ -1,0 +1,97 @@
+#!/usr/bin/env bash
+# generate_index.py.test — smoke test for generate_index.py.
+#
+# Constructs a tmp catalogue with 2 fixture entries, runs the script
+# in --stdout mode, asserts entry_count=2 and entries are sorted by
+# entry_id. Then constructs a tmp catalogue with a filename mismatch
+# and asserts non-zero exit.
+set -euo pipefail
+
+THIS_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+SCRIPT="$THIS_DIR/generate_index.py"
+PY="${PYTHON:-python3}"
+
+if [[ ! -f "$SCRIPT" ]]; then
+    echo "FAIL: $SCRIPT not found" >&2
+    exit 1
+fi
+
+TMPROOT=$(mktemp -d)
+trap 'rm -rf "$TMPROOT"' EXIT
+
+mkdir -p "$TMPROOT/docs/byte-diff-catalogue/cdm/6.16.0"
+( cd "$TMPROOT" && git init -q && git config user.email "t@t.t" && git config user.name "t" )
+
+# Fixture 1: id 00000000-0000-4000-8000-000000000001
+cat > "$TMPROOT/docs/byte-diff-catalogue/cdm/6.16.0/00000000-0000-4000-8000-000000000001.json" <<'EOF'
+{
+  "entry_id": "00000000-0000-4000-8000-000000000001",
+  "corpus": "cdm",
+  "project": "base-model",
+  "version": "6.16.0",
+  "element_kind": "type",
+  "symbol": "cdm.A",
+  "upstream_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "our_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "classification": "stylistic",
+  "rationale": "fix1",
+  "status": "accepted",
+  "created_date": "2026-04-25",
+  "last_review": "2026-04-25",
+  "linked_issue": null
+}
+EOF
+
+# Fixture 2: id 00000000-0000-4000-8000-000000000002
+cat > "$TMPROOT/docs/byte-diff-catalogue/cdm/6.16.0/00000000-0000-4000-8000-000000000002.json" <<'EOF'
+{
+  "entry_id": "00000000-0000-4000-8000-000000000002",
+  "corpus": "cdm",
+  "project": "base-model",
+  "version": "6.16.0",
+  "element_kind": "type",
+  "symbol": "cdm.B",
+  "upstream_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "our_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "classification": "stylistic",
+  "rationale": "fix2",
+  "status": "accepted",
+  "created_date": "2026-04-25",
+  "last_review": "2026-04-25",
+  "linked_issue": null
+}
+EOF
+
+git -C "$TMPROOT" add -A && git -C "$TMPROOT" commit -q -m "fixture"
+
+# Run the script with TMPROOT as cwd so its repo_root() resolves there.
+OUT=$( cd "$TMPROOT" && "$PY" "$SCRIPT" --stdout 2>&1 ) || {
+    echo "FAIL: script exited non-zero on valid input"
+    echo "$OUT"
+    exit 1
+}
+
+# Assert entry_count and sort order via python.
+"$PY" - "$OUT" <<'PYEOF'
+import json, sys
+data = json.loads(sys.argv[1])
+assert data["entry_count"] == 2, f"expected entry_count=2, got {data['entry_count']}"
+ids = [e["entry_id"] for e in data["entries"]]
+assert ids == sorted(ids), f"entries not sorted by entry_id: {ids}"
+assert ids[0] == "00000000-0000-4000-8000-000000000001"
+assert ids[1] == "00000000-0000-4000-8000-000000000002"
+assert "generated_utc" not in data, "index.json must NOT include generated_utc (reproducibility constraint)"
+print("PASS: 2 entries, sorted, no timestamp")
+PYEOF
+
+# Now test filename-mismatch failure case.
+mv "$TMPROOT/docs/byte-diff-catalogue/cdm/6.16.0/00000000-0000-4000-8000-000000000002.json" \
+   "$TMPROOT/docs/byte-diff-catalogue/cdm/6.16.0/wrong-name.json"
+git -C "$TMPROOT" add -A && git -C "$TMPROOT" commit -q -m "rename"
+
+if ( cd "$TMPROOT" && "$PY" "$SCRIPT" --stdout >/dev/null 2>&1 ); then
+    echo "FAIL: script accepted filename != entry_id"
+    exit 1
+fi
+
+echo "generate_index.py.test: 2-entry happy path + filename-mismatch failure both behave correctly"

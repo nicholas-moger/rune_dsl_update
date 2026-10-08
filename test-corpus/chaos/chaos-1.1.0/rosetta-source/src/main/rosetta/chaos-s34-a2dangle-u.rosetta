@@ -1,0 +1,4 @@
+namespace chaos.s34.a2dangle.unused
+version "1.0.0"
+type C34AuxUnusedT:
+    stub string (0..1)

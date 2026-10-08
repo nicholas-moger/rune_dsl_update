@@ -1,0 +1,4 @@
+namespace chaos.s16.a2dangle.h
+version "1.0.0"
+type C16Held: <"Self-contained helper - relocated by the import axis.">
+    h string (1..1)

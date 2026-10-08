@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+set -euo pipefail
+REPO_ROOT=$(git rev-parse --show-toplevel)
+LINT="$REPO_ROOT/scripts/ci/upgrade-manifest-validate.sh"
+FIX="$REPO_ROOT/scripts/ci/fixtures/upgrade-manifest"
+
+[[ -x "$LINT" ]] || chmod +x "$LINT"
+
+# Production manifest must pass
+if ! bash "$LINT" >/dev/null 2>&1; then
+    echo "FAIL: production docs/upgrades/ should pass"
+    bash "$LINT" || true
+    exit 1
+fi
+
+# known-good fixture must pass
+if ! bash "$LINT" --root "$FIX/known-good" >/dev/null 2>&1; then
+    echo "FAIL: known-good fixture should pass"
+    bash "$LINT" --root "$FIX/known-good" || true
+    exit 1
+fi
+
+# Each known-bad fixture must fail
+shopt -s nullglob
+bads=("$FIX"/known-bad-*)
+shopt -u nullglob
+for bad in "${bads[@]}"; do
+    name=$(basename "$bad")
+    if bash "$LINT" --root "$bad" >/dev/null 2>&1; then
+        echo "FAIL: $name should fail validation"
+        bash "$LINT" --root "$bad" || true
+        exit 1
+    fi
+done
+
+echo "PASS: upgrade-manifest-validate (1 production + 1 known-good + ${#bads[@]} known-bad)"
+exit 0

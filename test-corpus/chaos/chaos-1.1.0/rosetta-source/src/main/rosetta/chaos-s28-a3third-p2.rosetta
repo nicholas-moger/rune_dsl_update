@@ -1,0 +1,42 @@
+namespace chaos.s28.a3third.p2
+version "1.0.0"
+import chaos.s28.a3third.p1.*
+import chaos.s28.a3third.p3.*
+isEvent root C28Event;
+body Authority C28AUTH <"The chaos authority.">
+corpus Regulation "C28 Chaos Regulation" C28Reg <"The chaos corpus.">
+segment c28article
+metaType scheme string
+type C28OptA: <"Choice option A - the F15' implicit-input chain head.">
+    av string (0..1)
+type C28OptB: <"Choice option B.">
+    bv string (0..1)
+choice C28Which: <"The choice a report input attribute is typed by.">
+    C28OptA
+    C28OptB
+type C28Trade: <"The report-from type: a choice-typed attribute navigated by bare option at a rule seat (F15' leg d) and a scheme-carrying scalar.">
+    utid string (1..1)
+        [label as "The Trade UTI"]
+    which C28Which (0..1)
+    venue string (0..1)
+        [metadata scheme]
+    extra C28Extra (0..1)
+        [label for memo "The Extra Memo"]
+func C28VenueOf: <"The callee returning a scheme-carrying value.">
+    inputs:
+        t C28Trade (1..1)
+    output:
+        v string (0..1)
+            [metadata scheme]
+    set v: t -> venue
+eligibility rule C28Eligible from C28Trade: <"When-gate.">
+    utid exists
+reporting rule C28Utid from C28Trade: <"Reported field.">
+    extract utid
+        as "UTI"
+reporting rule C28Av from C28Trade: <"F15' leg (d): the implicit-input attribute typed by a choice, navigated by its BARE option to the option's attribute.">
+    extract which -> C28OptA -> av
+        as "Option A Value"
+reporting rule C28Venue from C28Trade: <"A rule extracting a function call whose result is META-annotated.">
+    extract C28VenueOf(item)
+        as "Venue"

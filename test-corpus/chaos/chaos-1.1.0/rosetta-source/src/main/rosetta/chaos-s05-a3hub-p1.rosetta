@@ -1,0 +1,7 @@
+namespace chaos.s05.a3hub.p1
+version "1.0.0"
+import chaos.s05.a3hub.p2.*
+type C5Sub: <"List-of-list rung and reference target - relocated by the import axis.">
+    [metadata key]
+    vals number (0..*)
+    name string (1..1)

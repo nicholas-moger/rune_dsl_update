@@ -1,0 +1,27 @@
+namespace chaos.s21.a3half.p2
+version "1.0.0"
+import chaos.s21.a3half.p1.*
+type C21Paths: <"only-exists targets.">
+    p string (0..1)
+    q string (0..1)
+    r string (0..1)
+func C21Gate: <"only exists - single path, list form, and inside if/else arms.">
+    inputs:
+        t C21Paths (1..1)
+    output:
+        ok boolean (1..1)
+    set ok:
+        if t -> p only exists
+        then True
+        else (t -> q, t -> r) only exists
+func C21Void: <"is absent + exists modifiers at condition seats.">
+    inputs:
+        t C21Paths (1..1)
+        many string (0..*)
+    output:
+        n number (1..1)
+    condition C21NoP:
+        t -> p is absent or t -> p exists
+    condition C21Card:
+        many multiple exists or many single exists or many is absent
+    set n: many count

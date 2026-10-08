@@ -1,0 +1,10 @@
+namespace test.zeroinputalias
+
+func Adder:
+    output: res int (1..1)
+    alias arg1 : AddOne( 1 )
+    set res : arg1
+
+func AddOne:
+    inputs:  arg int (1..1)
+    output: out int(1..1)

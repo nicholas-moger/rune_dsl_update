@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="2090" viewBox="0 0 480 2090" role="img" aria-labelledby="title desc">
+<title id="title">Maintaining Rune and using Rune</title>
+<desc id="desc">Responsibilities for maintaining the language and using the language. A language maintainer edits affected components: Rosetta.xtext grammar, .xcore metamodels, or Java and Xtend language services and generators. Regeneration builds affected parser and EMF classes, compilation builds language tooling, then checks and tests precede release. A model author ordinarily edits .rosetta domain models and uses published tooling to generate application Java, compiled and used with the runtime. A model change does not ordinarily edit framework sources, and a language change need not affect every component shown.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9" fill="none" stroke="#a9b7cb" stroke-width="1.4"/></marker></defs>
+<rect width="480" height="2090" rx="22" fill="#121923"/>
+<g font-family="Segoe UI, Arial, sans-serif">
+<text x="24" y="43" fill="#eef2f8" font-size="29" font-weight="600" text-anchor="start">
+<tspan x="24" dy="0" xml:space="preserve">Maintaining Rune</tspan>
+<tspan x="24" dy="35" xml:space="preserve">and using Rune</tspan>
+</text>
+<text x="24" y="119" fill="#a9b7cb" font-size="19" font-weight="400" text-anchor="start">
+<tspan x="24" dy="0" xml:space="preserve">Different responsibilities</tspan>
+<tspan x="24" dy="26" xml:space="preserve">for language and model changes</tspan>
+</text>
+<rect x="24" y="185" width="432" height="915" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<text x="47" y="222" fill="#a6b0ec" font-size="25" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Language maintainer</tspan>
+</text>
+<text x="47" y="253" fill="#a9b7cb" font-size="18" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Changes affected language components</tspan>
+</text>
+<rect x="24" y="1130" width="432" height="900" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<text x="47" y="1167" fill="#92d5c6" font-size="25" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Model author</tspan>
+</text>
+<text x="47" y="1198" fill="#a9b7cb" font-size="18" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Uses the released language</tspan>
+</text>
+<rect x="47" y="280" width="386" height="160" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="48" y="299" width="4" height="122" rx="2" fill="#a6b0ec"/>
+<text x="70" y="317" fill="#a6b0ec" font-size="22" font-weight="600" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Edit affected components</tspan>
+</text>
+<text x="70" y="350" fill="#a9b7cb" font-size="18" font-weight="400" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Rosetta.xtext · grammar</tspan>
+<tspan x="70" dy="25" xml:space="preserve">*.xcore · metamodel</tspan>
+<tspan x="70" dy="25" xml:space="preserve">Java / Xtend · services + generators</tspan>
+</text>
+<rect x="47" y="480" width="386" height="135" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="48" y="499" width="4" height="97" rx="2" fill="#a2c6e6"/>
+<text x="70" y="517" fill="#a2c6e6" font-size="22" font-weight="600" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Regenerate affected code</tspan>
+</text>
+<text x="70" y="550" fill="#a9b7cb" font-size="18" font-weight="400" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Grammar → ANTLR 3 parser</tspan>
+<tspan x="70" dy="25" xml:space="preserve">Metamodel → EMF classes</tspan>
+</text>
+<rect x="47" y="655" width="386" height="110" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="48" y="674" width="4" height="72" rx="2" fill="#a2c6e6"/>
+<text x="70" y="692" fill="#a2c6e6" font-size="22" font-weight="600" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Compile language tooling</tspan>
+</text>
+<text x="70" y="725" fill="#a9b7cb" font-size="18" font-weight="400" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Build services and generators</tspan>
+</text>
+<rect x="47" y="805" width="386" height="95" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="48" y="824" width="4" height="57" rx="2" fill="#92d5c6"/>
+<text x="70" y="842" fill="#92d5c6" font-size="22" font-weight="600" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Checks and tests</tspan>
+</text>
+<text x="70" y="875" fill="#a9b7cb" font-size="18" font-weight="400" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Validate affected behaviour</tspan>
+</text>
+<rect x="47" y="940" width="386" height="105" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="48" y="959" width="4" height="67" rx="2" fill="#d0b487"/>
+<text x="70" y="977" fill="#d0b487" font-size="22" font-weight="600" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Release published tooling</tspan>
+</text>
+<text x="70" y="1010" fill="#a9b7cb" font-size="18" font-weight="400" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Available to model authors</tspan>
+</text>
+<rect x="47" y="1225" width="386" height="100" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="48" y="1244" width="4" height="62" rx="2" fill="#92d5c6"/>
+<text x="70" y="1262" fill="#92d5c6" font-size="22" font-weight="600" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Edit .rosetta models</tspan>
+</text>
+<text x="70" y="1295" fill="#a9b7cb" font-size="18" font-weight="400" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Domain models and rules</tspan>
+</text>
+<rect x="47" y="1370" width="386" height="125" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="48" y="1389" width="4" height="87" rx="2" fill="#a2c6e6"/>
+<text x="70" y="1407" fill="#a2c6e6" font-size="22" font-weight="600" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Use published tooling</tspan>
+</text>
+<text x="70" y="1440" fill="#a9b7cb" font-size="18" font-weight="400" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Parse · resolve · check</tspan>
+<tspan x="70" dy="25" xml:space="preserve">Generate application code</tspan>
+</text>
+<rect x="47" y="1540" width="386" height="110" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="48" y="1559" width="4" height="72" rx="2" fill="#d0b487"/>
+<text x="70" y="1577" fill="#d0b487" font-size="22" font-weight="600" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Application Java</tspan>
+</text>
+<text x="70" y="1610" fill="#a9b7cb" font-size="18" font-weight="400" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Generated source code</tspan>
+</text>
+<rect x="47" y="1695" width="386" height="95" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="48" y="1714" width="4" height="57" rx="2" fill="#a2c6e6"/>
+<text x="70" y="1732" fill="#a2c6e6" font-size="22" font-weight="600" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Runtime</tspan>
+</text>
+<text x="70" y="1765" fill="#a9b7cb" font-size="18" font-weight="400" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Shared execution support</tspan>
+</text>
+<rect x="47" y="1855" width="386" height="120" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="48" y="1874" width="4" height="82" rx="2" fill="#92d5c6"/>
+<text x="70" y="1892" fill="#92d5c6" font-size="22" font-weight="600" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Application</tspan>
+</text>
+<text x="70" y="1925" fill="#a9b7cb" font-size="18" font-weight="400" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Compile / use Java with runtime</tspan>
+</text>
+<polyline points="240.0,440 240.0,480" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="240.0,615 240.0,655" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="240.0,765 240.0,805" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="240.0,900 240.0,940" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="240.0,1325 240.0,1370" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="240.0,1495 240.0,1540" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="433,1595.0 443,1595.0 443,1835 240.0,1835" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="240.0,1790 240.0,1835" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="240.0,1835 240.0,1855" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="433,992.5 466,992.5 466,1432.5 433,1432.5" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<text x="24" y="2066" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="24" dy="0" xml:space="preserve">A change need not affect every component.</tspan>
+</text>
+</g>
+</svg>

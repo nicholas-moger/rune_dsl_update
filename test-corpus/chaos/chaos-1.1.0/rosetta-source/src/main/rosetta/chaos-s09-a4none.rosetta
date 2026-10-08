@@ -1,0 +1,9 @@
+namespace chaos.s09.a4none
+type C9Plain: <"Self-contained helper - relocated by the import axis.">
+    p string (1..1)
+metaType id string
+metaType key string
+metaType reference string
+metaType scheme string
+metaType address string
+metaType location string

@@ -1,0 +1,6 @@
+namespace chaos.s23.a2wild.h
+version "1.0.0"
+type C23Box: <"Helper - relocated by the import axis.">
+    lid string (1..1)
+    weight number (0..1)
+    live boolean (0..1)

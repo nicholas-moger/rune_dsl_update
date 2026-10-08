@@ -1,0 +1,24 @@
+namespace holdout.voidemptyelse
+version "0.0.0"
+
+// v3.2 seat 9 round 3 (the spec review's NIT-4, round 2's SF-1 second leg): a Void conditional whose ELSE arm is the
+// `empty` literal, ADDED to a Void multi output and SET into a Void output - the elseless leg is pinned (AddElseless);
+// this is the spelled-out `empty` leg.
+
+basicType etoken <"A model-declared basic type - a Void-typed value in the generated Java.">
+
+func AddEmptyElse: <"A Void conditional with an `empty` else ADDED to a Void multi output.">
+    inputs:
+        flag boolean (1..1)
+        t etoken (0..1)
+    output:
+        rs etoken (0..*)
+    add rs: if flag then t else empty
+
+func SetEmptyElse: <"A Void conditional with an `empty` else SET into a Void output.">
+    inputs:
+        flag boolean (1..1)
+        t etoken (0..1)
+    output:
+        r etoken (0..1)
+    set r: if flag then t else empty

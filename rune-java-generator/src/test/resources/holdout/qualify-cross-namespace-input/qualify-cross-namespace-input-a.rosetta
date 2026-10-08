@@ -1,0 +1,16 @@
+namespace test.qcn.a
+version "0.0.0"
+isProduct root QcnTerms;
+
+type QcnTerms: <"The root; a qualifier in namespace b takes it as input.">
+    kind string (0..1)
+    notional number (0..1)
+
+func Qualify_QcnA: <"Product qualification against the declared root.">
+    [qualification Product]
+    inputs:
+        terms QcnTerms (1..1)
+    output:
+        is_product boolean (1..1)
+    set is_product:
+        terms -> kind = "vanilla"

@@ -1,0 +1,548 @@
+# THE v3.3 IR-SHARE DECLINE REGISTER (v3.3 seat 1, PR #637 - the gate; re-cut by v3.3 seat 2, PR #638 - the first heal;
+# re-cut by v3.3 seat 3, PR #639 - THE THIRD SEAM, DATA_RULE, populated from its first measurement; re-cut by
+# v3.3 seat 4, PR #640 - THE FIRST HEAL UNDER THE DATA_RULE GATE: the condition-instance leaf, the nav-receiver,
+# comparison / existence / call-argument / equality-sibling admissions of the bare condition attribute, the meta mint)
+#
+# Every row is ONE measured IR decline of the ON route (-Pir-on), read from the D11 ON-route
+# print and asserted back by D11CorpusRegressionTest as an EQUALITY per (cell, seam, axis).
+# Until this seat the IR share was PRINTED AND ASSERTED NOWHERE: one line declining RFeatureCall
+# roots in ExpressionToIRAdapter.adapt collapsed cdm/5.38.0 FUNCTION from 100.0% to 602 declines
+# and the D11 stayed GREEN, every byte identical (the groundwork's lane L4). This file is the meter.
+#
+# ROW GRAMMAR (whitespace-separated, exactly five fields; the loader REFUSES anything else):
+#   <corpus>/<version> <SEAM> <axis> <token> <count>
+#     SEAM   FUNCTION | RULE | DATA_RULE - the three IR seams, NOT ElementKinds. The RULE seam is measured
+#                               in pojo_comparison (RuleGenerator + ReportGenerator render through that
+#                               pass's IRExpressionCompiler); the FUNCTION seam in function_comparison; the
+#                               DATA_RULE seam (v3.3 seat 3, D54) in datarule_comparison - the condition
+#                               bodies through IRDataRuleGenerator's IRExpressionCompiler. That third word
+#                               names BOTH the seam and the file kind the byte gate compares under the same
+#                               name; the distinction stands (a seam is where the compiler's counters are
+#                               read, a kind is a family of generated files) - do not 'fix' it either way.
+#     axis   site       - one of the five recordDecline tags (adapterGap / postPinGuard /
+#                         ruleDelegation / aliasResolution / leafEmitter) - a CLOSED set: a sixth
+#                         tag means IRExpressionCompiler grew a decline seat and this file learns it
+#            family     - the declined claim's root RExpression class simple name (an OPEN set)
+#            untargeted - a node kind the IR never attempted (outside the share denominator)
+#     count  the measured count, exact; a zero row is refused - the absence of a row IS zero
+#
+# The site and family axes are ORTHOGONAL views of the SAME population: each conserves to
+# irDeclined by construction (the recordDecline single-seat law). A family shift at a constant
+# site count is a real change and MUST fail. The untargeted axis is a DIFFERENT population -
+# irDeclined + untargetedVisits is the whole not-IR-driven node set v3.3 burns down. The oracle-
+# root split (IR driven split: / oracleRootLowered) is NOT declared here: it is the oracle-root
+# census's meter (v3.3 item 3), a coverage-quality dial, not a decline.
+#
+# LAWS:
+#  - EQUALITY, not tolerance: the gate asserts the declared rows == the measured breakdown for
+#    every (cell, seam, axis). An undeclared token, or a count ABOVE the declared one, fails
+#    'NEW DECLINE - a regression'. A declared count ABOVE the measured one fails 'HEALED -
+#    delete or shrink the row'. Equality is what makes this file the meter, not a waiver.
+#  - SHRINK-ONLY: a healing seat DELETES (or shrinks) its rows in the SAME commit as the heal.
+#    Growth is never appended to absorb a regression - it is investigated at the emitter. A NEW
+#    SEAM is the one growth: its block is written from its first measurement in the seam's own
+#    commit (this file's DATA_RULE block, v3.3 seat 3), then shrink-only like every other row.
+#  - A (cell, seam) with NO row declares the EMPTY breakdown on every axis: zero declines, zero
+#    untargeted. That is the goal state, and it is asserted, not assumed.
+#  - NO ROW MAY BE UNREACHABLE: every declared (cell, seam) key must be SEEN by a whole 26-cell
+#    ON-route run - the @AfterAll wholeness check fails a key the run never visited (STALE).
+#  - KEPT-BY-DESIGN: the ruleDelegation site rows sit in their own block below. They are the
+#    declines IRExpressionCompiler.ruleDelegationDeclines protects on purpose (the #274
+#    PriorUniqueTransactionIdentifierRule MapperC witness, BareRuleRefFunctionHostSeatTest); their
+#    retirement is its own later v3.3 seat. Their families are counted in the family rows of the
+#    same keys (the axes are orthogonal - a kept decline cannot be attributed to a family row).
+#  - THE EXIT OF v3.3 (stated at the axis grain): on the 25 vendored cells the site axis carries
+#    NO row outside the KEPT-BY-DESIGN block, and the family rows of each (cell, seam) key sum to
+#    exactly that key's kept declines - a COLLECTIVE sum per key, never a per-row one, because the
+#    axes are orthogonal and a kept decline cannot be attributed to any single family (v3.3 seat 2;
+#    PR #637 round 2, spec NIT-2 = rule6 SF-1); the untargeted axis carries no vendored row on the
+#    FUNCTION and RULE seams, and on the DATA_RULE seam only the cardinality twins' roots
+#    (RCardinalityCheckExpr - the one-of / choice conditions and every choice type's implicit one-of,
+#    which visitCardinalityCheck records as untargeted visits) until their adapter arm and compiler
+#    claim seat land (D54 item 4) - at the exit that row is gone too. The chaos block is separate
+#    and survives the exit (the adversarial cell is a burn-down surface, not a parity surface).
+#  - OFF-route runs never enter the gate block (IRGeneration.providerOrNull() is null), so this
+#    file cannot move a default-suite byte. MEASURED, not assumed: the OFF-route D11 log at
+#    c905eb257 carries ZERO 'IR share:' lines.
+#
+# POPULATED FROM THE PRINT: HEAD=f22655948+heal-s4c4.patch box=offload 2026-09-17T09:24:06+00:00 log=<offload-log>/d11-on-heal-s4.log probe=blockerProbe
+# THE MEASURED HEAD (every block): f22655948 + heal-s4c4.patch = v3.3 seat 4's heal MEASURED on the offload box clone before its
+# commit (measure-s4-heal.sh; the status preserved as target/v33-seat4-instruments/scratch/measure-s4-heal.status, local)
+# - the ON-route D11 alone, RED BY DESIGN at the gate (26 cells: every healed row a HEALED message against the c3
+# declaration), which IS the heal's measurement; every row is cut from that print by make-declines-s4c4.py, which lets a
+# FUNCTION / RULE row move SHRINK-ONLY (the #640 existence-operand admission reaches those seams: per DRR 7.x cell the
+# FUNCTION irDeclined 143 -> 137 (adapterGap 140 -> 134) and the RULE irDeclined 293 -> 266 (adapterGap 282 -> 255; on 7.3
+# 299 -> 272, adapterGap 288 -> 261) - READ from the maker's own moved-row print and the two `IR share` prints by
+# make-declines-s4c6.py, PR #640 round 1) and refuses a print whose VENDORED DATA_RULE passes
+# reported a generation error before the gate (the chaos cell's count is its DECLARED refusals - printed, exempt). The
+# committed head's own ON-route run is GREEN and is the run of record - recorded in the `## PR #640` entry of
+# the development changelog (backfilled at the next branch's commit 1 - the standing convention, mechanised at PR #636)
+# and preserved as target/v33-seat4-instruments/scratch/run-s4c4.status, local. The DATA_RULE seam's first measurement
+# (PR #639, 3ac0080d3, measure-s3c3b) and seat 2's FUNCTION / RULE heal (PR #638, s2c9) are the register's history,
+# in those PRs' CHANGELOG entries.
+#
+# ROW COUNT: 363 = 323 vendored burn-down + 14 KEPT-BY-DESIGN + 26 chaos, over 42 declining (cell, seam)
+# keys of the 78 a whole run visits (26 cells x 3 seams); the DATA_RULE seam's vendored keys: 25.
+#
+# ================================================================
+# THE 25 VENDORED CELLS - v3.3's burn-down. EXIT = every site row here gone (the kept block apart).
+# ================================================================
+
+# drr/7.0.0 FUNCTION - irDriven=39526 irDeclined=137 (99.65% of 39663 attempted); untargeted total=0
+drr/7.0.0 FUNCTION site adapterGap 134
+drr/7.0.0 FUNCTION family RSymbolReference 41
+drr/7.0.0 FUNCTION family RFeatureCall 40
+drr/7.0.0 FUNCTION family REnumValueRef 20
+drr/7.0.0 FUNCTION family RExistenceExpr 8
+drr/7.0.0 FUNCTION family RExtractExpr 8
+drr/7.0.0 FUNCTION family RLogicalExpr 7
+drr/7.0.0 FUNCTION family RDeepFeatureCall 4
+drr/7.0.0 FUNCTION family REqualityExpr 3
+drr/7.0.0 FUNCTION family RComparisonExpr 2
+drr/7.0.0 FUNCTION family RConditionalExpr 2
+drr/7.0.0 FUNCTION family RFilterExpr 1
+drr/7.0.0 FUNCTION family RListOpExpr 1
+
+# drr/7.1.0 FUNCTION - irDriven=39526 irDeclined=137 (99.65% of 39663 attempted); untargeted total=0
+drr/7.1.0 FUNCTION site adapterGap 134
+drr/7.1.0 FUNCTION family RSymbolReference 41
+drr/7.1.0 FUNCTION family RFeatureCall 40
+drr/7.1.0 FUNCTION family REnumValueRef 20
+drr/7.1.0 FUNCTION family RExistenceExpr 8
+drr/7.1.0 FUNCTION family RExtractExpr 8
+drr/7.1.0 FUNCTION family RLogicalExpr 7
+drr/7.1.0 FUNCTION family RDeepFeatureCall 4
+drr/7.1.0 FUNCTION family REqualityExpr 3
+drr/7.1.0 FUNCTION family RComparisonExpr 2
+drr/7.1.0 FUNCTION family RConditionalExpr 2
+drr/7.1.0 FUNCTION family RFilterExpr 1
+drr/7.1.0 FUNCTION family RListOpExpr 1
+
+# drr/7.2.0 FUNCTION - irDriven=39537 irDeclined=137 (99.65% of 39674 attempted); untargeted total=0
+drr/7.2.0 FUNCTION site adapterGap 134
+drr/7.2.0 FUNCTION family RSymbolReference 41
+drr/7.2.0 FUNCTION family RFeatureCall 40
+drr/7.2.0 FUNCTION family REnumValueRef 20
+drr/7.2.0 FUNCTION family RExistenceExpr 8
+drr/7.2.0 FUNCTION family RExtractExpr 8
+drr/7.2.0 FUNCTION family RLogicalExpr 7
+drr/7.2.0 FUNCTION family RDeepFeatureCall 4
+drr/7.2.0 FUNCTION family REqualityExpr 3
+drr/7.2.0 FUNCTION family RComparisonExpr 2
+drr/7.2.0 FUNCTION family RConditionalExpr 2
+drr/7.2.0 FUNCTION family RFilterExpr 1
+drr/7.2.0 FUNCTION family RListOpExpr 1
+
+# drr/7.3.0 FUNCTION - irDriven=39537 irDeclined=137 (99.65% of 39674 attempted); untargeted total=0
+drr/7.3.0 FUNCTION site adapterGap 134
+drr/7.3.0 FUNCTION family RSymbolReference 41
+drr/7.3.0 FUNCTION family RFeatureCall 40
+drr/7.3.0 FUNCTION family REnumValueRef 20
+drr/7.3.0 FUNCTION family RExistenceExpr 8
+drr/7.3.0 FUNCTION family RExtractExpr 8
+drr/7.3.0 FUNCTION family RLogicalExpr 7
+drr/7.3.0 FUNCTION family RDeepFeatureCall 4
+drr/7.3.0 FUNCTION family REqualityExpr 3
+drr/7.3.0 FUNCTION family RComparisonExpr 2
+drr/7.3.0 FUNCTION family RConditionalExpr 2
+drr/7.3.0 FUNCTION family RFilterExpr 1
+drr/7.3.0 FUNCTION family RListOpExpr 1
+
+# drr/5.61.0 RULE - irDriven=33193 irDeclined=3 (99.99% of 33196 attempted); untargeted total=0
+drr/5.61.0 RULE family RSymbolReference 3
+
+# drr/6.34.1 RULE - irDriven=32254 irDeclined=20 (99.93% of 32274 attempted); untargeted total=0
+drr/6.34.1 RULE family RSymbolReference 20
+
+# drr/6.35.0 RULE - irDriven=32248 irDeclined=20 (99.93% of 32268 attempted); untargeted total=0
+drr/6.35.0 RULE family RSymbolReference 20
+
+# drr/6.36.0 RULE - irDriven=32274 irDeclined=20 (99.93% of 32294 attempted); untargeted total=0
+drr/6.36.0 RULE family RSymbolReference 20
+
+# drr/6.37.0 RULE - irDriven=32274 irDeclined=20 (99.93% of 32294 attempted); untargeted total=0
+drr/6.37.0 RULE family RSymbolReference 20
+
+# drr/6.38.0 RULE - irDriven=32274 irDeclined=20 (99.93% of 32294 attempted); untargeted total=0
+drr/6.38.0 RULE family RSymbolReference 20
+
+# drr/7.0.0 RULE - irDriven=25760 irDeclined=266 (98.97% of 26026 attempted); untargeted total=0
+drr/7.0.0 RULE site adapterGap 255
+drr/7.0.0 RULE family RFeatureCall 112
+drr/7.0.0 RULE family REnumValueRef 50
+drr/7.0.0 RULE family RSymbolReference 49
+drr/7.0.0 RULE family RExistenceExpr 26
+drr/7.0.0 RULE family RExtractExpr 12
+drr/7.0.0 RULE family RDeepFeatureCall 9
+drr/7.0.0 RULE family RFilterExpr 3
+drr/7.0.0 RULE family REqualityExpr 2
+drr/7.0.0 RULE family RConditionalExpr 1
+drr/7.0.0 RULE family RListOpExpr 1
+drr/7.0.0 RULE family RToStringExpr 1
+
+# drr/7.1.0 RULE - irDriven=25760 irDeclined=266 (98.97% of 26026 attempted); untargeted total=0
+drr/7.1.0 RULE site adapterGap 255
+drr/7.1.0 RULE family RFeatureCall 112
+drr/7.1.0 RULE family REnumValueRef 50
+drr/7.1.0 RULE family RSymbolReference 49
+drr/7.1.0 RULE family RExistenceExpr 26
+drr/7.1.0 RULE family RExtractExpr 12
+drr/7.1.0 RULE family RDeepFeatureCall 9
+drr/7.1.0 RULE family RFilterExpr 3
+drr/7.1.0 RULE family REqualityExpr 2
+drr/7.1.0 RULE family RConditionalExpr 1
+drr/7.1.0 RULE family RListOpExpr 1
+drr/7.1.0 RULE family RToStringExpr 1
+
+# drr/7.2.0 RULE - irDriven=25771 irDeclined=266 (98.97% of 26037 attempted); untargeted total=0
+drr/7.2.0 RULE site adapterGap 255
+drr/7.2.0 RULE family RFeatureCall 112
+drr/7.2.0 RULE family REnumValueRef 50
+drr/7.2.0 RULE family RSymbolReference 49
+drr/7.2.0 RULE family RExistenceExpr 26
+drr/7.2.0 RULE family RExtractExpr 12
+drr/7.2.0 RULE family RDeepFeatureCall 9
+drr/7.2.0 RULE family RFilterExpr 3
+drr/7.2.0 RULE family REqualityExpr 2
+drr/7.2.0 RULE family RConditionalExpr 1
+drr/7.2.0 RULE family RListOpExpr 1
+drr/7.2.0 RULE family RToStringExpr 1
+
+# drr/7.3.0 RULE - irDriven=25811 irDeclined=272 (98.95% of 26083 attempted); untargeted total=0
+drr/7.3.0 RULE site adapterGap 261
+drr/7.3.0 RULE family RFeatureCall 112
+drr/7.3.0 RULE family REnumValueRef 50
+drr/7.3.0 RULE family RSymbolReference 49
+drr/7.3.0 RULE family RExistenceExpr 26
+drr/7.3.0 RULE family RExtractExpr 12
+drr/7.3.0 RULE family RDeepFeatureCall 9
+drr/7.3.0 RULE family RArithmeticExpr 6
+drr/7.3.0 RULE family RFilterExpr 3
+drr/7.3.0 RULE family REqualityExpr 2
+drr/7.3.0 RULE family RConditionalExpr 1
+drr/7.3.0 RULE family RListOpExpr 1
+drr/7.3.0 RULE family RToStringExpr 1
+
+# cdm/5.38.0 DATA_RULE - irDriven=7654 irDeclined=3 (99.96% of 7657 attempted); untargeted total=101
+cdm/5.38.0 DATA_RULE site adapterGap 3
+cdm/5.38.0 DATA_RULE family REnumValueRef 1
+cdm/5.38.0 DATA_RULE family RExistenceExpr 1
+cdm/5.38.0 DATA_RULE family RFeatureCall 1
+cdm/5.38.0 DATA_RULE untargeted RCardinalityCheckExpr 101
+
+# cdm/5.39.0 DATA_RULE - irDriven=7654 irDeclined=3 (99.96% of 7657 attempted); untargeted total=101
+cdm/5.39.0 DATA_RULE site adapterGap 3
+cdm/5.39.0 DATA_RULE family REnumValueRef 1
+cdm/5.39.0 DATA_RULE family RExistenceExpr 1
+cdm/5.39.0 DATA_RULE family RFeatureCall 1
+cdm/5.39.0 DATA_RULE untargeted RCardinalityCheckExpr 101
+
+# cdm/6.20.2 DATA_RULE - irDriven=8341 irDeclined=19 (99.77% of 8360 attempted); untargeted total=110
+cdm/6.20.2 DATA_RULE site adapterGap 19
+cdm/6.20.2 DATA_RULE family RLogicalExpr 6
+cdm/6.20.2 DATA_RULE family RSymbolReference 4
+cdm/6.20.2 DATA_RULE family RExistenceExpr 3
+cdm/6.20.2 DATA_RULE family RComparisonExpr 2
+cdm/6.20.2 DATA_RULE family RFeatureCall 2
+cdm/6.20.2 DATA_RULE family REnumValueRef 1
+cdm/6.20.2 DATA_RULE family REqualityExpr 1
+cdm/6.20.2 DATA_RULE untargeted RCardinalityCheckExpr 110
+
+# cdm/6.20.3 DATA_RULE - irDriven=8341 irDeclined=19 (99.77% of 8360 attempted); untargeted total=110
+cdm/6.20.3 DATA_RULE site adapterGap 19
+cdm/6.20.3 DATA_RULE family RLogicalExpr 6
+cdm/6.20.3 DATA_RULE family RSymbolReference 4
+cdm/6.20.3 DATA_RULE family RExistenceExpr 3
+cdm/6.20.3 DATA_RULE family RComparisonExpr 2
+cdm/6.20.3 DATA_RULE family RFeatureCall 2
+cdm/6.20.3 DATA_RULE family REnumValueRef 1
+cdm/6.20.3 DATA_RULE family REqualityExpr 1
+cdm/6.20.3 DATA_RULE untargeted RCardinalityCheckExpr 110
+
+# cdm/6.20.4 DATA_RULE - irDriven=8341 irDeclined=19 (99.77% of 8360 attempted); untargeted total=110
+cdm/6.20.4 DATA_RULE site adapterGap 19
+cdm/6.20.4 DATA_RULE family RLogicalExpr 6
+cdm/6.20.4 DATA_RULE family RSymbolReference 4
+cdm/6.20.4 DATA_RULE family RExistenceExpr 3
+cdm/6.20.4 DATA_RULE family RComparisonExpr 2
+cdm/6.20.4 DATA_RULE family RFeatureCall 2
+cdm/6.20.4 DATA_RULE family REnumValueRef 1
+cdm/6.20.4 DATA_RULE family REqualityExpr 1
+cdm/6.20.4 DATA_RULE untargeted RCardinalityCheckExpr 110
+
+# cdm/6.20.5 DATA_RULE - irDriven=8341 irDeclined=19 (99.77% of 8360 attempted); untargeted total=110
+cdm/6.20.5 DATA_RULE site adapterGap 19
+cdm/6.20.5 DATA_RULE family RLogicalExpr 6
+cdm/6.20.5 DATA_RULE family RSymbolReference 4
+cdm/6.20.5 DATA_RULE family RExistenceExpr 3
+cdm/6.20.5 DATA_RULE family RComparisonExpr 2
+cdm/6.20.5 DATA_RULE family RFeatureCall 2
+cdm/6.20.5 DATA_RULE family REnumValueRef 1
+cdm/6.20.5 DATA_RULE family REqualityExpr 1
+cdm/6.20.5 DATA_RULE untargeted RCardinalityCheckExpr 110
+
+# cdm/6.20.6 DATA_RULE - irDriven=8359 irDeclined=19 (99.77% of 8378 attempted); untargeted total=110
+cdm/6.20.6 DATA_RULE site adapterGap 19
+cdm/6.20.6 DATA_RULE family RLogicalExpr 6
+cdm/6.20.6 DATA_RULE family RSymbolReference 4
+cdm/6.20.6 DATA_RULE family RExistenceExpr 3
+cdm/6.20.6 DATA_RULE family RComparisonExpr 2
+cdm/6.20.6 DATA_RULE family RFeatureCall 2
+cdm/6.20.6 DATA_RULE family REnumValueRef 1
+cdm/6.20.6 DATA_RULE family REqualityExpr 1
+cdm/6.20.6 DATA_RULE untargeted RCardinalityCheckExpr 110
+
+# cdm/6.21.0 DATA_RULE - irDriven=8359 irDeclined=19 (99.77% of 8378 attempted); untargeted total=110
+cdm/6.21.0 DATA_RULE site adapterGap 19
+cdm/6.21.0 DATA_RULE family RLogicalExpr 6
+cdm/6.21.0 DATA_RULE family RSymbolReference 4
+cdm/6.21.0 DATA_RULE family RExistenceExpr 3
+cdm/6.21.0 DATA_RULE family RComparisonExpr 2
+cdm/6.21.0 DATA_RULE family RFeatureCall 2
+cdm/6.21.0 DATA_RULE family REnumValueRef 1
+cdm/6.21.0 DATA_RULE family REqualityExpr 1
+cdm/6.21.0 DATA_RULE untargeted RCardinalityCheckExpr 110
+
+# cdm/6.22.0 DATA_RULE - irDriven=8359 irDeclined=19 (99.77% of 8378 attempted); untargeted total=110
+cdm/6.22.0 DATA_RULE site adapterGap 19
+cdm/6.22.0 DATA_RULE family RLogicalExpr 6
+cdm/6.22.0 DATA_RULE family RSymbolReference 4
+cdm/6.22.0 DATA_RULE family RExistenceExpr 3
+cdm/6.22.0 DATA_RULE family RComparisonExpr 2
+cdm/6.22.0 DATA_RULE family RFeatureCall 2
+cdm/6.22.0 DATA_RULE family REnumValueRef 1
+cdm/6.22.0 DATA_RULE family REqualityExpr 1
+cdm/6.22.0 DATA_RULE untargeted RCardinalityCheckExpr 110
+
+# cdm/6.23.0 DATA_RULE - irDriven=8359 irDeclined=19 (99.77% of 8378 attempted); untargeted total=110
+cdm/6.23.0 DATA_RULE site adapterGap 19
+cdm/6.23.0 DATA_RULE family RLogicalExpr 6
+cdm/6.23.0 DATA_RULE family RSymbolReference 4
+cdm/6.23.0 DATA_RULE family RExistenceExpr 3
+cdm/6.23.0 DATA_RULE family RComparisonExpr 2
+cdm/6.23.0 DATA_RULE family RFeatureCall 2
+cdm/6.23.0 DATA_RULE family REnumValueRef 1
+cdm/6.23.0 DATA_RULE family REqualityExpr 1
+cdm/6.23.0 DATA_RULE untargeted RCardinalityCheckExpr 110
+
+# drr/5.61.0 DATA_RULE - irDriven=43856 irDeclined=701 (98.42% of 44557 attempted); untargeted total=56
+drr/5.61.0 DATA_RULE site adapterGap 701
+drr/5.61.0 DATA_RULE family RSymbolReference 203
+drr/5.61.0 DATA_RULE family RLogicalExpr 107
+drr/5.61.0 DATA_RULE family RExistenceExpr 82
+drr/5.61.0 DATA_RULE family REnumValueRef 79
+drr/5.61.0 DATA_RULE family REqualityExpr 65
+drr/5.61.0 DATA_RULE family RExtractExpr 58
+drr/5.61.0 DATA_RULE family RFeatureCall 55
+drr/5.61.0 DATA_RULE family RComparisonExpr 49
+drr/5.61.0 DATA_RULE family RConditionalExpr 3
+drr/5.61.0 DATA_RULE untargeted RCardinalityCheckExpr 56
+
+# drr/6.34.1 DATA_RULE - irDriven=56698 irDeclined=745 (98.7% of 57443 attempted); untargeted total=18
+drr/6.34.1 DATA_RULE site adapterGap 744
+drr/6.34.1 DATA_RULE site leafEmitter 1
+drr/6.34.1 DATA_RULE family RSymbolReference 227
+drr/6.34.1 DATA_RULE family RLogicalExpr 105
+drr/6.34.1 DATA_RULE family REnumValueRef 90
+drr/6.34.1 DATA_RULE family RExistenceExpr 80
+drr/6.34.1 DATA_RULE family REqualityExpr 69
+drr/6.34.1 DATA_RULE family RFeatureCall 59
+drr/6.34.1 DATA_RULE family RComparisonExpr 56
+drr/6.34.1 DATA_RULE family RExtractExpr 53
+drr/6.34.1 DATA_RULE family RConditionalExpr 5
+drr/6.34.1 DATA_RULE family RFilterExpr 1
+drr/6.34.1 DATA_RULE untargeted RCardinalityCheckExpr 18
+
+# drr/6.35.0 DATA_RULE - irDriven=56698 irDeclined=745 (98.7% of 57443 attempted); untargeted total=18
+drr/6.35.0 DATA_RULE site adapterGap 744
+drr/6.35.0 DATA_RULE site leafEmitter 1
+drr/6.35.0 DATA_RULE family RSymbolReference 227
+drr/6.35.0 DATA_RULE family RLogicalExpr 105
+drr/6.35.0 DATA_RULE family REnumValueRef 90
+drr/6.35.0 DATA_RULE family RExistenceExpr 80
+drr/6.35.0 DATA_RULE family REqualityExpr 69
+drr/6.35.0 DATA_RULE family RFeatureCall 59
+drr/6.35.0 DATA_RULE family RComparisonExpr 56
+drr/6.35.0 DATA_RULE family RExtractExpr 53
+drr/6.35.0 DATA_RULE family RConditionalExpr 5
+drr/6.35.0 DATA_RULE family RFilterExpr 1
+drr/6.35.0 DATA_RULE untargeted RCardinalityCheckExpr 18
+
+# drr/6.36.0 DATA_RULE - irDriven=56698 irDeclined=745 (98.7% of 57443 attempted); untargeted total=18
+drr/6.36.0 DATA_RULE site adapterGap 744
+drr/6.36.0 DATA_RULE site leafEmitter 1
+drr/6.36.0 DATA_RULE family RSymbolReference 227
+drr/6.36.0 DATA_RULE family RLogicalExpr 105
+drr/6.36.0 DATA_RULE family REnumValueRef 90
+drr/6.36.0 DATA_RULE family RExistenceExpr 80
+drr/6.36.0 DATA_RULE family REqualityExpr 69
+drr/6.36.0 DATA_RULE family RFeatureCall 59
+drr/6.36.0 DATA_RULE family RComparisonExpr 56
+drr/6.36.0 DATA_RULE family RExtractExpr 53
+drr/6.36.0 DATA_RULE family RConditionalExpr 5
+drr/6.36.0 DATA_RULE family RFilterExpr 1
+drr/6.36.0 DATA_RULE untargeted RCardinalityCheckExpr 18
+
+# drr/6.37.0 DATA_RULE - irDriven=56698 irDeclined=745 (98.7% of 57443 attempted); untargeted total=18
+drr/6.37.0 DATA_RULE site adapterGap 744
+drr/6.37.0 DATA_RULE site leafEmitter 1
+drr/6.37.0 DATA_RULE family RSymbolReference 227
+drr/6.37.0 DATA_RULE family RLogicalExpr 105
+drr/6.37.0 DATA_RULE family REnumValueRef 90
+drr/6.37.0 DATA_RULE family RExistenceExpr 80
+drr/6.37.0 DATA_RULE family REqualityExpr 69
+drr/6.37.0 DATA_RULE family RFeatureCall 59
+drr/6.37.0 DATA_RULE family RComparisonExpr 56
+drr/6.37.0 DATA_RULE family RExtractExpr 53
+drr/6.37.0 DATA_RULE family RConditionalExpr 5
+drr/6.37.0 DATA_RULE family RFilterExpr 1
+drr/6.37.0 DATA_RULE untargeted RCardinalityCheckExpr 18
+
+# drr/6.38.0 DATA_RULE - irDriven=56709 irDeclined=745 (98.7% of 57454 attempted); untargeted total=18
+drr/6.38.0 DATA_RULE site adapterGap 744
+drr/6.38.0 DATA_RULE site leafEmitter 1
+drr/6.38.0 DATA_RULE family RSymbolReference 227
+drr/6.38.0 DATA_RULE family RLogicalExpr 105
+drr/6.38.0 DATA_RULE family REnumValueRef 90
+drr/6.38.0 DATA_RULE family RExistenceExpr 80
+drr/6.38.0 DATA_RULE family REqualityExpr 69
+drr/6.38.0 DATA_RULE family RFeatureCall 59
+drr/6.38.0 DATA_RULE family RComparisonExpr 56
+drr/6.38.0 DATA_RULE family RExtractExpr 53
+drr/6.38.0 DATA_RULE family RConditionalExpr 5
+drr/6.38.0 DATA_RULE family RFilterExpr 1
+drr/6.38.0 DATA_RULE untargeted RCardinalityCheckExpr 18
+
+# drr/7.0.0 DATA_RULE - irDriven=58972 irDeclined=647 (98.91% of 59619 attempted); untargeted total=18
+drr/7.0.0 DATA_RULE site adapterGap 647
+drr/7.0.0 DATA_RULE family RSymbolReference 209
+drr/7.0.0 DATA_RULE family RLogicalExpr 97
+drr/7.0.0 DATA_RULE family REnumValueRef 93
+drr/7.0.0 DATA_RULE family RExistenceExpr 58
+drr/7.0.0 DATA_RULE family RComparisonExpr 55
+drr/7.0.0 DATA_RULE family RExtractExpr 53
+drr/7.0.0 DATA_RULE family REqualityExpr 51
+drr/7.0.0 DATA_RULE family RFeatureCall 26
+drr/7.0.0 DATA_RULE family RConditionalExpr 5
+drr/7.0.0 DATA_RULE untargeted RCardinalityCheckExpr 18
+
+# drr/7.1.0 DATA_RULE - irDriven=58972 irDeclined=647 (98.91% of 59619 attempted); untargeted total=18
+drr/7.1.0 DATA_RULE site adapterGap 647
+drr/7.1.0 DATA_RULE family RSymbolReference 209
+drr/7.1.0 DATA_RULE family RLogicalExpr 97
+drr/7.1.0 DATA_RULE family REnumValueRef 93
+drr/7.1.0 DATA_RULE family RExistenceExpr 58
+drr/7.1.0 DATA_RULE family RComparisonExpr 55
+drr/7.1.0 DATA_RULE family RExtractExpr 53
+drr/7.1.0 DATA_RULE family REqualityExpr 51
+drr/7.1.0 DATA_RULE family RFeatureCall 26
+drr/7.1.0 DATA_RULE family RConditionalExpr 5
+drr/7.1.0 DATA_RULE untargeted RCardinalityCheckExpr 18
+
+# drr/7.2.0 DATA_RULE - irDriven=58987 irDeclined=647 (98.91% of 59634 attempted); untargeted total=18
+drr/7.2.0 DATA_RULE site adapterGap 647
+drr/7.2.0 DATA_RULE family RSymbolReference 209
+drr/7.2.0 DATA_RULE family RLogicalExpr 97
+drr/7.2.0 DATA_RULE family REnumValueRef 93
+drr/7.2.0 DATA_RULE family RExistenceExpr 58
+drr/7.2.0 DATA_RULE family RComparisonExpr 55
+drr/7.2.0 DATA_RULE family RExtractExpr 53
+drr/7.2.0 DATA_RULE family REqualityExpr 51
+drr/7.2.0 DATA_RULE family RFeatureCall 26
+drr/7.2.0 DATA_RULE family RConditionalExpr 5
+drr/7.2.0 DATA_RULE untargeted RCardinalityCheckExpr 18
+
+# drr/7.3.0 DATA_RULE - irDriven=58987 irDeclined=647 (98.91% of 59634 attempted); untargeted total=18
+drr/7.3.0 DATA_RULE site adapterGap 647
+drr/7.3.0 DATA_RULE family RSymbolReference 209
+drr/7.3.0 DATA_RULE family RLogicalExpr 97
+drr/7.3.0 DATA_RULE family REnumValueRef 93
+drr/7.3.0 DATA_RULE family RExistenceExpr 58
+drr/7.3.0 DATA_RULE family RComparisonExpr 55
+drr/7.3.0 DATA_RULE family RExtractExpr 53
+drr/7.3.0 DATA_RULE family REqualityExpr 51
+drr/7.3.0 DATA_RULE family RFeatureCall 26
+drr/7.3.0 DATA_RULE family RConditionalExpr 5
+drr/7.3.0 DATA_RULE untargeted RCardinalityCheckExpr 18
+
+# iso20022/1.38.0 DATA_RULE - irDriven=246 irDeclined=0 (100.0% of 246 attempted); untargeted total=246
+iso20022/1.38.0 DATA_RULE untargeted RCardinalityCheckExpr 246
+
+# rune-fpml/1.6.0 DATA_RULE - irDriven=340 irDeclined=0 (100.0% of 340 attempted); untargeted total=340
+rune-fpml/1.6.0 DATA_RULE untargeted RCardinalityCheckExpr 340
+
+# rune-fpml/2.0.0 DATA_RULE - irDriven=5774 irDeclined=33 (99.43% of 5807 attempted); untargeted total=378
+rune-fpml/2.0.0 DATA_RULE site adapterGap 33
+rune-fpml/2.0.0 DATA_RULE family RLogicalExpr 21
+rune-fpml/2.0.0 DATA_RULE family RConditionalExpr 12
+rune-fpml/2.0.0 DATA_RULE untargeted RCardinalityCheckExpr 378
+
+# rune-fpml/2.1.0 DATA_RULE - irDriven=17339 irDeclined=111 (99.36% of 17450 attempted); untargeted total=421
+rune-fpml/2.1.0 DATA_RULE site adapterGap 111
+rune-fpml/2.1.0 DATA_RULE family RLogicalExpr 71
+rune-fpml/2.1.0 DATA_RULE family RConditionalExpr 40
+rune-fpml/2.1.0 DATA_RULE untargeted RCardinalityCheckExpr 421
+
+# rune-fpml/2.1.1 DATA_RULE - irDriven=17339 irDeclined=111 (99.36% of 17450 attempted); untargeted total=421
+rune-fpml/2.1.1 DATA_RULE site adapterGap 111
+rune-fpml/2.1.1 DATA_RULE family RLogicalExpr 71
+rune-fpml/2.1.1 DATA_RULE family RConditionalExpr 40
+rune-fpml/2.1.1 DATA_RULE untargeted RCardinalityCheckExpr 421
+
+# ================================================================
+# KEPT-BY-DESIGN - the ruleDelegation declines (IRExpressionCompiler.ruleDelegationDeclines; the #274
+# PriorUniqueTransactionIdentifierRule MapperC witness, protected by BareRuleRefFunctionHostSeatTest).
+# A named residue, not a burn-down row: retired by its own later v3.3 seat, in that seat's commit.
+# ================================================================
+drr/7.0.0 FUNCTION site ruleDelegation 3
+drr/7.1.0 FUNCTION site ruleDelegation 3
+drr/7.2.0 FUNCTION site ruleDelegation 3
+drr/7.3.0 FUNCTION site ruleDelegation 3
+drr/5.61.0 RULE site ruleDelegation 3
+drr/6.34.1 RULE site ruleDelegation 20
+drr/6.35.0 RULE site ruleDelegation 20
+drr/6.36.0 RULE site ruleDelegation 20
+drr/6.37.0 RULE site ruleDelegation 20
+drr/6.38.0 RULE site ruleDelegation 20
+drr/7.0.0 RULE site ruleDelegation 11
+drr/7.1.0 RULE site ruleDelegation 11
+drr/7.2.0 RULE site ruleDelegation 11
+drr/7.3.0 RULE site ruleDelegation 11
+
+# ================================================================
+# THE CHAOS CELL (chaos/1.1.0) - a SEPARATE block, on purpose. The adversarial cell is re-pinned by
+# the seats that heal it, in THEIR commit, from the print; v3.3's exit does NOT require this block
+# empty. Keep it below the divider so a chaos re-cut never touches a vendored row.
+# ================================================================
+
+# chaos/1.1.0 FUNCTION - irDriven=11046 irDeclined=611 (94.75% of 11657 attempted); untargeted total=13
+chaos/1.1.0 FUNCTION site adapterGap 611
+chaos/1.1.0 FUNCTION family RLogicalExpr 184
+chaos/1.1.0 FUNCTION family RArithmeticExpr 125
+chaos/1.1.0 FUNCTION family RDeepFeatureCall 72
+chaos/1.1.0 FUNCTION family RComparisonExpr 65
+chaos/1.1.0 FUNCTION family RFeatureCall 46
+chaos/1.1.0 FUNCTION family RExistenceExpr 37
+chaos/1.1.0 FUNCTION family REqualityExpr 28
+chaos/1.1.0 FUNCTION family RConditionalExpr 24
+chaos/1.1.0 FUNCTION family RFilterExpr 15
+chaos/1.1.0 FUNCTION family RSymbolReference 9
+chaos/1.1.0 FUNCTION family REnumValueRef 5
+chaos/1.1.0 FUNCTION family RThenExpr 1
+chaos/1.1.0 FUNCTION untargeted RReduceExpr 13
+
+# chaos/1.1.0 RULE - irDriven=1829 irDeclined=27 (98.54% of 1856 attempted); untargeted total=0
+chaos/1.1.0 RULE site adapterGap 27
+chaos/1.1.0 RULE family RComparisonExpr 12
+chaos/1.1.0 RULE family RLogicalExpr 12
+chaos/1.1.0 RULE family RFeatureCall 3
+
+# chaos/1.1.0 DATA_RULE - irDriven=2868 irDeclined=293 (90.73% of 3161 attempted); untargeted total=198
+chaos/1.1.0 DATA_RULE site adapterGap 293
+chaos/1.1.0 DATA_RULE family RComparisonExpr 165
+chaos/1.1.0 DATA_RULE family RLogicalExpr 76
+chaos/1.1.0 DATA_RULE family RConditionalExpr 18
+chaos/1.1.0 DATA_RULE family RSymbolReference 18
+chaos/1.1.0 DATA_RULE family REqualityExpr 14
+chaos/1.1.0 DATA_RULE family REnumValueRef 2
+chaos/1.1.0 DATA_RULE untargeted RCardinalityCheckExpr 198

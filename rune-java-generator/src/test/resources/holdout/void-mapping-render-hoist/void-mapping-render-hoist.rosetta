@@ -1,0 +1,38 @@
+namespace test.voidhoist
+version "1.0.0"
+
+// v3.2 seat 9 round 1 (F8, void-mapping-cast - the code-quality review's SF-3 / SF-7): the `nothing` RENDER law where
+// the compiled value carries a STATEMENT HOIST the fork registers on a side channel (the if-then-else result local) -
+// upstream discards the whole compiled builder at its coercion's early exit, so nothing of the operand survives.
+// Three seats the render-edge group does not reach: a Void-typed CONDITIONAL operand under `exists` (the existence
+// seat), a Void-typed conditional value SET into a Void output and ADDED to a Void multi output (the operation seat's
+// conditional branch, which the void arm did not reach at commit 6). Kept apart so a plugin refusal costs one group.
+
+basicType etoken <"A model-declared basic type.">
+
+func ExistsOverConditional: <"A Void-typed conditional operand under exists.">
+    inputs:
+        flag boolean (1..1)
+        t etoken (0..1)
+        u etoken (0..1)
+    output:
+        r boolean (1..1)
+    set r: (if flag then t else u) exists
+
+func SetConditional: <"A Void-typed conditional value into a Void output.">
+    inputs:
+        flag boolean (1..1)
+        t etoken (0..1)
+        u etoken (0..1)
+    output:
+        r etoken (0..1)
+    set r: if flag then t else u
+
+func AddConditional: <"A Void-typed conditional value ADDED to a Void multi output.">
+    inputs:
+        flag boolean (1..1)
+        t etoken (0..1)
+        u etoken (0..1)
+    output:
+        rs etoken (0..*)
+    add rs: if flag then t else u

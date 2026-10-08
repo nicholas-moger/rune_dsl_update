@@ -1,0 +1,6 @@
+namespace com.test
+
+func ChildFn extends ParentFn:
+    output:
+        result string (1..1)
+    set result: "child"

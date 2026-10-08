@@ -1,0 +1,15 @@
+namespace chaos.s33.a3third.p3
+version "1.0.0"
+import chaos.s33.a3third.p1.*
+import chaos.s33.a3third.p2.*
+func C33Strings: <"Escaped and non-ASCII string literals at function seats: a join over a list literal, switch guards, a default.">
+    inputs:
+        s string (1..1)
+    output:
+        r string (1..1)
+    alias parts: ["µ", "\"q\"", "\\", "\t"] then join "–"
+    set r:
+        s switch
+            "\"q\"" then "quote",
+            "µ–ü" then "uni",
+            default parts

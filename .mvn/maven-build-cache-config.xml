@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- P1.3.2 — Maven build-cache extension configuration. Local-backend
+     only (remote backends are P2+ scope per ci-incremental-cached.md §7).
+
+     Break-glass: to invalidate every cache entry instantly (D18 (local)),
+     bump the salt suffix in the GH Actions cache keys AND rename/delete
+     the local cache directory (default: ~/.m2/build-cache). Coordinate
+     both layers together.
+
+     Input includes capture everything a build legitimately depends on:
+     the effective pom (hashed by the extension itself — deps + plugin
+     versions), src/** (project source + resources), .mvn/** (Maven CLI
+     opts, extension version, config itself — repo root only).
+
+     ⚠️ Glob semantics (the 2026-07-16 "Found 0 input files" heal): the
+     extension matches the glob against FILE NAMES while walking the
+     <includes> directories — path patterns like **/*.g4 can never match
+     a name, and the previous glob {pom.xml,**/*.g4} therefore matched
+     ZERO files. The project checksum never changed, so every build
+     restored the first-ever cached compile into target/classes (the
+     PR #408/#409 stale-classes poisoning). {*} makes every file under
+     the scanned dirs an input, which is the correct-by-construction
+     invalidation contract for this repo. -->
+
+<cache xmlns="http://maven.apache.org/BUILD-CACHE-CONFIG/1.2.0"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://maven.apache.org/BUILD-CACHE-CONFIG/1.2.0
+                           https://maven.apache.org/xsd/build-cache-config-1.2.0.xsd">
+    <configuration>
+        <enabled>true</enabled>
+        <hashAlgorithm>SHA-256</hashAlgorithm>
+        <local>
+            <maxBuildsCached>10</maxBuildsCached>
+        </local>
+        <projectVersioning adjustMetaInf="true"/>
+    </configuration>
+    <input>
+        <global>
+            <glob>{*}</glob>
+            <includes>
+                <include>src</include>
+                <include>.mvn</include>
+            </includes>
+        </global>
+    </input>
+    <executionControl>
+        <runAlways>
+            <!-- Tests must run fresh every time — caching test results
+                 defeats the purpose of CI. -->
+            <plugins>
+                <plugin groupId="org.apache.maven.plugins" artifactId="maven-surefire-plugin"/>
+                <plugin groupId="org.apache.maven.plugins" artifactId="maven-failsafe-plugin"/>
+            </plugins>
+        </runAlways>
+    </executionControl>
+</cache>

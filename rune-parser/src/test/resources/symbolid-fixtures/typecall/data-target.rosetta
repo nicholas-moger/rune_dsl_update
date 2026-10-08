@@ -1,0 +1,7 @@
+namespace com.test
+
+type Bar:
+    a string (1..1)
+
+type FooWithDataType:
+    parent Bar (1..1)

@@ -1,0 +1,5 @@
+namespace test.model
+scope MyScope <"A test scope.">
+
+type Foo:
+    bar string (1..1)

@@ -1,0 +1,174 @@
+# THE CHAOS GOLDEN-FREE REGISTER (v3.2 PR-2, census F13 - the s4b noGolden
+# class; ADJUDICATED at v3.2 seat 9, PR #630 - D48): the files the FORK emits
+# on the chaos cell for which the released 9.83.0 plugin defines NO golden.
+#
+# WHAT IT IS SINCE D48 - the ASSERTED expected-noGolden set, not a class label:
+#  - D11CorpusRegressionTest asserts, per chaos (cell, kind), that the fork's
+#    noGolden files EQUAL this register's rows of that kind in BOTH directions
+#    (assertChaosGoldenFreeUnion), and after a whole chaos run that every row
+#    was emitted golden-free by some kind (chaosGoldenFreeRegisterWhollySeen);
+#    the expected-divergence baseline carries NO noGolden row any more - the
+#    two files are DISJOINT (ChaosForkDiagnosticsGateTest.goldenFreeRowsAre
+#    DisjointFromTheDeclaredDivergenceRows), the baseline holding the two
+#    element REFUSALS below and nothing else;
+#  - OptimisedNavigationPairGateTest passes these rows (and ONLY these) to the
+#    overlay compile as its expected-unmatched set - an overlay file with no
+#    golden twin outside this list still fails the path-mismatch guard.
+#
+# WHY p2 ALONE - the measured shape of the s17 rival-enum split (the receipts
+# under target/v32-seat9-instruments/, local): the released plugin REFUSES p2
+# whole for its two unresolved `Sell` references (the mojo's all-or-nothing
+# gate: "Couldn't resolve reference to RosettaFeature 'Sell'" x2, no file of
+# the invocation emitted - refused-groups/x36enum-split-pair/run1.log), so no
+# p2 golden can exist; the fork's licence stays per ELEMENT (D48): the two
+# elements that carry the unresolved reference - C17Sift and the data rule
+# C17BooksC17Agree - are REFUSED at SilentDegradation.Site.ENUM_VALUE_NAME_ECHO
+# (they used to render `C17SideEnum.SELL`, a constant p2's rival enum does not
+# declare - the E2 wrong-enum echo, non-compiling, silent until the seat's
+# commit-2 instrument dumped the fork's side of these files), and p2's other
+# seven files (three elements: C17Books, C17SideEnum, C17Act) still emit, golden-free - the rows below. p1's eight rows LEFT
+# this register at D48: the chaos pin script had excluded p1 as a "split
+# partner" of the refused p2, an inference the oracle refuted - judged alone,
+# p1 has 8 deterministic goldens (the hold-out group x36enum-split-p1) and the
+# fork is byte-identical on all eight; the pin script excludes EXPECTED files
+# only now and the chaos cell carries p1's goldens (6,487 -> 6,495).
+# SHRINK LOG: 17 -> 7 at v3.2 seat 9 (PR #630, D48, commit 5): -8 p1 rows (goldens pinned, byte-compared since),
+#   -2 p2 rows to the divergence baseline as REFUSAL rows (C17Sift, C17BooksC17Agree).
+#   111 -> 107 at v3.2 seat 12 (PR #633, D52, commit 3 - counters first): -4 s31 p2 rows to the divergence baseline as REFUSAL
+#   rows (C31Which, C31Keys at x16enum / x36enum p2: the fork had emitted them SILENTLY with the switch ternary; the
+#   SWITCH_TERNARY_STUB counter found them - the gen-2 census counted byte rows only, so these four were never in its 92).
+# SHRINK-ONLY; deleted whole at v3.2 close with the baseline.
+#
+#
+# ==================== chaos-1.1.0 - THE GENERATION-2 CELL (v3.2 seat 10, PR #631, D49) ====================
+# RE-DERIVED EMPTY-FIRST at the swap: the register IS the asserted expected-noGolden set (D48), so
+# every row below is a file the fork emits for which the released plugin defines NO golden BY A
+# RECORDED VERDICT - the § 4b union: the EXPECTED census (oracle-diagnostics.tsv: the s17 / s31
+# split p2 halves' clean elements; the s9x REFUSAL-PARITY band's fork-accepted files, each a
+# DECLARED FORK-ACCEPTS-DIVERGENT row of fork-diagnostics.tsv) and the mojo-refused verdicts
+# (mojo-refused.tsv: s98's `empty as-key`, the generator crash). Rows come from the D11's own
+# union print at the swap, never typed.
+#
+# THE FIRST GEN-2 CENSUS ROWS (measured 2026-09-10, d11-m1 both routes; 111 rows):
+#
+# --- D48-RIVAL-ENUM-SPLIT-P2 (26) ---
+#   the s17 rival-enum split's p2 half (x36enum, D48) and its A1xA6 twin (x16enum - the rival FIRST in p2, the
+#   same capture) plus the fresh s31 pair: the released plugin refuses p2 WHOLE, the fork's per-element licence
+#   emits the clean elements golden-free
+chaos/s17/x16enum/p2/C17Books.java
+chaos/s17/x16enum/p2/C17SideEnum.java
+chaos/s17/x16enum/p2/functions/C17Act.java
+chaos/s17/x16enum/p2/meta/C17BooksMeta.java
+chaos/s17/x16enum/p2/validation/C17BooksTypeFormatValidator.java
+chaos/s17/x16enum/p2/validation/C17BooksValidator.java
+chaos/s17/x16enum/p2/validation/exists/C17BooksOnlyExistsValidator.java
+chaos/s17/x36enum/p2/C17Books.java
+chaos/s17/x36enum/p2/C17SideEnum.java
+chaos/s17/x36enum/p2/functions/C17Act.java
+chaos/s17/x36enum/p2/meta/C17BooksMeta.java
+chaos/s17/x36enum/p2/validation/C17BooksTypeFormatValidator.java
+chaos/s17/x36enum/p2/validation/C17BooksValidator.java
+chaos/s17/x36enum/p2/validation/exists/C17BooksOnlyExistsValidator.java
+chaos/s31/x16enum/p2/C31Books.java
+chaos/s31/x16enum/p2/C31SideEnum.java
+chaos/s31/x16enum/p2/meta/C31BooksMeta.java
+chaos/s31/x16enum/p2/validation/C31BooksTypeFormatValidator.java
+chaos/s31/x16enum/p2/validation/C31BooksValidator.java
+chaos/s31/x16enum/p2/validation/exists/C31BooksOnlyExistsValidator.java
+chaos/s31/x36enum/p2/C31Books.java
+chaos/s31/x36enum/p2/C31SideEnum.java
+chaos/s31/x36enum/p2/meta/C31BooksMeta.java
+chaos/s31/x36enum/p2/validation/C31BooksTypeFormatValidator.java
+chaos/s31/x36enum/p2/validation/C31BooksValidator.java
+chaos/s31/x36enum/p2/validation/exists/C31BooksOnlyExistsValidator.java
+#
+# --- BAND-FORK-ACCEPTS-DIVERGENT (69) ---
+#   the s9x refusal-parity band: the released plugin refuses the file (EXPECTED, judged alone) and the fork
+#   EMITS - a DECLARED FORK-ACCEPTS-DIVERGENT row of fork-diagnostics.tsv each (s90 a closure parameter named
+#   e; s91 a named parameter after then; s92 an attribute named e; s93 / s94 the POJOs beside a refused
+#   function; s96 the nested lambda shadow; s97 with-meta on a multi argument)
+chaos/s90/base/C90Item.java
+chaos/s90/base/functions/C90Param.java
+chaos/s90/base/meta/C90ItemMeta.java
+chaos/s90/base/validation/C90ItemTypeFormatValidator.java
+chaos/s90/base/validation/C90ItemValidator.java
+chaos/s90/base/validation/exists/C90ItemOnlyExistsValidator.java
+chaos/s91/base/C91Item.java
+chaos/s91/base/functions/C91Then.java
+chaos/s91/base/meta/C91ItemMeta.java
+chaos/s91/base/validation/C91ItemTypeFormatValidator.java
+chaos/s91/base/validation/C91ItemValidator.java
+chaos/s91/base/validation/exists/C91ItemOnlyExistsValidator.java
+chaos/s92/base/C92Item.java
+chaos/s92/base/meta/C92ItemMeta.java
+chaos/s92/base/validation/C92ItemTypeFormatValidator.java
+chaos/s92/base/validation/C92ItemValidator.java
+chaos/s92/base/validation/exists/C92ItemOnlyExistsValidator.java
+chaos/s93/base/C93Either.java
+chaos/s93/base/C93OptA.java
+chaos/s93/base/C93OptB.java
+chaos/s93/base/meta/C93EitherMeta.java
+chaos/s93/base/meta/C93OptAMeta.java
+chaos/s93/base/meta/C93OptBMeta.java
+chaos/s93/base/util/C93EitherDeepPathUtil.java
+chaos/s93/base/validation/C93EitherTypeFormatValidator.java
+chaos/s93/base/validation/C93EitherValidator.java
+chaos/s93/base/validation/C93OptATypeFormatValidator.java
+chaos/s93/base/validation/C93OptAValidator.java
+chaos/s93/base/validation/C93OptBTypeFormatValidator.java
+chaos/s93/base/validation/C93OptBValidator.java
+chaos/s93/base/validation/datarule/C93EitherChoice.java
+chaos/s93/base/validation/exists/C93EitherOnlyExistsValidator.java
+chaos/s93/base/validation/exists/C93OptAOnlyExistsValidator.java
+chaos/s93/base/validation/exists/C93OptBOnlyExistsValidator.java
+chaos/s94/base/C94Either.java
+chaos/s94/base/C94OptA.java
+chaos/s94/base/C94OptB.java
+chaos/s94/base/functions/C94PickBothDirect.java
+chaos/s94/base/meta/C94EitherMeta.java
+chaos/s94/base/meta/C94OptAMeta.java
+chaos/s94/base/meta/C94OptBMeta.java
+chaos/s94/base/util/C94EitherDeepPathUtil.java
+chaos/s94/base/validation/C94EitherTypeFormatValidator.java
+chaos/s94/base/validation/C94EitherValidator.java
+chaos/s94/base/validation/C94OptATypeFormatValidator.java
+chaos/s94/base/validation/C94OptAValidator.java
+chaos/s94/base/validation/C94OptBTypeFormatValidator.java
+chaos/s94/base/validation/C94OptBValidator.java
+chaos/s94/base/validation/datarule/C94EitherChoice.java
+chaos/s94/base/validation/exists/C94EitherOnlyExistsValidator.java
+chaos/s94/base/validation/exists/C94OptAOnlyExistsValidator.java
+chaos/s94/base/validation/exists/C94OptBOnlyExistsValidator.java
+chaos/s96/base/C96Trunk.java
+chaos/s96/base/C96Twig.java
+chaos/s96/base/functions/C96Shade.java
+chaos/s96/base/meta/C96TrunkMeta.java
+chaos/s96/base/meta/C96TwigMeta.java
+chaos/s96/base/validation/C96TrunkTypeFormatValidator.java
+chaos/s96/base/validation/C96TrunkValidator.java
+chaos/s96/base/validation/C96TwigTypeFormatValidator.java
+chaos/s96/base/validation/C96TwigValidator.java
+chaos/s96/base/validation/exists/C96TrunkOnlyExistsValidator.java
+chaos/s96/base/validation/exists/C96TwigOnlyExistsValidator.java
+chaos/s97/base/C97Holder.java
+chaos/s97/base/functions/C97Stamp.java
+chaos/s97/base/meta/C97HolderMeta.java
+chaos/s97/base/validation/C97HolderTypeFormatValidator.java
+chaos/s97/base/validation/C97HolderValidator.java
+chaos/s97/base/validation/exists/C97HolderOnlyExistsValidator.java
+#
+# --- MOJO-CRASH-TWO-ORACLES (12) ---
+#   s98 `empty as-key`: the validator admits the model and the released plugin's GENERATOR crashes
+#   (mojo-refused.tsv) - the fork emits; the § 4b two-oracles class
+chaos/s98/base/C98Part.java
+chaos/s98/base/C98Whole.java
+chaos/s98/base/functions/C98EmptyKey.java
+chaos/s98/base/meta/C98PartMeta.java
+chaos/s98/base/meta/C98WholeMeta.java
+chaos/s98/base/metafields/ReferenceWithMetaC98Part.java
+chaos/s98/base/validation/C98PartTypeFormatValidator.java
+chaos/s98/base/validation/C98PartValidator.java
+chaos/s98/base/validation/C98WholeTypeFormatValidator.java
+chaos/s98/base/validation/C98WholeValidator.java
+chaos/s98/base/validation/exists/C98PartOnlyExistsValidator.java
+chaos/s98/base/validation/exists/C98WholeOnlyExistsValidator.java

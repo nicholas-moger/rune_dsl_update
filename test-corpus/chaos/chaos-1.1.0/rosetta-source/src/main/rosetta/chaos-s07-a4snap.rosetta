@@ -1,0 +1,8 @@
+namespace chaos.s07.a4snap
+version "1.0.0-SNAPSHOT"
+type C7Extra: <"Self-contained helper - relocated by the import axis.">
+    memo string (1..1)
+body Authority C7AUTH <"The chaos authority.">
+corpus Regulation "C7 Chaos Regulation" C7Reg <"The chaos corpus for the report seat.">
+segment c7article
+segment c7field

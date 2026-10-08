@@ -1,0 +1,57 @@
+# Every EXPECTED file of oracle-diagnostics.tsv judged ALONE by the released 9.83.0
+# rosetta-maven-plugin (v3.2 seat 10, chaos-1.1.0 - D49; the seat-9 exclusion class
+# retired): ONE mojo invocation per file, staged with nothing else - the verdict is the
+# oracle's on THAT file. Written by pin-chaos-goldens.sh --judge-alone; never typed.
+# file<TAB>verdict<TAB>detail   (ACCEPTED goldens=N | REFUSED <first ERROR line>)
+# ERRATUM (v3.2 seat 10 round 1, cq SF-9): the 34 a5bom rows carry a literal '?' where the mojo printed the
+# U+FEFF byte-order mark - the capture ran through the console codepage; the byte-exact message is in the
+# oracle dump beside the L2 set (chaos-1.1.0-upstream-9.83.0.tsv, the LINKERR rows). The writer forces UTF-8 since
+# round 2 (commit 10, cq SF-9: -Dfile.encoding / -Dstdout.encoding / -Dstderr.encoding on the mojo's JVM in
+# pin-chaos-goldens.sh); only the re-take of these rows is owed to the second round (round 3, rule6 NIT-4); the
+# verdict column is unaffected.
+chaos-s01-a5bom.rosetta	REFUSED	extraneous input '?' expecting 'namespace'
+chaos-s02-a5bom.rosetta	REFUSED	extraneous input '?' expecting 'namespace'
+chaos-s03-a5bom.rosetta	REFUSED	extraneous input '?' expecting 'namespace'
+chaos-s04-a5bom.rosetta	REFUSED	extraneous input '?' expecting 'namespace'
+chaos-s05-a5bom.rosetta	REFUSED	extraneous input '?' expecting 'namespace'
+chaos-s06-a5bom.rosetta	REFUSED	extraneous input '?' expecting 'namespace'
+chaos-s07-a5bom.rosetta	REFUSED	extraneous input '?' expecting 'namespace'
+chaos-s08-a5bom.rosetta	REFUSED	extraneous input '?' expecting 'namespace'
+chaos-s09-a5bom.rosetta	REFUSED	extraneous input '?' expecting 'namespace'
+chaos-s10-a5bom.rosetta	REFUSED	extraneous input '?' expecting 'namespace'
+chaos-s11-a5bom.rosetta	REFUSED	extraneous input '?' expecting 'namespace'
+chaos-s12-a5bom.rosetta	REFUSED	extraneous input '?' expecting 'namespace'
+chaos-s13-a5bom.rosetta	REFUSED	extraneous input '?' expecting 'namespace'
+chaos-s14-a5bom.rosetta	REFUSED	extraneous input '?' expecting 'namespace'
+chaos-s15-a5bom.rosetta	REFUSED	extraneous input '?' expecting 'namespace'
+chaos-s16-a5bom.rosetta	REFUSED	extraneous input '?' expecting 'namespace'
+chaos-s17-a5bom.rosetta	REFUSED	extraneous input '?' expecting 'namespace'
+chaos-s17-x16enum-p2.rosetta	REFUSED	Couldn't resolve reference to RosettaType 'C17ActionEnum'.
+chaos-s17-x36enum-p2.rosetta	REFUSED	Couldn't resolve reference to RosettaType 'C17ActionEnum'.
+chaos-s18-a5bom.rosetta	REFUSED	extraneous input '?' expecting 'namespace'
+chaos-s19-a5bom.rosetta	REFUSED	extraneous input '?' expecting 'namespace'
+chaos-s20-a5bom.rosetta	REFUSED	extraneous input '?' expecting 'namespace'
+chaos-s21-a5bom.rosetta	REFUSED	extraneous input '?' expecting 'namespace'
+chaos-s22-a5bom.rosetta	REFUSED	extraneous input '?' expecting 'namespace'
+chaos-s23-a5bom.rosetta	REFUSED	extraneous input '?' expecting 'namespace'
+chaos-s24-a5bom.rosetta	REFUSED	extraneous input '?' expecting 'namespace'
+chaos-s25-a5bom.rosetta	REFUSED	extraneous input '?' expecting 'namespace'
+chaos-s26-a5bom.rosetta	REFUSED	extraneous input '?' expecting 'namespace'
+chaos-s27-a5bom.rosetta	REFUSED	extraneous input '?' expecting 'namespace'
+chaos-s28-a5bom.rosetta	REFUSED	extraneous input '?' expecting 'namespace'
+chaos-s29-a5bom.rosetta	REFUSED	extraneous input '?' expecting 'namespace'
+chaos-s30-a5bom.rosetta	REFUSED	extraneous input '?' expecting 'namespace'
+chaos-s31-a5bom.rosetta	REFUSED	extraneous input '?' expecting 'namespace'
+chaos-s31-x16enum-p2.rosetta	REFUSED	Couldn't resolve reference to RosettaType 'C31MoveEnum'.
+chaos-s31-x36enum-p2.rosetta	REFUSED	Couldn't resolve reference to RosettaType 'C31MoveEnum'.
+chaos-s32-a5bom.rosetta	REFUSED	extraneous input '?' expecting 'namespace'
+chaos-s33-a5bom.rosetta	REFUSED	extraneous input '?' expecting 'namespace'
+chaos-s34-a5bom.rosetta	REFUSED	extraneous input '?' expecting 'namespace'
+chaos-s90-base.rosetta	REFUSED	no viable alternative at input 'e'
+chaos-s91-base.rosetta	REFUSED	no viable alternative at input 'p'
+chaos-s92-base.rosetta	REFUSED	no viable alternative at input 'e'
+chaos-s93-base.rosetta	REFUSED	Couldn't resolve reference to RosettaFeature 'av'.
+chaos-s94-base.rosetta	REFUSED	Expected type `C94Either`, but got `any` instead. Cannot assign `any` to output `outs`
+chaos-s96-base.rosetta	REFUSED	Duplicate name.
+chaos-s97-base.rosetta	REFUSED	Expecting single cardinality. The with-meta operator can only be used with single cardinality arguments
+chaos-s98-base.rosetta	CRASHED	com.regnosys.rosetta.generator.GenerationException: The null type has no name.

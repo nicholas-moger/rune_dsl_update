@@ -1,0 +1,23 @@
+namespace chaos.s19.a3third.p1
+version "1.0.0"
+import chaos.s19.a3third.p2.*
+import chaos.s19.a3third.p3.*
+type C19Part: <"Keyed component - relocated by the import axis.">
+    [metadata key]
+    pid string (1..1)
+metaType key string
+metaType reference string
+metaType address string
+metaType location string
+type C19Whole: <"Constructor target: every field-shape kind (charter 2.2b), incl. location/address meta at ctor-adjacent seats.">
+    name string (1..1)
+    opt number (0..1)
+    scores number (0..*)
+    part C19Part (0..1)
+    partRef C19Part (0..1)
+        [metadata reference]
+    parts C19Part (0..*)
+    spot string (0..1)
+        [metadata location]
+    ptr string (0..1)
+        [metadata address "pointsTo"=C19Whole->spot]

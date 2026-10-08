@@ -1,0 +1,69 @@
+namespace chaos.s20.a2dangle
+version "1.0.0"
+import chaos.s20.a2dangle.h.*
+import chaos.s20.a2dangle.unused.*
+type C20Twig: <"Depth 3.">
+    leaves C20Leaf (0..*)
+type C20Branch: <"Depth 2.">
+    twigs C20Twig (0..*)
+type C20Trunk: <"Depth 1.">
+    branches C20Branch (0..*)
+    title string (1..1)
+func C20Harvest: <"Nested extract to depth 4 with explicit lambdas at every level.">
+    inputs:
+        trunks C20Trunk (0..*)
+    output:
+        vs number (0..*)
+    add vs:
+        trunks
+            then extract t [
+                t -> branches extract b [
+                    b -> twigs extract w [
+                        w -> leaves extract l [ l -> v ]
+                    ]
+                ]
+            ]
+            then flatten
+func C20Pipeline: <"An eight-step then-chain mixing filter, extract, distinct, sort, and reduce.">
+    inputs:
+        trunks C20Trunk (0..*)
+    output:
+        total number (1..1)
+    set total:
+        trunks
+            then extract branches
+            then flatten
+            then extract twigs
+            then flatten
+            then extract leaves
+            then flatten
+            then extract v
+            then filter item >= 0
+            then distinct
+            then sort
+            then reduce a, b [ a + b ]
+func C20Shade: <"The F14 naming-class carrier: nested lambdas with sibling-similar names + a re-used name across SIBLING lambdas. The DIRECT nested shadow (inner lambda re-using the enclosing 't') was probed and upstream REFUSES it ('Duplicate name.', l1-run8) - recorded in the would-have-caught table, reverted here so s20 keeps its goldens.">
+    inputs:
+        trunks C20Trunk (0..*)
+    output:
+        n number (1..1)
+    set n:
+        (trunks extract t [
+            t -> branches extract tb [
+                tb -> twigs count
+            ]
+        ] then flatten then sum)
+            + (trunks extract t [ t -> title ] then count)
+func C20Spread: <"min/max with and without key lambdas, plus reverse/first/last.">
+    inputs:
+        leaves C20Leaf (0..*)
+    output:
+        spread number (1..1)
+    alias hiLeaf: leaves max l [ l -> v ]
+    alias loLeaf: leaves min l [ l -> v ]
+    alias ordered: leaves sort l [ l -> v ]
+    alias backFirst: ordered then reverse then first
+    set spread:
+        (hiLeaf -> v default 0) - (loLeaf -> v default 0)
+            + ((backFirst -> v default 0) * 0)
+            + ((ordered last -> v default 0) * 0)

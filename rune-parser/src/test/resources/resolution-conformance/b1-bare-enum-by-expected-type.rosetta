@@ -1,0 +1,100 @@
+namespace conformance.b1
+version "1.0.0"
+
+// B1 — a bare enum value resolved by the EXPECTED TYPE at its seat.
+//
+// Upstream never looks a bare value up by global simple name. The scope for a
+// symbol reference gains the expected type's values only when the expected type
+// is an enum, and they sit in the LOWEST-precedence bucket. Two enums here
+// declare `Other`, and `AlphaEnum` is declared FIRST — so any first-wins
+// simple-name lookup picks the wrong one at every seat below, which is exactly
+// what the fork does (32 TYPE_ERRORs per drr 7.x cell).
+//
+// Distilled from drr 7.x: regulation-cftc-rewrite-margin-rule (`contains`),
+// base-trade-basket-func (function argument), base-trade-underlier-func
+// (constructor field), regulation-common-trade-quantity-func (`default`),
+// regulation-hkma-rewrite-trade-rule (`else` arm, implicit-LHS compare).
+
+enum AlphaEnum:
+    Other
+    Alpha
+
+enum BetaEnum:
+    Other
+    Beta
+
+type Carrier:
+    beta BetaEnum (0..1)
+    betas BetaEnum (0..*)
+
+type Built:
+    kind BetaEnum (1..1)
+
+func TakesBeta:
+    inputs:
+        value BetaEnum (1..1)
+    output:
+        result boolean (1..1)
+    set result:
+        True
+
+// (a) `contains` right-hand side.
+func B1Contains:
+    inputs:
+        carrier Carrier (1..1)
+    output:
+        result boolean (1..1)
+    set result:
+        carrier -> betas contains Other
+
+// (b) FUNCTION ARGUMENT position.
+func B1FunctionArgument:
+    output:
+        result boolean (1..1)
+    set result:
+        TakesBeta(Other)
+
+// (c) CONSTRUCTOR field value.
+func B1ConstructorField:
+    output:
+        result Built (1..1)
+    set result:
+        Built { kind: Other }
+
+// (d) `default` right-hand side.
+func B1DefaultRhs:
+    inputs:
+        carrier Carrier (1..1)
+    output:
+        result BetaEnum (1..1)
+    set result:
+        carrier -> beta default Other
+
+// (e) if / else ARM — the branch carries the whole expression's expected type.
+func B1ElseArm:
+    inputs:
+        carrier Carrier (1..1)
+    output:
+        result BetaEnum (1..1)
+    set result:
+        if carrier -> beta exists
+        then Beta
+        else Other
+
+// (f) IMPLICIT-LHS compare inside a `then`.
+func B1ImplicitLhsCompare:
+    inputs:
+        carrier Carrier (1..1)
+    output:
+        result boolean (0..1)
+    set result:
+        carrier -> beta
+            then if = Other then True else False
+
+// (g) The QUALIFIED form, which has never been in doubt — the regression
+//     witness that fixing the bare form does not disturb it.
+func B1QualifiedForm:
+    output:
+        result BetaEnum (1..1)
+    set result:
+        BetaEnum -> Other

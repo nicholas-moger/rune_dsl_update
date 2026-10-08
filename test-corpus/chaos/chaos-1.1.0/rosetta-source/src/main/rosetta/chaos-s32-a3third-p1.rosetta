@@ -1,0 +1,6 @@
+namespace chaos.s32.a3third.p1
+version "1.0.0"
+import chaos.s32.a3third.p2.*
+import chaos.s32.a3third.p3.*
+type C32Aux: <"Helper - relocated by the import axis.">
+    ax string (1..1)

@@ -1,0 +1,24 @@
+namespace test.synonyms
+
+synonym source TestSource
+
+enum PriceTypeEnum:
+    InterestRate
+    CashPrice
+
+enum CounterpartyRoleEnum:
+    Party1
+    Party2
+
+type Counterparty:
+    role string (0..1)
+        [synonym TestSource set to CounterpartyRoleEnum -> Party1 when "partyA" = "applicable"]
+        [synonym TestSource set to CounterpartyRoleEnum -> Party2 when "partyB" = "applicable"]
+
+type PriceSchedule:
+    priceType string (0..1)
+        [synonym TestSource set to PriceTypeEnum -> InterestRate when path = "Rates"]
+    amount number (0..1)
+        [synonym TestSource value "amount" set when "status" = "active"]
+    fallback string (0..1)
+        [synonym TestSource value "fallbackValue" default to True]

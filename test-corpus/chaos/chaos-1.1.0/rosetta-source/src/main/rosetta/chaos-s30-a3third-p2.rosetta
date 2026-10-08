@@ -1,0 +1,28 @@
+namespace chaos.s30.a3third.p2
+version "1.0.0"
+import chaos.s30.a3third.p1.*
+import chaos.s30.a3third.p3.*
+func C30TwoOp: <"The two-op pathed-SET pattern (seat 9's witness shape) with a with-meta ctor field, a two-hop as-key segment set and a scheme leaf set from a conditional.">
+    inputs:
+        p C30Part (1..1)
+        flag boolean (1..1)
+        a string (0..1)
+    output:
+        w C30Whole (1..1)
+    set w: C30Whole { name: "root", code: "c" with-meta { scheme: "chaos" }, ... }
+    set w -> nested -> partRef: p as-key
+    set w -> nested -> name: if flag then "n" else "m"
+    set w -> code: if a exists then a else "z"
+func C30MultiThenAdd: <"A multi SET later mutated by ADD, twice-added list literals of DATA ctors, and an ADD of a conditional into a segment.">
+    inputs:
+        n number (1..1)
+        p C30Part (1..1)
+    output:
+        w C30Whole (1..1)
+    set w -> scores: [n]
+    add w -> scores: n * 2
+    add w -> scores: if n > 0 then [n, n + 1] else [0]
+    set w -> parts: [p, C30Part { pid: "a" }]
+    add w -> parts: [C30Part { pid: "b" }, C30Part { pid: "c" }]
+    add w -> parts: if n > 1 then p else empty
+    set w -> name: "x"

@@ -1,0 +1,4 @@
+namespace smoke.derived
+func NoInputs:
+    output: result int (1..1)
+    set result: 42

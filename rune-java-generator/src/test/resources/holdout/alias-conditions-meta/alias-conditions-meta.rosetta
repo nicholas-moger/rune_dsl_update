@@ -1,0 +1,20 @@
+namespace test.aliascondmeta
+
+typeAlias Nat: <"An int-grained alias with a condition, reached through META-WRAPPED attributes below.">
+    number(fractionalDigits: 0)
+    condition NonNeg:
+        item >= 0
+
+type MetaHolder: <"Conditioned-alias attributes under [metadata scheme], single and multi.">
+    schemed Nat (0..1)
+        [metadata scheme]
+    schemeds Nat (0..*)
+        [metadata scheme]
+    plain Nat (0..1)
+
+func UseNat: <"A conditioned alias crossing a function boundary - input and output.">
+    inputs:
+        v Nat (1..1)
+    output:
+        r Nat (1..1)
+    set r: v

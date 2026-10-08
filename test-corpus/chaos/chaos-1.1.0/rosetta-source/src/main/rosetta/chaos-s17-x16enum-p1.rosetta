@@ -1,0 +1,20 @@
+namespace chaos.s17.x16enum.p1
+version "1.0.0"
+import chaos.s17.x16enum.p2.*
+type C17Held: <"Self-contained helper - relocated by the import axis.">
+    h string (1..1)
+enum C17SideEnum: <"First enum - owns Buy and Sell.">
+    Buy
+    Sell
+enum C17ActionEnum: <"Second enum in the SAME scope re-using Buy (the E2 wrong-enum class).">
+    Buy
+    Amend
+func C17Which: <"Bare enum-value switch guards - the resolver must pick the input's enum, not a rival.">
+    inputs:
+        s C17SideEnum (1..1)
+    output:
+        r string (1..1)
+    set r:
+        s switch
+            Buy then "side-buy",
+            Sell then "side-sell"

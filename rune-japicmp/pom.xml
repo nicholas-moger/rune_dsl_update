@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.finos.rune</groupId>
+    <artifactId>rune-japicmp</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>rune-dsl-plus japicmp gate (Layer 1)</name>
+    <description>Four-layer gate Layer-1: API/ABI compatibility vs upstream baseline com.regnosys.rosetta:com.regnosys.rosetta (pre-rename Maven Central per D17 in the development decision log, 2026-04-24).</description>
+
+    <properties>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- Baseline per D17 (local, 2026-04-24): pre-rename Maven Central GAV.
+             Bump only via a dedicated rebaseline PR. -->
+        <upstream.baseline.groupId>com.regnosys.rosetta</upstream.baseline.groupId>
+        <upstream.baseline.artifactId>com.regnosys.rosetta</upstream.baseline.artifactId>
+        <upstream.baseline.version>9.58.1</upstream.baseline.version>
+        <!-- Under-test jar = our rune-parser. Co-located snapshot resolution.
+             Keep `rune-parser.version` in lockstep with rune-parser/pom.xml's
+             own <version> — this module is standalone (not in a reactor), so
+             Maven can't derive it automatically. -->
+        <rune-parser.version>0.0.1-SNAPSHOT</rune-parser.version>
+        <rune-parser.jar>${project.basedir}/../rune-parser/target/rune-parser-${rune-parser.version}.jar</rune-parser.jar>
+        <!-- P2.1.1 T5 Layer 3 retargeting (REPORT-ONLY landing per the
+             development methodology note § 3 Phase 3, not included here).
+             Output-side jar comparison: HEAD rune-java-generator.jar vs a
+             baseline rune-java-generator.jar that the development repository
+             built from its commit edda5ea (the post-P2.0.3 close). That commit
+             is NOT in this review repository's history, so the baseline cannot
+             be rebuilt here: it must be supplied as a file at
+             ${rune-java-generator.baseline.jar} (see README.md, Layer 3).
+             Layer 3 execution is SKIPPED by default (japicmp.layer3.skip=true);
+             -Djapicmp.layer3.skip=false activates it once that jar is in place.
+
+             P2.1.6 flip-to-ENFORCING: change layer3 execution's
+             <breakBuildOnModifications> from false to true (single-line edit).
+             Subject to spec § 6 R10 budget mitigation per the same note § 3 Phase 6. -->
+        <rune-java-generator.version>0.0.1-SNAPSHOT</rune-java-generator.version>
+        <rune-java-generator.jar>${project.basedir}/../rune-java-generator/target/rune-java-generator-${rune-java-generator.version}.jar</rune-java-generator.jar>
+        <baseline.jar.dir>${project.basedir}/.japicmp-baselines</baseline.jar.dir>
+        <rune-java-generator.baseline.jar>${baseline.jar.dir}/baseline-rune-java-generator.jar</rune-java-generator.baseline.jar>
+        <japicmp.layer3.skip>true</japicmp.layer3.skip>
+        <junit.version>5.11.3</junit.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Pin Surefire to match rune-parser/pom.xml + rune-java-generator/pom.xml
+                 so test execution is consistent across modules and not dependent on
+                 Maven Super POM defaults. Module-level config is otherwise stock. -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.5.2</version>
+            </plugin>
+            <plugin>
+                <groupId>com.github.siom79.japicmp</groupId>
+                <artifactId>japicmp-maven-plugin</artifactId>
+                <version>0.23.1</version>
+                <executions>
+                    <execution>
+                        <id>api-compat-gate</id>
+                        <phase>verify</phase>
+                        <goals><goal>cmp</goal></goals>
+                        <configuration>
+                            <oldVersion>
+                                <dependency>
+                                    <groupId>${upstream.baseline.groupId}</groupId>
+                                    <artifactId>${upstream.baseline.artifactId}</artifactId>
+                                    <version>${upstream.baseline.version}</version>
+                                </dependency>
+                            </oldVersion>
+                            <newVersion>
+                                <file>
+                                    <path>${rune-parser.jar}</path>
+                                </file>
+                            </newVersion>
+                            <parameter>
+                                <accessModifier>public</accessModifier>
+                                <onlyModified>true</onlyModified>
+                                <onlyBinaryIncompatible>false</onlyBinaryIncompatible>
+                                <!-- P1.3.1 posture: REPORT-ONLY (enforcement OFF). Per D17's (local)
+                                     "Honest limitations" addendum and the plan's scope-clarification,
+                                     the initial gate is infrastructure scaffolding; it produces the
+                                     japicmp report every run but does NOT fail the build. Flip both
+                                     break-build flags back to true when re-targeting at output-side
+                                     jars in P2 (a single two-line edit on the <oldVersion>/
+                                     <newVersion> pair + these flags). japicmp's <includes> filters
+                                     REPORT OUTPUT, not the comparison set — see P1.3.1 spike finding
+                                     for why enforcement-on against tool jars produces unwanted
+                                     CLASS_REMOVED diffs on upstream Xtext-era classes the fork
+                                     deliberately doesn't ship. -->
+                                <breakBuildOnBinaryIncompatibleModifications>false</breakBuildOnBinaryIncompatibleModifications>
+                                <breakBuildOnSourceIncompatibleModifications>false</breakBuildOnSourceIncompatibleModifications>
+                                <breakBuildOnModifications>false</breakBuildOnModifications>
+                                <breakBuildBasedOnSemanticVersioning>false</breakBuildBasedOnSemanticVersioning>
+                                <includeSynthetic>false</includeSynthetic>
+                                <!-- Fork does not link against Xtext; upstream baseline does. -->
+                                <ignoreMissingClasses>true</ignoreMissingClasses>
+                                <reportOnlyFilename>true</reportOnlyFilename>
+                            </parameter>
+                            <includes>
+                                <!-- P1.3.1 placeholder pairing — re-target in P2 per plan scope-clarification.
+                                     com.regnosys.rosetta.ast.model is a fork-only package (present in rune-parser,
+                                     absent from baseline 9.58.1). japicmp reports classes as ADDED (binary compatible,
+                                     non-blocking); gate passes. Widening / re-targeting to output-side jars is
+                                     deferred to P2 or P1.3.1-follow-up. -->
+                                <include>com.regnosys.rosetta.ast.model</include>
+                            </includes>
+                            <excludes>
+                                <!-- P1.4.1c: rune-parser-consumer-smoke is a separate module's package
+                                     that lives at com.regnosys.rosetta.smoke.*. Currently moot under the
+                                     narrow include (com.regnosys.rosetta.ast.model only); added now belt-
+                                     and-braces so widening enforcement in P2 does not need a coupled edit.
+                                     Per spec §6.8 of P1.4.1 internal-hardening design (local). -->
+                                <exclude>com.regnosys.rosetta.smoke.*</exclude>
+                            </excludes>
+                            <htmlTitle>rune-dsl-plus vs upstream com.regnosys.rosetta 9.58.1 (Layer-1 gate, P1.3.1 placeholder)</htmlTitle>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <!-- P2.1.1 T5 Layer 3 retargeting (REPORT-ONLY landing per
+                             the development methodology note § 3 Phase 3, not
+                             included here). Output-side jar comparison: HEAD
+                             rune-java-generator.jar vs a baseline built from
+                             development commit edda5ea (post-P2.0.3 close), which
+                             is not in this review history and must be supplied as
+                             a file (README.md, Layer 3). Skipped by default so the
+                             Layer-1-only invocation is unchanged;
+                             -Djapicmp.layer3.skip=false activates it. -->
+                        <id>japicmp-layer-3-output-jars</id>
+                        <phase>verify</phase>
+                        <goals><goal>cmp</goal></goals>
+                        <configuration>
+                            <skip>${japicmp.layer3.skip}</skip>
+                            <oldVersion>
+                                <file>
+                                    <path>${rune-java-generator.baseline.jar}</path>
+                                </file>
+                            </oldVersion>
+                            <newVersion>
+                                <file>
+                                    <path>${rune-java-generator.jar}</path>
+                                </file>
+                            </newVersion>
+                            <parameter>
+                                <accessModifier>public</accessModifier>
+                                <onlyModified>true</onlyModified>
+                                <onlyBinaryIncompatible>false</onlyBinaryIncompatible>
+                                <!-- REPORT-ONLY at P2.1.1-P2.1.5 per skill § 3
+                                     Phase 6; flip to true at P2.1.6 enforcing
+                                     gate (subject to spec § 6 R10 budget). -->
+                                <breakBuildOnBinaryIncompatibleModifications>false</breakBuildOnBinaryIncompatibleModifications>
+                                <breakBuildOnSourceIncompatibleModifications>false</breakBuildOnSourceIncompatibleModifications>
+                                <breakBuildOnModifications>false</breakBuildOnModifications>
+                                <breakBuildBasedOnSemanticVersioning>false</breakBuildBasedOnSemanticVersioning>
+                                <includeSynthetic>false</includeSynthetic>
+                                <ignoreMissingClasses>true</ignoreMissingClasses>
+                                <reportOnlyFilename>true</reportOnlyFilename>
+                            </parameter>
+                            <includes>
+                                <!-- Scope to generator-side public API only.
+                                     Parser-side ABI is covered by Layer 1's
+                                     `com.regnosys.rosetta.ast.model` execution
+                                     above. -->
+                                <include>com.regnosys.rosetta.generator.java.**</include>
+                            </includes>
+                            <excludes>
+                                <!-- Inner-class noise mitigation per skill § 4
+                                     pitfall #4. -->
+                                <exclude>**$*</exclude>
+                            </excludes>
+                            <htmlTitle>rune-dsl-plus generator output-side jar parity (Layer-3 gate, P2.1.1 REPORT-ONLY)</htmlTitle>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

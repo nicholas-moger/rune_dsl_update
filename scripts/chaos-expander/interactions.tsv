@@ -1,0 +1,12 @@
+# The enumerated pairwise interaction rows - charter § 2.3 (OAT + THIS list,
+# never a cross-product). Each row is a named, motivated combination; a v3.2
+# census finding that is a >1-axis conjunction GROWS this list (charter § 9).
+# pair<TAB>families(comma)<TAB>motivation
+# GENERATION 2 (chaos-1.1.0, D49): the three 1.0.0 rows extended to the fresh
+# families that carry their shape, and ONE new row - A1xA6, the rival declared
+# FIRST in the split's p2 (D48 measured upstream's in-file capture of the E2
+# class with the rival LAST alone; is the capture order-dependent?).
+A1xA3	s01,s04,s05,s23,s24,s29,s30	order-within-split: the #413 order class where resolution crosses a namespace boundary
+A2xA6	s16,s17,s31,s32	import-style-under-collision: the shadowing family arrived through imports (a2/P2)
+A3xA6	s16,s17,s31,s32	collision across the namespace boundary: the a2/P2 family was cross-file, not same-file (the rival LAST in p2 - the D48 capture)
+A1xA6	s16,s17,s31,s32	rival-first-in-file: the A3xA6 split with the rival declared FIRST in p2 - is upstream's in-file capture of the E2 class order-dependent? (D48 measured it with the rival last alone)

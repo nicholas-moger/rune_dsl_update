@@ -1,0 +1,17 @@
+namespace chaos.s12.a5uni
+version "1.0.0"
+type C12Aux: <"éüµ – Self-contained helper - relocated by the import axis.">
+    ax string (1..1)
+synonym source C12Base
+type C12Row: <"Mapping target for the external source.">
+    key string (1..1)
+    val number (0..1)
+    aux C12Aux (0..1)
+enum C12FlagEnum: <"External-enum mapping target.">
+    On
+    Off
+type A5UniProbe: <"Non-ASCII literal probe – müßig 試験.">
+    p string (0..1)
+        [label as "µ–label §7"]
+enum A5UniProbeEnum: <"displayName probe.">
+    V displayName "µ–„display“"

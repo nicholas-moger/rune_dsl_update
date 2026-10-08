@@ -1,0 +1,4 @@
+namespace chaos.s21.a2qual.h
+version "1.0.0"
+type C21Aux: <"Self-contained helper - relocated by the import axis.">
+    ax string (1..1)

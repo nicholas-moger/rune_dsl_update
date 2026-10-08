@@ -1,0 +1,45 @@
+namespace chaos.s33.a2wild
+version "1.0.0"
+import chaos.s33.a2wild.h.*
+synonym source C33Src
+body Authority C33AUTH <"Authority with a quote: \"quoted\", a backslash \\ and µ–ü.">
+corpus Regulation "C33 “Chaos” Règlement \"quoted\" \\ back" C33Reg <"Display string with non-ASCII, a quote and a backslash.">
+segment c33article
+type C33Trade: <"Labels, synonyms and docReferences carrying non-ASCII, a quote and a backslash each (D46's REACH beyond the enum seats).">
+    [synonym C33Src value "Röot \"q\" \\b" path "énvelope"]
+    [docReference C33AUTH C33Reg c33article "3" provision "Provision with µ–ü, a \"quote\" and a back\\slash."]
+    utid string (1..1)
+        [label as "Thé UTI \"quoted\" \\ back"]
+        [synonym C33Src value "ütid \"q\"" path "röot->päth"]
+    notional number (0..1)
+        [label as "Notional µ–§"]
+    extra C33Extra (0..1)
+        [label for memo "Mémo \"q\" \\"]
+eligibility rule C33Elig from C33Trade: <"Gate.">
+    notional exists
+reporting rule C33Utid from C33Trade: <"Reported with a non-ASCII quoted as-label.">
+    extract utid
+        as "UTI «ü» \"q\""
+reporting rule C33Lit from C33Trade: <"String literals with escapes and non-ASCII at expression seats: a comparison, a conditional arm, a default.">
+    extract if utid = "tab\there" then "µ-yes \"y\"" else (utid default "back\\slash")
+        as "Literal"
+type C33Report: <"Report type.">
+    utiField string (1..1)
+        [ruleReference C33Utid]
+    litField string (1..1)
+        [ruleReference C33Lit]
+report C33AUTH C33Reg in T+1
+    from C33Trade
+    when C33Elig
+    with type C33Report
+func C33Strings: <"Escaped and non-ASCII string literals at function seats: a join over a list literal, switch guards, a default.">
+    inputs:
+        s string (1..1)
+    output:
+        r string (1..1)
+    alias parts: ["µ", "\"q\"", "\\", "\t"] then join "–"
+    set r:
+        s switch
+            "\"q\"" then "quote",
+            "µ–ü" then "uni",
+            default parts

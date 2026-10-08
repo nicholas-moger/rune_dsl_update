@@ -1,0 +1,149 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="2180" viewBox="0 0 480 2180" role="img" aria-labelledby="title desc">
+<title id="title">Same compiler roles, different foundations</title>
+<desc id="desc">Four matched roles compare stock Rune 9.83.0 with the proposed contribution target: parsing, semantic model and services, code generation, and downstream application execution. Stock Xtext integrates ANTLR 3 with an EMF source graph and Rune semantic services; Java and Xtend generators emit Java. Its existing JVM language server and editor use those source-model services. The proposed direct ANTLR 4 parser creates a Java AST, with project-owned semantic services and a distinct shared semantic IR of prepared facts for emitters. The IR is an additional representation, not a claim of fewer compiler stages. The target Java emitter consumes that IR. Generated Java and the downstream runtime retain their application role, with compatibility a completion goal. The planned standalone SDK exposes owned services through CLI, Studio, replacement LSP and agent interfaces. It is connected only to the proposed semantic boundary. No new SDK or full IR closure is claimed delivered; other language targets are separate work.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9" fill="none" stroke="#a9b7cb" stroke-width="1.4"/></marker></defs>
+<rect width="480" height="2180" rx="22" fill="#121923"/>
+<g font-family="Segoe UI, Arial, sans-serif">
+<text x="24" y="43" fill="#eef2f8" font-size="32" font-weight="600" text-anchor="start">
+<tspan x="24" dy="0" xml:space="preserve">Same roles,</tspan>
+<tspan x="24" dy="38" xml:space="preserve">different foundations</tspan>
+</text>
+<text x="24" y="125" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="24" dy="0" xml:space="preserve">Existing 9.83.0 → proposed target</tspan>
+<tspan x="24" dy="30" xml:space="preserve">Shared semantic contract for emitters</tspan>
+</text>
+<rect x="24" y="205" width="432" height="770" rx="14" fill="#18222f" stroke="#a2c6e6" stroke-width="1.5"/>
+<text x="47" y="243" fill="#a2c6e6" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Existing · Rune 9.83.0</tspan>
+</text>
+<text x="47" y="275" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Stock compiler architecture</tspan>
+</text>
+<rect x="47" y="305" width="386" height="95" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="48" y="324" width="4" height="57" rx="2" fill="#a2c6e6"/>
+<text x="70" y="342" fill="#a2c6e6" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Parse · Xtext / ANTLR 3</tspan>
+</text>
+<text x="70" y="375" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Xtext-generated lexer / parser</tspan>
+</text>
+<rect x="47" y="435" width="386" height="260" rx="14" fill="#18222f" stroke="#92d5c6" stroke-width="1.5"/>
+<text x="70" y="473" fill="#92d5c6" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Semantic model + services</tspan>
+</text>
+<rect x="67" y="500" width="346" height="80" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="68" y="519" width="4" height="42" rx="2" fill="#92d5c6"/>
+<text x="90" y="537" fill="#92d5c6" font-size="23" font-weight="600" text-anchor="start">
+<tspan x="90" dy="0" xml:space="preserve">EMF source graph</tspan>
+</text>
+<text x="90" y="565" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="90" dy="0" xml:space="preserve">Objects · references · resources</tspan>
+</text>
+<rect x="67" y="605" width="346" height="80" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="68" y="624" width="4" height="42" rx="2" fill="#92d5c6"/>
+<text x="90" y="642" fill="#92d5c6" font-size="23" font-weight="600" text-anchor="start">
+<tspan x="90" dy="0" xml:space="preserve">Rune semantic services</tspan>
+</text>
+<text x="90" y="670" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="90" dy="0" xml:space="preserve">Scope · types · validation</tspan>
+</text>
+<polyline points="240.0,580 240.0,605" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="47" y="730" width="386" height="95" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="48" y="749" width="4" height="57" rx="2" fill="#d0b487"/>
+<text x="70" y="767" fill="#d0b487" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Generate · Java / Xtend</tspan>
+</text>
+<text x="70" y="800" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Consume source model + helpers</tspan>
+</text>
+<rect x="47" y="865" width="386" height="90" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="48" y="884" width="4" height="52" rx="2" fill="#d0b487"/>
+<text x="70" y="902" fill="#d0b487" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Generated Java + runtime</tspan>
+</text>
+<text x="70" y="935" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Application execution</tspan>
+</text>
+<polyline points="240.0,400 240.0,435" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="240.0,695 240.0,730" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="240.0,825 240.0,865" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<rect x="24" y="1005" width="432" height="140" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="25" y="1024" width="4" height="102" rx="2" fill="#a6b0ec"/>
+<text x="47" y="1042" fill="#a6b0ec" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Editor / LSP server · JVM</tspan>
+</text>
+<text x="47" y="1075" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Existing editor language features</tspan>
+<tspan x="47" dy="30" xml:space="preserve">Use the source-model services</tspan>
+</text>
+<polyline points="24,1075 12,1075 12,590 47,590" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6 6" marker-end="url(#arrow)"/>
+<rect x="24" y="1180" width="432" height="770" rx="14" fill="#18222f" stroke="#92d5c6" stroke-width="1.5"/>
+<text x="47" y="1218" fill="#92d5c6" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Proposed contribution</tspan>
+</text>
+<text x="47" y="1250" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Target compiler architecture</tspan>
+</text>
+<rect x="47" y="1280" width="386" height="95" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="48" y="1299" width="4" height="57" rx="2" fill="#a2c6e6"/>
+<text x="70" y="1317" fill="#a2c6e6" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Parse · ANTLR 4</tspan>
+</text>
+<text x="70" y="1350" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Direct Rune grammar</tspan>
+</text>
+<rect x="47" y="1410" width="386" height="260" rx="14" fill="#18222f" stroke="#92d5c6" stroke-width="1.5"/>
+<text x="70" y="1448" fill="#92d5c6" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Semantic model + services</tspan>
+</text>
+<rect x="67" y="1475" width="346" height="80" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="68" y="1494" width="4" height="42" rx="2" fill="#92d5c6"/>
+<text x="90" y="1512" fill="#92d5c6" font-size="23" font-weight="600" text-anchor="start">
+<tspan x="90" dy="0" xml:space="preserve">Java AST + owned services</tspan>
+</text>
+<text x="90" y="1540" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="90" dy="0" xml:space="preserve">Workspace · resolve · check</tspan>
+</text>
+<rect x="67" y="1580" width="346" height="80" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="68" y="1599" width="4" height="42" rx="2" fill="#a6b0ec"/>
+<text x="90" y="1617" fill="#a6b0ec" font-size="23" font-weight="600" text-anchor="start">
+<tspan x="90" dy="0" xml:space="preserve">Shared semantic IR</tspan>
+</text>
+<text x="90" y="1645" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="90" dy="0" xml:space="preserve">Prepared facts for emitters</tspan>
+</text>
+<polyline points="240.0,1555 240.0,1580" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<rect x="47" y="1705" width="386" height="95" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="48" y="1724" width="4" height="57" rx="2" fill="#d0b487"/>
+<text x="70" y="1742" fill="#d0b487" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Generate · Java emitters</tspan>
+</text>
+<text x="70" y="1775" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Consume the shared IR contract</tspan>
+</text>
+<rect x="47" y="1840" width="386" height="90" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="48" y="1859" width="4" height="52" rx="2" fill="#d0b487"/>
+<text x="70" y="1877" fill="#d0b487" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Generated Java + runtime</tspan>
+</text>
+<text x="70" y="1910" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Application · compatibility goal</tspan>
+</text>
+<polyline points="240.0,1375 240.0,1410" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="240.0,1670 240.0,1705" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="240.0,1800 240.0,1840" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<rect x="24" y="1980" width="432" height="140" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5" stroke-dasharray="7 5"/>
+<rect x="25" y="1999" width="4" height="102" rx="2" fill="#a6b0ec"/>
+<text x="47" y="2017" fill="#a6b0ec" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Standalone SDK · planned</tspan>
+</text>
+<text x="47" y="2050" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">CLI · Studio · LSP · agents</tspan>
+<tspan x="47" dy="30" xml:space="preserve">Use the owned semantic services</tspan>
+</text>
+<polyline points="456,2050 468,2050 468,1565 433,1565" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6 6" marker-end="url(#arrow)"/>
+<text x="24" y="2150" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="24" dy="0" xml:space="preserve">Target design; full IR closure is pending.</tspan>
+</text>
+</g>
+</svg>

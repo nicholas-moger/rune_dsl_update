@@ -1,0 +1,40 @@
+namespace chaos.s18.a3half.p1
+version "1.0.0"
+import chaos.s18.a3half.p2.*
+type C18Sub: <"Self-contained helper - relocated by the import axis.">
+    s string (1..1)
+enum C18KindEnum: <"Enum-guard subject.">
+    Red
+    Green
+    Blue
+type C18OptA: <"Choice-guard option A.">
+    av string (1..1)
+type C18OptB: <"Choice-guard option B.">
+    bv number (1..1)
+choice C18Either: <"Choice-guard subject.">
+    C18OptA
+    C18OptB
+func C18Colour: <"Enum guards with default.">
+    inputs:
+        k C18KindEnum (1..1)
+    output:
+        hex string (1..1)
+    set hex:
+        k switch
+            Red then "ff0000",
+            Green then "00ff00",
+            default "0000ff"
+metaType scheme string
+type C18Coded: <"The meta-shape dimension at the switch subject's feeder (charter 2.2b).">
+    kind string (0..1)
+        [metadata scheme]
+func C18FromCoded: <"Switch over a scheme-carrying scalar.">
+    inputs:
+        c C18Coded (1..1)
+    output:
+        n number (1..1)
+    set n:
+        c -> kind switch
+            "spot" then 1,
+            "fwd" then 2,
+            default 0

@@ -1,0 +1,85 @@
+namespace holdout.typenamedrosetta
+version "0.0.0"
+
+type Validator: <"com.rosetta.model.lib.validation.Validator - the validators' own interface, written at the class header BEFORE the data class (v3.2 seat 11, M1's class): here the LIBRARY claims first and the data class is written fully qualified.">
+    xs string (0..*)
+    x string (0..1)
+
+type ValidationResult: <"com.rosetta.model.lib.validation.ValidationResult - written by every validator's result type.">
+    xs string (0..*)
+    x string (0..1)
+
+type ValidatorWithArg: <"com.rosetta.model.lib.validation.ValidatorWithArg - the only-exists validator's interface, at its class header.">
+    xs string (0..*)
+    x string (0..1)
+
+type RosettaPath: <"com.rosetta.model.lib.path.RosettaPath - written by the POJO's process methods and every validator's signature.">
+    xs string (0..*)
+    x string (0..1)
+
+type ComparisonResult: <"com.rosetta.model.lib.expression.ComparisonResult - written by the cardinality and type-format validators.">
+    xs string (0..*)
+    x string (0..1)
+
+type ExistenceChecker: <"com.rosetta.model.lib.validation.ExistenceChecker - written by the only-exists validator's checks.">
+    xs string (0..*)
+    x string (0..1)
+
+type RosettaMetaData: <"com.rosetta.model.lib.meta.RosettaMetaData - the meta's interface and the POJO's metaData() return type.">
+    xs string (0..*)
+    x string (0..1)
+
+type ValidatorFactory: <"com.rosetta.model.lib.validation.ValidatorFactory - written by the meta's factory methods.">
+    xs string (0..*)
+    x string (0..1)
+
+type QualifyResult: <"com.rosetta.model.lib.qualify.QualifyResult - written by the meta's qualify signature.">
+    xs string (0..*)
+    x string (0..1)
+
+type QualifyFunctionFactory: <"com.rosetta.model.lib.qualify.QualifyFunctionFactory - written by the meta's qualify signature.">
+    xs string (0..*)
+    x string (0..1)
+
+type Processor: <"com.rosetta.model.lib.process.Processor - written by the POJO's process method.">
+    xs string (0..*)
+    x string (0..1)
+
+type BuilderProcessor: <"com.rosetta.model.lib.process.BuilderProcessor - written by the POJO builder's process method.">
+    xs string (0..*)
+    x string (0..1)
+
+type BuilderMerger: <"com.rosetta.model.lib.process.BuilderMerger - written by the POJO builder's merge method.">
+    xs string (0..*)
+    x string (0..1)
+
+type RosettaModelObject: <"com.rosetta.model.lib.RosettaModelObject - the POJO's own super-interface.">
+    xs string (0..*)
+    x string (0..1)
+
+type RosettaModelObjectBuilder: <"com.rosetta.model.lib.RosettaModelObjectBuilder - the POJO builder's super-interface.">
+    xs string (0..*)
+    x string (0..1)
+
+type ListEquals: <"com.rosetta.util.ListEquals - written by the POJO's equals over a multi attribute.">
+    xs string (0..*)
+    x string (0..1)
+
+type RosettaRefs: <"A sibling referencing every rosetta-lib-named type singly, its own multi string last.">
+    validator Validator (0..1)
+    validationResult ValidationResult (0..1)
+    validatorWithArg ValidatorWithArg (0..1)
+    rpath RosettaPath (0..1)
+    comparisonResult ComparisonResult (0..1)
+    existenceChecker ExistenceChecker (0..1)
+    rosettaMetaData RosettaMetaData (0..1)
+    validatorFactory ValidatorFactory (0..1)
+    qualifyResult QualifyResult (0..1)
+    qualifyFunctionFactory QualifyFunctionFactory (0..1)
+    processor Processor (0..1)
+    builderProcessor BuilderProcessor (0..1)
+    builderMerger BuilderMerger (0..1)
+    rosettaModelObject RosettaModelObject (0..1)
+    rosettaModelObjectBuilder RosettaModelObjectBuilder (0..1)
+    listEquals ListEquals (0..1)
+    names string (0..*)

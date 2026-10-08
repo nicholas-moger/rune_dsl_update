@@ -1,0 +1,9 @@
+namespace test.model
+
+type KeywordFields:
+    global number (0..1)
+    return number (0..1)
+
+enum CompoundingMethodEnum:
+    None
+    Flat

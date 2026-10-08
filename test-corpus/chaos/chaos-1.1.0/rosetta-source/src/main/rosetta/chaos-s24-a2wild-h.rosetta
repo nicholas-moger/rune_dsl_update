@@ -1,0 +1,4 @@
+namespace chaos.s24.a2wild.h
+version "1.0.0"
+type C24Ref: <"Helper - relocated by the import axis.">
+    mark string (1..1)

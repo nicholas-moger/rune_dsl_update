@@ -1,0 +1,8 @@
+namespace test.fsingle041
+
+func Test:
+	inputs: inp boolean (0..1)
+	output: result int (0..1)
+	set result:
+		42
+			filter inp

@@ -1,0 +1,8 @@
+namespace d.consumer
+
+import a.inner.*
+import b.base.*
+import c.top.*
+
+reporting rule Inner from Top: <"Rule named same as a type in scope.">
+    extract deep -> leaf

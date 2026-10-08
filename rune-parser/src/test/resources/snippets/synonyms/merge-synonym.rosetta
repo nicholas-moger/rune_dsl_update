@@ -1,0 +1,8 @@
+namespace test.synonyms
+
+synonym source TestSource
+
+type Merged:
+    combined string (0..1)
+        [synonym TestSource merge "fieldA"]
+        [synonym TestSource merge "fieldB" when path <> "excluded.path"]

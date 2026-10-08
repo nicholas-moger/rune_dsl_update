@@ -1,0 +1,70 @@
+namespace test.chswitchbare
+version "1.0.0"
+
+// v3.2 seat 7 (F11), THE THIRD ORACLE GROUP - pinned from the released 9.83.0 plugin AFTER the chain of record s7a went red on
+// ONE pre-existing pin: ChoiceSwitchLambdaOptionGetterSeatTest.e1 (v3.1 seat 31) pins a bare implicit-ITEM case body over a
+// MODEL-CHOICE lambda item as the instanceof fall-through ("today's bytes - the decline direction, not a law witness"), and the
+// seat's widened arm law admits the bare item at the option getter now, so the fork renders the option-getter form there. Neither
+// form was oracle-witnessed for THIS shape (the seat's two groups carry nav / to-string / literal / fn-call arms over a choice
+// subject, and bare-item arms over an EXTENDS subject only) - so the plugin decides. PickItems is e1's fixture VERBATIM (the
+// seat-31 model census.seat31l4b re-namespaced); PickItemsDirect the same switch at the SET seat (the #394 ladder's form); PickAll
+// the seat-31 a1 fn-call control (the plugin's option-getter form, already witnessed there - the group's positive control).
+
+type OptA:
+    fieldA string (0..1)
+
+type OptB:
+    fieldB string (0..1)
+
+choice Outer2:
+    OptA
+    OptB
+
+func FnA:
+    inputs:
+        a OptA (0..1)
+    output:
+        r string (0..1)
+    set r:
+        a -> fieldA
+
+func FnB:
+    inputs:
+        b OptB (0..1)
+    output:
+        r string (0..1)
+    set r:
+        b -> fieldB
+
+func PickAll: <"the seat-31 a1 control: fn-call case bodies over a MODEL-CHOICE lambda item - the option-getter form">
+    inputs:
+        outers Outer2 (0..*)
+    output:
+        outs string (0..*)
+    set outs:
+        outers extract
+            (switch
+                OptA then FnA(item),
+                OptB then FnB(item),
+                default empty)
+
+func PickItems: <"the seat-31 e1 shape: a bare implicit-ITEM case body over a MODEL-CHOICE lambda item, one arm, default empty">
+    inputs:
+        outers Outer2 (0..*)
+    output:
+        outs OptA (0..*)
+    set outs:
+        outers extract
+            (switch
+                OptA then item,
+                default empty)
+
+func PickItemsDirect: <"the same switch at the SET seat (single subject) - the #394 option-nav ladder's form">
+    inputs:
+        outer Outer2 (1..1)
+    output:
+        out OptA (0..1)
+    set out:
+        outer switch
+            OptA then item,
+            default empty

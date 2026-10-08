@@ -1,0 +1,12 @@
+{
+  "irFormatVersion": 1,
+  "nodes": [
+    {
+      "kind": "STRUCT",
+      "name": "test.model.Abstract",
+      "isAbstract": true,
+      "baseType": null,
+      "fields": []
+    }
+  ]
+}

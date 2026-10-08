@@ -1,0 +1,25 @@
+namespace test.expressions
+
+type Bar:
+    x number (0..1)
+    y number (0..1)
+    z number (0..*)
+
+func TestMiscPrimaries:
+    inputs:
+        a number (1..1)
+        b number (1..1)
+        items number (0..*)
+    output:
+        result number (1..1)
+    alias paren: (a + b) * 2
+    alias notEqual: a <> b
+    alias onlyEl: items only-element
+    alias multiExists: items multiple exists
+    set result: if a <> 0 then paren else 0
+
+type Baz:
+    x number (0..1)
+    y number (0..1)
+    condition OptChoice:
+        optional choice x, y

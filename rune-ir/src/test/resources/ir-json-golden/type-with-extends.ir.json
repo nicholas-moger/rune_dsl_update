@@ -1,0 +1,47 @@
+{
+  "irFormatVersion": 1,
+  "nodes": [
+    {
+      "kind": "STRUCT",
+      "name": "test.model.Base",
+      "isAbstract": false,
+      "baseType": null,
+      "fields": [
+        {
+          "kind": "FIELD",
+          "name": "id",
+          "type": "string",
+          "cardinality": "ONE_TO_ONE",
+          "typeKind": "BASIC_TYPE",
+          "typeResolvedName": "string",
+          "bounds": {
+            "lower": 1,
+            "upper": 1
+          }
+        }
+      ],
+      "namespace": "test.model"
+    },
+    {
+      "kind": "STRUCT",
+      "name": "test.model.Child",
+      "isAbstract": false,
+      "baseType": "Base",
+      "fields": [
+        {
+          "kind": "FIELD",
+          "name": "extra",
+          "type": "int",
+          "cardinality": "ZERO_TO_ONE",
+          "typeKind": "BASIC_TYPE",
+          "typeResolvedName": "int",
+          "bounds": {
+            "lower": 0,
+            "upper": 1
+          }
+        }
+      ],
+      "namespace": "test.model"
+    }
+  ]
+}

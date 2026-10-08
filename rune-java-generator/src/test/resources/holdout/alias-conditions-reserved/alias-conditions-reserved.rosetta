@@ -1,0 +1,27 @@
+namespace test.aliasreserved
+
+typeAlias Nat: <"An int-grained alias with ONE condition - the wired class is NatNonNeg.">
+    number(fractionalDigits: 0)
+    condition NonNeg:
+        item >= 0
+
+typeAlias Pa: <"An alias whose condition class is named Path - the wing's own class-scope identifier.">
+    number(fractionalDigits: 0)
+    condition th:
+        item >= 0
+
+typeAlias Re: <"An alias whose condition class is named Results - the wing's own method-scope identifier.">
+    number(fractionalDigits: 0)
+    condition sults:
+        item >= 0
+
+type Keywords: <"Multi attributes whose Rune names are Java KEYWORDS - the wing's attribute-named local must be escaped for javac.">
+    new Nat (0..*)
+    final Nat (0..*)
+
+type PathClash: <"An attribute typed through the alias whose condition class is Path - the injected field wants the name path.">
+    pa Pa (0..1)
+    pas Pa (0..*)
+
+type ResultsClash: <"An attribute typed through the alias whose condition class is Results - the injected field wants the name results.">
+    re Re (0..*)

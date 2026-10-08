@@ -1,0 +1,8 @@
+namespace test.expressions
+
+func DefaultOp:
+    inputs:
+        x number (0..1)
+    output:
+        result number (1..1)
+    set result: x default 0

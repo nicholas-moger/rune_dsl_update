@@ -1,0 +1,59 @@
+namespace chaos.s27.a2wild
+version "1.0.0"
+import chaos.s27.a2wild.h.*
+func C27Check: <"The function an alias condition calls (the parser half seat 3 found).">
+    inputs:
+        v number (1..1)
+    output:
+        ok boolean (1..1)
+    set ok: v >= 0
+typeAlias C27Nat: <"An int-grained alias whose conditions hold a list op, a conditional, a switch, an existence test, a set operation and a function call (seat 3's 23 unwitnessed consumers).">
+    number(fractionalDigits: 0)
+    condition NonNeg:
+        item >= 0
+    condition Ops:
+        ([item, 0] then max) >= 0
+        and (if item > 100 then item < 1000 else item >= 0)
+        and (item switch 0 then True, default (item > 0))
+        and item exists
+        and [item] contains item
+    condition Called:
+        C27Check(item)
+typeAlias L: <"alias L + condition ists = the condition class Lists, a boilerplate import the validator writes (BOILERPLATE_NAME_COLLISION - seat 3's banked template seat). The java.lang-named probe (alias Int + condition eger = Integer) lives in s99 ALONE since seat 10: in this package it shadowed java.lang.Integer for every sibling class and poisoned the boilerplate measurement.">
+    number(fractionalDigits: 0)
+    condition ists:
+        item >= 0
+typeAlias Validation: <"+ Result = ValidationResult.">
+    number(fractionalDigits: 0)
+    condition Result:
+        item <= 1000000
+typeAlias Array: <"+ List = ArrayList.">
+    number(fractionalDigits: 0)
+    condition List:
+        item <> 7
+typeAlias C27Hol: <"+ der = C27Holder, the data class whose validator wires it (the header claim, #624 round 3).">
+    number(fractionalDigits: 0)
+    condition der:
+        item >= 0
+typeAlias In: <"+ ject = Inject, the annotation the class header writes first.">
+    number(fractionalDigits: 0)
+    condition ject:
+        item >= 0
+type C27Holder: <"Multi and single attributes of the boilerplate-named-condition aliases, plus attribute locals named i / o / results beside a multi conditioned alias (the scope's numbering law).">
+    l L (0..*)
+    vr Validation (0..1)
+    ar Array (0..*)
+    h C27Hol (0..1)
+    inj In (0..*)
+    i C27Nat (0..*)
+    o C27Nat (0..*)
+    results C27Nat (0..*)
+    ref C27Ref (0..1)
+func C27Use: <"Alias types crossing a function boundary with the conditioned aliases at input, alias and output seats.">
+    inputs:
+        n C27Nat (1..1)
+        l L (0..1)
+    output:
+        r C27Nat (1..1)
+    alias doubled: n * 2
+    set r: doubled + (l default 0)

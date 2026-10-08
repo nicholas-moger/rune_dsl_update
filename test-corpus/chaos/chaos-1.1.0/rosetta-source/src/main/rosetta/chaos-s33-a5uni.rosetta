@@ -1,0 +1,23 @@
+namespace chaos.s33.a5uni
+version "1.0.0"
+type C33Extra: <"éüµ – Helper - relocated by the import axis.">
+    memo string (1..1)
+synonym source C33Src
+body Authority C33AUTH <"Authority with a quote: \"quoted\", a backslash \\ and µ–ü.">
+corpus Regulation "C33 “Chaos” Règlement \"quoted\" \\ back" C33Reg <"Display string with non-ASCII, a quote and a backslash.">
+segment c33article
+type C33Trade: <"Labels, synonyms and docReferences carrying non-ASCII, a quote and a backslash each (D46's REACH beyond the enum seats).">
+    [synonym C33Src value "Röot \"q\" \\b" path "énvelope"]
+    [docReference C33AUTH C33Reg c33article "3" provision "Provision with µ–ü, a \"quote\" and a back\\slash."]
+    utid string (1..1)
+        [label as "Thé UTI \"quoted\" \\ back"]
+        [synonym C33Src value "ütid \"q\"" path "röot->päth"]
+    notional number (0..1)
+        [label as "Notional µ–§"]
+    extra C33Extra (0..1)
+        [label for memo "Mémo \"q\" \\"]
+type A5UniProbe: <"Non-ASCII literal probe – müßig 試験.">
+    p string (0..1)
+        [label as "µ–label §7"]
+enum A5UniProbeEnum: <"displayName probe.">
+    V displayName "µ–„display“"

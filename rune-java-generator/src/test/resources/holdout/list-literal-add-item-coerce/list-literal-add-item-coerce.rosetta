@@ -1,0 +1,35 @@
+namespace holdout.listliteraladditemcoerce
+version "0.0.0"
+
+type Box: <"The holder.">
+    weight number (0..1)
+
+func AddIntListToNumber: <"THE CHAOS s23 C23WholeSet THIRD OPERATION (v3.2 seat 13, D53 - the M5a class's list-literal half, 20 of 20 non-compiling by the seat-13 census): an int list literal ADDED to a number multi output. The released plugin coerces the elements (`.<BigDecimal>map(\"Type coercion\", integer -> BigDecimal.valueOf(integer))` between the literal and `.getMulti()`); the fork appended `.getMulti()` to the Integer list - a List<Integer> into addAll(Collection<? extends BigDecimal>), non-compiling. The whole-output SET seat carries the coercion since PR #420; the ADD seat did not.">
+    output:
+        rs number (0..*)
+    add rs: [1, 2, 3]
+
+func AddDefaultedNumber: <"The chaos s23 C23WholeSet SECOND operation: a defaulted number ADDED to a number multi output - the ADD seat's singleton hoist (`final BigDecimal bigDecimal = …; if (bigDecimal == null) { rs.addAll(Collections.<BigDecimal>emptyList()); } else { rs.addAll(Collections.singletonList(bigDecimal)); }`), which the fork renders as `rs.addAll(MapperS.of(…).getMulti())` - compiling, byte-different.">
+    inputs:
+        b Box (1..1)
+    output:
+        rs number (0..*)
+    add rs: b -> weight default 0
+
+func AddBoth: <"Both operations in one function - the numbering of any hoists the plugin writes.">
+    inputs:
+        b Box (1..1)
+    output:
+        rs number (0..*)
+    add rs: b -> weight default 0
+    add rs: [1, 2, 3]
+
+func AddIntListToInt: <"THE CONTROL: an int list literal ADDED to an int multi output takes NO coercion (item-type equality declines).">
+    output:
+        rs int (0..*)
+    add rs: [1, 2, 3]
+
+func SetIntListToNumber: <"The whole-output SET twin (the PR #420 seat) - the same coercion, pinned beside the ADD.">
+    output:
+        rs number (0..*)
+    set rs: [1, 2, 3]

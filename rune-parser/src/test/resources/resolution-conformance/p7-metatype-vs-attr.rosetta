@@ -1,0 +1,38 @@
+namespace conformance.p7
+version "1.0.0"
+
+// P7 — a name that is BOTH a `metaType` declaration and an attribute of the
+// implicit item. Spec R6: RosettaMetaType IS a RosettaSymbol but is explicitly
+// filtered out at the ROOT of the parent chain (vendored
+// RosettaScopeProvider:389), so a metaType never wins a bare name; the item's
+// attribute binds. The fork's isUpstreamSymbol blacklist does NOT exclude
+// RMetaType, so a head/bare binding could keep one where upstream filters it.
+//
+// (b) pins the ORDER inside the feature scope: attributes come before meta
+// descriptions (allFeaturesExcludingEnumValues concatenates features first),
+// so `item -> key` binds the ATTRIBUTE named key, not the metaType.
+//
+// Expected upstream: both `key` seats bind Attribute conformance.p7.Tag7.key.
+
+metaType key string
+
+type Tag7:
+    key string (0..1)
+
+func P7BareKeyVsMetaType:
+    inputs:
+        tags Tag7 (1..*)
+    output:
+        result boolean (0..*)
+    set result:
+        tags
+            extract [ key exists ]
+
+func P7ArrowKeyAttrBeatsMeta:
+    inputs:
+        tags Tag7 (1..*)
+    output:
+        result boolean (0..*)
+    set result:
+        tags
+            extract [ item -> key exists ]

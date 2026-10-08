@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# Task 3 smoke test — verify rune-japicmp/pom.xml exists, binds japicmp-maven-plugin
+# to the verify phase, and pins plugin version 0.23.1.
+set -euo pipefail
+POM="rune-japicmp/pom.xml"
+if [[ ! -f "$POM" ]]; then
+    echo "FAIL: $POM missing"; exit 1
+fi
+grep -Fq 'japicmp-maven-plugin' "$POM" || { echo "FAIL: plugin not referenced"; exit 1; }
+grep -Fq '<version>0.23.1</version>' "$POM" || { echo "FAIL: plugin version pin missing"; exit 1; }
+grep -Fq '<phase>verify</phase>' "$POM" || { echo "FAIL: verify phase binding missing"; exit 1; }
+grep -Fq '<breakBuildOnBinaryIncompatibleModifications>' "$POM" || { echo "FAIL: binary-incompat gate flag missing"; exit 1; }
+echo "PASS: pom config"

@@ -1,0 +1,64 @@
+namespace test.mladderedge
+
+metaType scheme string
+metaType reference string
+metaType key string
+
+type Keyed: <"A keyed root (the chaos C9Keyed).">
+    [metadata key]
+    kid string (1..1)
+
+type Holder: <"The ladder's sources (the chaos C9Holder).">
+    coded string (0..1)
+        [metadata scheme]
+    codes string (0..*)
+        [metadata scheme]
+    byRefs Keyed (0..*)
+        [metadata reference]
+
+func LastAndOnly: <"last and only-element in place of first.">
+    inputs:
+        h Holder (1..1)
+    output:
+        pick string (0..1)
+    alias goodCodes: h -> codes then filter item <> "void"
+    set pick:
+        if h -> coded exists
+        then goodCodes last
+        else goodCodes only-element
+
+func ElseArmOnly: <"The wrapped rung at the else-arm alone, the then-arm plain.">
+    inputs:
+        h Holder (1..1)
+        p string (0..1)
+    output:
+        pick string (0..1)
+    alias goodCodes: h -> codes then filter item <> "void"
+    set pick:
+        if p exists
+        then p
+        else goodCodes first
+
+func InLambda: <"The ladder inside an extract lambda (the lambda channel).">
+    inputs:
+        hs Holder (0..*)
+    output:
+        picks string (0..*)
+    set picks:
+        hs extract h [
+            if h -> coded exists
+            then h -> coded
+            else h -> codes then filter c [ c <> "void" ] then first
+        ]
+
+func WrappedOutput: <"The ladder into a WRAPPED output (no unwrap wanted).">
+    inputs:
+        h Holder (1..1)
+    output:
+        pick string (0..1)
+            [metadata scheme]
+    alias goodCodes: h -> codes then filter item <> "void"
+    set pick:
+        if h -> coded exists
+        then h -> coded
+        else goodCodes first

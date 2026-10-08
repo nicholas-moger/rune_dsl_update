@@ -1,0 +1,15 @@
+delimiters "<", ">"
+
+pojoFile(m) ::= <<
+package <m.packageName>;
+
+<m.imports:{imp | import <imp>;
+}>
+<if(m.staticImports)>
+<m.staticImports:{imp | import static <imp>;
+}>
+<else>
+
+<endif>
+<m.body>
+>>

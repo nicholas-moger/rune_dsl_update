@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="1670" viewBox="0 0 480 1670" role="img" aria-labelledby="title desc">
+<title id="title">Generation measurements · separate routes</title>
+<desc id="desc">Separate retained source-generation pairs, not complete builds or native IR emission. Direct generation medians from three fresh JVM runs per mode: 91.263 to 14.492 seconds driver wall time; 19,219 Java files per route are equal after line-ending normalization. Direct median Windows peak working set increases from 1,531 to 2,112 MiB. Separate Maven clean generate-sources medians: 45.622 to 19.154 seconds; 19,216 equal files plus three package-info description-ordering differences, no extra or missing paths. No Maven memory measurement. The replacement direct route is the retained LEGACY generation route, not proof of native IR performance. Ratios are not cumulative.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9" fill="none" stroke="#a9b7cb" stroke-width="1.4"/></marker></defs>
+<rect width="480" height="1670" rx="22" fill="#121923"/>
+<g font-family="Segoe UI, Arial, sans-serif">
+<text x="24" y="43" fill="#eef2f8" font-size="32" font-weight="600" text-anchor="start">
+<tspan x="24" dy="0" xml:space="preserve">Generation measurements</tspan>
+<tspan x="24" dy="38" xml:space="preserve">separate routes</tspan>
+</text>
+<text x="24" y="125" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="24" dy="0" xml:space="preserve">Source generation only</tspan>
+<tspan x="24" dy="30" xml:space="preserve">Independent paired measurements</tspan>
+</text>
+<rect x="24" y="205" width="432" height="625" rx="14" fill="#18222f" stroke="#a2c6e6" stroke-width="1.5"/>
+<text x="47" y="243" fill="#a2c6e6" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Direct generation</tspan>
+</text>
+<text x="47" y="275" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Three-run medians</tspan>
+</text>
+<text x="47" y="325" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">19,219 equal after EOL</tspan>
+<tspan x="47" dy="30" xml:space="preserve">normalization</tspan>
+</text>
+<text x="47" y="395" fill="#eef2f8" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Driver wall time</tspan>
+</text>
+<text x="47" y="435" fill="#a2c6e6" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Reference: 91.263 s</tspan>
+</text>
+<rect x="47" y="451" width="386.0" height="24" rx="4" fill="#a2c6e6" stroke="#a2c6e6" stroke-width="1.5"/>
+<text x="47" y="506" fill="#92d5c6" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Replacement: 14.492 s</tspan>
+</text>
+<rect x="47" y="522" width="61.29441285077194" height="24" rx="4" fill="#92d5c6" stroke="#92d5c6" stroke-width="1.5"/>
+<text x="47" y="586" fill="#eef2f8" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Peak working set</tspan>
+</text>
+<text x="47" y="626" fill="#a2c6e6" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Reference: 1,531 MiB</tspan>
+</text>
+<rect x="47" y="642" width="279.813446969697" height="24" rx="4" fill="#a2c6e6" stroke="#a2c6e6" stroke-width="1.5"/>
+<text x="47" y="697" fill="#92d5c6" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Replacement: 2,112 MiB</tspan>
+</text>
+<rect x="47" y="713" width="386.0" height="24" rx="4" fill="#92d5c6" stroke="#92d5c6" stroke-width="1.5"/>
+<text x="47" y="782" fill="#d0b487" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Peak working set increased</tspan>
+</text>
+<rect x="24" y="880" width="432" height="425" rx="14" fill="#18222f" stroke="#a6b0ec" stroke-width="1.5"/>
+<text x="47" y="918" fill="#a6b0ec" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Maven generation</tspan>
+</text>
+<text x="47" y="950" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Separate paired route</tspan>
+</text>
+<text x="47" y="1000" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">19,216 equal + 3 package-info</tspan>
+<tspan x="47" dy="30" xml:space="preserve">ordering differences</tspan>
+</text>
+<text x="47" y="1085" fill="#eef2f8" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Elapsed time</tspan>
+</text>
+<text x="47" y="1125" fill="#a2c6e6" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Reference: 45.622 s</tspan>
+</text>
+<rect x="47" y="1141" width="386.0" height="24" rx="4" fill="#a2c6e6" stroke="#a2c6e6" stroke-width="1.5"/>
+<text x="47" y="1196" fill="#92d5c6" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Replacement: 19.154 s</tspan>
+</text>
+<rect x="47" y="1212" width="162.05874358861954" height="24" rx="4" fill="#92d5c6" stroke="#92d5c6" stroke-width="1.5"/>
+<text x="47" y="1270" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Memory: not measured</tspan>
+</text>
+<text x="24" y="1350" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="24" dy="0" xml:space="preserve">Source generation, not whole builds;</tspan>
+<tspan x="24" dy="30" xml:space="preserve">not native IR emission.</tspan>
+</text>
+<text x="24" y="1425" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="24" dy="0" xml:space="preserve">CDM 5.38.0 + ISO 20022 1.38.0</tspan>
+<tspan x="24" dy="30" xml:space="preserve">DRR 6.34.1 · 351 source files</tspan>
+<tspan x="24" dy="30" xml:space="preserve">349 model + 2 built-in files</tspan>
+<tspan x="24" dy="30" xml:space="preserve">Direct: 3 fresh JVM runs/variant</tspan>
+<tspan x="24" dy="30" xml:space="preserve">Warm dependencies in both routes</tspan>
+<tspan x="24" dy="30" xml:space="preserve">Maven: 3 runs/variant</tspan>
+<tspan x="24" dy="30" xml:space="preserve">Driver includes reporting</tspan>
+<tspan x="24" dy="30" xml:space="preserve">javac / tests excluded</tspan>
+</text>
+</g>
+</svg>

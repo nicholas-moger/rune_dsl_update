@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="800" viewBox="0 0 1120 800" role="img" aria-labelledby="title desc">
+<title id="title">Run generated CDM and DRR logic</title>
+<desc id="desc">Code generation precedes these separate execution lanes. In a Java application JVM, integration inputs populate generated CDM trade or event objects. The application uses applicable CDM functions/validation or DRR report functions; data can go directly to reporting without prior lifecycle-function execution. Shared Java runtime and application code support the application. A separate Python lane uses generated CDM Python models and Python runtime for a Python application or data analysis where supported. No arrow connects Java and Python; no Python DRR or complete function parity is implied.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9" fill="none" stroke="#a9b7cb" stroke-width="1.4"/></marker></defs>
+<rect width="1120" height="800" rx="22" fill="#121923"/>
+<g font-family="Segoe UI, Arial, sans-serif">
+<text x="30" y="47" fill="#eef2f8" font-size="31" font-weight="600" text-anchor="start">
+<tspan x="30" dy="0" xml:space="preserve">Run generated CDM and DRR logic</tspan>
+</text>
+<text x="30" y="80" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="30" dy="0" xml:space="preserve">Code generation precedes these separate execution lanes</tspan>
+</text>
+<text x="30" y="134" fill="#a2c6e6" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="30" dy="0" xml:space="preserve">Java route</tspan>
+</text>
+<rect x="30" y="215" width="245" height="130" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="31" y="234" width="4" height="92" rx="2" fill="#a2c6e6"/>
+<text x="53" y="252" fill="#a2c6e6" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="53" dy="0" xml:space="preserve">Integration input</tspan>
+</text>
+<text x="53" y="285" fill="#a9b7cb" font-size="19" font-weight="400" text-anchor="start">
+<tspan x="53" dy="0" xml:space="preserve">Transaction / event</tspan>
+<tspan x="53" dy="26" xml:space="preserve">Application integration</tspan>
+</text>
+<rect x="310" y="145" width="590" height="345" rx="14" fill="#18222f" stroke="#92d5c6" stroke-width="1.5"/>
+<text x="333" y="183" fill="#92d5c6" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="333" dy="0" xml:space="preserve">Java application · JVM</tspan>
+</text>
+<rect x="334" y="215" width="542" height="70" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="335" y="234" width="4" height="32" rx="2" fill="#a6b0ec"/>
+<text x="357" y="252" fill="#a6b0ec" font-size="23" font-weight="600" text-anchor="start">
+<tspan x="357" dy="0" xml:space="preserve">Generated CDM objects</tspan>
+</text>
+<text x="357" y="274" fill="#a9b7cb" font-size="18" font-weight="400" text-anchor="start">
+<tspan x="357" dy="0" xml:space="preserve">Trade / event instances</tspan>
+</text>
+<rect x="334" y="327" width="258" height="104" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="335" y="346" width="4" height="66" rx="2" fill="#92d5c6"/>
+<text x="357" y="364" fill="#92d5c6" font-size="22" font-weight="600" text-anchor="start">
+<tspan x="357" dy="0" xml:space="preserve">CDM functions</tspan>
+<tspan x="357" dy="30" xml:space="preserve">+ validation</tspan>
+</text>
+<text x="357" y="411" fill="#a9b7cb" font-size="18" font-weight="400" text-anchor="start">
+<tspan x="357" dy="0" xml:space="preserve">When required</tspan>
+</text>
+<rect x="618" y="327" width="258" height="104" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="619" y="346" width="4" height="66" rx="2" fill="#d0b487"/>
+<text x="641" y="364" fill="#d0b487" font-size="21" font-weight="600" text-anchor="start">
+<tspan x="641" dy="0" xml:space="preserve">DRR report functions</tspan>
+</text>
+<text x="641" y="392" fill="#a9b7cb" font-size="18" font-weight="400" text-anchor="start">
+<tspan x="641" dy="0" xml:space="preserve">Map CDM data</tspan>
+<tspan x="641" dy="25" xml:space="preserve">to report output</tspan>
+</text>
+<text x="334" y="316" fill="#a9b7cb" font-size="18" font-weight="400" text-anchor="start">
+<tspan x="334" dy="0" xml:space="preserve">Use the applicable logic</tspan>
+</text>
+<polyline points="275,250 334,250" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="562,285 562,327" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="747,285 747,327" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<text x="334" y="470" fill="#a2c6e6" font-size="21" font-weight="400" text-anchor="start">
+<tspan x="334" dy="0" xml:space="preserve">Shared Java runtime + application code</tspan>
+</text>
+<rect x="930" y="215" width="165" height="130" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="931" y="234" width="4" height="92" rx="2" fill="#92d5c6"/>
+<text x="953" y="252" fill="#92d5c6" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="953" dy="0" xml:space="preserve">Output</tspan>
+</text>
+<text x="953" y="285" fill="#a9b7cb" font-size="21" font-weight="400" text-anchor="start">
+<tspan x="953" dy="0" xml:space="preserve">Data /</tspan>
+<tspan x="953" dy="29" xml:space="preserve">reports</tspan>
+</text>
+<polyline points="900,270 930,270" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<rect x="30" y="550" width="1065" height="207" rx="14" fill="#18222f" stroke="#a6b0ec" stroke-width="1.5"/>
+<text x="53" y="588" fill="#a6b0ec" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="53" dy="0" xml:space="preserve">Python route · separate execution</tspan>
+</text>
+<rect x="55" y="615" width="315" height="102" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="56" y="634" width="4" height="64" rx="2" fill="#a6b0ec"/>
+<text x="78" y="652" fill="#a6b0ec" font-size="22" font-weight="600" text-anchor="start">
+<tspan x="78" dy="0" xml:space="preserve">CDM Python model</tspan>
+<tspan x="78" dy="30" xml:space="preserve">+ Python runtime</tspan>
+</text>
+<text x="78" y="703" fill="#a9b7cb" font-size="18" font-weight="400" text-anchor="start">
+<tspan x="78" dy="0" xml:space="preserve">Generated support</tspan>
+</text>
+<rect x="415" y="615" width="330" height="102" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="416" y="634" width="4" height="64" rx="2" fill="#a2c6e6"/>
+<text x="438" y="652" fill="#a2c6e6" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="438" dy="0" xml:space="preserve">Python application</tspan>
+</text>
+<text x="438" y="678" fill="#a9b7cb" font-size="18" font-weight="400" text-anchor="start">
+<tspan x="438" dy="0" xml:space="preserve">Data analysis</tspan>
+<tspan x="438" dy="25" xml:space="preserve">where supported</tspan>
+</text>
+<rect x="790" y="615" width="280" height="102" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="791" y="634" width="4" height="64" rx="2" fill="#92d5c6"/>
+<text x="813" y="652" fill="#92d5c6" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="813" dy="0" xml:space="preserve">Python result</tspan>
+</text>
+<text x="813" y="685" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="813" dy="0" xml:space="preserve">Supported operations</tspan>
+</text>
+<polyline points="370,666 415,666" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="745,666 790,666" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<text x="30" y="786" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="30" dy="0" xml:space="preserve">Python coverage depends on the backend; this lane does not imply Python DRR support.</tspan>
+</text>
+</g>
+</svg>

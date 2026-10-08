@@ -1,0 +1,111 @@
+namespace test.deeppath
+
+type Note: <"Choice option 1 - a text and tags (the chaos C3Note, widened by tags).">
+    text string (1..1)
+    tags string (0..*)
+
+type CashLeg: <"Inner option 1 - shares 'common' with its sibling (the chaos C3CashLeg).">
+    ccy string (1..1)
+    common string (0..1)
+
+type StockLeg: <"Inner option 2 (the chaos C3StockLeg).">
+    ticker string (1..1)
+    common string (0..1)
+
+choice Inner: <"The inner choice (the chaos C3Inner).">
+    CashLeg
+    StockLeg
+
+type Wrap: <"Choice option 2 - wraps the inner choice; shares 'text' and 'tags' with Note (the chaos C3Wrap).">
+    inner Inner (1..1)
+    text string (0..1)
+    tags string (0..*)
+
+choice Outer: <"The nested choice (the chaos C3Outer).">
+    Wrap
+    Note
+
+func Commons: <"The chaos C3Commons shape: a deep feature on the IMPLICIT item inside an extract lambda.">
+    inputs:
+        outers Outer (0..*)
+    output:
+        texts string (0..*)
+    add texts:
+        outers extract item ->> text
+
+func MultiFeature: <"The deep feature is MULTI (tags 0..*): the body is multi, the list of lists flattened.">
+    inputs:
+        outers Outer (0..*)
+    output:
+        tags string (0..*)
+    add tags:
+        outers extract item ->> tags then flatten
+
+func Filtered: <"The deep feature inside a FILTER lambda.">
+    inputs:
+        outers Outer (0..*)
+    output:
+        kept Outer (0..*)
+    add kept:
+        outers filter [ item ->> text exists ]
+
+func ThenChain: <"A then chain: the extract's argument is the filter.">
+    inputs:
+        outers Outer (0..*)
+    output:
+        texts string (0..*)
+    add texts:
+        outers filter [ item ->> text exists ] then extract item ->> text
+
+func SingleReceiver: <"A single receiver - the single-to-item form.">
+    inputs:
+        outer Outer (0..1)
+    output:
+        text string (0..1)
+    set text:
+        outer extract item ->> text
+
+func NestedChoice: <"The inner choice's util.">
+    inputs:
+        inners Inner (0..*)
+    output:
+        commons string (0..*)
+    add commons:
+        inners extract item ->> common
+
+func TwoUtils: <"Two deep calls on two choice types - two injected utils.">
+    inputs:
+        outers Outer (0..*)
+        inners Inner (0..*)
+    output:
+        texts string (0..*)
+    add texts:
+        outers extract item ->> text
+    add texts:
+        inners extract item ->> common
+
+func WithFnDep: <"A function dependency beside the util.">
+    inputs:
+        outers Outer (0..*)
+    output:
+        texts string (0..*)
+    add texts:
+        Commons(outers)
+    add texts:
+        outers extract item ->> text
+
+func Direct: <"CONTROL - the direct deep call on a single input (the pre-seat arm; byte-identical before and after).">
+    inputs:
+        outer Outer (0..1)
+    output:
+        text string (0..1)
+    set text:
+        outer ->> text
+
+func DirectMulti: <"CONTROL - the direct deep call on a multi input.">
+    inputs:
+        outers Outer (0..*)
+    output:
+        texts string (0..*)
+    add texts:
+        outers ->> text

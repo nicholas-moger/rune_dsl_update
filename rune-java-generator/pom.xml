@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.finos.rune</groupId>
+    <artifactId>rune-java-generator</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>Rune DSL Java Code Generator</name>
+    <description>Java code generation from Rosetta DSL, producing byte-identical output to the upstream Xtext/Xtend toolchain</description>
+
+    <properties>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <junit.version>5.11.3</junit.version>
+        <!-- The released-era runtime coordinate: Central-resolvable off-box and
+             ABI-identical to the fork's rune-runtime rebuild (U018). -->
+        <rune-dsl.version>9.83.0</rune-dsl.version>
+        <!-- PR-SPEED fork-parallelism knobs (Decision 40). Defaults
+             match rune-parser; override per-run to downsize
+             (invoke from repo root with -f; no top-level reactor
+             POM exists):
+               mvn -f rune-java-generator/pom.xml test -Dpr-speed.forkCount=1   (single forked JVM; no fork parallelism)
+               mvn -f rune-java-generator/pom.xml test -Dpr-speed.forkCount=0   (in-process; no fork at all)
+               mvn -f rune-java-generator/pom.xml test -Dpr-speed.forkCount=2 -Dpr-speed.perForkHeap=2g
+             forkCount=1 keeps a forked JVM (surefire.forkNumber set);
+             forkCount=0 runs tests in-process. See rune-parser/pom.xml
+             for the detailed rationale. -->
+        <pr-speed.forkCount>6</pr-speed.forkCount>
+        <pr-speed.perForkHeap>4g</pr-speed.perForkHeap>
+        <!-- 900s (15 min) is appropriate here: this module's full sweep
+             runs in ~27s median with no single-test Amdahl outlier, so
+             900s gives >30× headroom. rune-parser uses 1800s because its
+             CrossCorpusConsistencyTest runs in a single fork for ~14m 20s
+             (see D40-B round-6 note); that asymmetry is intentional. -->
+        <pr-speed.forkTimeoutSeconds>900</pr-speed.forkTimeoutSeconds>
+        <!-- W42 compile-gate (PR #233): the @Tag("compile-gate") D11CompileGateTest
+             compiles thousands of generated files per cell (heavy), so it is excluded
+             from the routine surefire run by default. Invoke it explicitly by clearing
+             the exclusion:
+               mvn -f rune-java-generator/pom.xml test -Dtest=D11CompileGateTest#cdm5 -Drune.excludedGroups=none -->
+        <rune.excludedGroups>compile-gate</rune.excludedGroups>
+    </properties>
+
+    <dependencies>
+        <!-- Our ANTLR4 parser, AST, type system, linker, validation -->
+        <dependency>
+            <groupId>org.finos.rune</groupId>
+            <artifactId>rune-parser</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- Upstream runtime: com.rosetta.util.types (JavaClass, JavaPrimitiveType, etc.)
+             and com.rosetta.model.lib (annotations, RosettaModelObject, MapperS, etc.) -->
+        <dependency>
+            <groupId>org.finos.rune</groupId>
+            <artifactId>rune-runtime</artifactId>
+            <version>${rune-dsl.version}</version>
+        </dependency>
+
+        <!-- StringTemplate 4 — ANTLR4's companion template engine for code generation (D15) -->
+        <dependency>
+            <groupId>org.antlr</groupId>
+            <artifactId>ST4</artifactId>
+            <version>4.3.4</version>
+        </dependency>
+
+        <!-- Test -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.jqwik</groupId>
+            <artifactId>jqwik</artifactId>
+            <version>1.9.1</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- facet isoPruneConfig (PR #331): the D11 harness reads each model
+             project's rosetta-config.yml (generators.doNotPrune) to populate
+             GeneratorModel's doNotPrune set — upstream loads the same file via
+             RosettaGeneratorsConfiguration. Test-scope only: production code
+             carries plain (type, attribute) keys, never parses YAML. -->
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+            <version>2.3</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.5.2</version>
+                <configuration>
+                    <!-- Fork-based parallelism — forks run concurrently,
+                         tests within each fork run sequentially. See
+                         Decision 40 in research/M1-DESIGN-DECISIONS.md
+                         and the detailed comment in rune-parser/pom.xml.
+                         jqwik's shrink-failure cache defaults to
+                         .jqwik-database (one file); made fork-local to
+                         prevent concurrent forks corrupting the shared
+                         file. Knobs parameterised via top-level
+                         properties — override per-run for smaller
+                         machines: -Dpr-speed.forkCount=1 uses a single
+                         forked JVM (no fork parallelism but still a
+                         fork); -Dpr-speed.forkCount=0 runs tests
+                         in-process in the mvn JVM (no fork). -->
+                    <forkCount>${pr-speed.forkCount}</forkCount>
+                    <reuseForks>true</reuseForks>
+                    <argLine>-Xmx${pr-speed.perForkHeap} -XX:+UseG1GC</argLine>
+                    <forkedProcessTimeoutInSeconds>${pr-speed.forkTimeoutSeconds}</forkedProcessTimeoutInSeconds>
+                    <!-- Exclude the heavy W42 compile-gate by default; override with
+                         -Drune.excludedGroups=none to run it (see properties block). -->
+                    <excludedGroups>${rune.excludedGroups}</excludedGroups>
+                    <systemPropertyVariables>
+                        <jqwik.database>target/jqwik-fork-${surefire.forkNumber}.bin</jqwik.database>
+                    </systemPropertyVariables>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <!-- The D43 IR ON ring: run the SAME test harness with the IR route enabled.
+             The rune-ir + rune-ir-java jars join the surefire classpath from the local
+             repository (they cannot be declared as dependencies — rune-ir-java depends on
+             this module, so a test-scope dependency would cycle the reactor) and the
+             opt-in flag turns the ServiceLoader seam on. Both modules must be `mvn
+             install`ed first. Inactive by default: the standing (OFF-ring) runs carry
+             zero trace of this profile.
+             Usage: mvn test -Pir-on -Dtest=D11CorpusRegressionTest ... -->
+        <profile>
+            <id>ir-on</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <!-- The jar paths interpolate THIS module's ${project.version} into the
+                                 rune-ir / rune-ir-java coordinates: correct while the whole family
+                                 shares one version (the repo-wide dev placeholder), SILENTLY STALE
+                                 if the module versions ever diverge — re-derive both elements then
+                                 (the #466 Seat-1 OBS-6 note). Both jars must be `mvn install`ed
+                                 before any -Pir-on run (the profile reads the m2 jars; a test-scope
+                                 dependency would cycle the reactor — rune-ir-java depends on this
+                                 module). -->
+                            <additionalClasspathElements>
+                                <additionalClasspathElement>${settings.localRepository}/org/finos/rune/rune-ir/${project.version}/rune-ir-${project.version}.jar</additionalClasspathElement>
+                                <additionalClasspathElement>${settings.localRepository}/org/finos/rune/rune-ir-java/${project.version}/rune-ir-java-${project.version}.jar</additionalClasspathElement>
+                            </additionalClasspathElements>
+                            <!-- combine.children="append" preserves the base config's
+                                 jqwik.database entry (a replaced map would drop it). -->
+                            <systemPropertyVariables combine.children="append">
+                                <rosetta.generator.ir>true</rosetta.generator.ir>
+                            </systemPropertyVariables>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <!-- The v3.1 OPTIMISED ON ring: the same test harness on route 3 of the
+             one-IR/three-backends architecture. Mirrors ir-on exactly, but joins
+             rune-ir + rune-ir-java-optimised (the optimised module depends on
+             rune-ir + this module, NOT on rune-ir-java) and sets the optimised
+             module's OWN flag. The two routes are EXCLUSIVE in IRGeneration —
+             never combine this profile with ir-on. Both jars must be `mvn
+             install`ed first, for the same reactor-cycle reason as ir-on.
+
+             ADDED for the v3.1 band survey: before this, D11 had no optimised
+             classpath at all, so the optimised route had never been measured
+             against the corpus goldens on ANY cell — it was gated only by its
+             own module tests and rune-equivalence's pair gates.
+             Usage: mvn test -Pir-optimised-on -Dtest=D11CorpusRegressionTest ... -->
+        <profile>
+            <id>ir-optimised-on</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <!-- Same ${project.version} interpolation caveat as ir-on: correct
+                                 while the family shares one version, SILENTLY STALE if the module
+                                 versions diverge. -->
+                            <additionalClasspathElements>
+                                <additionalClasspathElement>${settings.localRepository}/org/finos/rune/rune-ir/${project.version}/rune-ir-${project.version}.jar</additionalClasspathElement>
+                                <additionalClasspathElement>${settings.localRepository}/org/finos/rune/rune-ir-java-optimised/${project.version}/rune-ir-java-optimised-${project.version}.jar</additionalClasspathElement>
+                            </additionalClasspathElements>
+                            <systemPropertyVariables combine.children="append">
+                                <rosetta.generator.ir.optimised>true</rosetta.generator.ir.optimised>
+                            </systemPropertyVariables>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>

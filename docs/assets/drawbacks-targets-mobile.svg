@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="1740" viewBox="0 0 480 1740" role="img" aria-labelledby="title desc">
+<title id="title">Shared front end, target-specific implementations</title>
+<desc id="desc">Qualitative release-specific architecture illustration, not a combined compatibility matrix or a shared live model instance across versions. Common Rune source is parsed and linked through Xtext / ANTLR 3 and Rune services into an EMF source model on the JVM. Framework-model interfaces feed a built-in Java generator in the Rune repository and a separately maintained external Python generator; both generation implementations run on the JVM. The Java illustration uses the guide&#x27;s 9.83.0 baseline; the external Python illustration selects Rune 10.14.0. Generated Java uses a Java runtime in a Java application JVM; generated Python uses its own Python runtime in a Python application. Target expression implementations, runtime packages, versions and supported features must be coordinated. Shared semantics must be kept aligned across target implementations. Repository organisation is not itself a defect or a necessity, and Python is not impossible in Xtext.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9" fill="none" stroke="#a9b7cb" stroke-width="1.4"/></marker></defs>
+<rect width="480" height="1740" rx="22" fill="#121923"/>
+<g font-family="Segoe UI, Arial, sans-serif">
+<text x="24" y="43" fill="#eef2f8" font-size="29" font-weight="600" text-anchor="start">
+<tspan x="24" dy="0" xml:space="preserve">Shared front end,</tspan>
+<tspan x="24" dy="35" xml:space="preserve">target-specific implementations</tspan>
+</text>
+<text x="24" y="119" fill="#a9b7cb" font-size="19" font-weight="400" text-anchor="start">
+<tspan x="24" dy="0" xml:space="preserve">Qualitative architecture impact</tspan>
+<tspan x="24" dy="26" xml:space="preserve">Release-specific target examples</tspan>
+</text>
+<rect x="24" y="185" width="432" height="85" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="25" y="204" width="4" height="47" rx="2" fill="#a2c6e6"/>
+<text x="47" y="222" fill="#a2c6e6" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Common Rune source</tspan>
+</text>
+<text x="47" y="255" fill="#a9b7cb" font-size="21" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">.rosetta models</tspan>
+</text>
+<rect x="24" y="320" width="432" height="240" rx="14" fill="#18222f" stroke="#92d5c6" stroke-width="1.5"/>
+<text x="47" y="358" fill="#92d5c6" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Front end · JVM</tspan>
+</text>
+<rect x="47" y="385" width="386" height="130" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="48" y="404" width="4" height="92" rx="2" fill="#92d5c6"/>
+<text x="70" y="422" fill="#92d5c6" font-size="23" font-weight="600" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Current linked EMF model</tspan>
+</text>
+<text x="70" y="455" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Xtext / ANTLR 3 + Rune services</tspan>
+<tspan x="70" dy="28" xml:space="preserve">Framework-model interfaces</tspan>
+</text>
+<polyline points="240,270 240,320" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="240,373 240,385" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<rect x="24" y="620" width="432" height="225" rx="14" fill="#18222f" stroke="#d0b487" stroke-width="1.5"/>
+<text x="47" y="658" fill="#d0b487" font-size="23" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Java generation · JVM</tspan>
+</text>
+<rect x="47" y="685" width="386" height="140" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="48" y="704" width="4" height="102" rx="2" fill="#d0b487"/>
+<text x="70" y="722" fill="#d0b487" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Java generator</tspan>
+</text>
+<text x="70" y="755" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Built in · Rune repository</tspan>
+<tspan x="70" dy="28" xml:space="preserve">9.83.0 baseline</tspan>
+<tspan x="70" dy="28" xml:space="preserve">Java expressions / target code</tspan>
+</text>
+<rect x="24" y="1045" width="432" height="225" rx="14" fill="#18222f" stroke="#a6b0ec" stroke-width="1.5"/>
+<text x="47" y="1083" fill="#a6b0ec" font-size="23" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Python generation · JVM</tspan>
+</text>
+<rect x="47" y="1110" width="386" height="140" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="48" y="1129" width="4" height="102" rx="2" fill="#a6b0ec"/>
+<text x="70" y="1147" fill="#a6b0ec" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Python generator</tspan>
+</text>
+<text x="70" y="1180" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">External · separate repository</tspan>
+<tspan x="70" dy="28" xml:space="preserve">Rune 10.14.0 example</tspan>
+<tspan x="70" dy="28" xml:space="preserve">Python expressions / target code</tspan>
+</text>
+<polyline points="240,515 240,590 12,590 12,1180" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="12,755 47,755" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="12,1180 47,1180" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<rect x="24" y="900" width="432" height="85" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="25" y="919" width="4" height="47" rx="2" fill="#d0b487"/>
+<text x="47" y="937" fill="#d0b487" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Generated Java + runtime</tspan>
+</text>
+<text x="47" y="970" fill="#a9b7cb" font-size="21" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Java application · JVM</tspan>
+</text>
+<rect x="24" y="1325" width="432" height="85" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="25" y="1344" width="4" height="47" rx="2" fill="#a6b0ec"/>
+<text x="47" y="1362" fill="#a6b0ec" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Generated Python + runtime</tspan>
+</text>
+<text x="47" y="1395" fill="#a9b7cb" font-size="21" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Python application</tspan>
+</text>
+<polyline points="240,825 240,900" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="240,1250 240,1325" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<rect x="24" y="1460" width="432" height="180" rx="14" fill="#18222f" stroke="#92d5c6" stroke-width="1.5"/>
+<text x="47" y="1500" fill="#92d5c6" font-size="23" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Qualitative target coordination</tspan>
+</text>
+<text x="47" y="1538" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Separate expressions / runtimes</tspan>
+<tspan x="47" dy="29" xml:space="preserve">Version + feature coordination</tspan>
+<tspan x="47" dy="29" xml:space="preserve">Shared semantics kept aligned</tspan>
+</text>
+<text x="24" y="1683" fill="#a9b7cb" font-size="19" font-weight="400" text-anchor="start">
+<tspan x="24" dy="0" xml:space="preserve">Release-specific architecture</tspan>
+<tspan x="24" dy="27" xml:space="preserve">Not a combined version matrix</tspan>
+</text>
+</g>
+</svg>

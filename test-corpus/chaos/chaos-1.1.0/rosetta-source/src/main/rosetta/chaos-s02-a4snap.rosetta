@@ -1,0 +1,8 @@
+namespace chaos.s02.a4snap
+version "1.0.0-SNAPSHOT"
+type C2Tag: <"Helper the import-style axis relocates.">
+    tagLine string (1..1)
+enum C2DirEnum: <"Directions with displayName and docs.">
+    Buy displayName "BUY" <"Buy side.">
+    Sell displayName "SELL"
+    Hold <"No action.">

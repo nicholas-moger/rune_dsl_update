@@ -1,0 +1,5 @@
+namespace chaos.s01.a3hub.p1
+version "1.0.0"
+import chaos.s01.a3hub.p2.*
+type C1Ref: <"A referenced component the import-style axis relocates.">
+    refCode string (1..1)

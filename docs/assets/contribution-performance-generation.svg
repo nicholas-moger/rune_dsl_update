@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="1060" viewBox="0 0 1120 1060" role="img" aria-labelledby="title desc">
+<title id="title">Generation measurements · separate routes</title>
+<desc id="desc">Separate retained source-generation pairs, not complete builds or native IR emission. Direct generation medians from three fresh JVM runs per mode: 91.263 to 14.492 seconds driver wall time; 19,219 Java files per route are equal after line-ending normalization. Direct median Windows peak working set increases from 1,531 to 2,112 MiB. Separate Maven clean generate-sources medians: 45.622 to 19.154 seconds; 19,216 equal files plus three package-info description-ordering differences, no extra or missing paths. No Maven memory measurement. The replacement direct route is the retained LEGACY generation route, not proof of native IR performance. Ratios are not cumulative.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9" fill="none" stroke="#a9b7cb" stroke-width="1.4"/></marker></defs>
+<rect width="1120" height="1060" rx="22" fill="#121923"/>
+<g font-family="Segoe UI, Arial, sans-serif">
+<text x="30" y="47" fill="#eef2f8" font-size="32" font-weight="600" text-anchor="start">
+<tspan x="30" dy="0" xml:space="preserve">Generation measurements · separate routes</tspan>
+</text>
+<text x="30" y="85" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="30" dy="0" xml:space="preserve">Paired source-generation measurements; not complete builds</tspan>
+</text>
+<rect x="30" y="130" width="1060" height="350" rx="14" fill="#18222f" stroke="#a2c6e6" stroke-width="1.5"/>
+<text x="53" y="168" fill="#a2c6e6" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="53" dy="0" xml:space="preserve">Direct generation · three-run medians</tspan>
+</text>
+<text x="53" y="200" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="53" dy="0" xml:space="preserve">19,219 files equal after EOL normalization</tspan>
+</text>
+<text x="55" y="255" fill="#eef2f8" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="55" dy="0" xml:space="preserve">Driver wall time</tspan>
+</text>
+<text x="595" y="255" fill="#eef2f8" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="595" dy="0" xml:space="preserve">Peak working set</tspan>
+</text>
+<text x="55" y="295" fill="#a2c6e6" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="55" dy="0" xml:space="preserve">Reference: 91.263 s</tspan>
+</text>
+<rect x="55" y="311" width="465.00000000000006" height="24" rx="4" fill="#a2c6e6" stroke="#a2c6e6" stroke-width="1.5"/>
+<text x="55" y="366" fill="#92d5c6" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="55" dy="0" xml:space="preserve">Replacement: 14.492 s</tspan>
+</text>
+<rect x="55" y="382" width="73.83912428914238" height="24" rx="4" fill="#92d5c6" stroke="#92d5c6" stroke-width="1.5"/>
+<text x="595" y="295" fill="#a2c6e6" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="595" dy="0" xml:space="preserve">Reference: 1,531 MiB</tspan>
+</text>
+<rect x="595" y="311" width="337.08096590909093" height="24" rx="4" fill="#a2c6e6" stroke="#a2c6e6" stroke-width="1.5"/>
+<text x="595" y="366" fill="#92d5c6" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="595" dy="0" xml:space="preserve">Replacement: 2,112 MiB</tspan>
+</text>
+<rect x="595" y="382" width="465.0" height="24" rx="4" fill="#92d5c6" stroke="#92d5c6" stroke-width="1.5"/>
+<text x="55" y="448" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="55" dy="0" xml:space="preserve">Driver includes counting/reporting; javac/tests excluded. Peak working set increased.</tspan>
+</text>
+<rect x="30" y="535" width="1060" height="300" rx="14" fill="#18222f" stroke="#a6b0ec" stroke-width="1.5"/>
+<text x="53" y="573" fill="#a6b0ec" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="53" dy="0" xml:space="preserve">Maven generation · separate paired route</tspan>
+</text>
+<text x="53" y="605" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="53" dy="0" xml:space="preserve">19,216 equal + 3 package-info ordering differences</tspan>
+</text>
+<text x="55" y="660" fill="#eef2f8" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="55" dy="0" xml:space="preserve">Elapsed time</tspan>
+</text>
+<text x="55" y="700" fill="#a2c6e6" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="55" dy="0" xml:space="preserve">Reference: 45.622 s</tspan>
+</text>
+<rect x="55" y="716" width="465.0" height="24" rx="4" fill="#a2c6e6" stroke="#a2c6e6" stroke-width="1.5"/>
+<text x="55" y="771" fill="#92d5c6" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="55" dy="0" xml:space="preserve">Replacement: 19.154 s</tspan>
+</text>
+<rect x="55" y="787" width="195.22620665468415" height="24" rx="4" fill="#92d5c6" stroke="#92d5c6" stroke-width="1.5"/>
+<rect x="595" y="660" width="465" height="150" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="596" y="679" width="4" height="112" rx="2" fill="#a6b0ec"/>
+<text x="618" y="697" fill="#a6b0ec" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="618" dy="0" xml:space="preserve">Memory</tspan>
+</text>
+<text x="618" y="730" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="618" dy="0" xml:space="preserve">Not measured for</tspan>
+<tspan x="618" dy="30" xml:space="preserve">this route.</tspan>
+</text>
+<text x="30" y="893" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="30" dy="0" xml:space="preserve">Separate routes; no cumulative speedup or native IR performance claim.</tspan>
+</text>
+<text x="30" y="930" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="30" dy="0" xml:space="preserve">CDM 5.38.0 + ISO 20022 1.38.0 + DRR 6.34.1</tspan>
+<tspan x="30" dy="30" xml:space="preserve">351 source files: 349 model files + 2 built-in files</tspan>
+<tspan x="30" dy="30" xml:space="preserve">Direct: 3 fresh JVM runs/variant · warm dependencies</tspan>
+<tspan x="30" dy="30" xml:space="preserve">Maven: 3 runs/variant · warm dependencies</tspan>
+</text>
+</g>
+</svg>

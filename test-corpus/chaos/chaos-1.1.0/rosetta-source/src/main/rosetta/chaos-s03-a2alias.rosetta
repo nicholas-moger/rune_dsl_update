@@ -1,0 +1,35 @@
+namespace chaos.s03.a2alias
+version "1.0.0"
+import chaos.s03.a2alias.h.* as C3NoteNs
+import chaos.s03.a2alias.h.C3Note
+type C3CashLeg: <"Option 1 - shares 'common' with its sibling.">
+    ccy string (1..1)
+    common string (0..1)
+type C3StockLeg: <"Option 2.">
+    ticker string (1..1)
+    common string (0..1)
+choice C3Inner: <"Inner choice - the findCommonAttribute surface.">
+    C3CashLeg
+    C3StockLeg
+type C3Wrap: <"Wraps the inner choice; shares 'text' with C3Note.">
+    inner C3Inner (1..1)
+    text string (0..1)
+choice C3Outer: <"Nested choice - an option that itself wraps a choice.">
+    C3Wrap
+    C3Note
+type C3Deep: <"Navigates the common attribute across choice options.">
+    pick C3Outer (0..1)
+    picks C3Inner (0..*)
+    condition C3TextWhenPicked:
+        if pick exists
+        then pick ->> text exists
+    condition C3CommonNav:
+        if picks exists
+        then (picks ->> common) count <= picks count
+func C3Commons: <"Deep-feature (->>) on the IMPLICIT item inside a lambda (v3.1 F16).">
+    inputs:
+        outers C3Outer (0..*)
+    output:
+        texts string (0..*)
+    add texts:
+        outers extract item ->> text

@@ -1,0 +1,4 @@
+namespace chaos.s10.a2qual.h
+version "1.0.0"
+type C10Aux: <"Self-contained helper - relocated by the import axis.">
+    aux string (1..1)

@@ -1,0 +1,15 @@
+namespace test.fmeta003
+
+type Foo:
+  a string (1..1)
+  b int (0..1)
+  c number (0..1)
+
+func Test:
+  inputs:
+    foo Foo (1..1)
+      [metadata scheme]
+  output:
+    result boolean (1..1)
+  set result:
+    foo required choice b, c

@@ -1,0 +1,20 @@
+namespace test.expressions
+
+enum MyEnum:
+    A
+    B
+
+func Convert:
+    inputs:
+        x number (1..1)
+    output:
+        result string (1..1)
+    alias asStr: x to-string
+    alias asNum: x to-number
+    alias asInt: x to-int
+    alias asDate: x to-date
+    alias asDateTime: x to-date-time
+    alias asZoned: x to-zoned-date-time
+    alias asTime: x to-time
+    alias asEnum: x to-enum MyEnum
+    set result: x to-string

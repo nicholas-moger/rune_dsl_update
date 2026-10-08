@@ -1,0 +1,11 @@
+namespace chaos.s15.a3third.p2
+version "1.0.0"
+import chaos.s15.a3third.p1.*
+import chaos.s15.a3third.p3.*
+recordType c15span
+{
+	lo int
+	hi int
+}
+library function C15Half(x number) number
+library function C15Today() date

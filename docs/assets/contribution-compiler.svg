@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="1170" viewBox="0 0 1120 1170" role="img" aria-labelledby="title desc">
+<title id="title">Contribution design · target route</title>
+<desc id="desc">Final desired contribution route, not a claim that full Java-through-IR compatibility is delivered: .rosetta source, direct ANTLR 4 parser, Java AST and owned semantic services for workspace, resolution, types, cardinality and validation, shared semantic IR, Java emitter, generated Java. The downstream Java application executes generated Java with runtime support and handwritten application code; the runtime is not IR execution. LSP, SDK and CLI are static side consumers of the same planned semantic services, not mandatory compiler stages. The highlight order is an explanatory route, not benchmark timing.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9" fill="none" stroke="#a9b7cb" stroke-width="1.4"/></marker></defs>
+<rect width="1120" height="1170" rx="22" fill="#121923"/>
+<g font-family="Segoe UI, Arial, sans-serif">
+<text x="30" y="47" fill="#eef2f8" font-size="32" font-weight="600" text-anchor="start">
+<tspan x="30" dy="0" xml:space="preserve">Contribution design · target route</tspan>
+</text>
+<text x="30" y="85" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="30" dy="0" xml:space="preserve">Full compatibility Java emission through IR is the completion goal</tspan>
+</text>
+<rect x="365" y="120" width="730" height="805" rx="14" fill="#18222f" stroke="#92d5c6" stroke-width="1.5"/>
+<text x="388" y="158" fill="#92d5c6" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="388" dy="0" xml:space="preserve">Generation · JVM</tspan>
+</text>
+<rect x="30" y="195" width="300" height="95" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="31" y="214" width="4" height="57" rx="2" fill="#a2c6e6"/>
+<text x="53" y="232" fill="#a2c6e6" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="53" dy="0" xml:space="preserve">Rune source</tspan>
+</text>
+<text x="53" y="265" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="53" dy="0" xml:space="preserve">.rosetta models</tspan>
+</text>
+<rect x="395" y="195" width="695" height="95" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="396" y="214" width="4" height="57" rx="2" fill="#a2c6e6"/>
+<text x="418" y="232" fill="#a2c6e6" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="418" dy="0" xml:space="preserve">ANTLR 4 parser</tspan>
+</text>
+<text x="418" y="265" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="418" dy="0" xml:space="preserve">Direct Rune grammar</tspan>
+</text>
+<rect x="395" y="335" width="695" height="150" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="396" y="354" width="4" height="112" rx="2" fill="#92d5c6"/>
+<text x="418" y="372" fill="#92d5c6" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="418" dy="0" xml:space="preserve">Java AST + semantic services</tspan>
+</text>
+<text x="418" y="405" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="418" dy="0" xml:space="preserve">Workspace · resolution</tspan>
+<tspan x="418" dy="30" xml:space="preserve">Types · cardinality · validation</tspan>
+</text>
+<rect x="395" y="530" width="695" height="95" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="396" y="549" width="4" height="57" rx="2" fill="#a6b0ec"/>
+<text x="418" y="567" fill="#a6b0ec" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="418" dy="0" xml:space="preserve">Shared semantic IR</tspan>
+</text>
+<text x="418" y="600" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="418" dy="0" xml:space="preserve">Language-neutral semantic facts</tspan>
+</text>
+<rect x="395" y="670" width="695" height="95" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="396" y="689" width="4" height="57" rx="2" fill="#d0b487"/>
+<text x="418" y="707" fill="#d0b487" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="418" dy="0" xml:space="preserve">Java emitter</tspan>
+</text>
+<text x="418" y="740" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="418" dy="0" xml:space="preserve">Compatibility Java output</tspan>
+</text>
+<rect x="395" y="810" width="695" height="95" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="396" y="829" width="4" height="57" rx="2" fill="#d0b487"/>
+<text x="418" y="847" fill="#d0b487" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="418" dy="0" xml:space="preserve">Generated Java</tspan>
+</text>
+<text x="418" y="880" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="418" dy="0" xml:space="preserve">Application Java source</tspan>
+</text>
+<rect x="395" y="980" width="695" height="135" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="396" y="999" width="4" height="97" rx="2" fill="#92d5c6"/>
+<text x="418" y="1017" fill="#92d5c6" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="418" dy="0" xml:space="preserve">Java application · JVM</tspan>
+</text>
+<text x="418" y="1050" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="418" dy="0" xml:space="preserve">Generated Java + downstream runtime</tspan>
+<tspan x="418" dy="30" xml:space="preserve">Handwritten application code</tspan>
+</text>
+<rect x="30" y="360" width="300" height="240" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5" stroke-dasharray="7 5"/>
+<rect x="31" y="379" width="4" height="202" rx="2" fill="#a6b0ec"/>
+<text x="53" y="397" fill="#a6b0ec" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="53" dy="0" xml:space="preserve">LSP / SDK / CLI</tspan>
+</text>
+<text x="53" y="440" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="53" dy="0" xml:space="preserve">Side consumers</tspan>
+<tspan x="53" dy="30" xml:space="preserve">Same planned</tspan>
+<tspan x="53" dy="30" xml:space="preserve">semantic services</tspan>
+</text>
+<polyline points="330,242.5 395,242.5" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="742.5,290 742.5,335" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="742.5,485 742.5,530" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="742.5,625 742.5,670" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="742.5,765 742.5,810" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="742.5,905 742.5,980" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="330,480 365,480" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6 6"/>
+<text x="30" y="1147" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="30" dy="0" xml:space="preserve">Target route: runtime executes generated Java, not semantic IR.</tspan>
+</text>
+</g>
+</svg>

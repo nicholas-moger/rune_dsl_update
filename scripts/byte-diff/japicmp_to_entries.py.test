@@ -1,0 +1,76 @@
+#!/usr/bin/env bash
+# japicmp_to_entries.py.test — smoke test for the japicmp -> proposed
+# entries generator. Exercises both fixtures and asserts D19 (local) part 1
+# enforcement (refuses to write under docs/).
+set -euo pipefail
+
+THIS_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+SCRIPT="$THIS_DIR/japicmp_to_entries.py"
+FIX="$THIS_DIR/fixtures"
+PY="${PYTHON:-python3}"
+
+if [[ ! -f "$SCRIPT" ]]; then
+    echo "FAIL: $SCRIPT not found" >&2
+    exit 1
+fi
+
+TMPDIR=$(mktemp -d)
+trap 'rm -rf "$TMPDIR"' EXIT
+
+# Per D19 (local) part 1 enforcement, the script requires a RELATIVE
+# output path that starts with parts ('target', 'byte-diff-catalogue',
+# '_proposed'). Tests cd into TMPDIR so the relative path resolves
+# under TMPDIR/target/byte-diff-catalogue/_proposed/.
+mkdir -p "$TMPDIR/target/byte-diff-catalogue/_proposed"
+pushd "$TMPDIR" >/dev/null
+
+# Case 1: sample with 2 findings (relative path).
+"$PY" "$SCRIPT" "$FIX/japicmp-sample.xml" "target/byte-diff-catalogue/_proposed/sample.json"
+COUNT1=$("$PY" -c "import json,sys; print(json.load(open(sys.argv[1]))['candidate_count'])" "$TMPDIR/target/byte-diff-catalogue/_proposed/sample.json")
+if [[ "$COUNT1" != "2" ]]; then
+    echo "FAIL: japicmp-sample.xml expected 2 candidates, got $COUNT1" >&2
+    exit 1
+fi
+
+# Case 2: empty XML (relative path).
+"$PY" "$SCRIPT" "$FIX/japicmp-empty.xml" "target/byte-diff-catalogue/_proposed/empty.json"
+COUNT2=$("$PY" -c "import json,sys; print(json.load(open(sys.argv[1]))['candidate_count'])" "$TMPDIR/target/byte-diff-catalogue/_proposed/empty.json")
+if [[ "$COUNT2" != "0" ]]; then
+    echo "FAIL: japicmp-empty.xml expected 0 candidates, got $COUNT2" >&2
+    exit 1
+fi
+
+# Case 3a: refuse paths under docs/.
+if "$PY" "$SCRIPT" "$FIX/japicmp-sample.xml" "docs/byte-diff-catalogue/_proposed/x.json" >/dev/null 2>&1; then
+    echo "FAIL: D19 (local) part 1 violated — script accepted docs/ path" >&2
+    exit 1
+fi
+
+# Case 3b: refuse absolute path even when it ends with the canonical suffix.
+if "$PY" "$SCRIPT" "$FIX/japicmp-sample.xml" "$TMPDIR/target/byte-diff-catalogue/_proposed/abs.json" >/dev/null 2>&1; then
+    echo "FAIL: D19 (local) part 1 violated — script accepted absolute path" >&2
+    exit 1
+fi
+
+# Case 3c: refuse path that contains substring but doesn't start with prefix.
+if "$PY" "$SCRIPT" "$FIX/japicmp-sample.xml" "foo/target/byte-diff-catalogue/_proposed/x.json" >/dev/null 2>&1; then
+    echo "FAIL: D19 (local) part 1 violated — script accepted path with non-prefix substring match" >&2
+    exit 1
+fi
+
+# Case 3d: refuse '..' traversal.
+if "$PY" "$SCRIPT" "$FIX/japicmp-sample.xml" "target/byte-diff-catalogue/_proposed/../escape.json" >/dev/null 2>&1; then
+    echo "FAIL: D19 (local) part 1 violated — script accepted '..' traversal" >&2
+    exit 1
+fi
+
+popd >/dev/null
+
+# Case 4: artefact has generated_utc field (per spec section 3 item 6).
+HAS_GENUTC=$("$PY" -c "import json,sys; d=json.load(open(sys.argv[1])); print('yes' if 'generated_utc' in d else 'no')" "$TMPDIR/target/byte-diff-catalogue/_proposed/sample.json")
+if [[ "$HAS_GENUTC" != "yes" ]]; then
+    echo "FAIL: artefact missing generated_utc field" >&2
+    exit 1
+fi
+
+echo "japicmp_to_entries.py.test: 2 + 0 candidates + 4 D19-part-1 refusals (docs / abs / non-prefix-substring / .. traversal) + generated_utc field all pass"

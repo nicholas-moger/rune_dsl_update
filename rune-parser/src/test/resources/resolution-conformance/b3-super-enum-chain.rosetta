@@ -1,0 +1,79 @@
+namespace conformance.b3
+version "1.0.0"
+
+// B3 — a bare enum value INHERITED through an `extends` chain, joined in one
+// if/else chain with values declared on the child.
+//
+// Copied in structure from drr 7.0.0 base-util-party-enum.rosetta:4-13:
+//
+//     enum PartyIdentifierFormatEnum extends PartyIdentifierFormat2Enum:
+//     enum PartyIdentifierFormat2Enum extends LeiIdentifierFormatEnum:
+//         NaturalPerson  SWIFTBIC  Other
+//     enum LeiIdentifierFormatEnum:
+//         Lei  LeiAndPerson
+//
+// and used by regulation-hkma-rewrite-trade-rule.rosetta:63-74, whose chain
+// names `NaturalPerson`, `Lei`, `SWIFTBIC` and `Other` in the same expression.
+// `Lei` is declared ONE level up from the enum the other arms belong to, so the
+// chain's arms type as two DIFFERENT enums related by `extends` — and the fork
+// reports exactly that pair as having no common supertype, on every drr 7.x
+// cell, 32 times.
+//
+// The question this file settles: does upstream treat enum `extends` as a
+// subtype relation, so a child-enum arm and a parent-enum arm join cleanly?
+
+enum GrandparentEnum:
+    Lei
+    LeiAndPerson
+
+enum ParentEnum extends GrandparentEnum:
+    NaturalPerson
+    SWIFTBIC
+    Other
+
+enum ChildEnum extends ParentEnum:
+    Extra
+
+type Party:
+    identifierType string (0..1)
+    role string (0..1)
+
+// (a) The carrier's shape: the first arm names the enum explicitly, later arms
+//     are bare, and ONE of them is inherited from two declarations up.
+func B3InheritedValueInChain:
+    inputs:
+        party Party (1..1)
+    output:
+        result ParentEnum (1..1)
+    set result:
+        if party -> role exists
+        then ParentEnum -> NaturalPerson
+        else if party -> identifierType exists
+        then Lei
+        else Other
+
+// (b) The join on its own, with no bare names involved — both arms fully
+//     qualified, one on the child enum and one on its parent. If upstream
+//     accepts this, `extends` IS a subtype relation for enums and the arms of
+//     (a) are legally joinable.
+func B3QualifiedJoinAcrossExtends:
+    inputs:
+        party Party (1..1)
+    output:
+        result GrandparentEnum (1..1)
+    set result:
+        if party -> role exists
+        then ParentEnum -> NaturalPerson
+        else GrandparentEnum -> Lei
+
+// (c) An inherited value reached through TWO levels of extends, which is the
+//     depth the corpus chain actually has.
+func B3TwoLevelInheritance:
+    inputs:
+        party Party (1..1)
+    output:
+        result ChildEnum (1..1)
+    set result:
+        if party -> role exists
+        then Extra
+        else Lei

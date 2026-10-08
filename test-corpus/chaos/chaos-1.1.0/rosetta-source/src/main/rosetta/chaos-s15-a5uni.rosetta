@@ -1,0 +1,11 @@
+namespace chaos.s15.a5uni
+version "1.0.0"
+type C15Aux: <"éüµ – Self-contained helper - relocated by the import axis.">
+    ax string (1..1)
+basicType c15token <"A model-declared basic type - normally builtin-only; ORACLE-ARBITRATED (charter S15).">
+basicType c15scaled(c15digits int) <"A parameterised model-declared basic type.">
+type A5UniProbe: <"Non-ASCII literal probe – müßig 試験.">
+    p string (0..1)
+        [label as "µ–label §7"]
+enum A5UniProbeEnum: <"displayName probe.">
+    V displayName "µ–„display“"

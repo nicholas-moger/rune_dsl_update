@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="1500" viewBox="0 0 480 1500" role="img" aria-labelledby="title desc">
+<title id="title">From model text to an application</title>
+<desc id="desc">Teaching view of textual model processing: source text is parsed to an abstract syntax tree (AST), references and meaning are checked, an optional intermediate representation (IR) can precede emitters, or generation can bypass IR. Generated artifacts join a runtime and handwritten code in an application. These responsibilities can interleave.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9" fill="none" stroke="#a9b7cb" stroke-width="1.4"/></marker></defs>
+<rect width="480" height="1500" rx="22" fill="#121923"/>
+<g font-family="Segoe UI, Arial, sans-serif">
+<text x="24" y="43" fill="#eef2f8" font-size="29" font-weight="600" text-anchor="start">
+<tspan x="24" dy="0" xml:space="preserve">From model text</tspan>
+<tspan x="24" dy="35" xml:space="preserve">to an application</tspan>
+</text>
+<text x="24" y="119" fill="#a9b7cb" font-size="19" font-weight="400" text-anchor="start">
+<tspan x="24" dy="0" xml:space="preserve">Teaching view; responsibilities</tspan>
+<tspan x="24" dy="26" xml:space="preserve">can interleave.</tspan>
+</text>
+<rect x="24" y="170" width="386" height="110" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="25" y="189" width="4" height="72" rx="2" fill="#a2c6e6"/>
+<text x="47" y="207" fill="#a2c6e6" font-size="22" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Model text</tspan>
+</text>
+<text x="47" y="240" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Written using the DSL’s</tspan>
+<tspan x="47" dy="28" xml:space="preserve">permitted syntax</tspan>
+</text>
+<rect x="24" y="315" width="386" height="110" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="25" y="334" width="4" height="72" rx="2" fill="#a2c6e6"/>
+<text x="47" y="352" fill="#a2c6e6" font-size="22" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Parser</tspan>
+</text>
+<text x="47" y="385" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Recognises constructs</tspan>
+<tspan x="47" dy="28" xml:space="preserve">according to the grammar</tspan>
+</text>
+<rect x="24" y="460" width="386" height="110" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="25" y="479" width="4" height="72" rx="2" fill="#a6b0ec"/>
+<text x="47" y="497" fill="#a6b0ec" font-size="21" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Abstract syntax tree (AST)</tspan>
+</text>
+<text x="47" y="530" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Structured representation</tspan>
+<tspan x="47" dy="28" xml:space="preserve">of parsed constructs</tspan>
+</text>
+<rect x="24" y="605" width="386" height="110" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="25" y="624" width="4" height="72" rx="2" fill="#92d5c6"/>
+<text x="47" y="642" fill="#92d5c6" font-size="22" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Resolved / checked model</tspan>
+</text>
+<text x="47" y="675" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Resolve names and types;</tspan>
+<tspan x="47" dy="28" xml:space="preserve">check semantic rules</tspan>
+</text>
+<rect x="24" y="750" width="386" height="110" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5" stroke-dasharray="7 5"/>
+<rect x="25" y="769" width="4" height="72" rx="2" fill="#a6b0ec"/>
+<text x="47" y="787" fill="#a6b0ec" font-size="21" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Intermediate representation (IR)</tspan>
+</text>
+<text x="47" y="820" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">A form for transforms</tspan>
+<tspan x="47" dy="28" xml:space="preserve">and generation</tspan>
+</text>
+<rect x="24" y="895" width="386" height="110" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="25" y="914" width="4" height="72" rx="2" fill="#d0b487"/>
+<text x="47" y="932" fill="#d0b487" font-size="22" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Emitters</tspan>
+</text>
+<text x="47" y="965" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Produce code, documents</tspan>
+<tspan x="47" dy="28" xml:space="preserve">or other artifacts</tspan>
+</text>
+<text x="387" y="848" fill="#a6b0ec" font-size="17" font-weight="600" text-anchor="end">
+<tspan x="387" dy="0" xml:space="preserve">Optional</tspan>
+</text>
+<polyline points="217,280 217,315" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="217,425 217,460" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="217,570 217,605" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="217,715 217,750" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="217,860 217,895" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="410,660 452,660 452,950 410,950" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6 6" marker-end="url(#arrow)"/>
+<text x="24" y="1040" fill="#92d5c6" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="24" dy="0" xml:space="preserve">Dashed route: direct generation</tspan>
+<tspan x="24" dy="27" xml:space="preserve">can skip the optional IR.</tspan>
+</text>
+<rect x="24" y="1100" width="432" height="358" rx="14" fill="#18222f" stroke="#92d5c6" stroke-width="1.5"/>
+<text x="47" y="1141" fill="#92d5c6" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Application includes</tspan>
+</text>
+<rect x="45" y="1170" width="390" height="78" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="46" y="1189" width="4" height="40" rx="2" fill="#d0b487"/>
+<text x="68" y="1207" fill="#d0b487" font-size="22" font-weight="600" text-anchor="start">
+<tspan x="68" dy="0" xml:space="preserve">Generated artifacts</tspan>
+</text>
+<text x="68" y="1233" fill="#a9b7cb" font-size="18" font-weight="400" text-anchor="start">
+<tspan x="68" dy="0" xml:space="preserve">Produced by the emitters</tspan>
+</text>
+<rect x="45" y="1260" width="390" height="78" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="46" y="1279" width="4" height="40" rx="2" fill="#a2c6e6"/>
+<text x="68" y="1297" fill="#a2c6e6" font-size="22" font-weight="600" text-anchor="start">
+<tspan x="68" dy="0" xml:space="preserve">Runtime</tspan>
+</text>
+<text x="68" y="1323" fill="#a9b7cb" font-size="18" font-weight="400" text-anchor="start">
+<tspan x="68" dy="0" xml:space="preserve">Shared execution support</tspan>
+</text>
+<rect x="45" y="1350" width="390" height="78" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="46" y="1369" width="4" height="40" rx="2" fill="#a6b0ec"/>
+<text x="68" y="1387" fill="#a6b0ec" font-size="22" font-weight="600" text-anchor="start">
+<tspan x="68" dy="0" xml:space="preserve">Handwritten code</tspan>
+</text>
+<text x="68" y="1413" fill="#a9b7cb" font-size="18" font-weight="400" text-anchor="start">
+<tspan x="68" dy="0" xml:space="preserve">Application-specific behaviour</tspan>
+</text>
+<polyline points="386,1005 431,1005 431,1081 240,1081 240,1100" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+</g>
+</svg>

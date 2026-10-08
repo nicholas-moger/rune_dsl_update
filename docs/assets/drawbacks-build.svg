@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="835" viewBox="0 0 1120 835" role="img" aria-labelledby="title desc">
+<title id="title">Build: source-generation driver</title>
+<desc id="desc">Current source-generation route: source models enter a JVM with an Xtext / ANTLR 3 parser, EMF source model and Rune semantic services; Java / Xtend generators write Java source. Selected model and toolchain versions are configuration. Measured generation-driver wall time includes file counting and reporting and excludes javac and tests. Median of three fresh JVMs: 91.263 seconds and 1,531 MiB peak working set; 351 source files produced 19,219 Java files. CDM 5.38.0, ISO 20022 1.38.0, DRR 6.34.1; Windows 11, Core Ultra 9 285K, JDK 21.0.8. Rune 9.83.0 with EMF-common 2.44.0 override. No phase attribution or future comparison is implied.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9" fill="none" stroke="#a9b7cb" stroke-width="1.4"/></marker></defs>
+<rect width="1120" height="835" rx="22" fill="#121923"/>
+<g font-family="Segoe UI, Arial, sans-serif">
+<text x="30" y="47" fill="#eef2f8" font-size="31" font-weight="600" text-anchor="start">
+<tspan x="30" dy="0" xml:space="preserve">Build: source-generation driver</tspan>
+</text>
+<text x="30" y="80" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="30" dy="0" xml:space="preserve">Measured driver wall time · javac and tests excluded</tspan>
+</text>
+<rect x="300" y="120" width="530" height="365" rx="14" fill="#18222f" stroke="#92d5c6" stroke-width="1.5"/>
+<text x="325" y="158" fill="#92d5c6" font-size="25" font-weight="600" text-anchor="start">
+<tspan x="325" dy="0" xml:space="preserve">Generation · JVM</tspan>
+</text>
+<rect x="30" y="200" width="240" height="110" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="31" y="219" width="4" height="72" rx="2" fill="#a2c6e6"/>
+<text x="53" y="237" fill="#a2c6e6" font-size="23" font-weight="600" text-anchor="start">
+<tspan x="53" dy="0" xml:space="preserve">Source models</tspan>
+</text>
+<text x="53" y="270" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="53" dy="0" xml:space="preserve">.rosetta files</tspan>
+</text>
+<rect x="325" y="190" width="480" height="130" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="326" y="209" width="4" height="92" rx="2" fill="#a2c6e6"/>
+<text x="348" y="227" fill="#a2c6e6" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="348" dy="0" xml:space="preserve">Parse and resolve source</tspan>
+</text>
+<text x="348" y="260" fill="#a9b7cb" font-size="21" font-weight="400" text-anchor="start">
+<tspan x="348" dy="0" xml:space="preserve">Xtext / ANTLR 3 · EMF source model</tspan>
+<tspan x="348" dy="29" xml:space="preserve">Rune semantic services</tspan>
+</text>
+<rect x="325" y="365" width="480" height="95" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="326" y="384" width="4" height="57" rx="2" fill="#d0b487"/>
+<text x="348" y="402" fill="#d0b487" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="348" dy="0" xml:space="preserve">Java / Xtend generators</tspan>
+</text>
+<text x="348" y="435" fill="#a9b7cb" font-size="21" font-weight="400" text-anchor="start">
+<tspan x="348" dy="0" xml:space="preserve">Generate application source</tspan>
+</text>
+<rect x="860" y="365" width="230" height="95" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="861" y="384" width="4" height="57" rx="2" fill="#d0b487"/>
+<text x="883" y="402" fill="#d0b487" font-size="23" font-weight="600" text-anchor="start">
+<tspan x="883" dy="0" xml:space="preserve">Written Java</tspan>
+</text>
+<text x="883" y="435" fill="#a9b7cb" font-size="19" font-weight="400" text-anchor="start">
+<tspan x="883" dy="0" xml:space="preserve">Generated source</tspan>
+</text>
+<rect x="30" y="355" width="240" height="110" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5" stroke-dasharray="7 5"/>
+<rect x="31" y="374" width="4" height="72" rx="2" fill="#a6b0ec"/>
+<text x="53" y="392" fill="#a6b0ec" font-size="22" font-weight="600" text-anchor="start">
+<tspan x="53" dy="0" xml:space="preserve">Selected versions</tspan>
+</text>
+<text x="53" y="425" fill="#a9b7cb" font-size="19" font-weight="400" text-anchor="start">
+<tspan x="53" dy="0" xml:space="preserve">Model / toolchain pins</tspan>
+</text>
+<polyline points="270,255 325,255" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="565,320 565,365" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="805,412 860,412" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="270,410 300,410" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6 6"/>
+<rect x="30" y="525" width="1060" height="170" rx="14" fill="#18222f" stroke="#d0b487" stroke-width="1.5"/>
+<text x="55" y="568" fill="#d0b487" font-size="25" font-weight="600" text-anchor="start">
+<tspan x="55" dy="0" xml:space="preserve">Median across 3 fresh JVMs</tspan>
+</text>
+<text x="55" y="620" fill="#eef2f8" font-size="29" font-weight="600" text-anchor="start">
+<tspan x="55" dy="0" xml:space="preserve">91.263 s</tspan>
+</text>
+<text x="55" y="656" fill="#a9b7cb" font-size="21" font-weight="400" text-anchor="start">
+<tspan x="55" dy="0" xml:space="preserve">Driver wall time</tspan>
+</text>
+<text x="405" y="620" fill="#eef2f8" font-size="29" font-weight="600" text-anchor="start">
+<tspan x="405" dy="0" xml:space="preserve">1,531 MiB</tspan>
+</text>
+<text x="405" y="656" fill="#a9b7cb" font-size="21" font-weight="400" text-anchor="start">
+<tspan x="405" dy="0" xml:space="preserve">Peak working set</tspan>
+</text>
+<text x="755" y="620" fill="#eef2f8" font-size="29" font-weight="600" text-anchor="start">
+<tspan x="755" dy="0" xml:space="preserve">351 → 19,219</tspan>
+</text>
+<text x="755" y="656" fill="#a9b7cb" font-size="21" font-weight="400" text-anchor="start">
+<tspan x="755" dy="0" xml:space="preserve">Source files → Java files</tspan>
+</text>
+<text x="30" y="742" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="30" dy="0" xml:space="preserve">CDM 5.38.0 · ISO 20022 1.38.0 · DRR 6.34.1</tspan>
+<tspan x="30" dy="29" xml:space="preserve">Windows 11 · Core Ultra 9 285K · JDK 21.0.8</tspan>
+<tspan x="30" dy="29" xml:space="preserve">Rune 9.83.0 · EMF-common 2.44.0 override</tspan>
+</text>
+</g>
+</svg>

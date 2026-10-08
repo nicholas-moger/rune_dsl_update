@@ -1,0 +1,131 @@
+namespace conformance.a2
+version "1.0.0"
+
+// A2 — the choice option at seats other than a plain `->` navigation:
+// bare (no arrow at all), as a deep-path receiver, as a `then` narrowing, and
+// with a metadata feature hanging off the same node.
+//
+// Distilled from drr 7.x base-trade-underlier-func (`else if Index exists`,
+// `Index ->> identifier`), regulation-common-func (`then Observable`,
+// `commodityPayouts -> key`). `Index` is a choice here because it is one in
+// cdm 6.21.0 — a deep path only has deep features to find on a choice.
+
+// Upstream resolves a meta feature against `metaType` ROOT ELEMENTS exported by
+// the project (RosettaConfigExtension.findMetaTypes), NOT against the `metadata`
+// annotation's attributes — so a self-contained model must declare its own, as
+// cdm's base-desc.rosetta does.
+metaType key string
+
+type Security:
+    identifier string (1..1)
+
+type Basket:
+    identifier string (1..1)
+
+type CreditIndex:
+    identifier string (1..1)
+    name string (0..1)
+
+type EquityIndex:
+    identifier string (1..1)
+    name string (0..1)
+
+choice Index:
+    CreditIndex
+    EquityIndex
+
+choice Underlier:
+    Security
+    Basket
+    Index
+
+type Holder:
+    underlier Underlier (1..*)
+    tagged Security (0..*)
+        [metadata key]
+
+// (a) BARE option name, no arrow — a plain existence test on the implicit item.
+func A2BareOption:
+    inputs:
+        holder Holder (1..1)
+    output:
+        result string (0..*)
+    set result:
+        holder -> underlier
+            extract
+                if Index exists
+                then Index ->> identifier
+                else Basket -> identifier
+
+// (b) DEEP path off an option.
+func A2DeepPathOnOption:
+    inputs:
+        holder Holder (1..1)
+    output:
+        result string (0..*)
+    set result:
+        holder -> underlier
+            extract
+                if Index ->> name exists
+                then Index ->> name
+
+// (c) `then` narrowing to an option, then navigation inside the next body.
+func A2ThenNarrowing:
+    inputs:
+        holder Holder (1..1)
+    output:
+        result string (0..*)
+    set result:
+        holder -> underlier
+            then extract Security
+            then extract identifier
+
+// (d) A METADATA feature reached through the same feature-call node. Upstream
+//     appends the type's meta descriptions to the very same feature scope the
+//     attributes come from, so `-> key` is not a special case.
+func A2MetaFeature:
+    inputs:
+        holder Holder (1..1)
+    output:
+        result string (0..*)
+    set result:
+        holder -> tagged -> key
+
+// (e) The TWO-hop meta shape with the face on the TYPE — the corpus witness
+//     (CommodityCommodityLeg1's `commodityPayouts -> key`, where
+//     `type CommodityPayout ... [metadata key]` carries the annotation and the
+//     input attribute carries nothing). Upstream merges the declared type's
+//     own `[metadata ...]` annotations into the receiver's meta attributes
+//     (RosettaTypeProvider.getRMetaAttributesOfSymbol -> getRMetaAttributesOfType),
+//     so `-> key` resolves with no annotation on the attribute at all — and
+//     unlike case (d)'s attribute-level face, this is the form upstream's
+//     validator ACCEPTS ("[metadata key] annotation only allowed on a type").
+//     The fork parses the two-hop `payouts -> key` as one bare REnumValueRef,
+//     so the binding must come from the R9 arm's meta leg, not the
+//     RFeatureCall arm that closed case (d).
+type KeyedPayout:
+    [metadata key]
+    identifier string (1..1)
+
+func A2TwoHopTypeLevelMeta:
+    inputs:
+        payouts KeyedPayout (0..*)
+    output:
+        result KeyedPayout (0..1)
+    set result:
+        if (payouts -> key exists)
+        then payouts only-element
+
+// (f) The same face INHERITED: upstream's getRMetaAttributesOfType walks the
+//     full supertype chain, so a subtype's instances carry the parent's key.
+type KeyedChild extends KeyedPayout:
+    childField string (0..1)
+
+func A2TwoHopInheritedMeta:
+    inputs:
+        children KeyedChild (0..*)
+    output:
+        result KeyedChild (0..1)
+    set result:
+        if (children -> key exists)
+        then children only-element

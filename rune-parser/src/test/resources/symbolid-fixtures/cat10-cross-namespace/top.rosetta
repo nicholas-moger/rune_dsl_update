@@ -1,0 +1,6 @@
+namespace c.top
+
+import b.base.*
+
+type Top extends Middle:
+    topField string (1..1)

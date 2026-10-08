@@ -1,0 +1,15 @@
+namespace chaos.s09.a5uni
+version "1.0.0"
+type C9Plain: <"éüµ – Self-contained helper - relocated by the import axis.">
+    p string (1..1)
+metaType id string
+metaType key string
+metaType reference string
+metaType scheme string
+metaType address string
+metaType location string
+type A5UniProbe: <"Non-ASCII literal probe – müßig 試験.">
+    p string (0..1)
+        [label as "µ–label §7"]
+enum A5UniProbeEnum: <"displayName probe.">
+    V displayName "µ–„display“"

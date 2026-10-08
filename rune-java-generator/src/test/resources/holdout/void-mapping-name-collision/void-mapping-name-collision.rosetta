@@ -1,0 +1,13 @@
+namespace test.voidcollide
+version "1.0.0"
+
+// v3.2 seat 9 round 1 (F8 / D47 - the code-quality review's SF-8): a MODEL-DECLARED basic type whose NAME collides with
+// a builtin. The fork's ONE law (`BuiltinTypeRegistry.basicOrRecordNodeType`: a registered twin for a builtins-model
+// declaration, `nothing` for a model-declared one) is a NAME lookup, so this declaration would resolve to the BUILTIN
+// `string` - the third case its javadoc did not name. The released plugin's verdict decides: a refusal (a duplicate
+// declaration) or goldens. Kept apart so a plugin refusal costs one group.
+
+basicType string <"A model-declared basic type named like the builtin.">
+
+type Carrier: <"An attribute typed by the colliding declaration.">
+    s string (0..1)

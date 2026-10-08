@@ -1,0 +1,22 @@
+namespace chaos.s17.a3third.p3
+version "1.0.0"
+import chaos.s17.a3third.p1.*
+import chaos.s17.a3third.p2.*
+func C17Sift: <"A BARE enum comparand against the pipe item (v3.1 F15c) beside a qualified twin.">
+    inputs:
+        sides C17SideEnum (0..*)
+    output:
+        buys C17SideEnum (0..*)
+    add buys:
+        sides filter item = Buy
+    add buys:
+        sides filter item = C17SideEnum -> Sell
+type C17Books: <"Both colliding enums at attribute seats.">
+    side C17SideEnum (0..1)
+    action C17ActionEnum (0..1)
+    held C17Held (0..1)
+    condition C17Agree:
+        if side exists and action exists
+        then (side = C17SideEnum -> Buy and action = C17ActionEnum -> Buy)
+            or side = C17SideEnum -> Sell
+            or action = C17ActionEnum -> Amend

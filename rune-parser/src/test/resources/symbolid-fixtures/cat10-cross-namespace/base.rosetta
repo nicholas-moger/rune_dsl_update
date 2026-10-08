@@ -1,0 +1,9 @@
+namespace b.base
+
+import a.inner.*
+
+type GrandBase:
+    deep Inner (1..1)
+
+type Middle extends GrandBase:
+    middleField string (1..1)

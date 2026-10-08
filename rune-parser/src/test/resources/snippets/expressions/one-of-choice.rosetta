@@ -1,0 +1,16 @@
+namespace test.expressions
+
+type Obj:
+    a number (0..1)
+    b number (0..1)
+
+func OneOfExample:
+    inputs:
+        obj Obj (1..1)
+    output:
+        result boolean (1..1)
+    condition OneOfCheck:
+        obj one-of
+    condition ChoiceCheck:
+        obj required choice a, b
+    set result: obj one-of

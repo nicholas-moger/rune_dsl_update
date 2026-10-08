@@ -1,0 +1,9 @@
+/* chaos a9: a block-comment banner before the first token */
+// chaos a9: a line comment before namespace
+namespace chaos.s01.a9comment // a9
+version "1.0.0" // a9
+type C1Ref: <"A referenced component the import-style axis relocates."> // a9
+    refCode string (1..1) // a9
+type C1Base: <"Root of the S01 inheritance chain."> // a9
+    baseId string (1..1) // a9
+    note string (0..1) // a9

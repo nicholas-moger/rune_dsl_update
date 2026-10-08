@@ -1,0 +1,31 @@
+/* chaos a9: a block-comment banner before the first token */
+// chaos a9: a line comment before namespace
+namespace chaos.s31.a9comment // a9
+version "1.0.0" // a9
+type C31Held: <"Helper - relocated by the import axis."> // a9
+    h string (1..1) // a9
+metaType scheme string // a9
+synonym source C31Src // a9
+enum C31SideEnum: <"The E2 pair's first enum - owns Long and Short."> // a9
+    Long // a9
+    Short // a9
+enum C31MoveEnum: <"The second enum in the SAME scope re-using Long."> // a9
+    Long // a9
+    Flat // a9
+enum C31EscEnum: <"displayNames carrying a raw quote, a backslash and non-ASCII - the D46 RAW law (upstream's own non-compiling emission for the first two: EscapeEnum, rider 4)."> // a9
+    Quote displayName "say \"hi\"" // a9
+    Slash displayName "back\\slash" // a9
+    Uni displayName "µ–„display“" // a9
+    Plain displayName "plain" // a9
+enum C31KeyEnum: <"Enum values named like Java keywords."> // a9
+    class // a9
+    long // a9
+    new // a9
+    null // a9
+enum C31BaseEnum: <"Extends chain 1."> // a9
+    A // a9
+enum C31MidEnum extends C31BaseEnum: <"Extends chain 2."> // a9
+    B // a9
+enum C31TopEnum extends C31MidEnum: <"Extends chain 3, with a synonym on the value."> // a9
+    C // a9
+        [synonym C31Src value "cee"] // a9

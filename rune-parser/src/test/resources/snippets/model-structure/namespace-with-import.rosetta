@@ -1,0 +1,7 @@
+namespace com.example.model
+
+import com.other.model.*
+import com.specific.Type as MyType
+
+type Foo:
+    bar string (1..1)

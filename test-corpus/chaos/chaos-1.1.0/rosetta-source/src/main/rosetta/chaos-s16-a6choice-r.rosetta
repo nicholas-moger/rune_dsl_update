@@ -1,0 +1,6 @@
+namespace chaos.s16.a6choice.rival
+version "1.0.0"
+type C16RivalOpt: <"The rival choice's own option type.">
+    r string (0..1)
+choice C16Pick: <"RIVAL - a same-named global choice in an imported namespace (the P3 class).">
+    C16RivalOpt

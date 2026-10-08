@@ -1,0 +1,18 @@
+namespace test.rsp.p2
+version "0.0.0"
+
+import test.rsp.p3.*
+
+type RspTrade: <"The report-from type.">
+    utid string (1..1)
+        [label as "The Trade UTI"]
+    notional number (0..1)
+
+eligibility rule RspEligible from RspTrade: <"Report when-gate.">
+    notional exists
+reporting rule RspUtid from RspTrade: <"Reported field.">
+    extract utid
+        as "UTI"
+reporting rule RspNotional from RspTrade: <"Reported numeric with default.">
+    extract notional default 0
+        as "Notional"

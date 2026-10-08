@@ -1,0 +1,113 @@
+# THE CORPUS CELL SOURCE OF TRUTH
+#
+# One row per corpus cell. This file is the SINGLE declarative source for which
+# model releases the fork is tested against AND what each one depends on.
+#
+# WHY THIS FILE EXISTS
+# From PR #85 (2026-05-28) to 2026-08-14 the corpus was FROZEN at 5 cells, and
+# the cell list quietly accumulated SEVEN independent hand-maintained copies:
+# scripts/refresh-test-corpus.sh PROJECTS, scripts/legacy-vs-fork/cells.txt,
+# D11CorpusRegressionTest.ALL_CELLS (+ its three version maps),
+# StructuralBaselineDumper.EXPECTED_CELLS, StructuralBaselinesTest's cell count,
+# CorpusWalker.TRANSITIVE_DEP_CELL_DIRS and CorpusDiagnosticGateTest.CORPORA /
+# CELL_ROOTS. Nothing kept them in step, because nothing ever changed.
+#
+# The 2026-08-14 band expansion broke that assumption and exposed the cost. The
+# worst instance: CorpusDiagnosticGateTest loaded each corpus's OWN tree via a
+# DIRECTORY GLOB (so a new cell auto-loaded) while hardcoding the transitive
+# CLOSURE per version (so the new cell's dependencies did NOT load). cdm 6.21.0
+# came in without rune-fpml 2.1.1 and drr 7.3.0 without cdm 6.21.0, yielding
+# ENUM_NOT_FOUND=1143 / SYMBOL_NOT_FOUND=143 / TYPE_ERROR=398 that looked like
+# engine defects and were nothing of the kind. A half-dynamic list is worse than
+# a static one: it fails silently and blames the engine.
+#
+# FORMAT
+# Whitespace-separated columns; no field contains a space; '-' means empty.
+# Blank lines and #-comments ignored. Derived values are NOT stored: the repo is
+# fixed per corpus, the git tag equals the version, and the on-disk directory is
+# always <corpus>/<corpus>-<version>.
+#
+#   corpus     cdm | drr | iso20022 | rune-fpml | chaos (AUTHORED - committed, not cloned)
+#   version    release version == the upstream git tag
+#   state      active  = materialised on disk and gated
+#              planned = in the 9.83.0 band, not yet materialised
+#   role       catalogue  = a tested cell with its own goldens
+#              resolution = loaded ONLY as another cell's dependency closure,
+#                           never byte-compared, excluded from the catalogue
+#                           census (CorpusWalker.TRANSITIVE_DEP_CELL_DIRS)
+#   dsl        the cell's own <rosetta.dsl.version>. Meaningful for catalogue
+#              rows (all 9.83.0 by definition of this band). For resolution rows
+#              it is recorded for reference but carries no gating weight: their
+#              .rosetta source is compiled by the DEPENDENT cell's 9.83.0
+#              toolchain, so an older pin here is expected and harmless.
+#   declared   what the cell's own pom.xml pins as its dependencies
+#   resolved   what we actually load. Differs from `declared` ONLY where we do
+#              not carry the exact version and substitute the nearest one. Every
+#              such substitution is an approximation and is visible HERE rather
+#              than buried in a Java map.
+#
+# THE BAND IS COMPLETE, NOT A SAMPLE: established by scanning all 426 stable tags
+# across CDM majors 5-8, DRR majors 5-8, ISO majors 1-2 and rune-fpml majors 1-3
+# (zero unreadable). Exactly 25 UPSTREAM releases pin 9.83.0 (the vendored band;
+# the AUTHORED chaos cell below is cell 26 - the v3.2 chaos-gate charter's own
+# corpus, COMMITTED in-repo and materialised by copy from scripts/chaos-expander,
+# never cloned - outside that tag census by construction), each band contiguous with an observed
+# 9.78.0 boundary below and 9.84.0 above. A windowed scan would NOT have been
+# sufficient - the pins are not monotonic (ISO 1.41.0 is on 10.0.0 while the
+# LATER 1.42.0 is back on 9.85.1). CDM 7.x is absent because it moved to
+# rune-dsl 10.x (7.0.0 on 10.2.2, 7.1.0 on 10.3.0), so CDM tops out at 6.23.0.
+#
+# corpus     version  state    role        dsl      declared                    resolved
+cdm          5.38.0   active   catalogue   9.83.0   -                           -
+cdm          5.39.0   active   catalogue   9.83.0   -                           -
+cdm          6.20.2   active   catalogue   9.83.0   rune-fpml=1.5.3             rune-fpml=1.5.3
+cdm          6.20.3   active   catalogue   9.83.0   rune-fpml=1.5.3             rune-fpml=1.5.3
+cdm          6.20.4   active   catalogue   9.83.0   rune-fpml=1.5.3             rune-fpml=1.5.3
+cdm          6.20.5   active   catalogue   9.83.0   rune-fpml=1.5.3             rune-fpml=1.5.3
+cdm          6.20.6   active   catalogue   9.83.0   rune-fpml=1.5.3             rune-fpml=1.5.3
+cdm          6.21.0   active   catalogue   9.83.0   rune-fpml=2.1.1             rune-fpml=2.1.1
+cdm          6.22.0   active   catalogue   9.83.0   rune-fpml=2.1.1             rune-fpml=2.1.1
+cdm          6.23.0   active   catalogue   9.83.0   rune-fpml=2.1.1             rune-fpml=2.1.1
+drr          5.61.0   active   catalogue   9.83.0   cdm=5.36.0,iso20022=1.18.0  cdm=5.36.0,iso20022=1.18.0
+drr          6.34.1   active   catalogue   9.83.0   cdm=5.37.0,iso20022=1.37.0  cdm=5.38.0,iso20022=1.38.0
+drr          6.35.0   active   catalogue   9.83.0   cdm=5.38.0,iso20022=1.37.0  cdm=5.38.0,iso20022=1.37.0
+drr          6.36.0   active   catalogue   9.83.0   cdm=5.38.0,iso20022=1.37.0  cdm=5.38.0,iso20022=1.37.0
+drr          6.37.0   active   catalogue   9.83.0   cdm=5.38.0,iso20022=1.37.0  cdm=5.38.0,iso20022=1.37.0
+drr          6.38.0   active   catalogue   9.83.0   cdm=5.38.0,iso20022=1.37.0  cdm=5.38.0,iso20022=1.37.0
+drr          7.0.0    active   catalogue   9.83.0   cdm=6.21.0,iso20022=1.38.0  cdm=6.21.0,iso20022=1.38.0
+drr          7.1.0    active   catalogue   9.83.0   cdm=6.21.0,iso20022=1.38.0  cdm=6.21.0,iso20022=1.38.0
+drr          7.2.0    active   catalogue   9.83.0   cdm=6.21.0,iso20022=1.38.0  cdm=6.21.0,iso20022=1.38.0
+drr          7.3.0    active   catalogue   9.83.0   cdm=6.21.0,iso20022=1.38.0  cdm=6.21.0,iso20022=1.38.0
+iso20022     1.38.0   active   catalogue   9.83.0   -                           -
+rune-fpml    1.6.0    active   catalogue   9.83.0   -                           -
+rune-fpml    2.0.0    active   catalogue   9.83.0   -                           -
+rune-fpml    2.1.0    active   catalogue   9.83.0   -                           -
+rune-fpml    2.1.1    active   catalogue   9.83.0   -                           -
+chaos        1.1.0    active   catalogue   9.83.0   -                           -
+#
+# Resolution-only cells. Present so a dependent cell's workspace resolves against
+# the version it actually pins. Never byte-compared and never counted in the
+# catalogue census. Since PR #607 each ACTIVE one also carries goldens generated
+# by its OWN toolchain (the dsl column — what the dependent cell's published
+# build compiled against, read from the cell's own pom and asserted against the
+# build log by refresh-test-corpus.sh --resolution-goldens), read by
+# the optimised route's pair gate to compile a band cell's closure against its
+# real pins; the frozen-baseline manifest pins them like every other golden.
+#
+# THE ONE REMAINING SUBSTITUTION is drr 6.34.1, which declares
+# cdm=5.37.0,iso20022=1.37.0 and resolves against cdm=5.38.0,iso20022=1.38.0.
+# Only ONE row below is still `planned` — cdm 5.37.0. iso20022 1.37.0 has since
+# been materialised and is `active`, so the ISO half COULD already resolve
+# exactly (Copilot R9, PR #566).
+#
+# It is deliberately not changed here, and the two halves must move TOGETHER:
+# drr 6.34.1 is one of the FIVE EXACT RING CELLS, and retargeting only its ISO
+# half would resolve it against cdm 5.38.0 + iso 1.37.0 — a pairing that is
+# neither the declared pin nor the state the ring is currently EXACT against.
+# Materialising cdm 5.37.0 and retiring both halves in one measured step is the
+# recorded follow-on.
+rune-fpml    1.5.3    active   resolution  9.75.3   -                           -
+cdm          5.36.0   active   resolution  9.78.0   -                           -
+cdm          5.37.0   planned  resolution  9.78.0   -                           -
+iso20022     1.18.0   active   resolution  9.24.0   -                           -
+iso20022     1.37.0   active   resolution  9.78.0   -                           -

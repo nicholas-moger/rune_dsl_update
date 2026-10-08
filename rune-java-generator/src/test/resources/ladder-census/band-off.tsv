@@ -1,0 +1,19 @@
+# The 25x2 matrix's non-identical file set, OFF route (Path-1) — the ladder-retirement
+# census gate's band join (LadderBindingCensusTest.enforceBandGate).
+# Provenance: D11CorpusRegressionTest full matrix with -Dd11.dump-paths=true, re-run
+#   at bf0519655 (v3.1 flip seat 33, law 16 — the head at which the band reached ZERO;
+#   the #584 stage-exit lists this file supersedes were pinned at f63cff66 with 587 rows
+#   and had become a SUPERSET by 557 by #604, by design):
+#   ring 9062fc14 / matrix d47fa88f / band 0 / identical 174,129 / missingOutput 12.
+# Content: unwaived byte-mismatching files (0) + unwaived missingOutput files (0);
+#   the 12 waived METAFIELD missingOutput rows (the PERMANENT ReferenceWithMetaVoid
+#   class) are correctly absent — the extractor's whole-run guard reconciled them
+#   against the waiver file. ZERO rows, <cell>TAB<file>, sorted.
+# Measured property: this set is IDENTICAL to band-on (both EMPTY; 0 OFF-only, 0 ON-only)
+#   — the two routes converged at seat 12 (#582) and stayed converged through seat 33.
+# With the band EMPTY every census candidate is out-of-band on both routes, so the gate's
+#   VIOLATION direction rests entirely on triage.tsv's class-grain rows (one per
+#   (cell, RowClass) group, all now USED) and the expected-summary.tsv count pin.
+# Regen: mvn -o test -Dtest=D11CorpusRegressionTest -Dd11.dump-paths=true (capture
+#   the log), then: py -3 scripts/ci/ladder-band-extract.py <log> [<log>...] >
+#   this file's data rows (self-test: scripts/ci/ladder-band-extract.py.test).

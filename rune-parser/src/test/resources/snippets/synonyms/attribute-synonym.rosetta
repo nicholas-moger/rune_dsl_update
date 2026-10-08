@@ -1,0 +1,14 @@
+namespace test.synonyms
+
+synonym source TestSource
+
+type Trade:
+    tradeId string (1..1)
+        [synonym TestSource value "tradeIdentifier"]
+    price number (0..1)
+        [synonym TestSource value "StrikePrice" tag 202]
+    quantity number (0..1)
+        [synonym TestSource value "Notional" path "LegData" maps 2]
+    currency string (0..1)
+        [synonym TestSource value "Currency"]
+        [synonym TestSource value "Ccy" path "Header"]

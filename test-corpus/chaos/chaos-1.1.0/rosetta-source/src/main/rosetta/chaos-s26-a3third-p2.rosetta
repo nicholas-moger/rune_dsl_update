@@ -1,0 +1,47 @@
+namespace chaos.s26.a3third.p2
+version "1.0.0"
+import chaos.s26.a3third.p1.*
+import chaos.s26.a3third.p3.*
+func C26Upper: <"The callee taking a string.">
+    inputs:
+        s string (1..1)
+    output:
+        t string (1..1)
+    set t: s + "!"
+func C26Name: <"The callee taking the enum - the bare function-name arm's target.">
+    inputs:
+        k C26KindEnum (1..1)
+    output:
+        s string (1..1)
+    set s: k to-string
+func C26AliasArms: <"The other admitted arm kinds under LITERAL guards INSIDE an alias - the bare item, a function call, an item-rooted nav, a to-string over one - the alias signature walk's raw-name fallback (seat 7's banked class) and a closure-parameter SUBJECT.">
+    inputs:
+        raws string (0..*)
+        tags C26Tag (0..*)
+    output:
+        outs string (0..*)
+    alias bare: raws extract (item switch "keep" then item, default "other")
+    alias called: raws extract (item switch "up" then C26Upper(item), default item)
+    alias navved: tags extract (item -> code switch "x" then item -> code, default "y")
+    alias stringed: tags extract (item -> code switch "n" then item -> code count to-string, default "0")
+    alias paramed: raws extract p [ p switch "r" then "red", default "grey" ]
+    add outs: bare
+    add outs: called
+    add outs: navved
+    add outs: stringed
+    add outs: paramed
+func C26Nested: <"A switch arm whose body is a switch, a switch as a comparison operand, and an enum switch under an OPTIONAL subject in a then-arm.">
+    inputs:
+        k C26KindEnum (0..1)
+        g string (1..1)
+    output:
+        r string (1..1)
+    alias inner: g switch
+        "a" then (k switch Red then "ar", default "ax"),
+        "b" then (k switch Green then "bg", default "bx"),
+        default "z"
+    alias cmp: (g switch "a" then 1, default 0) = 1
+    set r:
+        if k exists and cmp
+        then inner
+        else (if k exists then (k switch Blue then "blue", default "none") else "absent")

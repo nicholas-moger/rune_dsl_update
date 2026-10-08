@@ -1,0 +1,25 @@
+namespace test.frec053
+
+func GetDate:
+	inputs:
+		zdt zonedDateTime (1..1)
+	output:
+		result date (1..1)
+	set result:
+		zdt -> date
+
+func GetTime:
+	inputs:
+		zdt zonedDateTime (1..1)
+	output:
+		result time (1..1)
+	set result:
+		zdt -> time
+				
+func GetZone:
+	inputs:
+		zdt zonedDateTime (1..1)
+	output:
+		result string (1..1)
+	set result:
+		zdt -> timezone

@@ -1,0 +1,22 @@
+{
+  "$schema": "./schema.json",
+  "fork_baseline_version": "0.1.0",
+  "entries": [
+    {
+      "id": "U012",
+      "subject": "IR scaffolding (fixture — deliberately missing template sections)",
+      "since_fork_version": "0.1.0",
+      "since_pr_at_spec": 1,
+      "since_pr_actual": null,
+      "since_sha": null,
+      "status": "Available",
+      "migration_depth": "None",
+      "removal_target": null,
+      "future_deprecation_risk": "low",
+      "related_d_entries": [],
+      "related_audit_hooks": [],
+      "related_parity_constraints": [],
+      "doc_path": "U012-ir-scaffolding.md"
+    }
+  ]
+}

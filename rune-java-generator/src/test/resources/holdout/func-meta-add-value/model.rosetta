@@ -1,0 +1,12 @@
+namespace test.fmeta022
+
+type A:
+    a string (0..*)
+    	[metadata reference]
+
+func Test:
+	output:
+		result A (1..1)
+	
+	add result -> a:
+		"Hello"

@@ -1,0 +1,13 @@
+namespace chaos.s22.a3third.p3
+version "1.0.0"
+import chaos.s22.a3third.p1.*
+import chaos.s22.a3third.p2.*
+isProduct root C22Terms;
+func Qualify_C22Exotic: <"Second qualifier - overlapping predicate space.">
+    [qualification Product]
+    inputs:
+        c22terms C22Terms (1..1)
+    output:
+        is_product boolean (1..1)
+    set is_product:
+        c22terms -> kind <> "vanilla" or c22terms -> notional is absent

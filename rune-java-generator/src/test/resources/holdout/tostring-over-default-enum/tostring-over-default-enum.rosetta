@@ -1,0 +1,41 @@
+namespace holdout.tostringoverdefaultenum
+version "0.0.0"
+
+metaType scheme string
+
+enum SideEnum: <"The side (the chaos s31 keyword-named values).">
+    Long
+    Short
+
+type Books: <"The holder.">
+    side SideEnum (0..1)
+    coded string (0..1)
+        [metadata scheme]
+
+func DefaultEnumToString: <"THE CHAOS s31 C31Defaults SHAPE (v3.2 seat 13, D53 - the M5a class's to-string half, 13 of 13 non-compiling by the seat-13 census): a `default` with a BARE enum-value right operand under to-string, ADDED to a string multi output. The released plugin keeps the default's Mapper wrap under the to-string map (`MapperS.of(<l>.getOrDefault(SideEnum.LONG)).map(\"to-string\", SideEnum::toDisplayString)`); the fork's ADD seat stripped the wrap to the bare item, which has no `.map` - non-compiling.">
+    inputs:
+        b Books (1..1)
+    output:
+        outs string (0..*)
+    add outs: (b -> side default Long) to-string
+
+func DefaultQualifiedEnumToString: <"The QUALIFIED twin (`default SideEnum -> Short`).">
+    inputs:
+        b Books (1..1)
+    output:
+        outs string (0..*)
+    add outs: (b -> side default SideEnum -> Short) to-string
+
+func DefaultEnumToStringSet: <"The same to-string SET whole into a SINGLE string output - the SET seat's consumption of the to-string over the default.">
+    inputs:
+        b Books (1..1)
+    output:
+        s string (1..1)
+    set s: (b -> side default Long) to-string
+
+func DefaultMetaString: <"The chaos s31 C31Defaults FIRST operation: a `default` with a META left operand ADDED to a string multi output - the ADD seat's singleton hoist over the unwrapped string (the fork's `MapperS.of(…).getMulti()` compiles, byte-different).">
+    inputs:
+        b Books (1..1)
+    output:
+        outs string (0..*)
+    add outs: b -> coded default "none"

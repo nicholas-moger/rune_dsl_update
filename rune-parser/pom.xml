@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.finos.rune</groupId>
+    <artifactId>rune-parser</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>Rune DSL Parser (ANTLR4)</name>
+    <description>ANTLR4-based parser for the Rosetta DSL</description>
+
+    <properties>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <antlr4.version>4.13.2</antlr4.version>
+        <junit.version>5.11.3</junit.version>
+        <rune-dsl.version>0.0.0.main-SNAPSHOT</rune-dsl.version>
+        <!-- PR-SPEED fork-parallelism knobs (Decision 40).
+             Defaults sized for the 24-core / 127 GB developer
+             machine. Override per-run for smaller machines
+             (invoke from repo root with -f, since the repo has
+             no top-level multi-module reactor POM):
+               mvn -f rune-parser/pom.xml test -Dpr-speed.forkCount=1   (single forked JVM; no fork parallelism)
+               mvn -f rune-parser/pom.xml test -Dpr-speed.forkCount=0   (in-process, no fork at all)
+               mvn -f rune-parser/pom.xml test -Dpr-speed.forkCount=2 -Dpr-speed.perForkHeap=2g
+             Surefire semantics: forkCount=1 still creates a forked
+             JVM (tests run once per fork, in that fork); only
+             forkCount=0 runs tests in the same JVM as Maven itself.
+             surefire.forkNumber is a per-fork identifier present in
+             forked execution (forkCount>=1; Surefire numbers the
+             forks 1..N) and absent in the in-process case
+             (forkCount=0). -->
+        <pr-speed.forkCount>6</pr-speed.forkCount>
+        <pr-speed.perForkHeap>4g</pr-speed.perForkHeap>
+        <pr-speed.forkTimeoutSeconds>1800</pr-speed.forkTimeoutSeconds>
+
+        <!-- Single source of truth for the Surefire argLine. Profiles
+             append their own -Djqwik.* flags onto this base so a future
+             change to (e.g.) GC flags or H16 sys props only has to land
+             here — not in three profile duplicates. -->
+        <surefire.argLine.base>-Xmx${pr-speed.perForkHeap} -XX:+UseG1GC -Djava.io.tmpdir=${project.build.directory}/fork-tmp/fork-${surefire.forkNumber} -Dmatrix.ndjson.shard=${project.build.directory}/matrix-ndjson/shard-${surefire.forkNumber}.ndjson</surefire.argLine.base>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.antlr</groupId>
+            <artifactId>antlr4-runtime</artifactId>
+            <version>${antlr4.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.jqwik</groupId>
+            <artifactId>jqwik</artifactId>
+            <version>1.9.1</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- H21: Jazzer coverage-guided fuzzing. The junit dep brings in
+             the @FuzzTest extension; the api dep provides
+             FuzzedDataProvider. Test-scoped; no production coupling.
+             Excludes: jazzer-junit 0.22.1 pins junit-platform 1.9.0,
+             which conflicts with the project's junit 5.11.3 transitive
+             junit-platform 1.11.x. The older platform-commons omits
+             ReflectionUtils.returnsPrimitiveVoid, breaking test
+             discovery. Excluding lets the project's newer platform win. -->
+        <dependency>
+            <groupId>com.code-intelligence</groupId>
+            <artifactId>jazzer-junit</artifactId>
+            <version>0.22.1</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.junit.platform</groupId>
+                    <artifactId>junit-platform-commons</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.junit.platform</groupId>
+                    <artifactId>junit-platform-launcher</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.antlr</groupId>
+                <artifactId>antlr4-maven-plugin</artifactId>
+                <version>${antlr4.version}</version>
+                <configuration>
+                    <listener>true</listener>
+                    <visitor>true</visitor>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>antlr4</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.5.2</version>
+                <configuration>
+                    <!-- Fork-based parallelism (separate JVMs per fork).
+                         Each fork is an independent JVM; the N forks
+                         run CONCURRENTLY, so the overall test phase is
+                         parallel across forks. Within each fork tests
+                         still run sequentially — in-process JUnit
+                         parallelism stays OFF because thread-level
+                         contention on ANTLR's static DFA cache caused
+                         the "parallel is slower" finding documented in
+                         src/test/resources/junit-platform.properties.
+                         Separate JVMs each have their own DFA cache,
+                         so fork-level parallelism is orthogonal and
+                         does NOT hit that contention.
+                         See Decision 40 in research/M1-DESIGN-DECISIONS.md.
+                         Knobs are parameterised via top-level properties
+                         so contributors on smaller machines can override
+                         per-run: -Dpr-speed.forkCount=1 uses a single
+                         forked JVM with no fork-level parallelism (still
+                         a forked JVM — surefire.forkNumber is set);
+                         -Dpr-speed.forkCount=0 runs tests in-process in
+                         the mvn JVM itself (no fork). -->
+                    <forkCount>${pr-speed.forkCount}</forkCount>
+                    <reuseForks>true</reuseForks>
+                    <!-- H16: per-fork isolation.
+                         - java.io.tmpdir becomes fork-scoped so concurrent
+                           forks cannot overwrite each other's temp files.
+                         - matrix.ndjson.shard points the matrix reporter at
+                           a fork-specific NDJSON file so the shard-merge
+                           step can concat without ordering concerns.
+                         The parent directories are created pre-test by the
+                         antrun plugin below.
+                         argLine comes from ${surefire.argLine.base} so
+                         H19 Jqwik profiles can append without duplicating. -->
+                    <argLine>${surefire.argLine.base}</argLine>
+                    <!-- Cheap insurance against a new deadlock regression
+                         from fork-unsafe code — each fork kills itself
+                         after the configured timeout. Per-fork compute
+                         budget is bounded by the Amdahl-tail test:
+                         CrossCorpusConsistencyTest takes ~14m 20s in a
+                         single fork (see D40-F measurements), which
+                         dominates the tail of any forked run. The 30-min
+                         default gives ~2× headroom over that bound.
+                         Increased from an earlier 15-min value (round 6)
+                         because 900s left only 40s margin over the
+                         14m 20s Amdahl bound — unsafe under GC spikes
+                         or disk I/O contention. -->
+                    <forkedProcessTimeoutInSeconds>${pr-speed.forkTimeoutSeconds}</forkedProcessTimeoutInSeconds>
+                </configuration>
+            </plugin>
+            <plugin>
+                <!-- H16: create per-fork tmpdir + ndjson shard dirs before
+                     Surefire launches forks, and merge shard NDJSON files
+                     after tests finish so CI gets a single matrix-report.ndjson
+                     artifact regardless of how many forks wrote to it. -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>h16-prepare-fork-dirs</id>
+                        <phase>process-test-resources</phase>
+                        <goals><goal>run</goal></goals>
+                        <configuration>
+                            <target>
+                                <mkdir dir="${project.build.directory}/fork-tmp"/>
+                                <mkdir dir="${project.build.directory}/matrix-ndjson"/>
+                                <!-- Surefire's ${surefire.forkNumber} is only
+                                     known at fork launch, so we cannot template
+                                     a single mkdir. Pre-create the tmpdir for
+                                     forks 1..16 (default forkCount is 6; users
+                                     can override up to 16 via
+                                     -Dpr-speed.forkCount without another pom
+                                     change). Unused dirs are harmless. -->
+                                <mkdir dir="${project.build.directory}/fork-tmp/fork-1"/>
+                                <mkdir dir="${project.build.directory}/fork-tmp/fork-2"/>
+                                <mkdir dir="${project.build.directory}/fork-tmp/fork-3"/>
+                                <mkdir dir="${project.build.directory}/fork-tmp/fork-4"/>
+                                <mkdir dir="${project.build.directory}/fork-tmp/fork-5"/>
+                                <mkdir dir="${project.build.directory}/fork-tmp/fork-6"/>
+                                <mkdir dir="${project.build.directory}/fork-tmp/fork-7"/>
+                                <mkdir dir="${project.build.directory}/fork-tmp/fork-8"/>
+                                <mkdir dir="${project.build.directory}/fork-tmp/fork-9"/>
+                                <mkdir dir="${project.build.directory}/fork-tmp/fork-10"/>
+                                <mkdir dir="${project.build.directory}/fork-tmp/fork-11"/>
+                                <mkdir dir="${project.build.directory}/fork-tmp/fork-12"/>
+                                <mkdir dir="${project.build.directory}/fork-tmp/fork-13"/>
+                                <mkdir dir="${project.build.directory}/fork-tmp/fork-14"/>
+                                <mkdir dir="${project.build.directory}/fork-tmp/fork-15"/>
+                                <mkdir dir="${project.build.directory}/fork-tmp/fork-16"/>
+                            </target>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <!-- Bound to phase `test`: runs AFTER Surefire's
+                             `test` goal when Surefire succeeds. If
+                             Surefire fails, Maven aborts the build in
+                             the `test` phase and this merge does NOT
+                             run, leaving only per-fork shard-*.ndjson
+                             files under target/matrix-ndjson/. For
+                             failure-case merging (e.g. CI failure
+                             triage), run Surefire with
+                             `-Dmaven.test.failure.ignore=true` so the
+                             build reaches this execution, or have CI
+                             concatenate shards as a post-test step
+                             that runs `if: always()`. There is no
+                             standard Maven phase that runs after a
+                             failed `test` phase. -->
+                        <id>h16-merge-ndjson-shards</id>
+                        <phase>test</phase>
+                        <goals><goal>run</goal></goals>
+                        <configuration>
+                            <target>
+                                <concat destfile="${project.build.directory}/matrix-ndjson/report.ndjson" force="yes" fixlastline="yes">
+                                    <fileset dir="${project.build.directory}/matrix-ndjson" includes="shard-*.ndjson" erroronmissingdir="false"/>
+                                </concat>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <!-- M3: Xtext equivalence harness (D5/E1). Both rune-testing and
+         rune-lang are needed for the full Xtext standalone pipeline but
+         are only available when the rune-dsl Maven reactor has been built
+         locally (they're SNAPSHOT artifacts not published to any repo).
+         Opt-in profile: activate with -Pxtext-harness after building
+         rune-dsl. The harness degrades gracefully without these deps —
+         tests pass with reduced coverage. -->
+    <profiles>
+        <profile>
+            <id>xtext-harness</id>
+            <dependencies>
+                <dependency>
+                    <groupId>org.finos.rune</groupId>
+                    <artifactId>rune-testing</artifactId>
+                    <version>${rune-dsl.version}</version>
+                    <scope>test</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.finos.rune</groupId>
+                    <artifactId>rune-lang</artifactId>
+                    <version>${rune-dsl.version}</version>
+                    <scope>test</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+
+        <!-- H19 + H24.3: per-cadence profiles. Property-test budget
+             (audit Q2) and matrix-cell cache mode (audit Q12) both
+             vary by cadence. All profiles extend the shared
+             surefire.argLine.base — future changes to (e.g.) GC
+             flags or H16 sys props land there once, not in every
+             profile.
+
+             matrix.cache.mode matrix (audit Q12):
+               pr-gate       READ_ONLY  — reads ground-truth written
+                                          by the last nightly; never
+                                          writes. Green on a PR means
+                                          "still matches the last
+                                          clean full-matrix run".
+               nightly       WRITE_ONLY — every cell runs fresh,
+                                          results replace cache
+                                          entries. Ground-truth
+                                          oracle for the four-layer
+                                          gate's Layer-3.
+               release-gate  WRITE_ONLY — same semantics as nightly;
+                                          separate profile id lets a
+                                          release cut call it
+                                          explicitly.
+               default (no -P) READ_WRITE — local dev loop: cache
+                                            reads accelerate repeat
+                                            runs, writes record new
+                                            cells. Honoured by
+                                            CachedMatrixExtension's
+                                            Mode default when the
+                                            sysprop is unset. -->
+        <profile>
+            <id>pr-gate</id>
+            <properties>
+                <jqwik.tries.default>100</jqwik.tries.default>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <argLine>${surefire.argLine.base} -Djqwik.tries.default=${jqwik.tries.default} -Dmatrix.cache.mode=READ_ONLY</argLine>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>nightly</id>
+            <properties>
+                <jqwik.tries.default>1000</jqwik.tries.default>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <argLine>${surefire.argLine.base} -Djqwik.tries.default=${jqwik.tries.default} -Dmatrix.cache.mode=WRITE_ONLY</argLine>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <!-- H24.3: release-gate is WRITE_ONLY like nightly —
+                 every cell runs fresh at release cut so we never
+                 ship a green based on a stale cache hit. Distinct
+                 profile id so release automation can select it
+                 explicitly and the cadence is legible in CI logs. -->
+            <id>release-gate</id>
+            <properties>
+                <jqwik.tries.default>1000</jqwik.tries.default>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <argLine>${surefire.argLine.base} -Djqwik.tries.default=${jqwik.tries.default} -Dmatrix.cache.mode=WRITE_ONLY</argLine>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <!-- Single-replay mode for reproducing a specific seed.
+                 Activate with: mvn test -Pinvestigate -Djqwik.seed=<seed>
+                 jqwik.tries.default=1 means one sample reproduced from the seed.
+                 Cache is disabled so the repro is hermetic — a PASSED
+                 cache hit would short-circuit the seed replay and mask
+                 the failure we're investigating. -->
+            <id>investigate</id>
+            <properties>
+                <jqwik.tries.default>1</jqwik.tries.default>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <argLine>${surefire.argLine.base} -Djqwik.tries.default=${jqwik.tries.default} -Djqwik.seed.default=${jqwik.seed} -Dmatrix.cache.mode=DISABLED</argLine>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>

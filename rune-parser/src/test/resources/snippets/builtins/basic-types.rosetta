@@ -1,0 +1,21 @@
+namespace test.builtins
+
+basicType myBool <"A boolean.">
+
+basicType myNum(
+    digits int
+  , fractionalDigits int
+) <"A number.">
+
+recordType myRecord {
+    <"A record.">
+    field1 int
+    field2 string
+}
+
+typeAlias posInt: <"Positive integer.">
+    number(fractionalDigits: 0, min: 0)
+
+metaType myMeta string
+
+library function MyFunc(x number, y number) number <"Add two numbers.">

@@ -1,0 +1,29 @@
+namespace conformance.p3
+version "1.0.0"
+
+// P3 — an IMPLICIT-ITEM ATTRIBUTE named the same as a top-level `type`.
+// Spec R6: a Data is not a RosettaSymbol, so the global type never competes at
+// a bare symbol seat; the item's attribute binds. The pinned c1 case (a) gives
+// the OPPOSITE answer for an ENUM collision on purpose (an enumeration IS a
+// symbol) — this case completes the pair for a plain data type.
+//
+// The fork's pass 5 file-scope fall-through carries no R6 filter, and the
+// Cat-9 attribute arm's exception is builtin-only (symbol-empty gate), so the
+// fork keeps the global TYPE where upstream binds the attribute.
+//
+// Expected upstream: bare `Cash` binds Attribute conformance.p3.Position.Cash.
+
+type Cash:
+    amount number (1..1)
+
+type Position:
+    Cash string (0..1)
+
+func P3AttrShadowsGlobalType:
+    inputs:
+        positions Position (1..*)
+    output:
+        result boolean (0..*)
+    set result:
+        positions
+            extract [ Cash exists ]

@@ -1,0 +1,26 @@
+namespace test.rsp.a
+version "0.0.0"
+
+body Authority RspAUTH <"The authority.">
+corpus Regulation "Rsp Regulation" RspReg <"The corpus.">
+segment rwsarticle
+
+type RspTrade: <"The report-from type.">
+    utid string (1..1)
+        [label as "The Trade UTI"]
+    notional number (0..1)
+
+eligibility rule RspEligible from RspTrade: <"Report when-gate.">
+    notional exists
+reporting rule RspUtid from RspTrade: <"Reported field.">
+    extract utid
+        as "UTI"
+reporting rule RspNotional from RspTrade: <"Reported numeric with default.">
+    extract notional default 0
+        as "Notional"
+
+type RspReport: <"Report output type with rule references.">
+    utiField string (1..1)
+        [ruleReference RspUtid]
+    notionalField number (1..1)
+        [ruleReference RspNotional]

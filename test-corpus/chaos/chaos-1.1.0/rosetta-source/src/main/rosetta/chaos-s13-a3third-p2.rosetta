@@ -1,0 +1,7 @@
+namespace chaos.s13.a3third.p2
+version "1.0.0"
+import chaos.s13.a3third.p1.*
+import chaos.s13.a3third.p3.*
+rule source C13Bare
+{
+}

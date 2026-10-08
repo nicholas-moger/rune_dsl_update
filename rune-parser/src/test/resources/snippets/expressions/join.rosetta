@@ -1,0 +1,8 @@
+namespace test.expressions
+
+func JoinItems:
+    inputs:
+        items string (0..*)
+    output:
+        result string (1..1)
+    set result: items join ", "

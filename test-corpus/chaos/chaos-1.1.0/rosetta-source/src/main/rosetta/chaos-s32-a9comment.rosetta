@@ -1,0 +1,25 @@
+/* chaos a9: a block-comment banner before the first token */
+// chaos a9: a line comment before namespace
+namespace chaos.s32.a9comment // a9
+version "1.0.0" // a9
+type C32Aux: <"Helper - relocated by the import axis."> // a9
+    ax string (1..1) // a9
+type C32Keyworded: <"Attributes named after Java keywords at POJO seats (the func-java-keyword-attr class widened)."> // a9
+    class string (0..1) // a9
+    long number (0..1) // a9
+    char string (0..1) // a9
+    this string (0..1) // a9
+    new string (0..*) // a9
+    private string (0..1) // a9
+    return number (0..1) // a9
+    package string (0..1) // a9
+    null string (0..1) // a9
+    var string (0..*) // a9
+    abstract boolean (0..1) // a9
+    throws string (0..1) // a9
+    aux C32Aux (0..1) // a9
+type List: <"A type named List - the model's List.java beside every sibling POJO's java.util.List import (the file-scope law at the POJO seat)."> // a9
+    items string (0..*) // a9
+type C32Obj: <"An attribute named o - upstream's equals(Object o) shadows the field it reads (the #624 Clash.java class, reproduced bug-compat) - and one named Class (getClass())."> // a9
+    o string (0..1) // a9
+    Class string (0..1) // a9

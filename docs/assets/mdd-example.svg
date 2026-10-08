@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="820" viewBox="0 0 1120 820" role="img" aria-labelledby="title desc">
+<title id="title">One rule, four representations</title>
+<desc id="desc">Illustrative Order has quantity of integer type and unitPrice of decimal type. Source rule total equals quantity times unitPrice. The AST is Multiply with two field references. Semantic checks resolve the fields and types. Optional teaching IR explicitly converts quantity to decimal before decimal multiplication. Output pseudocode decimal(quantity) times unitPrice gives 37.50 for quantity 3 and unitPrice 12.50.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9" fill="none" stroke="#a9b7cb" stroke-width="1.4"/></marker></defs>
+<rect width="1120" height="820" rx="22" fill="#121923"/>
+<g font-family="Segoe UI, Arial, sans-serif">
+<text x="30" y="47" fill="#eef2f8" font-size="31" font-weight="600" text-anchor="start">
+<tspan x="30" dy="0" xml:space="preserve">One rule, four representations</tspan>
+</text>
+<text x="30" y="80" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="30" dy="0" xml:space="preserve">Illustrative teaching notation · not actual Rune syntax or generated output</tspan>
+</text>
+<rect x="30" y="120" width="515" height="305" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<text x="54" y="159" fill="#a2c6e6" font-size="25" font-weight="600" text-anchor="start">
+<tspan x="54" dy="0" xml:space="preserve">1  Source text</tspan>
+</text>
+<text x="54" y="201" fill="#eef2f8" font-size="23" font-weight="400" text-anchor="start" font-family="Consolas, DejaVu Sans Mono, monospace">
+<tspan x="54" dy="0" xml:space="preserve">type Order {</tspan>
+<tspan x="54" dy="34" xml:space="preserve">  quantity: integer</tspan>
+<tspan x="54" dy="34" xml:space="preserve">  unitPrice: decimal</tspan>
+<tspan x="54" dy="34" xml:space="preserve">}</tspan>
+<tspan x="54" dy="34" xml:space="preserve">total = quantity * unitPrice</tspan>
+</text>
+<rect x="575" y="120" width="515" height="305" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<text x="599" y="159" fill="#92d5c6" font-size="25" font-weight="600" text-anchor="start">
+<tspan x="599" dy="0" xml:space="preserve">2  AST + semantic checks</tspan>
+</text>
+<text x="599" y="205" fill="#eef2f8" font-size="22" font-weight="400" text-anchor="start" font-family="Consolas, DejaVu Sans Mono, monospace">
+<tspan x="599" dy="0" xml:space="preserve">Multiply</tspan>
+<tspan x="599" dy="34" xml:space="preserve">  FieldRef(Order.quantity)</tspan>
+<tspan x="599" dy="34" xml:space="preserve">  FieldRef(Order.unitPrice)</tspan>
+</text>
+<text x="599" y="340" fill="#a9b7cb" font-size="21" font-weight="400" text-anchor="start">
+<tspan x="599" dy="0" xml:space="preserve">Both fields resolve. Integer ×</tspan>
+<tspan x="599" dy="29" xml:space="preserve">decimal is checked as decimal.</tspan>
+</text>
+<rect x="30" y="460" width="515" height="305" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5" stroke-dasharray="7 5"/>
+<text x="54" y="499" fill="#a6b0ec" font-size="25" font-weight="600" text-anchor="start">
+<tspan x="54" dy="0" xml:space="preserve">3  Optional teaching IR</tspan>
+</text>
+<text x="54" y="545" fill="#eef2f8" font-size="21" font-weight="400" text-anchor="start" font-family="Consolas, DejaVu Sans Mono, monospace">
+<tspan x="54" dy="0" xml:space="preserve">DecimalMultiply(</tspan>
+<tspan x="54" dy="34" xml:space="preserve">  ToDecimal(Read(Order.quantity)),</tspan>
+<tspan x="54" dy="34" xml:space="preserve">  Read(Order.unitPrice)</tspan>
+<tspan x="54" dy="34" xml:space="preserve">)</tspan>
+</text>
+<text x="54" y="710" fill="#a9b7cb" font-size="21" font-weight="400" text-anchor="start">
+<tspan x="54" dy="0" xml:space="preserve">Makes the numeric conversion explicit</tspan>
+</text>
+<rect x="575" y="460" width="515" height="305" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<text x="599" y="499" fill="#d0b487" font-size="25" font-weight="600" text-anchor="start">
+<tspan x="599" dy="0" xml:space="preserve">4  Output pseudocode</tspan>
+</text>
+<text x="599" y="545" fill="#eef2f8" font-size="23" font-weight="400" text-anchor="start" font-family="Consolas, DejaVu Sans Mono, monospace">
+<tspan x="599" dy="0" xml:space="preserve">decimal(quantity) * unitPrice</tspan>
+</text>
+<text x="599" y="628" fill="#eef2f8" font-size="23" font-weight="400" text-anchor="start">
+<tspan x="599" dy="0" xml:space="preserve">quantity = 3; unitPrice = 12.50</tspan>
+<tspan x="599" dy="34" xml:space="preserve">total = 37.50</tspan>
+</text>
+<text x="30" y="803" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="30" dy="0" xml:space="preserve">Same rule and types throughout · IR is one possible implementation choice</tspan>
+</text>
+</g>
+</svg>

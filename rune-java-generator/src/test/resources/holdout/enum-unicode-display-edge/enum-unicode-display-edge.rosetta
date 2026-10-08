@@ -1,0 +1,26 @@
+namespace test.enumuniedge
+version "1.0.0"
+
+// v3.2 seat 9 (F1, enum-unicode-display) - THE EDGE GROUP, kept apart so a plugin refusal costs one group: display names
+// whose Java string literal needs an escape BEYOND non-ASCII (a double quote, a backslash, a tab - the chaos golden's RAW
+// annotation render would put them into the annotation unescaped; the plugin decides whether that is its emission), a
+// non-ASCII enum-value SYNONYM value (the fork Java-escapes synonym values; the plugin's render of the @RosettaSynonym
+// annotation is unmeasured), and a display name that is pure ASCII with a Java-significant character.
+
+synonym source EdgeSrc
+
+enum EscapeEnum: <"Display names that need Java escaping beyond non-ASCII.">
+    Quote displayName "say \"hi\""
+    Backslash displayName "back\\slash"
+    Tab displayName "tab\there"
+    Dollar displayName "cost $5 {x}"
+
+enum SynonymEnum: <"A non-ASCII synonym value on an enum value beside a non-ASCII display name.">
+    S displayName "µ"
+        [synonym EdgeSrc value "µ–syn"]
+    T displayName "tee"
+        [synonym EdgeSrc value "plain"]
+
+type EdgeCarrier: <"An attribute of each enum so every enum is reachable from a type. (The first cut named the first attribute `e` - the released grammar REFUSED it at the lexer, 'no viable alternative at input e', the seat-8 banked refusal met again: target/v32-seat9-instruments/scratch/oracle-s9a-enum-unicode-display-edge-run1.log.)">
+    esc EscapeEnum (0..1)
+    syn SynonymEnum (0..1)

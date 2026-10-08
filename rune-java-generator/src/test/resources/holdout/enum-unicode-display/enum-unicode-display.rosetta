@@ -1,0 +1,34 @@
+namespace test.enumuni
+version "1.0.0"
+
+// v3.2 seat 9 (F1, enum-unicode-display) - THE ORACLE GROUP, pinned from the RELEASED 9.83.0 plugin BEFORE the code.
+// The chaos a5uni shape (every seed's `A5UniProbeEnum`, 22 declared ENUM rows): an enum value whose displayName carries
+// non-ASCII text. The chaos golden renders the @RosettaEnumValue annotation's displayName RAW and the constructor argument
+// Java-ESCAPED (µ...); the fork escaped BOTH. The sub-shapes: ASCII beside non-ASCII beside no display name, a
+// non-ASCII DEFINITION beside a non-ASCII display name (the javadoc seat), and every value of an enum carrying one.
+
+enum ProbeEnum: <"displayName probe - the chaos a5uni shape verbatim.">
+    V displayName "µ–„display“"
+
+enum MixedEnum: <"ASCII and non-ASCII display names beside each other, and a value without one.">
+    Plain
+    Ascii displayName "Ascii Display"
+    Micro displayName "µ"
+    Dash displayName "en–dash"
+    Quotes displayName "„low“ quotes"
+    Cjk displayName "試験"
+
+enum DefinedEnum: <"A non-ASCII DEFINITION beside a non-ASCII display name — µ–„def“ 試験.">
+    A displayName "Ä" <"Value definition with non-ASCII — ü.">
+    B <"Plain value with a non-ASCII definition — ß.">
+
+enum AllDisplayedEnum: <"Every value carries a display name.">
+    One displayName "eins"
+    Two displayName "zwei – ü"
+    Three displayName "drei"
+
+type Carrier: <"An attribute of each enum so every enum is reachable from a type.">
+    p ProbeEnum (0..1)
+    m MixedEnum (0..1)
+    d DefinedEnum (0..1)
+    a AllDisplayedEnum (0..*)

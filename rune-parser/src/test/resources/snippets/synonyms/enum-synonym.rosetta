@@ -1,0 +1,13 @@
+namespace test.synonyms
+
+synonym source ISO20022
+
+enum DirectionEnum:
+    Up
+        [synonym ISO20022 value "UP"]
+    Down
+        [synonym ISO20022 value "DOWN" definition "Downward direction"]
+    Left
+        [synonym ISO20022 value "LFT" pattern "[A-Z]+" "$1"]
+    Right
+        [synonym ISO20022 value "RT" pattern "[A-Z]+" "$1" removeHtml]

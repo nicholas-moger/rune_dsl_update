@@ -1,0 +1,9 @@
+namespace chaos.s19.a4snap
+version "1.0.0-SNAPSHOT"
+type C19Part: <"Keyed component - relocated by the import axis.">
+    [metadata key]
+    pid string (1..1)
+metaType key string
+metaType reference string
+metaType address string
+metaType location string

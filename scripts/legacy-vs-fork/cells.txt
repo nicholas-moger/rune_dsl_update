@@ -1,0 +1,25 @@
+# D11 corpus cells. Format: <relative-path-from-test-corpus>|<rosetta.dsl.version>
+#
+# PR #85 rebaseline (2026-05-28): ALL_CELLS in D11CorpusRegressionTest has
+# 5 entries — uniform rune-dsl 9.83.0 across CDM 5.38.0 + CDM 6.20.6 +
+# DRR 6.34.1 + ISO 20022 1.38.0 + rune-fpml 2.0.0. cdm-master dropped
+# (moving to v10 track; deferred until upstream stabilises 10.x).
+#
+# Skip semantics (Copilot R8 fail-on-zero gate, fixed post-R8):
+#  - All-cells modes (snapshot/regen/diff with no args) skip missing cells
+#    PER-CELL gracefully, but fail-on-zero if NO cell processes (e.g. clean
+#    checkout without test-corpus). Restore is intentionally idempotent.
+#  - Single-cell modes (./snapshot-goldens.sh drr/drr-6.34.1 etc.)
+#    against a missing/uncloned cell now FAIL — the user explicitly
+#    requested work that could not happen. Restore stays idempotent.
+#
+# chaos/chaos-<version> (v3.2 PR-2; chaos-1.1.0 since seat 10, D49) is DELIBERATELY absent: its goldens are
+# pinned by scripts/chaos-expander/pin-chaos-goldens.sh (the PR-1 holdout
+# clone running the SAME legacy 9.83.0 mojo, ×2 determinism check), and the
+# committed cell is the byte contract (git + `** -text`). A second regen
+# path here would rival that pin and could clobber the admitted bytes.
+cdm/cdm-5.38.0|9.83.0
+cdm/cdm-6.20.6|9.83.0
+drr/drr-6.34.1|9.83.0
+iso20022/iso20022-1.38.0|9.83.0
+rune-fpml/rune-fpml-2.0.0|9.83.0

@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="875" viewBox="0 0 1120 875" role="img" aria-labelledby="title desc">
+<title id="title">One EMF model can link two files</title>
+<desc id="desc">Miniature structural illustration, not runtime data or an exact memory dump. Resource orders.rosetta contains RosettaModel with namespace example.orders. Its elements include Data named Order, whose attributes include Attribute named product, whose typeCall is a TypeCall. TypeCall.type cross-references the Data named Product, a RosettaType declaration in the RosettaModel with namespace example.products in Resource products.rosetta. Solid arrows indicate containment; the dashed arrow indicates a cross-reference between the two containment trees.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9" fill="none" stroke="#a9b7cb" stroke-width="1.4"/></marker></defs>
+<rect width="1120" height="875" rx="22" fill="#121923"/>
+<g font-family="Segoe UI, Arial, sans-serif">
+<text x="30" y="47" fill="#eef2f8" font-size="31" font-weight="600" text-anchor="start">
+<tspan x="30" dy="0" xml:space="preserve">One EMF model can link two files</tspan>
+</text>
+<text x="30" y="80" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="30" dy="0" xml:space="preserve">Miniature structural illustration · not runtime data or an exact memory dump</tspan>
+</text>
+<rect x="30" y="130" width="515" height="660" rx="14" fill="#18222f" stroke="#a2c6e6" stroke-width="1.5"/>
+<text x="53" y="167" fill="#a2c6e6" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="53" dy="0" xml:space="preserve">Resource</tspan>
+</text>
+<text x="53" y="200" fill="#eef2f8" font-size="21" font-weight="400" text-anchor="start" font-family="Consolas, DejaVu Sans Mono, monospace">
+<tspan x="53" dy="0" xml:space="preserve">orders.rosetta</tspan>
+</text>
+<rect x="575" y="130" width="515" height="660" rx="14" fill="#18222f" stroke="#a2c6e6" stroke-width="1.5"/>
+<text x="598" y="167" fill="#a2c6e6" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="598" dy="0" xml:space="preserve">Resource</tspan>
+</text>
+<text x="598" y="200" fill="#eef2f8" font-size="21" font-weight="400" text-anchor="start" font-family="Consolas, DejaVu Sans Mono, monospace">
+<tspan x="598" dy="0" xml:space="preserve">products.rosetta</tspan>
+</text>
+<rect x="60" y="245" width="455" height="90" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="61" y="264" width="4" height="52" rx="2" fill="#a6b0ec"/>
+<text x="83" y="282" fill="#a6b0ec" font-size="23" font-weight="600" text-anchor="start">
+<tspan x="83" dy="0" xml:space="preserve">RosettaModel</tspan>
+</text>
+<text x="83" y="315" fill="#a9b7cb" font-size="19" font-weight="400" text-anchor="start">
+<tspan x="83" dy="0" xml:space="preserve">namespace example.orders</tspan>
+</text>
+<rect x="60" y="380" width="455" height="90" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="61" y="399" width="4" height="52" rx="2" fill="#92d5c6"/>
+<text x="83" y="417" fill="#92d5c6" font-size="23" font-weight="600" text-anchor="start">
+<tspan x="83" dy="0" xml:space="preserve">Data · Order</tspan>
+</text>
+<text x="83" y="450" fill="#a9b7cb" font-size="19" font-weight="400" text-anchor="start">
+<tspan x="83" dy="0" xml:space="preserve">Contains its attributes</tspan>
+</text>
+<rect x="60" y="515" width="455" height="90" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="61" y="534" width="4" height="52" rx="2" fill="#92d5c6"/>
+<text x="83" y="552" fill="#92d5c6" font-size="23" font-weight="600" text-anchor="start">
+<tspan x="83" dy="0" xml:space="preserve">Attribute · product</tspan>
+</text>
+<text x="83" y="585" fill="#a9b7cb" font-size="19" font-weight="400" text-anchor="start">
+<tspan x="83" dy="0" xml:space="preserve">Contains its TypeCall</tspan>
+</text>
+<rect x="60" y="650" width="455" height="90" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="61" y="669" width="4" height="52" rx="2" fill="#d0b487"/>
+<text x="83" y="687" fill="#d0b487" font-size="23" font-weight="600" text-anchor="start">
+<tspan x="83" dy="0" xml:space="preserve">TypeCall</tspan>
+</text>
+<text x="83" y="720" fill="#a9b7cb" font-size="19" font-weight="400" text-anchor="start">
+<tspan x="83" dy="0" xml:space="preserve">type refers to Product</tspan>
+</text>
+<rect x="605" y="245" width="455" height="90" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="606" y="264" width="4" height="52" rx="2" fill="#a6b0ec"/>
+<text x="628" y="282" fill="#a6b0ec" font-size="23" font-weight="600" text-anchor="start">
+<tspan x="628" dy="0" xml:space="preserve">RosettaModel</tspan>
+</text>
+<text x="628" y="315" fill="#a9b7cb" font-size="19" font-weight="400" text-anchor="start">
+<tspan x="628" dy="0" xml:space="preserve">namespace example.products</tspan>
+</text>
+<rect x="605" y="380" width="455" height="100" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="606" y="399" width="4" height="62" rx="2" fill="#92d5c6"/>
+<text x="628" y="417" fill="#92d5c6" font-size="23" font-weight="600" text-anchor="start">
+<tspan x="628" dy="0" xml:space="preserve">Data · Product</tspan>
+</text>
+<text x="628" y="450" fill="#a9b7cb" font-size="19" font-weight="400" text-anchor="start">
+<tspan x="628" dy="0" xml:space="preserve">RosettaType declaration</tspan>
+</text>
+<polyline points="287.5,335 287.5,380" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<text x="304.5" y="364.5" fill="#a9b7cb" font-size="18" font-weight="400" text-anchor="start">
+<tspan x="304.5" dy="0" xml:space="preserve">elements</tspan>
+</text>
+<polyline points="287.5,470 287.5,515" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<text x="304.5" y="499.5" fill="#a9b7cb" font-size="18" font-weight="400" text-anchor="start">
+<tspan x="304.5" dy="0" xml:space="preserve">attributes</tspan>
+</text>
+<polyline points="287.5,605 287.5,650" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<text x="304.5" y="634.5" fill="#a9b7cb" font-size="18" font-weight="400" text-anchor="start">
+<tspan x="304.5" dy="0" xml:space="preserve">typeCall</tspan>
+</text>
+<polyline points="832.5,335 832.5,380" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<text x="849.5" y="364.5" fill="#a9b7cb" font-size="18" font-weight="400" text-anchor="start">
+<tspan x="849.5" dy="0" xml:space="preserve">elements</tspan>
+</text>
+<polyline points="515,690 1040,690 1040,480" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6 6" marker-end="url(#arrow)"/>
+<text x="595" y="659" fill="#d0b487" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="595" dy="0" xml:space="preserve">type · cross-reference</tspan>
+</text>
+<text x="605" y="542" fill="#a9b7cb" font-size="21" font-weight="400" text-anchor="start">
+<tspan x="605" dy="0" xml:space="preserve">References can link objects</tspan>
+<tspan x="605" dy="29" xml:space="preserve">across containment trees / files.</tspan>
+</text>
+<polyline points="30,833 86,833" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<text x="98" y="840" fill="#a9b7cb" font-size="18" font-weight="400" text-anchor="start">
+<tspan x="98" dy="0" xml:space="preserve">Containment (owned child)</tspan>
+</text>
+<polyline points="580,833 636,833" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6 6" marker-end="url(#arrow)"/>
+<text x="648" y="840" fill="#a9b7cb" font-size="18" font-weight="400" text-anchor="start">
+<tspan x="648" dy="0" xml:space="preserve">Cross-reference (linked object)</tspan>
+</text>
+</g>
+</svg>

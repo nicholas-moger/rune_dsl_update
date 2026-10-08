@@ -1,0 +1,25 @@
+namespace chaos.s28.a7first
+version "1.0.0"
+isEvent root C28Event;
+type C28Extra: <"Helper - relocated by the import axis.">
+    memo string (1..1)
+type C28Event: <"The qualifiable EVENT root - the A7 order-of-load race runs on the Event kind so the s22 Product race stays unmoved.">
+    kind string (0..1)
+    size number (0..1)
+    extra C28Extra (0..1)
+func Qualify_C28Trade: <"Event qualification 1.">
+    [qualification BusinessEvent]
+    inputs:
+        event C28Event (1..1)
+    output:
+        is_event boolean (1..1)
+    set is_event:
+        event -> kind = "trade"
+func Qualify_C28Cancel: <"Event qualification 2 - the overlapping predicate space.">
+    [qualification BusinessEvent]
+    inputs:
+        event C28Event (1..1)
+    output:
+        is_event boolean (1..1)
+    set is_event:
+        event -> kind = "cancel" and event -> size exists

@@ -1,0 +1,16 @@
+namespace test.qfw.b
+version "0.0.0"
+isProduct root QfwTerms;
+
+type QfwTerms: <"The same-named root type in the LATER namespace - its configuration loses the first-wins race.">
+    kind string (0..1)
+    notional number (0..1)
+
+func Qualify_QfwB1: <"Product qualification against the declared root.">
+    [qualification Product]
+    inputs:
+        terms QfwTerms (1..1)
+    output:
+        is_product boolean (1..1)
+    set is_product:
+        terms -> kind = "exotic"

@@ -1,0 +1,46 @@
+namespace chaos.s23.a3half.p2
+version "1.0.0"
+import chaos.s23.a3half.p1.*
+func C23Mul: <"The callee: number inputs, the int argument coerced at the call.">
+    inputs:
+        a number (1..1)
+        b number (1..1)
+    output:
+        p number (1..1)
+    set p: a * b
+func C23Scale: <"An int INPUT in BigDecimal arithmetic at ARGUMENT position (F2's C8Scale class re-shaped: the argument seat), a count inside a lambda into a number output, and an int sum into a number.">
+    inputs:
+        q int (1..1)
+        w number (1..1)
+        bs C23Box (0..*)
+    output:
+        r number (1..1)
+    alias scaled: C23Mul(q, w)
+    alias counted: bs extract b [ b -> lid ] then count
+    alias summed: bs extract b [ (b -> lid) count ] then sum
+    set r: scaled + counted + summed + q
+func C23Flag: <"The bare-boolean-input CONDITION render: `if flag then ... else ...` over flag boolean (1..1) - the fork renders MapperS.of(flag).getOrDefault(false) where the released plugin renders (flag == null ? false : flag) (seat 9 round 3's banked divergence; no vendored carrier).">
+    inputs:
+        flag boolean (1..1)
+        a string (1..1)
+        b string (1..1)
+    output:
+        r string (1..1)
+    set r: if flag then a else b
+func C23FlagOpt: <"The same over an OPTIONAL boolean input and over a boolean ATTRIBUTE.">
+    inputs:
+        flag boolean (0..1)
+        box C23Box (1..1)
+    output:
+        r string (1..1)
+    set r: if flag then box -> lid else (if box -> live then "live" else "none")
+func C23CmpArm: <"A LITERAL-armed conditional as a COMPARISON operand (the ExistsThenConditional class - the released plugin hoists a final MapperS<String>, the fork's plain String does not compile; DECLARED at #630) beside a NUMBER-armed one and a conditional at each side of the comparison.">
+    inputs:
+        flag boolean (1..1)
+        n number (1..1)
+    output:
+        ok boolean (1..1)
+    set ok:
+        (if flag then "a" else "b") = "a"
+        and (if flag then 1 else 2) < n
+        and n >= (if flag then 0 else 1)

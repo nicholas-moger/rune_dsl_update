@@ -1,0 +1,18 @@
+namespace chaos.s07.a3third.p2
+version "1.0.0"
+import chaos.s07.a3third.p1.*
+import chaos.s07.a3third.p3.*
+type C7Trade: <"The report-from type - label annotations in both grammar forms.">
+    utid string (1..1)
+        [label as "The Trade UTI"]
+    notional number (0..1)
+    extra C7Extra (0..1)
+        [label for memo "The Extra Memo"]
+eligibility rule C7Eligible from C7Trade: <"Report when-gate.">
+    notional exists
+reporting rule C7Utid from C7Trade: <"Reported field with a label.">
+    extract utid
+        as "UTI"
+reporting rule C7Notional from C7Trade: <"Reported numeric with default.">
+    extract notional default 0
+        as "Notional"

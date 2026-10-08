@@ -1,0 +1,38 @@
+namespace chaos.s18.a3third.p2
+version "1.0.0"
+import chaos.s18.a3third.p1.*
+import chaos.s18.a3third.p3.*
+metaType scheme string
+type C18Coded: <"The meta-shape dimension at the switch subject's feeder (charter 2.2b).">
+    kind string (0..1)
+        [metadata scheme]
+func C18FromCoded: <"Switch over a scheme-carrying scalar.">
+    inputs:
+        c C18Coded (1..1)
+    output:
+        n number (1..1)
+    set n:
+        c -> kind switch
+            "spot" then 1,
+            "fwd" then 2,
+            default 0
+func C18Grade: <"String-literal guards.">
+    inputs:
+        g string (1..1)
+    output:
+        n number (1..1)
+    set n:
+        g switch
+            "A" then 1,
+            "B" then 2,
+            default 0
+func C18Band: <"Integer-literal guards.">
+    inputs:
+        i number (1..1)
+    output:
+        b string (1..1)
+    set b:
+        i switch
+            1 then "one",
+            2 then "two",
+            default "many"

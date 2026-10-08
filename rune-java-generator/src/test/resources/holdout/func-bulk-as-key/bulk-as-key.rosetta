@@ -1,0 +1,18 @@
+namespace test.bulkaskey
+
+type WithMeta:
+    [metadata key]
+
+type OtherType:
+    attrSingle WithMeta (0..1)
+    [metadata reference]
+    attrMulti WithMeta (0..*)
+    [metadata reference]
+
+func asKeyUsage:
+    inputs: withMeta WithMeta(0..*)
+    output: out OtherType (0..1)
+    add out -> attrMulti:
+        withMeta as-key
+    set out -> attrSingle:
+        withMeta only-element as-key

@@ -1,0 +1,82 @@
+# The § 4b FORK-side per-file diagnostics for the EXPECTED census (the spec
+# review's MF-4: PR-1 pins the DATA per file, not an aggregate count).
+# file<TAB>fork-verdict<TAB>fork-diagnostic-substring
+# RE-TAKEN for chaos-1.1.0 (v3.2 seat 10, PR #631 - D49).
+#
+# BOM-REFUSAL fork half: the fork PARSER refuses every a5bom file at 1:0 with
+# a token-recognition error on the BOM bytes - refusal parity with upstream,
+# MEASURED and asserted as a SET by ChaosCoverageCensusTest.expectedBomSet()
+# (LAW 73) - 34 files at chaos-1.1.0, one per A5-applicable family. The
+# per-file rows below are the committed data; the standing test re-takes
+# them live. Parse-gate readers filter to FORK-REFUSES (exact).
+chaos-s01-a5bom.rosetta	FORK-REFUSES	token recognition error
+chaos-s02-a5bom.rosetta	FORK-REFUSES	token recognition error
+chaos-s03-a5bom.rosetta	FORK-REFUSES	token recognition error
+chaos-s04-a5bom.rosetta	FORK-REFUSES	token recognition error
+chaos-s05-a5bom.rosetta	FORK-REFUSES	token recognition error
+chaos-s06-a5bom.rosetta	FORK-REFUSES	token recognition error
+chaos-s07-a5bom.rosetta	FORK-REFUSES	token recognition error
+chaos-s08-a5bom.rosetta	FORK-REFUSES	token recognition error
+chaos-s09-a5bom.rosetta	FORK-REFUSES	token recognition error
+chaos-s10-a5bom.rosetta	FORK-REFUSES	token recognition error
+chaos-s11-a5bom.rosetta	FORK-REFUSES	token recognition error
+chaos-s12-a5bom.rosetta	FORK-REFUSES	token recognition error
+chaos-s13-a5bom.rosetta	FORK-REFUSES	token recognition error
+chaos-s14-a5bom.rosetta	FORK-REFUSES	token recognition error
+chaos-s15-a5bom.rosetta	FORK-REFUSES	token recognition error
+chaos-s16-a5bom.rosetta	FORK-REFUSES	token recognition error
+chaos-s17-a5bom.rosetta	FORK-REFUSES	token recognition error
+chaos-s18-a5bom.rosetta	FORK-REFUSES	token recognition error
+chaos-s19-a5bom.rosetta	FORK-REFUSES	token recognition error
+chaos-s20-a5bom.rosetta	FORK-REFUSES	token recognition error
+chaos-s21-a5bom.rosetta	FORK-REFUSES	token recognition error
+chaos-s22-a5bom.rosetta	FORK-REFUSES	token recognition error
+chaos-s23-a5bom.rosetta	FORK-REFUSES	token recognition error
+chaos-s24-a5bom.rosetta	FORK-REFUSES	token recognition error
+chaos-s25-a5bom.rosetta	FORK-REFUSES	token recognition error
+chaos-s26-a5bom.rosetta	FORK-REFUSES	token recognition error
+chaos-s27-a5bom.rosetta	FORK-REFUSES	token recognition error
+chaos-s28-a5bom.rosetta	FORK-REFUSES	token recognition error
+chaos-s29-a5bom.rosetta	FORK-REFUSES	token recognition error
+chaos-s30-a5bom.rosetta	FORK-REFUSES	token recognition error
+chaos-s31-a5bom.rosetta	FORK-REFUSES	token recognition error
+chaos-s32-a5bom.rosetta	FORK-REFUSES	token recognition error
+chaos-s33-a5bom.rosetta	FORK-REFUSES	token recognition error
+chaos-s34-a5bom.rosetta	FORK-REFUSES	token recognition error
+#
+# COLLISION-CAPTURE fork half - ANSWERED at PR-2 for s17 (the L2 differential
+# records ZERO x36enum rows - the fork binds the in-file rival and leaves
+# 'Sell' UNRESOLVED exactly as upstream does) and ADJUDICATED at v3.2 seat 9
+# (PR #630, D48): the released plugin REFUSES p2 WHOLE (the mojo's
+# all-or-nothing gate) and DEFINES p1's goldens when p1 is judged alone; the
+# fork keeps its per-ELEMENT licence - the p2 elements carrying the unresolved
+# reference are REFUSED at ENUM_VALUE_NAME_ECHO and p2's other files emit
+# golden-free (chaos-golden-free.txt, the asserted expected-noGolden set).
+# chaos-1.1.0 (D49) adds the A1xA6 twins (the rival FIRST in p2 - the same
+# capture, measured) and the fresh s31 pair; the fork's rows for them are
+# taken from the swap's own D11 + L2 + judged-alone prints (never typed).
+chaos-s17-x36enum-p1.rosetta	FORK-EMITS-AS-UPSTREAM	8 goldens (x36enum-split-p1, the released plugin judging p1 alone); byte-identical
+chaos-s17-x36enum-p2.rosetta	FORK-REFUSES-ELEMENT	ENUM_VALUE_NAME_ECHO x2 (C17Sift, C17BooksC17Agree); the other seven files (three elements) golden-free; L2 zero x36enum rows
+#
+# REFUSAL-PARITY fork half (chaos-1.1.0, D49) - the VALIDATOR-grain rows the
+# widened ChaosForkDiagnosticsGateTest asserts live; each FORK-ACCEPTS-DIVERGENT
+# row is a DECLARED divergence (shrink-only: a priced parser / resolver /
+# validator seat), each FORK-REFUSES-VALIDATION row a parity fact. The rows
+# land at the swap commit from the gate's own print.
+# The rows below are the gate's own [BAND] print at the swap (fills-f2, 2026-09-10; band-f2.log; the s93 row RE-TAKEN at
+# round 1 from the every-error print - scratch/r1-band-r1a.log - where its second declared error comes from): the fork's
+# front end over each band file ALONE (builtins + the file), ERROR diagnostics of parse + link + validation.
+#   FORK-REFUSES-VALIDATION = refusal parity: EVERY error message of the file, `||`-separated (one substring per ERROR,
+#                             any order; round 1 - s93 reports its message twice, once per reference); upstream's wording may differ;
+#   FORK-ACCEPTS-DIVERGENT  = the fork accepts what the released plugin refuses - a DECLARED, PRICED seat, shrink-only;
+#   FORK-ACCEPTS-PARITY     = both validators admit the file (the ORACLE-CLEAN / MOJO-CRASH band rows).
+chaos-s90-base.rosetta	FORK-ACCEPTS-DIVERGENT	a closure parameter named `e` (the released grammar refuses: the exponent letter; the fork's lexer admits it - the seat-7 banked parser seat)
+chaos-s91-base.rosetta	FORK-ACCEPTS-DIVERGENT	a named-parameter inline function after `then` (the fork's thenSuffix admits it where the released grammar takes a bare implicit body - the seat-6 banked PARSER SEAT)
+chaos-s92-base.rosetta	FORK-ACCEPTS-DIVERGENT	an attribute named `e` (the released grammar refuses; the seat-8 anchor fixture's first cut)
+chaos-s93-base.rosetta	FORK-REFUSES-VALIDATION	Enum 'eth' not found || Enum 'eth' not found
+chaos-s94-base.rosetta	FORK-ACCEPTS-DIVERGENT	bare-item switch arms joining to `any` (the released validator refuses at typing, "Cannot assign `any`"; the fork's validator admits and its GENERATOR refuses the function at TYPE_SWITCH_TERNARY_STUB - the seat-7 banked typing seat)
+chaos-s95-base.rosetta	FORK-ACCEPTS-PARITY	a duplicate closure-parameter name (`reduce a, a`): upstream admits it too (ORACLE-CLEAN) and renders `(a0, a1)`; the fork's `(a, a)` render is the D11's M12 row
+chaos-s96-base.rosetta	FORK-ACCEPTS-DIVERGENT	the direct nested lambda shadow (the released validator refuses "Duplicate name."; the fork binds the inner parameter - a validator port owed, the seat-8 banking)
+chaos-s97-base.rosetta	FORK-REFUSES-VALIDATION	Expecting single cardinality
+chaos-s98-base.rosetta	FORK-ACCEPTS-PARITY	`empty as-key` at a reference leaf: both validators admit it; upstream's GENERATOR crashes (mojo-refused.tsv), the fork emits - the section 4b two-oracles class
+chaos-s99-base.rosetta	FORK-ACCEPTS-PARITY	the java.lang shadow (alias Int + condition eger): both validators admit it; the fork refuses the two poisoned emissions at BOILERPLATE_NAME_COLLISION, upstream emits them non-compiling (the register)

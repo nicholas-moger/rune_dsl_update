@@ -1,0 +1,8 @@
+namespace chaos.s19.a4none
+type C19Part: <"Keyed component - relocated by the import axis.">
+    [metadata key]
+    pid string (1..1)
+metaType key string
+metaType reference string
+metaType address string
+metaType location string

@@ -1,0 +1,230 @@
+#!/usr/bin/env python3
+"""Self-test for evidence-api-ledger.py — proves the gate is NOT vacuous.
+
+The house convention (see the sibling `*.py.test` / `*.sh.test` lints): build
+deliberately-broken inputs and assert the gate FAILS on each, plus the clean
+case. A gate nobody has seen fail is a gate nobody should trust — and THIS
+gate is the C2a burn-down meter, so a silent hole in it would let an evidence
+scan land unledgered for the rest of the programme.
+
+Run:  py -3 scripts/ci/evidence-api-ledger.py.test
+"""
+import os
+import shutil
+import subprocess
+import sys
+import tempfile
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+GATE = os.path.join(HERE, "evidence-api-ledger.py")
+
+JAVA = """package p;
+/** facet alphaProbe (self-test) — the render-truth overlay note lives here. */
+class T {
+    void a(J e) {
+        imports = HandlerHelper.union(e.getRefs(), more);
+        if (!e.getRefs().isEmpty()) {
+        }
+        String s = "x.contains(\\"generated\\")";
+        if (rendered.endsWith(".get()")) {
+        }
+        if (names.contains(n)) {
+        }
+        NavigationHandler.uniqueMetaWrapperForValueType(e.getRefs(), t);
+    }
+}
+"""
+# One candidate per fixture line, whitespace-normalised — keys of the ledger.
+ROWS = [
+    ("refs-read", "PROPAGATION", "KEPT-BY-CLASS", 1,
+     "imports = HandlerHelper.union(e.getRefs(), more);", ""),
+    ("refs-read", "PROBE", "PENDING", 1,
+     "if (!e.getRefs().isEmpty()) {", ""),
+    ("rendered-string-test", "PROBE", "PENDING", 1,
+     'if (rendered.endsWith(".get()")) {', ""),
+    ("rendered-string-test", "EXCLUDED", "N-A", 1,
+     "if (names.contains(n)) {", "collection membership, not a string test"),
+    ("wrapper-scan", "PROBE", "PENDING", 1,
+     "NavigationHandler.uniqueMetaWrapperForValueType(e.getRefs(), t);", ""),
+]
+REL = "rune-java-generator/src/main/java/T.java"
+MODULES = ["rune-java-generator", "rune-ir", "rune-ir-java",
+           "rune-ir-java-optimised", "rune-parser"]
+
+
+def ledger_text(rows=None, probe_pin=3, labels=None):
+    rows = ROWS if rows is None else rows
+    labels = labels or {"rune-java-generator": "1/1"}
+    out = ["# pin probe-sites=%d" % probe_pin]
+    for m in MODULES:
+        out.append("# pin facet-labels-%s=%s" % (m, labels.get(m, "0/0")))
+    for kind, cls, disp, count, snippet, note in rows:
+        out.append("\t".join([REL, kind, cls, disp, str(count), snippet, note]))
+    return "\n".join(out) + "\n"
+
+
+def build(tmp, java=JAVA, ledger=None):
+    for sub in ("rune-java-generator", "scripts"):
+        p = os.path.join(tmp, sub)
+        if os.path.isdir(p):
+            shutil.rmtree(p)
+    src = os.path.join(tmp, "rune-java-generator", "src", "main", "java")
+    os.makedirs(src)
+    with open(os.path.join(src, "T.java"), "w", encoding="utf-8",
+              newline="\n") as fh:
+        fh.write(java)
+    ci = os.path.join(tmp, "scripts", "ci")
+    os.makedirs(ci)
+    with open(os.path.join(ci, "evidence-api-ledger.tsv"), "w",
+              encoding="utf-8", newline="\n") as fh:
+        fh.write(ledger if ledger is not None else ledger_text())
+
+
+def run(tmp, *extra):
+    p = subprocess.run([sys.executable, GATE, "--root", tmp] + list(extra),
+                       capture_output=True, text=True, encoding="utf-8",
+                       errors="replace")
+    return p.returncode, (p.stdout or "") + (p.stderr or "")
+
+
+def main():
+    failures = []
+    ran = []
+
+    def expect(label, code, out, want_fail, needle=None):
+        ran.append(label)
+        ok = (code != 0) if want_fail else (code == 0)
+        if ok and needle:
+            ok = needle in out
+        print("  %-52s %s" % (label, "ok" if ok else "FAILED"))
+        if not ok:
+            failures.append((label, code, out))
+
+    tmp = tempfile.mkdtemp(prefix="evidence-ledger-test-")
+    try:
+        build(tmp)
+        code, out = run(tmp)
+        expect("clean tree + matching ledger passes", code, out, False,
+               "OK - ledger and tree agree")
+
+        # A comment mention and a string-literal predicate net NOTHING: the
+        # clean case above already proves it (JAVA carries both and the
+        # ledger has no rows for them). Make the masking failure DIRECT too:
+        build(tmp, java=JAVA.replace(
+            "String s", 'String rt = "render-truth"; String s'))
+        code, out = run(tmp)
+        expect("render-truth outside a comment fails", code, out, True,
+               "positive control")
+
+        build(tmp, java=JAVA.replace(
+            "if (names.contains(n)) {",
+            "if (names.contains(n)) {\n        }\n        if (other.startsWith(m)) {"))
+        code, out = run(tmp)
+        expect("new unledgered candidate fails", code, out, True,
+               "unledgered candidate")
+
+        build(tmp, java=JAVA.replace(
+            "        if (names.contains(n)) {\n        }\n", ""))
+        code, out = run(tmp)
+        expect("stale ledger row fails", code, out, True, "stale ledger row")
+
+        build(tmp, java=JAVA.replace(
+            "if (!e.getRefs().isEmpty()) {",
+            "if (!e.getRefs().isEmpty()) {\n        }\n"
+            "        if (!e.getRefs().isEmpty()) {"))
+        code, out = run(tmp)
+        expect("count drift fails", code, out, True, "count drift")
+
+        build(tmp, ledger=ledger_text(probe_pin=2))
+        code, out = run(tmp)
+        expect("probe-site pin mismatch fails", code, out, True,
+               "probe-site pin")
+
+        build(tmp, ledger=ledger_text().replace(
+            "# pin probe-sites=3\n", ""))
+        code, out = run(tmp)
+        expect("missing probe pin header fails", code, out, True,
+               "no '# pin probe-sites=N'")
+
+        rows = [("refs-read", "UNCLASSIFIED", "N-A", 1,
+                 "imports = HandlerHelper.union(e.getRefs(), more);", "")] \
+            + ROWS[1:]
+        build(tmp, ledger=ledger_text(rows=rows))
+        code, out = run(tmp)
+        expect("committed UNCLASSIFIED row fails", code, out, True,
+               "UNCLASSIFIED")
+
+        rows = [("refs-read", "PROBE", "PENDING", 1,
+                 "imports = HandlerHelper.union(e.getRefs(), more);", "")] \
+            + ROWS[1:]
+        build(tmp, ledger=ledger_text(rows=rows, probe_pin=4))
+        code, out = run(tmp)
+        expect("definitional propagation shape ledgered PROBE fails", code,
+               out, True, "contradicts definitional")
+
+        rows = ROWS[:4] + [("wrapper-scan", "PROPAGATION", "KEPT-BY-CLASS", 1,
+                            "NavigationHandler.uniqueMetaWrapperForValueType(e.getRefs(), t);",
+                            "")]
+        build(tmp, ledger=ledger_text(rows=rows, probe_pin=2))
+        code, out = run(tmp)
+        expect("definitional probe shape ledgered PROPAGATION fails", code,
+               out, True, "contradicts definitional")
+
+        # The ADVISORY strength: an isEmpty() refs read PRE-FILLS probe but a
+        # committed judgement may refine it — the live tree's sole carrier is
+        # a guard around an idempotent union (propagation maintenance).
+        rows = ROWS[:1] + [("refs-read", "PROPAGATION", "KEPT-BY-CLASS", 1,
+                            "if (!e.getRefs().isEmpty()) {",
+                            "guard around an idempotent refs union")] + ROWS[2:]
+        build(tmp, ledger=ledger_text(rows=rows, probe_pin=2))
+        code, out = run(tmp)
+        expect("advisory probe shape refinable to PROPAGATION", code, out,
+               False, "OK - ledger and tree agree")
+
+        rows = ROWS[:3] + [("rendered-string-test", "EXCLUDED", "N-A", 1,
+                            "if (names.contains(n)) {", "")] + ROWS[4:]
+        build(tmp, ledger=ledger_text(rows=rows))
+        code, out = run(tmp)
+        expect("EXCLUDED row without a note fails", code, out, True,
+               "needs a note")
+
+        rows = ROWS[:1] + [("refs-read", "PROBE", "JUSTIFIED-KEPT", 1,
+                            "if (!e.getRefs().isEmpty()) {", "")] + ROWS[2:]
+        build(tmp, ledger=ledger_text(rows=rows))
+        code, out = run(tmp)
+        expect("JUSTIFIED-KEPT without justification fails", code, out, True,
+               "written justification")
+
+        build(tmp, ledger=ledger_text(
+            labels={"rune-java-generator": "2/2"}))
+        code, out = run(tmp)
+        expect("facet-label tripwire mismatch fails", code, out, True,
+               "facet-label tripwire")
+
+        build(tmp, ledger=ledger_text(rows=ROWS[1:], probe_pin=3))
+        code, out = run(tmp, "--emit")
+        expect("--emit prints the unledgered row auto-classified", code, out,
+               False, "refs-read\tPROPAGATION\tKEPT-BY-CLASS")
+
+        build(tmp)
+        code, out = run(tmp, "--list")
+        expect("--list prints live sites with line numbers", code, out,
+               False, "T.java:5")
+    finally:
+        shutil.rmtree(tmp, ignore_errors=True)
+
+    print()
+    if failures:
+        print("SELF-TEST FAILED - %d of %d case(s):" % (len(failures),
+                                                        len(ran)))
+        for label, code, out in failures:
+            print()
+            print("== %s (exit %d)" % (label, code))
+            print(out)
+        return 1
+    print("SELF-TEST OK - %d cases." % len(ran))
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

@@ -1,0 +1,14 @@
+namespace test.fmeta018
+
+metaType reference string
+
+func SomeFunc:
+	inputs:
+		myInput int (0..*)
+		[metadata reference]
+
+	output:
+		myResult number (0..*)
+		[metadata scheme]
+		
+	set myResult: myInput	

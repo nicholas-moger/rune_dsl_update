@@ -1,0 +1,6 @@
+namespace com.test
+
+func ParentFn:
+    output:
+        result string (1..1)
+    set result: "parent"

@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="1535" viewBox="0 0 480 1535" role="img" aria-labelledby="title desc">
+<title id="title">One EMF model can link two files</title>
+<desc id="desc">Miniature structural illustration, not runtime data or an exact memory dump. Resource orders.rosetta contains RosettaModel with namespace example.orders. Its elements include Data named Order, whose attributes include Attribute named product, whose typeCall is a TypeCall. TypeCall.type cross-references the Data named Product, a RosettaType declaration in the RosettaModel with namespace example.products in Resource products.rosetta. Solid arrows indicate containment; the dashed arrow indicates a cross-reference between the two containment trees.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9" fill="none" stroke="#a9b7cb" stroke-width="1.4"/></marker></defs>
+<rect width="480" height="1535" rx="22" fill="#121923"/>
+<g font-family="Segoe UI, Arial, sans-serif">
+<text x="24" y="43" fill="#eef2f8" font-size="29" font-weight="600" text-anchor="start">
+<tspan x="24" dy="0" xml:space="preserve">One EMF model</tspan>
+<tspan x="24" dy="35" xml:space="preserve">can link two files</tspan>
+</text>
+<text x="24" y="119" fill="#a9b7cb" font-size="19" font-weight="400" text-anchor="start">
+<tspan x="24" dy="0" xml:space="preserve">Miniature structural illustration;</tspan>
+<tspan x="24" dy="26" xml:space="preserve">not runtime data or a memory dump.</tspan>
+</text>
+<rect x="24" y="185" width="432" height="665" rx="14" fill="#18222f" stroke="#a2c6e6" stroke-width="1.5"/>
+<text x="47" y="222" fill="#a2c6e6" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Resource</tspan>
+</text>
+<text x="47" y="255" fill="#eef2f8" font-size="21" font-weight="400" text-anchor="start" font-family="Consolas, DejaVu Sans Mono, monospace">
+<tspan x="47" dy="0" xml:space="preserve">orders.rosetta</tspan>
+</text>
+<rect x="24" y="970" width="432" height="420" rx="14" fill="#18222f" stroke="#a2c6e6" stroke-width="1.5"/>
+<text x="47" y="1007" fill="#a2c6e6" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Resource</tspan>
+</text>
+<text x="47" y="1040" fill="#eef2f8" font-size="21" font-weight="400" text-anchor="start" font-family="Consolas, DejaVu Sans Mono, monospace">
+<tspan x="47" dy="0" xml:space="preserve">products.rosetta</tspan>
+</text>
+<rect x="47" y="300" width="386" height="95" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="48" y="319" width="4" height="57" rx="2" fill="#a6b0ec"/>
+<text x="70" y="337" fill="#a6b0ec" font-size="23" font-weight="600" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">RosettaModel</tspan>
+</text>
+<text x="70" y="370" fill="#a9b7cb" font-size="19" font-weight="400" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">namespace example.orders</tspan>
+</text>
+<rect x="47" y="435" width="386" height="85" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="48" y="454" width="4" height="47" rx="2" fill="#92d5c6"/>
+<text x="70" y="472" fill="#92d5c6" font-size="23" font-weight="600" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Data · Order</tspan>
+</text>
+<text x="70" y="505" fill="#a9b7cb" font-size="19" font-weight="400" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Contains its attributes</tspan>
+</text>
+<rect x="47" y="560" width="386" height="85" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="48" y="579" width="4" height="47" rx="2" fill="#92d5c6"/>
+<text x="70" y="597" fill="#92d5c6" font-size="23" font-weight="600" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Attribute · product</tspan>
+</text>
+<text x="70" y="630" fill="#a9b7cb" font-size="19" font-weight="400" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Contains its TypeCall</tspan>
+</text>
+<rect x="47" y="685" width="386" height="100" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="48" y="704" width="4" height="62" rx="2" fill="#d0b487"/>
+<text x="70" y="722" fill="#d0b487" font-size="23" font-weight="600" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">TypeCall</tspan>
+</text>
+<text x="70" y="755" fill="#a9b7cb" font-size="19" font-weight="400" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">type refers to Product</tspan>
+</text>
+<rect x="47" y="1080" width="386" height="100" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="48" y="1099" width="4" height="62" rx="2" fill="#a6b0ec"/>
+<text x="70" y="1117" fill="#a6b0ec" font-size="23" font-weight="600" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">RosettaModel</tspan>
+</text>
+<text x="70" y="1150" fill="#a9b7cb" font-size="19" font-weight="400" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">namespace example.products</tspan>
+</text>
+<rect x="47" y="1225" width="386" height="90" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="48" y="1244" width="4" height="52" rx="2" fill="#92d5c6"/>
+<text x="70" y="1262" fill="#92d5c6" font-size="23" font-weight="600" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Data · Product</tspan>
+</text>
+<text x="70" y="1295" fill="#a9b7cb" font-size="19" font-weight="400" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">RosettaType declaration</tspan>
+</text>
+<polyline points="240.0,395 240.0,435" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<text x="257.0" y="422.0" fill="#a9b7cb" font-size="18" font-weight="400" text-anchor="start">
+<tspan x="257.0" dy="0" xml:space="preserve">elements</tspan>
+</text>
+<polyline points="240.0,520 240.0,560" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<text x="257.0" y="547.0" fill="#a9b7cb" font-size="18" font-weight="400" text-anchor="start">
+<tspan x="257.0" dy="0" xml:space="preserve">attributes</tspan>
+</text>
+<polyline points="240.0,645 240.0,685" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<text x="257.0" y="672.0" fill="#a9b7cb" font-size="18" font-weight="400" text-anchor="start">
+<tspan x="257.0" dy="0" xml:space="preserve">typeCall</tspan>
+</text>
+<polyline points="240.0,1180 240.0,1225" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<text x="257.0" y="1209.5" fill="#a9b7cb" font-size="18" font-weight="400" text-anchor="start">
+<tspan x="257.0" dy="0" xml:space="preserve">elements</tspan>
+</text>
+<polyline points="433,735 466,735 466,1270 433,1270" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6 6" marker-end="url(#arrow)"/>
+<text x="24" y="903" fill="#d0b487" font-size="21" font-weight="400" text-anchor="start">
+<tspan x="24" dy="0" xml:space="preserve">TypeCall.type → Data(Product)</tspan>
+<tspan x="24" dy="28" xml:space="preserve">A cross-reference between files</tspan>
+</text>
+<polyline points="24,1430 79,1430" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<text x="91" y="1437" fill="#a9b7cb" font-size="18" font-weight="400" text-anchor="start">
+<tspan x="91" dy="0" xml:space="preserve">Containment (owned child)</tspan>
+</text>
+<polyline points="24,1480 79,1480" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6 6" marker-end="url(#arrow)"/>
+<text x="91" y="1487" fill="#a9b7cb" font-size="18" font-weight="400" text-anchor="start">
+<tspan x="91" dy="0" xml:space="preserve">Cross-reference (linked object)</tspan>
+</text>
+</g>
+</svg>

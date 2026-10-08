@@ -1,0 +1,66 @@
+namespace chaos.s19.a2wild
+version "1.0.0"
+import chaos.s19.a2wild.h.*
+metaType key string
+metaType reference string
+metaType address string
+metaType location string
+type C19Whole: <"Constructor target: every field-shape kind (charter 2.2b), incl. location/address meta at ctor-adjacent seats.">
+    name string (1..1)
+    opt number (0..1)
+    scores number (0..*)
+    part C19Part (0..1)
+    partRef C19Part (0..1)
+        [metadata reference]
+    parts C19Part (0..*)
+    spot string (0..1)
+        [metadata location]
+    ptr string (0..1)
+        [metadata address "pointsTo"=C19Whole->spot]
+func C19Make: <"Every constructor-field kind: scalar, empty, list literal, nested ctor, as-key reference.">
+    inputs:
+        nm string (1..1)
+        p C19Part (1..1)
+    output:
+        w C19Whole (1..1)
+    set w:
+        C19Whole {
+            name: nm,
+            opt: empty,
+            scores: [1, 2, 3],
+            part: C19Part { pid: nm + "-p" },
+            partRef: p as-key,
+            parts: [p, C19Part { pid: "fixed" }],
+            ...
+        }
+func C19Sparse: <"The rest marker - unset trailing fields.">
+    inputs:
+        nm string (1..1)
+    output:
+        w C19Whole (1..1)
+    set w:
+        C19Whole {
+            name: nm,
+            ...
+        }
+func C19Pick: <"A CONDITIONAL at a constructor-field seat (v3.1 F8) + a segment-set as-key from a bare value (F26).">
+    inputs:
+        n number (1..1)
+        p C19Part (1..1)
+    output:
+        w C19Whole (1..1)
+    set w:
+        C19Whole {
+            name: if n > 0 then "pos" else "neg",
+            opt: if n > 100 then n else empty,
+            ...
+        }
+    set w -> partRef: p as-key
+func C19Grid: <"Nested constructors inside list literals inside a constructor.">
+    inputs:
+        n number (1..1)
+    output:
+        ws C19Whole (0..*)
+    add ws:
+        [C19Whole { name: "a", scores: [n], ... },
+         C19Whole { name: "b", scores: [n, n * 2], ... }]

@@ -1,0 +1,4 @@
+namespace chaos.s01.a2dangle.h
+version "1.0.0"
+type C1Ref: <"A referenced component the import-style axis relocates.">
+    refCode string (1..1)

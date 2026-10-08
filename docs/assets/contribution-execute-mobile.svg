@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="1530" viewBox="0 0 480 1530" role="img" aria-labelledby="title desc">
+<title id="title">Try the snapshot in one small example</title>
+<desc id="desc">A bounded path for trying the fixed code snapshot: prepare JDK21, Maven with recorded baseline3.9.11 and Git; install seven modules in prescribed dependency order with tests skipped for bootstrap; run the authored fixture in Mode1 direct replacement compiler, Mode2 IR-assisted compatibility and Mode3 optimised provider; verify the expected route header and three authored tests for each mode. Green exit status alone does not establish provider selection. The optional next step is the separate pinned CDM consumer recipe and its corpus version pins. This diagram is an instructional route, not a new execution result or whole-corpus certification.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9" fill="none" stroke="#a9b7cb" stroke-width="1.4"/></marker></defs>
+<rect width="480" height="1530" rx="22" fill="#121923"/>
+<g font-family="Segoe UI, Arial, sans-serif">
+<text x="24" y="43" fill="#eef2f8" font-size="32" font-weight="600" text-anchor="start">
+<tspan x="24" dy="0" xml:space="preserve">Try the snapshot</tspan>
+<tspan x="24" dy="38" xml:space="preserve">in one small example</tspan>
+</text>
+<text x="24" y="125" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="24" dy="0" xml:space="preserve">Build → select a route → check it</tspan>
+<tspan x="24" dy="30" xml:space="preserve">A bounded authored fixture</tspan>
+</text>
+<rect x="24" y="205" width="432" height="125" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="25" y="224" width="4" height="87" rx="2" fill="#a2c6e6"/>
+<text x="47" y="242" fill="#a2c6e6" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">1 · Prepare</tspan>
+</text>
+<text x="47" y="275" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">JDK 21 · Maven · Git</tspan>
+<tspan x="47" dy="30" xml:space="preserve">Recorded Maven baseline: 3.9.11</tspan>
+</text>
+<rect x="24" y="375" width="432" height="135" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="25" y="394" width="4" height="97" rx="2" fill="#a2c6e6"/>
+<text x="47" y="412" fill="#a2c6e6" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">2 · Install seven modules</tspan>
+</text>
+<text x="47" y="445" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Follow the prescribed order</tspan>
+<tspan x="47" dy="30" xml:space="preserve">Bootstrap only · tests skipped</tspan>
+</text>
+<rect x="24" y="555" width="432" height="415" rx="14" fill="#18222f" stroke="#92d5c6" stroke-width="1.5"/>
+<text x="47" y="593" fill="#92d5c6" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">3 · Run the authored fixture</tspan>
+</text>
+<rect x="24" y="1015" width="432" height="165" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="25" y="1034" width="4" height="127" rx="2" fill="#d0b487"/>
+<text x="47" y="1052" fill="#d0b487" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">4 · Check every mode</tspan>
+</text>
+<text x="47" y="1085" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Expected route header</tspan>
+<tspan x="47" dy="30" xml:space="preserve">Three authored tests per mode</tspan>
+<tspan x="47" dy="30" xml:space="preserve">Green exit alone is insufficient</tspan>
+</text>
+<rect x="24" y="1225" width="432" height="155" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5" stroke-dasharray="7 5"/>
+<rect x="25" y="1244" width="4" height="117" rx="2" fill="#a6b0ec"/>
+<text x="47" y="1262" fill="#a6b0ec" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">5 · Optional: pinned CDM</tspan>
+</text>
+<text x="47" y="1295" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Use the separate consumer recipe</tspan>
+<tspan x="47" dy="30" xml:space="preserve">Select the recorded corpus pins</tspan>
+</text>
+<polyline points="240,330 240,375" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="240,510 240,555" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="240,970 240,1015" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="240,1180 240,1225" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6 6" marker-end="url(#arrow)"/>
+<text x="24" y="1440" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="24" dy="0" xml:space="preserve">A small example, not a full corpus run.</tspan>
+<tspan x="24" dy="30" xml:space="preserve">No new execution result is claimed.</tspan>
+</text>
+<rect x="47" y="625" width="386" height="90" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="48" y="644" width="4" height="52" rx="2" fill="#92d5c6"/>
+<text x="70" y="662" fill="#92d5c6" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Mode 1 · Direct</tspan>
+</text>
+<text x="70" y="695" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Replacement compiler</tspan>
+</text>
+<rect x="47" y="740" width="386" height="90" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="48" y="759" width="4" height="52" rx="2" fill="#92d5c6"/>
+<text x="70" y="777" fill="#92d5c6" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Mode 2 · IR compatibility</tspan>
+</text>
+<text x="70" y="810" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">IR-assisted provider</tspan>
+</text>
+<rect x="47" y="855" width="386" height="90" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="48" y="874" width="4" height="52" rx="2" fill="#92d5c6"/>
+<text x="70" y="892" fill="#92d5c6" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Mode 3 · Optimised</tspan>
+</text>
+<text x="70" y="925" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Optimised provider</tspan>
+</text>
+</g>
+</svg>

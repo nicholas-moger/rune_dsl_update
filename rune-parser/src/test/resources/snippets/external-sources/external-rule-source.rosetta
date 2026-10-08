@@ -1,0 +1,15 @@
+namespace test.external
+
+rule source MyRuleSource
+{
+    Trade:
+        + tradeId
+        + party
+        - removedAttr
+
+    enums
+
+    DirectionEnum:
+        + Up
+        + Down
+}

@@ -1,0 +1,22 @@
+namespace test.fmeta026
+
+choice A:
+	B
+	C
+
+type ABase:
+	prop int (0..*)
+		[metadata scheme]
+
+type B extends ABase:
+
+type C extends ABase:
+
+func Test:
+	inputs:
+		a A (1..1)
+	output:
+		result int (0..*)
+	
+	set result:
+		a ->> prop

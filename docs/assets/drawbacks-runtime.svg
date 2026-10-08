@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="900" viewBox="0 0 1120 900" role="img" aria-labelledby="title desc">
+<title id="title">When failure text is formatted</title>
+<desc id="desc">Conceptual failing-comparison path: format failure text eagerly, create ComparisonResult with Boolean and diagnostic, then a caller needs either Boolean or diagnostic text; eager text can remain unobserved. This does not mean every comparison or successful comparison formats a diagnostic. Separate retained U020 runtime experiment: eager versus deferred text. Time 8,527.481 plus/minus 411.588 versus 2,454.674 plus/minus 258.851 ms/op; allocation 30,790.11 plus/minus 121.15 versus 10,457.24 plus/minus 2.13 MB/op. Six JMH forks per variant; one operation runs 23 selected DRR report functions with synthetic inputs and reference Java held fixed. This is not production throughput, an IR gain, or a released Rune 9.83 baseline. Bars use separate scales for time and allocation.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9" fill="none" stroke="#a9b7cb" stroke-width="1.4"/></marker></defs>
+<rect width="1120" height="900" rx="22" fill="#121923"/>
+<g font-family="Segoe UI, Arial, sans-serif">
+<text x="30" y="47" fill="#eef2f8" font-size="31" font-weight="600" text-anchor="start">
+<tspan x="30" dy="0" xml:space="preserve">When failure text is formatted</tspan>
+</text>
+<text x="30" y="80" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="30" dy="0" xml:space="preserve">Conceptual failure path · experiment below is separate</tspan>
+</text>
+<rect x="30" y="145" width="250" height="120" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="31" y="164" width="4" height="82" rx="2" fill="#a2c6e6"/>
+<text x="53" y="182" fill="#a2c6e6" font-size="22" font-weight="600" text-anchor="start">
+<tspan x="53" dy="0" xml:space="preserve">Failing comparison</tspan>
+</text>
+<text x="53" y="215" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="53" dy="0" xml:space="preserve">Condition is false</tspan>
+</text>
+<rect x="315" y="145" width="250" height="120" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="316" y="164" width="4" height="82" rx="2" fill="#d0b487"/>
+<text x="338" y="182" fill="#d0b487" font-size="22" font-weight="600" text-anchor="start">
+<tspan x="338" dy="0" xml:space="preserve">Format failure text</tspan>
+</text>
+<text x="338" y="215" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="338" dy="0" xml:space="preserve">Eager formatting</tspan>
+</text>
+<rect x="600" y="145" width="250" height="120" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="601" y="164" width="4" height="82" rx="2" fill="#a6b0ec"/>
+<text x="623" y="182" fill="#a6b0ec" font-size="22" font-weight="600" text-anchor="start">
+<tspan x="623" dy="0" xml:space="preserve">ComparisonResult</tspan>
+</text>
+<text x="623" y="215" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="623" dy="0" xml:space="preserve">Boolean +</tspan>
+<tspan x="623" dy="28" xml:space="preserve">diagnostic text</tspan>
+</text>
+<rect x="885" y="145" width="205" height="120" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="886" y="164" width="4" height="82" rx="2" fill="#92d5c6"/>
+<text x="908" y="182" fill="#92d5c6" font-size="23" font-weight="600" text-anchor="start">
+<tspan x="908" dy="0" xml:space="preserve">Caller need</tspan>
+</text>
+<text x="908" y="215" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="908" dy="0" xml:space="preserve">Boolean only</tspan>
+<tspan x="908" dy="28" xml:space="preserve">or diagnostic</tspan>
+</text>
+<polyline points="280,205 315,205" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="565,205 600,205" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="850,205 885,205" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<rect x="315" y="292" width="250" height="80" rx="14" fill="#18222f" stroke="#d0b487" stroke-width="1.5"/>
+<text x="440" y="324" fill="#d0b487" font-size="20" font-weight="400" text-anchor="middle">
+<tspan x="440" dy="0" xml:space="preserve">Eager text can remain</tspan>
+<tspan x="440" dy="28" xml:space="preserve">unobserved by caller</tspan>
+</text>
+<polyline points="440,265 440,292" fill="none" stroke="#d0b487" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="30" y="435" width="1060" height="355" rx="14" fill="#18222f" stroke="#d0b487" stroke-width="1.5"/>
+<text x="55" y="474" fill="#d0b487" font-size="25" font-weight="600" text-anchor="start">
+<tspan x="55" dy="0" xml:space="preserve">Retained U020 runtime experiment</tspan>
+</text>
+<text x="55" y="510" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="55" dy="0" xml:space="preserve">Reported point estimates and uncertainty · eager / deferred failure text</tspan>
+</text>
+<text x="55" y="561" fill="#eef2f8" font-size="23" font-weight="600" text-anchor="start">
+<tspan x="55" dy="0" xml:space="preserve">Time per operation</tspan>
+</text>
+<text x="55" y="601" fill="#d0b487" font-size="19" font-weight="400" text-anchor="start">
+<tspan x="55" dy="0" xml:space="preserve">Eager: 8,527.481 ± 411.588 ms/op</tspan>
+</text>
+<rect x="55" y="617" width="465" height="24" rx="4" fill="#d0b487" stroke="#d0b487" stroke-width="1.5"/>
+<text x="55" y="675" fill="#92d5c6" font-size="19" font-weight="400" text-anchor="start">
+<tspan x="55" dy="0" xml:space="preserve">Deferred: 2,454.674 ± 258.851 ms/op</tspan>
+</text>
+<rect x="55" y="691" width="133.8523545229828" height="24" rx="4" fill="#92d5c6" stroke="#92d5c6" stroke-width="1.5"/>
+<text x="595" y="561" fill="#eef2f8" font-size="23" font-weight="600" text-anchor="start">
+<tspan x="595" dy="0" xml:space="preserve">Allocation per operation</tspan>
+</text>
+<text x="595" y="601" fill="#d0b487" font-size="19" font-weight="400" text-anchor="start">
+<tspan x="595" dy="0" xml:space="preserve">Eager: 30,790.11 ± 121.15 MB/op</tspan>
+</text>
+<rect x="595" y="617" width="465" height="24" rx="4" fill="#d0b487" stroke="#d0b487" stroke-width="1.5"/>
+<text x="595" y="675" fill="#92d5c6" font-size="19" font-weight="400" text-anchor="start">
+<tspan x="595" dy="0" xml:space="preserve">Deferred: 10,457.24 ± 2.13 MB/op</tspan>
+</text>
+<rect x="595" y="691" width="157.92787359317649" height="24" rx="4" fill="#92d5c6" stroke="#92d5c6" stroke-width="1.5"/>
+<text x="55" y="760" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="55" dy="0" xml:space="preserve">6 JMH forks per variant · 1 operation = 23 selected DRR report functions</tspan>
+</text>
+<text x="30" y="838" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="30" dy="0" xml:space="preserve">Synthetic inputs · reference Java held fixed</tspan>
+<tspan x="30" dy="29" xml:space="preserve">Runtime experiment, not production throughput or an IR gain</tspan>
+</text>
+</g>
+</svg>

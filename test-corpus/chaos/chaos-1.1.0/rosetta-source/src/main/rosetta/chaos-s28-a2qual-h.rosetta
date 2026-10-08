@@ -1,0 +1,4 @@
+namespace chaos.s28.a2qual.h
+version "1.0.0"
+type C28Extra: <"Helper - relocated by the import axis.">
+    memo string (1..1)

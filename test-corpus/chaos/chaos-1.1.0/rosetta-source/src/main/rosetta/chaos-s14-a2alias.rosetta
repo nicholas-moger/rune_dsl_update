@@ -1,0 +1,24 @@
+namespace chaos.s14.a2alias
+version "1.0.0"
+import chaos.s14.a2alias.h.* as C14AuxNs
+import chaos.s14.a2alias.h.C14Aux
+body Authority C14REG <"The chaos regulator.">
+body Organisation C14ORG <"The chaos standards organisation.">
+corpus Regulation "C14 Chaos Act" C14Act <"Primary corpus.">
+corpus Guidance C14Guide <"Secondary corpus without a display string.">
+segment c14article
+segment c14paragraph
+segment c14annex
+segment rationale
+type C14Clause: <"docReference AND regulatoryReference at type and attribute level, incl. for-path and rationale_author.">
+    [docReference C14REG C14Act c14article "3" provision "Type-level provision text."]
+    [docReference for cid C14REG C14Act c14article "9" provision "For-path provision."]
+    [regulatoryReference C14REG C14Act c14article "12"
+        rationale_author "chaos"
+        rationale "Because the census said the corpus writes this in 311 files and no seed did."
+        provision "Regulatory-reference provision."]
+    cid string (1..1)
+        [docReference C14REG C14Act c14article "3" c14paragraph "1a" provision "Attribute-level provision."]
+    weight number (0..1)
+        [docReference C14ORG C14Guide c14annex "B" rationale "Because chaos." provision "Weighted per annex B."]
+    aux C14Aux (0..1)

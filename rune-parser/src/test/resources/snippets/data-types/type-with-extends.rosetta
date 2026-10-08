@@ -1,0 +1,7 @@
+namespace test.model
+
+type Base:
+    id string (1..1)
+
+type Child extends Base:
+    extra int (0..1)

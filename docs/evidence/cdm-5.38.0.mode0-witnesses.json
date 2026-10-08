@@ -1,0 +1,49 @@
+{
+  "generator": "com.regnosys.rosetta:rosetta-maven-plugin:9.83.0 with the released 9.83.0 compiler and runtime, selected by the pinned CDM POM",
+  "input": {
+    "repository": "https://github.com/finos/common-domain-model.git",
+    "tag": "5.38.0",
+    "commit": "788f63af47723ca2ef2ec8d24f31c01a4ac4505f"
+  },
+  "command": "mvn -B -ntp -pl rosetta-source -am process-sources -Dmaven.build.cache.enabled=false (from the CDM clone root; no private settings)",
+  "runs": [
+    {
+      "id": "R",
+      "role": "retained frozen 9.83.0 baseline reference (the 3,950 raw hashes of cdm-5.38.0.sha256)",
+      "generatedBefore": "2026-05-28",
+      "platform": "Windows (CRLF output)"
+    },
+    {
+      "id": "W1",
+      "role": "independent regeneration during the export validation",
+      "finishedAt": "2026-09-22T12:28:47+01:00",
+      "platform": "Windows 11 Pro, JDK 21.0.8, Maven 3.9.11, new empty local repository, empty settings",
+      "outcome": "BUILD SUCCESS, 3,950 Java files"
+    },
+    {
+      "id": "W2",
+      "role": "independent regeneration during the committed-snapshot review (a separate clone and Maven repository)",
+      "finishedAt": "2026-09-22T14:06:58+01:00",
+      "platform": "Windows 11 Pro, JDK 21.0.8, Maven 3.9.11, new task-local repository, empty settings",
+      "outcome": "BUILD SUCCESS, 3,950 Java files"
+    }
+  ],
+  "orderDependentFiles": {
+    "cdm/cdm-5.38.0/rosetta-source/src/generated/java/cdm/event/common/meta/BusinessEventMeta.java": {
+      "R": "64b140be11badc9304f04678cd0d92378ad00de71d2a0820c2dd6803f0292bc4",
+      "W1": "64b140be11badc9304f04678cd0d92378ad00de71d2a0820c2dd6803f0292bc4",
+      "W2": "6ac215f420920e95344ac37a16a6652abad56ddfb53a849b3f6d308422fd0b2a"
+    },
+    "cdm/cdm-5.38.0/rosetta-source/src/generated/java/cdm/observable/asset/calculatedrate/package-info.java": {
+      "R": "97b66ca6441825eaf780f31210e992f5ca0082aa3e74bf8383525a58bcca1dea",
+      "W1": "1bc5747cf775a9d161902b4f44263f6dce2c82458554519aea80ab1594b7bfaf",
+      "W2": "ac8eb42cee686866b5bbad1613eaa654ab8d89d0e642cda5f7dff21e07acf067"
+    },
+    "cdm/cdm-5.38.0/rosetta-source/src/generated/java/cdm/product/asset/floatingrate/package-info.java": {
+      "R": "a56ac2c40730cbadaf34f61e8bb8e377c095b8c8f050d9fd3c89e308851c398b",
+      "W1": "48a324af09a6cbad77d185b93ad562837f571e07f29b367d10d3fabfe4a1887d",
+      "W2": "8c7636fe695d6ab5819f6350bece58140e058407d65d3580a5a92e0120a19229"
+    }
+  },
+  "filesIdenticalAcrossAllRuns": 3947
+}

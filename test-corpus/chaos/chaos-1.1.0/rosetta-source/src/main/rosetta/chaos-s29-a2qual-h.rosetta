@@ -1,0 +1,5 @@
+namespace chaos.s29.a2qual.h
+version "1.0.0"
+type C29Leaf: <"Helper - relocated by the import axis.">
+    v number (1..1)
+    tags string (0..*)

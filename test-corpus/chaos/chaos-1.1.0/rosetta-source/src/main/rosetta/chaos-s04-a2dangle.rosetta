@@ -1,0 +1,70 @@
+namespace chaos.s04.a2dangle
+version "1.0.0"
+import chaos.s04.a2dangle.h.*
+import chaos.s04.a2dangle.unused.*
+func C4Add: <"Minimal set seat.">
+    inputs:
+        a number (1..1)
+        b number (1..1)
+    output:
+        s number (1..1)
+    set s: a + b
+func C4Build: <"Alias, condition, constructor, post-condition seats.">
+    inputs:
+        xs number (0..*)
+    output:
+        p C4Pair (1..1)
+    alias lo: xs first default 0
+    alias hiV: xs last default 0
+    condition C4NonNeg:
+        xs all >= 0
+    set p: C4Pair { left: lo, right: hiV }
+    post-condition C4BothSet:
+        p -> left exists and p -> right exists
+func C4Grow: <"add-operation seats - scalar, expression, list-literal extract.">
+    inputs:
+        seedv number (1..1)
+        n number (1..1)
+    output:
+        outs number (0..*)
+    add outs: seedv
+    add outs: seedv * n
+    add outs: [seedv, n] extract item + 1
+    add outs: C4Add(seedv, n)
+func C4Seg: <"Segment-path set operations.">
+    inputs:
+        v number (1..1)
+    output:
+        p C4Pair (1..1)
+    set p -> left: v
+    set p -> right: v + 1
+func C4IsBig: <"Boolean-output helper for the bare-call-condition class.">
+    inputs:
+        v number (1..1)
+    output:
+        big boolean (1..1)
+    set big: v > 1000000
+func C4Gate: <"A BARE function call as the if-condition (v3.1 F4) + a beyond-long literal (F5) + Java-reserved-word input names (F18).">
+    inputs:
+        final number (1..1)
+        static number (0..1)
+        interface string (0..1)
+    output:
+        verdict number (1..1)
+    set verdict:
+        if C4IsBig(final)
+        then 9999999999999999999999999
+        else final + (static default 0)
+enum C4ModeEnum: <"Dispatch discriminator.">
+    Fast
+    Slow
+func C4Speed: <"Dispatch BASE - declares the inputs and output the branches inherit (the CDM YearFraction shape).">
+    inputs:
+        mode C4ModeEnum (1..1)
+        x number (1..1)
+    output:
+        y number (1..1)
+func C4Speed(mode: C4ModeEnum -> Fast): <"Enum-dispatch branch 1.">
+    set y: x * 2
+func C4Speed(mode: C4ModeEnum -> Slow): <"Enum-dispatch branch 2.">
+    set y: x / 2

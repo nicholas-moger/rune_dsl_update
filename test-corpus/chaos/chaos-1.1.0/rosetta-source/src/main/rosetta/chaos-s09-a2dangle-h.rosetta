@@ -1,0 +1,4 @@
+namespace chaos.s09.a2dangle.h
+version "1.0.0"
+type C9Plain: <"Self-contained helper - relocated by the import axis.">
+    p string (1..1)

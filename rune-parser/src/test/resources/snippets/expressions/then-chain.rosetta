@@ -1,0 +1,8 @@
+namespace test.expressions
+
+func ThenChain:
+    inputs:
+        x number (1..1)
+    output:
+        result number (1..1)
+    set result: x then [item + 1] then [item * 2]

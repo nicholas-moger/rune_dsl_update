@@ -1,0 +1,73 @@
+namespace test.convbigedge
+
+func IsBig: <"Boolean helper.">
+    inputs:
+        v number (1..1)
+    output:
+        big boolean (1..1)
+    set big: v > 1000000
+
+func Nested: <"Two conditionals deep.">
+    inputs:
+        v number (1..1)
+        f boolean (1..1)
+    output:
+        r number (1..1)
+    set r:
+        if f
+        then if IsBig(v) then 9999999999999999999999999 else v
+        else 0
+
+func AsArg: <"As a function-call argument.">
+    inputs:
+        v number (1..1)
+    output:
+        r boolean (1..1)
+    set r: IsBig(9999999999999999999999999)
+
+func IntOut: <"An int output takes the exact conversion.">
+    inputs:
+        v number (1..1)
+    output:
+        r int (1..1)
+    set r:
+        if IsBig(v)
+        then 9999999999999999999999999
+        else 1
+
+func BothArms: <"Both arms beyond long.">
+    inputs:
+        v number (1..1)
+    output:
+        r number (1..1)
+    set r:
+        if IsBig(v)
+        then 9999999999999999999999999
+        else 8888888888888888888888888
+
+typeAlias BigInt: <"A 25-digit integer - the BigInteger-typed output (round 1).">
+    int(digits: 25)
+
+func IdentityOut: <"A beyond-long literal into a BigInteger-typed output: the conversion is the identity.">
+    inputs:
+        v number (1..1)
+    output:
+        r BigInt (0..1)
+    set r: 9999999999999999999999999
+
+func EscapedName: <"The then-arm literal into an output whose Java name needs the keyword escape.">
+    inputs:
+        v number (1..1)
+    output:
+        transient number (1..1)
+    set transient:
+        if IsBig(v)
+        then 9999999999999999999999999
+        else v
+
+func MultiWhole: <"A beyond-long literal as the WHOLE value of a MULTI output (round 2).">
+    inputs:
+        v number (1..1)
+    output:
+        rs number (0..*)
+    set rs: 9999999999999999999999999

@@ -1,0 +1,10 @@
+namespace chaos.s02.a3third.p1
+version "1.0.0"
+import chaos.s02.a3third.p2.*
+import chaos.s02.a3third.p3.*
+type C2Tag: <"Helper the import-style axis relocates.">
+    tagLine string (1..1)
+enum C2DirEnum: <"Directions with displayName and docs.">
+    Buy displayName "BUY" <"Buy side.">
+    Sell displayName "SELL"
+    Hold <"No action.">

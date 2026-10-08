@@ -1,0 +1,32 @@
+namespace holdout.convintliterallongoutput
+version "0.0.0"
+
+typeAlias Long18: <"An 18-digit int alias - MapperS<Long> upstream (the digit law's Long rung, the chaos s23 C23Long twin).">
+    int(digits: 18)
+
+func LongOutCond: <"THE CHAOS s23 C23LongOut SHAPE (v3.2 seat 13, D53 - the M5d class, 13 of 13 non-compiling by the seat-13 census): an int-range literal at a conditional ELSE arm into the Long-aliased output beside a 12-digit THEN arm. The released plugin casts the int-range literal (`r = (long) 42;`) and suffixes the long-band literal (`123456789012l`); the fork wrote the bare `r = 42;` - an int into a Long, non-compiling.">
+    inputs:
+        f boolean (1..1)
+    output:
+        r Long18 (0..1)
+    set r: if f then 123456789012 else 42
+
+func LongOutWhole: <"The WHOLE-OUTPUT sibling: an int-range literal SET whole into the Long-aliased output.">
+    output:
+        r Long18 (0..1)
+    set r: 42
+
+func LongOutIntInput: <"The NON-LITERAL sibling: an int INPUT (a boxed Integer) SET whole into the Long-aliased output - the plugin's Integer -> Long conversion form.">
+    inputs:
+        n int (1..1)
+    output:
+        r Long18 (0..1)
+    set r: n
+
+func LongOutIntInputCond: <"The non-literal sibling at a conditional arm beside an int-range literal into the Long-aliased output.">
+    inputs:
+        f boolean (1..1)
+        n int (1..1)
+    output:
+        r Long18 (0..1)
+    set r: if f then n else 42

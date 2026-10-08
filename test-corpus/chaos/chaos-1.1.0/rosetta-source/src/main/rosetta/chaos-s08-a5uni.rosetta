@@ -1,0 +1,12 @@
+namespace chaos.s08.a5uni
+version "1.0.0"
+type C8Box: <"éüµ – Self-contained helper - relocated by the import axis.">
+    lid string (1..1)
+typeAlias C8Positive: <"Non-negative integer-grained number."> number(fractionalDigits: 0, min: 0)
+typeAlias C8Code: <"Three-char upper code."> string(minLength: 3, maxLength: 3, pattern: "[A-Z]{3}")
+typeAlias C8Pct: <"Bounded percentage."> number(min: 0, max: 100)
+type A5UniProbe: <"Non-ASCII literal probe – müßig 試験.">
+    p string (0..1)
+        [label as "µ–label §7"]
+enum A5UniProbeEnum: <"displayName probe.">
+    V displayName "µ–„display“"

@@ -1,0 +1,15 @@
+namespace test.prb.qb
+version "0.0.0"
+isProduct root PrbTerms;
+
+type PrbTerms: <"The qualifiable root type of test.prb.qb.">
+    kind string (0..1)
+
+func Qualify_PrbQB: <"Product qualification of test.prb.qb.">
+    [qualification Product]
+    inputs:
+        terms PrbTerms (1..1)
+    output:
+        is_product boolean (1..1)
+    set is_product:
+        terms -> kind = "qb"

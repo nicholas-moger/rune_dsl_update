@@ -1,0 +1,27 @@
+namespace chaos.s34.a3half.p2
+version "1.0.0"
+import chaos.s34.a3half.p1.*
+func C34Stage_Tag: <"Annotated function with two references - named under the prefix annotation's own contract (C34Stage_ - the oracle warns otherwise).">
+    [c34owner team]
+    [c34stage kind]
+    inputs:
+        s string (1..1)
+    output:
+        t string (1..1)
+    set t: s + "!"
+func C34Impl: <"A codeImplementation function (no body) beside a caller.">
+    [codeImplementation]
+    inputs:
+        s string (1..1)
+    output:
+        t string (1..1)
+func C34Caller: <"Calls the code-implemented function.">
+    inputs:
+        s string (1..1)
+    output:
+        t string (1..1)
+    set t: C34Impl(s)
+enum C34Flag: <"An annotated enum.">
+    [c34owner live]
+    On
+    Off

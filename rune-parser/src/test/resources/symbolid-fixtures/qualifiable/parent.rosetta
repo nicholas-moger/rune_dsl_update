@@ -1,0 +1,4 @@
+namespace com.test
+
+type RootType:
+    a string (1..1)

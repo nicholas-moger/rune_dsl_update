@@ -1,0 +1,18 @@
+namespace test.dispatchns.d
+
+enum ModeD: <"Dispatch discriminator, namespace d.">
+    Fast
+    Slow
+
+func Speed(mode: ModeD -> Fast): <"d / Fast - a VARIANT declared BEFORE its base (declaration order).">
+    set y: x * 5
+
+func Speed(mode: ModeD -> Slow): <"d / Slow - declared before the base.">
+    set y: x / 5
+
+func Speed: <"Dispatch BASE in namespace d, declared AFTER its variants.">
+    inputs:
+        mode ModeD (1..1)
+        x number (1..1)
+    output:
+        y number (1..1)

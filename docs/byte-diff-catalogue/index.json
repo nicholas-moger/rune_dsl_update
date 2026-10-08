@@ -1,0 +1,37 @@
+{
+  "entry_count": 2,
+  "entries": [
+    {
+      "entry_id": "a96d88f5-e73b-4515-991e-bb5b6bce0294",
+      "corpus": "cdm",
+      "project": "base-model",
+      "version": "6.16.0",
+      "element_kind": "type",
+      "symbol": "com.regnosys.rosetta.generator.java.RosettaJavaPackages",
+      "upstream_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "our_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "classification": "semantic",
+      "rationale": "Hand-promoted from a japicmp CLASS_REMOVED finding via the proposer artefact (skill byte-diff-catalogue.md (local) section 8.1). The fork re-implements the parser/codegen via ANTLR4 per the ROADMAP mission; Xtext tool-surface classes including this RosettaJavaPackages helper are deliberately not replicated. Status=active because no current D-entry blesses Xtext-tool-surface absence as accepted; a future fork-mandate D-entry can promote this entry (and the dozens of sibling Xtext-class entries that will accumulate as the proposer is run) to status=accepted in one batch. Sentinel our_hash marks our absence (no bytes emitted); upstream_hash uses the same sentinel rather than a real bytecode hash to avoid pinning a baseline JAR fingerprint that the next japicmp baseline rebase will invalidate.",
+      "status": "active",
+      "created_date": "2026-04-25",
+      "last_review": "2026-04-25",
+      "linked_issue": "the development repository"
+    },
+    {
+      "entry_id": "ac8e311c-3cb0-4326-bc74-fa7204a7a2f9",
+      "corpus": "cdm",
+      "project": "base-model",
+      "version": "6.16.0",
+      "element_kind": "function",
+      "symbol": "__class_rule__:stringbuilder_stringconcat_equivalence",
+      "upstream_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "our_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "classification": "stylistic",
+      "rationale": "Class-rule entry per skill byte-diff-catalogue.md (local) section 4.3 (i)-(iii). Both javac and ECJ lower String + b + c + ... to either a StringBuilder.append() chain or invokedynamic StringConcatFactory depending on --release; both lowerings are valid bytecode for the same source per JVMS section 4. Equivalence class accepted under D19 (local) part 2 with M1 D41-C as the historical taxonomy anchor (~BOTH 1187/1241 body-diff finding pre-rebaseline, PR #6-#8 D11 convergence, 765/765 POJOs byte-identical when normalised). Sentinel hash pair (sha-256 of empty bytes) marks this as a class-rule rather than a per-occurrence entry; the __class_rule__: prefix on symbol is the discriminator. Future Layer-3 lookup must key on symbol prefix, not solely on hash pair.",
+      "status": "accepted",
+      "created_date": "2026-04-25",
+      "last_review": "2026-04-25",
+      "linked_issue": null
+    }
+  ]
+}

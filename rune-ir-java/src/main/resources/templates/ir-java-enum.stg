@@ -1,0 +1,57 @@
+delimiters "<", ">"
+
+enumFile(m) ::= <<
+package <m.packageName>;
+
+<m.imports:{imp | import <imp>;
+}>
+
+<if(m.javadoc)><m.javadoc>
+<endif>@RosettaEnum("<m.enumName>")
+public enum <m.enumName> {
+
+<m.values:{v | <enumValue(v)>}; separator=",\n\t\n">
+;
+	private static Map\<String, <m.enumName>\> values;
+	static {
+        Map\<String, <m.enumName>\> map = new ConcurrentHashMap\<\>();
+		for (<m.enumName> instance : <m.enumName>.values()) {
+			map.put(instance.toDisplayString(), instance);
+		}
+		values = Collections.unmodifiableMap(map);
+    }
+
+	private final String rosettaName;
+	private final String displayName;
+
+	<m.enumName>(String rosettaName, String displayName) {
+		this.rosettaName = rosettaName;
+		this.displayName = displayName;
+	}
+
+	public static <m.enumName> fromDisplayName(String name) {
+		<m.enumName> value = values.get(name);
+		if (value == null) {
+			throw new IllegalArgumentException("No enum constant with display name \"" + name + "\".");
+		}
+		return value;
+	}
+
+	@Override
+	public String toString() {
+		return toDisplayString();
+	}
+
+	public String toDisplayString() {
+		return displayName != null ?  displayName : rosettaName;
+	}
+}
+
+>>
+
+enumValue(v) ::= <<
+<if(v.javadoc)><v.javadoc>
+<endif><v.synonyms:{s | <s.sources:{src |<\t>@RosettaSynonym(value = "<s.value>", source = "<src>")
+}>}><\t>@RosettaEnumValue(value = "<v.rosettaName>"<if(v.displayName)>, displayName = "<v.displayName>"<endif>) 
+<\t><v.javaName>("<v.rosettaName>", <if(v.displayName)>"<v.displayNameLiteral>"<else>null<endif>)
+>>

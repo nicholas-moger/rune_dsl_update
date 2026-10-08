@@ -1,0 +1,14 @@
+namespace test.expressions
+
+func WithoutLeft:
+    inputs:
+        x boolean (1..1)
+    output:
+        result boolean (1..1)
+    condition OrPrefix:
+        or x
+    condition AndPrefix:
+        and x
+    condition ExistsPrefix:
+        exists
+    set result: or x

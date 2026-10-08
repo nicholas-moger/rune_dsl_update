@@ -1,0 +1,99 @@
+# Snapshot tests (SchemaLockTest, SymbolTableSnapshotTest) compare
+# byte-for-byte against LF-terminated serializer output. Force LF on
+# the tracked snapshot + lock resource files so byte-for-byte comparison
+# works identically on Windows and Linux clones regardless of the
+# user's git config core.autocrlf setting.
+rune-parser/src/test/resources/symbols/schema-lock.txt     text eol=lf
+rune-parser/src/test/resources/symbols/snapshots/*.txt     text eol=lf
+
+# Frozen 9.83.0 baseline corpus manifest — Corpus983BaselineManifestTest compares
+# the working test-corpus/ against this committed SHA-256 contract. Pin LF so the
+# manifest is byte-stable across Windows and Linux regardless of core.autocrlf.
+rune-parser/src/test/resources/corpus-baseline-9.83.manifest text eol=lf
+
+# Jazzer crash reproducers are raw bytes — treat as binary so git does
+# not mangle line endings and every reproducer replays byte-identically
+# on Windows devs and Linux CI. Paths follow the jazzer-junit convention
+# (H20 / H22).
+rune-parser/src/test/resources/com/regnosys/rosetta/harness/fuzz/**/* binary
+rune-parser/crash-* binary
+
+# Byte-diff catalogue (P1.3.3): index.json is byte-compared by CI's
+# index-regen-check job (diff -u against fresh regeneration). Per-entry
+# JSON files are schema-validated + emitted into the index in fixed
+# Python json.dump format. Force LF on every catalogue JSON so a Windows
+# checkout regenerating the index produces identical bytes to a Linux
+# CI runner — same precedent as the schema-lock entries above.
+docs/byte-diff-catalogue/**/*.json text eol=lf
+
+# Byte-diff catalogue scripts and fixtures: the .test smoke tests use
+# bash heredocs and Python json.dump output that are LF-terminated;
+# CRLF on Windows checkouts would fail the smoke tests and the
+# `index-regen-check` CI job. Pin LF.
+scripts/byte-diff/**/*.py text eol=lf
+scripts/byte-diff/**/*.sh text eol=lf
+scripts/byte-diff/**/*.test text eol=lf
+scripts/byte-diff/fixtures/*.xml text eol=lf
+scripts/byte-diff/fixtures/*.json text eol=lf
+
+# Chart generators + their SVGs: pin LF so the regen scripts produce byte-stable
+# output on Windows and Linux regardless of core.autocrlf (same precedent as the
+# byte-diff catalogue pins above) — the regen-x2 sha-compare discipline depends
+# on it. The v3 pair added at PR #543 (the Seat-1 SF1 there also backfilled the
+# regen-ir-svgs trio, unpinned since #476).
+docs/assets/ir-progress.svg text eol=lf
+# the v3.2 phase chart's pair (PR #635, the v3.2.0 co-review - round 30's cq SF-4 backfilled the pin)
+
+# The IR charts' regenerator gate + its .test (PR #632 round 3, committed under scripts/ci/): bash with a quoted
+# heredoc - pin LF like the byte-diff .sh/.test pins above (PR #632 round 4, cq NIT-5). Measured first: this box's MSYS
+# bash runs a CRLF script with a quoted heredoc, and the two CRLF-checked-out peers in scripts/ci/ are green in every
+# receipt - the pin protects a WSL / Linux bash over a Windows checkout and the .test's byte-exact sed copy.
+
+# Resolution-conformance suite (v3.1 C1): the committed oracle dump records
+# CHARACTER OFFSETS into the .rosetta snippets, so the snippets' on-disk line
+# endings are part of the instrument — a CRLF checkout shifts every offset and
+# the "dump regenerates byte-identical" gate silently fails on the next
+# machine (found live 2026-08-16: the post-#566 checkout materialized the six
+# snippets as CRLF and every regenerated offset moved). Pin LF on the
+# snippets AND the dump — same precedent as the schema-lock entries above.
+rune-parser/src/test/resources/resolution-conformance/*.rosetta text eol=lf
+rune-parser/src/test/resources/resolution-conformance/*.tsv text eol=lf
+
+# rune-runtime = the verbatim released 9.83.0 source port (U018). The three
+# classpath resources are byte-locked (SHA-256, RuntimeSurfaceLockTest)
+# against the released binary jar and served through the maven plugin's
+# builtin-model channel — pin LF so a fresh checkout keeps the released
+# bytes regardless of core.autocrlf; sources stay LF for verbatim
+# diffability against the released sources jar.
+rune-runtime/src/main/resources/** text eol=lf
+rune-runtime/src/main/java/**/*.java text eol=lf
+rune-runtime/src/test/java/**/*.java text eol=lf
+rune-runtime/pom.xml text eol=lf
+
+# The C2a evidence-API ledger + its gate (v3.1 C2): the ledger's snippet keys
+# are whitespace-normalised (CRLF-immune by design) but the instrument family
+# is LF-pinned on principle after the #567 lesson — a committed instrument's
+# line endings are part of the instrument.
+scripts/ci/evidence-api-ledger.py text eol=lf
+scripts/ci/evidence-api-ledger.py.test text eol=lf
+scripts/ci/evidence-api-ledger.tsv text eol=lf
+# The C2d triage instrument (PR #608) is the ledger's sibling and takes the same pin (PR #609).
+
+# The v3.2 chaos declared sets are committed instruments: their line endings are
+# part of the instrument (the #567 lesson). The cell's own `** -text` covers the
+# in-cell register; these are the module-resource ones.
+rune-parser/src/test/resources/resolution-conformance/chaos-l2-expected-differences.txt text eol=lf
+rune-java-generator/src/test/resources/chaos-expected-divergence.txt text eol=lf
+rune-java-generator/src/test/resources/chaos-golden-free.txt text eol=lf
+rune-ir-java-optimised/src/test/resources/chaos-optimised-route-broken.txt text eol=lf
+
+# The maven plugin's route fixture (v3.3 seat 9, PR #645 commit 14b): RunePluginRunnerRouteTest
+# compares the runner's generated output against these goldens BYTE-FOR-BYTE on all three routes,
+# so their line endings ARE the instrument (the #567 lesson, the holdout goldens' normalising
+# compare deliberately not copied - a byte gate that normalises is not a byte gate). The generator
+# emits LF; pin LF on the goldens AND on the .rosetta source that feeds them, so a core.autocrlf
+# checkout on Windows compares the same bytes a Linux one does.
+rune-maven-plugin/src/test/resources/route-fixture/** text eol=lf
+
+# Compact evidence files: their SHA-256 values are recorded in docs/evidence/inventory.json, so Git must never convert their line endings.
+docs/evidence/** -text

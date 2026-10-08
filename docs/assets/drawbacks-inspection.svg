@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="950" viewBox="0 0 1120 950" role="img" aria-labelledby="title desc">
+<title id="title">Prepare a model, then answer questions</title>
+<desc id="desc">The retained prepare-then-inspect experiment loaded CDM 5.38.0, ISO 20022 1.38.0 and DRR 6.34.1: 349 model files plus two builtins. A single fresh JVM run per lane measured process start through semantic preparation, extraction, indexing and four matching structural answer sets: 90.799 seconds with released Rune 9.83.0 Xtext/EMF and 7.676 seconds with the contribution Java parser/workspace. Legacy resolveAll took 87.587 seconds; replacement workspace build took 3.084 seconds. This is not warm LSP or network request latency, and the four queries use declared-name facts. Windows peak working set increased from 1483 to 2239 MiB. A separate Python prototype experiment compared 1894552 complete-source tokens with 284248 selective structural-digest tokens over 351 files and 7661 declarations using o200k_base. The digest omits prose, mappings and expression/rule bodies; no LLM quality was tested.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9" fill="none" stroke="#a9b7cb" stroke-width="1.4"/></marker></defs>
+<rect width="1120" height="950" rx="22" fill="#121923"/>
+<g font-family="Segoe UI, Arial, sans-serif">
+<text x="30" y="47" fill="#eef2f8" font-size="31" font-weight="600" text-anchor="start">
+<tspan x="30" dy="0" xml:space="preserve">Prepare a model, then answer questions</tspan>
+</text>
+<text x="30" y="80" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="30" dy="0" xml:space="preserve">Measured initial access · one fresh-process run per lane · not warm request latency</tspan>
+</text>
+<rect x="30" y="125" width="1060" height="90" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="31" y="144" width="4" height="52" rx="2" fill="#a2c6e6"/>
+<text x="53" y="162" fill="#a2c6e6" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="53" dy="0" xml:space="preserve">Same model inputs</tspan>
+</text>
+<text x="53" y="195" fill="#a9b7cb" font-size="21" font-weight="400" text-anchor="start">
+<tspan x="53" dy="0" xml:space="preserve">349 model files + 2 builtins · CDM / ISO 20022 / DRR</tspan>
+</text>
+<rect x="30" y="275" width="505" height="160" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="31" y="294" width="4" height="122" rx="2" fill="#d0b487"/>
+<text x="53" y="312" fill="#d0b487" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="53" dy="0" xml:space="preserve">Released Rune 9.83.0 · JVM</tspan>
+</text>
+<text x="53" y="345" fill="#a9b7cb" font-size="21" font-weight="400" text-anchor="start">
+<tspan x="53" dy="0" xml:space="preserve">Xtext / EMF load and resolve</tspan>
+<tspan x="53" dy="29" xml:space="preserve">Extract / index / four structural questions</tspan>
+<tspan x="53" dy="29" xml:space="preserve">90.799 s through answers</tspan>
+</text>
+<rect x="585" y="275" width="505" height="160" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="586" y="294" width="4" height="122" rx="2" fill="#92d5c6"/>
+<text x="608" y="312" fill="#92d5c6" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="608" dy="0" xml:space="preserve">Contribution Java · JVM</tspan>
+</text>
+<text x="608" y="345" fill="#a9b7cb" font-size="21" font-weight="400" text-anchor="start">
+<tspan x="608" dy="0" xml:space="preserve">Parse / build plain-Java workspace</tspan>
+<tspan x="608" dy="29" xml:space="preserve">Extract / index / four structural questions</tspan>
+<tspan x="608" dy="29" xml:space="preserve">7.676 s through answers</tspan>
+</text>
+<polyline points="560,215 560,245 282,245 282,275" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="560,245 837,245 837,275" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<rect x="30" y="480" width="1060" height="175" rx="14" fill="#18222f" stroke="#d0b487" stroke-width="1.5"/>
+<text x="55" y="522" fill="#d0b487" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="55" dy="0" xml:space="preserve">Initial access cost · four matching structural answer sets</tspan>
+</text>
+<text x="55" y="564" fill="#d0b487" font-size="21" font-weight="400" text-anchor="start">
+<tspan x="55" dy="0" xml:space="preserve">Xtext / EMF: 90.799 s</tspan>
+</text>
+<rect x="420" y="549" width="620" height="23" rx="4" fill="#d0b487" stroke="#d0b487" stroke-width="1.5"/>
+<text x="55" y="617" fill="#92d5c6" font-size="21" font-weight="400" text-anchor="start">
+<tspan x="55" dy="0" xml:space="preserve">Java workspace: 7.676 s</tspan>
+</text>
+<rect x="420" y="602" width="52.41379310344828" height="23" rx="4" fill="#92d5c6" stroke="#92d5c6" stroke-width="1.5"/>
+<rect x="30" y="695" width="1060" height="110" rx="14" fill="#18222f" stroke="#a6b0ec" stroke-width="1.5"/>
+<text x="55" y="732" fill="#a6b0ec" font-size="23" font-weight="600" text-anchor="start">
+<tspan x="55" dy="0" xml:space="preserve">Separate AI-context experiment · selective structural digest</tspan>
+</text>
+<text x="55" y="777" fill="#eef2f8" font-size="25" font-weight="400" text-anchor="start">
+<tspan x="55" dy="0" xml:space="preserve">1,894,552 → 284,248 tokens · 351 files · 7,661 declarations</tspan>
+</text>
+<text x="30" y="843" fill="#a9b7cb" font-size="19" font-weight="400" text-anchor="start">
+<tspan x="30" dy="0" xml:space="preserve">CDM 5.38.0 · ISO 20022 1.38.0 · DRR 6.34.1 · Windows 11 · JDK 21.0.8</tspan>
+<tspan x="30" dy="29" xml:space="preserve">Peak working set: 1,483 → 2,239 MiB; digest omits prose, mappings and rule bodies; no LLM test.</tspan>
+</text>
+<text x="30" y="917" fill="#a2c6e6" font-size="19" font-weight="400" text-anchor="start">
+<tspan x="30" dy="0" xml:space="preserve">Separate Python access demo: no JVM · same four structural answers · 106.587 s total</tspan>
+</text>
+</g>
+</svg>

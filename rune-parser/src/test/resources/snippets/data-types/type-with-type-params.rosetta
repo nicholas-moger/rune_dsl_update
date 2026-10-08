@@ -1,0 +1,4 @@
+namespace test.model
+
+type Account:
+    balance number(digits: 18, fractionalDigits: 2) (1..1)

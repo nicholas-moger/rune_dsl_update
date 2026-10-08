@@ -1,0 +1,19 @@
+namespace test.reservednames
+
+type Path:
+    name string (0..1)
+
+    condition NameExists:
+        name exists
+
+type Result:
+    value string (0..1)
+
+    condition ValueExists:
+        value exists
+
+type FailureMessage:
+    text string (0..1)
+
+    condition TextExists:
+        text exists

@@ -1,0 +1,14 @@
+namespace chaos.s22.a5uni
+version "1.0.0"
+isProduct root C22Terms;
+type C22Aux: <"éüµ – Self-contained helper - relocated by the import axis.">
+    ax string (1..1)
+type C22Terms: <"The qualifiable root type.">
+    kind string (0..1)
+    notional number (0..1)
+    aux C22Aux (0..1)
+type A5UniProbe: <"Non-ASCII literal probe – müßig 試験.">
+    p string (0..1)
+        [label as "µ–label §7"]
+enum A5UniProbeEnum: <"displayName probe.">
+    V displayName "µ–„display“"

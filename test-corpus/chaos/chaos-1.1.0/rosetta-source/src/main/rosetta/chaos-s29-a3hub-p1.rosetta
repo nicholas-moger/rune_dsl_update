@@ -1,0 +1,6 @@
+namespace chaos.s29.a3hub.p1
+version "1.0.0"
+import chaos.s29.a3hub.p2.*
+type C29Leaf: <"Helper - relocated by the import axis.">
+    v number (1..1)
+    tags string (0..*)

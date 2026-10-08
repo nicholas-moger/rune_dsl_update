@@ -1,0 +1,14 @@
+namespace com.test
+
+type OptA:
+    x string (1..1)
+
+type OptB:
+    y string (1..1)
+
+choice Method:
+    OptA
+    OptB
+
+type FooWithChoice:
+    m Method (1..1)

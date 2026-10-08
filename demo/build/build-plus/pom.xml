@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Rune DSL stats demo - BUILD section, PLUS (fork) leg (CONTRACTS section 7E).
+
+  The point of this file is how BORING it is next to build-legacy/pom.xml.
+  Same corpus, same rosetta-config.yml, same `generate` goal bound to the same
+  phase, same <languages>/<outputConfigurations> block, same setup class name.
+  What changes is the plugin coordinate and the output directory - that is the
+  drop-in story, stated as a diff:
+
+    -  <groupId>com.regnosys.rosetta</groupId>
+    -  <artifactId>rosetta-maven-plugin</artifactId>
+    -  <version>9.83.0</version>
+    +  <groupId>org.finos.rune</groupId>
+    +  <artifactId>rune-maven-plugin</artifactId>
+    +  <version>0.0.1-SNAPSHOT</version>
+
+  ====================================================================
+  PARAMETER SURFACE - READ FROM THE FORK'S OWN SOURCE
+  ====================================================================
+  rune-maven-plugin/src/main/java/com/regnosys/rosetta/maven/
+    RuneGenerateMojo.java          @Mojo(name="generate",
+                                         defaultPhase=GENERATE_SOURCES,
+                                         requiresDependencyResolution=COMPILE,
+                                         threadSafe=true)
+                                   classpathElements  READ-ONLY ${project.compileClasspathElements}
+                                   sourceRoots        required  ${project.compileSourceRoots}
+    AbstractRuneGeneratorMojo.java languages, classPathLookupFilter, rosettaConfig,
+                                   addOutputDirectoriesToCompileSourceRoots (true),
+                                   failOnValidationError (true)
+                                   + the accepted-and-IGNORED Xtext knobs:
+                                     incrementalXtextBuild, clusteringConfig,
+                                     compilerSourceLevel, compilerTargetLevel,
+                                     compilerSkipAnnotationProcessing,
+                                     compilerPreserveInformationAboutFormalParameters,
+                                     javaSourceRoots, tmpClassDirectory,
+                                     writeClasspathConfiguration,
+                                     classpathConfigurationLocation,
+                                     writeStorageResources
+    Language.java                  <setup> / <outputConfigurations> / <javaSupport>
+    OutputConfiguration.java       <name> (default DEFAULT_OUTPUT) / <outputDirectory>
+
+  That list is a deliberate clone of the released 9.83.0 descriptor - the same
+  names and defaults this demo verified independently by unzipping
+  rosetta-maven-plugin-9.83.0.jar -> META-INF/maven/plugin.xml (transcribed in
+  build-legacy/pom.xml's header). The fork requires EXACTLY ONE
+  outputConfiguration carrying an outputDirectory
+  (AbstractRuneGeneratorMojo.java:114-120) and rejects any <setup> other than
+  com.regnosys.rosetta.RosettaStandaloneSetup (Language.java:29,
+  AbstractRuneGeneratorMojo.java:188-193).
+
+  ====================================================================
+  classPathLookupFilter: REQUIRED HERE (unlike the legacy leg)
+  ====================================================================
+  RunePluginRunner.java:178-183 returns an EMPTY library-model list when the
+  filter is null or blank:
+
+      private List<RModel> parseClasspathModels() throws IOException {
+          List<RModel> models = new ArrayList<>();
+          if (classPathLookupFilter == null || classPathLookupFilter.isBlank()) {
+              return models;
+          }
+          Pattern filter = Pattern.compile(classPathLookupFilter);
+
+  That is the inverse of Xtext's "unset means scan everything", so the filter is
+  NOT optional on this leg: omit it and the two builtin models never load, and
+  every `string` / `metadata` reference in the corpus fails to link.
+
+  The value below is the CDM 6.20.6 / DRR 6.34.1 consumer regex character for
+  character - deliberately, to show the fork honouring the real consumer value
+  unchanged. It is version-agnostic and matches the fork jar in the hermetic
+  repo, which the runner full-matches against the raw classpath element string:
+    ...\demo\work\.m2\org\finos\rune\rune-runtime\0.0.1-SNAPSHOT\rune-runtime-0.0.1-SNAPSHOT.jar
+    .*org[\\/]finos[\\/]rune[\\/]rune-runtime.*\.jar            -> matches
+  ([\\/] is a character class of backslash-or-slash, so the Windows path form is
+  covered; RunePluginRunner uses Matcher.matches(), i.e. a full match, and the
+  leading `.*` absorbs the repo prefix.)
+
+  ====================================================================
+  BUILTINS: demo/corpus/builtins is NOT a source root here either
+  ====================================================================
+  Verified in the hermetic repo: org/finos/rune/rune-runtime/0.0.1-SNAPSHOT/
+  rune-runtime-0.0.1-SNAPSHOT.jar carries model/annotations.rosetta (2012 bytes)
+  and model/basictypes.rosetta (1891 bytes) - the same two models the 9.83.0
+  runtime jar carries for the legacy leg. Declaring the runtime as a project
+  dependency below puts it on ${project.compileClasspathElements}, which is the
+  list the runner scans. Adding demo/corpus/builtins as a fourth <sourceRoot>
+  as well would declare namespace com.rosetta.model twice.
+
+  Either way they are never GENERATED: GeneratorModel.IGNORED_FILES
+  (rune-java-generator/.../generator/java/GeneratorModel.java:94-98) skips
+  basictypes.rosetta and annotations.rosetta by file name inside shouldGenerate()
+  (:795-797), before the namespace filter is consulted. That is what makes the
+  two legs' output trees comparable at all - see demo/build/diff-trees.ps1.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.finos.rune.demo</groupId>
+    <artifactId>demo-build-plus</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+    <name>Rune DSL stats demo - Build (rune-dsl-plus fork toolchain)</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- Never compile: the demo runs `generate-sources` only. -->
+        <maven.main.skip>true</maven.main.skip>
+        <maven.test.skip>true</maven.test.skip>
+        <maven.build.cache.skip>true</maven.build.cache.skip>
+        <maven.build.cache.enabled>false</maven.build.cache.enabled>
+
+        <!-- ABSOLUTE, for the same reason as the legacy leg: the runner does
+             Path.of(root) + Files.isDirectory(root) (RunePluginRunner.java:134-144)
+             and Path.of(rosettaConfig) + Files.isRegularFile
+             (AbstractRuneGeneratorMojo.java:197-206), so a CWD-relative value
+             breaks under `mvn -f`. The output directory is resolved as
+             basedir.resolve(configured).normalize() (:129-130), and resolve()
+             returns an absolute argument unchanged. -->
+        <demo.corpus>${project.basedir}/../../corpus</demo.corpus>
+        <demo.out>${project.basedir}/../../work/build-plus-out</demo.out>
+        <demo.rosettaConfig>${project.basedir}/../rosetta-config.yml</demo.rosettaConfig>
+    </properties>
+
+    <dependencies>
+        <!-- Present ONLY to put the builtins carrier on the project compile
+             classpath, which is the list classPathLookupFilter is matched
+             against. Nothing here is compiled against. -->
+        <dependency>
+            <groupId>org.finos.rune</groupId>
+            <artifactId>rune-runtime</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.finos.rune</groupId>
+                <artifactId>rune-maven-plugin</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+                <executions>
+                    <execution>
+                        <id>generate-demo-corpus</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <rosettaConfig>${demo.rosettaConfig}</rosettaConfig>
+
+                            <sourceRoots>
+                                <sourceRoot>${demo.corpus}/cdm-5.38.0</sourceRoot>
+                                <sourceRoot>${demo.corpus}/iso20022-1.38.0</sourceRoot>
+                                <sourceRoot>${demo.corpus}/drr-6.34.1</sourceRoot>
+                            </sourceRoots>
+
+                            <!-- The CDM/DRR consumer value, unchanged. Mandatory on
+                                 this leg - see the header. -->
+                            <classPathLookupFilter>.*org[\\/]finos[\\/]rune[\\/]rune-runtime.*\.jar</classPathLookupFilter>
+
+                            <!-- Accepted and ignored by the fork (no Xtext build
+                                 machinery); carried so both poms read identically. -->
+                            <incrementalXtextBuild>false</incrementalXtextBuild>
+
+                            <languages>
+                                <language>
+                                    <setup>com.regnosys.rosetta.RosettaStandaloneSetup</setup>
+                                    <outputConfigurations>
+                                        <outputConfiguration>
+                                            <outputDirectory>${demo.out}</outputDirectory>
+                                        </outputConfiguration>
+                                    </outputConfigurations>
+                                </language>
+                            </languages>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

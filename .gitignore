@@ -1,0 +1,70 @@
+# Reviewer-acquired inputs (not committed; see docs/CORPUS-9.83.md and test-corpus/CATALOGUE.md)
+/rune-dsl/
+/rune-python-runtime/
+/rune-common/
+/rune-testing/
+/common-domain-model/
+/upstream/
+/test-corpus/cdm/
+/test-corpus/drr/
+/test-corpus/iso20022/
+/test-corpus/rune-fpml/
+/test-corpus/rune-dsl-builtins/
+/corpus-baseline-9.83/
+
+# Maven build output
+**/target/
+
+# Content-addressable matrix-cell cache (outside target/ so `mvn clean` keeps it)
+/.matrix-cache/
+
+# Locally captured japicmp Layer-3 baseline jars
+/rune-japicmp/.japicmp-baselines/
+
+# Legacy-vs-fork harness outputs
+/docs/harness/logs/
+/docs/harness/diffs/
+/docs/harness/*-summary.md
+
+# Per-cell as-cloned goldens snapshots created by snapshot-goldens.sh
+**/rosetta-source/src/generated-as-cloned/
+**/rosetta-source/target/classes/generated-as-cloned/
+
+# Test output
+**/*.actual.txt
+**/.jqwik-database
+
+# Demo work area (generated trees, hermetic Maven repository, logs, venv)
+/demo/work/
+
+# Review example outputs
+/examples/review/target/
+
+# IDE files
+.idea/
+*.iml
+.project
+.classpath
+.settings/
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+*.egg-info/
+dist/
+build/
+# demo/build holds real Maven sources, not a Python build directory
+!demo/build/
+!demo/build/**
+
+# Local agent settings and scratch (never committed)
+/.claude/
+/.codex/
+/tmp/

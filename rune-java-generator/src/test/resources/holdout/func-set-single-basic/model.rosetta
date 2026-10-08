@@ -1,0 +1,17 @@
+namespace test.fsetbasic144
+
+type Baz:
+	attrList string (0..*)
+
+func FuncFoo:
+ 	inputs:
+ 		baz Baz (1..1)
+ 		s string (1..1) <"Add single">
+	output:
+		updatedBaz Baz (1..1)
+	
+	set updatedBaz:
+		baz
+	
+	set updatedBaz -> attrList:
+		s

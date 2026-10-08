@@ -1,0 +1,9 @@
+namespace chaos.s15.a3half.p2
+version "1.0.0"
+import chaos.s15.a3half.p1.*
+library function C15Half(x number) number
+library function C15Today() date
+type C15Carrier: <"Uses the model-declared builtins beside real ones.">
+    tok c15token (0..1)
+    span c15span (0..1)
+    aux C15Aux (0..1)

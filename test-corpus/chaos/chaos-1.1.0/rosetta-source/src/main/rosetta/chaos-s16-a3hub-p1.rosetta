@@ -1,0 +1,5 @@
+namespace chaos.s16.a3hub.p1
+version "1.0.0"
+import chaos.s16.a3hub.p2.*
+type C16Held: <"Self-contained helper - relocated by the import axis.">
+    h string (1..1)

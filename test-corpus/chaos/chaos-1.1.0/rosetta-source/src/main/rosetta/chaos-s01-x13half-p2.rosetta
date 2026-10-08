@@ -1,0 +1,14 @@
+namespace chaos.s01.x13half.p2
+version "1.0.0"
+import chaos.s01.x13half.p1.*
+type C1Leaf extends C1Mid: <"Leaf - overrides, parameterised types, multi-cardinality.">
+    override note string (1..1)
+    parts C1Ref (2..*)
+    ratio number(min: 0, max: 100) (0..1)
+    code string(minLength: 3, maxLength: 3) (0..1)
+type C1Mid extends C1Base: <"Middle of the chain - adds a list and a date.">
+    mids number (0..*)
+    asOf date (0..1)
+type C1Base: <"Root of the S01 inheritance chain.">
+    baseId string (1..1)
+    note string (0..1)

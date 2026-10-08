@@ -1,0 +1,11 @@
+namespace chaos.s16.a3third.p2
+version "1.0.0"
+import chaos.s16.a3third.p1.*
+import chaos.s16.a3third.p3.*
+type C16Alpha: <"Choice option 1 - its NAME is the shadowing battery's subject.">
+    a string (1..1)
+type C16Beta: <"Choice option 2.">
+    b string (1..1)
+choice C16Pick: <"The choice whose bare option names the rivals collide with.">
+    C16Alpha
+    C16Beta

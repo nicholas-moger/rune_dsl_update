@@ -1,0 +1,39 @@
+namespace test.rws.b
+version "0.0.0"
+
+import test.rws.a.*
+
+body Authority RwsAUTH <"The authority.">
+corpus Regulation "Rws Regulation" RwsReg <"The corpus.">
+segment rwsarticle
+
+type RwsTrade: <"The report-from type.">
+    utid string (1..1)
+        [label as "The Trade UTI"]
+    notional number (0..1)
+
+eligibility rule RwsEligible from RwsTrade: <"Report when-gate.">
+    notional exists
+reporting rule RwsUtid from RwsTrade: <"Reported field.">
+    extract utid
+        as "UTI"
+reporting rule RwsNotional from RwsTrade: <"Reported numeric with default.">
+    extract notional default 0
+        as "Notional"
+
+type RwsReport: <"Report output type with rule references - the OWN namespace's, shadowing the imported one.">
+    utiField string (1..1)
+        [ruleReference RwsUtid]
+    notionalField number (1..1)
+        [ruleReference RwsNotional]
+
+corpus Standard "Rws Standard" RwsStd <"The standard.">
+rule source RwsRS
+{
+}
+report RwsAUTH RwsReg in T+1
+    from RwsTrade
+    when RwsEligible
+    using standard RwsStd
+    with type RwsReport
+    with source RwsRS

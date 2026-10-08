@@ -1,0 +1,22 @@
+namespace chaos.s27.a5mixed
+version "1.0.0"
+type C27Ref: <"Helper - relocated by the import axis.">
+    caption string (1..1)
+func C27Check: <"The function an alias condition calls (the parser half seat 3 found).">
+    inputs:
+        v number (1..1)
+    output:
+        ok boolean (1..1)
+    set ok: v >= 0
+typeAlias C27Nat: <"An int-grained alias whose conditions hold a list op, a conditional, a switch, an existence test, a set operation and a function call (seat 3's 23 unwitnessed consumers).">
+    number(fractionalDigits: 0)
+    condition NonNeg:
+        item >= 0
+    condition Ops:
+        ([item, 0] then max) >= 0
+        and (if item > 100 then item < 1000 else item >= 0)
+        and (item switch 0 then True, default (item > 0))
+        and item exists
+        and [item] contains item
+    condition Called:
+        C27Check(item)

@@ -1,0 +1,35 @@
+namespace holdout.convbigintaliaslong
+version "0.0.0"
+
+func LongAliasArm: <"THE DIGIT LAW'S LONG RUNG (v3.2 seat 13, D53 - the chaos s23 C23LongAlias rows, 13 of 13 non-compiling by the seat-13 census; the group seat 5 BANKED as conv-bigint-alias-long): a 12-digit literal through an alias - the alias's signature is MapperS<Long> - at a conditional arm into a `number` (BigDecimal) output. The plugin hoists the alias value on the session's Long group with the KEYWORD ESCAPE `_long` (`final Long _long = big12(v, f).get();`) and converts it null-guarded (`r = BigDecimal.valueOf(_long);`); the fork's conditional-arm conversion seat DECLINED the Long item ('its escape is unwitnessed') and spliced `r = big12(v, f).get();` - a Long into a BigDecimal, non-compiling.">
+    inputs:
+        v number (1..1)
+        f boolean (1..1)
+    output:
+        r number (1..1)
+    alias big12: 123456789012
+    set r:
+        if f
+        then big12
+        else v
+
+func LongAliasWhole: <"THE WHOLE-OUTPUT SIBLING: the same Long alias SET whole-output (no conditional) into the `number` output - the whole-SET seat's numeric output coercion with the same `_long` escape.">
+    inputs:
+        v number (1..1)
+    output:
+        r number (1..1)
+    alias big12: 123456789012
+    set r: big12
+
+func LongAliasTwice: <"TWO Long alias arms in one function - the session's Long group NUMBERS the escaped locals (`_long0` / `_long1`, or whatever the plugin's isName loop yields) - the numbering law under the escape, pinned as bytes.">
+    inputs:
+        v number (1..1)
+        f boolean (1..1)
+    output:
+        r number (1..1)
+    alias big12: 123456789012
+    alias big13: 1234567890123
+    set r:
+        if f
+        then big12
+        else big13

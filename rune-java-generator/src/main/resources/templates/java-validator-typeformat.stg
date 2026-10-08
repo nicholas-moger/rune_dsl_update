@@ -1,0 +1,69 @@
+delimiters "<", ">"
+
+// v3.2 seat 11 (D50 — the file-scope first-claim law): rendered in TWO steps — see
+// java-validator-cardinality.stg. The body's TYPE positions are first-claim sentinels
+// (the library tokens through <t.X>; the data class, the condition dependencies, the
+// casts and the runConditions locals through the model); the generator resolves them
+// in text order from the validator class as the one seed and drops the losers'
+// imports; the file template wraps m.body.
+typeFormatValidator(m) ::= <<
+package <m.packageName>;
+
+<m.imports:{imp | import <imp>;
+}>
+<if(m.staticImports)>
+<m.staticImports:{imp | import static <imp>;
+}>
+<endif>
+<m.body>
+>>
+
+typeFormatValidatorBody(m, t) ::= <<
+public class <m.validatorClassName> implements <t.Validator>\<<m.dataClassJavaType>\> {
+<if(m.conditionDeps)>
+<m.conditionDeps:{d | 	@<t.Inject>
+	protected <d.typeName> <d.fieldName>;
+}>
+<else>
+
+<endif>
+	private <t.List>\<<t.ComparisonResult>\> getComparisonResults(<m.dataClassJavaType> o) {
+		return <t.Lists>.\<<t.ComparisonResult>\>newArrayList(
+<m.checks:{c | 				<c.checkExpr><if(!c.isLast)>, <endif>
+}>			);
+	}
+<if(m.conditionDeps)>
+<m.runConditionsBody>
+<else>
+
+<endif>
+	@Override
+	public <t.List>\<<t.ValidationResult>\<?\>\> getValidationResults(<t.RosettaPath> <m.pathName>, <m.dataClassJavaType> o) {
+<if(m.conditionDeps)>
+		return <t.Streams>.concat(getComparisonResults(o)
+				.stream()
+				.map(res -> {
+					if (!isNullOrEmpty(res.getError())) {
+						return failure("<m.dataClassName>", <t.ValidationResult>.ValidationType.TYPE_FORMAT, "<m.dataClassName>", <m.pathName>, "", res.getError());
+					}
+					return success("<m.dataClassName>", <t.ValidationResult>.ValidationType.TYPE_FORMAT, "<m.dataClassName>", <m.pathName>, "");
+				}),
+				runConditions(<m.pathName>, o).stream()
+			)
+			.collect(toList());
+<else>
+		return getComparisonResults(o)
+			.stream()
+			.map(res -> {
+				if (!isNullOrEmpty(res.getError())) {
+					return failure("<m.dataClassName>", <t.ValidationResult>.ValidationType.TYPE_FORMAT, "<m.dataClassName>", <m.pathName>, "", res.getError());
+				}
+				return success("<m.dataClassName>", <t.ValidationResult>.ValidationType.TYPE_FORMAT, "<m.dataClassName>", <m.pathName>, "");
+			})
+			.collect(toList());
+<endif>
+	}
+
+}
+
+>>

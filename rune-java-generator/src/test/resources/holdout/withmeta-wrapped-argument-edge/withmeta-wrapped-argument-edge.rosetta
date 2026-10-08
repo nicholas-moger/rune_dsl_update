@@ -1,0 +1,77 @@
+namespace test.wmwrapedge
+
+metaType scheme string
+metaType id string
+metaType key string
+metaType reference string
+
+type Holder: <"Attribute-level meta shapes (the chaos C9Holder).">
+    coded string (0..1)
+        [metadata scheme]
+    codes string (0..*)
+        [metadata scheme]
+    marked string (0..1)
+        [metadata id]
+    plain string (0..1)
+
+type Keyed: <"A keyed root (the chaos C9Keyed).">
+    [metadata key]
+    kid string (1..1)
+
+type KeyedHolder: <"A holder of a keyed root (round 1: the alias into the POJO-meta arm).">
+    keyed Keyed (0..1)
+
+func Wrapped: <"The chaos C9Stamp shape, the callee of FromCall.">
+    inputs:
+        h Holder (1..1)
+    output:
+        c string (0..1)
+            [metadata scheme]
+    set c: h -> coded with-meta { scheme: "oracle-scheme" }
+
+func FromCall: <"Scheme on a function call returning a wrapped value.">
+    inputs:
+        h Holder (1..1)
+    output:
+        c string (0..1)
+            [metadata scheme]
+    set c: Wrapped(h) with-meta { scheme: "other-scheme" }
+
+func KeyOnKeyed: <"key (type meta) on a keyed argument.">
+    inputs:
+        k Keyed (1..1)
+    output:
+        r Keyed (1..1)
+    set r: k with-meta { key: "the-key" }
+
+func RefOnKeyed: <"reference on a keyed argument into a reference-wrapped output.">
+    inputs:
+        k Keyed (1..1)
+    output:
+        r Keyed (1..1)
+            [metadata reference]
+    set r: k with-meta { reference: "the-ref" }
+
+func ViaAlias: <"The wrapped argument through an alias.">
+    inputs:
+        h Holder (1..1)
+    output:
+        c string (0..1)
+            [metadata scheme]
+    alias src: h -> coded
+    set c: src with-meta { scheme: "oracle-scheme" }
+
+func AliasKeyed: <"key (type meta) on a keyed value reached through an ALIAS - the POJO-meta arm's alias case.">
+    inputs:
+        kh KeyedHolder (1..1)
+    output:
+        r Keyed (1..1)
+    alias src: kh -> keyed
+    set r: src with-meta { key: "the-key" }
+
+func CallKeyed: <"key (type meta) on a function CALL returning a keyed value (round 2).">
+    inputs:
+        k Keyed (1..1)
+    output:
+        r Keyed (1..1)
+    set r: KeyOnKeyed(k) with-meta { key: "call-key" }

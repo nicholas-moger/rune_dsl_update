@@ -1,0 +1,30 @@
+/* chaos a9: a block-comment banner before the first token */
+// chaos a9: a line comment before namespace
+namespace chaos.s25.a9comment // a9
+version "1.0.0" // a9
+type C25Sub: <"Helper - relocated by the import axis; every attribute optional (an only-exists parent must have no required attribute - the oracle's law)."> // a9
+    sname string (0..1) // a9
+    subs number (0..*) // a9
+type C25OptA: <"Choice option A."> // a9
+    pa string (0..1) // a9
+    shared string (0..1) // a9
+type C25OptB: <"Choice option B."> // a9
+    pb string (0..1) // a9
+    shared string (0..1) // a9
+choice C25Pick: <"The choice whose option is an only-exists leaf (the ladder census's leaf class, seat 8)."> // a9
+    C25OptA // a9
+    C25OptB // a9
+type C25Paths: <"only-exists targets: a bare, a nested, a choice-typed and a multi attribute."> // a9
+    p string (0..1) // a9
+    q string (0..1) // a9
+    sub C25Sub (0..1) // a9
+    pick C25Pick (0..1) // a9
+    subs C25Sub (0..*) // a9
+    condition C25Bare: <"A bare-symbol leaf with no chain (seat 8's declined edge shape - upstream's verdict UNMEASURED until now)."> // a9
+        p only exists or q only exists // a9
+    condition C25Item: <"An item root (the other declined edge shape)."> // a9
+        item -> p only exists or (item -> p, item -> q) only exists // a9
+    condition C25TwoHop: <"A two-hop element and a mixed list beside it."> // a9
+        sub -> sname only exists or (sub -> sname, sub -> subs) only exists // a9
+    condition C25Option: <"A choice-option leaf."> // a9
+        if pick exists then pick -> C25OptA only exists or pick -> C25OptB only exists // a9

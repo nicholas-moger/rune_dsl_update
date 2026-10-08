@@ -1,0 +1,4 @@
+namespace com.test
+
+type Parent:
+    a string (1..1)

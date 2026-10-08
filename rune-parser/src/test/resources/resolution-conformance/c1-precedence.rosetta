@@ -1,0 +1,121 @@
+namespace conformance.c1
+version "1.0.0"
+
+// C1 — PRECEDENCE. The discriminating experiments: every function here writes a
+// name that TWO scopes could legitimately supply, so the oracle's answer is the
+// precedence rule itself rather than a reading of it.
+//
+// Upstream builds a symbol reference's scope as
+//   ReversedSimpleScope.scopeFor(implicitFeatures ++ expectedEnumValues, parentScope)
+// and ReversedSimpleScope documents REVERSE shadowing — "for a given name, first
+// the parent scope will be checked, and if no element was found, only then local
+// elements". So the parent chain (lambda params -> function inputs/output/
+// shortcuts -> globals and imports) OUTRANKS both implicit-item features and
+// expected-type enum values, which share the lowest bucket in that order.
+//
+// This is the OPPOSITE of what a "sensible" resolver would do, and it is the
+// half of the spec no golden file can settle: where both bindings would emit the
+// same bytes, only the oracle knows which one upstream made.
+
+enum Colour:
+    Red
+    Green
+
+enum Flavour:
+    Sweet
+    Salt
+
+type Item:
+    // Deliberately collides with the global enum `Colour` above.
+    Colour string (0..1)
+    // Deliberately collides with the enclosing function's input `payload`.
+    payload string (0..1)
+    // Deliberately collides with a value of the expected enum `Flavour`.
+    Salt string (0..1)
+    other string (0..1)
+    // Deliberately collides with the alias name in (e).
+    caption string (0..1)
+
+type Box:
+    items Item (0..*)
+    caption string (0..1)
+
+// (a) GLOBAL SYMBOL vs IMPLICIT-ITEM FEATURE.
+//     `Colour` is both a top-level enum (parent scope) and an attribute of the
+//     implicit item (local bucket).
+func C1GlobalVsImplicitFeature:
+    inputs:
+        box Box (1..1)
+    output:
+        result string (0..*)
+    set result:
+        box -> items
+            extract Colour
+
+// (b) FUNCTION INPUT vs IMPLICIT-ITEM FEATURE.
+//     `payload` is both an input of this function (parent chain) and an
+//     attribute of the implicit item (local bucket).
+func C1InputVsImplicitFeature:
+    inputs:
+        box Box (1..1)
+        payload string (0..1)
+    output:
+        result string (0..*)
+    set result:
+        box -> items
+            extract payload
+
+// (c) IMPLICIT-ITEM FEATURE vs EXPECTED-TYPE ENUM VALUE.
+//     Both live in the SAME lowest bucket, implicit features first, so this
+//     pins the order WITHIN that bucket rather than between buckets. `Salt` is
+//     an attribute of the item and a value of the expected `Flavour`.
+func C1ImplicitFeatureVsExpectedEnumValue:
+    inputs:
+        box Box (1..1)
+    output:
+        result Flavour (0..*)
+    set result:
+        box -> items
+            extract Salt
+
+// (d) LAMBDA PARAMETER vs IMPLICIT-ITEM FEATURE.
+//     An explicit closure parameter sits on the parent chain BELOW the function
+//     inputs, so it shadows normally.
+func C1LambdaParamVsImplicitFeature:
+    inputs:
+        box Box (1..1)
+    output:
+        result string (0..*)
+    set result:
+        box -> items
+            extract other [ other -> other ]
+
+// (e) AN ALIAS'S OWN NAME inside its own body. Upstream filters a shortcut's
+//     own name out of the scope its body sees, so the bare `caption` INSIDE the
+//     alias cannot be the alias — it must fall through to the implicit item's
+//     attribute. The same bare name OUTSIDE the alias does bind to the alias.
+func C1AliasSelfName:
+    inputs:
+        box Box (1..1)
+    output:
+        result string (0..*)
+    alias caption:
+        box -> items extract caption
+    set result:
+        caption
+
+// (f) THE FUNCTION OUTPUT named from a pre-condition — which upstream FILTERS
+//     out of the scope — and from a post-condition, where it is kept. The
+//     pre-condition reference is EXPECTED to come back unresolved; that
+//     unresolved answer IS the rule, and a resolver that binds it is wrong.
+func C1OutputInConditions:
+    inputs:
+        box Box (1..1)
+    output:
+        result string (0..1)
+    condition PreCondition:
+        result is absent
+    set result:
+        box -> caption
+    post-condition PostCondition:
+        result exists

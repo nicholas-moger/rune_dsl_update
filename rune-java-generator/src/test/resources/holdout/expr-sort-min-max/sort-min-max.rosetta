@@ -1,0 +1,15 @@
+namespace test.expressions
+
+type Item:
+    name string (1..1)
+    price number (1..1)
+
+func TestSortMinMax:
+    inputs:
+        items Item (0..*)
+    output:
+        result Item (0..*)
+    alias sorted: items sort x [x -> price]
+    alias cheapest: items min x [x -> price]
+    alias expensive: items max x [x -> price]
+    set result: sorted

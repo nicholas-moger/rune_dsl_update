@@ -1,0 +1,13 @@
+namespace chaos.s02.a5uni
+version "1.0.0"
+type C2Tag: <"éüµ – Helper the import-style axis relocates.">
+    tagLine string (1..1)
+enum C2DirEnum: <"Directions with displayName and docs.">
+    Buy displayName "BUY" <"Buy side.">
+    Sell displayName "SELL"
+    Hold <"No action.">
+type A5UniProbe: <"Non-ASCII literal probe – müßig 試験.">
+    p string (0..1)
+        [label as "µ–label §7"]
+enum A5UniProbeEnum: <"displayName probe.">
+    V displayName "µ–„display“"

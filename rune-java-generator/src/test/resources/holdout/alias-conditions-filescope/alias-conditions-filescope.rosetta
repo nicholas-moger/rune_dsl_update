@@ -1,0 +1,45 @@
+namespace test.aliasfilescope
+
+typeAlias Nat: <"An int-grained alias with ONE condition - the wired class is NatNonNeg, its @Inject field natNonNeg.">
+    number(fractionalDigits: 0)
+    condition NonNeg:
+        item >= 0
+
+typeAlias OwnTypeFormat: <"An alias whose condition class is named OwnTypeFormatValidator - the SAME simple name as the type-format validator of type Own, in a sibling package.">
+    number(fractionalDigits: 0)
+    condition Validator:
+        item >= 0
+
+type Own: <"The validator OwnTypeFormatValidator wires a condition class of its OWN simple name - the file scope's first claim is the class itself.">
+    v OwnTypeFormat (0..1)
+    vs OwnTypeFormat (0..*)
+
+type Imported: <"Multi attributes named after the wing's imported simple names (Streams, ArrayList, Inject) and a java.lang one (Integer) - the file scope's imports against the attribute-named local.">
+    Streams Nat (0..*)
+    ArrayList Nat (0..*)
+    Inject Nat (0..*)
+    Integer Nat (0..*)
+
+type Written: <"Multi attributes named after every OTHER simple name the two files write - the POJO's boilerplate (Object, String, List, Objects, Consumer, Collectors, ImmutableList, Processor, Multi, Override) and the validator's (Lists, ValidationResult, RosettaPath, Validator, ComparisonResult) - which of them upstream's file scope escapes.">
+    Object Nat (0..*)
+    String Nat (0..*)
+    List Nat (0..*)
+    Objects Nat (0..*)
+    Consumer Nat (0..*)
+    Collectors Nat (0..*)
+    ImmutableList Nat (0..*)
+    Processor Nat (0..*)
+    Multi Nat (0..*)
+    Override Nat (0..*)
+    Lists Nat (0..*)
+    ValidationResult Nat (0..*)
+    RosettaPath Nat (0..*)
+    Validator Nat (0..*)
+    ComparisonResult Nat (0..*)
+
+type WrittenSingle: <"The same names at SINGLE cardinality - the builder-interface setter's own parameter arm.">
+    Consumer Nat (0..1)
+    Object Nat (0..1)
+    Override Nat (0..1)
+    Integer Nat (0..1)
+    Objects Nat (0..1)

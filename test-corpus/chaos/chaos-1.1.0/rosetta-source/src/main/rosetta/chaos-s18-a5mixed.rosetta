@@ -1,0 +1,15 @@
+namespace chaos.s18.a5mixed
+version "1.0.0"
+type C18Sub: <"Self-contained helper - relocated by the import axis.">
+    s string (1..1)
+enum C18KindEnum: <"Enum-guard subject.">
+    Red
+    Green
+    Blue
+type C18OptA: <"Choice-guard option A.">
+    av string (1..1)
+type C18OptB: <"Choice-guard option B.">
+    bv number (1..1)
+choice C18Either: <"Choice-guard subject.">
+    C18OptA
+    C18OptB

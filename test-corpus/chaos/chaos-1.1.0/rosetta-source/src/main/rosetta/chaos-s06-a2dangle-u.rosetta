@@ -1,0 +1,4 @@
+namespace chaos.s06.a2dangle.unused
+version "1.0.0"
+type C6TagUnusedT:
+    stub string (0..1)

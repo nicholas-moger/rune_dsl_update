@@ -1,0 +1,56 @@
+{
+  "id": "analytics.legacy-emf",
+  "section": "analytics",
+  "title": "Analytics - upstream Xtext 9.83.0 (legacy-emf)",
+  "command": "java -cp \"demo/harness/codegen/legacy/target/classes;demo/harness/codegen/legacy/target/lib/*\" demo.harness.analytics.legacy.Main legacy-emf --src \"demo/corpus/cdm-5.38.0;demo/corpus/iso20022-1.38.0;demo/corpus/drr-6.34.1\" --builtins demo/corpus/builtins --receipt demo/receipts/analytics.legacy-emf.json",
+  "startedAt": "2026-08-20T01:21:06Z",
+  "durationMs": 90802,
+  "host": {
+    "os": "Windows 11 10.0",
+    "cpu": "Intel64 Family 6 Model 198 Stepping 2, GenuineIntel",
+    "java": "21.0.8"
+  },
+  "metrics": {
+    "lane": "legacy-emf",
+    "files": 349,
+    "parseMs": 2256,
+    "indexMs": 1,
+    "q1Ms": 0,
+    "q2Ms": 0,
+    "q3Ms": 0,
+    "q4Ms": 0,
+    "startupMs": 926,
+    "results": {
+      "q1": {
+        "types": 2243,
+        "enums": 763,
+        "functions": 1649,
+        "rules": 2272
+      },
+      "q2": {
+        "metaAnnotatedTypes": 206
+      },
+      "q3": {
+        "referencesToTarget": 26
+      },
+      "q4": {
+        "deepestExtendsChain": 5
+      }
+    },
+    "peakHeapMb": 1329,
+    "peakNonHeapMb": 67,
+    "indexSize": 3474,
+    "indexCollisions": 3933,
+    "extendsCycles": 0,
+    "resolveMs": 87587,
+    "declarations": 7407,
+    "unresolvedSuperTypes": 0,
+    "unresolvedAttributeTypes": 0,
+    "skippedRootElements": 226,
+    "resourceErrors": 0,
+    "wallMs": 90799,
+    "exit": 0,
+    "peakRssMb": 1483
+  },
+  "notes": "startupMs is process start to Guice injector ready and resolveMs is EcoreUtil.resolveAll; both are real costs of this lane and are reported rather than netted out. files counts the NON-builtin population. peakRssMb omitted -- see AnalyticsRun. peakRssMb added by the outer wrapper: PeakWorkingSet64 sampled every 150 ms while the process ran (BelowNormal priority)."
+}

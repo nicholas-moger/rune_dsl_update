@@ -1,0 +1,4 @@
+override namespace com.example.model
+
+type Foo:
+    bar string (1..1)

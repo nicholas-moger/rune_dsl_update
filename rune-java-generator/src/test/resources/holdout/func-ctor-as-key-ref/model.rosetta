@@ -1,0 +1,20 @@
+namespace test.fctorref035
+
+type TypeWithKey:
+	[metadata key]
+
+type OtherType:
+	attrSingle TypeWithKey (1..1)
+		[metadata reference]
+	attrMulti TypeWithKey (0..*)
+		[metadata reference]
+
+func CreateOtherType:
+	inputs:
+		key TypeWithKey (1..1)
+	output: result OtherType (1..1)
+	set result:
+		OtherType {
+			attrSingle: key as-key,
+			attrMulti: [key, key] as-key
+		}

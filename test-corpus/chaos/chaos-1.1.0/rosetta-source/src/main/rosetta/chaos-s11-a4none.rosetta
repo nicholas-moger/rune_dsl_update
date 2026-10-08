@@ -1,0 +1,5 @@
+namespace chaos.s11.a4none
+type C11Aux: <"Self-contained helper - relocated by the import axis.">
+    ax string (1..1)
+synonym source C11XML
+synonym source C11JSON

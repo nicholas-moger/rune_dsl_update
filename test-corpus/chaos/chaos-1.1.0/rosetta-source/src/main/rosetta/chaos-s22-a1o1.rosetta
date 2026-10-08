@@ -1,0 +1,26 @@
+namespace chaos.s22.a1o1
+version "1.0.0"
+isProduct root C22Terms;
+type C22Aux: <"Self-contained helper - relocated by the import axis.">
+    ax string (1..1)
+func Qualify_C22Exotic: <"Second qualifier - overlapping predicate space.">
+    [qualification Product]
+    inputs:
+        c22terms C22Terms (1..1)
+    output:
+        is_product boolean (1..1)
+    set is_product:
+        c22terms -> kind <> "vanilla" or c22terms -> notional is absent
+
+func Qualify_C22Vanilla: <"Product qualification against the declared root.">
+    [qualification Product]
+    inputs:
+        c22terms C22Terms (1..1)
+    output:
+        is_product boolean (1..1)
+    set is_product:
+        c22terms -> kind = "vanilla" and c22terms -> notional exists
+type C22Terms: <"The qualifiable root type.">
+    kind string (0..1)
+    notional number (0..1)
+    aux C22Aux (0..1)

@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:rune-dsl-review:docs/byte-diff-catalogue/schema.json",
+  "title": "Byte-diff catalogue entry",
+  "description": "Per-divergence ledger entry. 14 required fields per D5 (local) (rebaseline.md (local)). See skill byte-diff-catalogue.md (local) section 6.1.",
+  "$comment": "D5 (local) verbatim field order (positions 1-14): entry_id, corpus, project, version, element_kind, symbol, upstream_hash, our_hash, classification, rationale, status, created_date, last_review, linked_issue. Property order is a presentation convention; JSON Schema cannot enforce it.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "entry_id",
+    "corpus",
+    "project",
+    "version",
+    "element_kind",
+    "symbol",
+    "upstream_hash",
+    "our_hash",
+    "classification",
+    "rationale",
+    "status",
+    "created_date",
+    "last_review",
+    "linked_issue"
+  ],
+  "properties": {
+    "entry_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Stable primary key; never reused. Matches the entry filename."
+    },
+    "corpus": {
+      "type": "string",
+      "enum": ["cdm", "drr", "iso20022", "rune-fpml"],
+      "description": "Cell dimension; one of the four supported corpora. Values match the codebase canonical names (Corpus.java enum dirName(), CI matrix, test-corpus/ directory layout). The display form 'ISO-20022' in prose docs is the standard's official name; this enum uses 'iso20022' for the machine identifier."
+    },
+    "project": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Sub-module within the corpus (e.g., base-model, product-model)."
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Version pin (e.g., 6.16.0)."
+    },
+    "element_kind": {
+      "type": "string",
+      "minLength": 1,
+      "description": "18+ element kinds per D15 (local). String for now; future PR may tighten to enum."
+    },
+    "symbol": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Fully-qualified name. Class-rule entries use synthetic prefix __class_rule__:<slug>."
+    },
+    "upstream_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "SHA-256 of upstream emission for this symbol. Sentinel e3b0c44... (sha-256 of empty string) for class-rule entries."
+    },
+    "our_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "SHA-256 of our emission. Sentinel e3b0c44... for class-rule entries."
+    },
+    "classification": {
+      "type": "string",
+      "enum": ["cosmetic", "stylistic", "semantic"],
+      "description": "Three-way classification per skill section 2."
+    },
+    "rationale": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Human rationale; for accepted entries cites the D-entry that locked the decision."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["active", "accepted", "resolved"],
+      "description": "Lifecycle state per skill section 7."
+    },
+    "created_date": {
+      "type": "string",
+      "format": "date",
+      "description": "ISO-8601 date of catalogue-entry creation."
+    },
+    "last_review": {
+      "type": "string",
+      "format": "date",
+      "description": "ISO-8601 date of last triage-review confirmation."
+    },
+    "linked_issue": {
+      "anyOf": [
+        { "type": "string", "minLength": 1 },
+        { "type": "null" }
+      ],
+      "description": "Tracker URL (upstream issue, japicmp report anchor, downstream tracker, internal follow-up). May be null."
+    }
+  }
+}

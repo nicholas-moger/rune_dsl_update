@@ -1,0 +1,16 @@
+namespace test.singletolistset
+
+type NumberList:
+    numbers number (0..*)
+
+type Baz:
+    bazValue number (0..1)
+    other number (0..1)
+
+type Foo:
+    baz Baz (0..1)
+
+func AliasOther:
+    inputs: foo Foo (1..1)
+    output: result NumberList (1..1)
+    set result -> numbers : foo -> baz -> other

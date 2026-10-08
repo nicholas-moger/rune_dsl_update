@@ -1,0 +1,4 @@
+namespace chaos.s17.a2dangle.unused
+version "1.0.0"
+type C17HeldUnusedT:
+    stub string (0..1)

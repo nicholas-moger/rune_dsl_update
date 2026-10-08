@@ -1,0 +1,10 @@
+namespace test.expressions
+
+func Arithmetic:
+    inputs:
+        x number (1..1)
+        y number (1..1)
+        z number (1..1)
+    output:
+        result number (1..1)
+    set result: x + y * 2 - z / 3

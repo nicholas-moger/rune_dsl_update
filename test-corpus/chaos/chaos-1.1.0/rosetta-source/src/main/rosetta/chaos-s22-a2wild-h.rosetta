@@ -1,0 +1,4 @@
+namespace chaos.s22.a2wild.h
+version "1.0.0"
+type C22Aux: <"Self-contained helper - relocated by the import axis.">
+    ax string (1..1)

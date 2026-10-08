@@ -1,0 +1,12 @@
+//== header
+namespace chaos.s91.seed
+version "0.0.0"
+//== element C91Then
+type C91Item: <"REFUSAL-PARITY s91 (base only): a NAMED-parameter inline function after `then` - the released grammar's then takes a bare implicit body and refuses (no viable alternative at input 'p'; the seat-6 receipt); the fork's thenSuffix admits it (the banked parser seat).">
+    v number (0..1)
+func C91Then:
+    inputs:
+        items C91Item (0..*)
+    output:
+        vs number (0..*)
+    add vs: items then p [ p -> v ]

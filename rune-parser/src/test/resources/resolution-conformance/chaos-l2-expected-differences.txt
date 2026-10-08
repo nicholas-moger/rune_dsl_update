@@ -1,0 +1,154 @@
+# chaos-1.1.0 (v3.2 seat 10, PR #631, D49): RE-DERIVED EMPTY-FIRST at the swap - the differential over the
+# generation-2 cell (records=23875, the l1-s10-run7 dump = run8, byte-identical); a row landing below is a MEASURED row of the
+# first gen-2 L2 census, its class named (KNOWN / NEW). The 1.0.0 history follows.
+# THE CHAOS L2 DECLARED DIFFERENCES (v3.2 PR-2 first differential, 2026-09-02)
+#
+# LIVE ROWS: 85 (103 re-derived at the gen-2 swap, v3.2 seat 10; 85 since v3.2 seat 12's H3 - the SHRINK LOG below;
+# this line moves WITH every re-cut - it had read 0 from seat 8 until seat 12 swept it, the #632 law).
+# EMPTY from v3.2 seat 8 to the gen-2 swap — the fork bound every in-scope chaos-1.0.0 reference where upstream 9.83.0
+# binds it (ChaosResolutionConformanceTest asserts the differential CLEAN outright when this file carries no row).
+# The file stays as the belt until the v3.2 close DELETES it (charter § 6: L2 differential = 0 at the stated
+# scope); a row appearing here again is a resolution REGRESSION or an undiscovered family — census it, never
+# append it silently.
+#
+# LAWS: shrink-only (a row that stops differing is STALE and fails the gate -
+# delete it in the seat that healed it); a NEW difference fails undeclared;
+# DELETED WHOLE at v3.2 close (L2 differential = 0 at the stated scope).
+# Format: the differential's own key form, one per line.
+#
+# --- HISTORY: the 258 rows measured by ChaosResolutionConformanceTest at the first run (2026-09-02) = TWO
+# families, both censused in target/v32-chaos-census.md (local):
+#  - 222 rows (F14): upstream binds a lambda parameter to its ClosureParameter node; the fork had NO
+#    lambda-parameter AST node (RInlineFunction kept params as List<String>) and could only record the
+#    declaring lambda - the SAME structural gap as ResolutionConformanceTest's one frozen exception, measured
+#    at chaos scale across the two nested-lambda seats the rows span - s05 (78 rows) and s20 (144 rows); the
+#    seat list here originally over-named six seats and was corrected at the PR-2 spec review's SF-8 (Rule 4:
+#    enumerate, never extrapolate).
+#  - 36 rows (F15): upstream binds an Attribute; the fork emitted NO record at the offset (all in seat s21,
+#    names p/q/r): the element's leaf was a bare name, not a reference node. The PR-2 text called s21 "the
+#    deep-path projection seat" - corrected at seat 8: chaos-s21-base.rosetta declares C21Paths as the
+#    only-exists seat ("only-exists targets."), and every row of this family is an only-exists leaf.
+#
+# --- SHRINK LOG (shrink-only; every deletion is the healing seat's own commit, measured by the gate) ---
+#  v3.2 seat 8 (F14): the 222 lambda-parameter rows DELETED - RClosureParameter landed (every declared
+#    lambda parameter is a node, the binding target of a reference to it; the vendored suite's frozen
+#    exception left in the same change); the pre-fix census target/v32-seat8-instruments/scratch/l2-pre/
+#    (local) read 78 + 144 rows fork=RInlineFunction / upstream=ClosureParameter, the post-fix gate 0 of them.
+#  v3.2 seat 8 (F15): the 36 s21 only-exists rows DELETED - the only-exists element's LEAF is a real
+#    RFeatureCall now (the whole root -> ... -> leaf path is the element's expression, ranged hop by hop;
+#    receiverExpression() is unchanged, the leaf's receiver), so the fork's own resolver binds the leaf
+#    and the dump emits it; the pre-fix census read 36 rows fork=(no record) / upstream=Attribute.
+#  v3.2 seat 12 (PR #633, D52 H3 - M6 the `item ->` only-exists root, healed): 18 of the 98 F15-RESIDUE rows DELETED
+#    (103 -> 85; RosettaFeatureCall.feature 'C25OptA' x9, RosettaFeatureCall.feature 'pick' x9) - the rows the linker now BINDS, read from the gate's own STALE print at the H3 tree
+#    (target/v32-seat12-instruments/scratch/t-parser-h3.log, local; recut-l2-s12.py). The parser builds an `item ->`
+#    only-exists root as a real, non-synthetic RImplicitVariable (AstBuilder.buildOnlyExistsPath) and chains the
+#    features off it; inside a lambda the type engine types the literal item (Cat 8) and binds the hops (Cat 1), so the
+#    nine C25Only `ps then extract (item -> pick -> C25OptA only exists)` seats bind `pick` (Attribute) and `C25OptA`
+#    (ChoiceOption) where upstream does. THE 48 CONDITION-SEAT ROWS STAY (the sixteen C25Item conditions' `item -> p`
+#    x2 + `item -> q`): the type engine types the literal `item` inside lambdas and rule bodies but NOT inside a
+#    data-type condition (computeImplicitItemType has no RCondition-under-RDataType arm - upstream's
+#    safeTypeOfImplicitVariable has), so those hops stay unbound in the AST and the fork emits no record; the
+#    GENERATOR resolves them by name against the declaring type (the gm-aware receiver walk's condition-top arm - the
+#    same arm cdm's `item -> location` condition renders through) and the sixteen data rules render byte-identical
+#    to their goldens at the H3 head (the chaos D11 on both routes, scratch/ds12d-off.log / -on.log). The Cat 8
+#    condition arm is a parser typing change with the whole vendored corpus's type conditions in
+#    its reach (72 `item ->` lines in cdm 6.20+ / drr) - a seat of its own, measured by the rings, not this heal's. The
+#    33 bare-symbol rows (`p only exists` / `(p, q) only exists`, RosettaSymbolReference.symbol) stay too - the bare
+#    shape is still declined by the parser (no reference node; the generator's arms 3 / 4 synthesise its parent).
+#
+# THE FIRST GEN-2 CENSUS ROWS (measured 2026-09-10, the parser chaos step of d11-m1 over the l1-s10-run7 dump; 103 rows; 85 live since v3.2 seat 12's H3, the SHRINK LOG below):
+#
+# --- F15-RESIDUE-ONLY-EXISTS-EDGE-SHAPES (80) ---
+#   the seat-8 banked only-exists edge shapes, PRICED at s25: a bare-symbol leaf (`p only exists`), an `item
+#   ->` root (`item -> p`, `(item -> p, item -> q)`) and a choice-option leaf under an implicit item (`item ->
+#   pick -> C25OptA`) - upstream binds every one (Attribute / ChoiceOption); the fork synthesizes NO reference
+#   node there (fork=(no record))
+chaos-s25-a1o1.rosetta@00002235 RosettaSymbolReference.symbol 'p'
+chaos-s25-a1o1.rosetta@00002252 RosettaSymbolReference.symbol 'q'
+chaos-s25-a1o1.rosetta@00002355 RosettaFeatureCall.feature 'p'
+chaos-s25-a1o1.rosetta@00002381 RosettaFeatureCall.feature 'p'
+chaos-s25-a1o1.rosetta@00002392 RosettaFeatureCall.feature 'q'
+chaos-s25-a2alias.rosetta@00000761 RosettaSymbolReference.symbol 'p'
+chaos-s25-a2alias.rosetta@00000778 RosettaSymbolReference.symbol 'q'
+chaos-s25-a2alias.rosetta@00000881 RosettaFeatureCall.feature 'p'
+chaos-s25-a2alias.rosetta@00000907 RosettaFeatureCall.feature 'p'
+chaos-s25-a2alias.rosetta@00000918 RosettaFeatureCall.feature 'q'
+chaos-s25-a2dangle.rosetta@00000752 RosettaSymbolReference.symbol 'p'
+chaos-s25-a2dangle.rosetta@00000769 RosettaSymbolReference.symbol 'q'
+chaos-s25-a2dangle.rosetta@00000872 RosettaFeatureCall.feature 'p'
+chaos-s25-a2dangle.rosetta@00000898 RosettaFeatureCall.feature 'p'
+chaos-s25-a2dangle.rosetta@00000909 RosettaFeatureCall.feature 'q'
+chaos-s25-a2qual.rosetta@00000718 RosettaSymbolReference.symbol 'p'
+chaos-s25-a2qual.rosetta@00000735 RosettaSymbolReference.symbol 'q'
+chaos-s25-a2qual.rosetta@00000838 RosettaFeatureCall.feature 'p'
+chaos-s25-a2qual.rosetta@00000864 RosettaFeatureCall.feature 'p'
+chaos-s25-a2qual.rosetta@00000875 RosettaFeatureCall.feature 'q'
+chaos-s25-a2wild.rosetta@00000713 RosettaSymbolReference.symbol 'p'
+chaos-s25-a2wild.rosetta@00000730 RosettaSymbolReference.symbol 'q'
+chaos-s25-a2wild.rosetta@00000833 RosettaFeatureCall.feature 'p'
+chaos-s25-a2wild.rosetta@00000859 RosettaFeatureCall.feature 'p'
+chaos-s25-a2wild.rosetta@00000870 RosettaFeatureCall.feature 'q'
+chaos-s25-a3half-p1.rosetta@00000921 RosettaSymbolReference.symbol 'p'
+chaos-s25-a3half-p1.rosetta@00000938 RosettaSymbolReference.symbol 'q'
+chaos-s25-a3half-p1.rosetta@00001041 RosettaFeatureCall.feature 'p'
+chaos-s25-a3half-p1.rosetta@00001067 RosettaFeatureCall.feature 'p'
+chaos-s25-a3half-p1.rosetta@00001078 RosettaFeatureCall.feature 'q'
+chaos-s25-a3hub-p2.rosetta@00000715 RosettaSymbolReference.symbol 'p'
+chaos-s25-a3hub-p2.rosetta@00000732 RosettaSymbolReference.symbol 'q'
+chaos-s25-a3hub-p2.rosetta@00000835 RosettaFeatureCall.feature 'p'
+chaos-s25-a3hub-p2.rosetta@00000861 RosettaFeatureCall.feature 'p'
+chaos-s25-a3hub-p2.rosetta@00000872 RosettaFeatureCall.feature 'q'
+chaos-s25-a3third-p2.rosetta@00000749 RosettaSymbolReference.symbol 'p'
+chaos-s25-a3third-p2.rosetta@00000766 RosettaSymbolReference.symbol 'q'
+chaos-s25-a3third-p2.rosetta@00000869 RosettaFeatureCall.feature 'p'
+chaos-s25-a3third-p2.rosetta@00000895 RosettaFeatureCall.feature 'p'
+chaos-s25-a3third-p2.rosetta@00000906 RosettaFeatureCall.feature 'q'
+chaos-s25-a4none.rosetta@00000873 RosettaSymbolReference.symbol 'p'
+chaos-s25-a4none.rosetta@00000890 RosettaSymbolReference.symbol 'q'
+chaos-s25-a4none.rosetta@00000993 RosettaFeatureCall.feature 'p'
+chaos-s25-a4none.rosetta@00001019 RosettaFeatureCall.feature 'p'
+chaos-s25-a4none.rosetta@00001030 RosettaFeatureCall.feature 'q'
+chaos-s25-a4snap.rosetta@00000898 RosettaSymbolReference.symbol 'p'
+chaos-s25-a4snap.rosetta@00000915 RosettaSymbolReference.symbol 'q'
+chaos-s25-a4snap.rosetta@00001018 RosettaFeatureCall.feature 'p'
+chaos-s25-a4snap.rosetta@00001044 RosettaFeatureCall.feature 'p'
+chaos-s25-a4snap.rosetta@00001055 RosettaFeatureCall.feature 'q'
+chaos-s25-a5crlf.rosetta@00000910 RosettaSymbolReference.symbol 'p'
+chaos-s25-a5crlf.rosetta@00000927 RosettaSymbolReference.symbol 'q'
+chaos-s25-a5crlf.rosetta@00001032 RosettaFeatureCall.feature 'p'
+chaos-s25-a5crlf.rosetta@00001058 RosettaFeatureCall.feature 'p'
+chaos-s25-a5crlf.rosetta@00001069 RosettaFeatureCall.feature 'q'
+chaos-s25-a5mixed.rosetta@00000901 RosettaSymbolReference.symbol 'p'
+chaos-s25-a5mixed.rosetta@00000918 RosettaSymbolReference.symbol 'q'
+chaos-s25-a5mixed.rosetta@00001022 RosettaFeatureCall.feature 'p'
+chaos-s25-a5mixed.rosetta@00001048 RosettaFeatureCall.feature 'p'
+chaos-s25-a5mixed.rosetta@00001059 RosettaFeatureCall.feature 'q'
+chaos-s25-a5uni.rosetta@00000894 RosettaSymbolReference.symbol 'p'
+chaos-s25-a5uni.rosetta@00000911 RosettaSymbolReference.symbol 'q'
+chaos-s25-a5uni.rosetta@00001014 RosettaFeatureCall.feature 'p'
+chaos-s25-a5uni.rosetta@00001040 RosettaFeatureCall.feature 'p'
+chaos-s25-a5uni.rosetta@00001051 RosettaFeatureCall.feature 'q'
+chaos-s25-a9comment.rosetta@00001125 RosettaSymbolReference.symbol 'p'
+chaos-s25-a9comment.rosetta@00001142 RosettaSymbolReference.symbol 'q'
+chaos-s25-a9comment.rosetta@00001257 RosettaFeatureCall.feature 'p'
+chaos-s25-a9comment.rosetta@00001283 RosettaFeatureCall.feature 'p'
+chaos-s25-a9comment.rosetta@00001294 RosettaFeatureCall.feature 'q'
+chaos-s25-a9tabs.rosetta@00000841 RosettaSymbolReference.symbol 'p'
+chaos-s25-a9tabs.rosetta@00000858 RosettaSymbolReference.symbol 'q'
+chaos-s25-a9tabs.rosetta@00000952 RosettaFeatureCall.feature 'p'
+chaos-s25-a9tabs.rosetta@00000978 RosettaFeatureCall.feature 'p'
+chaos-s25-a9tabs.rosetta@00000989 RosettaFeatureCall.feature 'q'
+chaos-s25-base.rosetta@00000887 RosettaSymbolReference.symbol 'p'
+chaos-s25-base.rosetta@00000904 RosettaSymbolReference.symbol 'q'
+chaos-s25-base.rosetta@00001007 RosettaFeatureCall.feature 'p'
+chaos-s25-base.rosetta@00001033 RosettaFeatureCall.feature 'p'
+chaos-s25-base.rosetta@00001044 RosettaFeatureCall.feature 'q'
+#
+# --- BAND-FORK-ACCEPTS-DIVERGENT (5) ---
+#   the s9x band: the fork BINDS what the released plugin refuses at the grammar (s90 a closure parameter named
+#   e, s91 a named parameter after then and its items) - DECLARED FORK-ACCEPTS-DIVERGENT rows
+chaos-s90-base.rosetta@00000401 RosettaSymbolReference.symbol 'e'
+chaos-s90-base.rosetta@00000406 RosettaFeatureCall.feature 'v'
+chaos-s91-base.rosetta@00000447 RosettaSymbolReference.symbol 'items'
+chaos-s91-base.rosetta@00000462 RosettaSymbolReference.symbol 'p'
+chaos-s91-base.rosetta@00000467 RosettaFeatureCall.feature 'v'

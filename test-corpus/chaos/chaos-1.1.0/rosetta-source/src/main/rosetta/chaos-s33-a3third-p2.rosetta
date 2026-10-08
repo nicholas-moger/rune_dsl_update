@@ -1,0 +1,21 @@
+namespace chaos.s33.a3third.p2
+version "1.0.0"
+import chaos.s33.a3third.p1.*
+import chaos.s33.a3third.p3.*
+eligibility rule C33Elig from C33Trade: <"Gate.">
+    notional exists
+reporting rule C33Utid from C33Trade: <"Reported with a non-ASCII quoted as-label.">
+    extract utid
+        as "UTI «ü» \"q\""
+reporting rule C33Lit from C33Trade: <"String literals with escapes and non-ASCII at expression seats: a comparison, a conditional arm, a default.">
+    extract if utid = "tab\there" then "µ-yes \"y\"" else (utid default "back\\slash")
+        as "Literal"
+type C33Report: <"Report type.">
+    utiField string (1..1)
+        [ruleReference C33Utid]
+    litField string (1..1)
+        [ruleReference C33Lit]
+report C33AUTH C33Reg in T+1
+    from C33Trade
+    when C33Elig
+    with type C33Report

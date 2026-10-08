@@ -1,0 +1,4 @@
+namespace com.test
+
+type Child extends Parent:
+    b int (1..1)

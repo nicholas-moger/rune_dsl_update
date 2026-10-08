@@ -1,0 +1,49 @@
+namespace test.external
+
+synonym source BaseSource
+
+synonym source ExtSource extends BaseSource
+{
+    Trade:
+        + tradeId
+            [value "tradeIdentifier"]
+        + party
+            [value "Envelope" path "Trade"]
+        + product
+            [value "SwapData" path "Trade"]
+        - removedField
+
+    PriceSchedule:
+        + value
+            [value "Rate"]
+            [value "Spread"]
+        + priceType
+            [set to PriceTypeEnum -> InterestRate when path = "Rates"]
+
+    RateSchedule:
+        + price
+            [meta "Rate"]
+            [meta "Spread"]
+
+    Frequency:
+        + periodMultiplier
+            [value "Tenor" maps 2 pattern "([0-9]*).*" "$1"]
+        + period
+            [value "Tenor" maps 2 pattern "[0-9]*(.*)" "$1"]
+
+    CalculationPeriodDates:
+        + effectiveDate
+            [hint "StartDate"]
+
+    enums
+
+    PeriodEnum:
+        + D
+            [value "D"]
+        + W
+            [value "W"]
+        + M
+            [value "M"]
+        + Y
+            [value "Y"]
+}

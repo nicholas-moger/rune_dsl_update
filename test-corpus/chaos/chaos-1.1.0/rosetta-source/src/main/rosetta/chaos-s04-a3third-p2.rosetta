@@ -1,0 +1,21 @@
+namespace chaos.s04.a3third.p2
+version "1.0.0"
+import chaos.s04.a3third.p1.*
+import chaos.s04.a3third.p3.*
+func C4Grow: <"add-operation seats - scalar, expression, list-literal extract.">
+    inputs:
+        seedv number (1..1)
+        n number (1..1)
+    output:
+        outs number (0..*)
+    add outs: seedv
+    add outs: seedv * n
+    add outs: [seedv, n] extract item + 1
+    add outs: C4Add(seedv, n)
+func C4Seg: <"Segment-path set operations.">
+    inputs:
+        v number (1..1)
+    output:
+        p C4Pair (1..1)
+    set p -> left: v
+    set p -> right: v + 1

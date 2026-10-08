@@ -1,0 +1,4 @@
+namespace chaos.s03.a2qual.h
+version "1.0.0"
+type C3Note: <"Choice option AND helper - relocated by the import axis.">
+    text string (1..1)

@@ -1,0 +1,91 @@
+namespace test.chswitchedge
+
+enum KindEnum: <"The chaos C18KindEnum.">
+    Red
+    Green
+    Blue
+
+type OptA: <"Choice option A (the chaos C18OptA, widened by tags).">
+    av string (1..1)
+    tags string (0..*)
+
+type OptB: <"Choice option B (the chaos C18OptB).">
+    bv number (1..1)
+
+choice Either: <"The choice subject (the chaos C18Either).">
+    OptA
+    OptB
+
+type Base: <"The EXTENDS-typed twin's base.">
+    id string (1..1)
+
+type Sub1 extends Base: <"Subtype 1 - the nav arm's target.">
+    a string (1..1)
+
+type Sub2 extends Base: <"Subtype 2 - the to-string arm's target.">
+    b number (1..1)
+
+type OptC: <"A third option beside the nested choice.">
+    cv string (1..1)
+
+choice Both: <"A nested choice - OptA is reachable through Either (the deep option hop).">
+    Either
+    OptC
+
+type Bag: <"The rule and datarule carrier.">
+    eths Either (0..*)
+    condition Texts:
+        if eths exists
+        then (eths extract [ item switch OptA then item -> av, OptB then item -> bv to-string, default "none" ] then count) <= eths count
+
+func NestedChoice: <"A case type reachable only through a nested choice option.">
+    inputs:
+        boths Both (0..*)
+    output:
+        texts string (0..*)
+    add texts:
+        boths extract (item switch OptA then item -> av, OptC then item -> cv, default "none")
+
+func MultiArm: <"A MULTI nav arm (tags 0..*) - the list form, flattened.">
+    inputs:
+        eths Either (0..*)
+    output:
+        tags string (0..*)
+    add tags:
+        eths extract (item switch OptA then item -> tags, default empty) then flatten
+
+func ThenChain: <"The switch extract then-chained into a filter.">
+    inputs:
+        eths Either (0..*)
+    output:
+        texts string (0..*)
+    add texts:
+        eths extract (item switch OptA then item -> av, OptB then item -> bv to-string, default "none") then filter [ item <> "none" ]
+
+func Filtered: <"The choice switch as a FILTER predicate - boolean arms.">
+    inputs:
+        eths Either (0..*)
+    output:
+        kept Either (0..*)
+    add kept:
+        eths filter [ item switch OptA then True, OptB then False, default False ]
+
+func InCondition: <"The switch lambda inside a function CONDITION.">
+    inputs:
+        eths Either (0..*)
+    output:
+        n int (1..1)
+    condition HasText:
+        eths extract [ item switch OptA then item -> av, OptB then item -> bv to-string, default "none" ] then exists
+    set n: eths count
+
+func NumberArms: <"Number-typed arms with an int literal and a literal default.">
+    inputs:
+        eths Either (0..*)
+    output:
+        nums number (0..*)
+    add nums:
+        eths extract (item switch OptA then 1, OptB then item -> bv, default 0)
+
+reporting rule PickAv from Bag: <"The switch lambda in a REPORTING RULE body.">
+    extract eths then extract (item switch OptA then item -> av, OptB then item -> bv to-string, default "none")

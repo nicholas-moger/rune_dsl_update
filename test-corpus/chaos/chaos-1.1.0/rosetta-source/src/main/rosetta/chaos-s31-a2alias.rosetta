@@ -1,0 +1,65 @@
+namespace chaos.s31.a2alias
+version "1.0.0"
+import chaos.s31.a2alias.h.* as C31HeldNs
+import chaos.s31.a2alias.h.C31Held
+metaType scheme string
+synonym source C31Src
+enum C31SideEnum: <"The E2 pair's first enum - owns Long and Short.">
+    Long
+    Short
+enum C31MoveEnum: <"The second enum in the SAME scope re-using Long.">
+    Long
+    Flat
+enum C31EscEnum: <"displayNames carrying a raw quote, a backslash and non-ASCII - the D46 RAW law (upstream's own non-compiling emission for the first two: EscapeEnum, rider 4).">
+    Quote displayName "say \"hi\""
+    Slash displayName "back\\slash"
+    Uni displayName "µ–„display“"
+    Plain displayName "plain"
+enum C31KeyEnum: <"Enum values named like Java keywords.">
+    class
+    long
+    new
+    null
+enum C31BaseEnum: <"Extends chain 1.">
+    A
+enum C31MidEnum extends C31BaseEnum: <"Extends chain 2.">
+    B
+enum C31TopEnum extends C31MidEnum: <"Extends chain 3, with a synonym on the value.">
+    C
+        [synonym C31Src value "cee"]
+type C31Books: <"Both colliding enums at attribute seats, a scheme-carrying scalar, an enum list and the top of the extends chain.">
+    side C31SideEnum (0..1)
+    move C31MoveEnum (0..1)
+    coded string (0..1)
+        [metadata scheme]
+    sides C31SideEnum (0..*)
+    top C31TopEnum (0..1)
+    held C31Held (0..1)
+func C31Defaults: <"F10' legs (b) and (d): `default` with a META left operand and with a BARE-ENUM right operand (the enum default re-wrap), beside the qualified twin.">
+    inputs:
+        b C31Books (1..1)
+    output:
+        outs string (0..*)
+    add outs: b -> coded default "none"
+    add outs: (b -> side default Long) to-string
+    add outs: (b -> side default C31SideEnum -> Short) to-string
+    add outs: (b -> move default Flat) to-string
+    add outs: (b -> top default C31TopEnum -> A) to-string
+func C31Which: <"Bare enum-value switch guards over the E2 pair, and a switch over the escaped enum.">
+    inputs:
+        s C31SideEnum (1..1)
+        esc C31EscEnum (1..1)
+    output:
+        r string (1..1)
+    set r:
+        (s switch Long then "side-long", Short then "side-short")
+        + (esc switch Quote then "q", Slash then "s", default esc to-string)
+func C31Keys: <"The keyword-named values at compare, switch and to-enum seats.">
+    inputs:
+        k C31KeyEnum (1..1)
+        raw string (1..1)
+    output:
+        ok boolean (1..1)
+    set ok:
+        k = C31KeyEnum -> class
+        or (k switch long then True, new then False, default (raw to-enum C31KeyEnum = k))

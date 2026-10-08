@@ -1,0 +1,40 @@
+namespace holdout.rulemetaoutputunwrap
+version "0.0.0"
+
+type Trade: <"The M8a carrier's root (v3.2 seat 12, D52 H2): a scheme-carrying scalar beside a plain one.">
+    utid string (1..1)
+    venue string (0..1)
+        [metadata scheme]
+    venues string (0..*)
+        [metadata scheme]
+
+func VenueOf: <"The callee returning a scheme-carrying SINGLE value - the function output the rule seat assigns.">
+    inputs:
+        t Trade (1..1)
+    output:
+        venue string (1..1)
+            [metadata scheme]
+    set venue: t -> venue
+
+func VenuesOf: <"The callee returning a scheme-carrying MULTI value.">
+    inputs:
+        t Trade (1..1)
+    output:
+        venues string (0..*)
+            [metadata scheme]
+    add venues: t -> venues
+
+reporting rule Venue from Trade: <"THE M8a SHAPE: a rule extracting a function call whose output is `string [metadata scheme]`. The rule's own output is inference-derived (RFunction.fromRule's synthetic output has no typeCall); the released 9.83.0 plugin hoists the FieldWithMetaString to a type-named local and unwraps it (`if (fieldWithMetaString == null) { output = null; } else { output = fieldWithMetaString.getValue(); }`); the fork assigned the wrapper to the String output before this seat's heal.">
+    extract VenueOf(item)
+
+reporting rule VenueDirect from Trade: <"THE CONTROL: the rule extracting the scheme-carrying ATTRIBUTE directly - the bare-rule-then seat the fork already unwraps (renderRuleThenValueMetaWrapOrNull), keyed on the declared attribute type.">
+    extract venue
+
+reporting rule Venues from Trade: <"The MULTI twin of the shape: a rule extracting a function call whose output is `string (0..*) [metadata scheme]` - the list form of the unwrap.">
+    extract VenuesOf(item)
+
+reporting rule VenueThen from Trade: <"The shape under a then: the function call's meta output piped into a plain string expression - the unwrap must happen at the rule's output seat, not inside the chain.">
+    extract VenueOf(item) then extract item + "-x"
+
+reporting rule Utid from Trade: <"A plain-string rule beside the others - the untouched form.">
+    extract utid

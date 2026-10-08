@@ -1,0 +1,8 @@
+STRUCT test.model.Foo [abstract=false]
+  namespace "test.model"
+  FIELD bar : string [ONE_TO_ONE]
+    typeRef BASIC_TYPE name="string"
+    bounds (1..1)
+  FIELD baz : number [ZERO_TO_MANY]
+    typeRef BASIC_TYPE name="number"
+    bounds (0..*)

@@ -1,0 +1,6 @@
+namespace chaos.s28.a3hub.p1
+version "1.0.0"
+import chaos.s28.a3hub.p2.*
+isEvent root C28Event;
+type C28Extra: <"Helper - relocated by the import axis.">
+    memo string (1..1)

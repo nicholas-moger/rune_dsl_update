@@ -1,0 +1,22 @@
+namespace test.rsr.a
+version "0.0.0"
+
+type RsrTrade: <"The report-from type.">
+    utid string (1..1)
+    notional number (0..1)
+
+reporting rule RsrUtid from RsrTrade: <"Reported field.">
+    extract utid
+        as "UTI"
+reporting rule RsrNotional from RsrTrade: <"Reported numeric with default.">
+    extract notional default 0
+        as "Notional"
+
+type RsrReport: <"Report output type; the notional field has NO inline rule reference.">
+    utiField string (1..1)
+        [ruleReference RsrUtid]
+    notionalField number (1..1)
+
+rule source RsrRS
+{
+}

@@ -1,0 +1,961 @@
+# THE v3.2 CHAOS EXPECTED-DIVERGENCE BASELINE (charter: the declared-red set)
+#
+# Every row is ONE measured divergence of the fork against the chaos cell's
+# legacy-9.83.0 goldens. THE LIVE FILE (chaos-1.1.0, v3.2 seat 10 - D49): 370
+# rows = 53 byte mismatches + 316 refusal rows + 1 silent missing output since
+# v3.2 seat 13's register sites (472 = 256 + 215 + 1 after seat 12's counters and heals; 506 = 419 + 86 + 1 after seat 11; 611 at the FIRST generation-2 D11 census on both routes,
+# 2026-09-10; the census target/v32-gen2-census.md, local), every row under its mechanism-family
+# comment in the chaos-1.1.0 section below. The chaos-1.0.0 material above
+# that section is HISTORY (its rows left with the cell; the SHRINK LOG is the
+# meter's record: 354 rows at the first probe, v3.2 PR-2 2026-09-02 = 301 byte
+# mismatches + 36 missingOutput + 17 noGolden, burnt down to 2 by #630). This
+# file is what keeps the suite DECLARATIVE-GREEN while the seats burn the set
+# down.
+#
+# LAWS (charter s5):
+#  - CHAOS-ONLY: keys must be chaos/<version>/<KIND> (1.1.0 since v3.2 seat 10); the loader REFUSES any other
+#    corpus (this file must never dilute d11-known-divergent.txt, whose
+#    1-entry-PERMANENT semantics are v3.1's closed result).
+#  - SHRINK-ONLY: every fix seat's merge deletes its healed rows (the
+#    -Dd11.dump-now-matching diagnostic lists the healed MISMATCH rows; the 17
+#    noGolden rows WERE the committed chaos-golden-free.txt until the F13 seat,
+#    PR #630 / D48, made that register the asserted expected-noGolden set and this
+#    file's noGolden class went to 0 - see the shrink log); ANY growth is a
+#    regression to investigate, never to append. Every receipts chain quotes
+#    this file's row count as the burn-down meter.
+#  - DELETED WHOLE at v3.2 close (the 100% CLEAN bar - charter s6).
+#
+#
+# SHRINK LOG (the burn-down meter's history; every entry = one merged seat):
+#  - 354 -> 257 at v3.2 seat 1 (PR #622, F2 dropped-coercion): -97 healed rows = the 84 F2
+#    rows (C8Scale 12, C18FromCoded 12, C18Maybe 12, C19Make 12, C19Pick 12, C20Shade 12,
+#    C21Void 12 - every placement variant) + 13 C5Ctor rows (s05, the F4 family) healed by
+#    the same typed count/operand channels; identical on BOTH routes (the D11
+#    waivered-but-now-matching print, 97 on each). C20Spread (12) stays: not a coercion
+#    (the sort-key element-type leak), re-priced to the typing seat.
+#    [PR #622 round-4 note] that "sort-key element-type leak" reading was REFUTED by the seat-2
+#    census (target/v32-seat2-instruments/f4-f17-census.md, local): the `number` is the function
+#    OUTPUT type arriving through FunctionAliasHelper.computeReturnType's fallback — F17 = F4's
+#    output-type leak at a fourth alias; the 12 rows stay declared until seat 2 heals them.
+#  - 257 -> 193 at v3.2 seat 2 (PR #623, F4 lambda-type-join + F17): -64 healed rows = the 52 F4
+#    rows (C5Deep 13, C5Forms 13, C5Preds 13, C5Seats 13 - all thirteen placement variants each) + the 12
+#    F17 C20Spread rows (all twelve); identical on BOTH routes (the D11 waivered-but-now-matching
+#    print, 64 on each). THE PRODUCER-TRACED MECHANISMS: the alias signature walk leaked the function
+#    OUTPUT type where it could not type a then-body (REVERSE outside the #252 op set, no JOIN arm, no
+#    literal-guarded switch arm, the elided `default` left, the explicit lambda parameter read as a
+#    feature) - Law 1/4; the count's primitive stamp was consumed by NODE at the comparison seat and not
+#    at all at the to-string seat - Law 2; the literal-switch then-chain was UNHANDLED control flow, so
+#    the deep hoist declined it AND (through the function-level all-or-nothing guard) every clean
+#    sibling alias - Law 3; the conditional at a comparison operand took the ITEM form - Law 5; plus the
+#    sort receiver twin, the multi-default ternary's list-literal admit, the typed numeric widening and
+#    the sum render's own stamp. The 2 remaining s05/s20 rows are F1 (A5UniProbeEnum), not this seat's.
+#  - 193 -> 156 at v3.2 seat 3 (PR #624, F9 + F12 THE SILENT PAIR, counters first): -37 healed rows =
+#    the 12 F12 C4Speed FUNCTION missingOutput rows (every placement variant) + the 13th C4Speed row
+#    (x13half/p1, the byte MISMATCH filed under F16 - the same bare-name key, named by the D11
+#    waivered-but-now-matching print at the fix head) + the 12 F9 C8EvenC8NonNeg DATA_RULE
+#    missingOutput rows + the 12 F9 C8PricedTypeFormatValidator TYPE_FORMAT mismatch rows;
+#    identical on BOTH routes. THE COUNTERS (commit 2, before the fix): FUNCTION_NOT_EMITTED - an
+#    accounting pass at the function generator's boundary (every non-variant function has a file or an
+#    attributed error, else it refuses with its path) - and TYPE_ALIAS_CONDITION_DROPPED at the data-rule
+#    walk and the type-format validator; the receipts printed 12 / 12 / 12 on both routes with every
+#    witness named. THE MECHANISMS: the dispatch groups were keyed by BARE NAME across every model
+#    (thirteen same-named C4Speed groups folded into one file at the last base's path, 13x the members -
+#    the 13th row, x13half/p1, is F16's and heals with the same key), now keyed per FILE as upstream's
+#    same-resource siblings; the data-rule walk cased Data and choice owners only, and the type-format
+#    validator's alias-condition wing had been recorded as "post-9.83" on an absence-of-carrier
+#    inference the released-9.83.0 goldens refute - the corpus simply has no typeAlias with a condition.
+#  - 156 -> 135 at v3.2 seat 4 (PR #625, F7 + F10 THE ORDER-DEPENDENT PAIR): -21 healed rows = the 11 F7
+#    C7AUTHC7RegReportFunction POJO mismatch rows (every s07 placement variant but a1o1, which was right BY
+#    ACCIDENT: the first same-named report type of the workspace is its own) + the 10 F10 C22TermsMeta XMETA
+#    mismatch rows (every s22 variant that declares qualifiers but the winner a1o1; a4none / a4snap / a5*
+#    have none to register and never diverged); identical on BOTH routes (the D11 waivered-but-now-matching
+#    print, 21 on each, at commit 4 4e6863310 - scratch/ds4c-off.log / ds4c-on.log). THE MECHANISMS: F7 - RReport.withType was a bare String the linker
+#    never resolved, so RFunction.fromReport typed the synthetic output by NAME and the generator's
+#    workspace-wide first match handed every s07 report function (and its label provider, which walks the
+#    same output type) the FIRST namespace's report type and rules - emissions that do not compile (the
+#    captured rules take the first namespace's from-type); now `with type` / `with source` are
+#    linker-resolved ids (the own namespace, the imports, a qualified name; TYPE_NOT_FOUND /
+#    EXTERNAL_SOURCE_NOT_FOUND) and an id-less reference is REFUSED at REPORT_REFERENCE_UNRESOLVED at both
+#    seats. F10 - ModelMetaGenerator.isQualifiableRoot accepted ANY model's configuration where the released
+#    plugin takes the FIRST resolved configuration per kind over its index (RosettaConfigExtension
+#    getFirst - an order that is a function of the resource PATH, exposed by the seat's three order probes:
+#    the same three files, byte-identical, won differently under two directory names; a hash over resource
+#    URIs is consistent with it and inferred, not measured), so every losing namespace registered its own
+#    qualifiers; now ONE declaration (RQualifiableConfig.firstRoot over the WORKSPACE's models in load
+#    order, dependency models included - whether the released plugin's index admits a dependency's
+#    configuration is yes by the post-9.83 source AND by the released 9.83.0 jar's bytecode under file: URIs (javap, #625
+#    round 2), the plugin's RUNTIME URI scheme the banked residue; replayed by pin where a golden fixes a winner - the #413 law; the chaos cell
+#    needs none, a1o1 sorts first) read by the meta generator and by the validator's port of upstream's
+#    "Input type does not match qualification root type." warning (the losing qualifiers).
+# Format: chaos/<version>/<KIND>:<golden-relative path> - the chaos/1.0.0 history above is COMMENTS only, the chaos/1.1.0 rows below  (same line shape as
+# d11-known-divergent.txt, parsed by its loader's stricter chaos-only twin).
+#  - 135 -> 123 at v3.2 seat 5 (PR #626, F6 with-meta on an ALREADY-wrapped argument - arm (a) of the seat): -12 healed
+#    rows = the 12 C9Stamp rows (s09, every placement variant); identical on BOTH routes (the D11 waivered-but-now-matching
+#    print, 12 on each - scratch/ds5b-off.log / ds5b-on.log at the arm's head). THE PRODUCER-TRACED MECHANISM: the with-meta
+#    argument whose OWN type is the wrapper was hoisted as the VALUE type and a fresh wrapper rebuilt (non-compiling) where
+#    upstream hoists the wrapper's BUILDER null-guarded and stamps the entries through getOrCreateMeta() as statements
+#    (ExpressionGenerator.xtend:1443-1463) - ConstructionHandler.buildTypedWithMeta's wrapped-argument arm, the argument's
+#    wrapper read from the compiled Mapper's ITEM type or recovered from the AST (NavigationHandler.recoverExprMetaWrapper,
+#    an ALIAS body now included); a MODEL-typed VARIABLE argument takes the POJO-meta form (tryPojoMetaWithMeta); the SET
+#    seat's unwrap arm reads a bare variable in place. The oracle groups withmeta-wrapped-argument / -edge (34 goldens, the
+#    released plugin) byte-identical; the C9Sieve 12 + C4Gate 13 rows stay until arms (c) / (d).
+#  - 123 -> 111 at v3.2 seat 5 (PR #626, F6 the meta ladder's ALIAS rung - arm (c) of the seat): -12 healed rows = the 12
+#    C9Sieve rows (s09, every placement variant); identical on BOTH routes (the D11 waivered-but-now-matching print, 12 on
+#    each - scratch/ds5d-off.log / ds5d-on.log at the arm's head). THE PRODUCER-TRACED MECHANISM: an ALIAS-CALL argument of
+#    a first / last collapse compiles null-typed (the reference route's bare Mapper-returning call) and the collapse stamp's
+#    AST terminal-meta walk stops at the alias reference, so `goodCodes first` carried no wrapper item and the SET seat's
+#    hoist + null-guarded deref (FunctionExpressionRenderer.renderMetaValueDerefOrNull) never fired for the alias rung -
+#    the bare `pick = goodCodes(h).first().get()`, a wrapper into a value output (non-compiling). CollectionHandler's
+#    FIRST / LAST collapse stamp (#399-G) gained a third rung reading the alias SIGNATURE walk (NavigationHandler
+#    .tryAliasReceiverMapperType - the same FunctionAliasHelper walk the alias method's declaration renders from), and the
+#    deref seat's #382 alias-signature rung reads THROUGH an only-element collapse (null-typed by the #614 bijection). The
+#    oracle groups meta-ladder-alias-rung / -edge: six of seven pinned files byte-identical; InLambda (no alias - the
+#    direct ladder inside an extract lambda with an explicit filter parameter) stays PINNED, its two lambda-channel typing
+#    gaps of the F4 family BANKED with the golden as their witness; the C4Gate 13 rows stay until arm (d).
+#  - 111 -> 98 at v3.2 seat 5 (PR #626, F3 the beyond-long literal's conversion render form - arm (d) of the seat): -13
+#    healed rows = the 13 C4Gate rows (s04, every placement variant incl. x13half/p1); identical on BOTH routes (the D11
+#    waivered-but-now-matching print, 13 on each - scratch/ds5f-off.log / ds5f-on.log at the arm's head). THE
+#    PRODUCER-TRACED MECHANISM: the hoisted beyond-long literal's VALUE consumption was the LAMBDA channel's Mapper ternary
+#    at the STATEMENT seats too (`verdict = bigInteger == null ? MapperS.<BigDecimal>ofNull() : MapperS.of(new
+#    BigDecimal(bigInteger)).get();` - the `.get()` binding to the else operand alone, non-compiling), where upstream's
+#    convertNullSafe completes as an if/else STATEMENT. The literal seat now returns a producer-stamped witness carrying the
+#    hoisted sentinel (JavaExpression.BigIntegerLiteralValue) and hoists at every statement-seat value (a conditional arm,
+#    an operation's whole expression - the int output too); ONE renderer (FunctionExpressionRenderer
+#    .renderNumericConvertNullSafeOrNull, the conversion from the coercion service) reads it at the conditional-SET arms
+#    (with the else-arm `} else if (` flatten), the whole-output SET and the whole-output ADD; the alias signature walk
+#    types an int literal by the translator's digit law (MapperS<BigInteger>). The oracle groups conv-bigint-statement /
+#    -edge (12 goldens, the released plugin): every pinned file byte-identical and compiling - the conditional arm at the
+#    statement sink (nested, both arms, the multi output), the whole set, the add seat, the alias seat, the int output;
+#    the evaluate-argument seat (AsArg) UNMOVED after the seat's own first-cut catch (a double hoist).
+#  - 98 -> 87 at v3.2 seat 6 (PR #627, F5 the deep-path util injection at the LAMBDA-ITEM seat): -11 healed rows = the
+#    11 C3Commons rows (s03, every placement variant that carries a functions/ directory - the five a4* / a5* families
+#    expand the type subset alone); identical on BOTH routes
+#    (the D11 waivered-but-now-matching print, 11 on each - scratch/ds6fix2-off.log / ds6fix2-on.log at the fix head,
+#    target/v32-seat6-instruments, local; FUNCTION identical 569 -> 580, mismatches 0 per route). THE PRODUCER-TRACED
+#    MECHANISM: a deep feature call (`->>`) whose RECEIVER is a list-op LAMBDA'S ITEM (`outers extract item ->> text`)
+#    - the WITNESS half (resolveDeepFeature over resolveReceiverDataType's implicit-variable arm) typed the item and
+#    rendered the `<String>` witness and the `map` hop, but the ADMISSION half (NavigationHandler
+#    .resolveDeepReceiverJavaClass - the ONE resolver the render's `<type>DeepPathUtil` field / lambda var AND
+#    FunctionDependencyCollector's @Inject consult) walked resolveReceiverRType, which had no lambda-item arm, so
+#    the render fell to the `/* TODO(M7b-4): wire DeepPathUtil */ chooseText(_text)` placeholder with NO injection
+#    (non-compiling: `cannot find symbol`), and the extract chooser's body read took the parser computer's blanket
+#    MULTI for any deep call (`mapItemToList` where the released plugin selects `mapItem`). ONE rung heals both
+#    halves (LAW 69): NavigationHandler.lambdaItemReceiverRType - the implicit item or the explicit closure
+#    parameter resolved to the owning argument's ELEMENT through lambdaOwnerArgument (the SAME owner walk the
+#    naming reads) and recoverThenArgItemRType, a then-piped owner recursed - as the LAST rung of the resolver;
+#    CollectionHandler.isBodyMulti's deep-call body reads NavigationHandler.deepBodyProvesMulti, which consults the
+#    deep arm of chainProvesMulti (the render's own map-method chooser - upstream's isFeatureMulti(feature) term;
+#    the isMulti(receiver) term measured empty by a lane and withdrawn at round 1, the seat-30 precedent). The
+#    oracle groups deep-path-util-injection / -edge (108 goldens, the released plugin): all 16 pinned files
+#    byte-identical at the fix content (run 2, scratch/d11-fix2.status) and all 108 compiling clean at the commit-4
+#    pre-commit run (scratch/precommit4.status, 44 + 64), the two direct-receiver controls unmoved; the edge fixture
+#    InCondition surfaced two adjacent residues healed in the same commit (the function-condition hoist block's
+#    ComparisonResult coercion; the primitive identity at the numeric-output seat). THE REACH: ZERO vendored carriers
+#    of the two MECHANISM arms (the seat's census, target/v32-seat6-instruments/f5-census.md, local - its s 4 table
+#    covers the injection and the map method); the two residue arms are byte-neutral on the 25 vendored cells by the
+#    chain's chaos-FILTERED re-digest (d47fa88f / 275 + ring 9062fc14, identical25 174,129, UNMOVED on both routes).
+#  - 87 -> 75 at v3.2 seat 7 (F11 the type-switch refusals - a CHOICE-keyed switch INSIDE a list-op lambda): -12 healed
+#    rows = the 12 C18ToKind rows (s18, every placement variant - the set's LAST missingOutput rows: the FUNCTION
+#    section's missingOutput is 0 from here), identical on BOTH routes (the D11 waivered-but-now-matching print, 12
+#    on each - scratch/ds7fix4-off.log / -on.log at the fix content, target/v32-seat7-instruments, local; FUNCTION
+#    identical 580 -> 592, mismatches 0 and missingOutput 12 -> 0 per route - the BEFORE half from PR #627's own
+#    receipts, target/v32-seat6-instruments/scratch/ds6pc8-off.log / -on.log (identical=580 mismatches=0
+#    missingOutput=12), the AFTER half the two seat-7 logs (identical=592 mismatches=0 missingOutput=0); a refused
+#    element has no fork side to dump, so this seat's first chaos D11 is at cut 1 (d11-fix1.status: identical=580
+#    mismatches=12 missingOutput=0 - the twelve emitting, not yet byte-identical) after the refusal prints and the
+#    oracle groups (round 1, the spec review's NIT-1); the LOUD line's
+#    TYPE_SWITCH_TERNARY_STUB 12 -> 0). THE PRODUCER-TRACED MECHANISM: the C18ToKind shape's `pulled` alias
+#    (`eths extract (item switch C18OptA then item -> av, C18OptB then item -> bv to-string, default "none")`)
+#    reached the block-lambda switch seats with THREE unadmitted features - a case-narrowed NAVIGATION arm, a
+#    to-string over one, a non-empty literal DEFAULT - and fell past the seat-31 option-getter block and the #226
+#    instanceof block to ControlFlowHandler.renderGuard, whose type-keyed ternary REFUSES (the LOUD register site,
+#    the whole function un-emitted). The seats share ONE enumerated arm admission and ONE default-arm law now
+#    (CollectionHandler.admissibleBlockSwitchCaseBody / compileBlockSwitchDefault - LAW 69); the option getter
+#    splices a Mapper-valued arm verbatim off the bound local; the lambda item's element type resolves through the
+#    receiver's OWN binding (implicitItemRType - the s18 seed's twelve namespaces each declare a C18Either and the
+#    simple-name lookup bound a1o1's for every variant); the sibling `switched` alias (a LITERAL-keyed switch in a
+#    lambda over the list literal [raw]) gained its own block renderer (the areEqual ladder through the SET seat's
+#    own guard render, ChoiceSwitchSupport.renderGuardMapper) and the alias SIGNATURE walk admits the lambda-item
+#    subject (MapperC<String> where the output-type fallback had leaked the raw rune name / the output's own
+#    type); the IR route's nav-hop lambda var consults the default route's bound-subject pre-escape (LAW 77 -
+#    `_c18OptA` against the case local). The oracle groups choice-switch-in-lambda / -edge (103 goldens, the
+#    released plugin): all 16 declared refusals emit and every golden is byte-identical at the fix content; the
+#    two CONTROLS the oracle turned into findings (the enum-keyed and the literal-keyed switch in a lambda, both
+#    non-compiling emissions before the seat) healed in the same seat. THE REACH: ZERO vendored carriers of the
+#    seat's shapes (the parse-tree census LambdaSwitchShapeCensusTest over the 4,137 vendored sources; the
+#    25-cell digests UNMOVED on both routes by the chain's chaos-FILTERED re-digest).
+#  - 75 -> 39 at v3.2 seat 9 (PR #630, F8 the void-mapping cast - D47, upstream wins): -36 healed rows = the 36 C15Carrier
+#    rows (s15, every placement variant - POJO 12 + CARDINALITY_VALIDATOR 12 + ONLY_EXISTS_VALIDATOR 12); identical on BOTH
+#    routes (the D11 waivered-but-now-matching print, 36 on each and the two sets EQUAL - scratch/ds9fix1-off.log /
+#    -on.log at the fix content, target/v32-seat9-instruments, local; this entry was written FROM those prints by
+#    shrink-chaos-s9.py, which deletes exactly the printed keys). THE PRODUCER-TRACED MECHANISM: an attribute typed by a
+#    MODEL-DECLARED basicType / recordType (`basicType c15token`, `recordType c15span` - names no builtin registry knows)
+#    resolved to its DECLARATION node, which GeneratorModel.astNodeToRType mapped by name to RMissingType -> Object (the
+#    parser twin ExpressionTypeComputer.astNodeToRType to MISSING; TypeAliasSolver.evaluateBodyWithBindings the same by
+#    name) where the released plugin types the declaration as `nothing` -> java.lang.Void at every seat (getters, setters,
+#    fields, the process class token, the validators' casts, List<Void> at list cardinality, FieldWithMetaVoid /
+#    ReferenceWithMetaVoid under metadata). ONE law now - BuiltinTypeRegistry.basicOrRecordNodeType: the builtins model's
+#    declaration answers its registered twin, a model-declared one `nothing` - consulted by both astNodeToRTypes and the
+#    alias body (LAW 69). The oracle groups void-mapping-basic-record / -edge (39 goldens, the released plugin): the core
+#    group byte-identical WHOLE and compiling (ListCarrier's `processBasic` ambiguity over List<Object> gone with the
+#    type), the edge group's FieldWithMetaVoid / ReferenceWithMetaVoid minted (the missing / extra pair gone), 22 of 24
+#    byte-identical and all 24 compiling; UseToken and ConditionCarrierTokPresent stay PINNED at the byte bar for the two
+#    `nothing` RENDER laws (the assignment seat's `null`, the mapper seat's MapperS.<Void>ofNull()) until their commit.
+#    THE REACH: ZERO vendored carriers - the seat's text census over the 4,743 vendored sources found 48 model-declared
+#    basic / record declarations, every one a chaos s15 file, and 0 choice options typed by a builtin (the one parser arm
+#    the twin verdict moves); cdm 6.20.2 / drr 6.34.1 / drr 7.0.0 UNMOVED on both routes at the fix run, the whole ring
+#    at the chain.
+#  - 39 -> 17 at v3.2 seat 9 (PR #630, F1 enum-unicode-display - D46, upstream wins): -22 healed rows = the 22
+#    A5UniProbeEnum rows (a5uni, every seed s01..s22); identical on BOTH routes (the D11 waivered-but-now-matching
+#    print, 22 on each and the two sets EQUAL - scratch/ds9f1b-off.log / -on.log at the fix content,
+#    target/v32-seat9-instruments, local; written FROM those prints by shrink-chaos-s9.py). THE PRODUCER-TRACED
+#    MECHANISM: the released plugin renders an enum value's displayName RAW inside the @RosettaEnumValue annotation
+#    and Java-ESCAPED as the constructor argument; EnumGenerator escaped ONCE and java-enum.stg read that one string
+#    at BOTH seats, so every non-ASCII display name reached the annotation as \uXXXX. ONE escape law now, at the
+#    constructor alone: EnumValueModel carries the RAW displayName beside a displayNameLiteral, the template reads
+#    each at its seat, and @RosettaSynonym's value / sources are carried RAW too (IREnumGenerator extends
+#    EnumGenerator - one site, both routes). The oracle groups enum-unicode-display / -edge (16 goldens, the released
+#    plugin): all six pinned files byte-identical at the fix content; EscapeEnum (a quote / a backslash / a tab in a
+#    display name) is upstream's OWN non-compiling emission, reproduced under the byte contract and pinned as an
+#    upstream bug at the compile gate (FINOS rider #4 in the D11 waiver header). THE REACH: no vendored display name
+#    needs an escape - the 25-cell ring's byte identity at the pre-seat head already said so (an escaped annotation
+#    would have diverged from its golden); the three vendored cells UNMOVED on both routes at the fix run, the whole
+#    ring at the chain.
+#  - 17 -> 2 at v3.2 seat 9 (PR #630, F13 x36enum-split-emission - D48, the fork's licence stays per ELEMENT, the
+#    echo becomes a refusal): -15 rows = p1's 8 (every one printed FLIP-OUT on BOTH routes - scratch/ds9f13a-off.log
+#    / -on.log at the D48 content with this baseline still in place: the released plugin DEFINES p1's goldens once
+#    the chaos pin script stops excluding split partners, 6,487 -> 6,495, and the fork matches all eight) + p2's 7
+#    clean rows (tolerated by the golden-free REGISTER now - chaos-golden-free.txt, the asserted expected-noGolden
+#    set, D11's union print naming 7 over the kinds - so a baseline row for them would be tolerated twice). THE TWO
+#    ROWS THAT STAY are REFUSALS, not divergences: C17Sift (FUNCTION) and C17BooksC17Agree (DATA_RULE) carry
+#    `C17SideEnum -> Sell` against p2's rival enum (Buy, Hold), which the linker leaves UNRESOLVED exactly as upstream
+#    does (ENUM_VALUE_NOT_FOUND at the reference's own range; the L2 differential's zero x36enum rows) and which the
+#    generator used to render from the raw value NAME as `C17SideEnum.SELL` - a constant the enum does not declare,
+#    a NON-COMPILING emission with no refusal and every LOUD counter at 0, the E2 wrong-enum echo the s17 seed was
+#    written to catch, invisible behind the golden-free declaration until the seat's commit-2 instrument dumped the
+#    fork's side of the seventeen files. ReferenceHandler.handle(REnumValueRef) REFUSES at the twelfth register
+#    site, ENUM_VALUE_NAME_ECHO, when GeneratorModel.isReportedUnresolved holds the linker's verdict for the
+#    reference, and COUNTS there (fallback kept) for an unbound value with no diagnostic - 0 on every cell; the IR
+#    route declines the shape (valueNameFallback) to the same render, ONE site both routes (LAW 77) - the D11 print
+#    `2 generation refusal(s) tolerated as DECLARED rows` (FUNCTION 1 + DATA_RULE 1) and the LOUD line's
+#    ENUM_VALUE_NAME_ECHO=1 at each of the two kinds on both routes; the optimised route's tolerated-refusal pin
+#    0 -> 1 (C17Sift; the data rule never reaches that generator). THE PREMISE CORRECTED: the census had filed F13
+#    as "upstream emitted NOTHING for either half" - a HARNESS EXCLUSION (the pin script's EXPECTED-PARTNER rule),
+#    not a measurement; measured now, the released plugin emits p1's 8 (deterministic x2, the hold-out group
+#    x36enum-split-p1, 8/8 byte-identical), refuses p2 alone (twelve unresolved references) and refuses the PAIR
+#    whole for exactly the two `Sell` errors (target/v32-seat9-instruments/refused-groups/, local). THE REACH: the
+#    site fires on the chaos cell alone - 0 on every vendored cell and both routes (the three fix-run cells UNMOVED,
+#    the whole ring at the chain); the 25-cell digests UNMOVED.
+#  - 611 -> 506 at v3.2 seat 11 (PR #632, M1 THE BOILERPLATE-NAMED TYPE - D50, the file-scope first-claim law at six
+#    kinds): -105 healed rows = the WHOLE M1 block, chaos/s32's List-named type at every one of its five files x 21
+#    placement variants (CARDINALITY_VALIDATOR 21, ONLY_EXISTS_VALIDATOR 21, TYPE_FORMAT_VALIDATOR 21, XMETA 21, POJO 21);
+#    identical on BOTH routes (the D11 waivered-but-now-matching print at abee82e37, 105 on each -
+#    target/v32-seat11-instruments/scratch/d11-a.status, local; flipout-a-off.txt = flipout-a-on.txt = the block, 0 diff
+#    lines) and NOTHING else moved (mismatches 524 -> 419, missingOutput 79, noGolden 111 - the other rows UNMOVED; a
+#    NEW-BROKEN at any census is a regression, none). THE LAW: upstream's ImportingStringConcatenation registers the
+#    file's own class first, then every TYPE the file writes claims its simple name at its first write in TEXT ORDER; a
+#    later different canonical with a taken name is written fully qualified and never imported. The fork carried it as
+#    ImportCollisionResolver (PR #227) at the function bodies and the data-rule body ALONE; the POJO, the meta, the three
+#    validators and the data-rule template wrote every type name literally and imported every canonical (a duplicate
+#    import beside a bare name - SILENT, no LOUD counter, javac 105 / 105 non-compiling on the default route). Now every
+#    type write of the six kinds is a sentinel, ONE resolve per class text from the own class as the seed, the losers
+#    dropped from the import list (LAW 69: one producer, ImportCollisionResolver.resolveClass; both routes read the
+#    installed generator, LAW 77 by identity). MEASURED FIRST on 232 goldens of the released plugin (the five
+#    type-named-* hold-out groups, oracle-s11a.status @ 283ec5eff, deterministic x2): 155 -> 231 identical; the ONE
+#    residual is the FUNCTION kind (UseList's signature writes List<String> literally beside a model List input),
+#    DECLARED at the byte bar and the compile gate - the M1 law's last kind, banked for a function-generator seat.
+#  - 506 -> 510 at v3.2 seat 12 (PR #633, D52 - THE SILENT CLASSES MADE LOUD, counters first): NO row healed; the byte /
+#    refusal split moved 419 / 86 -> 294 / 215 as three register sites landed BEFORE any fix - SWITCH_TERNARY_STUB (the
+#    residual switch ternary: 72 rows = 68 of M2's 92 + the 4 golden-free s31 p2 rows the census never counted),
+#    DEEP_PATH_UTIL_UNRESOLVED (the TODO stub: M7b's 24) and ALIAS_SIGNATURE_RAW_TYPE (the raw builtin name: 52 = 24 of
+#    M2's rows + M6b's 9 + the seat-7 R-LITERAL block's 19, that site's chaos count 0 until seat 13 types the walk) -
+#    every attribution READ from the D11's gen-error dump at the counter tree, identical on BOTH routes
+#    (target/v32-seat12-instruments/scratch/ds12a-off.log / ds12a-on.log, d11-a.status, local). The +4 is the golden-free
+#    register's -4 (chaos-golden-free.txt 111 -> 107): the union of the two files is UNMOVED (the #630 D48 move in the
+#    other direction is the precedent) - a re-classification of four silent M2 emissions to LOUD refusals, not growth.
+#    The 25 vendored cells: PREDICTED 0 fires at every site (a golden carries no ternary, no stub, no rune basic name),
+#    the claim the chain's rings print.
+#  - 510 -> 509 at v3.2 seat 12 (PR #633, D52 H1 - M12 THE DUPLICATE CLOSURE PARAMETER, healed): -1 healed row = the
+#    C95Reduce 1 row (`reduce a, a [ a + a ]`); identical on BOTH routes (the D11 waivered-but-now-matching print at the H1
+#    head, 1 on each and the two sets EQUAL - scratch/ds12b-off.log / -on.log, target/v32-seat12-instruments, local; written
+#    FROM those prints by recut-healed-s12.py). THE MECHANISM: upstream (GeneratorScope.computeActualNames) numbers EVERY
+#    holder of a shared desired name in one scope and binds the body's reads to the FIRST - `(a0, a1) -> add(a0, a0)`; the
+#    fork's compileReduceLambda wrote the raw names `(a, a)` and the reference handler's reduce arm rendered `a`. ONE
+#    predicate for both halves now (HandlerHelper.reduceParamRenderNames / reduceParamReadName, LAW 69); two distinct
+#    names stay raw. The oracle group closure-param-duplicate (9 goldens from the released plugin BEFORE the code): 6 / 9
+#    identical before the code, 8 / 9 at the fix - the residual ReduceDupThenUse is an ADJACENT, older mechanism the
+#    fixture surfaced (a conditional as the whole body of a reduce lambda renders the inline ternary where the plugin
+#    renders the block lambda), DECLARED at the byte bar and banked for a seat of its own. THE REACH: the vendored corpus
+#    carries no `reduce` at all (the #420 census), so no vendored file can move; the rings decide at the chain.
+#  - 509 -> 497 at v3.2 seat 12 (PR #633, D52 H2 - M8a THE META WRAPPER INTO A RULE'S PLAIN OUTPUT, healed): -12 healed
+#    rows = the C28VenueRule 12 rows (`reporting rule C28Venue from C28Trade: extract C28VenueOf(item) as "Venue"`, the
+#    callee's output `string [metadata scheme]`); identical on BOTH routes (the D11 waivered-but-now-matching print at the
+#    H2 head, 12 on each and the two sets EQUAL - scratch/ds12c-off.log / -on.log, target/v32-seat12-instruments,
+#    local; written FROM those prints by recut-healed-s12.py). THE MECHANISM: the rule's synthetic output
+#    (RFunction.fromRule) carries no typeCall, so the SET seat's declared-type unwrap never keyed; the fork assigned the
+#    FieldWithMetaString to the String output (`output = MapperS.of(input).mapSingleToItem(item -> MapperS.of(c28VenueOf
+#    .evaluate(item.get()))).get()`, non-compiling). The ONE meta-recovery walker both SET-seat arms read
+#    (NavigationHandler.recoverMetaFromExpr, LAW 69) gains the FUNCTION-callee case - an RSymbolReference with arguments
+#    whose symbol is an RFunction recovers the callee's declared OUTPUT attribute's wrapper through metaWrapperOf, the
+#    same resolution a navigation terminal reads - and the single-output SET seat's gate (the #331 / seat-22
+#    condLambdaMeta arm) admits a direct call body beside the conditional and then-chain bodies: the existing deref block
+#    hoists the wrapper to a type-named local and unwraps it under a null guard (single), the "Type coercion" map derefs
+#    element-wise (multi) - the released plugin's forms. A plain-output callee recovers null and the gate is inert; a
+#    zero-argument call is not admitted (no carrier). The oracle group rule-meta-output-unwrap (13 goldens from the
+#    released plugin BEFORE the code): 11 / 13 identical before the code (VenueRule single + VenuesRule multi the two
+#    mismatches, both non-compiling), 13 / 13 at the fix and compiling. THE REACH: the walker feeds some forty-five
+#    consumers, three with INVERTED polarity (the seat-25 note at the walker), so a vendored rule extracting a
+#    meta-output function call could have moved - MEASURED on the 26-cell D11 on BOTH routes at this tree BEFORE the
+#    commit (rings-s12.ps1 -Tag h2, rings-h2.status, 12:43-12:51; the entry above was written at 12:40 and said
+#    UNMEASURED until the round-1 spec review, SF-1): rings 9062fc14 / d47fa88f / identical25 174,129 UNMOVED on both
+#    routes, MATRIX-FULL 3ac1faee = 281 / 185,813 / 216 + 107 - no vendored file moved; the chain re-measures it.
+#  - 497 -> 472 at v3.2 seat 12 (PR #633, D52 H3 - M6 THE `item ->` ONLY-EXISTS ROOT, healed): -25 healed rows =
+#    the C25Only 9, C25PathsC25Item 16 rows (the sixteen `condition C25Item: item -> p only exists or (item -> p, item -> q) only exists`
+#    data rules and the nine `add oks: ps then extract (item -> pick -> C25OptA only exists)` functions); identical on
+#    BOTH routes (the D11 waivered-but-now-matching print at the H3 head, 25 on each and the two sets EQUAL -
+#    scratch/ds12d-off.log / -on.log, target/v32-seat12-instruments, local; written FROM those prints by
+#    recut-healed-s12.py). THE MECHANISM: the parser (AstBuilder.buildOnlyExistsPath) returned null for an item root by
+#    design, so the element carried no receiver and the generator wrote the legacy dotted placeholder
+#    `onlyExists(item, Arrays.asList("item.p"), Arrays.asList("item.p"))` - no `item` variable in a data rule
+#    (non-compiling), a compiling and WRONG call in a lambda (the pair gate's 18 one-sided outcomes). Upstream parses
+#    an only-exists argument as an ordinary feature call over the implicit variable - `item -> p` IS `p` there (the
+#    hold-out group only-exists-item-root, pinned BEFORE the code: PathsItemRoot renders exactly as PathsBareControl).
+#    ONE half in the parser and NONE in the generator's code: the item root is a real, non-synthetic RImplicitVariable
+#    now (ranged at the token, its `keyword` range recorded), the features chained off it as off a symbol root; the
+#    generator's existing arm (1) - the gm-aware NavigationHandler.resolveReceiverDataType - types the implicit receiver
+#    from its context (the lambda item type; the condition's declaring type - the arm cdm's LegacyValuationTime
+#    `item -> location` renders through) and a hop over it by name, and the receiver compiles to `item` in a lambda /
+#    `MapperS.of(<instance>)` at a condition top. The type engine binds the lambda-seat hops (the L2 set 103 -> 85 by
+#    the gate's STALE print; the 48 condition-seat rows stay - the engine has no Cat 8 arm for a type condition, a
+#    banked parser item with the vendored type conditions in its reach). A bare `item only exists` and a bare symbol
+#    stay declined (no carrier). The oracle group (33 goldens from the released plugin BEFORE the code): 29 / 33
+#    identical before the code (OnlyItem, PathsItemRoot, PathsItemTwoHop, PathsItemOption the four mismatches), 33 /
+#    33 at the fix and compiling. THE REACH: the vendored cells carry ZERO `item ->` only-exists elements and ZERO bare
+#    `item only exists` (census-item-root-s12.py over the 25 cells' sources, scratch/census-item-root-s12.txt), so no
+#    vendored file can move through this path; the rings at the H3 tree and the chain decide.
+#  - 472 -> 472 at v3.2 seat 13 (PR #634, D53 - THE CLOSING SEAT, THE CENSUS RE-TAKE, commit 2): NO row moved; the COMPILE
+#    VERDICT of every byte row RECORDED here (D53 (a): a byte-listed row carries its verdict in this header) - the javac
+#    census of the default route's 256 dumped byte rows at the commit-1 head 5031a093f, the seat-10 two-pass shape with the
+#    seat-12 golden swap-in AND the register-twin admission (target/v32-seat13-instruments/scratch/default-route-census-b.log,
+#    local; -by-class.txt the table below, READ into this entry by patch-declared-census-s13.py): 12,018 sources, pass 1
+#    203 error files, pass 2 (190 broken overlay files swapped for their goldens, 13 register twins removed) 0 errors,
+#    cascadeOnGoldenApi 0, golden errors 0. 256 = 203 NON-COMPILING over thirteen classes + 53 COMPILING-DIFFERENT:
+#      M3-VOID-RENDER-LAW-NEW-SEATS                          52 rows =  13 NON-COMPILING + 39 compiling
+#      M5a-ADD-SEAT-SINGLETON-HOIST                          33 rows =  33 NON-COMPILING +  0 compiling
+#      M3-PARKED-WITH-META-OVER-NOTHING                      26 rows =  26 NON-COMPILING +  0 compiling
+#      M5f-INT-ARGUMENT-COERCION-DROPPED-IN-ALIAS-CONDITION  18 rows =  18 NON-COMPILING +  0 compiling
+#      M3-DECLARED-VOID-META-OUTPUT                          13 rows =  13 NON-COMPILING +  0 compiling
+#      M5b-EXISTS-THEN-CONDITIONAL-NEW-SEATS                 13 rows =  13 NON-COMPILING +  0 compiling
+#      M5c-LONG-RUNG-ALIAS-DIGIT-LAW                         13 rows =  13 NON-COMPILING +  0 compiling
+#      M5d-LONG-LITERAL-RENDER                               13 rows =  13 NON-COMPILING +  0 compiling
+#      M5e-INT-ARGUMENT-COERCION-HOIST                       13 rows =  13 NON-COMPILING +  0 compiling
+#      M4-BARE-BOOLEAN-CONDITION-AND-WITH-META-ARM           12 rows =  12 NON-COMPILING +  0 compiling
+#      M7a-DECLARED-META-LADDER-IN-LAMBDA                    12 rows =  12 NON-COMPILING +  0 compiling
+#      M7c-LAMBDA-PARAM-NAME-AS-TYPE                         12 rows =  12 NON-COMPILING +  0 compiling
+#      M9-CONDITIONAL-HOIST-AT-ADD                           12 rows =  12 NON-COMPILING +  0 compiling
+#      M11-NON-ASCII-STRING-ESCAPE-AT-SWITCH-GUARD           11 rows =   0 NON-COMPILING + 11 compiling
+#      M13-FIRST-WINS-REPLAY                                  3 rows =   0 NON-COMPILING +  3 compiling
+#    THE INSTRUMENT'S OWN CATCH: the seat-10 census (default-route-census-by-class.txt, #631) read M3-PARKED as "13 of
+#    26" - the 13 C24WithMetaPlain rows sit in the cell's upstream noncompiling register (the released plugin's own
+#    `Thing.builder().setValue(...)` does not compile there), so the source list skipped their goldens AND their overlay
+#    twins and the by-class print called them compiling by ABSENCE of measurement; the seat-13 clone admits a register
+#    row's overlay twin as the fork's file (--admit-register-overlay; removed in pass 2, never swapped for a golden the
+#    register calls non-compiling) and reads 26 of 26. Every other class's verdict held. THE RULE FROM HERE (D53): a
+#    NON-COMPILING class owes a register site - its rows become refusal rows on the LOUD line, re-cut FROM THE PRINT at
+#    the site's commit (shrink-only BY KIND, 256 byte rows -> N byte rows + M refusal rows); a COMPILING-DIFFERENT class
+#    stays byte-listed with its verdict (the three below marked COMPILING-DIFFERENT), a v3.3 heal's row. The heals of
+#    every class here are DEFERRED to v3.3 the IR closure (D53 decision 2).
+#  - 472 -> 472 at v3.2 seat 13 (PR #634, D53 - THE ALIAS SEATS, commit 3): NO row healed; the byte / refusal split moved
+#    256 / 215 -> 231 / 240 as two register sites landed at the alias seats - ALIAS_SIGNATURE_CLOSURE_PARAM_TYPE
+#    (R4, the signature walk's closure-parameter-as-type fallback: the M7c block's 12 rows) and
+#    ALIAS_BODY_ITEM_UNWRAPPED (R6, the then-chain alias body's bare item return against the Mapper seam: the M5e block's
+#    13 rows) - every attribution READ from the D11's gen-error dump at the site tree, identical on BOTH
+#    routes (target/v32-seat13-instruments/scratch/ds13c3a-off.log / ds13c3a-on.log, d11-c3a.status, local; written from
+#    them by recut-declared-s13.py). Both classes were NON-COMPILING whole by the seat-13 census (12 / 12, 13 / 13) - the
+#    D53 (b) rule: a non-compiling class's rows become refusal rows at its site's commit. The 25 vendored cells: PREDICTED 0
+#    fires at both sites (a golden carries no lambda parameter as a Java type and no bare item return against a Mapper
+#    seam), the claim the chain's rings print.
+#  - 472 -> 370 at v3.2 seat 13 commit 4 (PR #634, D53 - THE CLOSING SEAT's heals, each with an oracle group pinned from
+#    the released plugin FIRST): -102 healed rows = C23CmpArm 13, C23LongAlias 13, C23LongOut 13, C23WholeSet 20, C27NatCalled 18, C29InLambda 12, C31Defaults 13; identical on BOTH routes (the D11 waivered-but-now-matching
+#    print at the commit-4 tree, scratch/ds13c4g-off.log / -on.log: 84 FUNCTION + 18 DATA_RULE). THE MECHANISMS, each the
+#    released plugin's own law measured on its oracle group: M5f (C27NatCalled) the inline bare-local coercion at a
+#    typeAlias condition's call (arg-coercion-bare-local); M5c (C23LongAlias) the Long alias hoisted on the session's
+#    group with the keyword escape, its long-band literal suffixed lowercase on BOTH routes - the IR route's leaf
+#    emitter had carried its own uppercase copy (conv-bigint-alias-long); M5d (C23LongOut) the int-range literal cast
+#    `(long) 42` into a Long output (conv-int-literal-long-output); M5b (C23CmpArm) the equality parent admitted to the
+#    conditional's Mapper-form slot, the comparison JOIN typing the slot, the bare-boolean guard at the hoist block
+#    (the hold-out pin ExistsThenConditional healed with it); M5a (C23WholeSet, C31Defaults) the list literal's element
+#    coercion and the singleton hoist at the ADD seat, the qualified enum default wrapped like its bare twin under
+#    to-string (list-literal-add-item-coerce, tostring-over-default-enum); M7a (C29InLambda) the element deref after
+#    the block lambda from the deep-path root's leaf (extract-meta-elem-deref-function; the hold-out pin InLambda healed
+#    with it).
+#  - 370 -> 370 at v3.2 seat 13 (PR #634, D53 - THE META, CONDITIONAL AND HOIST SEATS, commit 4, the refusal half): NO row
+#    healed by this entry's sites; the byte / refusal split moved 129 / 240 -> 53 / 316 as four register
+#    sites landed - WITH_META_UNTYPED_STUB (R5, the M7b-1 with-meta stub refused whole: the M3-PARKED block's
+#    26 byte rows), VOID_INTO_META_OUTPUT (R13, a Void value into a meta-annotated output at the
+#    single-output SET fallback: the M3-DECLARED block's 13 rows), INLINE_CONDITIONAL_TERNARY (R14, the
+#    last-resort inline ternary refused at its producer: the M9 block's 12 rows) and
+#    HOIST_ARM_COERCION_DROPPED (R10, a bare-valued arm into a META-typed hoist local: the M4 block's 12 rows and the split
+#    M3-VOID-RENDER-LAW-NEW-SEATS-SEGMENTS block's 13 - 25 together) - every attribution READ from
+#    the D11's gen-error dump at the commit-4 tree, identical on BOTH routes (target/v32-seat13-instruments/scratch/ds13c4g-off.log
+#    / ds13c4g-on.log - the offload box's run of 2026-09-14, copied to scratch, local; written from them by
+#    recut-declared-s13.py). The four classes were NON-COMPILING whole by the seat-13 census (26 / 26, 13 / 13, 12 / 12,
+#    25 / 25) - the D53 (b) rule. The heal half of the same commit is the entry above it (the 102 rows deleted). The 25 vendored
+#    cells: PREDICTED 0 fires at every site (no golden carries the stub form, a Void into a meta output, the ternary shape or a
+#    bare value into a wrapper local - the seat-13 golden census and the rings), the claim the chain's rings print.
+#
+#
+# ==================== chaos-1.1.0 - THE GENERATION-2 CELL (v3.2 seat 10, PR #631, D49) ====================
+# The cell was REPLACED whole (charter s9); this file was RE-DERIVED EMPTY-FIRST at the swap: the
+# 1.0.0 rows above are HISTORY (the meter's shrink log), every row below is a MEASURED row of the
+# first gen-2 D11 census over chaos-1.1.0 (both routes), named with its mechanism family and its
+# class - KNOWN (banked at seat N of the 1.0.0 burn-down, priced) or NEW (the convergence residue).
+# Keys are chaos/1.1.0/<KIND>. The same laws: chaos-only, shrink-only, deleted whole at the close.
+# The 1.0.0 baseline closed at 2 rows (the two F13 refusals) - the six declared meters read
+# 2 / 0 / 24 / 0 / 7 / 0 at #630; the gen-2 figures below are the FIRST census of this cell.
+#
+# THE FIRST GEN-2 CENSUS ROWS (measured 2026-09-10, d11-m1 both routes; 611 rows = 524 byte mismatches + 86 refusals + 1 silent missing output; the census target/v32-gen2-census.md, local):
+# SHRUNK 611 -> 506 at v3.2 seat 11 (PR #632): the M1 block (105 rows) DELETED, healed on both routes - the SHRINK LOG
+# entry above; every block below is as the first census measured it.
+#
+# --- M3-VOID-RENDER-LAW-NEW-SEATS (39) ---
+# [seat 13 census, D53 (a)] COMPILING-DIFFERENT: 39 of 39 compile by javac (default-route-census-c4i, 2026-09-14) - stays byte-listed with its verdict; a v3.3 heal's row.
+#   (the commit-2 census read this block as 52 rows, 13 of them NON-COMPILING: those 13 - the C24Segments rows - became
+#   refusal rows under R-HOIST-ARM-COERCION-DROPPED at commit 4, and this header stood at the commit-2 verdict until
+#   #634 round 1, the spec seat's MF-1; the 39 rows are UNMOVED)
+#   the #630 render law (a Void-item value is the EMPTY of its expected type) MISSING at the multi SET/ADD
+#   seat, the conditional-ARM seats (the seat-9 banked deep/multi/meta Void conditional into a segment leaf),
+#   the alias/switch-arm seat, the COMPARISON operand seat and the pre-condition seat (the OFF route renders
+#   ofNull there, the ON route the mapC - a LAW 77 split) - KNOWN law, new seats
+chaos/1.1.0/FUNCTION:chaos/s24/a1o1/functions/C24Arg.java
+chaos/1.1.0/FUNCTION:chaos/s24/a1o1/functions/C24Compare.java
+chaos/1.1.0/FUNCTION:chaos/s24/a1o1/functions/C24Multi.java
+chaos/1.1.0/FUNCTION:chaos/s24/a1o2/functions/C24Arg.java
+chaos/1.1.0/FUNCTION:chaos/s24/a1o2/functions/C24Compare.java
+chaos/1.1.0/FUNCTION:chaos/s24/a1o2/functions/C24Multi.java
+chaos/1.1.0/FUNCTION:chaos/s24/a1o3/functions/C24Arg.java
+chaos/1.1.0/FUNCTION:chaos/s24/a1o3/functions/C24Compare.java
+chaos/1.1.0/FUNCTION:chaos/s24/a1o3/functions/C24Multi.java
+chaos/1.1.0/FUNCTION:chaos/s24/a1o4/functions/C24Arg.java
+chaos/1.1.0/FUNCTION:chaos/s24/a1o4/functions/C24Compare.java
+chaos/1.1.0/FUNCTION:chaos/s24/a1o4/functions/C24Multi.java
+chaos/1.1.0/FUNCTION:chaos/s24/a2alias/functions/C24Arg.java
+chaos/1.1.0/FUNCTION:chaos/s24/a2alias/functions/C24Compare.java
+chaos/1.1.0/FUNCTION:chaos/s24/a2alias/functions/C24Multi.java
+chaos/1.1.0/FUNCTION:chaos/s24/a2dangle/functions/C24Arg.java
+chaos/1.1.0/FUNCTION:chaos/s24/a2dangle/functions/C24Compare.java
+chaos/1.1.0/FUNCTION:chaos/s24/a2dangle/functions/C24Multi.java
+chaos/1.1.0/FUNCTION:chaos/s24/a2qual/functions/C24Arg.java
+chaos/1.1.0/FUNCTION:chaos/s24/a2qual/functions/C24Compare.java
+chaos/1.1.0/FUNCTION:chaos/s24/a2qual/functions/C24Multi.java
+chaos/1.1.0/FUNCTION:chaos/s24/a2wild/functions/C24Arg.java
+chaos/1.1.0/FUNCTION:chaos/s24/a2wild/functions/C24Compare.java
+chaos/1.1.0/FUNCTION:chaos/s24/a2wild/functions/C24Multi.java
+chaos/1.1.0/FUNCTION:chaos/s24/a3half/p2/functions/C24Arg.java
+chaos/1.1.0/FUNCTION:chaos/s24/a3half/p2/functions/C24Compare.java
+chaos/1.1.0/FUNCTION:chaos/s24/a3half/p2/functions/C24Multi.java
+chaos/1.1.0/FUNCTION:chaos/s24/a3hub/p2/functions/C24Arg.java
+chaos/1.1.0/FUNCTION:chaos/s24/a3hub/p2/functions/C24Compare.java
+chaos/1.1.0/FUNCTION:chaos/s24/a3hub/p2/functions/C24Multi.java
+chaos/1.1.0/FUNCTION:chaos/s24/a3third/p2/functions/C24Arg.java
+chaos/1.1.0/FUNCTION:chaos/s24/a3third/p2/functions/C24Compare.java
+chaos/1.1.0/FUNCTION:chaos/s24/a3third/p2/functions/C24Multi.java
+chaos/1.1.0/FUNCTION:chaos/s24/base/functions/C24Arg.java
+chaos/1.1.0/FUNCTION:chaos/s24/base/functions/C24Compare.java
+chaos/1.1.0/FUNCTION:chaos/s24/base/functions/C24Multi.java
+chaos/1.1.0/FUNCTION:chaos/s24/x13half/p2/functions/C24Arg.java
+chaos/1.1.0/FUNCTION:chaos/s24/x13half/p2/functions/C24Compare.java
+chaos/1.1.0/FUNCTION:chaos/s24/x13half/p2/functions/C24Multi.java
+#
+#
+#
+# --- M3-PARKED-METAFIELD-SILENT (1) ---
+# [seat 13 commit 4, D53] the ONE silent missing output of the cell - the ReferenceWithMetaVoid metafield the
+#   released plugin mints for a with-meta construction over `nothing` and the fork does not emit at all (the
+#   #405 decision: java.lang.Void is the unresolvable-type mapping); split from the M3-PARKED block at the
+#   commit-4 re-cut so that block's 26 function rows could move WHOLE to R-WITH-META-UNTYPED-STUB (R5). Stays a
+#   declared missing output; the v3.3 heal (the Void wrapper minted at a meta output) re-measures it.
+chaos/1.1.0/METAFIELD:com/rosetta/model/metafields/ReferenceWithMetaVoid.java
+# --- M11-NON-ASCII-STRING-ESCAPE-AT-SWITCH-GUARD (11) ---
+# [seat 13 census, D53 (a)] COMPILING-DIFFERENT: 11 of 11 compile by javac (default-route-census-b, 2026-09-13) - stays byte-listed with its verdict; a v3.3 heal's row.
+#   the v3.1 F2 class (emitted literals outside 0x20-0x7e) at a switch-guard seat: upstream writes
+#   `"\u00B5\u2013\u00FC"`, the fork the raw characters - KNOWN law, new seat
+chaos/1.1.0/FUNCTION:chaos/s33/a1o1/functions/C33Strings.java
+chaos/1.1.0/FUNCTION:chaos/s33/a1o2/functions/C33Strings.java
+chaos/1.1.0/FUNCTION:chaos/s33/a1o3/functions/C33Strings.java
+chaos/1.1.0/FUNCTION:chaos/s33/a2alias/functions/C33Strings.java
+chaos/1.1.0/FUNCTION:chaos/s33/a2dangle/functions/C33Strings.java
+chaos/1.1.0/FUNCTION:chaos/s33/a2qual/functions/C33Strings.java
+chaos/1.1.0/FUNCTION:chaos/s33/a2wild/functions/C33Strings.java
+chaos/1.1.0/FUNCTION:chaos/s33/a3half/p2/functions/C33Strings.java
+chaos/1.1.0/FUNCTION:chaos/s33/a3hub/p2/functions/C33Strings.java
+chaos/1.1.0/FUNCTION:chaos/s33/a3third/p3/functions/C33Strings.java
+chaos/1.1.0/FUNCTION:chaos/s33/base/functions/C33Strings.java
+#
+# --- M13-FIRST-WINS-REPLAY (3) ---
+# [seat 13 census, D53 (a)] COMPILING-DIFFERENT: 3 of 3 compile by javac (default-route-census-b, 2026-09-13) - stays byte-listed with its verdict; a v3.3 heal's row.
+#   the F10 / #413 first-wins replay class: the released plugin's GENERATOR crowned chaos-s28-a1o3 (a hash-like
+#   index order) while its VALIDATOR crowned aaa-chaos-s28-a7first and the fork follows the lexical first; the
+#   s22 Product race lost to a qualifier-free slim carrier (no s22 meta registers upstream at 1.1.0) - the heal
+#   is the replay pin from this cell on - KNOWN F10
+chaos/1.1.0/XMETA:chaos/s22/a1o1/meta/C22TermsMeta.java
+chaos/1.1.0/XMETA:chaos/s28/a1o3/meta/C28EventMeta.java
+chaos/1.1.0/XMETA:chaos/s28/a7first/meta/C28EventMeta.java
+#
+# --- R-BOILERPLATE-NAME-COLLISION (24) ---
+#   REFUSED at BOILERPLATE_NAME_COLLISION (seat 3's a17 / a18): condition classes named Lists (upstream's
+#   emission COMPILES - a fork defect-by-refusal), ValidationResult (upstream's own emission does NOT compile -
+#   the success branch's ValidationResult.ValidationType left bare) and s99's Integer (the java.lang shadow -
+#   upstream's siblings do not compile); THE RULING OWED: reproduce-and-pin (the D46 policy) or refuse (the
+#   seat-3 policy)
+chaos/1.1.0/TYPE_FORMAT_VALIDATOR:chaos/s27/a1o1/validation/C27HolderTypeFormatValidator.java
+chaos/1.1.0/TYPE_FORMAT_VALIDATOR:chaos/s27/a1o2/validation/C27HolderTypeFormatValidator.java
+chaos/1.1.0/TYPE_FORMAT_VALIDATOR:chaos/s27/a1o3/validation/C27HolderTypeFormatValidator.java
+chaos/1.1.0/TYPE_FORMAT_VALIDATOR:chaos/s27/a2alias/validation/C27HolderTypeFormatValidator.java
+chaos/1.1.0/TYPE_FORMAT_VALIDATOR:chaos/s27/a2dangle/validation/C27HolderTypeFormatValidator.java
+chaos/1.1.0/TYPE_FORMAT_VALIDATOR:chaos/s27/a2qual/validation/C27HolderTypeFormatValidator.java
+chaos/1.1.0/TYPE_FORMAT_VALIDATOR:chaos/s27/a2wild/validation/C27HolderTypeFormatValidator.java
+chaos/1.1.0/TYPE_FORMAT_VALIDATOR:chaos/s27/a3half/p2/validation/C27HolderTypeFormatValidator.java
+chaos/1.1.0/TYPE_FORMAT_VALIDATOR:chaos/s27/a3hub/p2/validation/C27HolderTypeFormatValidator.java
+chaos/1.1.0/TYPE_FORMAT_VALIDATOR:chaos/s27/a3third/p2/validation/C27HolderTypeFormatValidator.java
+chaos/1.1.0/TYPE_FORMAT_VALIDATOR:chaos/s27/base/validation/C27HolderTypeFormatValidator.java
+chaos/1.1.0/TYPE_FORMAT_VALIDATOR:chaos/s99/base/validation/C99HolderTypeFormatValidator.java
+chaos/1.1.0/DATA_RULE:chaos/s27/a1o1/validation/datarule/ValidationResult.java
+chaos/1.1.0/DATA_RULE:chaos/s27/a1o2/validation/datarule/ValidationResult.java
+chaos/1.1.0/DATA_RULE:chaos/s27/a1o3/validation/datarule/ValidationResult.java
+chaos/1.1.0/DATA_RULE:chaos/s27/a2alias/validation/datarule/ValidationResult.java
+chaos/1.1.0/DATA_RULE:chaos/s27/a2dangle/validation/datarule/ValidationResult.java
+chaos/1.1.0/DATA_RULE:chaos/s27/a2qual/validation/datarule/ValidationResult.java
+chaos/1.1.0/DATA_RULE:chaos/s27/a2wild/validation/datarule/ValidationResult.java
+chaos/1.1.0/DATA_RULE:chaos/s27/a3half/p2/validation/datarule/ValidationResult.java
+chaos/1.1.0/DATA_RULE:chaos/s27/a3hub/p2/validation/datarule/ValidationResult.java
+chaos/1.1.0/DATA_RULE:chaos/s27/a3third/p2/validation/datarule/ValidationResult.java
+chaos/1.1.0/DATA_RULE:chaos/s27/base/validation/datarule/ValidationResult.java
+chaos/1.1.0/DATA_RULE:chaos/s99/base/validation/datarule/Integer.java
+#
+# --- R-ENUM-VALUE-NAME-ECHO (6) ---
+#   REFUSED at ENUM_VALUE_NAME_ECHO (D48, by design): the rival-enum split's p2 elements carrying an unresolved
+#   value - the A1xA6 twins double the s17 pair, the fresh s31 pair adds two - KNOWN D48
+chaos/1.1.0/DATA_RULE:chaos/s17/x16enum/p2/validation/datarule/C17BooksC17Agree.java
+chaos/1.1.0/DATA_RULE:chaos/s17/x36enum/p2/validation/datarule/C17BooksC17Agree.java
+chaos/1.1.0/FUNCTION:chaos/s17/x16enum/p2/functions/C17Sift.java
+chaos/1.1.0/FUNCTION:chaos/s17/x36enum/p2/functions/C17Sift.java
+chaos/1.1.0/FUNCTION:chaos/s31/x16enum/p2/functions/C31Defaults.java
+chaos/1.1.0/FUNCTION:chaos/s31/x36enum/p2/functions/C31Defaults.java
+#
+# --- R-BAND-FORK-REFUSES (2) ---
+#   REFUSED on a band file the released plugin refuses too (golden-free): s93's function at
+#   TYPE_COLLAPSED_TO_OBJECT (`eth -> av` in a case arm), s94's at TYPE_SWITCH_TERNARY_STUB (bare-item arms
+#   joining to any) - refusal parity at the generator, its POJOs emitted golden-free
+chaos/1.1.0/FUNCTION:chaos/s93/base/functions/C93Nav.java
+chaos/1.1.0/FUNCTION:chaos/s94/base/functions/C94PickBoth.java
+#
+# --- R-TYPE-SWITCH-TERNARY-STUB (11) ---
+#   REFUSED at TYPE_SWITCH_TERNARY_STUB: a type-keyed switch in a data-type CONDITION (a POJO-kind seat with no
+#   instanceof-ladder renderer) - the v3.1 class at a new seat; upstream emits the ladder - fork defect
+chaos/1.1.0/POJO:chaos/s26/a1o2/reports/C26PickAvRule.java
+chaos/1.1.0/POJO:chaos/s26/a1o3/reports/C26PickAvRule.java
+chaos/1.1.0/POJO:chaos/s26/a1o4/reports/C26PickAvRule.java
+chaos/1.1.0/POJO:chaos/s26/a2alias/reports/C26PickAvRule.java
+chaos/1.1.0/POJO:chaos/s26/a2dangle/reports/C26PickAvRule.java
+chaos/1.1.0/POJO:chaos/s26/a2qual/reports/C26PickAvRule.java
+chaos/1.1.0/POJO:chaos/s26/a2wild/reports/C26PickAvRule.java
+chaos/1.1.0/POJO:chaos/s26/a3half/p2/reports/C26PickAvRule.java
+chaos/1.1.0/POJO:chaos/s26/a3hub/p2/reports/C26PickAvRule.java
+chaos/1.1.0/POJO:chaos/s26/a3third/p3/reports/C26PickAvRule.java
+chaos/1.1.0/POJO:chaos/s26/base/reports/C26PickAvRule.java
+#
+# --- R-REPORT-WITH-TYPE-CHOICE (24) ---
+#   REFUSED at REPORT_REFERENCE_UNRESOLVED: a report `with type` naming a CHOICE - the released plugin
+#   GENERATES it (61 s28 base goldens); the seat-4 banked report-withtype-choice group - KNOWN banked fork
+#   defect
+chaos/1.1.0/POJO:chaos/s28/a1o1/reports/C28ALTC28RegReportFunction.java
+chaos/1.1.0/POJO:chaos/s28/a1o1/labels/C28ALTC28RegLabelProvider.java
+chaos/1.1.0/POJO:chaos/s28/a1o2/reports/C28ALTC28RegReportFunction.java
+chaos/1.1.0/POJO:chaos/s28/a1o2/labels/C28ALTC28RegLabelProvider.java
+chaos/1.1.0/POJO:chaos/s28/a1o3/reports/C28ALTC28RegReportFunction.java
+chaos/1.1.0/POJO:chaos/s28/a1o3/labels/C28ALTC28RegLabelProvider.java
+chaos/1.1.0/POJO:chaos/s28/a1o4/reports/C28ALTC28RegReportFunction.java
+chaos/1.1.0/POJO:chaos/s28/a1o4/labels/C28ALTC28RegLabelProvider.java
+chaos/1.1.0/POJO:chaos/s28/a2alias/reports/C28ALTC28RegReportFunction.java
+chaos/1.1.0/POJO:chaos/s28/a2alias/labels/C28ALTC28RegLabelProvider.java
+chaos/1.1.0/POJO:chaos/s28/a2dangle/reports/C28ALTC28RegReportFunction.java
+chaos/1.1.0/POJO:chaos/s28/a2dangle/labels/C28ALTC28RegLabelProvider.java
+chaos/1.1.0/POJO:chaos/s28/a2qual/reports/C28ALTC28RegReportFunction.java
+chaos/1.1.0/POJO:chaos/s28/a2qual/labels/C28ALTC28RegLabelProvider.java
+chaos/1.1.0/POJO:chaos/s28/a2wild/reports/C28ALTC28RegReportFunction.java
+chaos/1.1.0/POJO:chaos/s28/a2wild/labels/C28ALTC28RegLabelProvider.java
+chaos/1.1.0/POJO:chaos/s28/a3half/p2/reports/C28ALTC28RegReportFunction.java
+chaos/1.1.0/POJO:chaos/s28/a3half/p2/labels/C28ALTC28RegLabelProvider.java
+chaos/1.1.0/POJO:chaos/s28/a3hub/p2/reports/C28ALTC28RegReportFunction.java
+chaos/1.1.0/POJO:chaos/s28/a3hub/p2/labels/C28ALTC28RegLabelProvider.java
+chaos/1.1.0/POJO:chaos/s28/a3third/p3/reports/C28ALTC28RegReportFunction.java
+chaos/1.1.0/POJO:chaos/s28/a3third/p3/labels/C28ALTC28RegLabelProvider.java
+chaos/1.1.0/POJO:chaos/s28/base/reports/C28ALTC28RegReportFunction.java
+chaos/1.1.0/POJO:chaos/s28/base/labels/C28ALTC28RegLabelProvider.java
+#
+# --- R-SWITCH-TERNARY-STUB (72) ---
+#   REFUSED at SWITCH_TERNARY_STUB (v3.2 seat 12, D52 - COUNTERS FIRST, the residual site AFTER the two guarded ones): every
+#   switch that reached ControlFlowHandler's inline ternary - a mapItem lambda whose ARM KINDS the four block renderers decline
+#   (C26Hoist), a comparison / + / or operand in a SET body (C31Which, C31Keys), an and-conjunct of a typeAlias condition
+#   (C27NatOps), the then arm of a data-type condition (C26BagC26Colour) - used to render `Objects.equals(<raw source name>,
+#   <Mapper>) ? .. : ..` (non-compiling or always false; upstream folds every switch into a hoisted switchArgument ladder).
+#   The FIRST site in render order wins a file: C26AliasArms / C26Nested refuse at ALIAS_SIGNATURE_RAW_TYPE (their alias
+#   signatures render before their bodies) and sit in that block. The four s31 x16enum / x36enum p2 rows at the tail were
+#   GOLDEN-FREE rows of chaos-golden-free.txt (the released plugin refuses p2 whole) that the fork emitted SILENTLY with the
+#   ternary - the census's 92 counted byte rows only; the counter found them (the #630 D48 precedent: a refusal on a
+#   golden-free file is a refusal row here, not a missingOutput). Measured at the counter tree on BOTH routes
+#   (target/v32-seat12-instruments/scratch/d11-a.status, local). The HEAL is by hoist channel, the seats after this one
+#   (D52 decision 3): a healed row is deleted in its healing seat.
+chaos/1.1.0/DATA_RULE:chaos/s26/a1o1/validation/datarule/C26BagC26Colour.java
+chaos/1.1.0/DATA_RULE:chaos/s26/a1o2/validation/datarule/C26BagC26Colour.java
+chaos/1.1.0/DATA_RULE:chaos/s26/a1o3/validation/datarule/C26BagC26Colour.java
+chaos/1.1.0/DATA_RULE:chaos/s26/a1o4/validation/datarule/C26BagC26Colour.java
+chaos/1.1.0/DATA_RULE:chaos/s26/a2alias/validation/datarule/C26BagC26Colour.java
+chaos/1.1.0/DATA_RULE:chaos/s26/a2dangle/validation/datarule/C26BagC26Colour.java
+chaos/1.1.0/DATA_RULE:chaos/s26/a2qual/validation/datarule/C26BagC26Colour.java
+chaos/1.1.0/DATA_RULE:chaos/s26/a2wild/validation/datarule/C26BagC26Colour.java
+chaos/1.1.0/DATA_RULE:chaos/s26/a3half/p2/validation/datarule/C26BagC26Colour.java
+chaos/1.1.0/DATA_RULE:chaos/s26/a3hub/p2/validation/datarule/C26BagC26Colour.java
+chaos/1.1.0/DATA_RULE:chaos/s26/a3third/p3/validation/datarule/C26BagC26Colour.java
+chaos/1.1.0/DATA_RULE:chaos/s26/base/validation/datarule/C26BagC26Colour.java
+chaos/1.1.0/DATA_RULE:chaos/s27/a1o1/validation/datarule/C27NatOps.java
+chaos/1.1.0/DATA_RULE:chaos/s27/a1o2/validation/datarule/C27NatOps.java
+chaos/1.1.0/DATA_RULE:chaos/s27/a1o3/validation/datarule/C27NatOps.java
+chaos/1.1.0/DATA_RULE:chaos/s27/a2alias/validation/datarule/C27NatOps.java
+chaos/1.1.0/DATA_RULE:chaos/s27/a2dangle/validation/datarule/C27NatOps.java
+chaos/1.1.0/DATA_RULE:chaos/s27/a2qual/validation/datarule/C27NatOps.java
+chaos/1.1.0/DATA_RULE:chaos/s27/a2wild/validation/datarule/C27NatOps.java
+chaos/1.1.0/DATA_RULE:chaos/s27/a3half/p1/validation/datarule/C27NatOps.java
+chaos/1.1.0/DATA_RULE:chaos/s27/a3hub/p2/validation/datarule/C27NatOps.java
+chaos/1.1.0/DATA_RULE:chaos/s27/a3third/p1/validation/datarule/C27NatOps.java
+chaos/1.1.0/DATA_RULE:chaos/s27/a4none/validation/datarule/C27NatOps.java
+chaos/1.1.0/DATA_RULE:chaos/s27/a4snap/validation/datarule/C27NatOps.java
+chaos/1.1.0/DATA_RULE:chaos/s27/a5crlf/validation/datarule/C27NatOps.java
+chaos/1.1.0/DATA_RULE:chaos/s27/a5mixed/validation/datarule/C27NatOps.java
+chaos/1.1.0/DATA_RULE:chaos/s27/a5uni/validation/datarule/C27NatOps.java
+chaos/1.1.0/DATA_RULE:chaos/s27/a9comment/validation/datarule/C27NatOps.java
+chaos/1.1.0/DATA_RULE:chaos/s27/a9tabs/validation/datarule/C27NatOps.java
+chaos/1.1.0/DATA_RULE:chaos/s27/base/validation/datarule/C27NatOps.java
+chaos/1.1.0/FUNCTION:chaos/s26/a1o1/functions/C26Hoist.java
+chaos/1.1.0/FUNCTION:chaos/s26/a1o2/functions/C26Hoist.java
+chaos/1.1.0/FUNCTION:chaos/s26/a1o3/functions/C26Hoist.java
+chaos/1.1.0/FUNCTION:chaos/s26/a1o4/functions/C26Hoist.java
+chaos/1.1.0/FUNCTION:chaos/s26/a2alias/functions/C26Hoist.java
+chaos/1.1.0/FUNCTION:chaos/s26/a2dangle/functions/C26Hoist.java
+chaos/1.1.0/FUNCTION:chaos/s26/a2qual/functions/C26Hoist.java
+chaos/1.1.0/FUNCTION:chaos/s26/a2wild/functions/C26Hoist.java
+chaos/1.1.0/FUNCTION:chaos/s26/a3half/p2/functions/C26Hoist.java
+chaos/1.1.0/FUNCTION:chaos/s26/a3hub/p2/functions/C26Hoist.java
+chaos/1.1.0/FUNCTION:chaos/s26/a3third/p3/functions/C26Hoist.java
+chaos/1.1.0/FUNCTION:chaos/s26/base/functions/C26Hoist.java
+chaos/1.1.0/FUNCTION:chaos/s31/a1o1/functions/C31Keys.java
+chaos/1.1.0/FUNCTION:chaos/s31/a1o1/functions/C31Which.java
+chaos/1.1.0/FUNCTION:chaos/s31/a1o2/functions/C31Keys.java
+chaos/1.1.0/FUNCTION:chaos/s31/a1o2/functions/C31Which.java
+chaos/1.1.0/FUNCTION:chaos/s31/a1o3/functions/C31Keys.java
+chaos/1.1.0/FUNCTION:chaos/s31/a1o3/functions/C31Which.java
+chaos/1.1.0/FUNCTION:chaos/s31/a2alias/functions/C31Keys.java
+chaos/1.1.0/FUNCTION:chaos/s31/a2alias/functions/C31Which.java
+chaos/1.1.0/FUNCTION:chaos/s31/a2dangle/functions/C31Keys.java
+chaos/1.1.0/FUNCTION:chaos/s31/a2dangle/functions/C31Which.java
+chaos/1.1.0/FUNCTION:chaos/s31/a2qual/functions/C31Keys.java
+chaos/1.1.0/FUNCTION:chaos/s31/a2qual/functions/C31Which.java
+chaos/1.1.0/FUNCTION:chaos/s31/a2wild/functions/C31Keys.java
+chaos/1.1.0/FUNCTION:chaos/s31/a2wild/functions/C31Which.java
+chaos/1.1.0/FUNCTION:chaos/s31/a3half/p2/functions/C31Keys.java
+chaos/1.1.0/FUNCTION:chaos/s31/a3half/p2/functions/C31Which.java
+chaos/1.1.0/FUNCTION:chaos/s31/a3hub/p2/functions/C31Keys.java
+chaos/1.1.0/FUNCTION:chaos/s31/a3hub/p2/functions/C31Which.java
+chaos/1.1.0/FUNCTION:chaos/s31/a3third/p3/functions/C31Keys.java
+chaos/1.1.0/FUNCTION:chaos/s31/a3third/p3/functions/C31Which.java
+chaos/1.1.0/FUNCTION:chaos/s31/a6enum/functions/C31Keys.java
+chaos/1.1.0/FUNCTION:chaos/s31/a6enum/functions/C31Which.java
+chaos/1.1.0/FUNCTION:chaos/s31/base/functions/C31Keys.java
+chaos/1.1.0/FUNCTION:chaos/s31/base/functions/C31Which.java
+chaos/1.1.0/FUNCTION:chaos/s31/x26enum/functions/C31Keys.java
+chaos/1.1.0/FUNCTION:chaos/s31/x26enum/functions/C31Which.java
+chaos/1.1.0/FUNCTION:chaos/s31/x16enum/p2/functions/C31Keys.java
+chaos/1.1.0/FUNCTION:chaos/s31/x16enum/p2/functions/C31Which.java
+chaos/1.1.0/FUNCTION:chaos/s31/x36enum/p2/functions/C31Keys.java
+chaos/1.1.0/FUNCTION:chaos/s31/x36enum/p2/functions/C31Which.java
+#
+# --- R-DEEP-PATH-UTIL-UNRESOLVED (24) ---
+#   REFUSED at DEEP_PATH_UTIL_UNRESOLVED (v3.2 seat 12, D52): the deep call whose RECEIVER type the resolver cannot name -
+#   a receiver that is itself a deep call (`o ->> inners ->> deep`; the rule's `extract outer ->> inners ->> deep`) or the
+#   explicit parameter of a then-extract over a LIST OF LISTS - used to render `/* TODO(M7b-4): wire DeepPathUtil */` with
+#   no @Inject field (the seat-4 banked register question, answered). The M7b block's 24 rows exactly, on both routes; the
+#   heal (the resolver's two arms, the list-of-lists count wrap + coercion, the rule's mapSingleToList cardinality) is seat
+#   13's (D52 decision 3).
+chaos/1.1.0/FUNCTION:chaos/s29/a1o1/functions/C29LoL.java
+chaos/1.1.0/FUNCTION:chaos/s29/a1o2/functions/C29LoL.java
+chaos/1.1.0/FUNCTION:chaos/s29/a1o3/functions/C29LoL.java
+chaos/1.1.0/FUNCTION:chaos/s29/a2alias/functions/C29LoL.java
+chaos/1.1.0/FUNCTION:chaos/s29/a2dangle/functions/C29LoL.java
+chaos/1.1.0/FUNCTION:chaos/s29/a2qual/functions/C29LoL.java
+chaos/1.1.0/FUNCTION:chaos/s29/a2wild/functions/C29LoL.java
+chaos/1.1.0/FUNCTION:chaos/s29/a3half/p2/functions/C29LoL.java
+chaos/1.1.0/FUNCTION:chaos/s29/a3hub/p2/functions/C29LoL.java
+chaos/1.1.0/FUNCTION:chaos/s29/a3third/p2/functions/C29LoL.java
+chaos/1.1.0/FUNCTION:chaos/s29/base/functions/C29LoL.java
+chaos/1.1.0/FUNCTION:chaos/s29/x13half/p2/functions/C29LoL.java
+chaos/1.1.0/POJO:chaos/s29/a1o1/reports/C29InnerRule.java
+chaos/1.1.0/POJO:chaos/s29/a1o2/reports/C29InnerRule.java
+chaos/1.1.0/POJO:chaos/s29/a1o3/reports/C29InnerRule.java
+chaos/1.1.0/POJO:chaos/s29/a2alias/reports/C29InnerRule.java
+chaos/1.1.0/POJO:chaos/s29/a2dangle/reports/C29InnerRule.java
+chaos/1.1.0/POJO:chaos/s29/a2qual/reports/C29InnerRule.java
+chaos/1.1.0/POJO:chaos/s29/a2wild/reports/C29InnerRule.java
+chaos/1.1.0/POJO:chaos/s29/a3half/p2/reports/C29InnerRule.java
+chaos/1.1.0/POJO:chaos/s29/a3hub/p2/reports/C29InnerRule.java
+chaos/1.1.0/POJO:chaos/s29/a3third/p3/reports/C29InnerRule.java
+chaos/1.1.0/POJO:chaos/s29/base/reports/C29InnerRule.java
+chaos/1.1.0/POJO:chaos/s29/x13half/p1/reports/C29InnerRule.java
+#
+# --- R-ALIAS-SIGNATURE-RAW-TYPE (52) ---
+#   REFUSED at ALIAS_SIGNATURE_RAW_TYPE (v3.2 seat 12, D52): an alias the signature walk declines in a function whose
+#   OUTPUT type is a BUILTIN (number / string) - the fallback used to render the raw rune name as the Java type
+#   (`MapperS<? extends number>`, `MapperC<? extends string>`), non-compiling and silent. Three sources, every row from
+#   the print: M6b's 9 (C25Shadow - a reduce over counts), 24 of M2's rows (C26AliasArms' five switch aliases and
+#   C26Nested's `inner` - their signatures fall to `? extends string` before their bodies reach the switch ternary), and
+#   the seat-7 R-LITERAL-SWITCH-TERNARY-STUB block's 19 (C26Lit: `alias nums` / `alias flags` under literal guards in a
+#   number-output function - the alias signature renders before the alias body, so this site wins the file; the
+#   LITERAL_SWITCH_TERNARY_STUB counter reads 0 on the chaos cell until seat 13 types the walk, and its unit control keeps
+#   its witness without an alias). The heal is the walk's typing at the declining seats (seat 13, D52 decision 3);
+#   MapperC<l2> (M7c, the closure-parameter NAME) is NOT this leg and stays a byte row.
+chaos/1.1.0/FUNCTION:chaos/s26/a1o1/functions/C26AliasArms.java
+chaos/1.1.0/FUNCTION:chaos/s26/a1o1/functions/C26Nested.java
+chaos/1.1.0/FUNCTION:chaos/s26/a1o2/functions/C26AliasArms.java
+chaos/1.1.0/FUNCTION:chaos/s26/a1o2/functions/C26Nested.java
+chaos/1.1.0/FUNCTION:chaos/s26/a1o3/functions/C26AliasArms.java
+chaos/1.1.0/FUNCTION:chaos/s26/a1o3/functions/C26Nested.java
+chaos/1.1.0/FUNCTION:chaos/s26/a1o4/functions/C26AliasArms.java
+chaos/1.1.0/FUNCTION:chaos/s26/a1o4/functions/C26Nested.java
+chaos/1.1.0/FUNCTION:chaos/s26/a2alias/functions/C26AliasArms.java
+chaos/1.1.0/FUNCTION:chaos/s26/a2alias/functions/C26Nested.java
+chaos/1.1.0/FUNCTION:chaos/s26/a2dangle/functions/C26AliasArms.java
+chaos/1.1.0/FUNCTION:chaos/s26/a2dangle/functions/C26Nested.java
+chaos/1.1.0/FUNCTION:chaos/s26/a2qual/functions/C26AliasArms.java
+chaos/1.1.0/FUNCTION:chaos/s26/a2qual/functions/C26Nested.java
+chaos/1.1.0/FUNCTION:chaos/s26/a2wild/functions/C26AliasArms.java
+chaos/1.1.0/FUNCTION:chaos/s26/a2wild/functions/C26Nested.java
+chaos/1.1.0/FUNCTION:chaos/s26/a3half/p1/functions/C26AliasArms.java
+chaos/1.1.0/FUNCTION:chaos/s26/a3half/p2/functions/C26Nested.java
+chaos/1.1.0/FUNCTION:chaos/s26/a3hub/p2/functions/C26AliasArms.java
+chaos/1.1.0/FUNCTION:chaos/s26/a3hub/p2/functions/C26Nested.java
+chaos/1.1.0/FUNCTION:chaos/s26/a3third/p2/functions/C26AliasArms.java
+chaos/1.1.0/FUNCTION:chaos/s26/a3third/p2/functions/C26Nested.java
+chaos/1.1.0/FUNCTION:chaos/s26/base/functions/C26AliasArms.java
+chaos/1.1.0/FUNCTION:chaos/s26/base/functions/C26Nested.java
+chaos/1.1.0/FUNCTION:chaos/s25/a1o1/functions/C25Shadow.java
+chaos/1.1.0/FUNCTION:chaos/s25/a2alias/functions/C25Shadow.java
+chaos/1.1.0/FUNCTION:chaos/s25/a2dangle/functions/C25Shadow.java
+chaos/1.1.0/FUNCTION:chaos/s25/a2qual/functions/C25Shadow.java
+chaos/1.1.0/FUNCTION:chaos/s25/a2wild/functions/C25Shadow.java
+chaos/1.1.0/FUNCTION:chaos/s25/a3half/p2/functions/C25Shadow.java
+chaos/1.1.0/FUNCTION:chaos/s25/a3hub/p2/functions/C25Shadow.java
+chaos/1.1.0/FUNCTION:chaos/s25/a3third/p3/functions/C25Shadow.java
+chaos/1.1.0/FUNCTION:chaos/s25/base/functions/C25Shadow.java
+chaos/1.1.0/FUNCTION:chaos/s26/a1o1/functions/C26Lit.java
+chaos/1.1.0/FUNCTION:chaos/s26/a1o2/functions/C26Lit.java
+chaos/1.1.0/FUNCTION:chaos/s26/a1o3/functions/C26Lit.java
+chaos/1.1.0/FUNCTION:chaos/s26/a1o4/functions/C26Lit.java
+chaos/1.1.0/FUNCTION:chaos/s26/a2alias/functions/C26Lit.java
+chaos/1.1.0/FUNCTION:chaos/s26/a2dangle/functions/C26Lit.java
+chaos/1.1.0/FUNCTION:chaos/s26/a2qual/functions/C26Lit.java
+chaos/1.1.0/FUNCTION:chaos/s26/a2wild/functions/C26Lit.java
+chaos/1.1.0/FUNCTION:chaos/s26/a3half/p1/functions/C26Lit.java
+chaos/1.1.0/FUNCTION:chaos/s26/a3hub/p2/functions/C26Lit.java
+chaos/1.1.0/FUNCTION:chaos/s26/a3third/p1/functions/C26Lit.java
+chaos/1.1.0/FUNCTION:chaos/s26/a4none/functions/C26Lit.java
+chaos/1.1.0/FUNCTION:chaos/s26/a4snap/functions/C26Lit.java
+chaos/1.1.0/FUNCTION:chaos/s26/a5crlf/functions/C26Lit.java
+chaos/1.1.0/FUNCTION:chaos/s26/a5mixed/functions/C26Lit.java
+chaos/1.1.0/FUNCTION:chaos/s26/a5uni/functions/C26Lit.java
+chaos/1.1.0/FUNCTION:chaos/s26/a9comment/functions/C26Lit.java
+chaos/1.1.0/FUNCTION:chaos/s26/a9tabs/functions/C26Lit.java
+chaos/1.1.0/FUNCTION:chaos/s26/base/functions/C26Lit.java
+#
+# --- R-ALIAS-BODY-ITEM-UNWRAPPED (13) ---
+#   REFUSED at ALIAS_BODY_ITEM_UNWRAPPED (v3.2 seat 13, D53 - site R6, commit 3): the then-chain alias body renderer
+#   (FunctionExpressionRenderer.renderAliasThenHoistOrNull) returned its then-consumer BARE against the alias method's Mapper
+#   seam - `counted: bs extract b [ b -> lid ] then count` (C23Scale) rendered `return thenArg.resultCount();` in a
+#   `MapperS<Integer>` method, the count render's primitive int (stamped by its producer since v3.2 seat 1) where the plugin
+#   renders `return MapperS.of(thenArg.resultCount());` - a body javac refuses (the seat-13 census: 13 of 13 non-compiling),
+#   SILENT. The site refuses BY TYPE on the reference route: a consumer whose compiled type is an item (not a List, a
+#   Mapper, a list-of-lists Mapper or a ComparisonResult) that the two proven-single collapse arms did not re-wrap; a
+#   wrapper-typed consumer keeps its bytes and an UNTYPED one (the #433 standing class) is not decided here. The M5e block's
+#   13 rows exactly, on both routes (target/v32-seat13-instruments/scratch/d11-c3a.status, ds13c3a-off.log / -on.log,
+#   local); the block's other two mechanisms of the census's naming - the default route's hoisted int-argument coercion
+#   (`final Integer integer = q;`, compiling, byte-different) and the IR route's dropped one (the C23Scale route split,
+#   § 4 of the census) - travel with the rows: a file refuses at its FIRST site in render order. The HEAL - the
+#   `MapperS.of(...)` wrap at the seam - is v3.3's (D53 decision 2): a healed row is deleted in its healing seat.
+chaos/1.1.0/FUNCTION:chaos/s23/a1o1/functions/C23Scale.java
+chaos/1.1.0/FUNCTION:chaos/s23/a1o2/functions/C23Scale.java
+chaos/1.1.0/FUNCTION:chaos/s23/a1o3/functions/C23Scale.java
+chaos/1.1.0/FUNCTION:chaos/s23/a1o4/functions/C23Scale.java
+chaos/1.1.0/FUNCTION:chaos/s23/a2alias/functions/C23Scale.java
+chaos/1.1.0/FUNCTION:chaos/s23/a2dangle/functions/C23Scale.java
+chaos/1.1.0/FUNCTION:chaos/s23/a2qual/functions/C23Scale.java
+chaos/1.1.0/FUNCTION:chaos/s23/a2wild/functions/C23Scale.java
+chaos/1.1.0/FUNCTION:chaos/s23/a3half/p2/functions/C23Scale.java
+chaos/1.1.0/FUNCTION:chaos/s23/a3hub/p2/functions/C23Scale.java
+chaos/1.1.0/FUNCTION:chaos/s23/a3third/p2/functions/C23Scale.java
+chaos/1.1.0/FUNCTION:chaos/s23/base/functions/C23Scale.java
+chaos/1.1.0/FUNCTION:chaos/s23/x13half/p2/functions/C23Scale.java
+#
+# --- R-ALIAS-SIGNATURE-CLOSURE-PARAM-TYPE (12) ---
+#   REFUSED at ALIAS_SIGNATURE_CLOSURE_PARAM_TYPE (v3.2 seat 13, D53 - site R4, commit 3): the alias signature walk's 2-name-root
+#   fallback (FunctionAliasHelper.inferEnumValueRefType, "assuming it IS an enum just not resolved") returned a CLOSURE
+#   PARAMETER's name as the alias element type - `piped: outers extract o [ o ->> leaves then filter l [ l -> v > 0 ] then
+#   extract l2 [ l2 -> v ] ] then flatten` (C29Piped), where the parser carries `l2 -> v` as a 2-name ref and the then-piped
+#   extract has no bare-symbol LEFT for the walk's extract-item arm to root on, so the seam rendered `MapperC<l2>`: a signature
+#   javac refuses (the seat-13 census: 12 of 12 non-compiling), SILENT. The site refuses when the root name is bound as a
+#   parameter by an enclosing inline function (the ONE predicate enclosingClosureParameterOwner); every other unresolved 2-name
+#   root keeps the fallback's bytes. The M7c block's 12 rows exactly, on both routes (target/v32-seat13-instruments/scratch/
+#   d11-c3a.status, ds13c3a-off.log / -on.log, local). The HEAL - the walk's typing of the then-piped extract's element
+#   (`MapperC<BigDecimal>`) - is v3.3's (D53 decision 2): a healed row is deleted in its healing seat.
+chaos/1.1.0/FUNCTION:chaos/s29/a1o1/functions/C29Piped.java
+chaos/1.1.0/FUNCTION:chaos/s29/a1o2/functions/C29Piped.java
+chaos/1.1.0/FUNCTION:chaos/s29/a1o3/functions/C29Piped.java
+chaos/1.1.0/FUNCTION:chaos/s29/a2alias/functions/C29Piped.java
+chaos/1.1.0/FUNCTION:chaos/s29/a2dangle/functions/C29Piped.java
+chaos/1.1.0/FUNCTION:chaos/s29/a2qual/functions/C29Piped.java
+chaos/1.1.0/FUNCTION:chaos/s29/a2wild/functions/C29Piped.java
+chaos/1.1.0/FUNCTION:chaos/s29/a3half/p2/functions/C29Piped.java
+chaos/1.1.0/FUNCTION:chaos/s29/a3hub/p2/functions/C29Piped.java
+chaos/1.1.0/FUNCTION:chaos/s29/a3third/p2/functions/C29Piped.java
+chaos/1.1.0/FUNCTION:chaos/s29/base/functions/C29Piped.java
+chaos/1.1.0/FUNCTION:chaos/s29/x13half/p2/functions/C29Piped.java
+#
+# --- R-HOIST-ARM-COERCION-DROPPED (25) ---
+#   REFUSED at HOIST_ARM_COERCION_DROPPED (v3.2 seat 13, D53 - site R10, commit 4): a conditional whose hoisted local is a META
+#   WRAPPER (`final FieldWithMetaString ifThenElseResult1;` at the ctor-setter / pathed-leaf META seat of
+#   ControlFlowHandler.hoistAsItemLocalOrNull; `final FieldWithMetaVoid ifThenElseResult0;` at `out -> vm`) with an arm whose
+#   compiled or front-end item type is a BARE value, which the item form assigned raw - `ifThenElseResult1 = a;` (C30TwoOp,
+#   `set w -> code: if a exists then a else "z"`, the M4 class) and `ifThenElseResult0 = MapperS.of(c).<Void>map("getTok",
+#   ...).get();` (C24Segments, `set out -> vm: if flag then c -> tok else d -> tok`, the M3-VOID-RENDER-LAW-NEW-SEATS class's
+#   non-compiling half) - 25 of 25 non-compiling by the seat-13 census, SILENT. The released plugin coerces the arm into the
+#   wrapper null-guarded (`a == null ? FieldWithMetaString.builder().build() : FieldWithMetaString.builder().setValue(a).build()`,
+#   a literal hoisted to a type-named local first; a Void arm the EMPTY wrapper) - the v3.3 heal under D53 decision 2. ONE
+#   predicate (HandlerHelper.refuseIfBareValueIntoMetaLocal) at the item-local hoist's arm renderer and at the FER pathed
+#   conditional SET's two value arms (LAW 69); an untyped arm reads the front-end type through the Void site's own
+#   inferredJavaType (its structural meta guard keeps a [metadata]-bound arm - the wrapper the golden assigns directly); an arm
+#   that IS the wrapper keeps its bytes. The M4 block's 12 rows and the split M3-VOID-RENDER-LAW-NEW-SEATS-SEGMENTS block's 13
+#   rows exactly, on both routes (target/v32-seat13-instruments/scratch/ds13c4g-off.log / -on.log - the offload box's chaos
+#   D11 at the commit-4 tree of 2026-09-14, copied to scratch - local). The C24Segments class's second mechanism - the MULTI meta
+#   leaf's conditional collapsing to `out = <list>.get();` - sits behind this site in text order on every carrier.
+chaos/1.1.0/FUNCTION:chaos/s30/a1o1/functions/C30TwoOp.java
+chaos/1.1.0/FUNCTION:chaos/s30/a1o2/functions/C30TwoOp.java
+chaos/1.1.0/FUNCTION:chaos/s30/a1o3/functions/C30TwoOp.java
+chaos/1.1.0/FUNCTION:chaos/s30/a2alias/functions/C30TwoOp.java
+chaos/1.1.0/FUNCTION:chaos/s30/a2dangle/functions/C30TwoOp.java
+chaos/1.1.0/FUNCTION:chaos/s30/a2qual/functions/C30TwoOp.java
+chaos/1.1.0/FUNCTION:chaos/s30/a2wild/functions/C30TwoOp.java
+chaos/1.1.0/FUNCTION:chaos/s30/a3half/p2/functions/C30TwoOp.java
+chaos/1.1.0/FUNCTION:chaos/s30/a3hub/p2/functions/C30TwoOp.java
+chaos/1.1.0/FUNCTION:chaos/s30/a3third/p2/functions/C30TwoOp.java
+chaos/1.1.0/FUNCTION:chaos/s30/base/functions/C30TwoOp.java
+chaos/1.1.0/FUNCTION:chaos/s30/x13half/p2/functions/C30TwoOp.java
+chaos/1.1.0/FUNCTION:chaos/s24/a1o1/functions/C24Segments.java
+chaos/1.1.0/FUNCTION:chaos/s24/a1o2/functions/C24Segments.java
+chaos/1.1.0/FUNCTION:chaos/s24/a1o3/functions/C24Segments.java
+chaos/1.1.0/FUNCTION:chaos/s24/a1o4/functions/C24Segments.java
+chaos/1.1.0/FUNCTION:chaos/s24/a2alias/functions/C24Segments.java
+chaos/1.1.0/FUNCTION:chaos/s24/a2dangle/functions/C24Segments.java
+chaos/1.1.0/FUNCTION:chaos/s24/a2qual/functions/C24Segments.java
+chaos/1.1.0/FUNCTION:chaos/s24/a2wild/functions/C24Segments.java
+chaos/1.1.0/FUNCTION:chaos/s24/a3half/p2/functions/C24Segments.java
+chaos/1.1.0/FUNCTION:chaos/s24/a3hub/p2/functions/C24Segments.java
+chaos/1.1.0/FUNCTION:chaos/s24/a3third/p3/functions/C24Segments.java
+chaos/1.1.0/FUNCTION:chaos/s24/base/functions/C24Segments.java
+chaos/1.1.0/FUNCTION:chaos/s24/x13half/p1/functions/C24Segments.java
+#
+# --- R-INLINE-CONDITIONAL-TERNARY (12) ---
+#   REFUSED at INLINE_CONDITIONAL_TERNARY (v3.2 seat 13, D53 - site R14, commit 4): the LAST-RESORT inline ternary of
+#   ControlFlowHandler.handle(RConditionalExpr) - `<cond>.getOrDefault(false) ? <then> : <else>` - reached by a conditional every
+#   hoist seat declined: on the chaos cell `add w -> scores: if n > 0 then [n, n + 1] else [0]` (C30MultiThenAdd), a conditional
+#   at a pathed ADD whose arms are list literals of different element types, where the ADD seat appended `.getMulti()` to the ELSE
+#   arm alone - 12 of 12 non-compiling by the seat-13 census, SILENT. The released plugin hoists every conditional to a statement
+#   (JavaIfThenElseBuilder - the `final List<BigDecimal> ifThenElseResult0` block with a per-arm coercion, the v3.3 heal under D53
+#   decision 2). ZERO vendored goldens carry the ternary shape (the seat-13 census over 206,685 golden files, 0 hits of
+#   `.getOrDefault(false) ? ` - census-ternary-goldens-s13.txt) and on the chaos cell only these 12 byte rows did (the dump grep at
+#   the commit-1 head), so the arm is refused WHOLE at the producer on the FUNCTION path (the RULE path keeps the pre-seat ternary: the optimised route rule face reaches it on vendored drr 6.34.1, its suite catch at the c4h overlay run, and no chaos rule row reaches the seat). The M9 block's 12 rows exactly, on both routes
+#   (ds13c4g-off.log / -on.log - the offload box's chaos D11 at the commit-4 tree of 2026-09-14, copied to scratch - local).
+chaos/1.1.0/FUNCTION:chaos/s30/a1o1/functions/C30MultiThenAdd.java
+chaos/1.1.0/FUNCTION:chaos/s30/a1o2/functions/C30MultiThenAdd.java
+chaos/1.1.0/FUNCTION:chaos/s30/a1o3/functions/C30MultiThenAdd.java
+chaos/1.1.0/FUNCTION:chaos/s30/a2alias/functions/C30MultiThenAdd.java
+chaos/1.1.0/FUNCTION:chaos/s30/a2dangle/functions/C30MultiThenAdd.java
+chaos/1.1.0/FUNCTION:chaos/s30/a2qual/functions/C30MultiThenAdd.java
+chaos/1.1.0/FUNCTION:chaos/s30/a2wild/functions/C30MultiThenAdd.java
+chaos/1.1.0/FUNCTION:chaos/s30/a3half/p2/functions/C30MultiThenAdd.java
+chaos/1.1.0/FUNCTION:chaos/s30/a3hub/p2/functions/C30MultiThenAdd.java
+chaos/1.1.0/FUNCTION:chaos/s30/a3third/p2/functions/C30MultiThenAdd.java
+chaos/1.1.0/FUNCTION:chaos/s30/base/functions/C30MultiThenAdd.java
+chaos/1.1.0/FUNCTION:chaos/s30/x13half/p2/functions/C30MultiThenAdd.java
+#
+# --- R-VOID-INTO-META-OUTPUT (13) ---
+#   REFUSED at VOID_INTO_META_OUTPUT (v3.2 seat 13, D53 - site R13, commit 4): the single-output SET seat's fallback
+#   (FunctionExpressionRenderer.renderOperationInner, `<out> = toBuilder(<rhs>)`) with a META-ANNOTATED output and a value whose
+#   item type is Void - `set t: c -> tok` where t is `c24tok (0..1) [metadata scheme]` and c24tok a model-declared basicType
+#   (Void in the generated Java, D47) rendered `t = toBuilder(MapperS.of(c).<Void>map("getTok", ...).get());`, which javac refuses
+#   (no toBuilder(Void)) - 13 of 13 non-compiling by the seat-13 census, SILENT (C24IntoMeta; the hold-out byte pin SetMetaVoid,
+#   DECLARED at #630, is the same shape - re-cut to the refusal at the byte bar and the compile gate, LAW 73). The released
+#   plugin renders the EMPTY wrapper (`toBuilder(FieldWithMetaVoid.builder().build())`, upstream's Void-into-meta coercion - the
+#   v3.3 heal, D53 decision 2). The site refuses by TYPE (the value's item type from the #630 Void render law's stamp, or the
+#   front-end type when the stamp is absent); a non-Void value keeps its toBuilder wrap. The M3-DECLARED-VOID-META-OUTPUT block's
+#   13 rows exactly, on both routes (ds13c4g-off.log / -on.log - the offload box's chaos D11 at the commit-4 tree of 2026-09-14, copied to scratch - local).
+chaos/1.1.0/FUNCTION:chaos/s24/a1o1/functions/C24IntoMeta.java
+chaos/1.1.0/FUNCTION:chaos/s24/a1o2/functions/C24IntoMeta.java
+chaos/1.1.0/FUNCTION:chaos/s24/a1o3/functions/C24IntoMeta.java
+chaos/1.1.0/FUNCTION:chaos/s24/a1o4/functions/C24IntoMeta.java
+chaos/1.1.0/FUNCTION:chaos/s24/a2alias/functions/C24IntoMeta.java
+chaos/1.1.0/FUNCTION:chaos/s24/a2dangle/functions/C24IntoMeta.java
+chaos/1.1.0/FUNCTION:chaos/s24/a2qual/functions/C24IntoMeta.java
+chaos/1.1.0/FUNCTION:chaos/s24/a2wild/functions/C24IntoMeta.java
+chaos/1.1.0/FUNCTION:chaos/s24/a3half/p1/functions/C24IntoMeta.java
+chaos/1.1.0/FUNCTION:chaos/s24/a3hub/p2/functions/C24IntoMeta.java
+chaos/1.1.0/FUNCTION:chaos/s24/a3third/p2/functions/C24IntoMeta.java
+chaos/1.1.0/FUNCTION:chaos/s24/base/functions/C24IntoMeta.java
+chaos/1.1.0/FUNCTION:chaos/s24/x13half/p2/functions/C24IntoMeta.java
+#
+# --- R-WITH-META-UNTYPED-STUB (26) ---
+#   REFUSED at WITH_META_UNTYPED_STUB (v3.2 seat 13, D53 - site R5, commit 4): the legacy M7b-1 with-meta STUB of
+#   ConstructionHandler.handle(RWithMetaExpr) - `<arg>.toBuilder().setMeta(MetaFields.builder()...).build()`, reached when the
+#   three typed arms (the annotated-output wrapper, the POJO's own MetaFields, the expression-derived wrapper) decline; documented
+#   non-compiling since PR #202 ("zero goldens carry the stub form") and SILENT. On the chaos cell every carrier is a with-meta
+#   construction over `nothing` (`empty with-meta { reference: href }` - C24WithMetaExists as an existence operand, C24WithMetaPlain
+#   into a plain output): the fork rendered `null.toBuilder().setMeta(...)`, 26 of 26 non-compiling by the seat-13 census (the 13
+#   C24WithMetaPlain rows sit in the cell's upstream register too - the released plugin mints ReferenceWithMetaVoid beside them and
+#   its own render does not compile either, the seat-9 parked group). The site refuses the stub whole; the typed arms keep their
+#   bytes. The M3-PARKED block's 26 byte rows exactly, on both routes (target/v32-seat13-instruments/scratch/ds13c4g-off.log / -on.log,
+#   the offload run of 2026-09-14, local); the block's 27th row - the silent ReferenceWithMetaVoid METAFIELD missing output the plugin
+#   mints for the with-meta over nothing - stays a declared missing-output row under its own comment below. The HEAL - the Void
+#   with-meta shape's typed render - is v3.3's (D53 decision 2).
+chaos/1.1.0/FUNCTION:chaos/s24/a1o1/functions/C24WithMetaExists.java
+chaos/1.1.0/FUNCTION:chaos/s24/a1o1/functions/C24WithMetaPlain.java
+chaos/1.1.0/FUNCTION:chaos/s24/a1o2/functions/C24WithMetaExists.java
+chaos/1.1.0/FUNCTION:chaos/s24/a1o2/functions/C24WithMetaPlain.java
+chaos/1.1.0/FUNCTION:chaos/s24/a1o3/functions/C24WithMetaExists.java
+chaos/1.1.0/FUNCTION:chaos/s24/a1o3/functions/C24WithMetaPlain.java
+chaos/1.1.0/FUNCTION:chaos/s24/a1o4/functions/C24WithMetaExists.java
+chaos/1.1.0/FUNCTION:chaos/s24/a1o4/functions/C24WithMetaPlain.java
+chaos/1.1.0/FUNCTION:chaos/s24/a2alias/functions/C24WithMetaExists.java
+chaos/1.1.0/FUNCTION:chaos/s24/a2alias/functions/C24WithMetaPlain.java
+chaos/1.1.0/FUNCTION:chaos/s24/a2dangle/functions/C24WithMetaExists.java
+chaos/1.1.0/FUNCTION:chaos/s24/a2dangle/functions/C24WithMetaPlain.java
+chaos/1.1.0/FUNCTION:chaos/s24/a2qual/functions/C24WithMetaExists.java
+chaos/1.1.0/FUNCTION:chaos/s24/a2qual/functions/C24WithMetaPlain.java
+chaos/1.1.0/FUNCTION:chaos/s24/a2wild/functions/C24WithMetaExists.java
+chaos/1.1.0/FUNCTION:chaos/s24/a2wild/functions/C24WithMetaPlain.java
+chaos/1.1.0/FUNCTION:chaos/s24/a3half/p1/functions/C24WithMetaExists.java
+chaos/1.1.0/FUNCTION:chaos/s24/a3half/p1/functions/C24WithMetaPlain.java
+chaos/1.1.0/FUNCTION:chaos/s24/a3hub/p2/functions/C24WithMetaExists.java
+chaos/1.1.0/FUNCTION:chaos/s24/a3hub/p2/functions/C24WithMetaPlain.java
+chaos/1.1.0/FUNCTION:chaos/s24/a3third/p2/functions/C24WithMetaExists.java
+chaos/1.1.0/FUNCTION:chaos/s24/a3third/p2/functions/C24WithMetaPlain.java
+chaos/1.1.0/FUNCTION:chaos/s24/base/functions/C24WithMetaExists.java
+chaos/1.1.0/FUNCTION:chaos/s24/base/functions/C24WithMetaPlain.java
+chaos/1.1.0/FUNCTION:chaos/s24/x13half/p2/functions/C24WithMetaExists.java
+chaos/1.1.0/FUNCTION:chaos/s24/x13half/p2/functions/C24WithMetaPlain.java

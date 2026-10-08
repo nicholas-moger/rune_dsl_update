@@ -1,0 +1,130 @@
+#!/usr/bin/env bash
+# Smoke test — argument validation + integration test for the
+# destructive rm -rf + mv restore workflow.
+set -euo pipefail
+
+# Resolve REPO_ROOT regardless of cwd (Copilot R14 F13 — convention
+# alignment with scripts/ci/*.sh.test). Without this, the test fails
+# when invoked from any directory other than the repository root.
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+cd "$REPO_ROOT"
+
+SCRIPT="scripts/legacy-vs-fork/restore-goldens.sh"
+[[ -f "$SCRIPT" ]] || { echo "FAIL: $SCRIPT missing"; exit 1; }
+
+assert_reject() {
+    local arg="$1" label="$2"
+    if "$SCRIPT" "$arg" >/dev/null 2>&1; then
+        echo "FAIL: $SCRIPT should reject $label input: '$arg'"
+        exit 1
+    fi
+}
+
+# Path traversal — critical because restore uses `rm -rf` on a cell-derived
+# path, and any escape would delete outside the intended cell directory.
+assert_reject ".."          "path traversal '..'"
+assert_reject "cdm/../etc"  "embedded path traversal"
+assert_reject "/etc"        "absolute path"
+
+# Regex bypass — pre-fix, `.*` could match the first cell row in cells.txt
+# and trigger a destructive restore on an unintended cell.
+assert_reject ".*"          "regex bypass '.*'"
+assert_reject "cdm/.*"      "regex bypass 'cdm/.*'"
+
+# Unknown cell — must fail before any filesystem touch.
+assert_reject "fake/cell-99" "unknown cell"
+
+# Multi-arg invocation — silently dropping extras for a destructive command
+# could lose user intent. Reject with exit 2.
+set +e
+"$SCRIPT" cdm/cdm-6.15.0 extra-arg >/dev/null 2>&1
+rc=$?
+set -e
+if [ "$rc" -ne 2 ]; then
+    echo "FAIL: multi-arg rejection should exit 2, got $rc"
+    exit 1
+fi
+
+# Integration test (Copilot R14 F7) — exercise the destructive restore
+# workflow (rm -rf goldens, mv snapshot → goldens, rm marker) against
+# a synthetic tmp tree. Verifies (1) snapshot moved to goldens position,
+# (2) snapshot dir no longer exists post-restore, (3) any stale marker
+# is cleared, (4) idempotent no-snapshot path is silent skip.
+TMP_HARNESS="$(mktemp -d -t restore-it.XXXXXX)"
+cleanup_integration() {
+    rm -rf "$TMP_HARNESS"
+}
+trap cleanup_integration EXIT
+
+CELL="testcorpus/synth-1.0.0"
+SYNTH_CELL_DIR="$TMP_HARNESS/corpus/$CELL"
+# Set up the "post-snapshot, mid-regen" state:
+# - goldens java/ tree present (the regenerated content)
+# - snapshot dir present (the original goldens preserved by snapshot-goldens)
+# - marker file present (regen wrote it)
+GOLDENS="$SYNTH_CELL_DIR/rosetta-source/src/generated"
+SNAP="${GOLDENS}-as-cloned"
+mkdir -p "$GOLDENS/java/com/example"
+mkdir -p "$SNAP/java/com/example"
+echo "regenerated" > "$GOLDENS/java/com/example/Stub.java"
+echo "original" > "$SNAP/java/com/example/Stub.java"
+echo "synth-pom" > "$SYNTH_CELL_DIR/pom.xml"
+
+SYNTH_CELLS="$TMP_HARNESS/cells.txt"
+printf '%s|1.0.0\n' "$CELL" > "$SYNTH_CELLS"
+
+SYNTH_LOG="$TMP_HARNESS/logs"
+mkdir -p "$SYNTH_LOG"
+MARKER="$SYNTH_LOG/regen-$(echo "$CELL" | tr '/' '-').done"
+echo "stale-marker" > "$MARKER"
+
+# Run restore against the synth tree
+TEST_CORPUS="$TMP_HARNESS/corpus" \
+CELLS_FILE="$SYNTH_CELLS" \
+LOG_DIR="$SYNTH_LOG" \
+    "$SCRIPT" "$CELL" >/dev/null 2>&1
+
+# Assertion 1: snapshot dir no longer exists (it was moved into place)
+[ ! -d "$SNAP" ] || { echo "FAIL: snapshot dir still exists post-restore at $SNAP"; exit 1; }
+
+# Assertion 2: goldens dir contains the ORIGINAL content (from snapshot),
+#              not the REGENERATED content. Proves mv happened.
+ACTUAL="$(cat "$GOLDENS/java/com/example/Stub.java")"
+[ "$ACTUAL" = "original" ] || { echo "FAIL: goldens should contain 'original' after restore, got '$ACTUAL'"; exit 1; }
+
+# Assertion 3: marker cleared on successful restore
+[ ! -f "$MARKER" ] || { echo "FAIL: stale marker not cleared post-restore"; exit 1; }
+
+# Assertion 4: idempotent rerun (no snapshot to restore from) is silent skip
+TEST_CORPUS="$TMP_HARNESS/corpus" \
+CELLS_FILE="$SYNTH_CELLS" \
+LOG_DIR="$SYNTH_LOG" \
+    "$SCRIPT" "$CELL" >/dev/null 2>&1
+# Goldens unchanged (still contains "original" from the prior restore)
+ACTUAL2="$(cat "$GOLDENS/java/com/example/Stub.java")"
+[ "$ACTUAL2" = "original" ] || { echo "FAIL: idempotent rerun corrupted goldens, got '$ACTUAL2'"; exit 1; }
+
+# ISO20022 sub-case (Copilot R15 F2) — exercise path-resolution branch.
+ISO_CELL="iso20022/synth-1.0.0"
+ISO_CELL_DIR="$TMP_HARNESS/corpus/$ISO_CELL"
+ISO_GOLDENS="$ISO_CELL_DIR/rosetta-source/target/classes/generated"
+ISO_SNAP="${ISO_GOLDENS}-as-cloned"
+mkdir -p "$ISO_GOLDENS/java/com/example/iso"
+mkdir -p "$ISO_SNAP/java/com/example/iso"
+echo "iso-regenerated" > "$ISO_GOLDENS/java/com/example/iso/Stub.java"
+echo "iso-original" > "$ISO_SNAP/java/com/example/iso/Stub.java"
+echo "iso-pom" > "$ISO_CELL_DIR/pom.xml"
+printf '%s|1.0.0\n%s|1.0.0\n' "$CELL" "$ISO_CELL" > "$SYNTH_CELLS"
+ISO_MARKER="$SYNTH_LOG/regen-$(echo "$ISO_CELL" | tr '/' '-').done"
+echo "iso-stale-marker" > "$ISO_MARKER"
+TEST_CORPUS="$TMP_HARNESS/corpus" \
+CELLS_FILE="$SYNTH_CELLS" \
+LOG_DIR="$SYNTH_LOG" \
+    "$SCRIPT" "$ISO_CELL" >/dev/null 2>&1
+[ ! -d "$ISO_SNAP" ] || { echo "FAIL: iso20022 snapshot dir still exists post-restore"; exit 1; }
+ISO_ACTUAL="$(cat "$ISO_GOLDENS/java/com/example/iso/Stub.java")"
+[ "$ISO_ACTUAL" = "iso-original" ] || \
+    { echo "FAIL: iso20022 goldens should contain 'iso-original', got '$ISO_ACTUAL'"; exit 1; }
+[ ! -f "$ISO_MARKER" ] || { echo "FAIL: iso20022 marker not cleared post-restore"; exit 1; }
+
+echo "PASS: restore-goldens validation + integration (+ iso20022)"

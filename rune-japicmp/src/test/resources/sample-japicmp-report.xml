@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+  Synthetic japicmp report fixture for JapicmpReportTest. Mirrors the
+  structure emitted by japicmp-maven-plugin 0.23.1 (schema captured
+  2026-04-24 from a local run); contains three <class> elements, two
+  with binaryCompatible="false" and one with binaryCompatible="true".
+  Keep in sync with the plugin's XML schema if the plugin version
+  bumps; tracked by rune-japicmp/pom.xml's <version>0.23.1</version>.
+-->
+<japicmp xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         accessModifier="PUBLIC"
+         creationTimestamp="2026-04-24T00:00:00.000+0000"
+         ignoreMissingClasses="true"
+         newJar="fixture-new.jar"
+         newVersion="0.0.1-SNAPSHOT"
+         oldJar="fixture-old.jar"
+         oldVersion="9.58.1"
+         onlyBinaryIncompatibleModifications="false"
+         onlyModifications="true"
+         semanticVersioning="1.0.0"
+         title="Fixture — JapicmpReportTest harness test">
+    <classes>
+        <class binaryCompatible="false" changeStatus="REMOVED"
+               fullyQualifiedName="com.example.Removed"
+               javaObjectSerializationCompatible="NOT_SERIALIZABLE"
+               javaObjectSerializationCompatibleAsString="not serializable"
+               sourceCompatible="false">
+            <annotations/>
+            <compatibilityChanges>
+                <compatibilityChange binaryCompatible="false" sourceCompatible="false" type="CLASS_REMOVED"/>
+            </compatibilityChanges>
+            <constructors/>
+            <interfaces/>
+            <methods/>
+            <modifiers/>
+            <superclass/>
+        </class>
+        <class binaryCompatible="false" changeStatus="MODIFIED"
+               fullyQualifiedName="com.example.Modified"
+               javaObjectSerializationCompatible="SERIALIZABLE_INCOMPATIBLE"
+               javaObjectSerializationCompatibleAsString="serializable but incompatible"
+               sourceCompatible="false">
+            <annotations/>
+            <compatibilityChanges/>
+            <constructors/>
+            <interfaces/>
+            <methods/>
+            <modifiers/>
+            <superclass/>
+        </class>
+        <class binaryCompatible="true" changeStatus="NEW"
+               fullyQualifiedName="com.example.Added"
+               javaObjectSerializationCompatible="NOT_SERIALIZABLE"
+               javaObjectSerializationCompatibleAsString="not serializable"
+               sourceCompatible="true">
+            <annotations/>
+            <compatibilityChanges/>
+            <constructors/>
+            <interfaces/>
+            <methods/>
+            <modifiers/>
+            <superclass/>
+        </class>
+    </classes>
+</japicmp>

@@ -1,0 +1,270 @@
+# UPSTREAM-DEFECT REGISTER: goldens the legacy 9.83.0 generator emitted that
+# DO NOT COMPILE. chaos-1.1.0 (v3.2 seat 10, PR #631 - D49): javac over all the
+# cell's goldens with the fork-runtime classpath, TWO passes (javac stops at a
+# parse error before attribution: pass 1 names the syntax-broken files, pass 2
+# compiles the rest) - target/v32-seat10-instruments/javac-probe-s10.sh, the
+# union of both passes; every row below is CLASSIFIED into a named upstream
+# defect class by write-register-s10.py (an unclassifiable row refuses the
+# write). 116 files in 9 classes (chaos-1.0.0: 24 files, ONE class - s20)
+# + 48 CASCADE rows (THE REMOVAL CLOSURE section below - dependents of the
+# registered files, NOT defects of their own) = 164 rows, ALL subtracted
+# identically by the consumers (round 1, cq NIT-4).
+#
+# BY CLASS (upstream, not fork - each a fork REFUSAL or a declared pin already):
+#   S20-LOL-MAPITEMTOLIST                  24  (s20 24)
+#       the nested list-of-lists harvest (the 1.0.0 register whole):
+#       mapItemToList(t -> t.mapC(...).mapItemToList(...)) where the inner
+#       lambda returns MapperListOfLists but mapItemToList needs a
+#       MapperC-returning lambda - javac 'cannot infer type-variable(s) F';
+#       the #415 ResultValueExists lineage; the draft upstream issue below is
+#       the 1.0.0 one, unchanged
+#   S31-ENUM-ANNOTATION-RAW-ESCAPE         22  (s31 22)
+#       an enum value's displayName holding a quote / backslash spliced RAW
+#       into @RosettaEnumValue (D46, PR #630 - the hold-out compile pin
+#       EscapeEnum): the annotation literal is unterminated, javac stops at
+#       the parse error
+#   S31-ENUM-ANNOTATION-CASCADE            13  (s31 13)
+#       the CASCADE of the raw-escape class: a sibling class referencing the
+#       parse-broken enum fails attribution once the enum is out of the
+#       compile (named separately so the cascade is not mistaken for a defect
+#       of its own)
+#   OUTPUT-NAMED-O-INTODEEP                14  (s32 14)
+#       a function whose model-typed output is named `o` (PR #630's IntoDeep
+#       pin): the plugin's fixed `.map(o -> o.prune())` is rejected -
+#       'variable o is already defined'
+#   A8-PATH-CLOBBER                         6  (s04 3, s32 3)
+#       the A8 axis's writer-seam finding (D49; the seat-3
+#       FUNCTION_PATH_COLLISION the fork refuses): a rival TYPE in
+#       <ns>.functions named like the seed's function - the released plugin
+#       writes the type and the function to ONE Java path silently and the
+#       FUNCTION wins, so the type's meta / validator / only-exists classes
+#       reference a POJO that is gone
+#   S24-WITHMETA-OVER-NOTHING-SETVALUE     13  (s24 13)
+#       a with-meta construction over a `nothing` value into a PLAIN output
+#       (PR #630's parked oracle-r2 group with-meta-plain-output): upstream
+#       mints ReferenceWithMetaVoid and its own setValue(...) does not
+#       compile there
+#   ATTRIBUTE-NAMED-O-CLASH                11  (s27 11)
+#       a data type with an attribute named `o` (PR #624's Clash.java pin):
+#       the released plugin's POJO for it does not compile
+#   S27-BOILERPLATE-SELF-SHADOW            11  (s27 11)
+#       alias Validation + condition Result = a data-rule class named
+#       ValidationResult, the boilerplate type its own body returns (seat 3's
+#       alias-conditions-boilerplate class; the fork refuses it at
+#       BOILERPLATE_NAME_COLLISION): the released plugin's qualification law
+#       is INCOMPLETE - the failure branch writes
+#       com.rosetta.model.lib.validation.ValidationResult fully qualified,
+#       the success branch's ValidationResult.ValidationType stays bare and
+#       resolves to the class itself - javac 'cannot find symbol: variable
+#       ValidationType'. The sibling probes Lists / ArrayList / Inject /
+#       C27Holder compile: only the self-referencing boilerplate name breaks
+#       (NEW at chaos-1.1.0, no 1.0.0 carrier)
+#   S99-JAVA-LANG-SHADOW                    2  (s99 2)
+#       the java.lang shadow (seat 10, s99 base only): alias Int + condition
+#       eger = a data-rule class named Integer that shadows java.lang.Integer
+#       for every sibling class of its package and for the holder's
+#       type-format validator importing it (the #624 round-3 a18 class the
+#       fork refuses at BOILERPLATE_NAME_COLLISION)
+#
+# BY FAMILY: s04 3, s20 24, s24 13, s27 22, s31 35, s32 17, s99 2
+#
+# THE DRAFT UPSTREAM ISSUE for the s20 class (part of the waiver, per the
+# ReferenceWithMetaVoid precedent - file against finos/rune-dsl when the fork
+# goes public):
+#   Title: 9.83.0 generator emits non-compiling Java for nested list-of-lists
+#          mapItemToList composition
+#   Body:  Given a function whose body maps each item of a list through a
+#          nested two-level list navigation, the 9.83.0 rosetta-maven-plugin
+#          emits mapItemToList(t -> t.<X>mapC(...).mapItemToList(...)) where
+#          the inner lambda's value is a MapperListOfLists<F> but
+#          mapItemToList requires a Function<MapperS<T>, MapperC<F>> -
+#          javac: "incompatible types: cannot infer type-variable(s) F".
+#          Reproduction: the chaos seed family s20 (C20Harvest/C20Spread,
+#          24 files, 36 errors); every sibling file from the same generator
+#          run compiles clean, so the defect is specific to this composition
+#          shape. Measured twice, 2026-09-02; unmoved at chaos-1.1.0.
+# The other classes are each PINNED already (the hold-out compile gate: EscapeEnum,
+# IntoDeep, Clash.java; the parked oracle-r2 groups; the fork refusal sites
+# FUNCTION_PATH_COLLISION and BOILERPLATE_NAME_COLLISION) - the register names
+# where the cell's goldens carry them.
+#
+# CONSUMERS: CorpusClasses (rune-benchmarks) subtracts these files from the
+# cell's compile (plain AND overlay sides identically - the pair gate's
+# executable population legitimately excludes classes NEITHER side can load),
+# recording the count in the compile marker. The register is UPSTREAM-owned:
+# rows leave only if upstream's generator is fixed and the goldens re-pinned -
+# never because the fork changed.
+#
+chaos/s04/a8pkg/functions/meta/C4AddMeta.java
+chaos/s04/a8pkg/functions/validation/C4AddValidator.java
+chaos/s04/a8pkg/functions/validation/exists/C4AddOnlyExistsValidator.java
+chaos/s20/a1o1/functions/C20Harvest.java
+chaos/s20/a1o1/functions/C20Spread.java
+chaos/s20/a1o2/functions/C20Harvest.java
+chaos/s20/a1o2/functions/C20Spread.java
+chaos/s20/a1o3/functions/C20Harvest.java
+chaos/s20/a1o3/functions/C20Spread.java
+chaos/s20/a1o4/functions/C20Harvest.java
+chaos/s20/a1o4/functions/C20Spread.java
+chaos/s20/a2alias/functions/C20Harvest.java
+chaos/s20/a2alias/functions/C20Spread.java
+chaos/s20/a2dangle/functions/C20Harvest.java
+chaos/s20/a2dangle/functions/C20Spread.java
+chaos/s20/a2qual/functions/C20Harvest.java
+chaos/s20/a2qual/functions/C20Spread.java
+chaos/s20/a2wild/functions/C20Harvest.java
+chaos/s20/a2wild/functions/C20Spread.java
+chaos/s20/a3half/p1/functions/C20Harvest.java
+chaos/s20/a3half/p2/functions/C20Spread.java
+chaos/s20/a3hub/p2/functions/C20Harvest.java
+chaos/s20/a3hub/p2/functions/C20Spread.java
+chaos/s20/a3third/p2/functions/C20Harvest.java
+chaos/s20/a3third/p3/functions/C20Spread.java
+chaos/s20/base/functions/C20Harvest.java
+chaos/s20/base/functions/C20Spread.java
+chaos/s24/a1o1/functions/C24WithMetaPlain.java
+chaos/s24/a1o2/functions/C24WithMetaPlain.java
+chaos/s24/a1o3/functions/C24WithMetaPlain.java
+chaos/s24/a1o4/functions/C24WithMetaPlain.java
+chaos/s24/a2alias/functions/C24WithMetaPlain.java
+chaos/s24/a2dangle/functions/C24WithMetaPlain.java
+chaos/s24/a2qual/functions/C24WithMetaPlain.java
+chaos/s24/a2wild/functions/C24WithMetaPlain.java
+chaos/s24/a3half/p1/functions/C24WithMetaPlain.java
+chaos/s24/a3hub/p2/functions/C24WithMetaPlain.java
+chaos/s24/a3third/p2/functions/C24WithMetaPlain.java
+chaos/s24/base/functions/C24WithMetaPlain.java
+chaos/s24/x13half/p2/functions/C24WithMetaPlain.java
+chaos/s27/a1o1/C27Holder.java
+chaos/s27/a1o1/validation/datarule/ValidationResult.java
+chaos/s27/a1o2/C27Holder.java
+chaos/s27/a1o2/validation/datarule/ValidationResult.java
+chaos/s27/a1o3/C27Holder.java
+chaos/s27/a1o3/validation/datarule/ValidationResult.java
+chaos/s27/a2alias/C27Holder.java
+chaos/s27/a2alias/validation/datarule/ValidationResult.java
+chaos/s27/a2dangle/C27Holder.java
+chaos/s27/a2dangle/validation/datarule/ValidationResult.java
+chaos/s27/a2qual/C27Holder.java
+chaos/s27/a2qual/validation/datarule/ValidationResult.java
+chaos/s27/a2wild/C27Holder.java
+chaos/s27/a2wild/validation/datarule/ValidationResult.java
+chaos/s27/a3half/p2/C27Holder.java
+chaos/s27/a3half/p2/validation/datarule/ValidationResult.java
+chaos/s27/a3hub/p2/C27Holder.java
+chaos/s27/a3hub/p2/validation/datarule/ValidationResult.java
+chaos/s27/a3third/p2/C27Holder.java
+chaos/s27/a3third/p2/validation/datarule/ValidationResult.java
+chaos/s27/base/C27Holder.java
+chaos/s27/base/validation/datarule/ValidationResult.java
+chaos/s31/a1o1/C31EscEnum.java
+chaos/s31/a1o1/functions/C31Which.java
+chaos/s31/a1o2/C31EscEnum.java
+chaos/s31/a1o2/functions/C31Which.java
+chaos/s31/a1o3/C31EscEnum.java
+chaos/s31/a1o3/functions/C31Which.java
+chaos/s31/a2alias/C31EscEnum.java
+chaos/s31/a2alias/functions/C31Which.java
+chaos/s31/a2dangle/C31EscEnum.java
+chaos/s31/a2dangle/functions/C31Which.java
+chaos/s31/a2qual/C31EscEnum.java
+chaos/s31/a2qual/functions/C31Which.java
+chaos/s31/a2wild/C31EscEnum.java
+chaos/s31/a2wild/functions/C31Which.java
+chaos/s31/a3half/p1/C31EscEnum.java
+chaos/s31/a3half/p2/functions/C31Which.java
+chaos/s31/a3hub/p2/C31EscEnum.java
+chaos/s31/a3hub/p2/functions/C31Which.java
+chaos/s31/a3third/p1/C31EscEnum.java
+chaos/s31/a3third/p3/functions/C31Which.java
+chaos/s31/a4none/C31EscEnum.java
+chaos/s31/a4snap/C31EscEnum.java
+chaos/s31/a5crlf/C31EscEnum.java
+chaos/s31/a5mixed/C31EscEnum.java
+chaos/s31/a5uni/C31EscEnum.java
+chaos/s31/a6enum/C31EscEnum.java
+chaos/s31/a6enum/functions/C31Which.java
+chaos/s31/a9comment/C31EscEnum.java
+chaos/s31/a9tabs/C31EscEnum.java
+chaos/s31/base/C31EscEnum.java
+chaos/s31/base/functions/C31Which.java
+chaos/s31/x16enum/p1/C31EscEnum.java
+chaos/s31/x26enum/C31EscEnum.java
+chaos/s31/x26enum/functions/C31Which.java
+chaos/s31/x36enum/p1/C31EscEnum.java
+chaos/s32/a1o1/functions/C32Out.java
+chaos/s32/a2alias/functions/C32Out.java
+chaos/s32/a2dangle/functions/C32Out.java
+chaos/s32/a2qual/functions/C32Out.java
+chaos/s32/a2wild/functions/C32Out.java
+chaos/s32/a3half/p2/functions/C32Out.java
+chaos/s32/a3hub/p2/functions/C32Out.java
+chaos/s32/a3third/p3/functions/C32Out.java
+chaos/s32/a6fn/functions/C32Out.java
+chaos/s32/a8pkg/functions/C32Out.java
+chaos/s32/a8pkg/functions/meta/C32TwinMeta.java
+chaos/s32/a8pkg/functions/validation/C32TwinValidator.java
+chaos/s32/a8pkg/functions/validation/exists/C32TwinOnlyExistsValidator.java
+chaos/s32/base/functions/C32Out.java
+chaos/s32/x16fn/p2/functions/C32Out.java
+chaos/s32/x26fn/functions/C32Out.java
+chaos/s32/x36fn/p2/functions/C32Out.java
+chaos/s99/base/validation/C99HolderTypeFormatValidator.java
+chaos/s99/base/validation/datarule/C99NatNonNeg.java
+#
+# THE REMOVAL CLOSURE - CASCADE-OF-REGISTERED (48 rows; NOT upstream defects of their own): the pair gate
+# (CorpusClasses) compiles the cell MINUS this register, so a registered POJO / enum / data rule takes its
+# dependents out of the executable population with it (javac: "cannot find symbol" for the removed class -
+# in the whole-population census above the broken file's SYMBOL still exists for them). Computed by the
+# SAME subtraction to a fixed point (register-closure-s10.py: rounds 1-3 broke 45 + 1 + 2, round 4 clean at
+# 12,005 sources), never by hand: s27's C27HolderMeta and its three validators over 11 variants (the
+# dependents of the `o`-attribute POJO C27Holder), s99's C99Holder with its meta and two validators (the
+# dependents of the java.lang-shadow validator). A cascade row leaves when its registered dependency does.
+chaos/s27/a1o1/meta/C27HolderMeta.java
+chaos/s27/a1o1/validation/C27HolderTypeFormatValidator.java
+chaos/s27/a1o1/validation/C27HolderValidator.java
+chaos/s27/a1o1/validation/exists/C27HolderOnlyExistsValidator.java
+chaos/s27/a1o2/meta/C27HolderMeta.java
+chaos/s27/a1o2/validation/C27HolderTypeFormatValidator.java
+chaos/s27/a1o2/validation/C27HolderValidator.java
+chaos/s27/a1o2/validation/exists/C27HolderOnlyExistsValidator.java
+chaos/s27/a1o3/meta/C27HolderMeta.java
+chaos/s27/a1o3/validation/C27HolderTypeFormatValidator.java
+chaos/s27/a1o3/validation/C27HolderValidator.java
+chaos/s27/a1o3/validation/exists/C27HolderOnlyExistsValidator.java
+chaos/s27/a2alias/meta/C27HolderMeta.java
+chaos/s27/a2alias/validation/C27HolderTypeFormatValidator.java
+chaos/s27/a2alias/validation/C27HolderValidator.java
+chaos/s27/a2alias/validation/exists/C27HolderOnlyExistsValidator.java
+chaos/s27/a2dangle/meta/C27HolderMeta.java
+chaos/s27/a2dangle/validation/C27HolderTypeFormatValidator.java
+chaos/s27/a2dangle/validation/C27HolderValidator.java
+chaos/s27/a2dangle/validation/exists/C27HolderOnlyExistsValidator.java
+chaos/s27/a2qual/meta/C27HolderMeta.java
+chaos/s27/a2qual/validation/C27HolderTypeFormatValidator.java
+chaos/s27/a2qual/validation/C27HolderValidator.java
+chaos/s27/a2qual/validation/exists/C27HolderOnlyExistsValidator.java
+chaos/s27/a2wild/meta/C27HolderMeta.java
+chaos/s27/a2wild/validation/C27HolderTypeFormatValidator.java
+chaos/s27/a2wild/validation/C27HolderValidator.java
+chaos/s27/a2wild/validation/exists/C27HolderOnlyExistsValidator.java
+chaos/s27/a3half/p2/meta/C27HolderMeta.java
+chaos/s27/a3half/p2/validation/C27HolderTypeFormatValidator.java
+chaos/s27/a3half/p2/validation/C27HolderValidator.java
+chaos/s27/a3half/p2/validation/exists/C27HolderOnlyExistsValidator.java
+chaos/s27/a3hub/p2/meta/C27HolderMeta.java
+chaos/s27/a3hub/p2/validation/C27HolderTypeFormatValidator.java
+chaos/s27/a3hub/p2/validation/C27HolderValidator.java
+chaos/s27/a3hub/p2/validation/exists/C27HolderOnlyExistsValidator.java
+chaos/s27/a3third/p2/meta/C27HolderMeta.java
+chaos/s27/a3third/p2/validation/C27HolderTypeFormatValidator.java
+chaos/s27/a3third/p2/validation/C27HolderValidator.java
+chaos/s27/a3third/p2/validation/exists/C27HolderOnlyExistsValidator.java
+chaos/s27/base/meta/C27HolderMeta.java
+chaos/s27/base/validation/C27HolderTypeFormatValidator.java
+chaos/s27/base/validation/C27HolderValidator.java
+chaos/s27/base/validation/exists/C27HolderOnlyExistsValidator.java
+chaos/s99/base/meta/C99HolderMeta.java
+chaos/s99/base/C99Holder.java
+chaos/s99/base/validation/C99HolderValidator.java
+chaos/s99/base/validation/exists/C99HolderOnlyExistsValidator.java

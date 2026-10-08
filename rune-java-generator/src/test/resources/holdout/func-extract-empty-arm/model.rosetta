@@ -1,0 +1,10 @@
+namespace test.femptyarm031
+
+func Foo:
+	output:
+		result int (0..1)
+	set result:
+		42 extract
+		    if item > 0
+		    then empty
+		    else item

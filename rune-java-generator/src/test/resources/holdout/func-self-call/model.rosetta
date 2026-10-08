@@ -1,0 +1,6 @@
+namespace test.fsingle054
+
+func Rec:
+	output: result int (1..1)
+	alias test: Rec()
+	set result: Rec()

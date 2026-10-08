@@ -1,0 +1,7 @@
+namespace test.regulatory
+
+body Authority ESMA
+corpus Regulation ESMA "MiFIR" MiFIR_RTS <"Markets in Financial Instruments">
+segment article
+segment section
+segment field

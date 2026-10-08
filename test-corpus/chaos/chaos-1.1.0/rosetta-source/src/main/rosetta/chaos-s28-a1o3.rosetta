@@ -1,0 +1,89 @@
+namespace chaos.s28.a1o3
+version "1.0.0"
+isEvent root C28Event;
+type C28Extra: <"Helper - relocated by the import axis.">
+    memo string (1..1)
+func C28VenueOf: <"The callee returning a scheme-carrying value.">
+    inputs:
+        t C28Trade (1..1)
+    output:
+        v string (0..1)
+            [metadata scheme]
+    set v: t -> venue
+eligibility rule C28Eligible from C28Trade: <"When-gate.">
+    utid exists
+reporting rule C28Utid from C28Trade: <"Reported field.">
+    extract utid
+        as "UTI"
+reporting rule C28Av from C28Trade: <"F15' leg (d): the implicit-input attribute typed by a choice, navigated by its BARE option to the option's attribute.">
+    extract which -> C28OptA -> av
+        as "Option A Value"
+reporting rule C28Venue from C28Trade: <"A rule extracting a function call whose result is META-annotated.">
+    extract C28VenueOf(item)
+        as "Venue"
+type C28Report: <"Report output type.">
+    utiField string (1..1)
+        [ruleReference C28Utid]
+    avField string (0..1)
+        [ruleReference C28Av]
+    venueField string (0..1)
+        [ruleReference C28Venue]
+rule source C28RS
+{
+}
+report C28AUTH C28Reg in T+1
+    from C28Trade
+    when C28Eligible
+    with type C28Report
+    with source C28RS
+type C28ChoiceReport: <"The other option of the choice named as a report type.">
+    utiField string (1..1)
+        [ruleReference C28Utid]
+choice C28ReportChoice: <"A report `with type` naming a CHOICE - the released plugin resolves it (Choice extends Data), the fork's RDataType gate refuses at TYPE_NOT_FOUND (seat 4's banked report-withtype-choice).">
+    C28ChoiceReport
+    C28Report
+body Authority C28ALT <"A second authority for the second report.">
+report C28ALT C28Reg in T+1
+    from C28Trade
+    when C28Eligible
+    with type C28ReportChoice
+
+type C28Event: <"The qualifiable EVENT root - the A7 order-of-load race runs on the Event kind so the s22 Product race stays unmoved.">
+    kind string (0..1)
+    size number (0..1)
+    extra C28Extra (0..1)
+func Qualify_C28Trade: <"Event qualification 1.">
+    [qualification BusinessEvent]
+    inputs:
+        event C28Event (1..1)
+    output:
+        is_event boolean (1..1)
+    set is_event:
+        event -> kind = "trade"
+func Qualify_C28Cancel: <"Event qualification 2 - the overlapping predicate space.">
+    [qualification BusinessEvent]
+    inputs:
+        event C28Event (1..1)
+    output:
+        is_event boolean (1..1)
+    set is_event:
+        event -> kind = "cancel" and event -> size exists
+body Authority C28AUTH <"The chaos authority.">
+corpus Regulation "C28 Chaos Regulation" C28Reg <"The chaos corpus.">
+segment c28article
+metaType scheme string
+type C28OptA: <"Choice option A - the F15' implicit-input chain head.">
+    av string (0..1)
+type C28OptB: <"Choice option B.">
+    bv string (0..1)
+choice C28Which: <"The choice a report input attribute is typed by.">
+    C28OptA
+    C28OptB
+type C28Trade: <"The report-from type: a choice-typed attribute navigated by bare option at a rule seat (F15' leg d) and a scheme-carrying scalar.">
+    utid string (1..1)
+        [label as "The Trade UTI"]
+    which C28Which (0..1)
+    venue string (0..1)
+        [metadata scheme]
+    extra C28Extra (0..1)
+        [label for memo "The Extra Memo"]

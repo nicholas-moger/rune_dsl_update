@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="990" viewBox="0 0 1120 990" role="img" aria-labelledby="title desc">
+<title id="title">Proposed SDK maintenance workflow</title>
+<desc id="desc">Conceptual future SDK maintenance workflow using already-solved upstream issue 1395, fixed by upstream 1396 on 21 September 2026. Two CommodityOption types in different namespaces shared a short name; Java switch rendering emitted short-name instanceof checks, causing ambiguity or wrong selection. Reproduce a minimal case, trace qualified semantic identity separately from target rendering, change the affected target layer where appropriate, verify type selection/output/regression, then review the diff and evidence. A target fix need not change IR. This is a proposed future tooling workflow, not current SDK execution or a newly fixed issue.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9" fill="none" stroke="#a9b7cb" stroke-width="1.4"/></marker></defs>
+<rect width="1120" height="990" rx="22" fill="#121923"/>
+<g font-family="Segoe UI, Arial, sans-serif">
+<text x="30" y="47" fill="#eef2f8" font-size="32" font-weight="600" text-anchor="start">
+<tspan x="30" dy="0" xml:space="preserve">Proposed SDK maintenance workflow</tspan>
+</text>
+<text x="30" y="85" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="30" dy="0" xml:space="preserve">Conceptual case: issue 1395, already fixed upstream by 1396</tspan>
+</text>
+<rect x="30" y="165" width="300" height="285" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5" stroke-dasharray="7 5"/>
+<rect x="31" y="184" width="4" height="247" rx="2" fill="#a2c6e6"/>
+<text x="53" y="202" fill="#a2c6e6" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="53" dy="0" xml:space="preserve">Already-fixed</tspan>
+<tspan x="53" dy="36" xml:space="preserve">issue 1395</tspan>
+</text>
+<text x="53" y="280" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="53" dy="0" xml:space="preserve">Upstream fix 1396</tspan>
+<tspan x="53" dy="30" xml:space="preserve">21 September 2026</tspan>
+<tspan x="53" dy="30" xml:space="preserve">Future SDK workflow</tspan>
+</text>
+<rect x="30" y="500" width="300" height="250" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5" stroke-dasharray="7 5"/>
+<rect x="31" y="519" width="4" height="212" rx="2" fill="#a6b0ec"/>
+<text x="53" y="537" fill="#a6b0ec" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="53" dy="0" xml:space="preserve">Qualified identity</tspan>
+</text>
+<text x="53" y="600" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="53" dy="0" xml:space="preserve">Two namespaces</tspan>
+<tspan x="53" dy="30" xml:space="preserve">Java short-name</tspan>
+<tspan x="53" dy="30" xml:space="preserve">instanceof ambiguity</tspan>
+</text>
+<text x="30" y="968" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="30" dy="0" xml:space="preserve">Proposed tooling workflow; a target rendering fix may leave semantic IR unchanged.</tspan>
+</text>
+<rect x="395" y="165" width="695" height="120" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="396" y="184" width="4" height="82" rx="2" fill="#a2c6e6"/>
+<text x="418" y="202" fill="#a2c6e6" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="418" dy="0" xml:space="preserve">Reproduce</tspan>
+</text>
+<text x="418" y="235" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="418" dy="0" xml:space="preserve">Two CommodityOption types in different namespaces</tspan>
+<tspan x="418" dy="30" xml:space="preserve">Record expected selection despite the shared short name</tspan>
+</text>
+<rect x="395" y="325" width="695" height="120" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="396" y="344" width="4" height="82" rx="2" fill="#92d5c6"/>
+<text x="418" y="362" fill="#92d5c6" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="418" dy="0" xml:space="preserve">Trace</tspan>
+</text>
+<text x="418" y="395" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="418" dy="0" xml:space="preserve">Keep semantic identity qualified</tspan>
+<tspan x="418" dy="30" xml:space="preserve">Trace Java instanceof target rendering</tspan>
+</text>
+<rect x="395" y="485" width="695" height="120" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="396" y="504" width="4" height="82" rx="2" fill="#d0b487"/>
+<text x="418" y="522" fill="#d0b487" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="418" dy="0" xml:space="preserve">Change</tspan>
+</text>
+<text x="418" y="555" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="418" dy="0" xml:space="preserve">Fix the affected target layer when appropriate</tspan>
+<tspan x="418" dy="30" xml:space="preserve">An IR change is not always needed</tspan>
+</text>
+<rect x="395" y="645" width="695" height="120" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="396" y="664" width="4" height="82" rx="2" fill="#92d5c6"/>
+<text x="418" y="682" fill="#92d5c6" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="418" dy="0" xml:space="preserve">Verify</tspan>
+</text>
+<text x="418" y="715" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="418" dy="0" xml:space="preserve">Check the correct namespace / type selection</tspan>
+<tspan x="418" dy="30" xml:space="preserve">Recheck generated output and regression</tspan>
+</text>
+<rect x="395" y="805" width="695" height="120" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="396" y="824" width="4" height="82" rx="2" fill="#a6b0ec"/>
+<text x="418" y="842" fill="#a6b0ec" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="418" dy="0" xml:space="preserve">Review</tspan>
+</text>
+<text x="418" y="875" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="418" dy="0" xml:space="preserve">Review semantics and the target diff</tspan>
+<tspan x="418" dy="30" xml:space="preserve">Record evidence and affected scope</tspan>
+</text>
+<polyline points="742.5,285 742.5,325" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="742.5,445 742.5,485" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="742.5,605 742.5,645" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="742.5,765 742.5,805" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+</g>
+</svg>

@@ -1,0 +1,12 @@
+namespace chaos.s04.a4snap
+version "1.0.0-SNAPSHOT"
+type C4Pair: <"Constructed and segment-set output type.">
+    left number (1..1)
+    right number (1..1)
+func C4Add: <"Minimal set seat.">
+    inputs:
+        a number (1..1)
+        b number (1..1)
+    output:
+        s number (1..1)
+    set s: a + b

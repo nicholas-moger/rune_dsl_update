@@ -1,0 +1,10 @@
+namespace test.frec034
+
+func CreateDate:
+	output: result date (1..1)
+	set result:
+		date {
+			day: 4,
+			month: 11,
+			year: 1998
+		}

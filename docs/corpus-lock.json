@@ -1,0 +1,37 @@
+{
+  "purpose": "Public one-cell review walkthrough; not the full historical corpus manifest",
+  "compilerBaseline": "9.83.0",
+  "inputs": [
+    {
+      "name": "cdm",
+      "version": "5.38.0",
+      "repository": "https://github.com/finos/common-domain-model.git",
+      "tag": "5.38.0",
+      "commit": "788f63af47723ca2ef2ec8d24f31c01a4ac4505f",
+      "directory": "test-corpus/cdm/cdm-5.38.0",
+      "sourceRoot": "rosetta-source/src/main/rosetta",
+      "goldenRoot": "rosetta-source/src/generated/java",
+      "gitBlobSha256": {
+        "pom.xml": "5ada888af6db904a3da5889cd031942594eab84cf802c31d9153429e7d642317",
+        "rosetta-source/pom.xml": "78abdfa91f9a408194f892b71a128effdfc29d9d2c797366a3dbb3bc4de295b5"
+      }
+    },
+    {
+      "name": "rune-builtins",
+      "version": "9.83.0",
+      "repository": "https://github.com/finos/rune-dsl.git",
+      "tag": "9.83.0",
+      "commit": "5fb8d697911d2ca62532d1801265b67752d03ef9",
+      "directory": "test-corpus/rune-dsl-builtins",
+      "sourceRoot": "rune-runtime/src/main/resources/model"
+    }
+  ],
+  "verification": {
+    "publicTagRefsResolved": true,
+    "pinnedCdmPomsInspected": true,
+    "assembledExportBuildExecuted": "2026-09-22",
+    "regeneratedGoldenManifestVerified": "2026-09-22",
+    "threeModeExampleExecuted": "2026-09-22",
+    "record": "docs/SOURCE-SNAPSHOT.md"
+  }
+}

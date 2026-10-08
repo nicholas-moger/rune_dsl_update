@@ -1,0 +1,6 @@
+namespace com.test.consumer
+
+import com.test.outer.* as outerAlias
+
+reporting rule DelegatingRule from com.test.outer.inner.Trade: <"Delegates to inner.TradeId via aliased wildcard import">
+    outerAlias.inner.TradeId

@@ -1,0 +1,15 @@
+namespace holdout.voidmetaoutput
+version "0.0.0"
+
+basicType etoken <"A model-declared basic type - a Void-typed value in the generated Java.">
+
+type Holder: <"Carries a Void-typed feature.">
+    v etoken (0..1)
+
+func SetMetaVoid: <"A Void-typed value (no with-meta construction) into a scheme-annotated Void output: the shape that would witness commit 11's META-OUTPUT decline ALONE - neither with-meta exclusion at HandlerHelper.inferredJavaType fires here. What does the released plugin render?">
+    inputs:
+        h Holder (0..1)
+    output:
+        t etoken (0..1)
+            [metadata scheme]
+    set t: h -> v

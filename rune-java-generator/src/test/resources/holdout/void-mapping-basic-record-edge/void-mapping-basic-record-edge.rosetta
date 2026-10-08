@@ -1,0 +1,46 @@
+namespace test.voidmapedge
+version "1.0.0"
+
+// v3.2 seat 9 (F8, void-mapping-cast) - THE EDGE GROUP, kept apart so a plugin refusal costs one group: the model-declared
+// basic / record types at the seats the seed does not reach - under a typeAlias, a PARAMETERISED model-declared basic type
+// at an attribute, under `[metadata scheme]` and `[metadata reference]` (the CDM 6.20.6 `ReferenceWithMetaVoid` lineage -
+// the PERMANENT waiver's own shape), inside a condition expression, and as a function's input and output.
+
+basicType etoken <"A model-declared basic type.">
+basicType escaled(edigits int) <"A parameterised model-declared basic type.">
+
+recordType espan
+{
+	lo int
+	hi int
+}
+
+typeAlias TokenAlias: <"An alias over the model-declared basic type."> etoken
+
+type AliasCarrier: <"The alias at an attribute.">
+    tok TokenAlias (0..1)
+
+type ParamCarrier: <"The parameterised basic type at an attribute.">
+    scaled escaled(edigits: 3) (0..1)
+
+type MetaCarrier: <"Metadata over the model-declared types.">
+    tok etoken (0..1)
+        [metadata scheme]
+    ref espan (0..1)
+        [metadata reference]
+    flag boolean (0..1)
+    condition TokPresent: <"Round 1 (the code-quality review's SF-4): a META-ANNOTATED Void feature under exists - the item is FieldWithMetaVoid, not Void, so the render law must NOT fire; the released plugin decides the bytes.">
+        if flag = True then tok exists
+
+type ConditionCarrier: <"An expression over a Void-typed attribute.">
+    tok etoken (0..1)
+    flag boolean (0..1)
+    condition TokPresent:
+        if flag = True then tok exists
+
+func UseToken: <"A function whose input and output are the model-declared basic type.">
+    inputs:
+        t etoken (1..1)
+    output:
+        r etoken (1..1)
+    set r: t

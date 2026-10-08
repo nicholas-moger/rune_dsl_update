@@ -1,0 +1,96 @@
+{
+  "id": "analytics.nojvm",
+  "section": "analytics",
+  "title": "Model analytics - no JVM (Python + ANTLR4)",
+  "command": "py -3 analytics.py --roots \"../corpus/builtins;../corpus/cdm-5.38.0;../corpus/iso20022-1.38.0;../corpus/drr-6.34.1\" --receipt ../receipts/analytics.nojvm.json",
+  "startedAt": "2026-08-20T02:21:18Z",
+  "durationMs": 106544,
+  "host": {
+    "os": "Windows 11",
+    "cpu": "Intel64 Family 6 Model 198 Stepping 2, GenuineIntel",
+    "python": "3.13.5"
+  },
+  "metrics": {
+    "lane": "plus-nojvm",
+    "files": 349,
+    "parseMs": 106088,
+    "indexMs": 122,
+    "q1Ms": 2,
+    "q2Ms": 2,
+    "q3Ms": 1,
+    "q4Ms": 2,
+    "wallMs": 106587,
+    "results": {
+      "q1": {
+        "types": 2243,
+        "enums": 763,
+        "functions": 1649,
+        "rules": 2272
+      },
+      "q2": {
+        "metaAnnotatedTypes": 206
+      },
+      "q3": {
+        "referencesToTarget": 26
+      },
+      "q4": {
+        "deepestExtendsChain": 5
+      }
+    },
+    "startupMs": 44,
+    "aux": {
+      "targetType": "Party",
+      "declsByKind": {
+        "annotation": 2,
+        "body": 41,
+        "corpus": 93,
+        "enum": 763,
+        "func": 1649,
+        "metaType": 6,
+        "report": 23,
+        "rule": 2317,
+        "ruleSource": 6,
+        "segment": 36,
+        "synonymSource": 19,
+        "type": 2243,
+        "typeAlias": 435
+      },
+      "builtinDeclarations": 28,
+      "deepestExtendsChainPath": [
+        "drr.regulation.cftc.rewrite.trade.CFTCPart43TransactionReport",
+        "drr.regulation.cftc.rewrite.trade.CFTCTransactionReport",
+        "drr.regulation.common.trade.CommonTransactionReport",
+        "drr.standards.iosco.cde.version3.CriticalDataElement",
+        "drr.standards.iosco.cde.version2.CriticalDataElementV2",
+        "drr.standards.iosco.cde.version1.CriticalDataElementV1"
+      ],
+      "attributesOnDataTypes": 9099,
+      "unresolvedExtends": 0,
+      "ambiguousExtends": 0,
+      "cycles": 0,
+      "nodesVisited": 476533,
+      "declarations": 7661,
+      "declarationsCounted": 7633,
+      "attributes": 13201,
+      "symbols": 3617,
+      "nameCollisions": 4021,
+      "namespaces": 196,
+      "unknownElements": 0,
+      "parseErrors": 0,
+      "errorFiles": [],
+      "sllBailouts": 122,
+      "llOnly": false,
+      "bytesParsed": 8524552,
+      "filesIndexed": 351,
+      "reportingRules": 2272,
+      "eligibilityRules": 45,
+      "parserReadyMs": 57,
+      "antlrImportMs": 25,
+      "python": "3.13.5",
+      "predictionMode": "SLL-then-LL",
+      "treeNodes": 1252354,
+      "treeWalkMs": 155
+    }
+  },
+  "notes": "No JVM at query time: the ANTLR4 Python3 parser is generated from the fork's own grammars (zero embedded actions, zero semantic predicates), so the whole run is a bare CPython process. parseMs and indexMs are accumulated per file - each tree is indexed and then dropped, which keeps peak RSS bounded and leaves both phase totals exact. Prediction mode: SLL-then-LL (122 SLL bailouts). startupMs is process start -> interpreter ready; aux.parserReadyMs is process start -> generated parser importable (the ATN load), which is the closer analogue of the JVM lanes' injector-ready figure. peakRssMb is self-measured in-process and excludes the interpreter's own teardown. [addendum, dashboard adversarial review 2026-08-20, wrapper-attributed] This run emitted NO peakRssMb: the sentence above describes what that field would mean, but the metrics object does not contain it, so no memory figure exists for this lane and the dashboard renders it as \"not sampled\"."
+}

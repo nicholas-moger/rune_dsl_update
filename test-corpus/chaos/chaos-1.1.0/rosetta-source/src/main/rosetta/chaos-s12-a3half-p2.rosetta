@@ -1,0 +1,20 @@
+namespace chaos.s12.a3half.p2
+version "1.0.0"
+import chaos.s12.a3half.p1.*
+synonym source C12Ext extends C12Base
+{
+    C12Row:
+        [value "RowEnvelope" meta "rowMeta"]
+        + key
+            [value "k" path "row"]
+        + val
+            [value "v" path "row" maps 2]
+
+    enums
+
+    C12FlagEnum:
+        + On
+            [value "1"]
+        + Off
+            [value "0"]
+}

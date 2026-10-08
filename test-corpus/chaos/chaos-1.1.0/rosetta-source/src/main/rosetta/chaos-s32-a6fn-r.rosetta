@@ -1,0 +1,4 @@
+namespace chaos.s32.a6fn.rival
+version "1.0.0"
+type C32Twin: <"RIVAL - a same-named TYPE in an imported namespace beside the seed's FUNCTION (the F17' type-vs-function flavour).">
+    rivalMark string (0..1)

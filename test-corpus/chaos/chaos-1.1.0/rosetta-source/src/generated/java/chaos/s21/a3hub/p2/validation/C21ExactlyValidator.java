@@ -1,0 +1,40 @@
+package chaos.s21.a3hub.p2.validation;
+
+import chaos.s21.a3hub.p2.C21Exactly;
+import com.google.common.collect.Lists;
+import com.rosetta.model.lib.expression.ComparisonResult;
+import com.rosetta.model.lib.path.RosettaPath;
+import com.rosetta.model.lib.validation.ValidationResult;
+import com.rosetta.model.lib.validation.Validator;
+import java.util.List;
+
+import static com.google.common.base.Strings.isNullOrEmpty;
+import static com.rosetta.model.lib.expression.ExpressionOperatorsNullSafe.checkCardinality;
+import static com.rosetta.model.lib.validation.ValidationResult.failure;
+import static com.rosetta.model.lib.validation.ValidationResult.success;
+import static java.util.stream.Collectors.toList;
+
+public class C21ExactlyValidator implements Validator<C21Exactly> {
+
+	private List<ComparisonResult> getComparisonResults(C21Exactly o) {
+		return Lists.<ComparisonResult>newArrayList(
+				checkCardinality("a", (String) o.getA() != null ? 1 : 0, 0, 1), 
+				checkCardinality("b", (String) o.getB() != null ? 1 : 0, 0, 1), 
+				checkCardinality("c", (String) o.getC() != null ? 1 : 0, 0, 1)
+			);
+	}
+
+	@Override
+	public List<ValidationResult<?>> getValidationResults(RosettaPath path, C21Exactly o) {
+		return getComparisonResults(o)
+			.stream()
+			.map(res -> {
+				if (!isNullOrEmpty(res.getError())) {
+					return failure("C21Exactly", ValidationResult.ValidationType.CARDINALITY, "C21Exactly", path, "", res.getError());
+				}
+				return success("C21Exactly", ValidationResult.ValidationType.CARDINALITY, "C21Exactly", path, "");
+			})
+			.collect(toList());
+	}
+
+}

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="218" viewBox="0 0 1100 218" role="img" aria-labelledby="title desc">
+  <title id="title">The contribution's five design goals</title>
+  <desc id="desc">Compatibility: preserve existing behaviour. Maintainability: clearer services and change workflows. Extensibility: reusable semantics and extension points. Performance: measured generation and runtime improvements. Developer access: SDK, editor and automation services. These are goals with different delivery stages.</desc>
+  <rect width="1100" height="218" rx="16" fill="#111923"/>
+  <g font-family="'Segoe UI',Arial,sans-serif">
+    <g stroke="#273545"><path d="M220 25V193M440 25V193M660 25V193M880 25V193"/></g>
+    <g fill="none" stroke="#92a0e3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M89 39L110 30L131 39V58C131 74 110 84 110 84S89 74 89 58Z"/><path d="M100 55L108 63L122 47"/>
+      <path d="M310 39H350V77H310Z"/><path d="M320 49H340M320 58H340M320 67H332"/>
+      <rect x="529" y="37" width="42" height="42" rx="7"/><path d="M550 46V69M538 57H562"/>
+      <path d="M750 74A29 29 0 0 1 790 39M749 75L778 48"/><circle cx="749" cy="75" r="3" fill="#92a0e3"/>
+      <path d="M967 47L955 58L967 69M1013 47L1025 58L1013 69M996 39L984 77"/>
+    </g>
+    <g text-anchor="middle">
+      <g font-size="18" font-weight="650" fill="#eef1f8"><text x="110" y="118">Compatibility</text><text x="330" y="118">Maintainability</text><text x="550" y="118">Extensibility</text><text x="770" y="118">Performance</text><text x="990" y="118">Developer access</text></g>
+      <g font-size="15" fill="#9eacc0"><text x="110" y="149">Preserve established</text><text x="110" y="172">model and output contracts</text><text x="330" y="149">Clearer services and</text><text x="330" y="172">language-change workflows</text><text x="550" y="149">Reusable semantics</text><text x="550" y="172">and extension points</text><text x="770" y="149">Measured generation</text><text x="770" y="172">and runtime improvements</text><text x="990" y="149">SDK, editor services</text><text x="990" y="172">and automation</text></g>
+    </g>
+  </g>
+</svg>

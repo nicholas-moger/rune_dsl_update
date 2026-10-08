@@ -1,0 +1,4 @@
+namespace chaos.s02.a2wild.h
+version "1.0.0"
+type C2Tag: <"Helper the import-style axis relocates.">
+    tagLine string (1..1)

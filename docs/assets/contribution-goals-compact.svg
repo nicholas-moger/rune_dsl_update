@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="432" viewBox="0 0 520 432" role="img" aria-labelledby="title desc">
+  <title id="title">Five contribution goals for compact screens</title>
+  <desc id="desc">Preserve compatibility; simplify maintenance; support extensions; improve measured generation and runtime performance; open developer access through SDK, editor services and automation. Goals have different delivery stages.</desc>
+  <rect width="520" height="432" rx="16" fill="#111923"/>
+  <g font-family="'Segoe UI',Arial,sans-serif">
+    <g stroke="#273545"><path d="M24 96H496M24 176H496M24 256H496M24 336H496"/></g>
+    <g fill="#92a0e3" font-size="15" font-weight="700"><text x="26" y="44">1</text><text x="26" y="124">2</text><text x="26" y="204">3</text><text x="26" y="284">4</text><text x="26" y="364">5</text></g>
+    <g fill="#eef1f8" font-size="24" font-weight="650"><text x="57" y="45">Compatibility</text><text x="57" y="125">Maintainability</text><text x="57" y="205">Extensibility</text><text x="57" y="285">Performance</text><text x="57" y="365">Developer access</text></g>
+    <g fill="#9eacc0" font-size="18"><text x="57" y="74">Preserve established model and output contracts</text><text x="57" y="154">Clearer services and language-change workflows</text><text x="57" y="234">Reusable semantics and extension points</text><text x="57" y="314">Measured generation and runtime improvements</text><text x="57" y="394">SDK, editor services and automation</text></g>
+  </g>
+</svg>

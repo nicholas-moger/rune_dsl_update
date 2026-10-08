@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  demo-harness-legacy — the UPSTREAM (Xtext 9.83.0) code-generation and EMF-analytics driver.
+
+  Separate from demo-harness-codegen by necessity, not preference. The fork and upstream
+  rune-lang BOTH own the java package `com.regnosys.rosetta.*` with incompatible class shapes
+  (verified: `parser`, `rosetta`, `types`, `utils`, `validation` sub-packages exist in BOTH
+  org.finos.rune:rune-parser:0.0.1-SNAPSHOT and org.finos.rune:rune-lang:9.83.0). Put both on
+  one classpath and Guice dies at graph construction with IncompatibleClassChangeError. This is
+  recorded at length in scripts/xtext-oracle/pom.xml, which is the in-repo precedent this pom
+  copies. NEVER add a fork dependency here.
+
+  TWO NON-OBVIOUS PINS, both inherited verbatim from scripts/xtext-oracle/pom.xml, both
+  measured on this box, both required:
+
+  (1) org.eclipse.emf:org.eclipse.emf.common MUST BE PINNED FORWARD to 2.44.0 and MUST BE
+      DECLARED BEFORE the language dependency so Maven's nearest-wins takes it. rune-lang
+      9.83.0 resolves emf.common to 2.30.0 (xtext 2.38.0's direct dep) while emf.ecore lands at
+      2.42.0 via ecore.xmi 2.37.0; the newer ecore calls CommonUtil.newURL(String), which
+      2.30.0 does not have, and the injector dies with NoSuchMethodError before parsing
+      anything. 2.44.0 is the oldest cached JAR carrying the method.
+
+  (2) DEPENDENCIES ARE COPIED, NEVER SHADED. An uber-jar cannot carry two files at one path,
+      and the Eclipse/EMF stack ships a `plugin.properties` in almost every artifact — shading
+      silently keeps one and drops the rest, which breaks EMF's diagnostic message lookup
+      (_UI_DiagnosticRoot_diagnostic MissingResource) and makes the validator return ZERO
+      ISSUES ON EVERY INPUT. That reads exactly like upstream having no complaints.
+      Consequence: because the jars are copied, seven separately-signed Eclipse platform jars
+      contribute classes to package org.eclipse.core.runtime and the JVM rejects the mix with
+      "SecurityException: ... signer information does not match". The integrator must strip
+      META-INF/*.SF|DSA|RSA|EC from the copied jars in target/lib — see README.md. Never strip
+      them inside the local Maven repository.
+
+  COORDINATES. CONTRACTS section-0 rule 5 names the upstream GAV as
+  com.regnosys.rosetta:com.regnosys.rosetta:9.83.0, which is what is declared below. Note that
+  this artifact is a 1,716-byte SHIM containing only its own pom: its single dependency is
+  org.finos.rune:rune-lang:9.83.0 (3.5 MB), which is where every class actually lives, and
+  which in turn pulls org.finos.rune:rune-runtime:9.83.0 carrying model/basictypes.rosetta and
+  model/annotations.rosetta as classpath resources. Both must resolve for this module to run.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.finos.rune.demo</groupId>
+    <artifactId>demo-harness-legacy</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+
+    <name>Rune DSL stats demo :: codegen + analytics harness (upstream 9.83.0)</name>
+
+    <properties>
+        <maven.compiler.release>21</maven.compiler.release>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <rune.legacy.version>9.83.0</rune.legacy.version>
+    </properties>
+
+    <dependencies>
+        <!-- PIN (1). MUST stay first. -->
+        <dependency>
+            <groupId>org.eclipse.emf</groupId>
+            <artifactId>org.eclipse.emf.common</artifactId>
+            <version>2.44.0</version>
+        </dependency>
+
+        <!-- The upstream language. A shim onto org.finos.rune:rune-lang:9.83.0. -->
+        <dependency>
+            <groupId>com.regnosys.rosetta</groupId>
+            <artifactId>com.regnosys.rosetta</artifactId>
+            <version>${rune.legacy.version}</version>
+        </dependency>
+
+        <!-- INTEGRATOR: rune-runtime arrives transitively via rune-lang and carries
+             model/basictypes.rosetta + model/annotations.rosetta, which
+             com.regnosys.rosetta.builtin.RosettaBuiltinsService requires to be RESOLVABLE AS
+             CLASSPATH RESOURCES: its basicTypesURL/annotationsURL fields are
+             Objects.requireNonNull-guarded, it is @Inject-ed by RosettaScopeProvider and
+             RBuiltinTypeService, and if the resources are missing the INJECTOR ITSELF throws
+             NPE before anything is parsed. If that happens, the transitive rune-runtime is
+             missing from target/lib — it is not a bug in this driver.
+             Uncomment to make the requirement explicit if the transitive path ever breaks:
+        <dependency>
+            <groupId>org.finos.rune</groupId>
+            <artifactId>rune-runtime</artifactId>
+            <version>${rune.legacy.version}</version>
+        </dependency>
+        -->
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- PIN (2). Copy, do not shade. -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.6.1</version>
+                <executions>
+                    <execution>
+                        <id>copy-deps</id>
+                        <phase>package</phase>
+                        <goals><goal>copy-dependencies</goal></goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                            <includeScope>runtime</includeScope>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.4.1</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>demo.harness.legacy.Main</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

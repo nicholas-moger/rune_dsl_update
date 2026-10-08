@@ -1,0 +1,22 @@
+namespace test.fsingle039
+
+func A:
+	inputs:
+		a int (0..*)
+	output:
+		result int (0..*)
+	add result:
+		a
+
+func B:
+	output: result int (0..*)
+	add result:
+		A(empty)
+
+func C:
+	inputs:
+		a int (0..1)
+	output:
+		result int (0..*)
+	add result:
+		A(a)

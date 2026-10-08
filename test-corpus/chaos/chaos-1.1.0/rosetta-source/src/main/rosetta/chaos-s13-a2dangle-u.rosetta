@@ -1,0 +1,4 @@
+namespace chaos.s13.a2dangle.unused
+version "1.0.0"
+type C13AuxUnusedT:
+    stub string (0..1)

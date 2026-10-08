@@ -1,0 +1,16 @@
+namespace chaos.s08.a3third.p2
+version "1.0.0"
+import chaos.s08.a3third.p1.*
+import chaos.s08.a3third.p3.*
+typeAlias C8Even: <"Alias with its own condition on the implicit item."> number(fractionalDigits: 0)
+    condition C8NonNeg:
+        item >= 0
+type C8Priced: <"Alias-typed attributes at every cardinality.">
+    qty C8Positive (1..1)
+    ccy C8Code (0..1)
+    weights C8Pct (0..*)
+    evens C8Even (0..*)
+    box C8Box (0..1)
+    condition C8WeightCap:
+        if weights exists
+        then weights sum <= 300

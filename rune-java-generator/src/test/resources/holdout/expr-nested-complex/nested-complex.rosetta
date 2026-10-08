@@ -1,0 +1,22 @@
+namespace test.expressions
+
+type Account:
+    balance number (1..1)
+    active boolean (1..1)
+
+func ComplexExpression:
+    inputs:
+        accounts Account (0..*)
+        threshold number (1..1)
+    output:
+        result number (1..1)
+    alias activeAccounts:
+        accounts filter [item -> active = True]
+    alias balances:
+        activeAccounts extract [item -> balance]
+    alias total:
+        balances sum
+    set result:
+        if total > threshold
+        then total - threshold
+        else 0

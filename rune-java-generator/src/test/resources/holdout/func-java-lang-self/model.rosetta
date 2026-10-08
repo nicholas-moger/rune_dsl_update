@@ -1,0 +1,7 @@
+namespace test.fsingle049
+
+func Boolean:
+	output:
+		Boolean boolean (1..1)
+	set Boolean:
+		True extract [ False ]

@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="1860" viewBox="0 0 480 1860" role="img" aria-labelledby="title desc">
+<title id="title">Rune DSL: source to application</title>
+<desc id="desc">Stock Rune DSL 9.83.0 build route: .rosetta source, Xtext-generated ANTLR 3 lexer/parser, abstract syntax tree (AST) as Eclipse Modeling Framework (EMF) objects, scoping, type and cardinality checks and validation, Java generators implemented in Java and Xtend, generated Java, then compile and use an application. Generators use the EMF model and derived helpers. Runtime and handwritten application code are separate application inputs. The associated syntax node model retains text, offsets and comments and is not a second semantic AST. An editor can use Language Server Protocol (LSP) and the same core services; this does not imply a shared live model instance across processes.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9" fill="none" stroke="#a9b7cb" stroke-width="1.4"/></marker></defs>
+<rect width="480" height="1860" rx="22" fill="#121923"/>
+<g font-family="Segoe UI, Arial, sans-serif">
+<text x="24" y="43" fill="#eef2f8" font-size="29" font-weight="600" text-anchor="start">
+<tspan x="24" dy="0" xml:space="preserve">Rune DSL: source</tspan>
+<tspan x="24" dy="35" xml:space="preserve">to application</tspan>
+</text>
+<text x="24" y="119" fill="#a9b7cb" font-size="19" font-weight="400" text-anchor="start">
+<tspan x="24" dy="0" xml:space="preserve">Stock Rune DSL 9.83.0</tspan>
+<tspan x="24" dy="26" xml:space="preserve">Build route and related services</tspan>
+</text>
+<rect x="24" y="185" width="386" height="95" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="25" y="204" width="4" height="57" rx="2" fill="#a2c6e6"/>
+<text x="47" y="222" fill="#a2c6e6" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">.rosetta source</tspan>
+</text>
+<text x="47" y="255" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Domain model text</tspan>
+</text>
+<rect x="24" y="315" width="386" height="120" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="25" y="334" width="4" height="82" rx="2" fill="#a2c6e6"/>
+<text x="47" y="352" fill="#a2c6e6" font-size="23" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Xtext-generated</tspan>
+<tspan x="47" dy="32" xml:space="preserve">ANTLR 3 parser</tspan>
+</text>
+<text x="47" y="412" fill="#a9b7cb" font-size="19" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">From the language grammar</tspan>
+</text>
+<rect x="24" y="470" width="386" height="170" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="25" y="489" width="4" height="132" rx="2" fill="#a6b0ec"/>
+<text x="47" y="507" fill="#a6b0ec" font-size="23" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Abstract syntax tree</tspan>
+<tspan x="47" dy="32" xml:space="preserve">(AST)</tspan>
+</text>
+<text x="47" y="569" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Eclipse Modeling</tspan>
+<tspan x="47" dy="28" xml:space="preserve">Framework (EMF) objects</tspan>
+</text>
+<rect x="24" y="675" width="386" height="130" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="25" y="694" width="4" height="92" rx="2" fill="#92d5c6"/>
+<text x="47" y="712" fill="#92d5c6" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Resolve and check</tspan>
+</text>
+<text x="47" y="745" fill="#a9b7cb" font-size="19" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Scoping · types · cardinality</tspan>
+<tspan x="47" dy="26" xml:space="preserve">Validation rules</tspan>
+</text>
+<rect x="24" y="840" width="386" height="140" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="25" y="859" width="4" height="102" rx="2" fill="#d0b487"/>
+<text x="47" y="877" fill="#d0b487" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Java generators</tspan>
+</text>
+<text x="47" y="910" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Java / Xtend implementations</tspan>
+<tspan x="47" dy="28" xml:space="preserve">EMF model + derived helpers</tspan>
+</text>
+<polyline points="217,280 217,315" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="217,435 217,470" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="217,640 217,675" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="217,805 217,840" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<rect x="24" y="1115" width="432" height="390" rx="14" fill="#18222f" stroke="#92d5c6" stroke-width="1.5"/>
+<text x="47" y="1155" fill="#92d5c6" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Compile / use application</tspan>
+</text>
+<rect x="45" y="1185" width="390" height="85" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="46" y="1204" width="4" height="47" rx="2" fill="#d0b487"/>
+<text x="68" y="1222" fill="#d0b487" font-size="23" font-weight="600" text-anchor="start">
+<tspan x="68" dy="0" xml:space="preserve">Generated Java</tspan>
+</text>
+<text x="68" y="1250" fill="#a9b7cb" font-size="18" font-weight="400" text-anchor="start">
+<tspan x="68" dy="0" xml:space="preserve">Domain types and functions</tspan>
+</text>
+<rect x="45" y="1300" width="390" height="85" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="46" y="1319" width="4" height="47" rx="2" fill="#a2c6e6"/>
+<text x="68" y="1337" fill="#a2c6e6" font-size="23" font-weight="600" text-anchor="start">
+<tspan x="68" dy="0" xml:space="preserve">Runtime</tspan>
+</text>
+<text x="68" y="1365" fill="#a9b7cb" font-size="18" font-weight="400" text-anchor="start">
+<tspan x="68" dy="0" xml:space="preserve">Shared execution support</tspan>
+</text>
+<rect x="45" y="1415" width="390" height="85" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="46" y="1434" width="4" height="47" rx="2" fill="#a6b0ec"/>
+<text x="68" y="1452" fill="#a6b0ec" font-size="21" font-weight="600" text-anchor="start">
+<tspan x="68" dy="0" xml:space="preserve">Handwritten application code</tspan>
+</text>
+<text x="68" y="1476" fill="#a9b7cb" font-size="18" font-weight="400" text-anchor="start">
+<tspan x="68" dy="0" xml:space="preserve">Application behaviour</tspan>
+</text>
+<polyline points="217,980 217,1060 443,1060 443,1227 435,1227" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<rect x="24" y="1540" width="432" height="115" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5" stroke-dasharray="7 5"/>
+<rect x="25" y="1559" width="4" height="77" rx="2" fill="#a2c6e6"/>
+<text x="47" y="1577" fill="#a2c6e6" font-size="23" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Syntax node model</tspan>
+</text>
+<text x="47" y="1610" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Text, offsets and comments</tspan>
+<tspan x="47" dy="28" xml:space="preserve">Associated with parser / AST</tspan>
+</text>
+<rect x="24" y="1690" width="432" height="135" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5" stroke-dasharray="7 5"/>
+<rect x="25" y="1709" width="4" height="97" rx="2" fill="#92d5c6"/>
+<text x="47" y="1727" fill="#92d5c6" font-size="22" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Editor / Language Server</tspan>
+<tspan x="47" dy="30" xml:space="preserve">Protocol (LSP)</tspan>
+</text>
+<text x="47" y="1794" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Uses the same core services</tspan>
+</text>
+</g>
+</svg>

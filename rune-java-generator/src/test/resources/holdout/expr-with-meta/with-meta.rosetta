@@ -1,0 +1,8 @@
+namespace test.expressions
+
+func TestWithMeta:
+    inputs:
+        value string (1..1)
+    output:
+        result string (1..1)
+    set result: value with-meta {scheme: "http://example.com"}

@@ -1,0 +1,5 @@
+namespace chaos.s25.a2wild.h
+version "1.0.0"
+type C25Sub: <"Helper - relocated by the import axis; every attribute optional (an only-exists parent must have no required attribute - the oracle's law).">
+    sname string (0..1)
+    subs number (0..*)

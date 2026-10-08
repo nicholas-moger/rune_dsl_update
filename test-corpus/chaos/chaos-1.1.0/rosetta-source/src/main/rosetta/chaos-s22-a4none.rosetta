@@ -1,0 +1,8 @@
+namespace chaos.s22.a4none
+isProduct root C22Terms;
+type C22Aux: <"Self-contained helper - relocated by the import axis.">
+    ax string (1..1)
+type C22Terms: <"The qualifiable root type.">
+    kind string (0..1)
+    notional number (0..1)
+    aux C22Aux (0..1)

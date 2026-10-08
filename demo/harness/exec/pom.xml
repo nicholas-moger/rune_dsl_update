@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.finos.rune.demo</groupId>
+    <artifactId>demo-harness-exec</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+
+    <name>Rune DSL stats demo - execution harness (lane B)</name>
+    <description>Runs the GENERATED DRR 6.34.1 Java closure on two runtime legs and measures
+        five workloads (populate, serialise, validate, report, projection). The two legs are
+        maven PROFILES, each pinning its own runtime + jackson + commons-lang3 explicitly so
+        every number is attributable to a named dependency set:
+
+        legacy-rt : com.regnosys.rosetta:com.regnosys.rosetta.lib:9.83.0
+                    (-&gt; org.finos.rune:rune-runtime:9.83.0), jackson 2.17.1, commons-lang3 3.14.0
+        plus-rt   : org.finos.rune:rune-runtime:0.0.1-SNAPSHOT (the fork, from the demo's
+                    hermetic local repo), jackson 2.18.9, commons-lang3 3.18.0
+
+        Guice is pinned to 6.0.0 on BOTH legs: it is the injector both legs share, so holding it
+        constant keeps the runtime + jackson + commons-lang3 triple as the only moving parts.
+        Each profile builds into its own directory and attaches its own shaded jar classifier, so
+        the two jars coexist and can never be confused with one another. The leg's pins are
+        written into src/main/resources/demo-exec-leg.properties by resource filtering and read
+        back at runtime, so a jar always reports the dependency set it was actually built with
+        (and refuses to run under the wrong --leg).
+
+        See README.md in this directory for the exact invocations.</description>
+
+    <properties>
+        <maven.compiler.release>21</maven.compiler.release>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jmh.version>1.37</jmh.version>
+        <shade.version>3.6.0</shade.version>
+        <compiler.version>3.13.0</compiler.version>
+        <resources.version>3.3.1</resources.version>
+        <maven.build.cache.skip>true</maven.build.cache.skip>
+
+        <!-- Pin descriptors. NEITHER leg profile is active by default: a build with no -P
+             fails fast in LegPins with a message naming the two profiles, rather than
+             producing an unattributable jar. -->
+        <exec.leg>UNSET</exec.leg>
+        <exec.runtime.gav>UNSET</exec.runtime.gav>
+        <exec.runtime.resolved>UNSET</exec.runtime.resolved>
+        <exec.jackson.version>UNSET</exec.jackson.version>
+        <exec.commonsLang3.version>UNSET</exec.commonsLang3.version>
+        <exec.guice.version>6.0.0</exec.guice.version>
+        <exec.xtend.present>UNSET</exec.xtend.present>
+    </properties>
+
+    <dependencies>
+        <!-- Leg-independent: the benchmark driver. JMH is the same on both legs, so it is not
+             part of what is being compared. -->
+        <dependency>
+            <groupId>org.openjdk.jmh</groupId>
+            <artifactId>jmh-core</artifactId>
+            <version>${jmh.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjdk.jmh</groupId>
+            <artifactId>jmh-generator-annprocess</artifactId>
+            <version>${jmh.version}</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <profiles>
+        <!-- ============================ LEG 1: legacy-rt ============================ -->
+        <profile>
+            <id>legacy-rt</id>
+            <properties>
+                <exec.leg>legacy-rt</exec.leg>
+                <exec.runtime.gav>com.regnosys.rosetta:com.regnosys.rosetta.lib:9.83.0</exec.runtime.gav>
+                <exec.runtime.resolved>org.finos.rune:rune-runtime:9.83.0</exec.runtime.resolved>
+                <exec.jackson.version>2.17.1</exec.jackson.version>
+                <exec.commonsLang3.version>3.14.0</exec.commonsLang3.version>
+                <exec.guice.version>6.0.0</exec.guice.version>
+                <!-- The upstream runtime additionally pulls org.eclipse.xtend:org.eclipse.xtend.lib
+                     (xtext 2.38.0 via org.finos.rune.parent:9.83.0). The fork removed that
+                     dependency, so it is present on this leg only - an honest leg difference,
+                     reported in the receipt notes. -->
+                <exec.xtend.present>true</exec.xtend.present>
+            </properties>
+            <build>
+                <!-- Per-leg build directory: the two legs never share target/classes, so a
+                     second build can never shade classes compiled against the other leg. -->
+                <directory>${project.basedir}/target/legacy-rt</directory>
+            </build>
+            <dependencyManagement>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.fasterxml.jackson.core</groupId>
+                        <artifactId>jackson-databind</artifactId>
+                        <version>${exec.jackson.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>com.fasterxml.jackson.core</groupId>
+                        <artifactId>jackson-core</artifactId>
+                        <version>${exec.jackson.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>com.fasterxml.jackson.core</groupId>
+                        <artifactId>jackson-annotations</artifactId>
+                        <version>${exec.jackson.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>com.fasterxml.jackson.datatype</groupId>
+                        <artifactId>jackson-datatype-jdk8</artifactId>
+                        <version>${exec.jackson.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.apache.commons</groupId>
+                        <artifactId>commons-lang3</artifactId>
+                        <version>${exec.commonsLang3.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>com.google.inject</groupId>
+                        <artifactId>guice</artifactId>
+                        <version>${exec.guice.version}</version>
+                    </dependency>
+                </dependencies>
+            </dependencyManagement>
+            <dependencies>
+                <dependency>
+                    <groupId>com.regnosys.rosetta</groupId>
+                    <artifactId>com.regnosys.rosetta.lib</artifactId>
+                    <version>9.83.0</version>
+                </dependency>
+                <dependency>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-databind</artifactId>
+                    <version>${exec.jackson.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-core</artifactId>
+                    <version>${exec.jackson.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-annotations</artifactId>
+                    <version>${exec.jackson.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>com.fasterxml.jackson.datatype</groupId>
+                    <artifactId>jackson-datatype-jdk8</artifactId>
+                    <version>${exec.jackson.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.apache.commons</groupId>
+                    <artifactId>commons-lang3</artifactId>
+                    <version>${exec.commonsLang3.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>com.google.inject</groupId>
+                    <artifactId>guice</artifactId>
+                    <version>${exec.guice.version}</version>
+                </dependency>
+            </dependencies>
+        </profile>
+
+        <!-- ============================= LEG 2: plus-rt ============================= -->
+        <profile>
+            <id>plus-rt</id>
+            <properties>
+                <exec.leg>plus-rt</exec.leg>
+                <exec.runtime.gav>org.finos.rune:rune-runtime:0.0.1-SNAPSHOT</exec.runtime.gav>
+                <exec.runtime.resolved>org.finos.rune:rune-runtime:0.0.1-SNAPSHOT</exec.runtime.resolved>
+                <exec.jackson.version>2.18.9</exec.jackson.version>
+                <exec.commonsLang3.version>3.18.0</exec.commonsLang3.version>
+                <exec.guice.version>6.0.0</exec.guice.version>
+                <!-- The fork runtime carries no xtend dependency (MapperMaths ships as plain
+                     Java) - the one dependency-set difference beyond the pinned triple. -->
+                <exec.xtend.present>false</exec.xtend.present>
+            </properties>
+            <build>
+                <directory>${project.basedir}/target/plus-rt</directory>
+            </build>
+            <dependencyManagement>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.fasterxml.jackson.core</groupId>
+                        <artifactId>jackson-databind</artifactId>
+                        <version>${exec.jackson.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>com.fasterxml.jackson.core</groupId>
+                        <artifactId>jackson-core</artifactId>
+                        <version>${exec.jackson.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>com.fasterxml.jackson.core</groupId>
+                        <artifactId>jackson-annotations</artifactId>
+                        <version>${exec.jackson.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>com.fasterxml.jackson.datatype</groupId>
+                        <artifactId>jackson-datatype-jdk8</artifactId>
+                        <version>${exec.jackson.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.apache.commons</groupId>
+                        <artifactId>commons-lang3</artifactId>
+                        <version>${exec.commonsLang3.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>com.google.inject</groupId>
+                        <artifactId>guice</artifactId>
+                        <version>${exec.guice.version}</version>
+                    </dependency>
+                </dependencies>
+            </dependencyManagement>
+            <dependencies>
+                <dependency>
+                    <groupId>org.finos.rune</groupId>
+                    <artifactId>rune-runtime</artifactId>
+                    <version>0.0.1-SNAPSHOT</version>
+                </dependency>
+                <dependency>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-databind</artifactId>
+                    <version>${exec.jackson.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-core</artifactId>
+                    <version>${exec.jackson.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-annotations</artifactId>
+                    <version>${exec.jackson.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>com.fasterxml.jackson.datatype</groupId>
+                    <artifactId>jackson-datatype-jdk8</artifactId>
+                    <version>${exec.jackson.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.apache.commons</groupId>
+                    <artifactId>commons-lang3</artifactId>
+                    <version>${exec.commonsLang3.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>com.google.inject</groupId>
+                    <artifactId>guice</artifactId>
+                    <version>${exec.guice.version}</version>
+                </dependency>
+            </dependencies>
+        </profile>
+
+        <!-- ===================== OPTIONAL: rosetta-common serialiser =====================
+             OFF BY DEFAULT, and the README explains why. com.regnosys:rosetta-common carries
+             RosettaObjectMapper (the canonical Rune JSON mapper), but it also depends on
+             org.finos.rune:rune-runtime AND com.regnosys.rosetta:rune-maven-plugin at ITS OWN
+             pinned version (9.85.1 in 11.124.2) - putting a THIRD rune-runtime on the classpath
+             alongside the leg's, in the same packages, resolved by first-wins class loading.
+             That destroys leg attribution, which is the entire point of the two profiles.
+             The exclusions below remove those two, so the profile is usable if the integrator
+             wants canonical JSON and accepts that rosetta-common's own code was compiled against
+             a different runtime version. RuneJson detects the mapper REFLECTIVELY, so nothing
+             in the harness needs recompiling either way; the active mode is reported in a
+             ##DEMO## metric and in the receipt notes. -->
+        <profile>
+            <id>rosetta-common-serde</id>
+            <dependencies>
+                <dependency>
+                    <groupId>com.regnosys</groupId>
+                    <artifactId>rosetta-common</artifactId>
+                    <!-- INTEGRATOR: 11.124.2 is the newest copy cached in the user's ~/.m2 at
+                         lane-B authoring time; any version whose RosettaObjectMapper links
+                         against the leg runtime's API will do. -->
+                    <version>11.124.2</version>
+                    <exclusions>
+                        <exclusion>
+                            <groupId>org.finos.rune</groupId>
+                            <artifactId>rune-runtime</artifactId>
+                        </exclusion>
+                        <exclusion>
+                            <groupId>com.regnosys.rosetta</groupId>
+                            <artifactId>rune-maven-plugin</artifactId>
+                        </exclusion>
+                    </exclusions>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>${resources.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${compiler.version}</version>
+                <configuration>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.openjdk.jmh</groupId>
+                            <artifactId>jmh-generator-annprocess</artifactId>
+                            <version>${jmh.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>${shade.version}</version>
+                <executions>
+                    <execution>
+                        <id>shade-leg</id>
+                        <phase>package</phase>
+                        <goals><goal>shade</goal></goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!-- The classifier IS the leg: ${exec.leg} comes from the active profile,
+                         so the two jars are named apart automatically and a build with no -P
+                         produces an obviously-wrong "UNSET" classifier rather than a jar that
+                         looks legitimate. Attached, not replacing, so both coexist. -->
+                    <shadedArtifactAttached>true</shadedArtifactAttached>
+                    <shadedClassifierName>${exec.leg}</shadedClassifierName>
+                    <createDependencyReducedPom>false</createDependencyReducedPom>
+                    <transformers>
+                        <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                            <!-- java -jar &lt;jar&gt; ... runs the verb CLI; JMH is reached with
+                                 java -cp &lt;jar&gt; org.openjdk.jmh.Main ... -->
+                            <mainClass>demo.harness.exec.Main</mainClass>
+                        </transformer>
+                        <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+                    </transformers>
+                    <filters>
+                        <filter>
+                            <artifact>*:*</artifact>
+                            <excludes>
+                                <exclude>META-INF/*.SF</exclude>
+                                <exclude>META-INF/*.DSA</exclude>
+                                <exclude>META-INF/*.RSA</exclude>
+                                <exclude>module-info.class</exclude>
+                            </excludes>
+                        </filter>
+                    </filters>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

@@ -1,0 +1,5 @@
+namespace chaos.s04.a2wild.h
+version "1.0.0"
+type C4Pair: <"Constructed and segment-set output type.">
+    left number (1..1)
+    right number (1..1)

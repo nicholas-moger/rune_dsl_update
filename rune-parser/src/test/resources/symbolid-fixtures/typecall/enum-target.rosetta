@@ -1,0 +1,8 @@
+namespace com.test
+
+enum Color:
+    Red
+    Blue
+
+type FooWithEnum:
+    c Color (1..1)

@@ -1,0 +1,225 @@
+[
+  {
+    "file": "codegen.legacy.json",
+    "sourcePath": "demo/receipts/codegen.legacy.json",
+    "sourceRevision": "691e0b160ab7dc189b9d33b5387d8462f36630b5",
+    "originalSha256": "9c055d93927eac8b44791e5185ecef0c72f7fb3a3187bbdafaa60550d3d6ae3c",
+    "curatedSha256": "9c055d93927eac8b44791e5185ecef0c72f7fb3a3187bbdafaa60550d3d6ae3c",
+    "pathFieldsRedacted": 0,
+    "measurementValuesChanged": false
+  },
+  {
+    "file": "codegen.m1.json",
+    "sourcePath": "demo/receipts/codegen.m1.json",
+    "sourceRevision": "691e0b160ab7dc189b9d33b5387d8462f36630b5",
+    "originalSha256": "11d35d51372b21671679923f29f0e32523ab5954382ddfe41b87285014a5f4d0",
+    "curatedSha256": "11d35d51372b21671679923f29f0e32523ab5954382ddfe41b87285014a5f4d0",
+    "pathFieldsRedacted": 0,
+    "measurementValuesChanged": false
+  },
+  {
+    "file": "diff.legacy-vs-m1.json",
+    "sourcePath": "demo/receipts/diff.legacy-vs-m1.json",
+    "sourceRevision": "691e0b160ab7dc189b9d33b5387d8462f36630b5",
+    "originalSha256": "3fc94427a6c070751a29ea61507dac0fa5c5cd09d0ef7903db3d877f4e829e54",
+    "curatedSha256": "5055b656c809d1ff4866e582687653b33c785a3ae0f38aea13b48d298337e737",
+    "pathFieldsRedacted": 3,
+    "measurementValuesChanged": false
+  },
+  {
+    "file": "build.legacy.clean.json",
+    "sourcePath": "demo/receipts/build.legacy.clean.json",
+    "sourceRevision": "691e0b160ab7dc189b9d33b5387d8462f36630b5",
+    "originalSha256": "9c14f6be8977e1a30f5af81dba5830ad2f61553ee711a9f7c1039f4a6a332482",
+    "curatedSha256": "6d7ad135d6cc1d2a53522c5958917d96c619b1a3aa58b90524aced813e34ce42",
+    "pathFieldsRedacted": 2,
+    "measurementValuesChanged": false
+  },
+  {
+    "file": "build.plus.clean.json",
+    "sourcePath": "demo/receipts/build.plus.clean.json",
+    "sourceRevision": "691e0b160ab7dc189b9d33b5387d8462f36630b5",
+    "originalSha256": "23bb30dd3076e73419bd0e397835dab5cbdd39a212819de19c7493c351b2c196",
+    "curatedSha256": "58f9cd1988a84df696cf3f5e4953b9fd8dbef9c368f0c616d6c6ffb054ab1391",
+    "pathFieldsRedacted": 2,
+    "measurementValuesChanged": false
+  },
+  {
+    "file": "build.paritydiff.json",
+    "sourcePath": "demo/receipts/build.paritydiff.json",
+    "sourceRevision": "691e0b160ab7dc189b9d33b5387d8462f36630b5",
+    "originalSha256": "ddb414b567033d4cf24b96988391c2d869eb9b46d6e791ee72658c86acb92371",
+    "curatedSha256": "68c31e62ecac9488272ffd009e6c7f8330c80e622e52a81122ec24cae68541cc",
+    "pathFieldsRedacted": 8,
+    "measurementValuesChanged": false
+  },
+  {
+    "file": "ai.context.json",
+    "sourcePath": "demo/receipts/ai.context.json",
+    "sourceRevision": "691e0b160ab7dc189b9d33b5387d8462f36630b5",
+    "originalSha256": "5cad90e683348064b5a73b10ab8e69f60dfcf9f605285e72977b674517ea939a",
+    "curatedSha256": "ebd60c00f0645274f1a9462ec9bcaac8fdb83014ab170cb6981e65af101fb0d7",
+    "pathFieldsRedacted": 2,
+    "measurementValuesChanged": false
+  },
+  {
+    "file": "compatibility-source.txt",
+    "sourcePath": "docs/user/testing.md",
+    "sourceRevision": "691e0b160ab7dc189b9d33b5387d8462f36630b5",
+    "sourceLineRanges": [
+      [
+        9,
+        22
+      ],
+      [
+        145,
+        166
+      ],
+      [
+        70,
+        78
+      ]
+    ],
+    "originalSha256": "8fd2c300bc25f52587f4d40db9275be1a9b195e8b0aa35f38691f5ec34df32f9",
+    "curatedSha256": "a28c72132839ee475b5b97195981e922205ecd0dee27d18813eda51e58ef341a",
+    "description": "Verbatim selected source-report lines; not raw benchmark logs"
+  },
+  {
+    "file": "runtime-U020-source.txt",
+    "sourcePath": "docs/upgrades/U020-lazy-failure-text-runtime.md",
+    "sourceRevision": "691e0b160ab7dc189b9d33b5387d8462f36630b5",
+    "sourceLineRanges": [
+      [
+        155,
+        174
+      ]
+    ],
+    "originalSha256": "50a47df8b21ed839f92869e7df32031a403f01841003bae49cb6119334354275",
+    "curatedSha256": "4d70dd96603bb54be6452624b7fa1955d3e133d653ce23954a4318b48f9580ca",
+    "description": "Verbatim selected source-report lines; not raw benchmark logs"
+  },
+  {
+    "file": "runtime-U021-source.txt",
+    "sourcePath": "docs/upgrades/U021-deferred-mapper-path-lineage.md",
+    "sourceRevision": "691e0b160ab7dc189b9d33b5387d8462f36630b5",
+    "sourceLineRanges": [
+      [
+        185,
+        205
+      ]
+    ],
+    "originalSha256": "fd7b36cf579d140c001c8543f04b21cad48728de1c8e933a996bf6f072be7cb2",
+    "curatedSha256": "004f96d426723ec9c28c6764fb25bf484cacdb883f4466006ec448666e35d05b",
+    "description": "Verbatim selected source-report lines; not raw benchmark logs"
+  },
+  {
+    "file": "runtime-U022-source.txt",
+    "sourcePath": "docs/upgrades/U022-seed-deferred-mapper-path-construction.md",
+    "sourceRevision": "691e0b160ab7dc189b9d33b5387d8462f36630b5",
+    "sourceLineRanges": [
+      [
+        184,
+        210
+      ]
+    ],
+    "originalSha256": "fab1b53ecf04b84ce4e67274dea3d451d10aa94d1fb52a44efa836a4d4a9ab26",
+    "curatedSha256": "a03d38caaadaf58fca61df05c3538d73064c06de7cc490f547f8c56815930322",
+    "description": "Verbatim selected source-report lines; not raw benchmark logs"
+  },
+  {
+    "file": "compatibility-25cell-off.txt",
+    "sourcePath": "target/release-instruments/scratch/rows-rel1-off.txt",
+    "evidenceReleaseCommit": "1448f0a7d8d9c1b6bee9a84a8d56e896e3e10083",
+    "evidenceReleaseDate": "2026-09-02",
+    "originalSha256": "cef66721f442d8caae8ee80b8cfa6932dd7e2f9693512695d4f69dda57da252e",
+    "curatedSha256": "d47fa88f49dba305183ca5adf278ae1bb29e12a29c9d1a00fd0252bf38d783a9",
+    "description": "Unmodified retained compact matrix rows, not a new run"
+  },
+  {
+    "file": "compatibility-25cell-on.txt",
+    "sourcePath": "target/release-instruments/scratch/rows-rel1-on.txt",
+    "evidenceReleaseCommit": "1448f0a7d8d9c1b6bee9a84a8d56e896e3e10083",
+    "evidenceReleaseDate": "2026-09-02",
+    "originalSha256": "cef66721f442d8caae8ee80b8cfa6932dd7e2f9693512695d4f69dda57da252e",
+    "curatedSha256": "d47fa88f49dba305183ca5adf278ae1bb29e12a29c9d1a00fd0252bf38d783a9",
+    "description": "Unmodified retained compact matrix rows, not a new run"
+  },
+  {
+    "file": "cdm-5.38.0.sha256",
+    "sourcePath": "test-corpus/cdm/cdm-5.38.0 (Git blob bytes at 788f63af47723ca2ef2ec8d24f31c01a4ac4505f) + the frozen 9.83.0 baseline reference Java",
+    "sourceRevision": "82e7921352111c4b0ae38fd37b8f8c89402f64c7",
+    "originalSha256": null,
+    "curatedSha256": "0c898dc0cd64aa6ff7261ecf3b3c463a9d41c9fc063a7aad3ee90bb02bbf31d2",
+    "description": "87 source rows hashed from the pinned public commit blobs and 3,950 reference Java rows hashed from the retained Windows reference; raw and CRLF->LF-normalised SHA-256 per row; the 3,950 raw hashes equal the committed frozen-corpus manifest rows"
+  },
+  {
+    "file": "analytics.plus-jvm.json",
+    "sourcePath": "demo/receipts/analytics.plus-jvm.json",
+    "sourceRevision": "82e7921352111c4b0ae38fd37b8f8c89402f64c7",
+    "originalSha256": "9f09bcf69dda7d6394c9f6006c64528c2be74515f1b81d9311a4ea99d8aafa03",
+    "pathFieldsRedacted": 0,
+    "measurementValuesChanged": false,
+    "description": "Model-access comparison receipt of 20 August 2026, fork parser lane; restored unchanged in the correction commit (Experiments section 6)",
+    "curatedSha256": "9f09bcf69dda7d6394c9f6006c64528c2be74515f1b81d9311a4ea99d8aafa03"
+  },
+  {
+    "file": "analytics.legacy-emf.json",
+    "sourcePath": "demo/receipts/analytics.legacy-emf.json",
+    "sourceRevision": "82e7921352111c4b0ae38fd37b8f8c89402f64c7",
+    "originalSha256": "5809abb290fb8d317e1d72054476fab3fceddf4a0efdc5d3ae6aaf371903764f",
+    "pathFieldsRedacted": 0,
+    "measurementValuesChanged": false,
+    "description": "Model-access comparison receipt of 20 August 2026, released Xtext/EMF lane; restored unchanged in the correction commit (Experiments section 6)",
+    "curatedSha256": "5809abb290fb8d317e1d72054476fab3fceddf4a0efdc5d3ae6aaf371903764f"
+  },
+  {
+    "file": "analytics.nojvm.json",
+    "sourcePath": "demo/receipts/analytics.nojvm.json",
+    "sourceRevision": "82e7921352111c4b0ae38fd37b8f8c89402f64c7",
+    "originalSha256": "718fc41581e0c78e083327cd668b62fb8fbf0931eea543b018f5c10f08a060e9",
+    "pathFieldsRedacted": 0,
+    "measurementValuesChanged": false,
+    "description": "Model-access comparison receipt of 20 August 2026, Python lane; restored unchanged in the correction commit (Experiments section 6)",
+    "curatedSha256": "718fc41581e0c78e083327cd668b62fb8fbf0931eea543b018f5c10f08a060e9"
+  },
+  {
+    "file": "cdm-5.38.0.witnessed-variants.tsv",
+    "sourcePath": "derived: the bytes of the three enumeration-order-dependent CDM 5.38.0 reference files as produced by each released-generator run named in cdm-5.38.0.mode0-witnesses.json",
+    "sourceRevision": "82e7921352111c4b0ae38fd37b8f8c89402f64c7",
+    "originalSha256": null,
+    "description": "Accepted content of the three order-dependent files (BusinessEventMeta.java and two package-info.java): eight witnessed forms over three files, every one produced by a run of the released 9.83.0 generator; nothing rendered by this implementation. Replaces the withdrawn replacement-rendered package-info variant list",
+    "curatedSha256": "8b4fdb09acb4a5370938b343112adae6786577c2147a0f2cefcff5a72ef5e8c7"
+  },
+  {
+    "file": "cdm-5.38.0.mode0-witnesses.json",
+    "sourcePath": "derived: the three released-generator runs (the retained frozen reference; the export validation regeneration of 22 September 2026 12:28; the independent review regeneration of 22 September 2026 14:06) whose outputs the witnessed-variant list attributes",
+    "sourceRevision": "82e7921352111c4b0ae38fd37b8f8c89402f64c7",
+    "originalSha256": null,
+    "description": "Witness record for cdm-5.38.0.witnessed-variants.tsv: generator, pinned input, command and the three runs (R, W1, W2) with their platform and time",
+    "curatedSha256": "98272aeda527dad01e4fac246227d345f84202b8b6d62ec2505208ce627515f3"
+  },
+  {
+    "file": "ir-writers-32f8c9ec4.txt",
+    "sourcePath": "the development validation chain's IR-on D11 run print at the extract commit (private instrument output; header lines replaced by a neutral description)",
+    "sourceRevision": "32f8c9ec4b337c5d3d33c9158e8410dd2225b36e",
+    "originalSha256": null,
+    "description": "Native IR file writers per cell and kind on the legacy Java route with the IR on, at a commit tree-identical to the exported revision, 22 September 2026 (25 real-model cells plus chaos)",
+    "curatedSha256": "6d3a30b52c3cb3ae7479330360f9612fff2b7ad9ad861dee3369e1bb0282faea"
+  },
+  {
+    "file": "ir-unit-shadows-32f8c9ec4.txt",
+    "sourcePath": "the development validation chain's IR-on D11 run print at the extract commit (private instrument output; header lines replaced by a neutral description)",
+    "sourceRevision": "32f8c9ec4b337c5d3d33c9158e8410dd2225b36e",
+    "originalSha256": null,
+    "description": "Type-unit shadows, readiness and verdicts per cell at a commit tree-identical to the exported revision, 22 September 2026",
+    "curatedSha256": "a3c5a44da802672ba846131264b5c948a2c4e7e58351105411867996215b698e"
+  },
+  {
+    "file": "optimised-pair-census-32f8c9ec4.txt",
+    "sourcePath": "the rune-equivalence Surefire report of the optimised-route pair gate at the extract commit (private instrument output; header lines replaced by a neutral description)",
+    "sourceRevision": "32f8c9ec4b337c5d3d33c9158e8410dd2225b36e",
+    "originalSha256": null,
+    "description": "Optimised-route paired-execution census per cell: 21 function-bearing cells, 150,831 paired executions, zero behaviour differences, 22 September 2026",
+    "curatedSha256": "d3bd7ce65473efc6d79c077d966fd0b52ce34fe65385bd0e9fead76c164e456c"
+  }
+]

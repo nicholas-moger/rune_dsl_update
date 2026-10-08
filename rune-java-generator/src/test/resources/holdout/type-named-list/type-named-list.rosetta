@@ -1,0 +1,27 @@
+namespace holdout.typenamedlist
+version "0.0.0"
+
+type List: <"A data type named List - the chaos s32 shape (v3.2 seat 11, M1): its POJO, its meta and its three validators write java.util.List fully qualified and never import it, because the own class claims the file scope first (the released plugin's ImportingStringConcatenation first-claim law); a data rule on it is the sixth kind.">
+    items string (0..*)
+    caption string (0..1)
+    condition NonEmpty: <"The sixth kind - a data rule whose subject is the List-named type.">
+        items exists
+
+type HolderModelFirst: <"A sibling whose FIRST attribute is typed by the model List: the model List claims the simple name first (imported), java.util.List is written fully qualified after it.">
+    subject List (0..1)
+    names string (0..*)
+    others List (0..*)
+
+type HolderJavaFirst: <"A sibling whose FIRST attribute is a multi string: java.util.List claims the simple name first (imported), the model List is written fully qualified after it.">
+    names string (0..*)
+    subject List (0..1)
+    others List (0..*)
+
+func UseList: <"The List-named type at the FUNCTION seat beside a list-of-string input and a list-of-string output: which List does the signature claim first?">
+    inputs:
+        l List (1..1)
+        ss string (0..*)
+    output:
+        out string (0..*)
+    add out: l -> items
+    add out: ss

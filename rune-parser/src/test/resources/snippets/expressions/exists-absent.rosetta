@@ -1,0 +1,15 @@
+namespace test.expressions
+
+func CheckExists:
+    inputs:
+        x number (0..1)
+        y number (0..1)
+    output:
+        result boolean (1..1)
+    condition XExists:
+        x exists
+    condition YAbsent:
+        y is absent
+    condition XSingleExists:
+        x single exists
+    set result: x exists

@@ -1,0 +1,22 @@
+namespace test.expressions
+
+func FilterItems:
+    inputs:
+        items number (0..*)
+    output:
+        result number (0..*)
+    set result: items filter [item > 0]
+
+func ExtractNames:
+    inputs:
+        items number (0..*)
+    output:
+        result number (0..*)
+    set result: items extract [item + 1]
+
+func ReduceItems:
+    inputs:
+        items number (0..*)
+    output:
+        result number (1..1)
+    set result: items reduce a, b [a + b]

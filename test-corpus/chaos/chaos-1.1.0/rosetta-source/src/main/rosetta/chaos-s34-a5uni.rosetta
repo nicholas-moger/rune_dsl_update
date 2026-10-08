@@ -1,0 +1,25 @@
+namespace chaos.s34.a5uni
+version "1.0.0"
+type C34Aux: <"éüµ – Helper - relocated by the import axis.">
+    aux string (1..1)
+enum C34KindEnum: <"The annotation attribute's enum.">
+    Alpha
+    Beta
+annotation c34owner: <"Annotation with string, number and boolean attributes.">
+    team string (0..1)
+    tier number (0..1)
+    live boolean (0..1)
+annotation c34stage: <"Annotation with a prefix and an enum-typed attribute.">
+    [prefix C34Stage]
+    kind C34KindEnum (0..1)
+type C34Marked: <"Annotated type and attribute - bare, attribute-selecting and prefixed references.">
+    [c34owner team]
+    [c34stage kind]
+    mid string (1..1)
+        [c34owner tier]
+    aux C34Aux (0..1)
+type A5UniProbe: <"Non-ASCII literal probe – müßig 試験.">
+    p string (0..1)
+        [label as "µ–label §7"]
+enum A5UniProbeEnum: <"displayName probe.">
+    V displayName "µ–„display“"

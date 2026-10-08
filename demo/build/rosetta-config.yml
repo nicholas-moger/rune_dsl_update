@@ -1,0 +1,52 @@
+# Rune DSL stats demo - BUILD section: the generator configuration SHARED by both
+# toolchains (demo/build/build-legacy/pom.xml and demo/build/build-plus/pom.xml
+# both point their `rosettaConfig` parameter at THIS file).
+#
+# Shape copied from the real 9.83.0-era consumers, verbatim structure:
+#   test-corpus/cdm/cdm-6.20.6/rosetta-source/src/main/resources/rosetta-config.yml
+#   test-corpus/drr/drr-6.34.1/rosetta-source/src/main/resources/rosetta-config.yml
+# both of which are exactly:
+#     model:
+#       name: <model name>
+#     dependencies:
+#     generators:
+#       namespaces:
+#       - <root>.*
+#       - com.rosetta.model
+#
+# `generators.namespaces` is an ACCEPT-list, not a deny-list. Its semantics
+# (upstream com.regnosys.rosetta.config.file.NamespaceFilter, ported arm-for-arm
+# in rune-maven-plugin/src/main/java/com/regnosys/rosetta/maven/NamespaceFilter.java):
+#   - a pattern ending in a `*` segment is GENERIC and matches any namespace whose
+#     dot-SEGMENTS start with the pattern's parent path (`cdm.*` matches `cdm` and
+#     `cdm.base.staticdata`, but NOT `cdmx.foo` - segments are compared, never raw
+#     string prefixes);
+#   - any other pattern is SPECIFIC (exact namespace equality);
+#   - an EMPTY list matches everything.
+#
+# The three roots below are the complete set of top-level namespace segments in
+# demo/corpus (measured: cdm-5.38.0 -> `cdm`, iso20022-1.38.0 -> `iso20022`,
+# drr-6.34.1 -> `drr`, builtins -> `com`), so this list is CONTRACTS section 1's
+# "everything except builtins" stated positively.
+#
+# `com.rosetta.model` is carried because both real consumers carry it, and it is
+# a no-op either way: the builtin models are skipped by FILE NAME before the
+# namespace filter is ever consulted. See GeneratorModel.IGNORED_FILES
+# (rune-java-generator/.../generator/java/GeneratorModel.java:94-98) =
+# {model-no-code-gen.rosetta, basictypes.rosetta, annotations.rosetta}, applied in
+# shouldGenerate() at :795-797 as `!isIgnoredFile(model) && emissionFilter.test(model)`.
+# The legacy leg reaches the same outcome by a different route: the builtins arrive
+# as CLASSPATH library models, and the Xtext standalone builder generates only
+# SOURCE resources.
+#
+# `doNotPrune` is deliberately absent: neither demo corpus root needs a builder
+# pruning exemption, and an absent section is upstream's empty-set default.
+model:
+  name: Rune DSL stats demo merged corpus
+dependencies:
+generators:
+  namespaces:
+  - cdm.*
+  - iso20022.*
+  - drr.*
+  - com.rosetta.model

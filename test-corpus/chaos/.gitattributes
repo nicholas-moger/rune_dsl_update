@@ -1,0 +1,5 @@
+# The charter § 2.1 byte-integrity law: the chaos cell's bytes ARE the
+# contract (the A5 axis ships CRLF/BOM/mixed-EOL/non-ASCII payloads, and the
+# goldens are the oracle's verbatim output) - git must never rewrite them at
+# checkout on any machine.
+** -text

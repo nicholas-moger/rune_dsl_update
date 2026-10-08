@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="1760" viewBox="0 0 480 1760" role="img" aria-labelledby="title desc">
+<title id="title">A standalone SDK · proposed service groups</title>
+<desc id="desc">Proposed standalone SDK service groupings: workspace for loading model/project contexts and selecting versions and dependencies; semantics for symbols, types, cardinality, resolution and validation; IR and targets for semantic IR, emitter contracts and coverage; regression and trace for reproduction, output comparison and source/semantic facts. Rune Studio, CLI, LSP and agent/MCP clients are planned clients of those services. Packaging names are illustrative, not shipped artifacts. Separate existing foundation modules: rune-parser, rune-java-generator, rune-ir, rune-ir-java, rune-ir-java-optimised, rune-runtime and rune-maven-plugin. Those foundations are not a claim that the standalone SDK is delivered.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9" fill="none" stroke="#a9b7cb" stroke-width="1.4"/></marker></defs>
+<rect width="480" height="1760" rx="22" fill="#121923"/>
+<g font-family="Segoe UI, Arial, sans-serif">
+<text x="24" y="43" fill="#eef2f8" font-size="32" font-weight="600" text-anchor="start">
+<tspan x="24" dy="0" xml:space="preserve">A standalone SDK</tspan>
+<tspan x="24" dy="38" xml:space="preserve">proposed service groups</tspan>
+</text>
+<text x="24" y="125" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="24" dy="0" xml:space="preserve">Illustrative packaging</tspan>
+<tspan x="24" dy="30" xml:space="preserve">Services and clients are planned</tspan>
+</text>
+<rect x="24" y="205" width="432" height="845" rx="14" fill="#18222f" stroke="#92d5c6" stroke-width="1.5"/>
+<text x="47" y="243" fill="#92d5c6" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Proposed standalone SDK</tspan>
+</text>
+<text x="47" y="275" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Service groupings</tspan>
+</text>
+<rect x="47" y="310" width="386" height="145" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="48" y="329" width="4" height="107" rx="2" fill="#a2c6e6"/>
+<text x="70" y="347" fill="#a2c6e6" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Workspace</tspan>
+</text>
+<text x="70" y="380" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Load model / project contexts</tspan>
+<tspan x="70" dy="30" xml:space="preserve">Select versions / dependencies</tspan>
+</text>
+<rect x="47" y="495" width="386" height="145" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="48" y="514" width="4" height="107" rx="2" fill="#92d5c6"/>
+<text x="70" y="532" fill="#92d5c6" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Semantics</tspan>
+</text>
+<text x="70" y="565" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Symbols · types · cardinality</tspan>
+<tspan x="70" dy="30" xml:space="preserve">Resolve and validate</tspan>
+</text>
+<rect x="47" y="680" width="386" height="145" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="48" y="699" width="4" height="107" rx="2" fill="#a6b0ec"/>
+<text x="70" y="717" fill="#a6b0ec" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">IR + targets</tspan>
+</text>
+<text x="70" y="750" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Inspect semantic IR / emit targets</tspan>
+<tspan x="70" dy="30" xml:space="preserve">Target contracts and coverage</tspan>
+</text>
+<rect x="47" y="865" width="386" height="145" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="48" y="884" width="4" height="107" rx="2" fill="#d0b487"/>
+<text x="70" y="902" fill="#d0b487" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Regression + trace</tspan>
+</text>
+<text x="70" y="935" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Reproduce / compare output</tspan>
+<tspan x="70" dy="30" xml:space="preserve">Trace source and semantic facts</tspan>
+</text>
+<rect x="24" y="1100" width="432" height="175" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5" stroke-dasharray="7 5"/>
+<rect x="25" y="1119" width="4" height="137" rx="2" fill="#a6b0ec"/>
+<text x="47" y="1137" fill="#a6b0ec" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Planned clients</tspan>
+</text>
+<text x="47" y="1170" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Rune Studio · CLI · LSP</tspan>
+<tspan x="47" dy="30" xml:space="preserve">Agents / MCP</tspan>
+<tspan x="47" dy="30" xml:space="preserve">Same proposed SDK services</tspan>
+</text>
+<polyline points="240,1050 240,1100" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6 6"/>
+<rect x="24" y="1320" width="432" height="330" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="25" y="1339" width="4" height="292" rx="2" fill="#a2c6e6"/>
+<text x="47" y="1357" fill="#a2c6e6" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Existing foundation modules</tspan>
+</text>
+<text x="47" y="1390" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">rune-parser</tspan>
+<tspan x="47" dy="30" xml:space="preserve">rune-java-generator</tspan>
+<tspan x="47" dy="30" xml:space="preserve">rune-ir</tspan>
+<tspan x="47" dy="30" xml:space="preserve">rune-ir-java</tspan>
+<tspan x="47" dy="30" xml:space="preserve">rune-ir-java-optimised</tspan>
+<tspan x="47" dy="30" xml:space="preserve">rune-runtime</tspan>
+<tspan x="47" dy="30" xml:space="preserve">rune-maven-plugin</tspan>
+</text>
+<text x="24" y="1695" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="24" dy="0" xml:space="preserve">SDK packaging names are illustrative;</tspan>
+<tspan x="24" dy="30" xml:space="preserve">foundation modules already exist.</tspan>
+</text>
+</g>
+</svg>

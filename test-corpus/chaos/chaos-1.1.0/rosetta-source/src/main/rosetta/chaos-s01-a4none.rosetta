@@ -1,0 +1,6 @@
+namespace chaos.s01.a4none
+type C1Ref: <"A referenced component the import-style axis relocates.">
+    refCode string (1..1)
+type C1Base: <"Root of the S01 inheritance chain.">
+    baseId string (1..1)
+    note string (0..1)

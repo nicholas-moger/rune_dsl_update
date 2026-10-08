@@ -1,0 +1,64 @@
+namespace test.wmwrap
+
+metaType scheme string
+metaType id string
+metaType key string
+metaType reference string
+
+type Holder: <"Attribute-level meta shapes (the chaos C9Holder).">
+    coded string (0..1)
+        [metadata scheme]
+    codes string (0..*)
+        [metadata scheme]
+    marked string (0..1)
+        [metadata id]
+    plain string (0..1)
+
+type Keyed: <"A keyed root (the chaos C9Keyed).">
+    [metadata key]
+    kid string (1..1)
+
+func Wrapped: <"The chaos C9Stamp shape: scheme on an already-scheme'd attribute.">
+    inputs:
+        h Holder (1..1)
+    output:
+        c string (0..1)
+            [metadata scheme]
+    set c: h -> coded with-meta { scheme: "oracle-scheme" }
+
+func Plain: <"Scheme on a plain attribute (the fork's current arm, byte-identical today).">
+    inputs:
+        h Holder (1..1)
+    output:
+        c string (0..1)
+            [metadata scheme]
+    set c: h -> plain with-meta { scheme: "oracle-scheme" }
+
+func Literal: <"Scheme on a string literal.">
+    output:
+        c string (1..1)
+            [metadata scheme]
+    set c: "fixed" with-meta { scheme: "oracle-scheme" }
+
+func IdOnId: <"id on an already-id attribute.">
+    inputs:
+        h Holder (1..1)
+    output:
+        c string (0..1)
+            [metadata id]
+    set c: h -> marked with-meta { id: "the-id" }
+
+func SchemeOnId: <"scheme on an id-wrapped attribute (another meta kind on the same wrapper class).">
+    inputs:
+        h Holder (1..1)
+    output:
+        c string (0..1)
+            [metadata scheme]
+    set c: h -> marked with-meta { scheme: "oracle-scheme" }
+
+func WrappedToPlainOutput: <"The wrapped argument stamped, assigned to a PLAIN output (the unwrap after the stamp).">
+    inputs:
+        h Holder (1..1)
+    output:
+        c string (0..1)
+    set c: h -> coded with-meta { scheme: "oracle-scheme" }

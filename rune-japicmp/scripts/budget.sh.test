@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Task 6 smoke test — verify budget measurement note exists and cites D5.
+set -euo pipefail
+DOC="rune-japicmp/docs/budget-measurement.md"
+[[ -f "$DOC" ]] || { echo "FAIL: $DOC missing"; exit 1; }
+grep -Fq 'D5' "$DOC" || { echo "FAIL: D5 citation missing"; exit 1; }
+grep -Eq 'seconds|s /|ms' "$DOC" || { echo "FAIL: measurement units missing"; exit 1; }
+echo "PASS: budget note"

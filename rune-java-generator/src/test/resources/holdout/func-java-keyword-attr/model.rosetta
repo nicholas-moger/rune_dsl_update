@@ -1,0 +1,7 @@
+namespace test.fsingle050
+
+func This:
+	output:
+		static int (1..1)
+	set static:
+		42

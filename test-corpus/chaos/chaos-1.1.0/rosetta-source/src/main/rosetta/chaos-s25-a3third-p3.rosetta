@@ -1,0 +1,29 @@
+namespace chaos.s25.a3third.p3
+version "1.0.0"
+import chaos.s25.a3third.p1.*
+import chaos.s25.a3third.p2.*
+func C25Shadow: <"Closure parameters named like an ATTRIBUTE of the item (sub), an explicit parameter at every list-op seat (reduce / sort / min / max / filter), and a then-body implicit item beside an outer explicit parameter.">
+    inputs:
+        ps C25Paths (0..*)
+    output:
+        n number (1..1)
+    alias bySub: ps extract sub [ sub -> sub -> sname ]
+    alias sorted: ps sort sub [ sub -> p ]
+    alias hi: ps max sub [ sub -> q ]
+    alias lo: ps min sub [ sub -> q ]
+    alias kept: ps filter sub [ sub -> p exists ]
+    alias total: ps extract sub [ sub -> subs count ] then reduce a, b [ a + b ]
+    alias mixed: ps extract x [ x -> subs then filter item -> subs exists then count ]
+    set n:
+        (bySub count) + (sorted count) + (kept count) + total + (mixed then sum)
+        + (if hi exists then 1 else 0) + (if lo exists then 1 else 0)
+func C25Only: <"only exists at a function seat: a single path, a two-hop list, under then inside a lambda, and a choice-option leaf through the implicit item.">
+    inputs:
+        ps C25Paths (0..*)
+        t C25Paths (1..1)
+    output:
+        oks boolean (0..*)
+    add oks: t -> p only exists
+    add oks: (t -> sub -> sname, t -> sub -> subs) only exists
+    add oks: ps extract x [ x -> sub -> sname only exists ]
+    add oks: ps then extract (item -> pick -> C25OptA only exists)

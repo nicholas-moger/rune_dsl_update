@@ -1,0 +1,1457 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://finos.org/rune-dsl/schemas/ir-declaration-v1.json",
+  "title": "Rune DSL IR — v1 declaration wire form",
+  "type": "object",
+  "properties": {
+    "irFormatVersion": {
+      "const": 1
+    },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/declarationNode"
+      }
+    }
+  },
+  "required": [
+    "irFormatVersion",
+    "nodes"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "declarationNode": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/typeNode"
+        },
+        {
+          "$ref": "#/$defs/enumNode"
+        },
+        {
+          "$ref": "#/$defs/typeAliasNode"
+        },
+        {
+          "$ref": "#/$defs/modelNode"
+        }
+      ]
+    },
+    "typeNode": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "enum": [
+            "STRUCT",
+            "CHOICE"
+          ]
+        },
+        "name": {
+          "type": "string"
+        },
+        "isAbstract": {
+          "type": "boolean"
+        },
+        "baseType": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "fields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/fieldNode"
+          }
+        },
+        "baseTypeKind": {
+          "enum": [
+            "STRUCT",
+            "CHOICE",
+            "TYPE_ALIAS",
+            "BASIC_TYPE",
+            "RECORD_TYPE",
+            "META_TYPE",
+            "ENUM"
+          ]
+        },
+        "baseTypeNamespace": {
+          "type": "string"
+        },
+        "baseTypeResolvedName": {
+          "type": "string"
+        },
+        "baseTypeEffectiveBase": {
+          "$ref": "#/$defs/effectiveBaseNode"
+        },
+        "baseTypeAliasChain": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/aliasLinkNode"
+          }
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "resolvedName": {
+          "type": "string"
+        },
+        "definition": {
+          "type": "string"
+        },
+        "docReferences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/docReferenceNode"
+          }
+        },
+        "annotations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/annotationUseNode"
+          }
+        },
+        "conditionNames": {
+          "type": "array",
+          "items": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "conditionKinds": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "OneOf",
+              "Choice",
+              "DataRule"
+            ]
+          }
+        }
+      },
+      "required": [
+        "kind",
+        "name",
+        "isAbstract",
+        "baseType",
+        "fields"
+      ],
+      "additionalProperties": false,
+      "dependentRequired": {
+        "baseTypeNamespace": [
+          "baseTypeKind"
+        ],
+        "baseTypeResolvedName": [
+          "baseTypeKind"
+        ],
+        "baseTypeEffectiveBase": [
+          "baseTypeKind"
+        ],
+        "baseTypeAliasChain": [
+          "baseTypeKind"
+        ]
+      },
+      "dependentSchemas": {
+        "baseTypeKind": {
+          "properties": {
+            "baseType": {
+              "type": "string"
+            }
+          },
+          "anyOf": [
+            {
+              "required": [
+                "baseTypeNamespace"
+              ]
+            },
+            {
+              "required": [
+                "baseTypeResolvedName"
+              ]
+            }
+          ]
+        },
+        "baseTypeEffectiveBase": {
+          "properties": {
+            "baseTypeKind": {
+              "const": "TYPE_ALIAS"
+            }
+          }
+        },
+        "baseTypeAliasChain": {
+          "properties": {
+            "baseTypeKind": {
+              "const": "TYPE_ALIAS"
+            }
+          }
+        }
+      }
+    },
+    "fieldNode": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "FIELD"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "cardinality": {
+          "enum": [
+            "ZERO_TO_ONE",
+            "ZERO_TO_MANY",
+            "ONE_TO_ONE",
+            "ONE_TO_MANY"
+          ]
+        },
+        "typeKind": {
+          "enum": [
+            "STRUCT",
+            "CHOICE",
+            "TYPE_ALIAS",
+            "BASIC_TYPE",
+            "RECORD_TYPE",
+            "META_TYPE",
+            "ENUM"
+          ]
+        },
+        "typeNamespace": {
+          "type": "string"
+        },
+        "typeResolvedName": {
+          "type": "string"
+        },
+        "typeEffectiveBase": {
+          "$ref": "#/$defs/effectiveBaseNode"
+        },
+        "typeAliasChain": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/aliasLinkNode"
+          }
+        },
+        "bounds": {
+          "$ref": "#/$defs/boundsNode"
+        },
+        "isOverride": {
+          "const": true
+        },
+        "typeArguments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/typeArgumentNode"
+          }
+        },
+        "definition": {
+          "type": "string"
+        },
+        "docReferences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/docReferenceNode"
+          }
+        },
+        "annotations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/annotationUseNode"
+          }
+        },
+        "labels": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/labelNode"
+          }
+        },
+        "ruleReferences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ruleReferenceNode"
+          }
+        }
+      },
+      "required": [
+        "kind",
+        "name",
+        "type",
+        "cardinality"
+      ],
+      "additionalProperties": false,
+      "dependentRequired": {
+        "typeNamespace": [
+          "typeKind"
+        ],
+        "typeResolvedName": [
+          "typeKind"
+        ],
+        "typeEffectiveBase": [
+          "typeKind"
+        ],
+        "typeAliasChain": [
+          "typeKind"
+        ]
+      },
+      "dependentSchemas": {
+        "typeKind": {
+          "anyOf": [
+            {
+              "required": [
+                "typeNamespace"
+              ]
+            },
+            {
+              "required": [
+                "typeResolvedName"
+              ]
+            }
+          ]
+        },
+        "typeEffectiveBase": {
+          "properties": {
+            "typeKind": {
+              "const": "TYPE_ALIAS"
+            }
+          }
+        },
+        "typeAliasChain": {
+          "properties": {
+            "typeKind": {
+              "const": "TYPE_ALIAS"
+            }
+          }
+        }
+      }
+    },
+    "enumNode": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "ENUM"
+        },
+        "name": {
+          "type": "string"
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/enumValueNode"
+          }
+        },
+        "parent": {
+          "type": "string"
+        },
+        "parentNamespace": {
+          "type": "string"
+        },
+        "parentResolvedName": {
+          "type": "string"
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "definition": {
+          "type": "string"
+        },
+        "docReferences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/docReferenceNode"
+          }
+        },
+        "annotations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/annotationUseNode"
+          }
+        }
+      },
+      "required": [
+        "kind",
+        "name",
+        "values"
+      ],
+      "additionalProperties": false,
+      "dependentRequired": {
+        "parentNamespace": [
+          "parent"
+        ],
+        "parentResolvedName": [
+          "parent"
+        ]
+      }
+    },
+    "enumValueNode": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "ENUM_VALUE"
+        },
+        "name": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "definition": {
+          "type": "string"
+        },
+        "docReferences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/docReferenceNode"
+          }
+        },
+        "annotations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/annotationUseNode"
+          }
+        },
+        "synonyms": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/enumSynonymNode"
+          }
+        }
+      },
+      "required": [
+        "kind",
+        "name",
+        "displayName"
+      ],
+      "additionalProperties": false
+    },
+    "typeAliasNode": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "TYPE_ALIAS"
+        },
+        "name": {
+          "type": "string"
+        },
+        "baseType": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "baseTypeKind": {
+          "enum": [
+            "STRUCT",
+            "CHOICE",
+            "TYPE_ALIAS",
+            "BASIC_TYPE",
+            "RECORD_TYPE",
+            "META_TYPE",
+            "ENUM"
+          ]
+        },
+        "baseTypeNamespace": {
+          "type": "string"
+        },
+        "baseTypeResolvedName": {
+          "type": "string"
+        },
+        "baseTypeEffectiveBase": {
+          "$ref": "#/$defs/effectiveBaseNode"
+        },
+        "baseTypeAliasChain": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/aliasLinkNode"
+          }
+        },
+        "baseTypeArguments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/typeArgumentNode"
+          }
+        },
+        "typeParameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/typeParameterNode"
+          }
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "definition": {
+          "type": "string"
+        },
+        "docReferences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/docReferenceNode"
+          }
+        },
+        "annotations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/annotationUseNode"
+          }
+        },
+        "conditionNames": {
+          "type": "array",
+          "items": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "conditionKinds": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "OneOf",
+              "Choice",
+              "DataRule"
+            ]
+          }
+        }
+      },
+      "required": [
+        "kind",
+        "name",
+        "baseType"
+      ],
+      "additionalProperties": false,
+      "dependentRequired": {
+        "baseTypeNamespace": [
+          "baseTypeKind"
+        ],
+        "baseTypeResolvedName": [
+          "baseTypeKind"
+        ],
+        "baseTypeEffectiveBase": [
+          "baseTypeKind"
+        ],
+        "baseTypeAliasChain": [
+          "baseTypeKind"
+        ]
+      },
+      "dependentSchemas": {
+        "baseTypeKind": {
+          "properties": {
+            "baseType": {
+              "type": "string"
+            }
+          },
+          "anyOf": [
+            {
+              "required": [
+                "baseTypeNamespace"
+              ]
+            },
+            {
+              "required": [
+                "baseTypeResolvedName"
+              ]
+            }
+          ]
+        },
+        "baseTypeEffectiveBase": {
+          "properties": {
+            "baseTypeKind": {
+              "const": "TYPE_ALIAS"
+            }
+          }
+        },
+        "baseTypeAliasChain": {
+          "properties": {
+            "baseTypeKind": {
+              "const": "TYPE_ALIAS"
+            }
+          }
+        }
+      }
+    },
+    "modelNode": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "MODEL"
+        },
+        "name": {
+          "type": "string"
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "definition": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "qualifiableConfigs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/qualifiableConfigNode"
+          }
+        },
+        "qualificationFunctions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/qualificationFunctionNode"
+          }
+        },
+        "functionSignatures": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/functionSignatureNode"
+          }
+        },
+        "withMetaUses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/withMetaUseNode"
+          }
+        }
+      },
+      "required": [
+        "kind",
+        "name",
+        "namespace"
+      ],
+      "additionalProperties": false
+    },
+    "qualifiableConfigNode": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "enum": [
+            "IS_EVENT",
+            "IS_PRODUCT"
+          ]
+        },
+        "rootType": {
+          "type": "string"
+        },
+        "rootTypeKind": {
+          "enum": [
+            "STRUCT",
+            "CHOICE",
+            "TYPE_ALIAS",
+            "BASIC_TYPE",
+            "RECORD_TYPE",
+            "META_TYPE",
+            "ENUM"
+          ]
+        },
+        "rootTypeNamespace": {
+          "type": "string"
+        },
+        "rootTypeResolvedName": {
+          "type": "string"
+        },
+        "rootTypeEffectiveBase": {
+          "$ref": "#/$defs/effectiveBaseNode"
+        },
+        "rootTypeAliasChain": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/aliasLinkNode"
+          }
+        }
+      },
+      "required": [
+        "kind",
+        "rootType"
+      ],
+      "additionalProperties": false,
+      "dependentRequired": {
+        "rootTypeNamespace": [
+          "rootTypeKind"
+        ],
+        "rootTypeResolvedName": [
+          "rootTypeKind"
+        ],
+        "rootTypeEffectiveBase": [
+          "rootTypeKind"
+        ],
+        "rootTypeAliasChain": [
+          "rootTypeKind"
+        ]
+      },
+      "dependentSchemas": {
+        "rootTypeKind": {
+          "anyOf": [
+            {
+              "required": [
+                "rootTypeNamespace"
+              ]
+            },
+            {
+              "required": [
+                "rootTypeResolvedName"
+              ]
+            }
+          ]
+        },
+        "rootTypeEffectiveBase": {
+          "properties": {
+            "rootTypeKind": {
+              "const": "TYPE_ALIAS"
+            }
+          }
+        },
+        "rootTypeAliasChain": {
+          "properties": {
+            "rootTypeKind": {
+              "const": "TYPE_ALIAS"
+            }
+          }
+        }
+      }
+    },
+    "qualificationFunctionNode": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "firstInputType": {
+          "type": "string"
+        },
+        "firstInputTypeKind": {
+          "enum": [
+            "STRUCT",
+            "CHOICE",
+            "TYPE_ALIAS",
+            "BASIC_TYPE",
+            "RECORD_TYPE",
+            "META_TYPE",
+            "ENUM"
+          ]
+        },
+        "firstInputTypeNamespace": {
+          "type": "string"
+        },
+        "firstInputTypeResolvedName": {
+          "type": "string"
+        },
+        "firstInputTypeEffectiveBase": {
+          "$ref": "#/$defs/effectiveBaseNode"
+        },
+        "firstInputTypeAliasChain": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/aliasLinkNode"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "firstInputType"
+      ],
+      "additionalProperties": false,
+      "dependentRequired": {
+        "firstInputTypeNamespace": [
+          "firstInputTypeKind"
+        ],
+        "firstInputTypeResolvedName": [
+          "firstInputTypeKind"
+        ],
+        "firstInputTypeEffectiveBase": [
+          "firstInputTypeKind"
+        ],
+        "firstInputTypeAliasChain": [
+          "firstInputTypeKind"
+        ]
+      },
+      "dependentSchemas": {
+        "firstInputTypeKind": {
+          "anyOf": [
+            {
+              "required": [
+                "firstInputTypeNamespace"
+              ]
+            },
+            {
+              "required": [
+                "firstInputTypeResolvedName"
+              ]
+            }
+          ]
+        },
+        "firstInputTypeEffectiveBase": {
+          "properties": {
+            "firstInputTypeKind": {
+              "const": "TYPE_ALIAS"
+            }
+          }
+        },
+        "firstInputTypeAliasChain": {
+          "properties": {
+            "firstInputTypeKind": {
+              "const": "TYPE_ALIAS"
+            }
+          }
+        }
+      }
+    },
+    "functionSignatureNode": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "inputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/fieldNode"
+          }
+        },
+        "output": {
+          "$ref": "#/$defs/fieldNode"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "additionalProperties": false
+    },
+    "withMetaUseNode": {
+      "type": "object",
+      "properties": {
+        "entryNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "argumentType": {
+          "type": "string"
+        },
+        "argumentTypeKind": {
+          "enum": [
+            "STRUCT",
+            "CHOICE",
+            "TYPE_ALIAS",
+            "BASIC_TYPE",
+            "RECORD_TYPE",
+            "META_TYPE",
+            "ENUM"
+          ]
+        },
+        "argumentTypeNamespace": {
+          "type": "string"
+        },
+        "argumentTypeResolvedName": {
+          "type": "string"
+        },
+        "argumentTypeEffectiveBase": {
+          "$ref": "#/$defs/effectiveBaseNode"
+        },
+        "argumentTypeAliasChain": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/aliasLinkNode"
+          }
+        },
+        "typeArguments": {
+          "type": "array",
+          "items": {
+            "allOf": [
+              {
+                "$ref": "#/$defs/typeArgumentNode"
+              },
+              {
+                "not": {
+                  "required": [
+                    "nameValue"
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        "refusal": {
+          "enum": [
+            "nothing",
+            "missing"
+          ]
+        }
+      },
+      "required": [],
+      "additionalProperties": false,
+      "dependentRequired": {
+        "argumentTypeNamespace": [
+          "argumentTypeKind"
+        ],
+        "argumentTypeResolvedName": [
+          "argumentTypeKind"
+        ],
+        "argumentTypeEffectiveBase": [
+          "argumentTypeKind"
+        ],
+        "argumentTypeAliasChain": [
+          "argumentTypeKind"
+        ]
+      },
+      "dependentSchemas": {
+        "argumentTypeKind": {
+          "required": [
+            "argumentType"
+          ],
+          "anyOf": [
+            {
+              "required": [
+                "argumentTypeNamespace"
+              ]
+            },
+            {
+              "required": [
+                "argumentTypeResolvedName"
+              ]
+            }
+          ]
+        },
+        "argumentTypeEffectiveBase": {
+          "properties": {
+            "argumentTypeKind": {
+              "const": "TYPE_ALIAS"
+            }
+          }
+        },
+        "argumentTypeAliasChain": {
+          "properties": {
+            "argumentTypeKind": {
+              "const": "TYPE_ALIAS"
+            }
+          }
+        }
+      },
+      "oneOf": [
+        {
+          "required": [
+            "argumentType"
+          ]
+        },
+        {
+          "required": [
+            "refusal"
+          ],
+          "not": {
+            "required": [
+              "typeArguments"
+            ]
+          }
+        }
+      ]
+    },
+    "boundsNode": {
+      "type": "object",
+      "properties": {
+        "lower": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "upper": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "lower"
+      ],
+      "additionalProperties": false
+    },
+    "typeArgumentNode": {
+      "type": "object",
+      "properties": {
+        "parameter": {
+          "type": "string"
+        },
+        "nameValue": {
+          "type": "string"
+        },
+        "literalValue": {
+          "type": "string"
+        },
+        "negated": {
+          "const": true
+        }
+      },
+      "required": [
+        "parameter"
+      ],
+      "additionalProperties": false,
+      "dependentRequired": {
+        "negated": [
+          "literalValue"
+        ]
+      },
+      "oneOf": [
+        {
+          "required": [
+            "nameValue"
+          ]
+        },
+        {
+          "required": [
+            "literalValue"
+          ]
+        }
+      ]
+    },
+    "effectiveBaseNode": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "enum": [
+            "BASIC_TYPE",
+            "RECORD_TYPE",
+            "STRUCT",
+            "ENUM",
+            "CHOICE"
+          ]
+        },
+        "name": {
+          "type": "string"
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "arguments": {
+          "type": "array",
+          "items": {
+            "allOf": [
+              {
+                "$ref": "#/$defs/typeArgumentNode"
+              },
+              {
+                "not": {
+                  "required": [
+                    "nameValue"
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "kind",
+        "name"
+      ],
+      "additionalProperties": false
+    },
+    "aliasLinkNode": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "parameterNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "conditionNames": {
+          "type": "array",
+          "items": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "conditionKinds": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "OneOf",
+              "Choice",
+              "DataRule"
+            ]
+          }
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "additionalProperties": false
+    },
+    "typeParameterNode": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "typeKind": {
+          "enum": [
+            "STRUCT",
+            "CHOICE",
+            "TYPE_ALIAS",
+            "BASIC_TYPE",
+            "RECORD_TYPE",
+            "META_TYPE",
+            "ENUM"
+          ]
+        },
+        "typeNamespace": {
+          "type": "string"
+        },
+        "typeResolvedName": {
+          "type": "string"
+        },
+        "typeEffectiveBase": {
+          "$ref": "#/$defs/effectiveBaseNode"
+        },
+        "typeAliasChain": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/aliasLinkNode"
+          }
+        },
+        "typeArguments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/typeArgumentNode"
+          }
+        },
+        "definition": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ],
+      "additionalProperties": false,
+      "dependentRequired": {
+        "typeNamespace": [
+          "typeKind"
+        ],
+        "typeResolvedName": [
+          "typeKind"
+        ],
+        "typeEffectiveBase": [
+          "typeKind"
+        ],
+        "typeAliasChain": [
+          "typeKind"
+        ]
+      },
+      "dependentSchemas": {
+        "typeKind": {
+          "anyOf": [
+            {
+              "required": [
+                "typeNamespace"
+              ]
+            },
+            {
+              "required": [
+                "typeResolvedName"
+              ]
+            }
+          ]
+        },
+        "typeEffectiveBase": {
+          "properties": {
+            "typeKind": {
+              "const": "TYPE_ALIAS"
+            }
+          }
+        },
+        "typeAliasChain": {
+          "properties": {
+            "typeKind": {
+              "const": "TYPE_ALIAS"
+            }
+          }
+        }
+      }
+    },
+    "annotationPathNode": {
+      "type": "object",
+      "properties": {
+        "rootItem": {
+          "const": true
+        },
+        "root": {
+          "type": "string"
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/pathStepNode"
+          }
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+    "pathStepNode": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "deep": {
+          "const": true
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "additionalProperties": false
+    },
+    "annotationUseNode": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "qualifier": {
+          "type": "string"
+        },
+        "arguments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/annotationArgumentNode"
+          }
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "additionalProperties": false
+    },
+    "annotationArgumentNode": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        },
+        "attributeRef": {
+          "const": true
+        }
+      },
+      "required": [
+        "key",
+        "value"
+      ],
+      "additionalProperties": false
+    },
+    "docReferenceNode": {
+      "type": "object",
+      "properties": {
+        "regulatory": {
+          "const": true
+        },
+        "path": {
+          "$ref": "#/$defs/annotationPathNode"
+        },
+        "body": {
+          "type": "string"
+        },
+        "corpora": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/corpusNode"
+          }
+        },
+        "segments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/segmentNode"
+          }
+        },
+        "rationales": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/rationaleNode"
+          }
+        },
+        "structuredProvision": {
+          "type": "string"
+        },
+        "provision": {
+          "type": "string"
+        },
+        "reportedField": {
+          "const": true
+        },
+        "namedArgs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/namedArgNode"
+          }
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+    "corpusNode": {
+      "type": "object",
+      "properties": {
+        "reference": {
+          "type": "string"
+        },
+        "resolved": {
+          "$ref": "#/$defs/corpusDeclarationNode"
+        }
+      },
+      "required": [
+        "reference"
+      ],
+      "additionalProperties": false
+    },
+    "corpusDeclarationNode": {
+      "type": "object",
+      "properties": {
+        "typeKeyword": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "definition": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "additionalProperties": false
+    },
+    "segmentNode": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ],
+      "additionalProperties": false
+    },
+    "rationaleNode": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string"
+        },
+        "author": {
+          "type": "string"
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+    "namedArgNode": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ],
+      "additionalProperties": false
+    },
+    "labelNode": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "forPath": {
+          "$ref": "#/$defs/annotationPathNode"
+        },
+        "asPath": {
+          "$ref": "#/$defs/annotationPathNode"
+        }
+      },
+      "required": [
+        "label"
+      ],
+      "additionalProperties": false
+    },
+    "ruleReferenceNode": {
+      "type": "object",
+      "properties": {
+        "forPath": {
+          "$ref": "#/$defs/annotationPathNode"
+        },
+        "ruleName": {
+          "type": "string"
+        },
+        "resolvedNamespace": {
+          "type": "string"
+        },
+        "resolvedName": {
+          "type": "string"
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+    "enumSynonymNode": {
+      "type": "object",
+      "properties": {
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "value": {
+          "type": "string"
+        },
+        "definition": {
+          "type": "string"
+        },
+        "patternMatch": {
+          "type": "string"
+        },
+        "patternReplace": {
+          "type": "string"
+        },
+        "removeHtml": {
+          "const": true
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

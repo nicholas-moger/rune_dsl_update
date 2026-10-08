@@ -1,0 +1,15 @@
+namespace chaos.s30.x13half.p1
+version "1.0.0"
+import chaos.s30.x13half.p2.*
+type C30Part: <"Keyed component - relocated by the import axis.">
+    [metadata key]
+    pid string (1..1)
+func C30Builders: <"A builder-typed multi output (a list of DATA) set whole from a lambda then added, and an empty reference leaf.">
+    inputs:
+        ps C30Part (0..*)
+        p C30Part (0..1)
+    output:
+        ws C30Whole (0..*)
+    set ws: ps extract x [ C30Whole { name: x -> pid, ... } ]
+    add ws: C30Whole { name: "tail", partRef: p as-key, ... }
+    add ws: C30Whole { name: "empty", partRef: empty, ... }

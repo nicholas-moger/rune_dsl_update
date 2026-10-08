@@ -1,0 +1,9 @@
+namespace chaos.s14.a3half.p1
+version "1.0.0"
+import chaos.s14.a3half.p2.*
+type C14Aux: <"Self-contained helper - relocated by the import axis.">
+    ax string (1..1)
+body Authority C14REG <"The chaos regulator.">
+body Organisation C14ORG <"The chaos standards organisation.">
+corpus Regulation "C14 Chaos Act" C14Act <"Primary corpus.">
+corpus Guidance C14Guide <"Secondary corpus without a display string.">

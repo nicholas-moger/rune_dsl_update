@@ -1,0 +1,49 @@
+namespace route.fixture
+version "1.0.0"
+
+enum RouteColour: <"the ENUM pass's whole population.">
+    RED
+    BLUE
+
+type RouteLeaf: <"the shared descent target - no one-of, so NOT deep-path eligible.">
+    [metadata key]
+    code string (1..1)
+
+type RouteBase: <"the DATA_RULE, TYPE_FORMAT, CARDINALITY and metafield witness in one type.">
+    name string(minLength: 1, maxLength: 3) (1..1) <"a type-format-bearing attribute - the TYPE_FORMAT pass.">
+    notes string (0..*) <"a multi attribute - the CARDINALITY pass.">
+    market string (0..1) <"a scheme-annotated attribute - the METAFIELD pass.">
+        [metadata scheme]
+    colour RouteColour (0..1)
+    condition NamePresent: <"a named condition - the DATA_RULE pass.">
+        name exists
+
+type RouteChild extends RouteBase: <"the extends witness - the inherited property surface.">
+    extra string (0..1)
+
+type RouteAltA: <"eligible, zero deep features - the EMPTY DeepPathUtil class.">
+    shared RouteLeaf (0..1)
+    p string (0..1)
+    condition: one-of
+
+type RouteAltB:
+    shared RouteLeaf (0..1)
+    q string (0..1)
+    condition: one-of
+
+type RouteDeep: <"DEEP-PATH ELIGIBLE - a one-of over two alternatives whose targets share `shared`.">
+    a RouteAltA (0..1)
+    b RouteAltB (0..1)
+    condition: one-of
+
+choice RouteChoice: <"the CHOICE pass's population.">
+    RouteChild <"the extending data type.">
+    RouteDeep <"the deep-path eligible data type.">
+
+func RouteEcho: <"the FUNCTION pass's population.">
+    inputs:
+        in1 string (1..1)
+    output:
+        result string (1..1)
+    set result:
+        in1

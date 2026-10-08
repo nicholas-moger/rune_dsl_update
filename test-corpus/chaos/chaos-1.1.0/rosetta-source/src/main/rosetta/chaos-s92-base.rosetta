@@ -1,0 +1,5 @@
+namespace chaos.s92.base
+version "1.0.0"
+type C92Item: <"REFUSAL-PARITY s92 (base only): an attribute named `e` - refused by the released grammar (the seat-8 anchor fixture's first cut); the fork's verdict is measured here.">
+    e number (0..1)
+    v number (0..1)

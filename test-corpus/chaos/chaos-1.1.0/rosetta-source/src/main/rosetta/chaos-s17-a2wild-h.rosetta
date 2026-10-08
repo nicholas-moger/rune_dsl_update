@@ -1,0 +1,4 @@
+namespace chaos.s17.a2wild.h
+version "1.0.0"
+type C17Held: <"Self-contained helper - relocated by the import axis.">
+    h string (1..1)

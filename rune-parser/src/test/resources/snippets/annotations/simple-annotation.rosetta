@@ -1,0 +1,5 @@
+namespace test.model
+
+annotation myAnnotation: <"A test annotation.">
+    [prefix My]
+    flag boolean (0..1)

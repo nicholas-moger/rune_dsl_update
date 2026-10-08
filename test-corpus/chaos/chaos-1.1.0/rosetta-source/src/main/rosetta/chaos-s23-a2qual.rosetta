@@ -1,0 +1,99 @@
+namespace chaos.s23.a2qual
+version "1.0.0"
+import chaos.s23.a2qual.h.C23Box
+func C23IsBig: <"Boolean helper (the bare-call condition class).">
+    inputs:
+        v number (1..1)
+    output:
+        big boolean (1..1)
+    set big: v > 1000000
+func C23WholeSet: <"A beyond-long literal as the WHOLE value of a MULTI output, a defaulted number, and an int list literal ADDED to a number list - the whole-SET / ADD conversion seats the 1.0.0 C4Gate rows never carried (seat 5's partial-coverage banking).">
+    inputs:
+        b C23Box (1..1)
+    output:
+        rs number (0..*)
+    add rs: 9999999999999999999999999
+    add rs: b -> weight default 0
+    add rs: [1, 2, 3]
+func C23IntOut: <"An int output takes the exact conversion (the int-output seat).">
+    inputs:
+        v number (1..1)
+    output:
+        r int (1..1)
+    set r:
+        if C23IsBig(v)
+        then 9999999999999999999999999
+        else 1
+typeAlias C23Long: <"The Long rung of the alias digit law - a 10-to-18-digit literal alias declares MapperS<Long> upstream (seat 5's banked conv-bigint-alias-long).">
+    int(digits: 18)
+func C23LongAlias: <"A 12-digit literal through an alias at a then arm and into a Long-aliased output.">
+    inputs:
+        v number (1..1)
+        f boolean (1..1)
+    output:
+        r number (1..1)
+    alias big12: 123456789012
+    set r:
+        if f
+        then big12
+        else v
+func C23LongOut: <"The 12-digit literal into the Long-aliased output.">
+    inputs:
+        f boolean (1..1)
+    output:
+        r C23Long (0..1)
+    set r: if f then 123456789012 else 42
+func C23AliasElse: <"The conversion renderer's case (ii): a null-typed ALIAS call at an ELSE arm (seat 5's banked conv-bigint-alias-else).">
+    inputs:
+        v number (1..1)
+        f boolean (1..1)
+    output:
+        r number (1..1)
+    alias huge: 9999999999999999999999999
+    set r:
+        if f
+        then v
+        else huge
+func C23Mul: <"The callee: number inputs, the int argument coerced at the call.">
+    inputs:
+        a number (1..1)
+        b number (1..1)
+    output:
+        p number (1..1)
+    set p: a * b
+func C23Scale: <"An int INPUT in BigDecimal arithmetic at ARGUMENT position (F2's C8Scale class re-shaped: the argument seat), a count inside a lambda into a number output, and an int sum into a number.">
+    inputs:
+        q int (1..1)
+        w number (1..1)
+        bs C23Box (0..*)
+    output:
+        r number (1..1)
+    alias scaled: C23Mul(q, w)
+    alias counted: bs extract b [ b -> lid ] then count
+    alias summed: bs extract b [ (b -> lid) count ] then sum
+    set r: scaled + counted + summed + q
+func C23Flag: <"The bare-boolean-input CONDITION render: `if flag then ... else ...` over flag boolean (1..1) - the fork renders MapperS.of(flag).getOrDefault(false) where the released plugin renders (flag == null ? false : flag) (seat 9 round 3's banked divergence; no vendored carrier).">
+    inputs:
+        flag boolean (1..1)
+        a string (1..1)
+        b string (1..1)
+    output:
+        r string (1..1)
+    set r: if flag then a else b
+func C23FlagOpt: <"The same over an OPTIONAL boolean input and over a boolean ATTRIBUTE.">
+    inputs:
+        flag boolean (0..1)
+        box C23Box (1..1)
+    output:
+        r string (1..1)
+    set r: if flag then box -> lid else (if box -> live then "live" else "none")
+func C23CmpArm: <"A LITERAL-armed conditional as a COMPARISON operand (the ExistsThenConditional class - the released plugin hoists a final MapperS<String>, the fork's plain String does not compile; DECLARED at #630) beside a NUMBER-armed one and a conditional at each side of the comparison.">
+    inputs:
+        flag boolean (1..1)
+        n number (1..1)
+    output:
+        ok boolean (1..1)
+    set ok:
+        (if flag then "a" else "b") = "a"
+        and (if flag then 1 else 2) < n
+        and n >= (if flag then 0 else 1)

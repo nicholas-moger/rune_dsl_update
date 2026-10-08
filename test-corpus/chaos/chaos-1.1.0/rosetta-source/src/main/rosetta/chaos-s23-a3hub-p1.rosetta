@@ -1,0 +1,7 @@
+namespace chaos.s23.a3hub.p1
+version "1.0.0"
+import chaos.s23.a3hub.p2.*
+type C23Box: <"Helper - relocated by the import axis.">
+    lid string (1..1)
+    weight number (0..1)
+    live boolean (0..1)

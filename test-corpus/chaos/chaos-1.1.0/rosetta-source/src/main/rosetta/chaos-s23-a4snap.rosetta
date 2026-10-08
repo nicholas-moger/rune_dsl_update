@@ -1,0 +1,29 @@
+namespace chaos.s23.a4snap
+version "1.0.0-SNAPSHOT"
+type C23Box: <"Helper - relocated by the import axis.">
+    lid string (1..1)
+    weight number (0..1)
+    live boolean (0..1)
+func C23IsBig: <"Boolean helper (the bare-call condition class).">
+    inputs:
+        v number (1..1)
+    output:
+        big boolean (1..1)
+    set big: v > 1000000
+func C23WholeSet: <"A beyond-long literal as the WHOLE value of a MULTI output, a defaulted number, and an int list literal ADDED to a number list - the whole-SET / ADD conversion seats the 1.0.0 C4Gate rows never carried (seat 5's partial-coverage banking).">
+    inputs:
+        b C23Box (1..1)
+    output:
+        rs number (0..*)
+    add rs: 9999999999999999999999999
+    add rs: b -> weight default 0
+    add rs: [1, 2, 3]
+func C23IntOut: <"An int output takes the exact conversion (the int-output seat).">
+    inputs:
+        v number (1..1)
+    output:
+        r int (1..1)
+    set r:
+        if C23IsBig(v)
+        then 9999999999999999999999999
+        else 1

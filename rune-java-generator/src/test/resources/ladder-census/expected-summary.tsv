@@ -1,0 +1,50 @@
+# The ladder-census per-cell row-count pin - EXACT both directions (the #569
+# ledger's pin discipline): a census run whose (rows, rebind, sameDenotation,
+# authOnly) quadruple differs from this file FAILS, in either direction, so the
+# class-grain triage cannot mask a NEW differing binding appearing (the count
+# moves first). Since the v3.1 stage exit this pin is the ONLY thing that does:
+# the flip healed enough band files that EVERY (cell, RowClass) group carrying
+# rows now has a CLASS: triage row, so the band gate's violation direction is
+# inert in all 25 cells (its staleness direction still bites). The reach columns
+# exist for the substitution case a count cannot see - a row re-pointing from an
+# in-band file to a byte-identical out-of-band one leaves every count unchanged,
+# and for the drr 7.x cells no byte ring would catch it either (they are not ring
+# cells). candidateFiles = distinct candidate paths; reachDigest = first 8 hex of
+# SHA-256 over that set, sorted, one path per line, LF-terminated.
+# <cell>TAB<rows>TAB<rebind>TAB<sameDenotation>TAB<authOnly>TAB<candidateFiles>TAB<reachDigest>
+# v3.2 seat 8 (PR #629): cdm/6.20.2-6.20.5 960 -> 963 (authOnly 796 -> 799, the reach UNMOVED) and drr/7.0.0-7.3.0 1565 -> 1571 (authOnly 1336 -> 1342, candidateFiles 177 -> 178, the reach digest b2e015eb -> 105118dc) - EVERY new row an AUTH_ONLY RFeatureCall at an only-exists LEAF whose feature is a choice option (`economicTerms -> payout -> SettlementPayout only exists`, `-> OptionPayout only exists`, `-> PerformancePayout only exists`; the drr file added is standards-iosco-cde-version1-price-func.rosetta's): the leaf is a bound reference since commit 4 (F15) and so a census node; cdm 6.20.6+ write no such line and their pins held. Verified row by row at target/ladder-census/<cell>.tsv before the re-pin - four of the eight cells at the chain s8a (target/v32-seat8-instruments/scratch/ladder-rows-s8a.txt, local), all eight plus five controls at the round-1 receipt (scratch/ladder-rows-r1.txt: 36 rows, every one an AUTH_ONLY feature call over a choice option); the rows transcribed from the chain s8a's own prints (patch-ladder-pins-s8.py).
+cdm/5.38.0	2	0	0	2	2	f9d53279
+cdm/5.39.0	2	0	0	2	2	f9d53279
+cdm/6.20.2	963	11	153	799	229	0b871823
+cdm/6.20.3	963	11	153	799	229	0b871823
+cdm/6.20.4	963	11	153	799	229	0b871823
+cdm/6.20.5	963	11	153	799	229	0b871823
+cdm/6.20.6	961	11	153	797	229	0b871823
+cdm/6.21.0	961	11	153	797	229	0b871823
+cdm/6.22.0	961	11	153	797	229	0b871823
+cdm/6.23.0	961	11	153	797	229	0b871823
+drr/5.61.0	0	0	0	0	0	e3b0c442
+drr/6.34.1	16	12	0	4	10	c706eddf
+drr/6.35.0	16	12	0	4	10	c706eddf
+drr/6.36.0	16	12	0	4	10	c706eddf
+drr/6.37.0	16	12	0	4	10	c706eddf
+drr/6.38.0	16	12	0	4	10	c706eddf
+drr/7.0.0	1571	40	189	1342	178	105118dc
+drr/7.1.0	1571	40	189	1342	178	105118dc
+drr/7.2.0	1571	40	189	1342	178	105118dc
+drr/7.3.0	1571	40	189	1342	178	105118dc
+iso20022/1.38.0	0	0	0	0	0	e3b0c442
+rune-fpml/1.6.0	0	0	0	0	0	e3b0c442
+rune-fpml/2.0.0	0	0	0	0	0	e3b0c442
+rune-fpml/2.1.0	0	0	0	0	0	e3b0c442
+rune-fpml/2.1.1	0	0	0	0	0	e3b0c442
+# v3.2 seat 12 (PR #633, D52 H3 - M6 the `item ->` only-exists root, healed): chaos/1.1.0 56/0/12/44/44/8d84d666 -> 65/0/12/53/53/f067ba48 - EVERY new row an
+# AUTH_ONLY RFeatureCall at the only-exists LEAF `C25OptA` of the nine C25Only functions (`ps then extract (item -> pick -> C25OptA
+# only exists)`; rebind / sameDenotation UNMOVED; +9 candidate files = the nine C25Only.java): the leaf is a bound reference since the
+# parser builds the item root as a real RImplicitVariable (AstBuilder.buildOnlyExistsPath) and the type engine binds the choice option
+# in the C1 authority slot inside the lambda - the seat-8 (#629) class of row, at the shape seat 8 had banked. READ from the verify
+# gate's print at the commit-7 head (target/v32-seat12-instruments/scratch/t-gen-targeted-c7.log; the per-row dump
+# rune-java-generator/target/ladder-census/chaos_1.1.0.tsv: 9 rows `AUTH_ONLY FC C25OptA ... RFunction:chaos.s25.<variant>.C25Only`,
+# local) by patch-ladder-pin-s12.py; the 16 C25Item condition seats add NO row (their `item -> p` hops stay unbound - the type
+# engine has no Cat 8 arm for a type condition; the generator resolves them by name).
+chaos/1.1.0	65	0	12	53	53	f067ba48

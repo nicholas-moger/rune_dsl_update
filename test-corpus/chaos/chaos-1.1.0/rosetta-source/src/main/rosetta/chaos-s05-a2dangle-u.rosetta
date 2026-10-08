@@ -1,0 +1,4 @@
+namespace chaos.s05.a2dangle.unused
+version "1.0.0"
+type C5SubUnusedT:
+    stub string (0..1)

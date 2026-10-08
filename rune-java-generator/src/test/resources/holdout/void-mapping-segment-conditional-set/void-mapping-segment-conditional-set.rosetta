@@ -1,0 +1,22 @@
+namespace holdout.voidsegcond
+version "0.0.0"
+
+// v3.2 seat 9 round 3 (the code-quality review's MF-1): the operation seat's THIRD path - a Void CONDITIONAL value SET
+// into a SEGMENT-pathed leaf. Neither whole-output consult reaches it (both are gated on an empty segment), so the fork
+// hands the shape to the pathed-conditional hoist arm: does the released plugin coerce the whole conditional to the
+// leaf's EMPTY (`.setTok(null)`) as it does for the whole-output SetConditional, or hoist a Void-typed local?
+
+basicType etoken <"A model-declared basic type - a Void-typed value in the generated Java.">
+
+type Carrier: <"A model type carrying a Void-typed attribute beside a plain one.">
+    tok etoken (0..1)
+    name string (0..1)
+
+func SegmentConditionalSet: <"A Void conditional value SET into a single-hop segment leaf.">
+    inputs:
+        flag boolean (1..1)
+        t etoken (0..1)
+        u etoken (0..1)
+    output:
+        c Carrier (1..1)
+    set c -> tok: if flag then t else u

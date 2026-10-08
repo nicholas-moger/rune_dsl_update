@@ -1,0 +1,6 @@
+namespace chaos.s30.a3hub.p1
+version "1.0.0"
+import chaos.s30.a3hub.p2.*
+type C30Part: <"Keyed component - relocated by the import axis.">
+    [metadata key]
+    pid string (1..1)

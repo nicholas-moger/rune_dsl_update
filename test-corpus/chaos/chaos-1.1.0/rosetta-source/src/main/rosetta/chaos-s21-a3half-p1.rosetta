@@ -1,0 +1,19 @@
+namespace chaos.s21.a3half.p1
+version "1.0.0"
+import chaos.s21.a3half.p2.*
+type C21Aux: <"Self-contained helper - relocated by the import axis.">
+    ax string (1..1)
+type C21Exactly: <"one-of over three optionals.">
+    a string (0..1)
+    b string (0..1)
+    c string (0..1)
+    condition: one-of
+type C21Prefer: <"required and optional choice conditions side by side.">
+    x string (0..1)
+    y string (0..1)
+    z string (0..1)
+    aux C21Aux (0..1)
+    condition C21Req:
+        required choice x, y
+    condition C21Opt:
+        optional choice y, z

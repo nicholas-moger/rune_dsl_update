@@ -1,0 +1,24 @@
+namespace chaos.s10.a2dangle
+version "1.0.0"
+import chaos.s10.a2dangle.h.*
+import chaos.s10.a2dangle.unused.*
+annotation c10approved: <"Bare marker annotation.">
+annotation c10owner: <"Annotation with attributes.">
+    team string (0..1)
+    tier number (0..1)
+annotation c10stage: <"Annotation with a prefix.">
+    [prefix C10Stage]
+    live boolean (0..1)
+type C10Marked: <"Annotated type - bare ref, attribute-selecting ref, prefixed ref.">
+    [c10approved]
+    [c10owner team]
+    [c10stage live]
+    mid string (1..1)
+    aux C10Aux (0..1)
+func C10Tag: <"Annotated function.">
+    [c10approved]
+    inputs:
+        s string (1..1)
+    output:
+        t string (1..1)
+    set t: s + "!"

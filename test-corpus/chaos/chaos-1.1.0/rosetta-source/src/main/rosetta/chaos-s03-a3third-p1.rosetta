@@ -1,0 +1,15 @@
+namespace chaos.s03.a3third.p1
+version "1.0.0"
+import chaos.s03.a3third.p2.*
+import chaos.s03.a3third.p3.*
+type C3Note: <"Choice option AND helper - relocated by the import axis.">
+    text string (1..1)
+type C3CashLeg: <"Option 1 - shares 'common' with its sibling.">
+    ccy string (1..1)
+    common string (0..1)
+type C3StockLeg: <"Option 2.">
+    ticker string (1..1)
+    common string (0..1)
+choice C3Inner: <"Inner choice - the findCommonAttribute surface.">
+    C3CashLeg
+    C3StockLeg

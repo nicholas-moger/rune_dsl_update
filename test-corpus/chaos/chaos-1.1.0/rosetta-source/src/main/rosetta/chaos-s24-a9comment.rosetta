@@ -1,0 +1,30 @@
+/* chaos a9: a block-comment banner before the first token */
+// chaos a9: a line comment before namespace
+namespace chaos.s24.a9comment // a9
+version "1.0.0" // a9
+type C24Ref: <"Helper - relocated by the import axis."> // a9
+    mark string (1..1) // a9
+metaType scheme string // a9
+metaType reference string // a9
+metaType key string // a9
+basicType c24tok <"A model-declared basic type - Void in the generated Java (D47)."> // a9
+type C24Carrier: <"Void-typed attributes at every cardinality and meta shape beside plain ones."> // a9
+    tok c24tok (0..1) // a9
+    toks c24tok (0..*) // a9
+    coded c24tok (0..1) // a9
+        [metadata scheme] // a9
+    name string (0..1) // a9
+    flag boolean (0..1) // a9
+    ref C24Ref (0..1) // a9
+type C24Keyed: <"A keyed root for the as-key seats."> // a9
+    [metadata key] // a9
+    kid string (1..1) // a9
+type C24Out: <"The output type: a Void leaf, a Void meta leaf, a Void list leaf, a keyed reference, a plain leaf and a nested carrier for the two-hop seat."> // a9
+    v c24tok (0..1) // a9
+    vm c24tok (0..1) // a9
+        [metadata scheme] // a9
+    vs c24tok (0..*) // a9
+    kref C24Keyed (0..1) // a9
+        [metadata reference] // a9
+    s string (0..1) // a9
+    car C24Carrier (0..1) // a9

@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+# Task 3b smoke test — verify d5-budget-gate.sh correctly enforces
+# the D5 tier budget across synthetic cell-timing artefacts.
+set -euo pipefail
+
+GATE="scripts/ci/d5-budget-gate.sh"
+[[ -f "$GATE" ]] || { echo "FAIL: $GATE missing"; exit 1; }
+
+TMP=$(mktemp -d)
+trap 'rm -rf "$TMP"' EXIT
+
+# Case 1: all cells under per-PR budget (900s — was 300s pre-PR-3 T5)
+mkdir -p "$TMP/case1"
+printf '%s\n' '850' > "$TMP/case1/cell-cdm-6.18.0.seconds"
+printf '%s\n' '820' > "$TMP/case1/cell-drr-6.29.0.seconds"
+if ! bash "$GATE" pull_request "$TMP/case1" >/dev/null 2>&1; then
+    echo "FAIL: case1 (all cells <900s) should pass pull_request tier"
+    exit 1
+fi
+
+# Case 2: one cell over per-PR budget — fail
+mkdir -p "$TMP/case2"
+printf '%s\n' '850' > "$TMP/case2/cell-cdm-6.18.0.seconds"
+printf '%s\n' '950' > "$TMP/case2/cell-drr-6.29.0.seconds"
+if bash "$GATE" pull_request "$TMP/case2" >/dev/null 2>&1; then
+    echo "FAIL: case2 (drr cell=950s, over 900s budget) should fail pull_request tier"
+    exit 1
+fi
+
+# Case 3: schedule tier has 1800s budget — 950s easily passes
+if ! bash "$GATE" schedule "$TMP/case2" >/dev/null 2>&1; then
+    echo "FAIL: case3 (drr cell=950s) should pass schedule tier (1800s)"
+    exit 1
+fi
+
+# Case 4: empty directory → pass (no cells = nothing to enforce)
+mkdir -p "$TMP/case4"
+if ! bash "$GATE" pull_request "$TMP/case4" >/dev/null 2>&1; then
+    echo "FAIL: case4 (empty) should pass (no cells to enforce)"
+    exit 1
+fi
+
+echo "PASS: d5-budget-gate"

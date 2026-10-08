@@ -1,0 +1,23 @@
+namespace chaos.s05.a5uni
+version "1.0.0"
+type C5Sub: <"éüµ – List-of-list rung and reference target - relocated by the import axis.">
+    [metadata key]
+    vals number (0..*)
+    name string (1..1)
+metaType key string
+metaType reference string
+enum C5KindEnum: <"to-enum target.">
+    Spot
+    Fwd
+type C5Item: <"The shape battery: single, optional, multi, list-of-list rung, and a meta-wrapped seat (charter 2.2b).">
+    one string (1..1)
+    opt number (0..1)
+    many number (0..*)
+    sub C5Sub (0..*)
+    subRef C5Sub (0..1)
+        [metadata reference]
+type A5UniProbe: <"Non-ASCII literal probe – müßig 試験.">
+    p string (0..1)
+        [label as "µ–label §7"]
+enum A5UniProbeEnum: <"displayName probe.">
+    V displayName "µ–„display“"

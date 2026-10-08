@@ -1,0 +1,16 @@
+namespace chaos.s16.a3half.p2
+version "1.0.0"
+import chaos.s16.a3half.p1.*
+func C16Grab: <"Resolves C16Alpha at a type-guard switch seat - the resolution probe.">
+    inputs:
+        p C16Pick (1..1)
+    output:
+        s string (1..1)
+    set s:
+        p switch
+            C16Alpha then "was-alpha",
+            C16Beta then "was-beta",
+            default "neither"
+type C16Slot: <"Resolves C16Alpha at an attribute type seat.">
+    firstPick C16Alpha (0..1)
+    held C16Held (0..1)

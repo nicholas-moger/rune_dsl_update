@@ -1,0 +1,20 @@
+namespace test.aliasheader
+version "0.0.0.test"
+
+typeAlias Pay: <"an alias whose condition class is named PayLoad - the simple name of the data type whose validator wires it: the class header (implements Validator<PayLoad>) claims the data class first, so the condition class is written fully qualified.">
+    number(fractionalDigits: 0)
+    condition Load:
+        item >= 0
+
+typeAlias In: <"an alias whose condition class is named Inject - the annotation the class header writes on its first field, claimed before the field's type.">
+    number(fractionalDigits: 0)
+    condition ject:
+        item >= 0
+
+type PayLoad: <"the validator's data class shares its simple name with the condition class it wires.">
+    pay Pay (0..1)
+    pays Pay (0..*)
+
+type Injected: <"attributes wired to a condition class named Inject.">
+    inj In (0..1)
+    injs In (0..*)

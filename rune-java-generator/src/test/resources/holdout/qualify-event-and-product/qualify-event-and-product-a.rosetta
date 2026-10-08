@@ -1,0 +1,15 @@
+namespace test.qep.a
+version "0.0.0"
+isEvent root QepEvent;
+
+type QepEvent: <"The event root.">
+    kind string (0..1)
+
+func Qualify_QepE: <"Event qualification.">
+    [qualification BusinessEvent]
+    inputs:
+        event QepEvent (1..1)
+    output:
+        is_event boolean (1..1)
+    set is_event:
+        event -> kind = "trade"

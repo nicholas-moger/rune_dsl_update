@@ -1,0 +1,41 @@
+namespace chaos.s09.a3third.p3
+version "1.0.0"
+import chaos.s09.a3third.p1.*
+import chaos.s09.a3third.p2.*
+type C9Loc: <"location + address pair.">
+    spot string (0..1)
+        [metadata location]
+    ptr string (0..1)
+        [metadata address "pointsTo"=C9Loc->spot]
+func C9Pick: <"Meta-wrapped values crossing a function boundary.">
+    inputs:
+        h C9Holder (1..1)
+    output:
+        k C9Keyed (0..1)
+    set k: h -> byRef
+func C9Code: <"Scheme-carrying scalar through a set seat.">
+    inputs:
+        h C9Holder (1..1)
+    output:
+        c string (0..1)
+    set c: h -> coded
+func C9Stamp: <"with-meta construction (census-driven enrichment).">
+    inputs:
+        h C9Holder (1..1)
+    output:
+        c string (0..1)
+            [metadata scheme]
+    set c: h -> coded with-meta { scheme: "chaos-scheme" }
+func C9Sieve: <"Meta values at FILTER-PREDICATE and THEN-CHAIN seats (v3.1 F13/F23), and a meta LADDER (F28).">
+    inputs:
+        h C9Holder (1..1)
+    output:
+        pick string (0..1)
+    alias firstRef: h -> byRefs then filter item -> kid exists then first
+    alias goodCodes: h -> codes then filter item <> "void"
+    set pick:
+        if h -> coded exists
+        then h -> coded
+        else if goodCodes exists
+        then goodCodes first
+        else firstRef -> kid

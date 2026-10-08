@@ -1,0 +1,23 @@
+namespace holdout.voiddeeptok
+version "0.0.0"
+
+basicType etoken <"A model-declared basic type - a Void-typed value in the generated Java.">
+
+type HolderA: <"One option of the choice, carrying the scheme-annotated Void feature.">
+    tok etoken (0..1)
+        [metadata scheme]
+
+type HolderB: <"The other option, carrying the same feature.">
+    tok etoken (0..1)
+        [metadata scheme]
+
+choice Holder: <"A choice whose every option carries tok - the deep path's receiver.">
+    HolderA
+    HolderB
+
+func DeepTok: <"A scheme-annotated Void feature reached by the DEEP path operator under exists: the same wrapper getter as the plain path? (round 2, cq SF-1 - the plain-type receiver is refused upstream, 'Couldn't resolve reference to Attribute tok', oracle-s9g)">
+    inputs:
+        h Holder (0..1)
+    output:
+        r boolean (1..1)
+    set r: h ->> tok exists

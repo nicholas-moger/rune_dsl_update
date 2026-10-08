@@ -1,0 +1,53 @@
+//== header
+namespace chaos.s32.seed
+version "0.0.0"
+//== helper C32Aux
+type C32Aux: <"Helper - relocated by the import axis.">
+    ax string (1..1)
+//== element C32Names
+type C32Keyworded: <"Attributes named after Java keywords at POJO seats (the func-java-keyword-attr class widened).">
+    class string (0..1)
+    long number (0..1)
+    char string (0..1)
+    this string (0..1)
+    new string (0..*)
+    private string (0..1)
+    return number (0..1)
+    package string (0..1)
+    null string (0..1)
+    var string (0..*)
+    abstract boolean (0..1)
+    throws string (0..1)
+    aux C32Aux (0..1)
+type List: <"A type named List - the model's List.java beside every sibling POJO's java.util.List import (the file-scope law at the POJO seat).">
+    items string (0..*)
+type C32Obj: <"An attribute named o - upstream's equals(Object o) shadows the field it reads (the #624 Clash.java class, reproduced bug-compat) - and one named Class (getClass()).">
+    o string (0..1)
+    Class string (0..1)
+//== element C32Fns
+func C32Out: <"A function OUTPUT named o - upstream's prune lambda shadows it (IntoDeep, rider 5) - with keyword-named inputs.">
+    inputs:
+        class string (1..1)
+        long number (0..1)
+    output:
+        o C32Keyworded (1..1)
+    set o -> class: class
+    set o -> long: long
+func C32Twin: <"A function whose simple name a rival TYPE takes in the A6 fn variant and the A8 pkg variant.">
+    inputs:
+        s string (1..1)
+    output:
+        t string (1..1)
+    set t: s
+func C32UseList: <"The List-named type at a function seat.">
+    inputs:
+        l List (1..1)
+    output:
+        n int (1..1)
+    set n: l -> items count
+//== collision C32Twin kind=fn
+type C32Twin: <"RIVAL - a same-named TYPE in an imported namespace beside the seed's FUNCTION (the F17' type-vs-function flavour).">
+    rivalMark string (0..1)
+//== collision C32TwinPath kind=pkg
+type C32Twin: <"RIVAL for A8 - a TYPE named like the seed's function C32Twin in the .functions sub-namespace: the POJO and the function generator address ONE Java path (the seat-3 writer seam).">
+    pathMark string (0..1)

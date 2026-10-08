@@ -1,0 +1,4 @@
+namespace chaos.s18.a2dangle.h
+version "1.0.0"
+type C18Sub: <"Self-contained helper - relocated by the import axis.">
+    s string (1..1)

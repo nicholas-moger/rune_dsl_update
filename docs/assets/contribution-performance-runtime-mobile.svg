@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="1830" viewBox="0 0 480 1830" role="img" aria-labelledby="title desc">
+<title id="title">Runtime experiments · independent pairs</title>
+<desc id="desc">Three independent retained runtime experiments, six JMH forks per variant in each pair. U020 lazy failure text: 8,527.481 to 2,454.674 ms/op and 30,790.11 to 10,457.24 MB/op. U021 parent-linked mapper-path lineage: 2,617.369 to 2,031.881 ms/op and 10,096.20 to 8,271.87 MB/op. U022 deferred mapper-path construction: 1,970.522 to 1,260.064 ms/op and 8,224.56 to 7,272.61 MB/op. These are point estimates; exact reported uncertainty is in the accompanying evidence. Each operation invokes 23 selected DRR report functions over synthetic inputs with reference-generated Java held fixed. Baselines differ; ratios are not cumulative. This is not production throughput, native IR improvement or all DRR coverage.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9" fill="none" stroke="#a9b7cb" stroke-width="1.4"/></marker></defs>
+<rect width="480" height="1830" rx="22" fill="#121923"/>
+<g font-family="Segoe UI, Arial, sans-serif">
+<text x="24" y="43" fill="#eef2f8" font-size="32" font-weight="600" text-anchor="start">
+<tspan x="24" dy="0" xml:space="preserve">Runtime experiments</tspan>
+<tspan x="24" dy="38" xml:space="preserve">independent pairs</tspan>
+</text>
+<text x="24" y="125" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="24" dy="0" xml:space="preserve">Time and allocation separate</tspan>
+<tspan x="24" dy="30" xml:space="preserve">Ratios are not cumulative</tspan>
+</text>
+<rect x="24" y="205" width="432" height="450" rx="14" fill="#18222f" stroke="#a2c6e6" stroke-width="1.5"/>
+<text x="47" y="243" fill="#a2c6e6" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">U020 · lazy failure text</tspan>
+</text>
+<text x="47" y="275" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Independent paired baseline</tspan>
+</text>
+<text x="47" y="320" fill="#eef2f8" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Time · ms/op</tspan>
+</text>
+<text x="47" y="360" fill="#a2c6e6" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Baseline: 8,527.481</tspan>
+</text>
+<rect x="47" y="376" width="386.0" height="24" rx="4" fill="#a2c6e6" stroke="#a2c6e6" stroke-width="1.5"/>
+<text x="47" y="425" fill="#92d5c6" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Variant: 2,454.674</tspan>
+</text>
+<rect x="47" y="441" width="111.11184698036853" height="24" rx="4" fill="#92d5c6" stroke="#92d5c6" stroke-width="1.5"/>
+<text x="47" y="505" fill="#eef2f8" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Allocation · MB/op</tspan>
+</text>
+<text x="47" y="545" fill="#a2c6e6" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Baseline: 30,790.11</tspan>
+</text>
+<rect x="47" y="561" width="386.0" height="24" rx="4" fill="#a2c6e6" stroke="#a2c6e6" stroke-width="1.5"/>
+<text x="47" y="610" fill="#92d5c6" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Variant: 10,457.24</tspan>
+</text>
+<rect x="47" y="626" width="131.09711657412072" height="24" rx="4" fill="#92d5c6" stroke="#92d5c6" stroke-width="1.5"/>
+<rect x="24" y="705" width="432" height="450" rx="14" fill="#18222f" stroke="#a2c6e6" stroke-width="1.5"/>
+<text x="47" y="743" fill="#a2c6e6" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">U021 · mapper lineage</tspan>
+</text>
+<text x="47" y="775" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Independent paired baseline</tspan>
+</text>
+<text x="47" y="820" fill="#eef2f8" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Time · ms/op</tspan>
+</text>
+<text x="47" y="860" fill="#a2c6e6" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Baseline: 2,617.369</tspan>
+</text>
+<rect x="47" y="876" width="386.0" height="24" rx="4" fill="#a2c6e6" stroke="#a2c6e6" stroke-width="1.5"/>
+<text x="47" y="925" fill="#92d5c6" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Variant: 2,031.881</tspan>
+</text>
+<rect x="47" y="941" width="299.6543727689905" height="24" rx="4" fill="#92d5c6" stroke="#92d5c6" stroke-width="1.5"/>
+<text x="47" y="1005" fill="#eef2f8" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Allocation · MB/op</tspan>
+</text>
+<text x="47" y="1045" fill="#a2c6e6" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Baseline: 10,096.20</tspan>
+</text>
+<rect x="47" y="1061" width="386.0" height="24" rx="4" fill="#a2c6e6" stroke="#a2c6e6" stroke-width="1.5"/>
+<text x="47" y="1110" fill="#92d5c6" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Variant: 8,271.87</tspan>
+</text>
+<rect x="47" y="1126" width="316.25183930587747" height="24" rx="4" fill="#92d5c6" stroke="#92d5c6" stroke-width="1.5"/>
+<rect x="24" y="1205" width="432" height="450" rx="14" fill="#18222f" stroke="#a2c6e6" stroke-width="1.5"/>
+<text x="47" y="1243" fill="#a2c6e6" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">U022 · deferred paths</tspan>
+</text>
+<text x="47" y="1275" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Independent paired baseline</tspan>
+</text>
+<text x="47" y="1320" fill="#eef2f8" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Time · ms/op</tspan>
+</text>
+<text x="47" y="1360" fill="#a2c6e6" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Baseline: 1,970.522</tspan>
+</text>
+<rect x="47" y="1376" width="386.0" height="24" rx="4" fill="#a2c6e6" stroke="#a2c6e6" stroke-width="1.5"/>
+<text x="47" y="1425" fill="#92d5c6" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Variant: 1,260.064</tspan>
+</text>
+<rect x="47" y="1441" width="246.83038504518095" height="24" rx="4" fill="#92d5c6" stroke="#92d5c6" stroke-width="1.5"/>
+<text x="47" y="1505" fill="#eef2f8" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Allocation · MB/op</tspan>
+</text>
+<text x="47" y="1545" fill="#a2c6e6" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Baseline: 8,224.56</tspan>
+</text>
+<rect x="47" y="1561" width="386.0" height="24" rx="4" fill="#a2c6e6" stroke="#a2c6e6" stroke-width="1.5"/>
+<text x="47" y="1610" fill="#92d5c6" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Variant: 7,272.61</tspan>
+</text>
+<rect x="47" y="1626" width="341.3225096540119" height="24" rx="4" fill="#92d5c6" stroke="#92d5c6" stroke-width="1.5"/>
+<text x="24" y="1700" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="24" dy="0" xml:space="preserve">6 JMH forks per variant</tspan>
+<tspan x="24" dy="30" xml:space="preserve">23 DRR functions per operation</tspan>
+<tspan x="24" dy="30" xml:space="preserve">Synthetic inputs; reference Java fixed</tspan>
+<tspan x="24" dy="30" xml:space="preserve">Independent ratios; not cumulative</tspan>
+</text>
+</g>
+</svg>

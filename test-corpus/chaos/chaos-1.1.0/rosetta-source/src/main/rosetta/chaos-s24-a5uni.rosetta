@@ -1,0 +1,33 @@
+namespace chaos.s24.a5uni
+version "1.0.0"
+type C24Ref: <"éüµ – Helper - relocated by the import axis.">
+    mark string (1..1)
+metaType scheme string
+metaType reference string
+metaType key string
+basicType c24tok <"A model-declared basic type - Void in the generated Java (D47).">
+type C24Carrier: <"Void-typed attributes at every cardinality and meta shape beside plain ones.">
+    tok c24tok (0..1)
+    toks c24tok (0..*)
+    coded c24tok (0..1)
+        [metadata scheme]
+    name string (0..1)
+    flag boolean (0..1)
+    ref C24Ref (0..1)
+type C24Keyed: <"A keyed root for the as-key seats.">
+    [metadata key]
+    kid string (1..1)
+type C24Out: <"The output type: a Void leaf, a Void meta leaf, a Void list leaf, a keyed reference, a plain leaf and a nested carrier for the two-hop seat.">
+    v c24tok (0..1)
+    vm c24tok (0..1)
+        [metadata scheme]
+    vs c24tok (0..*)
+    kref C24Keyed (0..1)
+        [metadata reference]
+    s string (0..1)
+    car C24Carrier (0..1)
+type A5UniProbe: <"Non-ASCII literal probe – müßig 試験.">
+    p string (0..1)
+        [label as "µ–label §7"]
+enum A5UniProbeEnum: <"displayName probe.">
+    V displayName "µ–„display“"

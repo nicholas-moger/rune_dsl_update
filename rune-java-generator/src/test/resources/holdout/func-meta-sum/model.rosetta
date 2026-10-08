@@ -1,0 +1,10 @@
+namespace test.fmeta005
+
+func Test:
+  inputs:
+    n int (0..*)
+      [metadata scheme]
+  output:
+    result int (1..1)
+  set result:
+    n sum

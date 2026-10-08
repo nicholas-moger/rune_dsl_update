@@ -1,0 +1,25 @@
+namespace com.rosetta.test.model.agreement
+version "test"
+
+type Top:
+	foo Foo (1..1)
+
+type Foo:
+	bar Bar (0..1)
+
+type Bar:
+	id number (1..1)
+
+func UpdateBarId: <"Updates Bar.id by set on an alias">
+	inputs:
+		top Top (1..1)
+		newId number (1..1)
+
+	output:
+		topOut Top (1..1)
+
+	alias barAlias :
+		topOut -> foo -> bar
+
+	set barAlias -> id:
+		newId

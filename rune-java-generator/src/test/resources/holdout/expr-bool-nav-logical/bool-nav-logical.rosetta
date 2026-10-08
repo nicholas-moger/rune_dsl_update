@@ -1,0 +1,32 @@
+namespace test.boolnavlogical
+
+type Foo:
+    attrBoolean boolean (1..1)
+    attrNumber number (1..1)
+
+func FuncFooOr:
+    inputs:
+        foo Foo (1..1)
+    output:
+        result boolean (1..1)
+
+    set result:
+        foo -> attrBoolean or foo -> attrNumber = 5
+
+func FuncFooAnd:
+    inputs:
+        foo Foo (1..1)
+    output:
+        result boolean (1..1)
+
+    set result:
+        foo -> attrBoolean and foo -> attrNumber = 5
+
+func FuncFooAnd2:
+    inputs:
+        foo Foo (1..1)
+    output:
+        result boolean (1..1)
+
+    set result:
+        foo -> attrNumber = 5 and foo -> attrBoolean

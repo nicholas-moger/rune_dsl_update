@@ -1,0 +1,86 @@
+delimiters "<", ">"
+
+// XMeta registry (RosettaMetaData implementation) — the 9.83 SEVEN-method golden
+// shape (incl. the @Deprecated validator()/typeFormatValidator() no-arg pair).
+// Byte laws: the six inter-method blank lines are tab/tab/EMPTY/EMPTY/EMPTY/tab —
+// the tab-bearing lines render via the <\t> escape (AutoIndentWriter drops
+// literal-indentation-only lines — the wave-A ST4 whitespace law); the empty
+// dataRules list renders `Arrays.asList(\n\t\t);`; qualify entries render only on
+// the qualifiable roots (else `Collections.emptyList();`); every TYPE position
+// uses m.dataClassJavaType (the #306 collision law — golden iso ErrorMeta).
+//
+// v3.2 seat 11 (D50 — the file-scope first-claim law): the file is rendered in TWO
+// steps. metaBody renders the class text with every TYPE position a first-claim
+// sentinel — the library tokens through the generator's token map <t.X>
+// (ImportCollisionResolver.typeRefs), the data class, the validator trio, the
+// condition and qualify classes through the model's own attributes — then the
+// generator resolves the sentinels in text order from the one seed (the meta class
+// itself) and drops the losers' imports, and metaFile wraps the resolved text under
+// the package line and the import block (the POJO's pojoFile shape). A class text
+// with no collision resolves to the pre-seat bytes.
+metaFile(m) ::= <<
+package <m.packageName>;
+
+<m.imports:{imp | import <imp>;
+}>
+
+<m.body>
+>>
+
+metaBody(m, t) ::= <<
+<if(m.version)>
+/**
+ * @version <m.version>
+ */
+<else>
+/**
+ * @version
+ */
+<endif>
+@<t.RosettaMeta>(model=<m.dataClassJavaType>.class)
+public class <m.metaClassName> implements <t.RosettaMetaData>\<<m.dataClassJavaType>\> {
+
+	@Override
+	public <t.List>\<<t.Validator>\<? super <m.dataClassJavaType>\>\> dataRules(<t.ValidatorFactory> factory) {
+		return <t.Arrays>.asList(
+<m.conditionRefs:{cr | 			factory.\<<cr.instanceType>\>create(<cr.simpleName>.class)<if(!cr.isLast)>,<endif>
+}>		);
+	}
+<\t>
+	@Override
+	public <t.List>\<<t.Function>\<? super <m.dataClassJavaType>, <t.QualifyResult>\>\> getQualifyFunctions(<t.QualifyFunctionFactory> factory) {
+<if(m.qualifyRefs)>		return <t.Arrays>.asList(
+<m.qualifyRefs:{qr | 			factory.\<<m.dataClassJavaType>\>create(<qr.simpleName>.class)<if(!qr.isLast)>,<endif>
+}>		);
+<else>		return <t.Collections>.emptyList();
+<endif>	}
+<\t>
+	@Override
+	public <t.Validator>\<? super <m.dataClassJavaType>\> validator(<t.ValidatorFactory> factory) {
+		return factory.\<<m.dataClassJavaType>\>create(<m.validatorSimple>.class);
+	}
+
+	@Override
+	public <t.Validator>\<? super <m.dataClassJavaType>\> typeFormatValidator(<t.ValidatorFactory> factory) {
+		return factory.\<<m.dataClassJavaType>\>create(<m.typeFormatValidatorSimple>.class);
+	}
+
+	@Deprecated
+	@Override
+	public <t.Validator>\<? super <m.dataClassJavaType>\> validator() {
+		return new <m.validatorSimple>();
+	}
+
+	@Deprecated
+	@Override
+	public <t.Validator>\<? super <m.dataClassJavaType>\> typeFormatValidator() {
+		return new <m.typeFormatValidatorSimple>();
+	}
+<\t>
+	@Override
+	public <t.ValidatorWithArg>\<? super <m.dataClassJavaType>, <t.Set>\<String\>\> onlyExistsValidator() {
+		return new <m.onlyExistsValidatorSimple>();
+	}
+}
+
+>>

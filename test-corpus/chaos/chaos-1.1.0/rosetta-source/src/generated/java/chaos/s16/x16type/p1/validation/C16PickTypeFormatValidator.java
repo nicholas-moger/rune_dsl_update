@@ -1,0 +1,36 @@
+package chaos.s16.x16type.p1.validation;
+
+import chaos.s16.x16type.p1.C16Pick;
+import com.google.common.collect.Lists;
+import com.rosetta.model.lib.expression.ComparisonResult;
+import com.rosetta.model.lib.path.RosettaPath;
+import com.rosetta.model.lib.validation.ValidationResult;
+import com.rosetta.model.lib.validation.Validator;
+import java.util.List;
+
+import static com.google.common.base.Strings.isNullOrEmpty;
+import static com.rosetta.model.lib.validation.ValidationResult.failure;
+import static com.rosetta.model.lib.validation.ValidationResult.success;
+import static java.util.stream.Collectors.toList;
+
+public class C16PickTypeFormatValidator implements Validator<C16Pick> {
+
+	private List<ComparisonResult> getComparisonResults(C16Pick o) {
+		return Lists.<ComparisonResult>newArrayList(
+			);
+	}
+
+	@Override
+	public List<ValidationResult<?>> getValidationResults(RosettaPath path, C16Pick o) {
+		return getComparisonResults(o)
+			.stream()
+			.map(res -> {
+				if (!isNullOrEmpty(res.getError())) {
+					return failure("C16Pick", ValidationResult.ValidationType.TYPE_FORMAT, "C16Pick", path, "", res.getError());
+				}
+				return success("C16Pick", ValidationResult.ValidationType.TYPE_FORMAT, "C16Pick", path, "");
+			})
+			.collect(toList());
+	}
+
+}

@@ -1,0 +1,10 @@
+namespace test.expressions
+
+func Logical:
+    inputs:
+        a boolean (1..1)
+        b boolean (1..1)
+        c boolean (1..1)
+    output:
+        result boolean (1..1)
+    set result: a or b and c

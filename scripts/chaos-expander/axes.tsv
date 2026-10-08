@@ -1,0 +1,19 @@
+# The chaos expansion axes - the charter § 2.3 SOT (tab-separated).
+# axis<TAB>description<TAB>applicability(comma families)<TAB>variants-per-seed-cap
+# Every axis descends from a measured bug class (charter § 2.3 table for A1-A6;
+# D49 for the generation-2 axes A7-A9). Caps are CEILINGS; the chosen counts
+# (and the A4/A5/A7/A9 slim carriers) are the golden-budget trim - see
+# expand.py's per-axis notes.
+# GENERATION 2 (chaos-1.1.0, D49): applicability is EXPLICIT - the `*` form
+# retired with the base-only band s90-s99, which no axis expands (one shape
+# per file: seven released-plugin refusals judged alone, s95's oracle-clean
+# duplicate parameter, s98's generator crash, s99's java.lang shadow).
+A1	declaration-order permutations (FOUR chosen orders, never N!; cap 6) - the #413 golden-input-order class	s01,s02,s03,s04,s05,s06,s07,s08,s09,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20,s21,s22,s23,s24,s25,s26,s27,s28,s29,s30,s31,s32,s33,s34	6
+A2	import styles: qualified / wildcard / aliased / unused-dangling (relocates the helper block)	s01,s02,s03,s04,s05,s06,s07,s08,s09,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20,s21,s22,s23,s24,s25,s26,s27,s28,s29,s30,s31,s32,s33,s34	4
+A3	namespace splits of identical content: half / thirds / hub	s01,s02,s03,s04,s05,s06,s07,s08,s09,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20,s21,s22,s23,s24,s25,s26,s27,s28,s29,s30,s31,s32,s33,s34	3
+A4	version declaration variants: absent / SNAPSHOT string (N4) - SLIM carrier (helper + first element)	s01,s02,s03,s04,s05,s06,s07,s08,s09,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20,s21,s22,s23,s24,s25,s26,s27,s28,s29,s30,s31,s32,s33,s34	2
+A5	line endings + non-ASCII bytes: CRLF / BOM / mixed-EOL / non-ASCII text - the a1 class - SLIM carrier + the F2 probe decls	s01,s02,s03,s04,s05,s06,s07,s08,s09,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20,s21,s22,s23,s24,s25,s26,s27,s28,s29,s30,s31,s32,s33,s34	4
+A6	cross-namespace collision injection (activates authored collision blocks of kinds type/choice/meta/enum/fn) - the a2/P2/P3/P7 + E2 families; fn = the F17' type-vs-function flavour (D49)	s16,s17,s31,s32	3
+A7	order-of-load: the SAME slim carrier under a file name that sorts FIRST (aaa-) and LAST (zz-) among its siblings - the F10 / seat-4 first-wins class (upstream's winner follows the resource path; lexical order was inferred, never measured against a first-sorting name) - run on s28's isEvent race so the s22 Product race stays unmoved (D49)	s28	2
+A8	output-package-shaped namespace: the seed in chaos.<fam>.a8pkg beside its kind=pkg rival TYPE in chaos.<fam>.a8pkg.functions, wildcard-imported - the POJO and the function generator address ONE Java path (the seat-3 writer seam FUNCTION_PATH_COLLISION, witnessed by a seeded map alone until now) (D49)	s04,s32	1
+A9	lexer trivia on a SLIM carrier: every leading four-space run a TAB (a9tabs); a block-comment banner and a line comment BEFORE namespace plus a line-comment trailer on every non-empty line (a9comment) - the L2 differential's key is the character offset and the seat-8 anchors are columns, neither measured under offset-shifting trivia (D49)	s01,s23,s24,s25,s26,s27,s28,s29,s30,s31,s32,s33,s34	2

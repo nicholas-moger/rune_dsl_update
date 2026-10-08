@@ -1,0 +1,25 @@
+namespace test.qfw.a
+version "0.0.0"
+isProduct root QfwTerms;
+
+type QfwTerms: <"The qualifiable root type - the first in load order.">
+    kind string (0..1)
+    notional number (0..1)
+
+func Qualify_QfwA1: <"Product qualification against the declared root.">
+    [qualification Product]
+    inputs:
+        terms QfwTerms (1..1)
+    output:
+        is_product boolean (1..1)
+    set is_product:
+        terms -> kind = "vanilla"
+
+func Qualify_QfwA2: <"Product qualification against the declared root.">
+    [qualification Product]
+    inputs:
+        terms QfwTerms (1..1)
+    output:
+        is_product boolean (1..1)
+    set is_product:
+        terms -> notional exists

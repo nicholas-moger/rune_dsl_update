@@ -1,0 +1,13 @@
+namespace test.expressions
+
+type Item:
+    id string (1..1)
+    value number (1..1)
+
+func TestAsKey:
+    inputs:
+        newId string (1..1)
+        newValue number (1..1)
+    output:
+        result Item (1..1)
+    set result: Item {id: newId as-key, value: newValue}

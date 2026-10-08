@@ -1,0 +1,6 @@
+namespace test.rrec001
+
+reporting rule Fac from int:
+	if item = 1
+	then 1
+	else item * Fac(item - 1)

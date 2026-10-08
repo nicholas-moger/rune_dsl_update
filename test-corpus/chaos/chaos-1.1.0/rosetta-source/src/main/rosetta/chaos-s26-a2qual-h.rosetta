@@ -1,0 +1,4 @@
+namespace chaos.s26.a2qual.h
+version "1.0.0"
+type C26Tag: <"Helper - relocated by the import axis.">
+    code string (1..1)

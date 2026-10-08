@@ -1,0 +1,8 @@
+namespace chaos.s34.a3third.p3
+version "1.0.0"
+import chaos.s34.a3third.p1.*
+import chaos.s34.a3third.p2.*
+enum C34Flag: <"An annotated enum.">
+    [c34owner live]
+    On
+    Off

@@ -1,0 +1,8 @@
+ENUM test.model.Base
+  namespace "test.model"
+  VALUE A
+  VALUE B
+ENUM test.model.Child
+  namespace "test.model"
+  parent Base
+  VALUE C

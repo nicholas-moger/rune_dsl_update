@@ -1,0 +1,52 @@
+{
+  "id": "analytics.plus-jvm",
+  "section": "analytics",
+  "title": "Analytics - fork parser (plus-jvm)",
+  "command": "java -cp \"demo/harness/analytics/target/classes;demo/harness/analytics/target/lib/*\" demo.harness.analytics.Main plus-jvm --src \"demo/corpus/cdm-5.38.0;demo/corpus/iso20022-1.38.0;demo/corpus/drr-6.34.1\" --builtins demo/corpus/builtins --receipt demo/receipts/analytics.plus-jvm.json",
+  "startedAt": "2026-08-20T01:20:58Z",
+  "durationMs": 7682,
+  "host": {
+    "os": "Windows 11 10.0",
+    "cpu": "Intel64 Family 6 Model 198 Stepping 2, GenuineIntel",
+    "java": "21.0.8"
+  },
+  "metrics": {
+    "lane": "plus-jvm",
+    "files": 349,
+    "parseMs": 4465,
+    "indexMs": 2,
+    "q1Ms": 0,
+    "q2Ms": 0,
+    "q3Ms": 1,
+    "q4Ms": 0,
+    "startupMs": 92,
+    "results": {
+      "q1": {
+        "types": 2243,
+        "enums": 763,
+        "functions": 1649,
+        "rules": 2272
+      },
+      "q2": {
+        "metaAnnotatedTypes": 206
+      },
+      "q3": {
+        "referencesToTarget": 26
+      },
+      "q4": {
+        "deepestExtendsChain": 5
+      }
+    },
+    "peakHeapMb": 1523,
+    "peakNonHeapMb": 31,
+    "indexSize": 3474,
+    "indexCollisions": 3933,
+    "extendsCycles": 0,
+    "linkMs": 3084,
+    "declarations": 7407,
+    "wallMs": 7676,
+    "exit": 0,
+    "peakRssMb": 2239
+  },
+  "notes": "files counts the NON-builtin population; the builtins are loaded but not counted. parseMs is parse only, linkMs is the workspace build (the counterpart of the legacy lane's resolveAll). peakRssMb omitted -- see AnalyticsRun; peakHeapMb/peakNonHeapMb are the measurable peaks. peakRssMb added by the outer wrapper: PeakWorkingSet64 sampled every 150 ms while the process ran (BelowNormal priority)."
+}

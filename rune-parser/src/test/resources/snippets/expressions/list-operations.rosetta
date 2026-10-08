@@ -1,0 +1,15 @@
+namespace test.expressions
+
+func ListOps:
+    inputs:
+        items number (0..*)
+    output:
+        result number (1..1)
+    alias cnt: items count
+    alias flat: items flatten
+    alias uniq: items distinct
+    alias fst: items first
+    alias lst: items last
+    alias rev: items reverse
+    alias total: items sum
+    set result: items count

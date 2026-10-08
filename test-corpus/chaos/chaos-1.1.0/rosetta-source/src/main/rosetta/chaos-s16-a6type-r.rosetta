@@ -1,0 +1,4 @@
+namespace chaos.s16.a6type.rival
+version "1.0.0"
+type C16Alpha: <"RIVAL - a same-named global type in an imported namespace (the a2/P2 class).">
+    rivalMark string (0..1)

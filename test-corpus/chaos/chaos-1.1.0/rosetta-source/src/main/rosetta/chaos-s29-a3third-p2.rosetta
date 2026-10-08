@@ -1,0 +1,29 @@
+namespace chaos.s29.a3third.p2
+version "1.0.0"
+import chaos.s29.a3third.p1.*
+import chaos.s29.a3third.p3.*
+func C29LoL: <"A deep call on a LIST-OF-LISTS lambda item (seat 6's banked deep-path-lol-item) and a deep path chained through the inner choice.">
+    inputs:
+        outers C29Outer (0..*)
+    output:
+        vs number (0..*)
+    add vs: outers extract o [ o ->> inners ] then extract ins [ ins ->> deep then count ]
+    add vs: outers extract o [ o ->> inners ->> deep then count ]
+func C29InLambda: <"The meta ladder inside an extract lambda with an EXPLICIT filter parameter over deep paths (seat 5's InLambda - DECLARED at the byte bar).">
+    inputs:
+        outers C29Outer (0..*)
+    output:
+        picks string (0..*)
+    set picks:
+        outers extract o [
+            if o ->> code exists
+            then o ->> code
+            else o ->> codes then filter c [ c <> "void" ] then first
+        ]
+func C29Piped: <"then-pipes inside a lambda inside an alias over a deep receiver.">
+    inputs:
+        outers C29Outer (0..*)
+    output:
+        vs number (0..*)
+    alias piped: outers extract o [ o ->> leaves then filter l [ l -> v > 0 ] then extract l2 [ l2 -> v ] ] then flatten
+    add vs: piped

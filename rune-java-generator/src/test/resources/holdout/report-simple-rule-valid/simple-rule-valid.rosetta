@@ -1,0 +1,13 @@
+namespace test.reports
+
+type Trade:
+    tradeId string (1..1)
+    isActive boolean (1..1)
+
+reporting rule TradeIdRule from Trade:
+    <"Extract the trade identifier">
+    extract item -> tradeId
+
+eligibility rule IsReportable from Trade:
+    <"Check if trade is reportable">
+    extract item -> isActive

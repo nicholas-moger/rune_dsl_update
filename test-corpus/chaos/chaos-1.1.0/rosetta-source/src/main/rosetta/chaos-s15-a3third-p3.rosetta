@@ -1,0 +1,8 @@
+namespace chaos.s15.a3third.p3
+version "1.0.0"
+import chaos.s15.a3third.p1.*
+import chaos.s15.a3third.p2.*
+type C15Carrier: <"Uses the model-declared builtins beside real ones.">
+    tok c15token (0..1)
+    span c15span (0..1)
+    aux C15Aux (0..1)

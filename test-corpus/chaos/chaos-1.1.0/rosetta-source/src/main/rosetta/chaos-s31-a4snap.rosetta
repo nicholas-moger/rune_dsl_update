@@ -1,0 +1,29 @@
+namespace chaos.s31.a4snap
+version "1.0.0-SNAPSHOT"
+type C31Held: <"Helper - relocated by the import axis.">
+    h string (1..1)
+metaType scheme string
+synonym source C31Src
+enum C31SideEnum: <"The E2 pair's first enum - owns Long and Short.">
+    Long
+    Short
+enum C31MoveEnum: <"The second enum in the SAME scope re-using Long.">
+    Long
+    Flat
+enum C31EscEnum: <"displayNames carrying a raw quote, a backslash and non-ASCII - the D46 RAW law (upstream's own non-compiling emission for the first two: EscapeEnum, rider 4).">
+    Quote displayName "say \"hi\""
+    Slash displayName "back\\slash"
+    Uni displayName "µ–„display“"
+    Plain displayName "plain"
+enum C31KeyEnum: <"Enum values named like Java keywords.">
+    class
+    long
+    new
+    null
+enum C31BaseEnum: <"Extends chain 1.">
+    A
+enum C31MidEnum extends C31BaseEnum: <"Extends chain 2.">
+    B
+enum C31TopEnum extends C31MidEnum: <"Extends chain 3, with a synonym on the value.">
+    C
+        [synonym C31Src value "cee"]

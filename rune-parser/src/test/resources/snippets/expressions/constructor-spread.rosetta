@@ -1,0 +1,12 @@
+namespace test.expressions
+
+type Addr:
+    city string (1..1)
+    zip string (1..1)
+
+func TestSpread:
+    inputs:
+        addr Addr (1..1)
+    output:
+        result Addr (1..1)
+    set result: Addr {city: "NYC", ...}

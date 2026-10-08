@@ -1,0 +1,6 @@
+namespace test.model
+
+type CamelCaseNames:
+    dayCountFraction number (1..1)
+    notionalUSDValue number (1..1)
+    payerReceiver string (0..1)

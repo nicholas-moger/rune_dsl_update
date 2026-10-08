@@ -1,0 +1,9 @@
+namespace com.test.outer.inner
+
+type Trade:
+    id string (1..1)
+
+func IsSwap:
+    inputs: trade Trade (1..1)
+    output: result boolean (1..1)
+    set result: trade -> id = "swap"

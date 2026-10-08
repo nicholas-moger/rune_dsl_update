@@ -1,0 +1,17 @@
+namespace chaos.s01.a3third.p2
+version "1.0.0"
+import chaos.s01.a3third.p1.*
+import chaos.s01.a3third.p3.*
+type C1Leaf extends C1Mid: <"Leaf - overrides, parameterised types, multi-cardinality.">
+    override note string (1..1)
+    parts C1Ref (2..*)
+    ratio number(min: 0, max: 100) (0..1)
+    code string(minLength: 3, maxLength: 3) (0..1)
+type C1Cond: <"Type-level condition seats.">
+    lo number (0..1)
+    hi number (0..1)
+    condition C1Bounds: <"Ordered when both present.">
+        if lo exists and hi exists
+        then lo <= hi
+    condition:
+        lo exists or hi exists

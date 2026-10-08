@@ -1,0 +1,10 @@
+namespace chaos.s90.base
+version "1.0.0"
+type C90Item: <"REFUSAL-PARITY s90 (base only): a closure parameter named `e` - the released plugin refuses at the GRAMMAR (no viable alternative at input 'e'; the seat-7 receipt); the fork parses and generates it.">
+    v number (0..1)
+func C90Param:
+    inputs:
+        items C90Item (0..*)
+    output:
+        vs number (0..*)
+    add vs: items extract e [ e -> v ]

@@ -1,0 +1,11 @@
+namespace chaos.s08.a3third.p3
+version "1.0.0"
+import chaos.s08.a3third.p1.*
+import chaos.s08.a3third.p2.*
+func C8Scale: <"Alias types crossing a function boundary.">
+    inputs:
+        q C8Positive (1..1)
+        w C8Pct (1..1)
+    output:
+        r number (1..1)
+    set r: q * w / 100

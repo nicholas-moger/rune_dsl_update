@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="506" viewBox="0 0 520 506" role="img" aria-labelledby="title desc">
+  <title id="title">Reading guide for compact screens</title>
+  <desc id="desc">Background: model-driven development. Rune today: architecture and CDM/DRR use. The proposed contribution: goals, design, progress, outcomes and SDK preview.</desc>
+  <rect width="520" height="506" rx="16" fill="#111923"/>
+  <g font-family="'Segoe UI',Arial,sans-serif">
+    <g transform="translate(16 16)"><rect width="488" height="146" rx="12" fill="#18222f" stroke="#344153"/><rect width="4" height="146" rx="2" fill="#929de5"/><text x="22" y="30" font-size="13" font-weight="700" letter-spacing="2" fill="#a6b0ec">THE FOUNDATIONS</text><text x="22" y="64" font-size="28" font-weight="650" fill="#eff2f8">Background</text><text x="22" y="94" font-size="19" fill="#c2ccdb">How models become software</text><text x="22" y="124" font-size="17" fill="#8f9fb4">Grammar · AST · IR · emitters · LSP · SDK</text></g>
+    <g transform="translate(16 180)"><rect width="488" height="146" rx="12" fill="#18222f" stroke="#344153"/><rect width="4" height="146" rx="2" fill="#85b5de"/><text x="22" y="30" font-size="13" font-weight="700" letter-spacing="2" fill="#a2c6e6">THE ESTABLISHED LANGUAGE</text><text x="22" y="64" font-size="28" font-weight="650" fill="#eff2f8">Rune today</text><text x="22" y="94" font-size="19" fill="#c2ccdb">Architecture and real-world use</text><text x="22" y="124" font-size="17" fill="#8f9fb4">Compiler · CDM · DRR · model inspection</text></g>
+    <g transform="translate(16 344)"><rect width="488" height="146" rx="12" fill="#18222f" stroke="#344153"/><rect width="4" height="146" rx="2" fill="#75c9b6"/><text x="22" y="30" font-size="13" font-weight="700" letter-spacing="2" fill="#92d5c6">THE PROPOSED EVOLUTION</text><text x="22" y="64" font-size="28" font-weight="650" fill="#eff2f8">The contribution</text><text x="22" y="94" font-size="19" fill="#c2ccdb">Design, delivery and evidence</text><text x="22" y="124" font-size="17" fill="#8f9fb4">Goals · progress · outcomes · SDK preview</text></g>
+  </g>
+</svg>

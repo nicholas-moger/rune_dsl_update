@@ -1,0 +1,8 @@
+namespace test.expressions
+
+func Absolute:
+    inputs:
+        x number (1..1)
+    output:
+        result number (1..1)
+    set result: if x > 0 then x else 0 - x

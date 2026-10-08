@@ -1,0 +1,13 @@
+namespace chaos.s12.a3half.p1
+version "1.0.0"
+import chaos.s12.a3half.p2.*
+type C12Aux: <"Self-contained helper - relocated by the import axis.">
+    ax string (1..1)
+synonym source C12Base
+type C12Row: <"Mapping target for the external source.">
+    key string (1..1)
+    val number (0..1)
+    aux C12Aux (0..1)
+enum C12FlagEnum: <"External-enum mapping target.">
+    On
+    Off

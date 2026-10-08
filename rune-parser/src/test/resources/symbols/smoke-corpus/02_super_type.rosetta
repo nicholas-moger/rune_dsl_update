@@ -1,0 +1,7 @@
+namespace smoke.types
+type Animal:
+    name string (1..1)
+type Dog extends Animal:
+    breed string (1..1)
+type Cat extends Animal:
+    indoor boolean (1..1)

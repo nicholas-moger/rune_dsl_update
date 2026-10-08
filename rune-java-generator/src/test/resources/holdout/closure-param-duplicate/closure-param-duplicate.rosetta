@@ -1,0 +1,33 @@
+namespace holdout.closureparamduplicate
+version "0.0.0"
+
+type Item: <"The M12 carrier's element (v3.2 seat 12, D52 H1): a number-valued item reduced over.">
+    v number (1..1)
+
+func ReduceDup: <"THE M12 SHAPE: two closure parameters of ONE name (`reduce a, a`). The released 9.83.0 plugin ACCEPTS it (the chaos s95 seed's refusal verdict was REFUTED at the gen-2 census, D49 s 2.3) and numbers the pair by GeneratorScope.computeActualNames - `(a0, a1) -> add(a0, a0)`, every holder of a shared desired name numbered, the body's reads bound to the FIRST parameter. The fork's compileReduceLambda wrote the raw names `(a, a)` - a duplicate lambda parameter, non-compiling - before this seat's heal.">
+    inputs:
+        items Item (0..*)
+    output:
+        total number (1..1)
+    set total: items extract i [ i -> v ] then reduce a, a [ a + a ]
+
+func ReduceDupMultiply: <"The same shape under a second operator and a second function, so the numbering is shown to be per LAMBDA scope (a0 / a1 again, not a2 / a3): the desired-name index restarts in each scope.">
+    inputs:
+        items Item (0..*)
+    output:
+        product number (1..1)
+    set product: items extract i [ i -> v ] then reduce a, a [ a * a ]
+
+func ReduceDistinct: <"THE CONTROL: two DISTINCT closure parameters render unnumbered - `(a, b) -> add(a, b)` - so the heal must number ONLY a shared desired name (a lane that numbers every parameter goes RED here).">
+    inputs:
+        items Item (0..*)
+    output:
+        total number (1..1)
+    set total: items extract i [ i -> v ] then reduce a, b [ a + b ]
+
+func ReduceDupThenUse: <"The duplicate pair whose body reads the parameter TWICE on each side and once more under a conditional - every read binds to the first parameter (a0), the second (a1) is never read: the plugin's binding law, pinned as bytes.">
+    inputs:
+        items Item (0..*)
+    output:
+        total number (1..1)
+    set total: items extract i [ i -> v ] then reduce a, a [ if a > 0 then a + a else a ]

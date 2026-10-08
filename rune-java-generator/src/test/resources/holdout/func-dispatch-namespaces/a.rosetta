@@ -1,0 +1,18 @@
+namespace test.dispatchns.a
+
+enum ModeA: <"Dispatch discriminator, namespace a.">
+    Fast
+    Slow
+
+func Speed: <"Dispatch BASE in namespace a - the same group name as namespaces b and d (the chaos s04 C4Speed shape across namespaces).">
+    inputs:
+        mode ModeA (1..1)
+        x number (1..1)
+    output:
+        y number (1..1)
+
+func Speed(mode: ModeA -> Fast): <"a / Fast.">
+    set y: x * 2
+
+func Speed(mode: ModeA -> Slow): <"a / Slow.">
+    set y: x / 2

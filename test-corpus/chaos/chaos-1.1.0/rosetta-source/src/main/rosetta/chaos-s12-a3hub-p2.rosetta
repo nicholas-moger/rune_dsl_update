@@ -1,0 +1,28 @@
+namespace chaos.s12.a3hub.p2
+version "1.0.0"
+import chaos.s12.a3hub.p1.*
+synonym source C12Base
+type C12Row: <"Mapping target for the external source.">
+    key string (1..1)
+    val number (0..1)
+    aux C12Aux (0..1)
+enum C12FlagEnum: <"External-enum mapping target.">
+    On
+    Off
+synonym source C12Ext extends C12Base
+{
+    C12Row:
+        [value "RowEnvelope" meta "rowMeta"]
+        + key
+            [value "k" path "row"]
+        + val
+            [value "v" path "row" maps 2]
+
+    enums
+
+    C12FlagEnum:
+        + On
+            [value "1"]
+        + Off
+            [value "0"]
+}

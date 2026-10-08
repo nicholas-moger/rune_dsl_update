@@ -1,0 +1,37 @@
+{
+  "irFormatVersion": 1,
+  "nodes": [
+    {
+      "kind": "STRUCT",
+      "name": "test.model.Foo",
+      "isAbstract": false,
+      "baseType": null,
+      "fields": [
+        {
+          "kind": "FIELD",
+          "name": "bar",
+          "type": "string",
+          "cardinality": "ONE_TO_ONE",
+          "typeKind": "BASIC_TYPE",
+          "typeResolvedName": "string",
+          "bounds": {
+            "lower": 1,
+            "upper": 1
+          }
+        },
+        {
+          "kind": "FIELD",
+          "name": "baz",
+          "type": "number",
+          "cardinality": "ZERO_TO_MANY",
+          "typeKind": "BASIC_TYPE",
+          "typeResolvedName": "number",
+          "bounds": {
+            "lower": 0
+          }
+        }
+      ],
+      "namespace": "test.model"
+    }
+  ]
+}

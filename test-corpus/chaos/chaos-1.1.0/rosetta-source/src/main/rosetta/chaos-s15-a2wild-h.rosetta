@@ -1,0 +1,4 @@
+namespace chaos.s15.a2wild.h
+version "1.0.0"
+type C15Aux: <"Self-contained helper - relocated by the import axis.">
+    ax string (1..1)

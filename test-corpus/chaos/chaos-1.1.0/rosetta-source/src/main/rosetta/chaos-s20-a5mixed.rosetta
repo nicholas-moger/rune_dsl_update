@@ -1,0 +1,11 @@
+namespace chaos.s20.a5mixed
+version "1.0.0"
+type C20Leaf: <"Depth-4 leaf - relocated by the import axis.">
+    v number (1..1)
+type C20Twig: <"Depth 3.">
+    leaves C20Leaf (0..*)
+type C20Branch: <"Depth 2.">
+    twigs C20Twig (0..*)
+type C20Trunk: <"Depth 1.">
+    branches C20Branch (0..*)
+    title string (1..1)

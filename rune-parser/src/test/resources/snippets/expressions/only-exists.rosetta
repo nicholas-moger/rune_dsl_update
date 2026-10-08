@@ -1,0 +1,15 @@
+namespace test.expressions
+
+type Fields:
+    a number (0..1)
+    b number (0..1)
+    c number (0..1)
+
+func CheckOnlyExists:
+    inputs:
+        f Fields (1..1)
+    output:
+        result boolean (1..1)
+    condition OnlyOneSet:
+        (f -> a, f -> b, f -> c) only exists
+    set result: f -> a only exists

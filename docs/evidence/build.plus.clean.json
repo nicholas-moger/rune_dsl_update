@@ -1,0 +1,26 @@
+{
+  "id": "build.plus.clean",
+  "section": "build",
+  "title": "Fork rune-maven-plugin 0.0.1-SNAPSHOT - clean",
+  "command": "mvn.cmd -B -f <development-root>\\demo\\build\\build-plus\\pom.xml clean generate-sources -Dmaven.repo.local=<development-root>\\demo\\work\\.m2",
+  "startedAt": "2026-08-20T01:37:42Z",
+  "durationMs": 62063,
+  "metrics": {
+    "toolchain": "plus",
+    "kind": "clean",
+    "wallMs": 19154,
+    "runsMs": [
+      19154,
+      17477,
+      25432
+    ],
+    "files": 19219,
+    "exit": 0
+  },
+  "notes": "warm dependency cache; cold = clean target, not cold network. incremental = a second generate-sources over an already-populated output tree with no clean; neither plugin persists an index between JVMs, so this measures re-generation, not true incrementality. Wall clock includes JVM startup and Maven plugin resolution. outputDir=<development-root>\\demo\\work\\build-plus-out; runs=3; wallMs is the MEDIAN of runsMs; durationMs is the SUM.",
+  "host": {
+    "cpu": "Intel(R) Core(TM) Ultra 9 285K",
+    "java": "21.0.8",
+    "os": "Microsoft Windows 11 Pro Insider Preview"
+  }
+}

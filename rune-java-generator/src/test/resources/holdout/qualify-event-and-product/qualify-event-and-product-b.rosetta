@@ -1,0 +1,15 @@
+namespace test.qep.b
+version "0.0.0"
+isProduct root QepProduct;
+
+type QepProduct: <"The product root, declared in the LATER namespace - first-wins is PER KIND.">
+    kind string (0..1)
+
+func Qualify_QepP: <"Product qualification against the declared root.">
+    [qualification Product]
+    inputs:
+        terms QepProduct (1..1)
+    output:
+        is_product boolean (1..1)
+    set is_product:
+        terms -> kind = "vanilla"

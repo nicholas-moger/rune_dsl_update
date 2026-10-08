@@ -1,0 +1,26 @@
+namespace test.rws.a
+version "0.0.0"
+
+body Authority RwsAUTH <"The authority.">
+corpus Regulation "Rws Regulation" RwsReg <"The corpus.">
+segment rwsarticle
+
+type RwsTrade: <"The report-from type.">
+    utid string (1..1)
+        [label as "The Trade UTI"]
+    notional number (0..1)
+
+eligibility rule RwsEligible from RwsTrade: <"Report when-gate.">
+    notional exists
+reporting rule RwsUtid from RwsTrade: <"Reported field.">
+    extract utid
+        as "UTI"
+reporting rule RwsNotional from RwsTrade: <"Reported numeric with default.">
+    extract notional default 0
+        as "Notional"
+
+type RwsReport: <"Report output type with rule references.">
+    utiField string (1..1)
+        [ruleReference RwsUtid]
+    notionalField number (1..1)
+        [ruleReference RwsNotional]

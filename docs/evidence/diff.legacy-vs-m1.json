@@ -1,0 +1,28 @@
+{
+  "id": "diff.legacy-vs-m1",
+  "section": "codegen",
+  "title": "Byte parity: legacy 9.83.0 tree vs Mode 1 (line endings normalised - the declared Layer-3 normalisation; legacy Xtext writes platform CRLF, the fork writes LF)",
+  "command": "pwsh -File demo/build/diff-trees.ps1 -A \"<development-root>\\demo\\work\\gen-legacy\" -B \"<development-root>\\demo\\work\\gen-m1\" -NormalizeEol -Id diff.legacy-vs-m1 -Title \"Byte parity: legacy 9.83.0 tree vs Mode 1 (line endings normalised - the declared Layer-3 normalisation; legacy Xtext writes platform CRLF, the fork writes LF)\" -Section codegen",
+  "startedAt": "2026-08-20T01:14:52Z",
+  "durationMs": 335440,
+  "metrics": {
+    "normalizeEol": true,
+    "identicalFiles": 19219,
+    "differingFiles": 0,
+    "onlyInA": 0,
+    "onlyInB": 0,
+    "totalPaths": 19219,
+    "rootA": "<development-root>\\demo\\work\\gen-legacy",
+    "rootB": "<development-root>\\demo\\work\\gen-m1",
+    "filesInA": 19219,
+    "filesInB": 19219,
+    "firstDiffering": [],
+    "firstOnlyInA": [],
+    "firstOnlyInB": []
+  },
+  "notes": "SHA-256 byte compare over the union of relative paths; length checked first as a cheap early-out. Paths compared case-sensitively (ordinal). Differences are the RESULT, not a failure: exit stays 0.",
+  "host": {
+    "cpu": "Intel(R) Core(TM) Ultra 9 285K",
+    "os": "Microsoft Windows 11 Pro Insider Preview"
+  }
+}

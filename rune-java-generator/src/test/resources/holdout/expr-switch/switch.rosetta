@@ -1,0 +1,8 @@
+namespace test.expressions
+
+func SwitchExample:
+    inputs:
+        x number (1..1)
+    output:
+        result number (1..1)
+    set result: x switch 1 then 10, 2 then 20, default 0

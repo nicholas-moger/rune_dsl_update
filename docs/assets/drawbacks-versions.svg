@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="690" viewBox="0 0 1120 690" role="img" aria-labelledby="title desc">
+<title id="title">Version lines require coordinated migration</title>
+<desc id="desc">Two official released model/toolchain selections: CDM 6.27.0 selects Rune 9.92.1 in the 9.x lane; CDM 7.0.0 selects Rune 10.2.2 in the 10.x lane. Each path is model source, selected generator and runtime, then application. Breaking validation, choice syntax and navigation changes require model migration and coordinated pins, while parallel version-line maintenance continues. This is a qualitative migration impact and two-release example, not a complete compatibility matrix or an attribution of the version split to Xtext.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9" fill="none" stroke="#a9b7cb" stroke-width="1.4"/></marker></defs>
+<rect width="1120" height="690" rx="22" fill="#121923"/>
+<g font-family="Segoe UI, Arial, sans-serif">
+<text x="30" y="47" fill="#eef2f8" font-size="31" font-weight="600" text-anchor="start">
+<tspan x="30" dy="0" xml:space="preserve">Version lines require coordinated migration</tspan>
+</text>
+<text x="30" y="80" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="30" dy="0" xml:space="preserve">Qualitative migration impact · two released model/toolchain paths</tspan>
+</text>
+<text x="30" y="133" fill="#a2c6e6" font-size="21" font-weight="600" text-anchor="start">
+<tspan x="30" dy="0" xml:space="preserve">9.x lane</tspan>
+</text>
+<rect x="30" y="160" width="280" height="110" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="31" y="179" width="4" height="72" rx="2" fill="#a2c6e6"/>
+<text x="53" y="197" fill="#a2c6e6" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="53" dy="0" xml:space="preserve">CDM 6.27.0</tspan>
+</text>
+<text x="53" y="230" fill="#a9b7cb" font-size="21" font-weight="400" text-anchor="start">
+<tspan x="53" dy="0" xml:space="preserve">.rosetta source</tspan>
+</text>
+<rect x="400" y="160" width="370" height="110" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="401" y="179" width="4" height="72" rx="2" fill="#a6b0ec"/>
+<text x="423" y="197" fill="#a6b0ec" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="423" dy="0" xml:space="preserve">Rune 9.92.1</tspan>
+</text>
+<text x="423" y="230" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="423" dy="0" xml:space="preserve">Selected generator + runtime</tspan>
+</text>
+<rect x="840" y="160" width="250" height="110" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="841" y="179" width="4" height="72" rx="2" fill="#d0b487"/>
+<text x="863" y="197" fill="#d0b487" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="863" dy="0" xml:space="preserve">Application</tspan>
+</text>
+<text x="863" y="230" fill="#a9b7cb" font-size="19" font-weight="400" text-anchor="start">
+<tspan x="863" dy="0" xml:space="preserve">Generated code</tspan>
+<tspan x="863" dy="26" xml:space="preserve">+ selected runtime</tspan>
+</text>
+<polyline points="310,215 400,215" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="770,215 840,215" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<text x="30" y="323" fill="#92d5c6" font-size="21" font-weight="600" text-anchor="start">
+<tspan x="30" dy="0" xml:space="preserve">10.x lane</tspan>
+</text>
+<rect x="30" y="350" width="280" height="110" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="31" y="369" width="4" height="72" rx="2" fill="#92d5c6"/>
+<text x="53" y="387" fill="#92d5c6" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="53" dy="0" xml:space="preserve">CDM 7.0.0</tspan>
+</text>
+<text x="53" y="420" fill="#a9b7cb" font-size="21" font-weight="400" text-anchor="start">
+<tspan x="53" dy="0" xml:space="preserve">.rosetta source</tspan>
+</text>
+<rect x="400" y="350" width="370" height="110" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="401" y="369" width="4" height="72" rx="2" fill="#a6b0ec"/>
+<text x="423" y="387" fill="#a6b0ec" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="423" dy="0" xml:space="preserve">Rune 10.2.2</tspan>
+</text>
+<text x="423" y="420" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="423" dy="0" xml:space="preserve">Selected generator + runtime</tspan>
+</text>
+<rect x="840" y="350" width="250" height="110" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="841" y="369" width="4" height="72" rx="2" fill="#d0b487"/>
+<text x="863" y="387" fill="#d0b487" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="863" dy="0" xml:space="preserve">Application</tspan>
+</text>
+<text x="863" y="420" fill="#a9b7cb" font-size="19" font-weight="400" text-anchor="start">
+<tspan x="863" dy="0" xml:space="preserve">Generated code</tspan>
+<tspan x="863" dy="26" xml:space="preserve">+ selected runtime</tspan>
+</text>
+<polyline points="310,405 400,405" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="770,405 840,405" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<rect x="30" y="525" width="1060" height="135" rx="14" fill="#18222f" stroke="#a6b0ec" stroke-width="1.5"/>
+<text x="55" y="564" fill="#a6b0ec" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="55" dy="0" xml:space="preserve">Model migration + coordinated pins</tspan>
+</text>
+<text x="55" y="602" fill="#a9b7cb" font-size="21" font-weight="400" text-anchor="start">
+<tspan x="55" dy="0" xml:space="preserve">Breaking validation, choice syntax and navigation changes</tspan>
+<tspan x="55" dy="29" xml:space="preserve">Parallel maintenance across version lines</tspan>
+</text>
+</g>
+</svg>

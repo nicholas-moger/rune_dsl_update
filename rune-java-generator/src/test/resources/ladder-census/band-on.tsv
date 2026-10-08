@@ -1,0 +1,8 @@
+# The 25x2 matrix's non-identical file set, ON route (-Pir-on) — see band-off.tsv.
+# Provenance: same head bf0519655; ring 9062fc14 / matrix d47fa88f / band 0 /
+#   identical 174,129 / missingOutput 12 — the seat-33 ON pins exactly.
+# Content: 0 unwaived mismatches + 0 unwaived missingOutput = ZERO rows.
+# Measured property: this set is IDENTICAL to band-off (both EMPTY; 0 OFF-only,
+#   0 ON-only). The #568 relation (a 180-file strict subset) closed at seat 12
+#   (#582); the routes stayed converged through seat 33 (#605), where both
+#   reached zero under one matrix digest.

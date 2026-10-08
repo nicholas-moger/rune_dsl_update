@@ -1,0 +1,11 @@
+namespace chaos.s14.a5uni
+version "1.0.0"
+type C14Aux: <"éüµ – Self-contained helper - relocated by the import axis.">
+    ax string (1..1)
+body Authority C14REG <"The chaos regulator.">
+body Organisation C14ORG <"The chaos standards organisation.">
+type A5UniProbe: <"Non-ASCII literal probe – müßig 試験.">
+    p string (0..1)
+        [label as "µ–label §7"]
+enum A5UniProbeEnum: <"displayName probe.">
+    V displayName "µ–„display“"

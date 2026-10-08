@@ -1,0 +1,11 @@
+namespace test.regulatory
+
+body Authority ESMA
+corpus Regulation ESMA "MiFIR" MiFIR_RTS
+
+type Trade:
+    [docReference ESMA MiFIR_RTS article "1" section "2"
+        rationale "Required for reporting"
+        rationale_author "Compliance"
+        provision "As per Article 1"]
+    tradeId string (1..1)

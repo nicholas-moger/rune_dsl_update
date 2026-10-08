@@ -1,0 +1,72 @@
+namespace conformance.p10
+version "1.0.0"
+
+// P10 — is a TYPE ALIAS legal as a CHOICE OPTION, and if so what does the
+// option navigation TYPE AS?
+//
+// The grammar makes `choiceOption : typeCall ...` — the same production
+// `attribute` uses — so an alias is SYNTACTICALLY admissible in an option slot.
+// The fork's ExpressionTypeComputer.typeOfChoiceOption handles only RDataType
+// and RChoice and returns MISSING for anything else, including an alias.
+//
+// This probe asks the RELEASED 9.83.0 oracle which of two things is true:
+//   (a) upstream REFUSES an alias option (a validation/linking error on the
+//       option itself) — in which case the fork's MISSING is the RIGHT answer
+//       and "fixing" it to resolve would be a wrong-accept; or
+//   (b) upstream ACCEPTS it and types the navigation as the alias's terminal
+//       type — in which case the fork silently loses a type.
+//
+// Controls: AliasOnly isolates the alias-option case; DataOnly is the known-good
+// data-type option; Mixed asks whether one alias option poisons its siblings.
+
+typeAlias AliasText: <"An alias over a plain string.">
+    string(pattern: "[ -~]*")
+
+type Plain:
+    shared string (1..1)
+
+type Other:
+    shared string (1..1)
+
+choice AliasOnly:
+    AliasText
+
+choice DataOnly:
+    Plain
+    Other
+
+choice Mixed:
+    Plain
+    AliasText
+
+func P10AliasOptionHop:
+    inputs:
+        c AliasOnly (1..1)
+    output:
+        result string (0..1)
+    set result:
+        c -> AliasText
+
+func P10DataOptionHopControl:
+    inputs:
+        c DataOnly (1..1)
+    output:
+        result string (0..1)
+    set result:
+        c -> Plain -> shared
+
+func P10MixedDataSiblingControl:
+    inputs:
+        c Mixed (1..1)
+    output:
+        result string (0..1)
+    set result:
+        c -> Plain -> shared
+
+func P10MixedAliasSibling:
+    inputs:
+        c Mixed (1..1)
+    output:
+        result string (0..1)
+    set result:
+        c -> AliasText

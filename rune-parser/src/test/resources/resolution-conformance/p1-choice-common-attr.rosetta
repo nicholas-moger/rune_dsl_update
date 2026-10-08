@@ -1,0 +1,48 @@
+namespace conformance.p1
+version "1.0.0"
+
+// P1 — a COMMON ATTRIBUTE of every option, navigated off the choice with a
+// plain `->`. Spec R9: upstream's feature scope on a choice is its OPTIONS
+// (asRDataType — the options ARE the attributes), never the options' shared
+// attributes; the shared-attribute reach-through is the DEEP path's semantics
+// (R11). The fork's findAttribute applies the common-attribute rule on choices
+// for plain `->` too (TypeDirectedResolver.findAttribute → findCommonAttribute),
+// so it binds a name upstream refuses.
+//
+// Expected upstream: (a) `-> shared` UNRESOLVED + a linking error;
+//                    (b) `->> shared` resolves (deep features);
+//                    (c) `-> A -> shared` resolves (option, then attribute).
+
+type A:
+    shared string (1..1)
+
+type B:
+    shared string (1..1)
+
+choice C:
+    A
+    B
+
+func P1PlainArrowCommonAttr:
+    inputs:
+        c C (1..1)
+    output:
+        result string (0..1)
+    set result:
+        c -> shared
+
+func P1DeepPathControl:
+    inputs:
+        c C (1..1)
+    output:
+        result string (0..1)
+    set result:
+        c ->> shared
+
+func P1OptionHopControl:
+    inputs:
+        c C (1..1)
+    output:
+        result string (0..1)
+    set result:
+        c -> A -> shared

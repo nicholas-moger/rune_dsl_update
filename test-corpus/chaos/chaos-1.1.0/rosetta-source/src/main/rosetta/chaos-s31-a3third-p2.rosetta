@@ -1,0 +1,22 @@
+namespace chaos.s31.a3third.p2
+version "1.0.0"
+import chaos.s31.a3third.p1.*
+import chaos.s31.a3third.p3.*
+type C31Books: <"Both colliding enums at attribute seats, a scheme-carrying scalar, an enum list and the top of the extends chain.">
+    side C31SideEnum (0..1)
+    move C31MoveEnum (0..1)
+    coded string (0..1)
+        [metadata scheme]
+    sides C31SideEnum (0..*)
+    top C31TopEnum (0..1)
+    held C31Held (0..1)
+func C31Defaults: <"F10' legs (b) and (d): `default` with a META left operand and with a BARE-ENUM right operand (the enum default re-wrap), beside the qualified twin.">
+    inputs:
+        b C31Books (1..1)
+    output:
+        outs string (0..*)
+    add outs: b -> coded default "none"
+    add outs: (b -> side default Long) to-string
+    add outs: (b -> side default C31SideEnum -> Short) to-string
+    add outs: (b -> move default Flat) to-string
+    add outs: (b -> top default C31TopEnum -> A) to-string

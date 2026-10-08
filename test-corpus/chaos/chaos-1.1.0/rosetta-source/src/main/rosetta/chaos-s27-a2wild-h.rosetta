@@ -1,0 +1,4 @@
+namespace chaos.s27.a2wild.h
+version "1.0.0"
+type C27Ref: <"Helper - relocated by the import axis.">
+    caption string (1..1)

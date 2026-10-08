@@ -1,0 +1,15 @@
+namespace test.fiflit147
+
+func A:
+    inputs:
+        a boolean (1..1)
+    output:
+        result boolean (1..1)
+
+func B:
+    output:
+        result boolean (1..1)
+    
+    set result:
+        A(if True then True else if False then True)
+

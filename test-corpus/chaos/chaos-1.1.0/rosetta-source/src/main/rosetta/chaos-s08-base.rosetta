@@ -1,0 +1,26 @@
+namespace chaos.s08.base
+version "1.0.0"
+type C8Box: <"Self-contained helper - relocated by the import axis.">
+    lid string (1..1)
+typeAlias C8Positive: <"Non-negative integer-grained number."> number(fractionalDigits: 0, min: 0)
+typeAlias C8Code: <"Three-char upper code."> string(minLength: 3, maxLength: 3, pattern: "[A-Z]{3}")
+typeAlias C8Pct: <"Bounded percentage."> number(min: 0, max: 100)
+typeAlias C8Even: <"Alias with its own condition on the implicit item."> number(fractionalDigits: 0)
+    condition C8NonNeg:
+        item >= 0
+type C8Priced: <"Alias-typed attributes at every cardinality.">
+    qty C8Positive (1..1)
+    ccy C8Code (0..1)
+    weights C8Pct (0..*)
+    evens C8Even (0..*)
+    box C8Box (0..1)
+    condition C8WeightCap:
+        if weights exists
+        then weights sum <= 300
+func C8Scale: <"Alias types crossing a function boundary.">
+    inputs:
+        q C8Positive (1..1)
+        w C8Pct (1..1)
+    output:
+        r number (1..1)
+    set r: q * w / 100

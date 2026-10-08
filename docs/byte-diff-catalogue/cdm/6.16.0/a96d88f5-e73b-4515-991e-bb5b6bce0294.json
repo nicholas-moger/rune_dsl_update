@@ -1,0 +1,16 @@
+{
+  "entry_id": "a96d88f5-e73b-4515-991e-bb5b6bce0294",
+  "corpus": "cdm",
+  "project": "base-model",
+  "version": "6.16.0",
+  "element_kind": "type",
+  "symbol": "com.regnosys.rosetta.generator.java.RosettaJavaPackages",
+  "upstream_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "our_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "classification": "semantic",
+  "rationale": "Hand-promoted from a japicmp CLASS_REMOVED finding via the proposer artefact (skill byte-diff-catalogue.md (local) section 8.1). The fork re-implements the parser/codegen via ANTLR4 per the ROADMAP mission; Xtext tool-surface classes including this RosettaJavaPackages helper are deliberately not replicated. Status=active because no current D-entry blesses Xtext-tool-surface absence as accepted; a future fork-mandate D-entry can promote this entry (and the dozens of sibling Xtext-class entries that will accumulate as the proposer is run) to status=accepted in one batch. Sentinel our_hash marks our absence (no bytes emitted); upstream_hash uses the same sentinel rather than a real bytecode hash to avoid pinning a baseline JAR fingerprint that the next japicmp baseline rebase will invalidate.",
+  "status": "active",
+  "created_date": "2026-04-25",
+  "last_review": "2026-04-25",
+  "linked_issue": "the development repository"
+}

@@ -1,0 +1,5 @@
+namespace chaos.s34.a3hub.p1
+version "1.0.0"
+import chaos.s34.a3hub.p2.*
+type C34Aux: <"Helper - relocated by the import axis.">
+    aux string (1..1)

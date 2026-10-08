@@ -1,0 +1,11 @@
+namespace test.datesubtract
+
+type Test:
+    one date (1..1)
+    two date (1..1)
+
+func TestQualifier:
+    inputs: test Test (1..1)
+    output: result boolean (1..1)
+    set result:
+        test -> one - test -> two = 42

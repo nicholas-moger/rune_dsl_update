@@ -1,0 +1,4 @@
+namespace a.inner
+
+type Inner:
+    leaf string (1..1)

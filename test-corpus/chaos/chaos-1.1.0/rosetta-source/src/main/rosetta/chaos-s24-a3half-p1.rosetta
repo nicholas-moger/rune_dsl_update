@@ -1,0 +1,48 @@
+namespace chaos.s24.a3half.p1
+version "1.0.0"
+import chaos.s24.a3half.p2.*
+type C24Ref: <"Helper - relocated by the import axis.">
+    mark string (1..1)
+metaType scheme string
+metaType reference string
+metaType key string
+basicType c24tok <"A model-declared basic type - Void in the generated Java (D47).">
+type C24Carrier: <"Void-typed attributes at every cardinality and meta shape beside plain ones.">
+    tok c24tok (0..1)
+    toks c24tok (0..*)
+    coded c24tok (0..1)
+        [metadata scheme]
+    name string (0..1)
+    flag boolean (0..1)
+    ref C24Ref (0..1)
+type C24Keyed: <"A keyed root for the as-key seats.">
+    [metadata key]
+    kid string (1..1)
+type C24Out: <"The output type: a Void leaf, a Void meta leaf, a Void list leaf, a keyed reference, a plain leaf and a nested carrier for the two-hop seat.">
+    v c24tok (0..1)
+    vm c24tok (0..1)
+        [metadata scheme]
+    vs c24tok (0..*)
+    kref C24Keyed (0..1)
+        [metadata reference]
+    s string (0..1)
+    car C24Carrier (0..1)
+func C24WithMetaPlain: <"A with-meta over `nothing` into a PLAIN output - upstream mints ReferenceWithMetaVoid and its own setValue does not compile (the parked with-meta-plain-output group, seat 9 round 2).">
+    inputs:
+        href string (0..1)
+    output:
+        r C24Ref (0..1)
+    set r: empty with-meta { reference: href }
+func C24WithMetaExists: <"The with-meta over `nothing` as an EXISTENCE operand (the parked with-meta-under-exists group).">
+    inputs:
+        href string (0..1)
+    output:
+        r boolean (1..1)
+    set r: (empty with-meta { reference: href }) exists
+func C24IntoMeta: <"A Void value SET into a scheme-annotated Void output - the EMPTY wrapper upstream, the fork's toBuilder(<Void>) non-compiling (SetMetaVoid, DECLARED at #630).">
+    inputs:
+        c C24Carrier (0..1)
+    output:
+        t c24tok (0..1)
+            [metadata scheme]
+    set t: c -> tok

@@ -1,0 +1,9 @@
+namespace test.reports
+
+body Authority ESMA
+corpus Regulation ESMA "MiFIR" MiFIR_RTS
+
+report ESMA MiFIR_RTS in T+1
+    from Trade
+    when IsReportable
+    with type TradeReport

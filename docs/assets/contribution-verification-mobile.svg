@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="1000" viewBox="0 0 480 1000" role="img" aria-labelledby="title desc">
+<title id="title">Verification layers and their claims</title>
+<desc id="desc">Three distinct evidence layers: source and semantic checks for parsing, references, types, cardinality and validation; generated output, API contracts, compilation and runtime behavior; corpus scope, adversarial coverage, missing cases and exception/receipt accounting. A passing layer does not certify every other layer. Exact scope, exclusions and reproducible evidence must be recorded. This is not an all-tests-passed or no-exceptions statement and is not a fresh verification receipt.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9" fill="none" stroke="#a9b7cb" stroke-width="1.4"/></marker></defs>
+<rect width="480" height="1000" rx="22" fill="#121923"/>
+<g font-family="Segoe UI, Arial, sans-serif">
+<text x="24" y="43" fill="#eef2f8" font-size="32" font-weight="600" text-anchor="start">
+<tspan x="24" dy="0" xml:space="preserve">Verification layers</tspan>
+<tspan x="24" dy="38" xml:space="preserve">and their claims</tspan>
+</text>
+<text x="24" y="125" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="24" dy="0" xml:space="preserve">Each layer establishes its own claim</tspan>
+<tspan x="24" dy="30" xml:space="preserve">Evidence remains scoped</tspan>
+</text>
+<rect x="24" y="205" width="432" height="200" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="25" y="224" width="4" height="162" rx="2" fill="#a2c6e6"/>
+<text x="47" y="242" fill="#a2c6e6" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Source + semantic checks</tspan>
+</text>
+<text x="47" y="275" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Parse / resolve / type / cardinality</tspan>
+<tspan x="47" dy="30" xml:space="preserve">Validate declared language rules</tspan>
+</text>
+<rect x="24" y="450" width="432" height="200" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="25" y="469" width="4" height="162" rx="2" fill="#92d5c6"/>
+<text x="47" y="487" fill="#92d5c6" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Generated output +</tspan>
+<tspan x="47" dy="36" xml:space="preserve">compile / runtime</tspan>
+</text>
+<text x="47" y="558" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Output and API contracts</tspan>
+<tspan x="47" dy="30" xml:space="preserve">Compile named targets</tspan>
+<tspan x="47" dy="30" xml:space="preserve">Check runtime behavior separately</tspan>
+</text>
+<rect x="24" y="695" width="432" height="200" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="25" y="714" width="4" height="162" rx="2" fill="#a6b0ec"/>
+<text x="47" y="732" fill="#a6b0ec" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Corpus + adversarial</tspan>
+<tspan x="47" dy="36" xml:space="preserve">accounting</tspan>
+</text>
+<text x="47" y="803" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Named releases and file kinds</tspan>
+<tspan x="47" dy="30" xml:space="preserve">Missing cases / exceptions</tspan>
+<tspan x="47" dy="30" xml:space="preserve">Adversarial and receipt accounting</tspan>
+</text>
+<text x="24" y="940" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="24" dy="0" xml:space="preserve">Record exact scope, exclusions</tspan>
+<tspan x="24" dy="30" xml:space="preserve">and reproducible evidence.</tspan>
+</text>
+</g>
+</svg>

@@ -1,0 +1,12 @@
+namespace chaos.s06.a3third.p2
+version "1.0.0"
+import chaos.s06.a3third.p1.*
+import chaos.s06.a3third.p3.*
+eligibility rule C6IsReportable from C6Event: <"Eligibility seat.">
+    qty exists and qty > 0
+reporting rule C6Id from C6Event: <"Bare-attribute extract in a rule body.">
+    extract eventId
+        as "Event ID"
+reporting rule C6Qty from C6Event: <"Conditional arithmetic in a rule body.">
+    extract if qty exists then qty * 1 else 0
+        as "Quantity"

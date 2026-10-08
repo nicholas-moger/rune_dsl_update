@@ -1,0 +1,24 @@
+/* chaos a9: a block-comment banner before the first token */
+// chaos a9: a line comment before namespace
+namespace chaos.s27.a9comment // a9
+version "1.0.0" // a9
+type C27Ref: <"Helper - relocated by the import axis."> // a9
+    caption string (1..1) // a9
+func C27Check: <"The function an alias condition calls (the parser half seat 3 found)."> // a9
+    inputs: // a9
+        v number (1..1) // a9
+    output: // a9
+        ok boolean (1..1) // a9
+    set ok: v >= 0 // a9
+typeAlias C27Nat: <"An int-grained alias whose conditions hold a list op, a conditional, a switch, an existence test, a set operation and a function call (seat 3's 23 unwitnessed consumers)."> // a9
+    number(fractionalDigits: 0) // a9
+    condition NonNeg: // a9
+        item >= 0 // a9
+    condition Ops: // a9
+        ([item, 0] then max) >= 0 // a9
+        and (if item > 100 then item < 1000 else item >= 0) // a9
+        and (item switch 0 then True, default (item > 0)) // a9
+        and item exists // a9
+        and [item] contains item // a9
+    condition Called: // a9
+        C27Check(item) // a9

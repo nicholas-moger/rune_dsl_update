@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="970" viewBox="0 0 1120 970" role="img" aria-labelledby="title desc">
+<title id="title">Build versioned model libraries</title>
+<desc id="desc">Selected model and Rune toolchain versions configure the build; they are not a transformation stage. Rune CDM/DRR source feeds an Xtext-generated ANTLR 3 lexer/parser for lexing and parsing .rosetta source. Xtext integrates that parsing with EMF source-model objects and resource/reference handling. The following model/services card represents those same source objects and Rune semantic responsibilities, not a second model conversion. Rune services resolve references and check scoping, types, cardinality and validation. Java generators implemented in Java and Xtend produce Java source. Compilation, tests and packaging create versioned libraries. JVM labels identify responsibilities, not an exact number of processes. This build is separate from application execution. The main processing route is a straight vertical spine; the version panel is separate configuration and stays static during the animation.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9" fill="none" stroke="#a9b7cb" stroke-width="1.4"/></marker></defs>
+<rect width="1120" height="970" rx="22" fill="#121923"/>
+<g font-family="Segoe UI, Arial, sans-serif">
+<text x="30" y="47" fill="#eef2f8" font-size="31" font-weight="600" text-anchor="start">
+<tspan x="30" dy="0" xml:space="preserve">Build versioned model libraries</tspan>
+</text>
+<text x="30" y="80" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="30" dy="0" xml:space="preserve">Source → parse and check → generate → compile and release</tspan>
+</text>
+<rect x="30" y="195" width="300" height="86" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="31" y="214" width="4" height="48" rx="2" fill="#a2c6e6"/>
+<text x="53" y="232" fill="#a2c6e6" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="53" dy="0" xml:space="preserve">CDM / DRR source</tspan>
+</text>
+<text x="53" y="265" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="53" dy="0" xml:space="preserve">Rune .rosetta definitions</tspan>
+</text>
+<rect x="30" y="335" width="300" height="185" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5" stroke-dasharray="7 5"/>
+<rect x="31" y="354" width="4" height="147" rx="2" fill="#a2c6e6"/>
+<text x="53" y="372" fill="#a2c6e6" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="53" dy="0" xml:space="preserve">Selected versions</tspan>
+</text>
+<text x="53" y="405" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="53" dy="0" xml:space="preserve">Model versions</tspan>
+<tspan x="53" dy="28" xml:space="preserve">Rune toolchain pins</tspan>
+<tspan x="53" dy="28" xml:space="preserve">Build configuration</tspan>
+</text>
+<rect x="365" y="120" width="730" height="455" rx="14" fill="#18222f" stroke="#a6b0ec" stroke-width="1.5"/>
+<text x="388" y="158" fill="#a6b0ec" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="388" dy="0" xml:space="preserve">Build / generation · JVM roles</tspan>
+</text>
+<rect x="395" y="195" width="675" height="86" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="396" y="214" width="4" height="48" rx="2" fill="#a2c6e6"/>
+<text x="418" y="232" fill="#a2c6e6" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="418" dy="0" xml:space="preserve">Xtext / ANTLR 3 parser</tspan>
+</text>
+<text x="418" y="265" fill="#a9b7cb" font-size="21" font-weight="400" text-anchor="start">
+<tspan x="418" dy="0" xml:space="preserve">Lexing and parsing .rosetta source</tspan>
+</text>
+<rect x="395" y="317" width="675" height="116" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="396" y="336" width="4" height="78" rx="2" fill="#92d5c6"/>
+<text x="418" y="354" fill="#92d5c6" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="418" dy="0" xml:space="preserve">EMF model + Rune services</tspan>
+</text>
+<text x="418" y="387" fill="#a9b7cb" font-size="21" font-weight="400" text-anchor="start">
+<tspan x="418" dy="0" xml:space="preserve">Source-model objects and references</tspan>
+<tspan x="418" dy="29" xml:space="preserve">Resolve · scope · types · cardinality · validate</tspan>
+</text>
+<rect x="395" y="469" width="675" height="86" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="396" y="488" width="4" height="48" rx="2" fill="#d0b487"/>
+<text x="418" y="506" fill="#d0b487" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="418" dy="0" xml:space="preserve">Java generators</tspan>
+</text>
+<text x="418" y="539" fill="#a9b7cb" font-size="21" font-weight="400" text-anchor="start">
+<tspan x="418" dy="0" xml:space="preserve">Java / Xtend implementations</tspan>
+</text>
+<rect x="395" y="591" width="675" height="86" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="396" y="610" width="4" height="48" rx="2" fill="#d0b487"/>
+<text x="418" y="628" fill="#d0b487" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="418" dy="0" xml:space="preserve">Generated Java</tspan>
+</text>
+<text x="418" y="661" fill="#a9b7cb" font-size="21" font-weight="400" text-anchor="start">
+<tspan x="418" dy="0" xml:space="preserve">Source code for model libraries</tspan>
+</text>
+<rect x="395" y="713" width="675" height="86" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="396" y="732" width="4" height="48" rx="2" fill="#a2c6e6"/>
+<text x="418" y="750" fill="#a2c6e6" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="418" dy="0" xml:space="preserve">Compile · test · package</tspan>
+</text>
+<text x="418" y="783" fill="#a9b7cb" font-size="21" font-weight="400" text-anchor="start">
+<tspan x="418" dy="0" xml:space="preserve">Build the generated libraries</tspan>
+</text>
+<rect x="395" y="835" width="675" height="86" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="396" y="854" width="4" height="48" rx="2" fill="#92d5c6"/>
+<text x="418" y="872" fill="#92d5c6" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="418" dy="0" xml:space="preserve">Versioned libraries</tspan>
+</text>
+<text x="418" y="905" fill="#a9b7cb" font-size="21" font-weight="400" text-anchor="start">
+<tspan x="418" dy="0" xml:space="preserve">Ready for application integration</tspan>
+</text>
+<polyline points="330,238 395,238" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="330,405 365,405" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6 6"/>
+<polyline points="732.5,281 732.5,317" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="732.5,433 732.5,469" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="732.5,555 732.5,591" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="732.5,677 732.5,713" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="732.5,799 732.5,835" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<text x="30" y="952" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="30" dy="0" xml:space="preserve">Build tools can use more than one JVM; these labels describe roles.</tspan>
+</text>
+</g>
+</svg>

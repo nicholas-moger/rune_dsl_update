@@ -1,0 +1,36 @@
+namespace holdout.extractmetaelemdereffunction
+version "0.0.0"
+
+metaType scheme string
+
+type Outer: <"The holder.">
+    code string (0..1)
+        [metadata scheme]
+    codes string (0..*)
+        [metadata scheme]
+
+func ExtractThenChainBody: <"THE CHAOS s29 C29InLambda SHAPE's SECOND MECHANISM (v3.2 seat 13, D53 - the M7a class, 12 of 12 non-compiling by the seat-13 census; the first mechanism, the filter comparand's unwrap, healed at this seat's R12): an extract whose lambda body is a THEN-CHAIN over a meta-annotated multi attribute (`o -> codes then filter c [ c <> \"void\" ] then first`) SET whole into a plain string multi output of a FUNCTION. The released plugin derefs the elements after the lambda (`.<String>map(\"Type coercion\", fieldWithMetaString -> fieldWithMetaString.getValue()).getMulti()`); the fork appended the bare `.getMulti()` - a List<FieldWithMetaString> into a List<String>, non-compiling - because the then-chain body compiles type-less and the function-path element coercion (PR #433) reads the compiled type alone.">
+    inputs:
+        outers Outer (0..*)
+    output:
+        picks string (0..*)
+    set picks: outers extract o [ o -> codes then filter c [ c <> "void" ] then first ]
+
+func ExtractConditionalThenBody: <"The seed's own body shape: a conditional over the single meta attribute with the then-chain at its ELSE arm.">
+    inputs:
+        outers Outer (0..*)
+    output:
+        picks string (0..*)
+    set picks:
+        outers extract o [
+            if o -> code exists
+            then o -> code
+            else o -> codes then filter c [ c <> "void" ] then first
+        ]
+
+func ExtractMetaNavBody: <"THE CONTROL: an extract whose body is the bare meta navigation - the compiled type carries the wrapper and the function-path deref fires today (PR #433).">
+    inputs:
+        outers Outer (0..*)
+    output:
+        picks string (0..*)
+    set picks: outers extract o [ o -> code ]

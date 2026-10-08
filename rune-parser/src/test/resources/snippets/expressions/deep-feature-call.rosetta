@@ -1,0 +1,11 @@
+namespace test.expressions
+
+type Trade:
+    price number (1..1)
+
+func GetPrice:
+    inputs:
+        trade Trade (1..1)
+    output:
+        result number (1..1)
+    set result: trade ->> price

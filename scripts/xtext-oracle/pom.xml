@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- v3.1 C1 — THE UPSTREAM RESOLUTION ORACLE (scaffold pom).
+
+     Builds the driver that runs upstream's RELEASED rune-lang 9.83.0 Xtext
+     pipeline in ITS OWN JVM and dumps every resolved cross-reference as TSV.
+     That dump is the ground truth the fork's Layer-1 resolution spec is
+     extracted against and pinned to.
+
+     The build produces `target/classes` plus an UNSIGNED `target/lib` of COPIED
+     runtime dependencies (maven-dependency-plugin `copy-dependencies`) — NOT an
+     uber-jar. Shading was tried and retired; see the copy-vs-shade rationale on
+     the plugin below, which is the reason the positive control exists.
+
+     THE ORACLE LAW (inherited verbatim from scripts/holdout-oracle): the
+     RELEASED 9.83.0 jars are the oracle — NEVER the vendored rune-dsl/ source.
+     The vendored tree sits at 10.0.0-dev.8 and its grammar has REMOVED syntax
+     9.83.0 still accepts (`regulatoryReference`, `using standard`, rule `as`
+     identifiers, `segment` compat names, `label ... as`), so parsing corpus
+     sources with it would fail on valid 9.83.0 input.
+     Verified for THIS surface at C1: `git diff 9.83.0 HEAD` over the vendored
+     tree leaves RosettaScopeProvider, types/, RosettaEcoreUtil and utils/
+     byte-identical, so the vendored source is a faithful READING reference for
+     the resolution rules even though it must never be the EXECUTING oracle.
+
+     WHY OUT-OF-PROCESS, NOT A LIBRARY (the C1 finding). The fork and upstream
+     both own the package `com.regnosys.rosetta.*` with incompatible shapes —
+     e.g. `com.regnosys.rosetta.types.RType` is an INTERFACE in the fork and a
+     CLASS upstream. Put both on one classpath and Guice dies with
+     `IncompatibleClassChangeError: class ...RDataType has interface ...RType as
+     super class`. In-process differential execution is therefore structurally
+     impossible, not merely unwired. This is why the pre-existing
+     XtextEquivalenceHarness never compared anything.
+
+     TWO NON-OBVIOUS PINS, both measured on this box, both required:
+
+     (1) THE COPIED JARS MUST BE STRIPPED OF THEIR SIGNATURES. Seven
+         separately-signed Eclipse platform jars contribute classes to the
+         package `org.eclipse.core.runtime` (equinox.common, osgi, core.runtime,
+         core.jobs, equinox.registry, equinox.preferences, core.contenttype).
+         The JVM rejects that with `SecurityException: class
+         "org.eclipse.core.runtime.OperationCanceledException"'s signer
+         information does not match signer information of other classes in the
+         same package`. Removing META-INF/*.SF|DSA|RSA|EC is the fix; because
+         the jars are copied rather than shaded, the driver does it per-jar in
+         `target/lib` (strip-jar-signatures.py, run from run-oracle.sh) and
+         never in the local Maven repository.
+
+     (2) org.eclipse.emf.common MUST BE PINNED FORWARD. rune-lang 9.83.0's tree
+         resolves emf.common to 2.30.0 (xtext 2.38.0's direct dep, nearest-wins)
+         while emf.ecore lands at 2.42.0 via ecore.xmi 2.37.0. The newer ecore
+         calls `CommonUtil.newURL(String)`, absent from 2.30.0, and the injector
+         dies with NoSuchMethodError before parsing anything. 2.44.0 is pinned
+         because it is the oldest emf.common JAR present in the local
+         repository that carries the method (2.42.0 has only its POM cached, and
+         this box gates OFFLINE). EMF patch level does not affect resolution
+         semantics — it only has to be self-consistent enough to boot.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.finos.rune.oracle</groupId>
+    <artifactId>rune-xtext-resolution-oracle</artifactId>
+    <!-- Deliberately loud: this artifact is a local test instrument and must
+         never appear in a release reactor or as anyone's dependency. -->
+    <version>0.0.0.c1-oracle</version>
+    <packaging>jar</packaging>
+
+    <properties>
+        <maven.compiler.release>17</maven.compiler.release>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <rune-dsl.oracle.version>9.83.0</rune-dsl.oracle.version>
+    </properties>
+
+    <dependencies>
+        <!-- Pin (2) above. MUST precede rune-lang so nearest-wins takes it. -->
+        <dependency>
+            <groupId>org.eclipse.emf</groupId>
+            <artifactId>org.eclipse.emf.common</artifactId>
+            <version>2.44.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.finos.rune</groupId>
+            <artifactId>rune-lang</artifactId>
+            <version>${rune-dsl.oracle.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Dependencies are COPIED, not shaded. An uber-jar cannot carry
+                 two files at the same path, and the Eclipse/EMF stack ships a
+                 `plugin.properties` in almost every artifact — shading silently
+                 kept one and dropped the rest, which broke EMF's diagnostic
+                 message lookup (`_UI_DiagnosticRoot_diagnostic` MissingResource)
+                 and made the VALIDATOR RETURN ZERO ISSUES ON EVERY INPUT. That
+                 read exactly like upstream having no complaints. Copying the
+                 jars keeps each one's resources intact; the signature stripping
+                 the shade was there for is done per-jar by the driver. -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.6.1</version>
+                <executions>
+                    <execution>
+                        <id>copy-deps</id>
+                        <phase>package</phase>
+                        <goals><goal>copy-dependencies</goal></goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                            <includeScope>runtime</includeScope>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

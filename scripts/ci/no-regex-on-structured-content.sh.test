@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+# Smoke test for no-regex-on-structured-content.sh.
+# - production tree must PASS (every regex site carries the ci-allowlist marker
+#   on its own line, the line above, or in the comment block that introduces it)
+# - known-good fixtures must PASS:
+#     known-good.java                 marker on the previous line (the original case)
+#     known-good-block-marker.java    marker heading a multi-line `//` comment block
+#     known-good-comment-mention.java forbidden tokens inside comments only
+#     known-good-block-interior.java  an UNSTARRED `/* */` block: interior lines
+#                                     classified by the block state, the marker
+#                                     reaching the call after the block
+# - known-bad fixtures must FAIL:
+#     known-bad.java                  an unmarked call (the original case)
+#     known-bad-stale-marker.java     a marker whose block is followed by an
+#                                     unrelated code line — the reach must not
+#                                     stretch to the call below it
+#     known-bad-star-continuation.java a CODE line beginning with `*` (a
+#                                     multiplication continuation) is a site —
+#                                     the leading-star rule applies only inside
+#                                     an open block comment
+# The good/bad pairs pin the v3.1 close-out hardening (block reach + the
+# comment-only skip + the block state) in BOTH directions, so a lint that
+# accepted every file or rejected every file would fail here — the instrument
+# is proven able to fail.
+set -euo pipefail
+
+REPO_ROOT=$(git rev-parse --show-toplevel)
+LINT="$REPO_ROOT/scripts/ci/no-regex-on-structured-content.sh"
+FIX="$REPO_ROOT/scripts/ci/fixtures/regex-sweep"
+
+[[ -x "$LINT" ]] || chmod +x "$LINT"
+
+# Production tree must pass
+if ! bash "$LINT" >/dev/null 2>&1; then
+    echo "FAIL: production tree should pass (every regex site carries a ci-allowlist marker)"
+    bash "$LINT" || true
+    exit 1
+fi
+
+for good in known-good.java known-good-block-marker.java known-good-comment-mention.java known-good-block-interior.java; do
+    if ! bash "$LINT" --root "$FIX/$good" >/dev/null 2>&1; then
+        echo "FAIL: $good should pass"
+        bash "$LINT" --root "$FIX/$good" || true
+        exit 1
+    fi
+done
+
+for bad in known-bad.java known-bad-stale-marker.java known-bad-star-continuation.java; do
+    if bash "$LINT" --root "$FIX/$bad" >/dev/null 2>&1; then
+        echo "FAIL: $bad should fail validation"
+        exit 1
+    fi
+done
+
+echo "PASS: no-regex-on-structured-content (4 good / 3 bad fixtures + the production tree)"
+exit 0

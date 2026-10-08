@@ -1,0 +1,23 @@
+namespace chaos.s06.a5uni
+version "1.0.0"
+type C6Tag: <"éüµ – Self-contained helper - relocated by the import axis.">
+    caption string (1..1)
+metaType scheme string
+type C6Event: <"The rule-from type; references the helper; carries a meta seat for the rule x meta conjunction.">
+    eventId string (1..1)
+    qty number (0..1)
+    legs string (0..*)
+    mark C6Tag (0..1)
+    venue string (0..1)
+        [metadata scheme]
+func C6MarkOf: <"Function whose call result is NAVIGATED inside a rule arm (v3.1 F25).">
+    inputs:
+        ev C6Event (1..1)
+    output:
+        t C6Tag (0..1)
+    set t: ev -> mark
+type A5UniProbe: <"Non-ASCII literal probe – müßig 試験.">
+    p string (0..1)
+        [label as "µ–label §7"]
+enum A5UniProbeEnum: <"displayName probe.">
+    V displayName "µ–„display“"

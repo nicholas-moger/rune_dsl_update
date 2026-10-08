@@ -1,0 +1,5 @@
+namespace com.example.model
+version "1.0.0"
+
+type Foo:
+    bar string (1..1)

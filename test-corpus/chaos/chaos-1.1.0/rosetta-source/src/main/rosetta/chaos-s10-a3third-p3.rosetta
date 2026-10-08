@@ -1,0 +1,11 @@
+namespace chaos.s10.a3third.p3
+version "1.0.0"
+import chaos.s10.a3third.p1.*
+import chaos.s10.a3third.p2.*
+func C10Tag: <"Annotated function.">
+    [c10approved]
+    inputs:
+        s string (1..1)
+    output:
+        t string (1..1)
+    set t: s + "!"

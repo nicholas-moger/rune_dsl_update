@@ -1,0 +1,15 @@
+namespace chaos.s17.a5uni
+version "1.0.0"
+type C17Held: <"éüµ – Self-contained helper - relocated by the import axis.">
+    h string (1..1)
+enum C17SideEnum: <"First enum - owns Buy and Sell.">
+    Buy
+    Sell
+enum C17ActionEnum: <"Second enum in the SAME scope re-using Buy (the E2 wrong-enum class).">
+    Buy
+    Amend
+type A5UniProbe: <"Non-ASCII literal probe – müßig 試験.">
+    p string (0..1)
+        [label as "µ–label §7"]
+enum A5UniProbeEnum: <"displayName probe.">
+    V displayName "µ–„display“"

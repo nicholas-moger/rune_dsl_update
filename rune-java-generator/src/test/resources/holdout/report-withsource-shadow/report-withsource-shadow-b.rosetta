@@ -1,0 +1,40 @@
+namespace test.rsr.b
+version "0.0.0"
+
+import test.rsr.a.*
+
+body Authority RsrAUTH <"The authority.">
+corpus Regulation "Rsr Regulation" RsrReg <"The corpus.">
+segment rsrarticle
+
+type RsrTrade: <"The report-from type.">
+    utid string (1..1)
+    notional number (0..1)
+
+eligibility rule RsrEligible from RsrTrade: <"Report when-gate.">
+    notional exists
+reporting rule RsrUtid from RsrTrade: <"Reported field.">
+    extract utid
+        as "UTI"
+reporting rule RsrNotional from RsrTrade: <"Reported numeric with default.">
+    extract notional default 0
+        as "Notional"
+
+type RsrReport: <"Report output type; the notional field's rule comes from the OWN rule source.">
+    utiField string (1..1)
+        [ruleReference RsrUtid]
+    notionalField number (1..1)
+
+corpus Standard "Rsr Standard" RsrStd <"The standard.">
+rule source RsrRS
+{
+    RsrReport:
+        + notionalField
+            [ruleReference RsrNotional]
+}
+report RsrAUTH RsrReg in T+1
+    from RsrTrade
+    when RsrEligible
+    using standard RsrStd
+    with type RsrReport
+    with source RsrRS

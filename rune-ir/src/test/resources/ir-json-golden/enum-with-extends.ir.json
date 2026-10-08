@@ -1,0 +1,35 @@
+{
+  "irFormatVersion": 1,
+  "nodes": [
+    {
+      "kind": "ENUM",
+      "name": "test.model.Base",
+      "values": [
+        {
+          "kind": "ENUM_VALUE",
+          "name": "A",
+          "displayName": null
+        },
+        {
+          "kind": "ENUM_VALUE",
+          "name": "B",
+          "displayName": null
+        }
+      ],
+      "namespace": "test.model"
+    },
+    {
+      "kind": "ENUM",
+      "name": "test.model.Child",
+      "values": [
+        {
+          "kind": "ENUM_VALUE",
+          "name": "C",
+          "displayName": null
+        }
+      ],
+      "parent": "Base",
+      "namespace": "test.model"
+    }
+  ]
+}

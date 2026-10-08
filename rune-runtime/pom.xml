@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.finos.rune</groupId>
+    <artifactId>rune-runtime</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>Rune DSL Runtime (fork)</name>
+    <description>Fork-owned build of the Rune DSL Java runtime (Leg R / R2 of the
+        drop-in parity program). Source basis: the RELEASED
+        org.finos.rune:rune-runtime:9.83.0 sources jar from Maven Central
+        (SHA-1 12d271da33f8611c6fcb0dbad2823c933b540691), taken verbatim except
+        for one deliberate deviation: MapperMaths (upstream's only xtend-built
+        class) ships as its xtend-generated Java form with
+        org.eclipse.xtend2/xbase references replaced by java.lang equivalents
+        (StringBuilder; the @XbaseGenerated markers dropped from private
+        methods), removing the xtend runtime dependency without changing any
+        public signature or message byte. The three classpath resources
+        (model/annotations.rosetta, model/basictypes.rosetta,
+        default-formatting-options.json) are byte-identical to the released
+        binary jar's copies.</description>
+
+    <properties>
+        <!-- The released 9.83.0 artifact compiles at release 8; the drop-in
+             keeps that floor so consumers on any Java 8+ runtime link. -->
+        <maven.compiler.release>8</maven.compiler.release>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- Dependency pins TRACK the released org.finos.rune.parent:9.83.0
+             dependencyManagement values, with SECURITY-PATCH deviations recorded
+             here (PR #490, 2026-07-30): commons-lang3 3.14.0 -> 3.18.0
+             (CVE-2025-48924) and jackson 2.17.1 -> 2.18.9 (CVE-2026-54512/-54513
+             HIGH + CVE-2026-54514/-54515/-59888). guice + junit stay at the
+             released pins; the #458-#461 swap-proof receipts were banked at the
+             released versions. -->
+        <guice.version>6.0.0</guice.version>
+        <commons-lang3.version>3.18.0</commons-lang3.version>
+        <jackson.version>2.18.9</jackson.version>
+        <junit.version>5.11.3</junit.version>
+        <maven.build.cache.skip>true</maven.build.cache.skip>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+            <version>${guice.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jdk8</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest</artifactId>
+            <version>2.2</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.5.2</version>
+            </plugin>
+            <plugin>
+                <!-- maven.compiler.release above is honoured only by maven-compiler-plugin 3.6+. Maven 3.9.11 (the Windows
+                     chain's, measured) binds 3.13.0 by default; Maven 3.8.7 (the offload box's) binds 3.1, which ignores the
+                     property and compiles at its own default level - the offload box pre-screen of PR #635 failed there with
+                     "Source option 5 is no longer supported". Pinned so the release-8 floor holds on every host (v3.3 seat 0;
+                     the two other rune-* modules using maven.compiler.release that offload box builds carry the same pin - rune-equivalence,
+                     a harness module never stamped, since PR #636, and rune-benchmarks by itself; scripts/xtext-oracle and three of
+                     the four demo/harness poms use the property with no pin and are not built on offload box - PR #636 rounds 2-4, #637). -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+            </plugin>
+        </plugins>
+    </build>
+</project>

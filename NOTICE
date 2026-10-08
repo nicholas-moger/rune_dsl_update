@@ -1,0 +1,67 @@
+Rune DSL review snapshot
+========================
+
+This repository's original work is licensed under the terms in LICENSE (a private
+review licence). It also contains components taken from, or derived from, the
+FINOS Rune DSL project, which are licensed under the Apache License, Version 2.0.
+A copy of that licence and the upstream NOTICE file, as published at the pinned
+upstream revision (tag 9.83.0, commit 5fb8d697911d2ca62532d1801265b67752d03ef9),
+are in licenses/rune-dsl-9.83.0/. Nothing in LICENSE alters the licensing of those
+components.
+
+Upstream NOTICE (reproduced verbatim from licenses/rune-dsl-9.83.0/NOTICE):
+
+  Rune-DSL - FINOS
+  Copyright 2019 - 2024 REGnosys support@regnosys.com
+
+  This product includes software developed at the Fintech Open Source Foundation (https://www.finos.org/).
+
+Components in this repository that are Rune DSL (Apache-2.0) material
+---------------------------------------------------------------------
+
+1. rune-runtime/src/main/java - the released 9.83.0 runtime sources
+   (org.finos.rune:rune-runtime:9.83.0, sources jar): 146 files, of which 131 are
+   taken verbatim with their Apache copyright headers, 14 are modified and 1 is
+   added, the last two groups listed under "Modified files" below. The reasons for
+   each change are in docs/upgrades/U018-fork-owned-runtime.md,
+   U020-lazy-failure-text-runtime.md, U021-deferred-mapper-path-lineage.md and
+   U022-seed-deferred-mapper-path-construction.md.
+2. rune-runtime/src/main/resources/model/basictypes.rosetta and annotations.rosetta,
+   and the same two files at demo/corpus/builtins/ - the upstream builtin models,
+   verbatim.
+3. rune-java-generator/src/test/java/com/regnosys/rosetta/generator/java/Upstream*PortTest.java
+   and their harness - test cases ported from the upstream integration tests
+   (rune-integration-tests) to this implementation's API; each class names the
+   upstream test it ports.
+4. Small model fixtures and expected outputs derived from upstream examples and from
+   the public CDM model where a file says so (test-corpus/chaos and the held-out
+   fixtures carry their own provenance notes).
+
+Modified files (Apache License section 4(b) notice of changes)
+--------------------------------------------------------------
+
+The following files under rune-runtime/src/main/java differ from the released 9.83.0
+sources; the changes are the runtime work described in the documents named above,
+and the files keep their original copyright headers:
+
+  com/rosetta/model/lib/expression/ComparisonResult.java
+  com/rosetta/model/lib/expression/ExpressionCompareUtil.java
+  com/rosetta/model/lib/expression/ExpressionCompareUtilNullSafe.java
+  com/rosetta/model/lib/expression/ExpressionEqualityUtil.java
+  com/rosetta/model/lib/expression/ExpressionEqualityUtilNullSafe.java
+  com/rosetta/model/lib/expression/ExpressionOperators.java
+  com/rosetta/model/lib/expression/ExpressionOperatorsNullSafe.java
+  com/rosetta/model/lib/mapper/AbstractMapperItem.java
+  com/rosetta/model/lib/mapper/MapperC.java
+  com/rosetta/model/lib/mapper/MapperItem.java
+  com/rosetta/model/lib/mapper/MapperListItem.java
+  com/rosetta/model/lib/mapper/MapperListOfLists.java
+  com/rosetta/model/lib/mapper/MapperPath.java
+  com/rosetta/model/lib/mapper/MapperS.java
+
+  Added (not in the released Java sources): com/rosetta/model/lib/expression/MapperMaths.java,
+  the Java form of the upstream Xtend source com/rosetta/model/lib/expression/MapperMaths.xtend
+  of the same release, carried as Java so the module builds without the Xtend compiler.
+
+Other third-party software is used only as Maven dependencies declared in the POMs
+and is not redistributed here.

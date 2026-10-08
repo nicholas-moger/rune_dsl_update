@@ -1,0 +1,5 @@
+namespace chaos.s10.a3hub.p1
+version "1.0.0"
+import chaos.s10.a3hub.p2.*
+type C10Aux: <"Self-contained helper - relocated by the import axis.">
+    aux string (1..1)

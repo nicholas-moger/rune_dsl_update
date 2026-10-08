@@ -1,0 +1,5 @@
+namespace test.twins.c
+
+type Both: <"Typed through two same-named aliases from two namespaces - the validator must wire two condition classes whose simple names collide (the import + the field name).">
+    left test.twins.a.EvenNat (0..*)
+    right test.twins.b.EvenNat (0..1)

@@ -1,0 +1,30 @@
+namespace chaos.s19.a3third.p2
+version "1.0.0"
+import chaos.s19.a3third.p1.*
+import chaos.s19.a3third.p3.*
+func C19Make: <"Every constructor-field kind: scalar, empty, list literal, nested ctor, as-key reference.">
+    inputs:
+        nm string (1..1)
+        p C19Part (1..1)
+    output:
+        w C19Whole (1..1)
+    set w:
+        C19Whole {
+            name: nm,
+            opt: empty,
+            scores: [1, 2, 3],
+            part: C19Part { pid: nm + "-p" },
+            partRef: p as-key,
+            parts: [p, C19Part { pid: "fixed" }],
+            ...
+        }
+func C19Sparse: <"The rest marker - unset trailing fields.">
+    inputs:
+        nm string (1..1)
+    output:
+        w C19Whole (1..1)
+    set w:
+        C19Whole {
+            name: nm,
+            ...
+        }

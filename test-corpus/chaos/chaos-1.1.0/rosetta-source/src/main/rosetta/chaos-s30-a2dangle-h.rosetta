@@ -1,0 +1,5 @@
+namespace chaos.s30.a2dangle.h
+version "1.0.0"
+type C30Part: <"Keyed component - relocated by the import axis.">
+    [metadata key]
+    pid string (1..1)

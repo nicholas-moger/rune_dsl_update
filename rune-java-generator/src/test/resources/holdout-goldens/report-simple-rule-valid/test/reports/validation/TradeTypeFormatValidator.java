@@ -1,0 +1,36 @@
+package test.reports.validation;
+
+import com.google.common.collect.Lists;
+import com.rosetta.model.lib.expression.ComparisonResult;
+import com.rosetta.model.lib.path.RosettaPath;
+import com.rosetta.model.lib.validation.ValidationResult;
+import com.rosetta.model.lib.validation.Validator;
+import java.util.List;
+import test.reports.Trade;
+
+import static com.google.common.base.Strings.isNullOrEmpty;
+import static com.rosetta.model.lib.validation.ValidationResult.failure;
+import static com.rosetta.model.lib.validation.ValidationResult.success;
+import static java.util.stream.Collectors.toList;
+
+public class TradeTypeFormatValidator implements Validator<Trade> {
+
+	private List<ComparisonResult> getComparisonResults(Trade o) {
+		return Lists.<ComparisonResult>newArrayList(
+			);
+	}
+
+	@Override
+	public List<ValidationResult<?>> getValidationResults(RosettaPath path, Trade o) {
+		return getComparisonResults(o)
+			.stream()
+			.map(res -> {
+				if (!isNullOrEmpty(res.getError())) {
+					return failure("Trade", ValidationResult.ValidationType.TYPE_FORMAT, "Trade", path, "", res.getError());
+				}
+				return success("Trade", ValidationResult.ValidationType.TYPE_FORMAT, "Trade", path, "");
+			})
+			.collect(toList());
+	}
+
+}

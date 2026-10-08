@@ -1,0 +1,10 @@
+namespace chaos.s11.a3third.p3
+version "1.0.0"
+import chaos.s11.a3third.p1.*
+import chaos.s11.a3third.p2.*
+enum C11KindEnum: <"Enum-value synonyms.">
+    Spot
+        [synonym C11XML value "SPOT"]
+    Fwd
+        [synonym C11XML value "FORWARD"]
+        [synonym C11JSON value "fwd"]

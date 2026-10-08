@@ -1,0 +1,25 @@
+namespace test.rsp.p3
+version "0.0.0"
+
+import test.rsp.p2.*
+
+body Authority RspAUTH <"The authority.">
+corpus Regulation "Rsp Regulation" RspReg <"The corpus.">
+segment rsparticle
+
+type RspReport: <"Report output type with rule references into the sibling part.">
+    utiField string (1..1)
+        [ruleReference RspUtid]
+    notionalField number (1..1)
+        [ruleReference RspNotional]
+
+corpus Standard "Rsp Standard" RspStd <"The standard.">
+rule source RspRS
+{
+}
+report RspAUTH RspReg in T+1
+    from RspTrade
+    when RspEligible
+    using standard RspStd
+    with type RspReport
+    with source RspRS

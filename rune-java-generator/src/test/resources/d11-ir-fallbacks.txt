@@ -1,0 +1,55 @@
+# THE v3.3 IR FALLBACK REGISTER (v3.3 seat 5, PR #641 - decision D55, the maintainer's ruling R4 of 2026-09-17)
+#
+# Every row is ONE generated file that the OLD generator still writes on the reference IR route (-Pir-on): a choice or a
+# data-type file the NEW IR emitter cannot write yet. The strict file meter (the development IR page, the meter's rule) counts a
+# sub-kind as made from the IR ONLY when a new IR emitter writes EVERY file of it on every vendored cell - that is, only
+# when this register holds NO row of that sub-kind. Until then the old generator writes the file (its bytes unmoved - the
+# rings) and the file is LISTED here.
+#
+# ROW GRAMMAR (whitespace-separated, exactly three fields; the loader REFUSES anything else):
+#   <corpus>/<version> <SUB_KIND> <file>
+#     SUB_KIND  ENUM | CHOICE | DATA_TYPE - the three sub-kinds the declaration emitters retire, in the staged order
+#               (enums at PR #642, then data types at PR #645, then choices - a PR each). NOT an ElementKind: the D11
+#               host's POJO bucket is a catch-all that also holds the rule, report and label-provider classes; a sub-kind
+#               is the set of files ONE declaration generator writes (enum_comparison's generator; pojo_comparison's
+#               data-type and choice generators, read as a key-set difference around each call).
+#     file      the generated file's relative, forward-slashed path - the generator's own output key
+#   The rows of one (cell, sub-kind) key stand in strictly ascending path order (one spelling of one list; a duplicate
+#   is refused by the same comparison), and one file of one cell stands under ONE sub-kind (PR #642).
+#
+# LAWS:
+#  - EQUALITY, not tolerance: per (cell, sub-kind) the ON-route D11 asserts the files the old generator wrote == the
+#    declared rows. A file it writes that is not declared fails 'NEW FALLBACK - a regression'. A declared file it no
+#    longer writes - or one the new emitter writes now - fails 'HEALED - delete the row'.
+#  - SHRINK-ONLY: a row is deleted in the commit that heals it and never comes back; the emitter PRs only shrink this file.
+#  - WHOLENESS: after a whole reference-ON-route run every declared key must have been judged (a stale key is RED), and
+#    an unscoped run that judged fewer than cells x sub-kinds keys is fail-closed.
+#  - The register is WRITTEN FROM the ON-route D11's own dump (-Dd11.ir.fallbacks.dump=<file>) by the seat's maker and
+#    cross-checked against the per-generator file census - never typed.
+#
+# TODAY (written 2026-09-22T01:19:39Z from run A, v3.3 seat 10 - PR #646 commit 5): THE CHOICE ROUTE IS ON
+#   (IRTypeUnitWiring.CHOICE_AVAILABLE beside AVAILABLE, rune-ir-java) - THE TYPE UNIT GENERALISED to the choice kind writes a
+#   choice's SIX files TOGETHER from the IR alone, or the choice is REFUSED WHOLE and all six come from the old generator. The
+#   80 VENDORED CHOICE rows of PR #645's register are HEALED and deleted here - newEmitter=N oldGenerator=0 on every
+#   vendored CHOICE line of the print - and 8 cell(s) lost their last row (every vendored cell: the register holds
+#   the adversarial cell alone). NO ENUM row moved (already zero) and NO DATA_TYPE row moved (the 12 chaos whole-unit
+#   refusals of PR #645 stand, set for set). The chaos CHOICE residual: 0 (every chaos choice rendered identical to the
+#   legacy generator on the five derived members, and 155 identical + 2 no-golden on the POJO member, at PR #646 commit 4).
+#   the 25 vendored cells: ENUM 0 + CHOICE 0 + DATA_TYPE 0 = 0 files (the file meter's three sub-kind rows)
+#   the adversarial cell (chaos/1.1.0), beside them and never counted: ENUM 0 + CHOICE 0 + DATA_TYPE 12 = 12 files
+#   the chaos DATA_TYPE residual is the 12 BOILERPLATE_NAME_COLLISION type(s) whose type-format member refuses, so the
+#   WHOLE unit is refused for them and the old generator writes all six of their files (no per-file fallback, ever).
+
+# ---- chaos/1.1.0 DATA_TYPE: 12 file(s) ----
+chaos/1.1.0 DATA_TYPE chaos/s27/a1o1/C27Holder.java
+chaos/1.1.0 DATA_TYPE chaos/s27/a1o2/C27Holder.java
+chaos/1.1.0 DATA_TYPE chaos/s27/a1o3/C27Holder.java
+chaos/1.1.0 DATA_TYPE chaos/s27/a2alias/C27Holder.java
+chaos/1.1.0 DATA_TYPE chaos/s27/a2dangle/C27Holder.java
+chaos/1.1.0 DATA_TYPE chaos/s27/a2qual/C27Holder.java
+chaos/1.1.0 DATA_TYPE chaos/s27/a2wild/C27Holder.java
+chaos/1.1.0 DATA_TYPE chaos/s27/a3half/p2/C27Holder.java
+chaos/1.1.0 DATA_TYPE chaos/s27/a3hub/p2/C27Holder.java
+chaos/1.1.0 DATA_TYPE chaos/s27/a3third/p2/C27Holder.java
+chaos/1.1.0 DATA_TYPE chaos/s27/base/C27Holder.java
+chaos/1.1.0 DATA_TYPE chaos/s99/base/C99Holder.java

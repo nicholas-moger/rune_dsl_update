@@ -1,0 +1,10 @@
+namespace test.fmeta004
+
+func Test:
+	inputs:
+		myInputs string (1..*)
+		[metadata scheme]
+	output:
+		result string (1..*)
+		
+	set result: myInputs sort

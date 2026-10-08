@@ -1,0 +1,17 @@
+//== header
+namespace chaos.s93.seed
+version "0.0.0"
+//== element C93Nav
+type C93OptA: <"REFUSAL-PARITY s93 (base only): an explicit lambda parameter navigated inside a case arm (`eth -> av`) - the released plugin refuses at the RESOLVER (only `item` is case-narrowed; the seat-7 receipt); the fork accepts and generates.">
+    av string (1..1)
+type C93OptB: <"Option B.">
+    bv number (1..1)
+choice C93Either: <"The switch subject.">
+    C93OptA
+    C93OptB
+func C93Nav:
+    inputs:
+        eths C93Either (0..*)
+    output:
+        outs string (0..*)
+    add outs: eths extract eth [ eth switch C93OptA then eth -> av, C93OptB then eth -> bv to-string, default "none" ]

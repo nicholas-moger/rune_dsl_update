@@ -1,0 +1,12 @@
+namespace chaos.s27.a3third.p3
+version "1.0.0"
+import chaos.s27.a3third.p1.*
+import chaos.s27.a3third.p2.*
+func C27Use: <"Alias types crossing a function boundary with the conditioned aliases at input, alias and output seats.">
+    inputs:
+        n C27Nat (1..1)
+        l L (0..1)
+    output:
+        r C27Nat (1..1)
+    alias doubled: n * 2
+    set r: doubled + (l default 0)

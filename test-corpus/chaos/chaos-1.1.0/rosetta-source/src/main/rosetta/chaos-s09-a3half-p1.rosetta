@@ -1,0 +1,15 @@
+namespace chaos.s09.a3half.p1
+version "1.0.0"
+import chaos.s09.a3half.p2.*
+type C9Plain: <"Self-contained helper - relocated by the import axis.">
+    p string (1..1)
+metaType id string
+metaType key string
+metaType reference string
+metaType scheme string
+metaType address string
+metaType location string
+type C9Keyed: <"The meta-shape battery's keyed root (charter 2.2b) - key AND template.">
+    [metadata key]
+    [metadata template]
+    kid string (1..1)

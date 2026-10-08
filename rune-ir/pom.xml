@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.finos.rune</groupId>
+    <artifactId>rune-ir</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>Rune DSL Intermediate Representation</name>
+    <description>The fork's Intermediate Representation layer (D43): the IR model
+        (core + rune extensions), the AST-to-IR adapters for declarations and
+        expressions (with ANF support), the off-JVM serialization contract
+        (MLIR-style printer + dependency-free JSON serializer/reader,
+        irFormatVersion 1), and the target-neutral emitter SPI with the first
+        Python declaration emitter. Ported from the frozen IR-lab tree at its
+        HEAD 8c14592 (2026-07-01); the U012 scaffolding relocated here from
+        rune-parser in the same cut. Depends on rune-parser only — the Java
+        generation route (rune-ir-java) arrives separately behind the
+        -Drosetta.generator.ir flag.</description>
+
+    <properties>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <junit.version>5.11.3</junit.version>
+        <maven.build.cache.skip>true</maven.build.cache.skip>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.finos.rune</groupId>
+            <artifactId>rune-parser</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- The JSON-contract oracles (test scope only; the production JSON
+             serializer/reader is dependency-free by design). Pins carried
+             from the lab tree: networknt 1.5.9 is the last 1.x with the
+             classic JsonSchemaFactory API and pins the same Jackson line;
+             jackson bumped in-line 2.18.3 -> 2.18.9 (PR #490 security patch,
+             CVE-2026-54512/-54513 et al.). -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.18.9</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.networknt</groupId>
+            <artifactId>json-schema-validator</artifactId>
+            <version>1.5.9</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.5.2</version>
+            </plugin>
+        </plugins>
+    </build>
+</project>

@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="1145" viewBox="0 0 1120 1145" role="img" aria-labelledby="title desc">
+<title id="title">Extending Rune through explicit model mappings</title>
+<desc id="desc">Qualitative integration and ownership impact. Illustrative external or legacy model definitions pass through a custom import/mapping adapter into Rune sources, then a JVM with Xtext, an EMF source model and Rune services. A custom export/mapping adapter supplies another metamodel or tool. Dashed incoming and outgoing source paths are custom mappings with supported constructs defined per adapter. Mappings need semantic contracts and unsupported-case handling; semantic identity and full round trips are not guaranteed. Existing external annotations and RosettaExternalSynonymSource mapping capabilities exist. Existing generator/model APIs let extension code consume framework-model interfaces. New model input formats require custom conversion, not necessarily a grammar fork. This illustrates boundaries and responsibilities, not the absence of extension capabilities, impossible bridges or a shipped future SDK.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9" fill="none" stroke="#a9b7cb" stroke-width="1.4"/></marker></defs>
+<rect width="1120" height="1145" rx="22" fill="#121923"/>
+<g font-family="Segoe UI, Arial, sans-serif">
+<text x="30" y="47" fill="#eef2f8" font-size="31" font-weight="600" text-anchor="start">
+<tspan x="30" dy="0" xml:space="preserve">Extending Rune through explicit model mappings</tspan>
+</text>
+<text x="30" y="80" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="30" dy="0" xml:space="preserve">Qualitative integration impact · illustrative custom source paths</tspan>
+</text>
+<rect x="340" y="120" width="440" height="85" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="341" y="139" width="4" height="47" rx="2" fill="#a2c6e6"/>
+<text x="363" y="157" fill="#a2c6e6" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="363" dy="0" xml:space="preserve">External / legacy models</tspan>
+</text>
+<text x="363" y="190" fill="#a9b7cb" font-size="21" font-weight="400" text-anchor="start">
+<tspan x="363" dy="0" xml:space="preserve">Model definitions</tspan>
+</text>
+<rect x="340" y="235" width="440" height="115" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5" stroke-dasharray="7 5"/>
+<rect x="341" y="254" width="4" height="77" rx="2" fill="#d0b487"/>
+<text x="363" y="272" fill="#d0b487" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="363" dy="0" xml:space="preserve">Custom import adapter</tspan>
+</text>
+<text x="363" y="305" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="363" dy="0" xml:space="preserve">Convert to Rune source</tspan>
+<tspan x="363" dy="28" xml:space="preserve">Supported constructs defined</tspan>
+</text>
+<rect x="340" y="380" width="440" height="85" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="341" y="399" width="4" height="47" rx="2" fill="#a2c6e6"/>
+<text x="363" y="417" fill="#a2c6e6" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="363" dy="0" xml:space="preserve">Rune sources</tspan>
+</text>
+<text x="363" y="450" fill="#a9b7cb" font-size="21" font-weight="400" text-anchor="start">
+<tspan x="363" dy="0" xml:space="preserve">.rosetta models</tspan>
+</text>
+<rect x="315" y="505" width="490" height="200" rx="14" fill="#18222f" stroke="#92d5c6" stroke-width="1.5"/>
+<text x="340" y="543" fill="#92d5c6" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="340" dy="0" xml:space="preserve">Model services · JVM</tspan>
+</text>
+<rect x="340" y="570" width="440" height="115" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="341" y="589" width="4" height="77" rx="2" fill="#92d5c6"/>
+<text x="363" y="607" fill="#92d5c6" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="363" dy="0" xml:space="preserve">Xtext + EMF model</tspan>
+</text>
+<text x="363" y="640" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="363" dy="0" xml:space="preserve">Linked source model + Rune services</tspan>
+<tspan x="363" dy="28" xml:space="preserve">Framework-model interfaces</tspan>
+</text>
+<rect x="340" y="735" width="440" height="115" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5" stroke-dasharray="7 5"/>
+<rect x="341" y="754" width="4" height="77" rx="2" fill="#d0b487"/>
+<text x="363" y="772" fill="#d0b487" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="363" dy="0" xml:space="preserve">Custom export adapter</tspan>
+</text>
+<text x="363" y="805" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="363" dy="0" xml:space="preserve">Map for the other tool</tspan>
+<tspan x="363" dy="28" xml:space="preserve">Supported constructs defined</tspan>
+</text>
+<rect x="340" y="880" width="440" height="85" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="341" y="899" width="4" height="47" rx="2" fill="#a6b0ec"/>
+<text x="363" y="917" fill="#a6b0ec" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="363" dy="0" xml:space="preserve">Other metamodel / tool</tspan>
+</text>
+<text x="363" y="950" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="363" dy="0" xml:space="preserve">Model definitions / integration</tspan>
+</text>
+<polyline points="560,205 560,235" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6 6" marker-end="url(#arrow)"/>
+<polyline points="560,350 560,380" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6 6" marker-end="url(#arrow)"/>
+<polyline points="560,465 560,505" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="560,558 560,570" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="560,685 560,735" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6 6" marker-end="url(#arrow)"/>
+<polyline points="560,850 560,880" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6 6" marker-end="url(#arrow)"/>
+<rect x="30" y="235" width="280" height="210" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5" stroke-dasharray="7 5"/>
+<rect x="31" y="254" width="4" height="172" rx="2" fill="#d0b487"/>
+<text x="53" y="272" fill="#d0b487" font-size="22" font-weight="600" text-anchor="start">
+<tspan x="53" dy="0" xml:space="preserve">Illustrative</tspan>
+<tspan x="53" dy="30" xml:space="preserve">source paths</tspan>
+</text>
+<text x="53" y="338" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="53" dy="0" xml:space="preserve">Custom mapping</tspan>
+<tspan x="53" dy="28" xml:space="preserve">Supported constructs</tspan>
+<tspan x="53" dy="28" xml:space="preserve">defined per adapter</tspan>
+</text>
+<rect x="790" y="120" width="300" height="220" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="791" y="139" width="4" height="182" rx="2" fill="#a2c6e6"/>
+<text x="813" y="157" fill="#a2c6e6" font-size="22" font-weight="600" text-anchor="start">
+<tspan x="813" dy="0" xml:space="preserve">Existing mapping</tspan>
+<tspan x="813" dy="30" xml:space="preserve">capabilities</tspan>
+</text>
+<text x="813" y="245" fill="#a9b7cb" font-size="18" font-weight="400" text-anchor="start">
+<tspan x="813" dy="0" xml:space="preserve">External annotations</tspan>
+<tspan x="813" dy="25" xml:space="preserve">RosettaExternalSynonymSource</tspan>
+</text>
+<rect x="825" y="505" width="265" height="200" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="826" y="524" width="4" height="162" rx="2" fill="#a6b0ec"/>
+<text x="848" y="542" fill="#a6b0ec" font-size="22" font-weight="600" text-anchor="start">
+<tspan x="848" dy="0" xml:space="preserve">Existing generator /</tspan>
+<tspan x="848" dy="30" xml:space="preserve">model APIs</tspan>
+</text>
+<text x="848" y="608" fill="#a9b7cb" font-size="18" font-weight="400" text-anchor="start">
+<tspan x="848" dy="0" xml:space="preserve">Extension code consumes</tspan>
+<tspan x="848" dy="25" xml:space="preserve">framework-model</tspan>
+<tspan x="848" dy="25" xml:space="preserve">interfaces</tspan>
+</text>
+<rect x="30" y="1000" width="1060" height="115" rx="14" fill="#18222f" stroke="#d0b487" stroke-width="1.5"/>
+<text x="55" y="1039" fill="#d0b487" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="55" dy="0" xml:space="preserve">Qualitative integration / ownership impact</tspan>
+</text>
+<text x="55" y="1073" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="55" dy="0" xml:space="preserve">Mappings need semantic contracts + unsupported-case handling.</tspan>
+<tspan x="55" dy="27" xml:space="preserve">No semantic identity or full round-trip guarantee.</tspan>
+</text>
+</g>
+</svg>

@@ -1,0 +1,8 @@
+namespace test.model
+
+enum Base:
+    A
+    B
+
+enum Child extends Base:
+    C

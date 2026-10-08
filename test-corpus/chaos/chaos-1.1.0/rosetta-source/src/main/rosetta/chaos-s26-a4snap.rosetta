@@ -1,0 +1,16 @@
+namespace chaos.s26.a4snap
+version "1.0.0-SNAPSHOT"
+type C26Tag: <"Helper - relocated by the import axis.">
+    code string (1..1)
+enum C26KindEnum: <"Enum-guard subject.">
+    Red
+    Green
+    Blue
+func C26Lit: <"Number and boolean literal ARMS and DEFAULTS under literal guards in a lambda-item switch (seat 7's banked kinds beyond string and int).">
+    inputs:
+        raws string (0..*)
+    output:
+        n number (1..1)
+    alias nums: raws extract (item switch "a" then 1.5, "b" then 2.25, default 0.5)
+    alias flags: raws extract (item switch "a" then True, "b" then False, default False)
+    set n: (nums then sum) + (flags then filter item = True then count)

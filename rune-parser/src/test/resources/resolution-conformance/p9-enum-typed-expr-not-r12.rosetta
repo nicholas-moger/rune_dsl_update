@@ -1,0 +1,34 @@
+namespace conformance.p9
+version "1.0.0"
+
+// P9 — R12's NEGATIVE half, currently a reading with no pinned case: the
+// enum-values feature scope appears ONLY when the receiver is literally a
+// symbol reference to an ENUMERATION. An expression that merely HAS an enum
+// type (here `h -> b`, typed Beta9) gets the ordinary feature scope, which for
+// an enum type is EMPTY — so `-> V1` off it must NOT resolve.
+//
+// Expected upstream: `V1` UNRESOLVED (+ errors); the qualified control
+// `Beta9 -> V1` resolves.
+
+enum Beta9:
+    V1
+    V2
+
+type Holder9:
+    b Beta9 (1..1)
+
+func P9EnumTypedReceiver:
+    inputs:
+        h Holder9 (1..1)
+    output:
+        result Beta9 (0..1)
+    set result:
+        h -> b -> V1
+
+func P9QualifiedControl:
+    inputs:
+        h Holder9 (1..1)
+    output:
+        result Beta9 (0..1)
+    set result:
+        Beta9 -> V1

@@ -1,0 +1,32 @@
+//== header
+namespace chaos.s94.seed
+version "0.0.0"
+//== element C94Join
+type C94OptA: <"REFUSAL-PARITY s94 (base only): a switch whose bare-item arms join to `any` - the released plugin refuses at TYPING (Expected type C94Either, but got any; the seat-7 receipt); the fork refuses the lambda forms LOUDLY and EMITS the SET-seat form.">
+    fieldA string (0..1)
+type C94OptB: <"Option B.">
+    fieldB string (0..1)
+choice C94Either: <"The subject and the output type.">
+    C94OptA
+    C94OptB
+func C94PickBoth:
+    inputs:
+        outers C94Either (0..*)
+    output:
+        outs C94Either (0..*)
+    set outs:
+        outers extract
+            (switch
+                C94OptA then item,
+                C94OptB then item,
+                default empty)
+func C94PickBothDirect:
+    inputs:
+        outer C94Either (1..1)
+    output:
+        out C94Either (0..1)
+    set out:
+        outer switch
+            C94OptA then item,
+            C94OptB then item,
+            default empty

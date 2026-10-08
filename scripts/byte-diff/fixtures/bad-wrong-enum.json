@@ -1,0 +1,16 @@
+{
+  "entry_id": "00000000-0000-4000-8000-000000000003",
+  "corpus": "cdm",
+  "project": "base-model",
+  "version": "6.16.0",
+  "element_kind": "type",
+  "symbol": "cdm.product.asset.SampleType",
+  "upstream_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "our_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "classification": "cosmet",
+  "rationale": "Test fixture; classification is a typo.",
+  "status": "active",
+  "created_date": "2026-04-25",
+  "last_review": "2026-04-25",
+  "linked_issue": null
+}

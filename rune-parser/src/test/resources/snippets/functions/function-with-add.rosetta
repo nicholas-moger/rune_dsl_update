@@ -1,0 +1,12 @@
+namespace test.functions
+
+type Account:
+    transactions number (0..*)
+
+func AddTransaction:
+    inputs:
+        account Account (1..1)
+        amount number (1..1)
+    output:
+        result Account (1..1)
+    add result -> transactions: amount

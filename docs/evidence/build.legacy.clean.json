@@ -1,0 +1,26 @@
+{
+  "id": "build.legacy.clean",
+  "section": "build",
+  "title": "Legacy 9.83.0 rosetta-maven-plugin - clean",
+  "command": "mvn.cmd -B -f <development-root>\\demo\\build\\build-legacy\\pom.xml clean generate-sources -Dmaven.repo.local=<development-root>\\demo\\work\\.m2",
+  "startedAt": "2026-08-20T01:35:29Z",
+  "durationMs": 130129,
+  "metrics": {
+    "toolchain": "legacy",
+    "kind": "clean",
+    "wallMs": 45622,
+    "runsMs": [
+      25310,
+      45622,
+      59197
+    ],
+    "files": 19219,
+    "exit": 0
+  },
+  "notes": "warm dependency cache; cold = clean target, not cold network. incremental = a second generate-sources over an already-populated output tree with no clean; neither plugin persists an index between JVMs, so this measures re-generation, not true incrementality. Wall clock includes JVM startup and Maven plugin resolution. outputDir=<development-root>\\demo\\work\\build-legacy-out; runs=3; wallMs is the MEDIAN of runsMs; durationMs is the SUM.",
+  "host": {
+    "cpu": "Intel(R) Core(TM) Ultra 9 285K",
+    "java": "21.0.8",
+    "os": "Microsoft Windows 11 Pro Insider Preview"
+  }
+}

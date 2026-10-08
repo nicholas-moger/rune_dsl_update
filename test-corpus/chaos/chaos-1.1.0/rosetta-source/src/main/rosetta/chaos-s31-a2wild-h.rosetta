@@ -1,0 +1,4 @@
+namespace chaos.s31.a2wild.h
+version "1.0.0"
+type C31Held: <"Helper - relocated by the import axis.">
+    h string (1..1)

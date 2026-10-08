@@ -1,0 +1,128 @@
+namespace test.chswitch
+
+enum KindEnum: <"The chaos C18KindEnum.">
+    Red
+    Green
+    Blue
+
+type OptA: <"Choice option A (the chaos C18OptA, widened by tags).">
+    av string (1..1)
+    tags string (0..*)
+
+type OptB: <"Choice option B (the chaos C18OptB).">
+    bv number (1..1)
+
+choice Either: <"The choice subject (the chaos C18Either).">
+    OptA
+    OptB
+
+type Base: <"The EXTENDS-typed twin's base.">
+    id string (1..1)
+
+type Sub1 extends Base: <"Subtype 1 - the nav arm's target.">
+    a string (1..1)
+
+type Sub2 extends Base: <"Subtype 2 - the to-string arm's target.">
+    b number (1..1)
+
+func Chaos: <"The chaos C18ToKind shape whole: to-enum at a single assignment sink + an extract-embedded literal switch + a choice switch INSIDE a lambda.">
+    inputs:
+        raw string (1..1)
+        eths Either (0..*)
+    output:
+        k KindEnum (0..1)
+    alias switched: [raw] extract (item switch "r" then "Red", "g" then "Green", default "Blue")
+    alias pulled: eths extract (item switch OptA then item -> av, OptB then item -> bv to-string, default "none")
+    set k:
+        if (pulled count = switched count) or pulled is absent
+        then raw to-enum KindEnum
+
+func Pulled: <"The choice switch inside the extract lambda of an ALIAS - the chaos `pulled` alias alone.">
+    inputs:
+        eths Either (0..*)
+    output:
+        texts string (0..*)
+    alias pulled: eths extract (item switch OptA then item -> av, OptB then item -> bv to-string, default "none")
+    add texts: pulled
+
+func DirectAdd: <"The same switch lambda at a direct ADD seat.">
+    inputs:
+        eths Either (0..*)
+    output:
+        texts string (0..*)
+    add texts:
+        eths extract (item switch OptA then item -> av, OptB then item -> bv to-string, default "none")
+
+func ExplicitParam: <"An explicit lambda parameter as the switch SUBJECT; the case arms still read the narrowed ITEM (two oracle laws: the released plugin REFUSES a closure parameter named e - no viable alternative at input e, scratch/oracle-s7a-core-e-param-refusal-run1.log - and REFUSES eth -> av inside the case arm - Couldn't resolve reference to RosettaFeature av: only item is case-narrowed, scratch/oracle-s7b-core-explicit-param-nav-refusal-run1.log).">
+    inputs:
+        eths Either (0..*)
+    output:
+        texts string (0..*)
+    add texts:
+        eths extract eth [ eth switch OptA then item -> av, OptB then item -> bv to-string, default "none" ]
+
+func NoDefault: <"No default arm - the null terminal.">
+    inputs:
+        eths Either (0..*)
+    output:
+        texts string (0..*)
+    add texts:
+        eths extract (item switch OptA then item -> av, OptB then item -> bv to-string)
+
+func SingleReceiver: <"A single receiver - the single-to-item form.">
+    inputs:
+        eth Either (0..1)
+    output:
+        text string (0..1)
+    set text:
+        eth extract (item switch OptA then item -> av, OptB then item -> bv to-string, default "none")
+
+func Fmt: <"A helper the FnArm shape calls.">
+    inputs:
+        s string (1..1)
+    output:
+        out string (1..1)
+    set out: s
+
+func FnArm: <"A function-call arm with a narrowed-nav argument beside a nav arm.">
+    inputs:
+        eths Either (0..*)
+    output:
+        texts string (0..*)
+    add texts:
+        eths extract (item switch OptA then Fmt(item -> av), OptB then item -> bv to-string, default "none")
+
+func ExtendsSubject: <"The EXTENDS-typed twin - the same arms over an instanceof subject.">
+    inputs:
+        bases Base (0..*)
+    output:
+        texts string (0..*)
+    add texts:
+        bases extract (item switch Sub1 then item -> a, Sub2 then item -> b to-string, default "none")
+
+func ControlEnum: <"CONTROL - the enum-keyed switch in a lambda (the pre-seat form; byte-identical before and after).">
+    inputs:
+        kinds KindEnum (0..*)
+    output:
+        hexes string (0..*)
+    add hexes:
+        kinds extract (item switch Red then "ff0000", Green then "00ff00", default "0000ff")
+
+func ControlLiteral: <"CONTROL - the literal-keyed switch in a lambda over a list literal (the chaos `switched` alias alone).">
+    inputs:
+        raw string (1..1)
+    output:
+        texts string (0..*)
+    alias switched: [raw] extract (item switch "r" then "Red", "g" then "Green", default "Blue")
+    add texts: switched
+
+func ControlSetSeat: <"CONTROL - the choice switch at the SET seat, no lambda (the chaos C18Pull shape; the #394 ladder).">
+    inputs:
+        eth Either (1..1)
+    output:
+        out string (1..1)
+    set out:
+        eth switch
+            OptA then item -> av,
+            OptB then item -> bv to-string,
+            default "none"

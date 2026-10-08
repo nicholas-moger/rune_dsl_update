@@ -1,0 +1,18 @@
+namespace chaos.s06.a4snap
+version "1.0.0-SNAPSHOT"
+type C6Tag: <"Self-contained helper - relocated by the import axis.">
+    caption string (1..1)
+metaType scheme string
+type C6Event: <"The rule-from type; references the helper; carries a meta seat for the rule x meta conjunction.">
+    eventId string (1..1)
+    qty number (0..1)
+    legs string (0..*)
+    mark C6Tag (0..1)
+    venue string (0..1)
+        [metadata scheme]
+func C6MarkOf: <"Function whose call result is NAVIGATED inside a rule arm (v3.1 F25).">
+    inputs:
+        ev C6Event (1..1)
+    output:
+        t C6Tag (0..1)
+    set t: ev -> mark

@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="890" viewBox="0 0 1120 890" role="img" aria-labelledby="title desc">
+<title id="title">What this snapshot contains</title>
+<desc id="desc">Snapshot provenance: released Rune9.83.0 is the compatibility reference, distinct from development commit82e7921. The curated review snapshot of22September2026 contains source, authored tests, retained evidence and legal/provenance notices. The current documentation refresh adds a guide and visuals while retaining the compiler revision and original measurement dates. Complete3.3IR closure, subsequent simplification and the proposed standaloneSDK/editor/agent interfaces are later work outside this fixed code snapshot; the guide does not assert that they are included. Full hashes are recorded in the page.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9" fill="none" stroke="#a9b7cb" stroke-width="1.4"/></marker></defs>
+<rect width="1120" height="890" rx="22" fill="#121923"/>
+<g font-family="Segoe UI, Arial, sans-serif">
+<text x="30" y="47" fill="#eef2f8" font-size="32" font-weight="600" text-anchor="start">
+<tspan x="30" dy="0" xml:space="preserve">What this snapshot contains</tspan>
+</text>
+<text x="30" y="85" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="30" dy="0" xml:space="preserve">Fixed code · refreshed explanation · full source identities below</tspan>
+</text>
+<rect x="30" y="155" width="325" height="180" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="31" y="174" width="4" height="142" rx="2" fill="#a2c6e6"/>
+<text x="53" y="192" fill="#a2c6e6" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="53" dy="0" xml:space="preserve">Compatibility reference</tspan>
+</text>
+<text x="53" y="225" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="53" dy="0" xml:space="preserve">Released Rune 9.83.0</tspan>
+<tspan x="53" dy="30" xml:space="preserve">Separate baseline identity</tspan>
+</text>
+<rect x="425" y="155" width="665" height="110" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="426" y="174" width="4" height="72" rx="2" fill="#92d5c6"/>
+<text x="448" y="192" fill="#92d5c6" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="448" dy="0" xml:space="preserve">Development source</tspan>
+</text>
+<text x="448" y="225" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="448" dy="0" xml:space="preserve">Commit 82e7921 · compiler work before curation</tspan>
+</text>
+<rect x="425" y="320" width="665" height="180" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="426" y="339" width="4" height="142" rx="2" fill="#92d5c6"/>
+<text x="448" y="357" fill="#92d5c6" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="448" dy="0" xml:space="preserve">Curated review snapshot</tspan>
+</text>
+<text x="448" y="390" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="448" dy="0" xml:space="preserve">Code: 22 September 2026 · curated snapshot</tspan>
+<tspan x="448" dy="30" xml:space="preserve">Source · authored tests · retained evidence</tspan>
+<tspan x="448" dy="30" xml:space="preserve">Legal notices and provenance</tspan>
+</text>
+<rect x="425" y="555" width="665" height="145" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="426" y="574" width="4" height="107" rx="2" fill="#d0b487"/>
+<text x="448" y="592" fill="#d0b487" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="448" dy="0" xml:space="preserve">Documentation refresh</tspan>
+</text>
+<text x="448" y="625" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="448" dy="0" xml:space="preserve">New guide and visuals</tspan>
+<tspan x="448" dy="30" xml:space="preserve">Same compiler revision · retained measurement dates</tspan>
+</text>
+<rect x="30" y="445" width="325" height="255" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5" stroke-dasharray="7 5"/>
+<rect x="31" y="464" width="4" height="217" rx="2" fill="#a6b0ec"/>
+<text x="53" y="482" fill="#a6b0ec" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="53" dy="0" xml:space="preserve">Beyond this snapshot</tspan>
+</text>
+<text x="53" y="515" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="53" dy="0" xml:space="preserve">3.3 complete IR</tspan>
+<tspan x="53" dy="30" xml:space="preserve">Then simplification</tspan>
+<tspan x="53" dy="30" xml:space="preserve">Planned standalone SDK</tspan>
+<tspan x="53" dy="30" xml:space="preserve">Editor / agent interfaces</tspan>
+</text>
+<polyline points="757.5,265 757.5,320" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="757.5,500 757.5,555" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<text x="30" y="770" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="30" dy="0" xml:space="preserve">The guide explains the future design; it does not put later work into the fixed code snapshot.</tspan>
+<tspan x="30" dy="30" xml:space="preserve">Development commit, curated export and released reference are different identities.</tspan>
+</text>
+</g>
+</svg>

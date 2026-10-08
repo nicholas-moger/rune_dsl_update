@@ -1,0 +1,49 @@
+namespace chaos.s11.a2wild
+version "1.0.0"
+import chaos.s11.a2wild.h.*
+synonym source C11XML
+synonym source C11JSON
+type C11Mapped: <"Inline synonym bodies: every alternative the grammar's rosettaSynonymBody admits.">
+    [synonym C11XML value "MappedRoot" path "envelope" meta "cm"]
+    ident string (1..1)
+        [synonym C11XML value "id" path "root"]
+        [synonym C11JSON value "identifier"]
+    total number (0..1)
+        [synonym C11XML value "amt" path "root->body" maps 2]
+    kindCode string (0..1)
+        [synonym C11XML set to "S" when "root->kind" = "spot", set to "F"]
+    flagged string (0..1)
+        [synonym C11XML value "flag" set when "root->flag" exists]
+        [synonym C11JSON hint "flagHint", "altHint"]
+    merged string (0..*)
+        [synonym C11XML merge "mergedBlock" when path <> "root->skip"]
+    tagged string (0..1)
+        [synonym C11XML value "t" tag 1]
+        [synonym C11JSON value "t2" componentID 2]
+    metaCarrier string (0..1)
+        [synonym C11XML value "mc" meta "mcScheme", "mcOther"]
+    defaulted string (0..1)
+        [synonym C11XML value "d" default to "fallback"]
+    tested string (0..1)
+        [synonym C11XML value "tv" set when path = "root->t" and "root->u" is absent and "root->w" = "V" and condition-func C11CondFn condition-path "root->c"]
+    pathed string (0..1)
+        [synonym C11XML value "pv" set when rosettaPath = C11Mapped -> ident]
+    dated date (0..1)
+        [synonym C11XML value "dt" dateFormat "yyyy-MM-dd"]
+    patterned string (0..1)
+        [synonym C11XML value "pp" pattern "(.*)" "$1" removeHtml mapper "ChaosMapper"]
+    metaOnly string (0..1)
+        [synonym C11XML meta "justMeta"]
+    aux C11Aux (0..1)
+func C11CondFn: <"The condition-func target the tested mapping names.">
+    inputs:
+        raw string (1..1)
+    output:
+        ok boolean (1..1)
+    set ok: raw exists
+enum C11KindEnum: <"Enum-value synonyms.">
+    Spot
+        [synonym C11XML value "SPOT"]
+    Fwd
+        [synonym C11XML value "FORWARD"]
+        [synonym C11JSON value "fwd"]

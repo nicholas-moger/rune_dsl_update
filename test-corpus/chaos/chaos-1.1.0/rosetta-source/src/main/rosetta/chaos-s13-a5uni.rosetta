@@ -1,0 +1,19 @@
+namespace chaos.s13.a5uni
+version "1.0.0"
+type C13Aux: <"éüµ – Self-contained helper - relocated by the import axis.">
+    ax string (1..1)
+type C13Fact: <"Rule-source subject type.">
+    fid string (1..1)
+    amt number (0..1)
+    aux C13Aux (0..1)
+reporting rule C13Fid from C13Fact: <"The externally-attached rule.">
+    extract fid
+        as "Fact ID"
+reporting rule C13Amt from C13Fact: <"Second externally-attached rule.">
+    extract amt default 0
+        as "Amount"
+type A5UniProbe: <"Non-ASCII literal probe – müßig 試験.">
+    p string (0..1)
+        [label as "µ–label §7"]
+enum A5UniProbeEnum: <"displayName probe.">
+    V displayName "µ–„display“"

@@ -1,0 +1,7 @@
+namespace test.reports
+
+type Trade:
+    tradeId string (1..1)
+        [label "Trade ID"]
+    parties Party (0..*)
+        [label for item -> name "Party Name"]

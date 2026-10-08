@@ -1,0 +1,42 @@
+namespace chaos.s21.a1o4
+version "1.0.0"
+type C21Aux: <"Self-contained helper - relocated by the import axis.">
+    ax string (1..1)
+type C21Exactly: <"one-of over three optionals.">
+    a string (0..1)
+    b string (0..1)
+    c string (0..1)
+    condition: one-of
+type C21Paths: <"only-exists targets.">
+    p string (0..1)
+    q string (0..1)
+    r string (0..1)
+func C21Gate: <"only exists - single path, list form, and inside if/else arms.">
+    inputs:
+        t C21Paths (1..1)
+    output:
+        ok boolean (1..1)
+    set ok:
+        if t -> p only exists
+        then True
+        else (t -> q, t -> r) only exists
+type C21Prefer: <"required and optional choice conditions side by side.">
+    x string (0..1)
+    y string (0..1)
+    z string (0..1)
+    aux C21Aux (0..1)
+    condition C21Req:
+        required choice x, y
+    condition C21Opt:
+        optional choice y, z
+func C21Void: <"is absent + exists modifiers at condition seats.">
+    inputs:
+        t C21Paths (1..1)
+        many string (0..*)
+    output:
+        n number (1..1)
+    condition C21NoP:
+        t -> p is absent or t -> p exists
+    condition C21Card:
+        many multiple exists or many single exists or many is absent
+    set n: many count

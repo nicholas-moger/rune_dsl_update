@@ -1,0 +1,188 @@
+delimiters "<", ">"
+
+inputParam(inp) ::= <%
+<if(inp.isMulti)><if(inp.isRosettaModelType)>List\<? extends <inp.typeName>\> <inp.name><else>List\<<inp.typeName>\> <inp.name><endif><else><inp.typeName> <inp.name><endif>
+%>
+
+evaluateReturnType(m) ::= <%
+<if(m.outputIsMulti)><if(m.outputNeedsBuilder)>List\<? extends <m.output.typeName>\><else>List\<<m.output.typeName>\><endif><else><m.output.typeName><endif>
+%>
+
+doEvaluateReturnType(m) ::= <%
+<if(m.outputIsMulti)><if(m.outputNeedsBuilder)>List\<<m.output.typeName>.<m.output.builderTypeName>\><else>List\<<m.output.typeName>\><endif><else><if(m.outputNeedsBuilder)><m.output.typeName>.<m.output.builderTypeName><else><m.output.typeName><endif><endif>
+%>
+
+dispatchFile(m) ::= <<
+package <m.packageName>;
+
+<m.imports:{imp | import <imp>;
+}>
+<if(m.staticImports)>
+<m.staticImports:{imp | import static <imp>;
+}>
+<else>
+
+<endif>
+<if(m.definition)>
+/**
+<" ">* <m.definition>
+<" ">* @version <m.version>
+<" ">*/
+<else>
+/**
+<" ">* @version <m.version>
+<" ">*/
+<endif>
+public class <m.className> implements RosettaFunction {
+<\t>
+<m.dispatchVariants:{v | <\t>@Inject protected <m.className>.<v.variantClassName> <v.fieldName>;}; separator="\n">
+<\t>
+<\t>public <evaluateReturnType(m)> evaluate(<m.inputs:{inp | <inputParam(inp)>}; separator=", ">) {
+<\t><\t>switch (<m.dispatchParamName>) {
+<m.dispatchVariants:{v | <\t><\t><\t>case <v.enumValue>:
+<\t><\t><\t><\t>return <v.fieldName>.evaluate(<m.inputs:{inp | <inp.name>}; separator=", ">);}; separator="\n">
+<\t><\t><\t>default:
+<\t><\t><\t><\t>throw new IllegalArgumentException("Enum value not implemented: " + <m.dispatchParamName>);
+<\t><\t>}
+<\t>}
+<\t>
+<m.dispatchVariants:{v | <variantClass(v, m)>
+}>}
+
+>>
+
+variantClass(v, m) ::= <<
+<\t>@ImplementedBy(<m.className>.<v.variantClassName>.<v.variantClassName>Default.class)
+<\t>public static abstract class <v.variantClassName> implements RosettaFunction {
+<if(v.variantModel.hasConditions)>
+<\t><\t>
+<\t><\t>@Inject protected ConditionValidator conditionValidator;
+<if(v.variantModel.hasObjectValidator)>
+<\t><\t>
+<\t><\t>@Inject protected ModelObjectValidator objectValidator;
+<endif>
+<if(v.variantModel.dependencies)>
+<\t><\t>
+<\t><\t>// RosettaFunction dependencies
+<\t><\t>//
+<v.variantModel.dependencies:{dep | <\t><\t>@Inject protected <dep.typeName> <dep.fieldName>;}; separator="\n">
+<endif>
+<elseif(v.variantModel.hasObjectValidator)>
+<\t><\t>
+<\t><\t>@Inject protected ModelObjectValidator objectValidator;
+<if(v.variantModel.dependencies)>
+<\t><\t>
+<\t><\t>// RosettaFunction dependencies
+<\t><\t>//
+<v.variantModel.dependencies:{dep | <\t><\t>@Inject protected <dep.typeName> <dep.fieldName>;}; separator="\n">
+<endif>
+<elseif(v.variantModel.dependencies)>
+<\t><\t>
+<\t><\t>// RosettaFunction dependencies
+<\t><\t>//
+<v.variantModel.dependencies:{dep | <\t><\t>@Inject protected <dep.typeName> <dep.fieldName>;}; separator="\n">
+<endif>
+<\t>
+<\t><\t>/**
+<v.variantModel.javadocParams:{p | <\t><\t>* <p>
+}><\t><\t>*/
+<\t><\t>public <evaluateReturnType(v.variantModel)> evaluate(<v.variantModel.inputs:{inp | <inputParam(inp)>}; separator=", ">) {
+<if(v.variantModel.preConditions)>
+<\t><\t><\t>// pre-conditions
+<v.variantModel.preConditions:{c | <\t><\t><\t>conditionValidator.validate(() -> <c.compiledExpression>,
+<\t><\t><\t><\t>"<c.definition>");
+}>
+<\t><\t><\t>
+<endif>
+<if(v.variantModel.outputNeedsBuilder)>
+<if(v.variantModel.outputIsMulti)>
+<\t><\t><\t>List\<<v.variantModel.output.typeName>.<v.variantModel.output.builderTypeName>\> <v.variantModel.output.builderName> = doEvaluate(<v.variantModel.inputs:{inp | <inp.name>}; separator=", ">);
+<\t><\t><\t>
+<\t><\t><\t>final List\<? extends <v.variantModel.output.typeName>\> <v.variantModel.output.name>;
+<\t><\t><\t>if (<v.variantModel.output.builderName> == null) {
+<\t><\t><\t><\t><v.variantModel.output.name> = null;
+<\t><\t><\t>} else {
+<\t><\t><\t><\t><v.variantModel.output.name> = <v.variantModel.output.builderName>.stream().map(<v.variantModel.output.typeName>::build).collect(Collectors.toList());
+<\t><\t><\t><\t>objectValidator.validate(<v.variantModel.output.typeName>.class, <v.variantModel.output.name>);
+<\t><\t><\t>}
+<else>
+<\t><\t><\t><v.variantModel.output.typeName>.<v.variantModel.output.builderTypeName> <v.variantModel.output.builderName> = doEvaluate(<v.variantModel.inputs:{inp | <inp.name>}; separator=", ">);
+<\t><\t><\t>
+<\t><\t><\t>final <v.variantModel.output.typeName> <v.variantModel.output.name>;
+<\t><\t><\t>if (<v.variantModel.output.builderName> == null) {
+<\t><\t><\t><\t><v.variantModel.output.name> = null;
+<\t><\t><\t>} else {
+<\t><\t><\t><\t><v.variantModel.output.name> = <v.variantModel.output.builderName>.build();
+<\t><\t><\t><\t>objectValidator.validate(<v.variantModel.output.typeName>.class, <v.variantModel.output.name>);
+<\t><\t><\t>}
+<endif>
+<else>
+<\t><\t><\t><evaluateReturnType(v.variantModel)> <v.variantModel.output.name> = doEvaluate(<v.variantModel.inputs:{inp | <inp.name>}; separator=", ">);
+<endif>
+<\t><\t><\t>
+<if(v.variantModel.postConditions)>
+<\t><\t><\t>// post-conditions
+<v.variantModel.postConditions:{c | <\t><\t><\t>conditionValidator.validate(() -> <c.compiledExpression>,
+<\t><\t><\t><\t>"<c.definition>");
+}>
+<\t><\t><\t>
+<endif>
+<\t><\t><\t>return <v.variantModel.output.name>;
+<\t><\t>}
+<\t>
+<\t><\t>protected abstract <doEvaluateReturnType(v.variantModel)> doEvaluate(<v.variantModel.inputs:{inp | <inputParam(inp)>}; separator=", ">);
+<v.variantModel.aliases:{a |
+<\t>
+<\t><\t>protected abstract <a.returnType> <a.name>(<v.variantModel.inputs:{inp | <inputParam(inp)>}; separator=", ">);
+}><\\>
+<\t>
+<\t><\t>public static class <v.variantClassName>Default extends <m.className>.<v.variantClassName> {
+<\t><\t><\t>@Override
+<\t><\t><\t>protected <doEvaluateReturnType(v.variantModel)> doEvaluate(<v.variantModel.inputs:{inp | <inputParam(inp)>}; separator=", ">) {
+<v.variantModel.inputs:{inp | <if(inp.isMulti)>
+<\t><\t><\t><\t>if (<inp.name> == null) {
+<\t><\t><\t><\t><\t><inp.name> = Collections.emptyList();
+<\t><\t><\t><\t>\}
+<endif>}>
+<if(v.variantModel.outputIsMulti)>
+<if(v.variantModel.outputNeedsBuilder)>
+<\t><\t><\t><\t>List\<<v.variantModel.output.typeName>.<v.variantModel.output.builderTypeName>\> <v.variantModel.output.name> = new ArrayList\<\>();
+<else>
+<\t><\t><\t><\t>List\<<v.variantModel.output.typeName>\> <v.variantModel.output.name> = new ArrayList\<\>();
+<endif>
+<elseif(v.variantModel.outputNeedsBuilder)>
+<\t><\t><\t><\t><v.variantModel.output.typeName>.<v.variantModel.output.builderTypeName> <v.variantModel.output.name> = <v.variantModel.output.typeName>.builder();
+<else>
+<\t><\t><\t><\t><v.variantModel.output.typeName> <v.variantModel.output.name> = null;
+<endif>
+<\t><\t><\t><\t>return assignOutput(<v.variantModel.output.name>, <v.variantModel.inputs:{inp | <inp.name>}; separator=", ">);
+<\t><\t><\t>}
+<\t><\t><\t>
+<\t><\t><\t>protected <doEvaluateReturnType(v.variantModel)> assignOutput(<doEvaluateReturnType(v.variantModel)> <v.variantModel.output.name>, <v.variantModel.inputs:{inp | <inputParam(inp)>}; separator=", ">) {
+<v.variantModel.operations:{op | <\t><\t><\t><\t><op.compiledStatement>
+}; separator="\t\t\t\t\n"><if(v.variantModel.operations)><\t><\t><\t><\t>
+<endif>
+<if(v.variantModel.outputNeedsBuilder)>
+<if(v.variantModel.outputIsMulti)>
+<\t><\t><\t><\t>return Optional.ofNullable(<v.variantModel.output.name>)
+<\t><\t><\t><\t><\t>.map(o -> o.stream().map(i -> i.prune()).collect(Collectors.toList()))
+<\t><\t><\t><\t><\t>.orElse(null);
+<else>
+<\t><\t><\t><\t>return Optional.ofNullable(<v.variantModel.output.name>)
+<\t><\t><\t><\t><\t>.map(o -> o.prune())
+<\t><\t><\t><\t><\t>.orElse(null);
+<endif>
+<else>
+<\t><\t><\t><\t>return <v.variantModel.output.name>;
+<endif>
+<\t><\t><\t>}
+<v.variantModel.aliases:{a |
+<\t><\t><\t>
+<\t><\t><\t>@Override
+<\t><\t><\t>protected <a.returnType> <a.name>(<v.variantModel.inputs:{inp | <inputParam(inp)>}; separator=", ">) {
+<\t><\t><\t><\t><a.compiledBody>
+<\t><\t><\t>\}
+}><\\>
+<v.variantModel.helperMethodsBlock><\t><\t>}
+<\t>}
+>>

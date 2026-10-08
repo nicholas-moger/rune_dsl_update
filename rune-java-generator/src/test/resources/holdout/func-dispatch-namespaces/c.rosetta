@@ -1,0 +1,8 @@
+namespace test.dispatchns.c
+
+func Speed: <"A STANDARD function carrying the dispatch group's name in a third namespace - it must emit as a plain function.">
+    inputs:
+        x number (1..1)
+    output:
+        y number (1..1)
+    set y: x * 4

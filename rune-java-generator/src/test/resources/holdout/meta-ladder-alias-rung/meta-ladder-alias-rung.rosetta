@@ -1,0 +1,74 @@
+namespace test.mladder
+
+metaType scheme string
+metaType reference string
+metaType key string
+
+type Keyed: <"A keyed root (the chaos C9Keyed).">
+    [metadata key]
+    kid string (1..1)
+
+type Holder: <"The ladder's sources (the chaos C9Holder).">
+    coded string (0..1)
+        [metadata scheme]
+    codes string (0..*)
+        [metadata scheme]
+    byRefs Keyed (0..*)
+        [metadata reference]
+
+func Sieve: <"The chaos C9Sieve shape: a filtered alias at the second rung.">
+    inputs:
+        h Holder (1..1)
+    output:
+        pick string (0..1)
+    alias firstRef: h -> byRefs then filter item -> kid exists then first
+    alias goodCodes: h -> codes then filter item <> "void"
+    set pick:
+        if h -> coded exists
+        then h -> coded
+        else if goodCodes exists
+        then goodCodes first
+        else firstRef -> kid
+
+func NoFilter: <"An alias without a filter at the rung.">
+    inputs:
+        h Holder (1..1)
+    output:
+        pick string (0..1)
+    alias allCodes: h -> codes
+    set pick:
+        if h -> coded exists
+        then h -> coded
+        else allCodes first
+
+func Direct: <"A direct then-first chain at the rung, no alias.">
+    inputs:
+        h Holder (1..1)
+    output:
+        pick string (0..1)
+    set pick:
+        if h -> coded exists
+        then h -> coded
+        else h -> codes then filter item <> "void" then first
+
+func ThreeRungs: <"Three wrapped rungs - the locals number 0 1 2.">
+    inputs:
+        h Holder (1..1)
+        g Holder (1..1)
+    output:
+        pick string (0..1)
+    alias goodCodes: h -> codes then filter item <> "void"
+    set pick:
+        if h -> coded exists
+        then h -> coded
+        else if goodCodes exists
+        then goodCodes first
+        else g -> coded
+
+func TopLevel: <"The alias rung at the top level, no ladder.">
+    inputs:
+        h Holder (1..1)
+    output:
+        pick string (0..1)
+    alias goodCodes: h -> codes then filter item <> "void"
+    set pick: goodCodes first

@@ -1,0 +1,7 @@
+namespace com.test.outer.inner
+
+type Trade:
+    id string (1..1)
+
+reporting rule TradeId from Trade: <"Trade identifier">
+    id

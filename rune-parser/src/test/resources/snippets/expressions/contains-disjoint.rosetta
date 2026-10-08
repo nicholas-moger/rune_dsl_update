@@ -1,0 +1,13 @@
+namespace test.expressions
+
+func ContainsDisjoint:
+    inputs:
+        a number (0..*)
+        b number (0..*)
+    output:
+        result boolean (1..1)
+    condition ContainsCheck:
+        a contains b
+    condition DisjointCheck:
+        a disjoint b
+    set result: a contains b

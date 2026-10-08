@@ -1,0 +1,11 @@
+namespace test.deeppathedgetypes
+
+type RNote: <"Remote option 1.">
+    text string (1..1)
+
+type RWrap: <"Remote option 2.">
+    text string (0..1)
+
+choice ROuter: <"The remote nested choice - its util is generated in THIS namespace.">
+    RWrap
+    RNote

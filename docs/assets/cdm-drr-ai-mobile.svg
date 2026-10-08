@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="1560" viewBox="0 0 480 1560" role="img" aria-labelledby="title desc">
+<title id="title">Use AI through configured tools</title>
+<desc id="desc">Illustrative integration. An optional external AI/agent client uses configured external tools/adapters. Adapters can read source/context directly without a Rune JVM, access existing Rune language/model services in a JVM, or use existing build/test tools with JVM roles. These are parallel available capabilities, not mandatory processing stages. Evidence and a proposed change reach human review. The AI does not have to run on a JVM. No native Rune AI platform, API or SDK availability is claimed.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9" fill="none" stroke="#a9b7cb" stroke-width="1.4"/></marker></defs>
+<rect width="480" height="1560" rx="22" fill="#121923"/>
+<g font-family="Segoe UI, Arial, sans-serif">
+<text x="24" y="43" fill="#eef2f8" font-size="29" font-weight="600" text-anchor="start">
+<tspan x="24" dy="0" xml:space="preserve">Use AI through</tspan>
+<tspan x="24" dy="35" xml:space="preserve">configured tools</tspan>
+</text>
+<text x="24" y="119" fill="#a9b7cb" font-size="19" font-weight="400" text-anchor="start">
+<tspan x="24" dy="0" xml:space="preserve">Illustrative integration</tspan>
+<tspan x="24" dy="26" xml:space="preserve">External adapters use existing services.</tspan>
+</text>
+<rect x="24" y="180" width="432" height="100" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="25" y="199" width="4" height="62" rx="2" fill="#a2c6e6"/>
+<text x="47" y="217" fill="#a2c6e6" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">AI / agent client</tspan>
+</text>
+<text x="47" y="250" fill="#a9b7cb" font-size="21" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">External, optional integration</tspan>
+</text>
+<rect x="24" y="325" width="432" height="800" rx="14" fill="#18222f" stroke="#a6b0ec" stroke-width="1.5" stroke-dasharray="7 5"/>
+<text x="47" y="363" fill="#a6b0ec" font-size="23" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">External adapter boundary</tspan>
+</text>
+<text x="47" y="395" fill="#a9b7cb" font-size="19" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Configured illustrative integration</tspan>
+</text>
+<rect x="47" y="440" width="386" height="110" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="48" y="459" width="4" height="72" rx="2" fill="#a2c6e6"/>
+<text x="70" y="477" fill="#a2c6e6" font-size="23" font-weight="600" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Configured tools / adapters</tspan>
+</text>
+<text x="70" y="510" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Select tools and supply context</tspan>
+</text>
+<rect x="47" y="595" width="386" height="115" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="48" y="614" width="4" height="77" rx="2" fill="#a2c6e6"/>
+<text x="70" y="632" fill="#a2c6e6" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Source / context access</tspan>
+</text>
+<text x="70" y="665" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Read files directly</tspan>
+<tspan x="70" dy="28" xml:space="preserve">No Rune JVM needed</tspan>
+</text>
+<rect x="47" y="750" width="386" height="115" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="48" y="769" width="4" height="77" rx="2" fill="#92d5c6"/>
+<text x="70" y="787" fill="#92d5c6" font-size="23" font-weight="600" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Rune model services · JVM</tspan>
+</text>
+<text x="70" y="820" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Existing parsing</tspan>
+<tspan x="70" dy="28" xml:space="preserve">+ semantic services</tspan>
+</text>
+<rect x="47" y="905" width="386" height="115" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="48" y="924" width="4" height="77" rx="2" fill="#d0b487"/>
+<text x="70" y="942" fill="#d0b487" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Build / test tools · JVM</tspan>
+</text>
+<text x="70" y="975" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Existing generation</tspan>
+<tspan x="70" dy="28" xml:space="preserve">+ test tools</tspan>
+</text>
+<polyline points="240,280 240,305 466,305 466,495 433,495" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="47,495 35,495 35,962 47,962" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="35,652 47,652" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="35,807 47,807" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="433,652 445,652" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="433,807 445,807" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="433,962 445,962" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="445,652 445,1080 240,1080 240,1170" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<rect x="24" y="1170" width="432" height="110" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="25" y="1189" width="4" height="72" rx="2" fill="#a6b0ec"/>
+<text x="47" y="1207" fill="#a6b0ec" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Evidence + proposed change</tspan>
+</text>
+<text x="47" y="1240" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Source links · diagnostics</tspan>
+<tspan x="47" dy="28" xml:space="preserve">Build / test results</tspan>
+</text>
+<rect x="24" y="1320" width="432" height="110" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="25" y="1339" width="4" height="72" rx="2" fill="#92d5c6"/>
+<text x="47" y="1357" fill="#92d5c6" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Human review</tspan>
+</text>
+<text x="47" y="1387" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Accept, revise or reject</tspan>
+<tspan x="47" dy="28" xml:space="preserve">before applying a change</tspan>
+</text>
+<polyline points="240,1280 240,1320" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<text x="24" y="1470" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="24" dy="0" xml:space="preserve">Adapters are illustrative.</tspan>
+<tspan x="24" dy="28" xml:space="preserve">No native Rune AI API / SDK</tspan>
+<tspan x="24" dy="28" xml:space="preserve">is implied by this integration.</tspan>
+</text>
+</g>
+</svg>

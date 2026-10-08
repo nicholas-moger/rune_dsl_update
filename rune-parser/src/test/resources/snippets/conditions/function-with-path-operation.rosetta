@@ -1,0 +1,12 @@
+namespace test.conditions
+
+type Account:
+    balance number (1..1)
+
+func UpdateBalance:
+    inputs:
+        account Account (1..1)
+        amount number (1..1)
+    output:
+        result Account (1..1)
+    set result -> balance: amount

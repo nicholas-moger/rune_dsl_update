@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="240" viewBox="0 0 820 240" role="img" aria-labelledby="title desc">
+  <title id="title">Rune DSL — Indigo–Jade</title>
+  <desc id="desc">Rune DSL wordmark with the approved option 03 Rune glyph and the Indigo–Jade gradient for dark backgrounds.</desc>
+  <defs><linearGradient id="gradient-indigo-jade-dark" gradientUnits="userSpaceOnUse" x1="40" y1="272" x2="536" y2="272"><stop offset="0%" stop-color="#8490D4"/><stop offset="100%" stop-color="#61B4A5"/></linearGradient></defs>
+  <g id="rune-mark" transform="translate(46.584507 57.746479) scale(0.228873239)"><g fill="url(#gradient-indigo-jade-dark)"><path d="M0 0H38L268 180H204L38 50V200H292V238H70L0 168Z"/>
+<path d="M0 206L296 502V556L0 260Z"/>
+<path d="M0 294L38 332V544H0Z"/>
+<path d="M276 -12L576 288V342L276 42Z"/>
+<path d="M538 0H576V254L538 216Z"/>
+<path d="M264 306H500L538 344H264Z"/>
+<path d="M300 374H368L538 504V344L576 382V544H530Z"/></g></g>
+  <g id="wordmark" font-family="Inter, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-weight="700" letter-spacing="-4.8">
+    <text x="232" y="162" font-size="128" fill="#d9dde4">Rune DSL</text>
+  </g>
+</svg>

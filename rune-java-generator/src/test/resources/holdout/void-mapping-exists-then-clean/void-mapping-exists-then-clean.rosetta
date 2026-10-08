@@ -1,0 +1,31 @@
+namespace holdout.voidexistsclean
+version "0.0.0"
+
+// v3.2 seat 9 round 3 (the spec review's SF-6, the code-quality review's MF-3): the EXISTENCE seat's naming law,
+// witnessed at a CLEAN (byte-matching, compiling) file. Round 2 deleted round 1's discarded compile at the existence
+// seat because upstream coerces a Void conditional operand to `exists(MapperS.<Void>ofNull())` WITHOUT compiling it -
+// so a LATER hoist in the same method keeps its index. Round 1's compile-then-drain minted (and leaked) the name,
+// numbering the later hoist one too high. render-hoist-second's ExistsThenConditional carries this shape but couples
+// it with an OLDER defect (a literal-armed conditional as a COMPARISON operand renders a plain String and does not
+// compile), so it is a declared pin. Here the SECOND operation is a pathed STRING SET whose conditional both sides
+// render as `String ifThenElseResult` (the leaf type - not a comparison operand), so the file compiles and byte-matches
+// and the ONLY variable is the hoist INDEX: `ifThenElseResult` (round 2, upstream - the exists operand mints no name)
+// vs `ifThenElseResult1` (round 1's leak). Lane L14 re-introduces round 1's compile and turns THIS file red.
+
+basicType etoken <"A model-declared basic type - a Void-typed value in the generated Java.">
+
+type Pair: <"An output carrying an existence result beside a plain string leaf.">
+    present boolean (0..1)
+    s string (0..1)
+
+func ExistsThenCleanConditional: <"A Void conditional under exists SET into one leaf, then a clean pathed string conditional SET into the sibling leaf - the naming-counter witness.">
+    inputs:
+        flag boolean (1..1)
+        t etoken (0..1)
+        u etoken (0..1)
+        a string (0..1)
+        b string (0..1)
+    output:
+        p Pair (1..1)
+    set p -> present: (if flag then t else u) exists
+    set p -> s: if a = b then "y" else "z"

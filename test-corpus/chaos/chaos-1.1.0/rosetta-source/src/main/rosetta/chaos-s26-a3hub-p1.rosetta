@@ -1,0 +1,5 @@
+namespace chaos.s26.a3hub.p1
+version "1.0.0"
+import chaos.s26.a3hub.p2.*
+type C26Tag: <"Helper - relocated by the import axis.">
+    code string (1..1)

@@ -1,0 +1,46 @@
+delimiters "<", ">"
+
+// v3.2 seat 11 (D50 — the file-scope first-claim law): rendered in TWO steps. The
+// body template writes every TYPE position as a first-claim sentinel — the library
+// tokens through the generator's token map <t.X> (ImportCollisionResolver.typeRefs),
+// the data class and the casts through the model — the generator resolves them in
+// text order from the one seed (the validator class itself) and drops the losers'
+// imports, and the file template wraps the resolved text (m.body) under the package
+// line and the import blocks, byte-identical to the single-step form it replaced.
+cardinalityValidator(m) ::= <<
+package <m.packageName>;
+
+<m.imports:{imp | import <imp>;
+}>
+<if(m.staticImports)>
+<m.staticImports:{imp | import static <imp>;
+}>
+<endif>
+<m.body>
+>>
+
+cardinalityValidatorBody(m, t) ::= <<
+public class <m.validatorClassName> implements <t.Validator>\<<m.dataClassJavaType>\> {
+
+	private <t.List>\<<t.ComparisonResult>\> getComparisonResults(<m.dataClassJavaType> o) {
+		return <t.Lists>.\<<t.ComparisonResult>\>newArrayList(
+<m.checks:{c | 				<c.checkExpr><if(!c.isLast)>, <endif>
+}>			);
+	}
+
+	@Override
+	public <t.List>\<<t.ValidationResult>\<?\>\> getValidationResults(<t.RosettaPath> path, <m.dataClassJavaType> o) {
+		return getComparisonResults(o)
+			.stream()
+			.map(res -> {
+				if (!isNullOrEmpty(res.getError())) {
+					return failure("<m.dataClassName>", <t.ValidationResult>.ValidationType.CARDINALITY, "<m.dataClassName>", path, "", res.getError());
+				}
+				return success("<m.dataClassName>", <t.ValidationResult>.ValidationType.CARDINALITY, "<m.dataClassName>", path, "");
+			})
+			.collect(toList());
+	}
+
+}
+
+>>

@@ -1,0 +1,61 @@
+namespace holdout.typenamedutil
+version "0.0.0"
+
+type Map: <"A data type named after a java.util token the only-exists validator writes (Map<String, Boolean>, Map.Entry) - v3.2 seat 11 (M1's class): every file that writes both claims by text order.">
+    xs string (0..*)
+    x string (0..1)
+
+type Set: <"java.util.Set - written by the only-exists validator (Set<String>) and the meta (Set<String>).">
+    xs string (0..*)
+    x string (0..1)
+
+type Objects: <"java.util.Objects - written by the POJO's equals over a single attribute.">
+    xs string (0..*)
+    x string (0..1)
+
+type Collectors: <"java.util.stream.Collectors - written by the POJO's builder setters and the only-exists validator.">
+    xs string (0..*)
+    x string (0..1)
+
+type Arrays: <"java.util.Arrays - written by the meta's dataRules list.">
+    xs string (0..*)
+    x string (0..1)
+
+type Collections: <"java.util.Collections - written by the meta's empty qualify list.">
+    xs string (0..*)
+    x string (0..1)
+
+type Function: <"java.util.function.Function - written by the meta's qualify signature.">
+    xs string (0..*)
+    x string (0..1)
+
+type Consumer: <"java.util.function.Consumer - written by the POJO's getOrCreate arms over a model-typed attribute.">
+    xs string (0..*)
+    x string (0..1)
+    inner Objects (0..1)
+
+type ArrayList: <"java.util.ArrayList - written by the POJO's builder fields.">
+    xs string (0..*)
+    x string (0..1)
+
+type Pattern: <"java.util.regex.Pattern - written by the type-format validator's string pattern check.">
+    xs string (0..*)
+    p string(pattern: "[a-z]+") (0..1)
+
+type BigDecimal: <"java.math.BigDecimal - written by the type-format validator's number range check.">
+    xs string (0..*)
+    n number(min: 0, max: 10) (0..1)
+
+type UtilRefs: <"A sibling referencing every util-named type singly, its own multi string last.">
+    map Map (0..1)
+    theSet Set (0..1)
+    objects Objects (0..1)
+    collectors Collectors (0..1)
+    arrays Arrays (0..1)
+    collections Collections (0..1)
+    fn Function (0..1)
+    consumer Consumer (0..1)
+    arrayList ArrayList (0..1)
+    pat Pattern (0..1)
+    bigDecimal BigDecimal (0..1)
+    names string (0..*)

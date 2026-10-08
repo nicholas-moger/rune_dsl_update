@@ -1,0 +1,12 @@
+namespace test.synonyms
+
+synonym source TestSource
+
+type Schedule:
+    price number (0..1)
+        [synonym TestSource meta "Rate"]
+        [synonym TestSource meta "Spread"]
+    quantity number (0..1)
+        [synonym TestSource meta "Notional"]
+    description string (0..1)
+        [synonym TestSource value "labelField" meta "labelMeta"]

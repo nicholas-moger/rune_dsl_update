@@ -1,0 +1,14 @@
+namespace test.expressions
+
+type Balance:
+    amount number (1..1)
+
+type Account:
+    balance Balance (1..1)
+
+func GetAmount:
+    inputs:
+        account Account (1..1)
+    output:
+        result number (1..1)
+    set result: account -> balance -> amount

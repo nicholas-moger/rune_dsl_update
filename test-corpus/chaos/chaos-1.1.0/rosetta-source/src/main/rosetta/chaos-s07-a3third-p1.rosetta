@@ -1,0 +1,10 @@
+namespace chaos.s07.a3third.p1
+version "1.0.0"
+import chaos.s07.a3third.p2.*
+import chaos.s07.a3third.p3.*
+type C7Extra: <"Self-contained helper - relocated by the import axis.">
+    memo string (1..1)
+body Authority C7AUTH <"The chaos authority.">
+corpus Regulation "C7 Chaos Regulation" C7Reg <"The chaos corpus for the report seat.">
+segment c7article
+segment c7field

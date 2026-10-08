@@ -1,0 +1,87 @@
+# Native IR file writers per cell and kind - the legacy Java route (IR on) at the exported revision.
+# Source: the development validation chain's ON-route D11 run at commit 32f8c9ec4 (tree identical to the
+# exported 82e792135), executed on the development offload machine, finished 2026-09-22T09:26:53Z;
+# command: mvn -f rune-java-generator/pom.xml test -Pir-on -Dtest=D11CorpusRegressionTest -Dcorpus.required=true
+# (all 26 cells: the 25 pinned real-model releases + chaos 1.1.0). Verbatim per-cell lines; only the run's
+# machine-specific footer was replaced by this header. newEmitter = files written by the IR emitter,
+# oldGenerator = files the existing generator wrote for that kind, declaredFallbacks = rows of the fallback
+# register (rune-java-generator/src/test/resources/d11-ir-fallbacks.txt) for that cell and kind.
+D11 cdm/5.38.0 ENUM IR file writers: newEmitter=208 oldGenerator=0 declaredFallbacks=0
+D11 cdm/5.39.0 ENUM IR file writers: newEmitter=208 oldGenerator=0 declaredFallbacks=0
+D11 cdm/6.20.2 ENUM IR file writers: newEmitter=259 oldGenerator=0 declaredFallbacks=0
+D11 cdm/6.20.3 ENUM IR file writers: newEmitter=259 oldGenerator=0 declaredFallbacks=0
+D11 cdm/6.20.4 ENUM IR file writers: newEmitter=259 oldGenerator=0 declaredFallbacks=0
+D11 cdm/6.20.5 ENUM IR file writers: newEmitter=259 oldGenerator=0 declaredFallbacks=0
+D11 cdm/6.20.6 ENUM IR file writers: newEmitter=259 oldGenerator=0 declaredFallbacks=0
+D11 cdm/6.21.0 ENUM IR file writers: newEmitter=259 oldGenerator=0 declaredFallbacks=0
+D11 cdm/6.22.0 ENUM IR file writers: newEmitter=259 oldGenerator=0 declaredFallbacks=0
+D11 cdm/6.23.0 ENUM IR file writers: newEmitter=259 oldGenerator=0 declaredFallbacks=0
+D11 drr/5.61.0 ENUM IR file writers: newEmitter=63 oldGenerator=0 declaredFallbacks=0
+D11 drr/6.34.1 ENUM IR file writers: newEmitter=102 oldGenerator=0 declaredFallbacks=0
+D11 drr/6.35.0 ENUM IR file writers: newEmitter=102 oldGenerator=0 declaredFallbacks=0
+D11 drr/6.36.0 ENUM IR file writers: newEmitter=102 oldGenerator=0 declaredFallbacks=0
+D11 drr/6.37.0 ENUM IR file writers: newEmitter=102 oldGenerator=0 declaredFallbacks=0
+D11 drr/6.38.0 ENUM IR file writers: newEmitter=102 oldGenerator=0 declaredFallbacks=0
+D11 drr/7.0.0 ENUM IR file writers: newEmitter=102 oldGenerator=0 declaredFallbacks=0
+D11 drr/7.1.0 ENUM IR file writers: newEmitter=102 oldGenerator=0 declaredFallbacks=0
+D11 drr/7.2.0 ENUM IR file writers: newEmitter=102 oldGenerator=0 declaredFallbacks=0
+D11 drr/7.3.0 ENUM IR file writers: newEmitter=102 oldGenerator=0 declaredFallbacks=0
+D11 iso20022/1.38.0 ENUM IR file writers: newEmitter=453 oldGenerator=0 declaredFallbacks=0
+D11 rune-fpml/1.6.0 ENUM IR file writers: newEmitter=155 oldGenerator=0 declaredFallbacks=0
+D11 rune-fpml/2.0.0 ENUM IR file writers: newEmitter=155 oldGenerator=0 declaredFallbacks=0
+D11 rune-fpml/2.1.0 ENUM IR file writers: newEmitter=155 oldGenerator=0 declaredFallbacks=0
+D11 rune-fpml/2.1.1 ENUM IR file writers: newEmitter=155 oldGenerator=0 declaredFallbacks=0
+D11 chaos/1.1.0 ENUM IR file writers: newEmitter=402 oldGenerator=0 declaredFallbacks=0
+D11 cdm/5.38.0 DATA_TYPE IR file writers: newEmitter=555 oldGenerator=0 declaredFallbacks=0
+D11 cdm/5.38.0 CHOICE IR file writers: newEmitter=0 oldGenerator=0 declaredFallbacks=0
+D11 cdm/5.39.0 DATA_TYPE IR file writers: newEmitter=555 oldGenerator=0 declaredFallbacks=0
+D11 cdm/5.39.0 CHOICE IR file writers: newEmitter=0 oldGenerator=0 declaredFallbacks=0
+D11 cdm/6.20.2 DATA_TYPE IR file writers: newEmitter=715 oldGenerator=0 declaredFallbacks=0
+D11 cdm/6.20.2 CHOICE IR file writers: newEmitter=10 oldGenerator=0 declaredFallbacks=0
+D11 cdm/6.20.3 DATA_TYPE IR file writers: newEmitter=715 oldGenerator=0 declaredFallbacks=0
+D11 cdm/6.20.3 CHOICE IR file writers: newEmitter=10 oldGenerator=0 declaredFallbacks=0
+D11 cdm/6.20.4 DATA_TYPE IR file writers: newEmitter=715 oldGenerator=0 declaredFallbacks=0
+D11 cdm/6.20.4 CHOICE IR file writers: newEmitter=10 oldGenerator=0 declaredFallbacks=0
+D11 cdm/6.20.5 DATA_TYPE IR file writers: newEmitter=715 oldGenerator=0 declaredFallbacks=0
+D11 cdm/6.20.5 CHOICE IR file writers: newEmitter=10 oldGenerator=0 declaredFallbacks=0
+D11 cdm/6.20.6 DATA_TYPE IR file writers: newEmitter=715 oldGenerator=0 declaredFallbacks=0
+D11 cdm/6.20.6 CHOICE IR file writers: newEmitter=10 oldGenerator=0 declaredFallbacks=0
+D11 cdm/6.21.0 DATA_TYPE IR file writers: newEmitter=715 oldGenerator=0 declaredFallbacks=0
+D11 cdm/6.21.0 CHOICE IR file writers: newEmitter=10 oldGenerator=0 declaredFallbacks=0
+D11 cdm/6.22.0 DATA_TYPE IR file writers: newEmitter=715 oldGenerator=0 declaredFallbacks=0
+D11 cdm/6.22.0 CHOICE IR file writers: newEmitter=10 oldGenerator=0 declaredFallbacks=0
+D11 cdm/6.23.0 DATA_TYPE IR file writers: newEmitter=715 oldGenerator=0 declaredFallbacks=0
+D11 cdm/6.23.0 CHOICE IR file writers: newEmitter=10 oldGenerator=0 declaredFallbacks=0
+D11 drr/5.61.0 DATA_TYPE IR file writers: newEmitter=200 oldGenerator=0 declaredFallbacks=0
+D11 drr/5.61.0 CHOICE IR file writers: newEmitter=0 oldGenerator=0 declaredFallbacks=0
+D11 drr/6.34.1 DATA_TYPE IR file writers: newEmitter=159 oldGenerator=0 declaredFallbacks=0
+D11 drr/6.34.1 CHOICE IR file writers: newEmitter=0 oldGenerator=0 declaredFallbacks=0
+D11 drr/6.35.0 DATA_TYPE IR file writers: newEmitter=159 oldGenerator=0 declaredFallbacks=0
+D11 drr/6.35.0 CHOICE IR file writers: newEmitter=0 oldGenerator=0 declaredFallbacks=0
+D11 drr/6.36.0 DATA_TYPE IR file writers: newEmitter=159 oldGenerator=0 declaredFallbacks=0
+D11 drr/6.36.0 CHOICE IR file writers: newEmitter=0 oldGenerator=0 declaredFallbacks=0
+D11 drr/6.37.0 DATA_TYPE IR file writers: newEmitter=159 oldGenerator=0 declaredFallbacks=0
+D11 drr/6.37.0 CHOICE IR file writers: newEmitter=0 oldGenerator=0 declaredFallbacks=0
+D11 drr/6.38.0 DATA_TYPE IR file writers: newEmitter=159 oldGenerator=0 declaredFallbacks=0
+D11 drr/6.38.0 CHOICE IR file writers: newEmitter=0 oldGenerator=0 declaredFallbacks=0
+D11 drr/7.0.0 DATA_TYPE IR file writers: newEmitter=178 oldGenerator=0 declaredFallbacks=0
+D11 drr/7.0.0 CHOICE IR file writers: newEmitter=0 oldGenerator=0 declaredFallbacks=0
+D11 drr/7.1.0 DATA_TYPE IR file writers: newEmitter=178 oldGenerator=0 declaredFallbacks=0
+D11 drr/7.1.0 CHOICE IR file writers: newEmitter=0 oldGenerator=0 declaredFallbacks=0
+D11 drr/7.2.0 DATA_TYPE IR file writers: newEmitter=178 oldGenerator=0 declaredFallbacks=0
+D11 drr/7.2.0 CHOICE IR file writers: newEmitter=0 oldGenerator=0 declaredFallbacks=0
+D11 drr/7.3.0 DATA_TYPE IR file writers: newEmitter=178 oldGenerator=0 declaredFallbacks=0
+D11 drr/7.3.0 CHOICE IR file writers: newEmitter=0 oldGenerator=0 declaredFallbacks=0
+D11 iso20022/1.38.0 DATA_TYPE IR file writers: newEmitter=1529 oldGenerator=0 declaredFallbacks=0
+D11 iso20022/1.38.0 CHOICE IR file writers: newEmitter=0 oldGenerator=0 declaredFallbacks=0
+D11 rune-fpml/1.6.0 DATA_TYPE IR file writers: newEmitter=2215 oldGenerator=0 declaredFallbacks=0
+D11 rune-fpml/1.6.0 CHOICE IR file writers: newEmitter=0 oldGenerator=0 declaredFallbacks=0
+D11 rune-fpml/2.0.0 DATA_TYPE IR file writers: newEmitter=1768 oldGenerator=0 declaredFallbacks=0
+D11 rune-fpml/2.0.0 CHOICE IR file writers: newEmitter=0 oldGenerator=0 declaredFallbacks=0
+D11 rune-fpml/2.1.0 DATA_TYPE IR file writers: newEmitter=1768 oldGenerator=0 declaredFallbacks=0
+D11 rune-fpml/2.1.0 CHOICE IR file writers: newEmitter=0 oldGenerator=0 declaredFallbacks=0
+D11 rune-fpml/2.1.1 DATA_TYPE IR file writers: newEmitter=1768 oldGenerator=0 declaredFallbacks=0
+D11 rune-fpml/2.1.1 CHOICE IR file writers: newEmitter=0 oldGenerator=0 declaredFallbacks=0
+D11 chaos/1.1.0 DATA_TYPE IR file writers: newEmitter=1719 oldGenerator=12 declaredFallbacks=12
+D11 chaos/1.1.0 CHOICE IR file writers: newEmitter=157 oldGenerator=0 declaredFallbacks=0
+D11 IR fallback gate wholeness: all 78 (cell, sub-kind) keys judged; the register holds ENUM=0 CHOICE=0 DATA_TYPE=12 row(s) - a sub-kind counts on the file meter at ZERO

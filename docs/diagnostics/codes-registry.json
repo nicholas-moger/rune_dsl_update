@@ -1,0 +1,31 @@
+{
+  "bands": {
+    "001-099": "parser",
+    "100-199": "scope",
+    "200-299": "type",
+    "300-399": "validation",
+    "400-499": "codegen",
+    "900-999": "internal"
+  },
+  "codes": [
+    { "code": "RUNE-001", "name": "UNEXPECTED_TOKEN", "category": "PARSER", "since": "0.1.0", "status": "active", "doc": "RUNE-001.md", "doc_status": "ready", "antlr_exception": "InputMismatchException" },
+    { "code": "RUNE-002", "name": "MISSING_TOKEN", "category": "PARSER", "since": "0.1.0", "status": "active", "doc": "RUNE-002.md", "doc_status": "ready" },
+    { "code": "RUNE-003", "name": "EXTRANEOUS_INPUT", "category": "PARSER", "since": "0.1.0", "status": "active", "doc": "RUNE-003.md", "doc_status": "ready" },
+    { "code": "RUNE-004", "name": "NO_VIABLE_ALTERNATIVE", "category": "PARSER", "since": "0.1.0", "status": "active", "doc": "RUNE-004.md", "doc_status": "ready", "antlr_exception": "NoViableAltException" },
+    { "code": "RUNE-005", "name": "FAILED_PREDICATE", "category": "PARSER", "since": "0.1.0", "status": "active", "doc": "RUNE-005.md", "doc_status": "ready", "antlr_exception": "FailedPredicateException" },
+    { "code": "RUNE-006", "name": "GRAMMAR_AMBIGUITY", "category": "PARSER", "since": "0.1.0", "status": "active", "doc": "RUNE-006.md", "doc_status": "stub" },
+    { "code": "RUNE-007", "name": "CONTEXT_SENSITIVE_PARSE", "category": "PARSER", "since": "0.1.0", "status": "active", "doc": "RUNE-007.md", "doc_status": "stub" },
+    { "code": "RUNE-008", "name": "LEXER_NO_VIABLE_ALTERNATIVE", "category": "PARSER", "since": "0.1.0", "status": "active", "doc": "RUNE-008.md", "doc_status": "stub", "antlr_exception": "LexerNoViableAltException" },
+    { "code": "RUNE-009", "name": "MISMATCHED_INPUT", "category": "PARSER", "since": "0.1.0", "status": "active", "doc": "RUNE-009.md", "doc_status": "stub" },
+    { "code": "RUNE-010", "name": "UNEXPECTED_EOF", "category": "PARSER", "since": "0.1.0", "status": "active", "doc": "RUNE-010.md", "doc_status": "stub" },
+    { "code": "RUNE-011", "name": "INVALID_STRING_LITERAL", "category": "PARSER", "since": "0.1.0", "status": "active", "doc": "RUNE-011.md", "doc_status": "stub" },
+    { "code": "RUNE-012", "name": "INVALID_NUMERIC_LITERAL", "category": "PARSER", "since": "0.1.0", "status": "active", "doc": "RUNE-012.md", "doc_status": "stub" },
+    { "code": "RUNE-013", "name": "UNCLOSED_COMMENT", "category": "PARSER", "since": "0.1.0", "status": "active", "doc": "RUNE-013.md", "doc_status": "stub" },
+    { "code": "RUNE-014", "name": "DUPLICATE_MODIFIER", "category": "PARSER", "since": "0.1.0", "status": "active", "doc": "RUNE-014.md", "doc_status": "stub" },
+    { "code": "RUNE-015", "name": "UNKNOWN_ERROR_PATTERN", "category": "PARSER", "since": "0.1.0", "status": "active", "doc": "RUNE-015.md", "doc_status": "stub" },
+    { "code": "RUNE-016", "name": "INVALID_RUNE_ANNOTATION_ARG", "category": "PARSER", "since": "0.1.0", "status": "active", "doc": "RUNE-016.md", "doc_status": "ready" },
+    { "code": "RUNE-017", "name": "INVALID_FILE_HEADER_FIELD", "category": "PARSER", "since": "0.1.0", "status": "active", "doc": "RUNE-017.md", "doc_status": "ready" },
+    { "code": "RUNE-018", "name": "INVALID_REGULATORY_REFERENCE_ARG", "category": "PARSER", "since": "0.1.0", "status": "active", "doc": "RUNE-018.md", "doc_status": "ready" },
+    { "code": "RUNE-019", "name": "INVALID_RUNE_ANNOTATION_NAME", "category": "PARSER", "since": "0.1.0", "status": "active", "doc": "RUNE-019.md", "doc_status": "ready" }
+  ]
+}

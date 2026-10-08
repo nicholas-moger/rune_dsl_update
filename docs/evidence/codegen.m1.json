@@ -1,0 +1,83 @@
+{
+  "id": "codegen.m1",
+  "section": "codegen",
+  "title": "Codegen race - Mode 1: fork, Java AST route (legacy-BC bytes)",
+  "command": "java -cp \"demo/harness/codegen/target/classes;demo/harness/codegen/target/lib/*\" demo.harness.codegen.Main generate --mode m1 --src \"demo/corpus/cdm-5.38.0;demo/corpus/iso20022-1.38.0;demo/corpus/drr-6.34.1\" --builtins demo/corpus/builtins --out demo/work/gen-m1 --filter all",
+  "startedAt": "2026-08-20T01:06:16Z",
+  "durationMs": 78915,
+  "host": {
+    "os": "Microsoft Windows 11 Pro Insider Preview",
+    "cpu": "Intel(R) Core(TM) Ultra 9 285K",
+    "java": "21.0.8"
+  },
+  "metrics": {
+    "mode": "m1",
+    "files": 19219,
+    "wallMs": 14492,
+    "jvmStartToFirstFileMs": 12103,
+    "peakRssMb": 2112,
+    "exit": 0,
+    "coldRuns": 3,
+    "runs": [
+      {
+        "run": 1,
+        "ok": true,
+        "exitCode": 0,
+        "peakRssMb": 2112,
+        "mode": "m1",
+        "files": 19219,
+        "wallMs": 14492,
+        "jvmStartToFirstFileMs": 12103,
+        "exit": 0,
+        "filter": "all",
+        "sourceFiles": 351,
+        "generatedModels": 349,
+        "parseMs": 4046,
+        "linkMs": 2580,
+        "generateMs": 5278,
+        "writeMs": 2392,
+        "route": "LEGACY"
+      },
+      {
+        "run": 2,
+        "ok": true,
+        "exitCode": 0,
+        "peakRssMb": 2029,
+        "mode": "m1",
+        "files": 19219,
+        "wallMs": 50426,
+        "jvmStartToFirstFileMs": 12112,
+        "exit": 0,
+        "filter": "all",
+        "sourceFiles": 351,
+        "generatedModels": 349,
+        "parseMs": 4009,
+        "linkMs": 2910,
+        "generateMs": 4986,
+        "writeMs": 38317,
+        "route": "LEGACY"
+      },
+      {
+        "run": 3,
+        "ok": true,
+        "exitCode": 0,
+        "peakRssMb": 3076,
+        "mode": "m1",
+        "files": 19219,
+        "wallMs": 13997,
+        "jvmStartToFirstFileMs": 11800,
+        "exit": 0,
+        "filter": "all",
+        "sourceFiles": 351,
+        "generatedModels": 349,
+        "parseMs": 3986,
+        "linkMs": 2617,
+        "generateMs": 5004,
+        "writeMs": 2201,
+        "route": "LEGACY"
+      }
+    ],
+    "routeProof": "LEGACY"
+  },
+  "notes": "Cold codegen race: N=3 runs per mode, FRESH JVM each run, output tree deleted before every run (outside the measured window; wallMs is self-reported inside the JVM: RuntimeMXBean start time -> last file written, so JVM boot is included). Runs interleaved round-robin across the four modes (legacy,m1,m2,m3 per round) so background drift spreads evenly. Headline wallMs/jvmStartToFirstFileMs/peakRssMb are MEDIANS of the valid runs; every run is in metrics.runs. peakRssMb = PeakWorkingSet64 sampled every 150 ms by the outer wrapper. Process priority BelowNormal; no other JVM ran concurrently. Warm dependency state: jars already on disk (this measures codegen, not downloads)."
+}

@@ -1,0 +1,6 @@
+namespace chaos.s22.a3hub.p1
+version "1.0.0"
+import chaos.s22.a3hub.p2.*
+isProduct root C22Terms;
+type C22Aux: <"Self-contained helper - relocated by the import axis.">
+    ax string (1..1)

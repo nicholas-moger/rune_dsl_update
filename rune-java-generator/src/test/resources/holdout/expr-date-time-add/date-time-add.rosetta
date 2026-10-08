@@ -1,0 +1,20 @@
+namespace test.datetimeadd
+
+type FuncIn:
+    val1 date (1..1)
+    val2 time (1..1)
+
+type FoncOut:
+    res1 dateTime (1..1)
+    res2 dateTime (1..1)
+
+func Calc:
+    inputs:
+        funIn FuncIn(1..1)
+
+    output:
+        res FoncOut(1..1)
+    alias arg1: funIn-> val1
+    alias arg2: funIn-> val2
+    set res -> res1:  arg1 + arg2
+    set res -> res2:  arg1 + arg2

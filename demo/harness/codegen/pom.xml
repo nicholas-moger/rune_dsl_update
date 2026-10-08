@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  demo-harness-codegen — the FORK (rune-dsl-plus) code-generation driver for the Rune DSL stats demo.
+
+  Runs the fork's parser + java generator over the vendored demo corpus and writes the
+  generated tree to disk, emitting the CONTRACTS.md section-3 "##DEMO##" protocol.
+
+  CLASSPATH SAFETY (this is why the legacy driver is a SEPARATE module):
+  the fork and upstream rune-lang BOTH own the java package `com.regnosys.rosetta.*`
+  with incompatible class shapes (verified: `parser`, `rosetta`, `types`, `utils`,
+  `validation` sub-packages exist in BOTH org.finos.rune:rune-parser:0.0.1-SNAPSHOT and
+  org.finos.rune:rune-lang:9.83.0). Putting both on one classpath is the documented
+  failure in scripts/xtext-oracle/pom.xml. This module therefore depends ONLY on fork
+  artifacts; the 9.83.0 driver lives in ./legacy/pom.xml with its own disjoint classpath.
+
+  rune-java-generator pulls org.finos.rune:rune-runtime:9.83.0 transitively — that is the
+  generated-code RUNTIME (`com.rosetta.model.*` + model/*.rosetta), NOT the language jar,
+  so it introduces no `com.regnosys.rosetta.*` collision.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.finos.rune.demo</groupId>
+    <artifactId>demo-harness-codegen</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+
+    <name>Rune DSL stats demo :: codegen harness (fork)</name>
+
+    <properties>
+        <maven.compiler.release>21</maven.compiler.release>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <rune.fork.version>0.0.1-SNAPSHOT</rune.fork.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.finos.rune</groupId>
+            <artifactId>rune-parser</artifactId>
+            <version>${rune.fork.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.finos.rune</groupId>
+            <artifactId>rune-java-generator</artifactId>
+            <version>${rune.fork.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.finos.rune</groupId>
+            <artifactId>rune-ir</artifactId>
+            <version>${rune.fork.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Dependencies are COPIED, never shaded. Uniform with the legacy module,
+                 where shading is actively harmful (see legacy/pom.xml). Run with:
+                 java -cp "target/classes;target/lib/*" demo.harness.codegen.Main ... -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.6.1</version>
+                <executions>
+                    <execution>
+                        <id>copy-deps</id>
+                        <phase>package</phase>
+                        <goals><goal>copy-dependencies</goal></goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                            <includeScope>runtime</includeScope>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.4.1</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>demo.harness.codegen.Main</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

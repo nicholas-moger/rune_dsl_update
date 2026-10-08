@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.finos.rune</groupId>
+    <artifactId>rune-equivalence</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>Rune DSL Functional-Equivalence Harness</name>
+    <description>The v3 functional-equivalence gate (the phase plan
+        the development plan "2026-08-10-p3-optimised-codegen-phase-plan" § 4; PR-3 lands
+        the harness). Leg G: the bespoke deterministic seeded seat-lattice
+        synthesizer (VALID + validator-targeting INVALID + resolved/unresolved
+        reference arms). Leg S: real in-cell samples loaded via the downstream
+        mapper and pipeline-post-processed (rosetta-common, TEST SCOPE ONLY per
+        the plan § 3.4 letter — the census at
+        research/p3-rosetta-common-census.md prescribes the wiring). Observables
+        O1–O7 compared per pair execution across two classloaders over the SAME
+        fork runtime. OUTSIDE the release six — never part of any release
+        chain; corpus-gated suites skip (with a recorded reason) when
+        test-corpus/ is absent. Receipts: target-&lt;pr&gt;-equiv-*.log, the
+        same gating model as the parity rings.</description>
+
+    <properties>
+        <maven.compiler.release>21</maven.compiler.release>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <junit.version>5.11.3</junit.version>
+        <surefire.version>3.5.2</surefire.version>
+        <jackson.version>2.18.9</jackson.version>
+        <rosetta.common.version>11.121.2</rosetta.common.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- The fork-wide Jackson pin (CVE bump; the census § 4: rosetta-common
+                 11.121.2 built against 2.17.1 — the 2.18.9 skew is minor-line and
+                 proven live by the leg-S probe). Managed here so every transitive
+                 Jackson artifact lands on one version. -->
+            <dependency>
+                <groupId>com.fasterxml.jackson</groupId>
+                <artifactId>jackson-bom</artifactId>
+                <version>${jackson.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <!-- The compile+loader harness (CorpusClasses) and the deterministic
+             populator (ReflectivePopulator) — reused from the PR-2 module. -->
+        <dependency>
+            <groupId>org.finos.rune</groupId>
+            <artifactId>rune-benchmarks</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <!-- The fork runtime, pinned DIRECT (census § 5: nearest-wins would already
+             prefer it over the excluded upstream chain; the direct pin makes the
+             classpath deterministic). -->
+        <dependency>
+            <groupId>org.finos.rune</groupId>
+            <artifactId>rune-runtime</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <!-- Leg S + O7 machinery: the downstream mapper + the three concrete
+             post-process steps. TEST SCOPE ONLY (the plan § 3.4 letter). The census
+             (research/p3-rosetta-common-census.md § 5) prescribes both exclusions:
+             the maven-plugin drags the whole upstream DSL/Xtext stack; the .lib
+             shell would re-export the UPSTREAM runtime GAV. -->
+        <dependency>
+            <groupId>com.regnosys</groupId>
+            <artifactId>rosetta-common</artifactId>
+            <version>${rosetta.common.version}</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.regnosys.rosetta</groupId>
+                    <artifactId>rosetta-maven-plugin</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.regnosys.rosetta</groupId>
+                    <artifactId>com.regnosys.rosetta.lib</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${surefire.version}</version>
+            </plugin>
+            <plugin>
+                <!-- maven.compiler.release above is honoured only by maven-compiler-plugin 3.6+; Maven 3.8.7 (the offload box
+                     box's) binds 3.1 by default and compiles at its own level ("Source option 5 is no longer supported").
+                     The same pin as rune-runtime's (the release module using the property) and rune-benchmarks' (which pins it
+                     itself); this module is a harness, never stamped - scripts/release-version.py; the unpinned users of the
+                     property (scripts/xtext-oracle, three of the four demo/harness poms) are not built on offload box (PR #636 rounds 1-4, #637). -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+            </plugin>
+        </plugins>
+    </build>
+</project>

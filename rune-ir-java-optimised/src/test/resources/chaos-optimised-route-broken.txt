@@ -1,0 +1,238 @@
+# chaos-1.1.0 (v3.2 seat 10, PR #631, D49): RE-DERIVED EMPTY-FIRST at the swap - the uncapped javac census
+# over the generation-2 overlay; a row landing below is a MEASURED row of the first gen-2 census, its class
+# named (KNOWN / NEW). THE DENOMINATOR (round 1, cq SF-6): the census compiles the 1,473 overlay files that
+# substitute a golden outside the upstream register - the 12 golden-free overlay files and the 64 whose golden
+# is a register row are NOT handed to javac - so the register reads 267 of 1,473 compiled, not of 1,549.
+# v3.2 seat 12 (PR #633, D52 - COUNTERS FIRST): 267 -> 185 at the counter commit, FROM THE PRINT of the two-pass census at
+# the counter head (scratch/overlay-census-c3c/, overlay-c3c.status: declared 267, brokenNow 185, HEALED 82, NEW-BROKEN 0,
+# declaredButNoOverlayFile 82; overlayFiles 1450, substituted 1391, sources 12005): NO row healed by a compile fix - every
+# one of the 82 is the TWIN of a function file the three register sites now REFUSE (SWITCH_TERNARY_STUB,
+# DEEP_PATH_UTIL_UNRESOLVED, ALIAS_SIGNATURE_RAW_TYPE - consulted on this route through the same handlers, LAW 77),
+# so the overlay no longer materialises it and the census reads the declared row as HEALED; a row with no overlay
+# file is a row to DELETE (the header's own law). Deleted by class: C25Shadow.java 9, C26AliasArms.java 12, C26Hoist.java 12, C26Nested.java 12, C29InnerRule.java 12, C29LoL.java 12, C31Keys.java 13.
+# Genuine compile heals (an overlay file that exists and compiles now): 0. The blocks dropped whole: C25Shadow.java (9), C26AliasArms.java (12), C26Hoist.java (12), C26Nested.java (12), C29InnerRule.java (12), C29LoL.java (12), C31Keys.java (13).
+# The denominator moved with the refusals: the register reads 185 of 1391 substituted (267 of 1,473 at the swap).
+# v3.2 seat 12 (PR #633, D52 - THE HEALS): 185 -> 172 at commit 10, FROM THE PRINT of the two-pass census at the commit-8 head `cccd61908`
+# (scratch/overlay-census-c8/, overlay-c8.status: declared 185, brokenNow 172, HEALED 13, NEW-BROKEN 0, declaredButNoOverlayFile 0;
+# overlayFiles 1450, substituted 1391, sources 12005, swappedIn 172): the FIRST census since the seat's three heals (commits 5-7) - every
+# one of the 13 a GENUINE compile heal on this route (the overlay file exists and compiles now), the optimised route inheriting
+# the heals by identity (IRFunctionExpressionRenderer extends FunctionExpressionRenderer; the meta-recovery walker and the reduce
+# naming are the same handlers on both routes - LAW 77 witnessed by javac). Deleted by class: C28VenueRule.java 12, C95Reduce.java 1
+# (H2 = M8a the rule seat's meta unwrap; H1 = M12 the numbered reduce pair). The blocks dropped whole: C28VenueRule.java (12), C95Reduce.java (1).
+# The heals' own D11 prints named their DEFAULT-route rows (d11-b / d11-c); this route's twins were re-censused only at the
+# pre-commit shape's overlay step - the seat's catch, disclosed. The register reads 172 of 1391 substituted.
+# v3.2 seat 13 (PR #634, D53 - commit 3): 172 -> 160 FROM THE PRINT of the two-pass census at the site head `2cf31fb02`
+# (scratch/overlay-census-c3c/, overlay-c3c.status, target/v32-seat13-instruments, local: declared 172, brokenNow 160, HEALED 12,
+# NEW-BROKEN 0, declaredButNoOverlayFile 12; overlayFiles 1438, substituted 1379, sources 12005): NO row healed by a compile fix -
+# every one of the 12 is the TWIN of a function file the seat-13 site(s) ALIAS_SIGNATURE_CLOSURE_PARAM_TYPE now REFUSE (consulted on this route
+# through the same handlers, LAW 77), so the overlay no longer materialises it and the census reads the declared row as
+# HEALED; a row with no overlay file is a row to DELETE (the header's own law). Deleted by class: C29Piped.java 12. The blocks dropped
+# whole: C29Piped.java (12). The register reads 160 of 1379 substituted.
+# v3.2 seat 13 (PR #634, D53 - commit 4): 160 -> 13 FROM THE PRINT of the two-pass census at the site head `b1aa59791`
+# (scratch/overlay-census-c4l/, overlay-c4l.status, target/v32-seat13-instruments, local: declared 160, brokenNow 13, HEALED 147,
+# NEW-BROKEN 0, declaredButNoOverlayFile 63; overlayFiles 1362, substituted 1316, sources 12005): 84 of the 147 HEALED by a GENUINE compile fix on this route (the commit-4 heals, consulted here by identity - LAW 77; the census substituted their files and javac accepted them), the rest -
+# the other 63 - the TWINS of function files the seat-13 site(s) WITH_META_UNTYPED_STUB,VOID_INTO_META_OUTPUT,INLINE_CONDITIONAL_TERNARY,HOIST_ARM_COERCION_DROPPED now REFUSE (consulted on this route
+# through the same handlers, LAW 77), so the overlay no longer materialises it and the census reads the declared row as
+# HEALED; a row with no overlay file is a row to DELETE (the header's own law). Deleted by class: C23CmpArm.java 13, C23LongAlias.java 13, C23LongOut.java 13, C23WholeSet.java 20, C24IntoMeta.java 13, C24Segments.java 13, C24WithMetaExists.java 13, C29InLambda.java 12, C30MultiThenAdd.java 12, C30TwoOp.java 12, C31Defaults.java 13. The blocks dropped
+# whole: C23CmpArm.java (13), C23LongAlias.java (13), C23LongOut.java (13), C23WholeSet.java (20), C24IntoMeta.java (13), C24Segments.java (13), C24WithMetaExists.java (13), C29InLambda.java (12), C30MultiThenAdd.java (12), C30TwoOp.java (12), C31Defaults.java (13). The register reads 13 of 1316 substituted.
+# The 1.0.0 history follows.
+# THE OPTIMISED-ROUTE BROKEN-EMISSION REGISTER (v3.2 PR-2, census family F16).
+#
+# Fork defect, OPTIMISED route: for these chaos overlay files the optimised
+# emitter produces Java that does not compile (the uncapped one-pass javac
+# census at the PR-2 head, 2026-09-02: 186 of 708 substituted files; the
+# substituted tree compiles clean with them declined). The per-seat spread
+# (s03 11, s04 14, s05 65, s08 12, s09 24, s18 24, s19 12, s20 12, s21 12)
+# tracks the SAME mechanism families the D11 default-route census names
+# (F2 dropped-coercion, F4 lambda-type-join - C5Forms emits the ROSETTA type
+# name `string` as a Java type - F5 deep-path-util injection, F12's sibling
+# C4Speed duplicate-member render): one defect surface, two routes. The
+# C4Speed x13half/p1 note CORRECTED at the spec review (its MF-1, refuted
+# against the c2b band dumps): the default route does NOT byte-match that
+# file - it is the 13th declared C4Speed row, a byte MISMATCH (the other 12
+# variants are F12's silent no-emits); both routes diverge from the golden
+# there, and the optimised render additionally does not compile.
+#
+# CONSUMER: OptimisedNavigationPairGateTest passes these rows to the overlay
+# compile as its do-not-substitute set - the reference copy compiles instead,
+# so each class's pair leg is ref-vs-ref (UNTESTED, declared, counted in the
+# compile marker as substitutionDeclined=N) and the remaining ~74% of the
+# overlay pair-tests NOW (the PR-2 figure, 186 declined of 708; 100% since
+# v3.2 seat 6 - the EMPTY note below). SHRINK-ONLY: the fix seats delete their rows; growth
+# is a new optimised-route regression. DELETED WHOLE at v3.2 close.
+#
+# EMPTY SINCE v3.2 SEAT 6 (PR #627): the last eleven rows (the C3Commons twins of
+# F5) healed at the seat's fix head - the shrink log's final entry. The file STAYS
+# until the close as the belt: the pair gate reads it (an empty body admitted for
+# THIS register alone - OptimisedNavigationPairGateTest.readRowFile's declared
+# exception, witnessed by DeclaredRowFileReaderUnitTest - so nothing is declined by
+# THIS register: every overlay file in the pair population substitutes and
+# pair-executes, 732 of 759 since v3.2 seat 7 (720 of 747 at #627 - the twelve
+# C18ToKind emissions the seat healed JOINED the overlay) - the other 27 never enter the substitution loop for
+# other declared reasons, the noncompiling-goldens register's 24 rows and 3 of the
+# declared golden-free set's 17 rows (the three the function-class overlay
+# carries), subtracted identically on the reference side - and the compile marker
+# carries NO substitutionDeclined token, which CorpusClasses prints only when
+# non-zero: `sources=6463 substituted=732 overlayFiles=759 register=24
+# unmatchedDeclared=3` - the marker since v3.2 seat 7 (overlay-c16.status at the
+# round-3 code head f11e9973a and the chain of record s7e's EQ-COMPILE line, which
+# reused the stamped tree files=759 sha256=a6d5e35d - the earlier prints
+# overlay-c13.status / s7d, overlay-c10.status / s7c and overlay-c7.status / s7b the
+# same; the shrink log below names every re-measure;
+# at #627 it read `substituted=720 overlayFiles=747` - the chain s6a's EQ-COMPILE line
+# printed that compile itself, `6463 sources (720 substituted, 747 overlay files ...)`,
+# s6b and s6c reused the stamped tree, and every seat-6 overlay census printed
+# substituted=720; every seat-7 census prints substituted=732)
+# and the overlay census
+# measures NEW-BROKEN against a declared set of 0; a row added here is a NEW
+# optimised-route regression, never a carry.
+#
+#
+# SHRINK LOG (the burn-down meter's history; every entry = one merged seat):
+#  - 186 -> 101 at v3.2 seat 1 (PR #622, F2 dropped-coercion): -85 overlay files that now
+#    COMPILE at the fix head (the uncapped javac census over the whole substituted tree,
+#    target/v32-seat1-instruments/overlay-census.py: declared 186, broken now 101,
+#    healed 85, NEW-BROKEN 0) - the F16 twins of the F2 rows, falling with the typed
+#    count/operand/parameter channels: C18FromCoded 12, C18Maybe 12, C19Make 12, C20Shade 12, C21Void 12, C5Ctor 13, C8Scale 12.
+#  - 101 -> 49 at v3.2 seat 2 (PR #623, F4 lambda-type-join + F17): -52 overlay files that now
+#    COMPILE at the fix head (the uncapped javac census over the whole substituted tree,
+#    target/v32-seat2-instruments/overlay-census.py over the overlay the final code head emits, the
+#    receipt target/v32-seat2-instruments/scratch/overlay-c11-vs-seat1-declared.status - HEAD-stamped
+#    on a clean tree, artifacts overlay-census-c11-vs-seat1/ (the commit-9 print overlay-c9-vs-seat1-declared.status
+#    at 2e695ddfe read the identical 52/49/0 over the identical healed set); overlay-c2.status preserves the earlier
+#    STALE run at seat 1's stamp e6c5d519, not this figure - at overlay stamp c1f78b49: declared 101,
+#    broken now 49, healed 52, NEW-BROKEN 0) - the F16 twins of the F4 rows, EXACTLY the s05
+#    set: C5Deep 13, C5Forms 13, C5Preds 13, C5Seats 13.
+#    (C20Spread is never substituted into the overlay - 0 rows here before and after - so its
+#    optimised-route compile status stays UNMEASURED by this register.) The census's own catch:
+#    the first run at this head printed HEALED=0 at seat 1's stamp e6c5d519 - the emission
+#    suite writes the chaos overlay AFTER its pins, so a moved pin had left the old overlay on
+#    disk. The stamp-equality guard that followed (overlay-run.ps1) then refused a REFRESHED overlay
+#    whose bytes were identical (scratch/overlay-c3-refused.status), so the guard of record is
+#    overlay-run2.ps1: the overlay is fresh iff the marker was written after the run started and the
+#    emission suite exited 0; an identical stamp on a fresh overlay is reported, not refused.
+#  - 49 -> 48 at v3.2 seat 3 (PR #624, F9 + F12 the silent pair): -1 overlay file that now
+#    COMPILES at the fix head - chaos/s04/x13half/p1/functions/C4Speed.java, the 13th C4Speed row
+#    (the bare-name dispatch key had rendered 13x the members into it; keyed per file the group
+#    renders its own two variants and compiles) - the uncapped javac census over the REFRESHED
+#    747-file overlay (overlay-run3.ps1, the freshness guard of record: the marker written after
+#    the run started AND the emission suite exit 0; stamp 44024c4e): declared 49, broken now 48,
+#    HEALED 1, NEW-BROKEN 0 - the twelve C4Speed overlay files the per-file grouping now emits
+#    all compile. The LIVE per-seat spread's s04 count falls 14 -> 13 (line 7's spread is the FROZEN PR-2 census and sums to 186).
+#    Re-measured at every later code head (LAW 82 - a census figure is a claim until re-taken): commit 7 (overlay-c7.status), commit 9
+#    (overlay-c9.status), commit 10 (overlay-c10.status), commit 12 (overlay-c12.status), commit 14 (overlay-c14.status), commit 16 (overlay-c16.status) and the FINAL code head 6e5ac83cf (scratch/overlay.status, the marker fresh, stamp 44024c4e):
+#    declared 48, broken now 48, HEALED 0, NEW-BROKEN 0 at each - the meter agrees with this register at the head that ships.
+#  - 48 UNMOVED at v3.2 seat 4 (PR #625, F7 + F10 - the order-dependent pair touches no optimised-route emission): re-measured
+#    FRESH at commit 4 4e6863310 (overlay-c4.status), at the round-1 code head cb3b968c5 (overlay-c6.status), at the round-2
+#    code head 95825a68f (overlay-c8.status), at the round-3 code head 7fc4250ce (overlay-c10.status) and at the final code head
+#    b2a8bfb75 (scratch/overlay.status), stamp 44024c4e each time: declared 48, broken now 48, HEALED 0, NEW-BROKEN 0 - the
+#    residue by class C4Gate 13 / C9Stamp 12 / C9Sieve 12 / C3Commons 11, every one ALSO a declared default-route D11 row of
+#    the F3 / F6 / F5 families (drafts/f16-residue-census-c6.md, local): nothing optimised-route-specific on its face.
+#  - 48 -> 36 at v3.2 seat 5 (PR #626, arm (a): F6 with-meta on an ALREADY-wrapped argument): -12 overlay files that now
+#    COMPILE at the arm's head - the F16 twins of the C9Stamp rows, EXACTLY the s09 C9Stamp set (every placement variant) - the
+#    uncapped javac census over the REFRESHED overlay (overlay-run5.ps1, the freshness guard of record: the marker written
+#    after the run started AND the emission suite exit 0; stamp 18f9f8ac, 747 files): declared 48, broken now 36, HEALED 12,
+#    NEW-BROKEN 0 (scratch/overlay.status, target/v32-seat5-instruments, local; healed.txt = this list). The mechanism is the
+#    DEFAULT route's (ConstructionHandler.buildTypedWithMeta's wrapped-argument arm - the same emitter both routes render
+#    through), so the twins fell with their default-route rows, as the seat plan's belt predicted; C4Gate 13 and C9Sieve 12
+#    stay until arms (d) / (c); C3Commons 11 is F5's (seat 6).
+#  - 36 -> 24 at v3.2 seat 5 (PR #626, arm (c): F6 the meta ladder's ALIAS rung): -12 overlay files that now COMPILE
+#    at the arm's head - the F16 twins of the C9Sieve rows, EXACTLY the s09 C9Sieve set (every placement variant) - the uncapped
+#    javac census over the REFRESHED overlay (overlay-run5.ps1 as step 2 of precommit5-s5.ps1, the freshness guard of
+#    record; stamp 59673cdb, 747 files): declared 36, broken now 24, HEALED 12, NEW-BROKEN 0 (scratch/overlay-c5.status,
+#    target/v32-seat5-instruments, local; healed.txt = this list). The mechanism is the DEFAULT route's (the alias-call
+#    first / last collapse typed from the alias signature walk at CollectionHandler's collapse stamp, the only-element rung
+#    recovered at the deref seat - the shared handlers both routes render through), so the twins fell with their
+#    default-route rows; C4Gate 13 stays until arm (d); C3Commons 11 is F5's (seat 6).
+#  - 24 -> 11 at v3.2 seat 5 (PR #626, arm (d): F3 the beyond-long literal's conversion render form): -13 overlay files
+#    that now COMPILE at the arm's head - the F16 twins of the C4Gate rows, EXACTLY the s04 C4Gate set (every placement variant
+#    incl. x13half/p1) - the uncapped javac census over the REFRESHED overlay (overlay-run5.ps1 as the last step of
+#    precommit7c-s5.ps1, the freshness guard of record; stamp b2cf238f, 747 files): declared 24, broken now 11, HEALED 13,
+#    NEW-BROKEN 0 (scratch/overlay-c7.status, target/v32-seat5-instruments, local; healed.txt = this list). The mechanism
+#    is the DEFAULT route's (the literal seat's witness + the ONE null-safe conversion statement at the conditional arms,
+#    the whole SET and the ADD - the shared handlers both routes render through), so the twins fell with their rows. The
+#    seat's three arms leave C3Commons 11 = F5's (seat 6) as the WHOLE residue: every C4Gate / C9Stamp / C9Sieve twin
+#    fell with its default-route row, NEW-BROKEN 0 at each of the three censuses - nothing optimised-route-specific
+#    surfaced in this seat (the seat plan's belt, row 7 = the verification seat).
+#    Re-measured at every later CODE head (LAW 82 - a census figure is a claim until re-taken): the committed round-1
+#    head f613f046c (overlay-c14.status: declared 11 = broken now 11, HEALED 0, NEW-BROKEN 0, stamp b2cf238f) and the
+#    round-2 code head 79521b28b (overlay-c17.status: declared 11 = broken now 11, HEALED 0, NEW-BROKEN 0, stamp b2cf238f);
+#    commits 15 and 16 (a parser javadoc, a parser test, the ledger; the docs and a helper's position) and the lane / docs
+#    commits after 17 move no emission and were not re-measured - the chain of record at each head re-prints the
+#    register at 11 (its DECLARED SETS line).
+#  - 11 -> 0 at v3.2 seat 6 (PR #627, F5 the deep-path util injection at the LAMBDA-ITEM seat): -11 overlay files
+#    that now COMPILE at the fix head - the F16 twins of the C3Commons rows, EXACTLY the s03 C3Commons set (every placement
+#    variant) - the uncapped javac census over the REFRESHED overlay (overlay-run6.ps1 as the last step of
+#    d11-fix2-s6.ps1 at the commit-3 content, the freshness guard of record; stamp 18b6deb4, 747 files): declared 11,
+#    broken now 0, HEALED 11, NEW-BROKEN 0, javac exit 0 over the WHOLE substituted overlay (errorFiles 0)
+#    (scratch/overlay-fix2.status, target/v32-seat6-instruments, local - the run-2 print preserved under that name
+#    before the later censuses overwrote scratch/overlay.status, the round-1 reviews' catch; overlay-census-fix2/
+#    healed.txt = this list; the cut-1 census overlay-c1.status read the identical 11 / 0 / 11 / 0). Re-measured at
+#    every later head (LAW 82 - a census figure is a claim until re-taken): the commit-4 content against the EMPTIED
+#    register (overlay-pc4.status: declared 0 = broken now 0, HEALED 0, NEW-BROKEN 0, stamp 18b6deb4) and the
+#    committed seat-suite head 829abc152 on a clean tree (overlay-c5.status: 0 / 0 / 0 / 0, javac exit 0, stamp
+#    18b6deb4) and the round-1 code head 51d740fbd on a clean tree (overlay-c8.status: 0 / 0 / 0 / 0, javac exit 0,
+#    stamp 18b6deb4). The mechanism is the DEFAULT route's (the deep-call
+#    receiver resolver's lambda-item rung + the extract chooser's deep-body read - the shared handlers both routes
+#    render through), so the twins fell with their rows. THE REGISTER IS EMPTY: every one of the 186 rows the PR-2
+#    census declared was the optimised twin of a declared default-route D11 row (F2 85, F4 52, F12 1, F6 24, F3 13,
+#    F5 11) and fell with it, NEW-BROKEN 0 at every census since - nothing optimised-route-specific ever surfaced,
+#    so the F16 verification seat (the seat plan's row 7) is an EMPTY seat. The file stays as the belt until the
+#    v3.2 close (the header's EMPTY note: the pair gate admits the empty body for this register alone; the census
+#    measures NEW-BROKEN against 0; growth is a regression).
+#  - 0 UNMOVED at v3.2 seat 7 (PR #628, F11 the type-switch refusals - the twelve C18ToKind emissions the seat healed
+#    JOIN the overlay, 747 -> 759 files, stamp 18b6deb4 -> a6d5e35d, substituted 720 -> 732 of 759 with the other 27 as
+#    before): re-measured FRESH at the fix content (overlay-fix4.status), at the committed seat-suite head 229223f89
+#    (overlay-c5.status) and at the commit-7 head b21c39fcf (overlay-c7.status) - target/v32-seat7-instruments/scratch,
+#    local: declared 0 = broken now 0, HEALED 0, NEW-BROKEN 0, javac exit 0 over the WHOLE 759-file overlay at each -
+#    every one of the twelve new emissions compiles on the optimised route (the round-1 rule-6 review's SF-5: this
+#    entry, on the seat-4 template). Re-measured again at the round-1 code head 7399d3c76 (overlay-c10.status), at the
+#    round-2 code head 55464ce0a (overlay-c13.status) and at the round-3 code head f11e9973a (overlay-c16.status) - the
+#    same figures at all three.
+#
+#
+# THE FIRST GEN-2 CENSUS ROWS (v3.2 seat 10, chaos-1.1.0 - D49): the TWO-PASS overlay javac census at the c2
+# overlay (scratch/overlay-census-c2b/: goldens=12169, the register 164 subtracted, overlayFiles=1549 substituted=1473,
+# sources=12005; pass 1 (parse) 13 files = C31Keys, pass 2 (attribution over the rest) 254; the union 267, golden 0).
+# The one-pass census the seat-2 instrument ran at c2 read 13 - javac stops at a parse error before attribution
+# (the javac-probe law) - so the instrument is two-pass since. Every row below is the OPTIMISED-route twin of a
+# default-route census class (target/v32-gen2-census.md, local) but three that are ROUTE-SPECIFIC (C23CmpArm,
+# C23LongOut, C31Defaults: byte-different from the golden on both routes, non-compiling on this one alone).
+# 13 rows in 1 classes (160 in 12 at seat 13 commit 4; 172 in 13 at seat 12's close; 185 in 15 at the counter commit; 267 in 22 at the swap); SHRINK-ONLY from here (the second round's heals delete their rows; a rise is a NEW
+# optimised-route regression); every row's overlay file exists (the census asserts it).
+#
+#
+#
+#
+# --- C23Scale.java (13: s23 13) - the int-argument coercion DROPPED on this route (M5e - the route split)
+chaos/s23/a1o1/functions/C23Scale.java
+chaos/s23/a1o2/functions/C23Scale.java
+chaos/s23/a1o3/functions/C23Scale.java
+chaos/s23/a1o4/functions/C23Scale.java
+chaos/s23/a2alias/functions/C23Scale.java
+chaos/s23/a2dangle/functions/C23Scale.java
+chaos/s23/a2qual/functions/C23Scale.java
+chaos/s23/a2wild/functions/C23Scale.java
+chaos/s23/a3half/p2/functions/C23Scale.java
+chaos/s23/a3hub/p2/functions/C23Scale.java
+chaos/s23/a3third/p2/functions/C23Scale.java
+chaos/s23/base/functions/C23Scale.java
+chaos/s23/x13half/p2/functions/C23Scale.java
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#

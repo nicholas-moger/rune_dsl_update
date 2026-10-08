@@ -1,0 +1,4 @@
+namespace com.test.bar
+
+type Container:
+    b com.test.foo.Bar (1..1)

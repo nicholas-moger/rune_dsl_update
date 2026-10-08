@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="1230" viewBox="0 0 480 1230" role="img" aria-labelledby="title desc">
+<title id="title">Goals for the next evolution</title>
+<desc id="desc">Six intended outcomes for the next evolution of Rune, not claims of delivered functionality. Compatibility and adoption remain acceptance gates. Preserve existing models: keep Rune source and established Java contracts usable. Own language maintenance: clear responsibilities and fewer framework-coupled change paths. Extend models and targets: reuse semantic facts across backends and explicit model mappings. Open model and AI access: query relevant facts and validate changes through headless services. Reduce avoidable work: improve generation, model access and runtime costs, measuring each separately. Equip developers: a standalone SDK for extending, testing and debugging the language. These are objectives, not process stages, confirmed compatibility or a shipped SDK.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9" fill="none" stroke="#a9b7cb" stroke-width="1.4"/></marker></defs>
+<rect width="480" height="1230" rx="22" fill="#121923"/>
+<g font-family="Segoe UI, Arial, sans-serif">
+<text x="24" y="43" fill="#eef2f8" font-size="32" font-weight="600" text-anchor="start">
+<tspan x="24" dy="0" xml:space="preserve">Goals for the</tspan>
+<tspan x="24" dy="38" xml:space="preserve">next evolution</tspan>
+</text>
+<text x="24" y="125" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="24" dy="0" xml:space="preserve">Intended outcomes ·</tspan>
+<tspan x="24" dy="30" xml:space="preserve">compatibility and adoption</tspan>
+<tspan x="24" dy="30" xml:space="preserve">remain acceptance gates</tspan>
+</text>
+<rect x="24" y="225" width="432" height="150" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="25" y="244" width="4" height="112" rx="2" fill="#a2c6e6"/>
+<text x="47" y="262" fill="#a2c6e6" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Preserve existing models</tspan>
+</text>
+<text x="47" y="295" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Keep Rune source and established</tspan>
+<tspan x="47" dy="30" xml:space="preserve">Java contracts usable.</tspan>
+</text>
+<rect x="24" y="391" width="432" height="150" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="25" y="410" width="4" height="112" rx="2" fill="#92d5c6"/>
+<text x="47" y="428" fill="#92d5c6" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Own language maintenance</tspan>
+</text>
+<text x="47" y="461" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Clear responsibilities, fewer</tspan>
+<tspan x="47" dy="30" xml:space="preserve">framework-coupled change paths.</tspan>
+</text>
+<rect x="24" y="557" width="432" height="150" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="25" y="576" width="4" height="112" rx="2" fill="#a6b0ec"/>
+<text x="47" y="594" fill="#a6b0ec" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Extend models and targets</tspan>
+</text>
+<text x="47" y="627" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Reuse semantic facts across backends</tspan>
+<tspan x="47" dy="30" xml:space="preserve">and explicit model mappings.</tspan>
+</text>
+<rect x="24" y="723" width="432" height="150" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="25" y="742" width="4" height="112" rx="2" fill="#d0b487"/>
+<text x="47" y="760" fill="#d0b487" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Open model and AI access</tspan>
+</text>
+<text x="47" y="793" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Query relevant facts and validate</tspan>
+<tspan x="47" dy="30" xml:space="preserve">changes through headless services.</tspan>
+</text>
+<rect x="24" y="889" width="432" height="150" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="25" y="908" width="4" height="112" rx="2" fill="#92d5c6"/>
+<text x="47" y="926" fill="#92d5c6" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Reduce avoidable work</tspan>
+</text>
+<text x="47" y="959" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Improve generation, model access</tspan>
+<tspan x="47" dy="30" xml:space="preserve">and runtime costs; measure each</tspan>
+<tspan x="47" dy="30" xml:space="preserve">separately.</tspan>
+</text>
+<rect x="24" y="1055" width="432" height="150" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="25" y="1074" width="4" height="112" rx="2" fill="#a2c6e6"/>
+<text x="47" y="1092" fill="#a2c6e6" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Equip developers</tspan>
+</text>
+<text x="47" y="1125" fill="#a9b7cb" font-size="22" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">A standalone SDK for extending,</tspan>
+<tspan x="47" dy="30" xml:space="preserve">testing and debugging the language.</tspan>
+</text>
+</g>
+</svg>

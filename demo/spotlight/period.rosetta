@@ -1,0 +1,17 @@
+namespace demo.spotlight : <"The Rune DSL stats demo spotlight model - one readable class exercising the full machinery: POJO + builder + metadata + validator + data rule. Verbatim CDM shapes (Period / PeriodEnum, cdm.base.datetime), re-namespaced for the standalone spotlight walkthrough.">
+version "1.0.0"
+
+enum PeriodEnum: <"The enumerated values to specify the period, e.g. day, week.">
+    D <"Day">
+    W <"Week">
+    M <"Month">
+    Y <"Year">
+
+type Period: <"A class to define recurring periods or time offsets.">
+    [metadata key]
+
+    periodMultiplier int (1..1) <"A time period multiplier, e.g. 1, 2 or 3 etc. A negative value can be used when specifying an offset relative to another date, e.g. -2 days.">
+    period PeriodEnum (1..1) <"A time period, e.g. a day, week, month or year of the stream. If the periodMultiplier value is 0 (zero) then period must contain the value D (day).">
+
+    condition DayPeriod: <"FpML specifies that if the periodMultiplier value is 0 (zero) then period must contain the value D (day).">
+        if periodMultiplier = 0 then period = PeriodEnum -> D

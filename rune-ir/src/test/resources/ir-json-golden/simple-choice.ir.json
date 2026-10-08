@@ -1,0 +1,26 @@
+{
+  "irFormatVersion": 1,
+  "nodes": [
+    {
+      "kind": "CHOICE",
+      "name": "test.model.PaymentMethod",
+      "isAbstract": false,
+      "baseType": null,
+      "fields": [
+        {
+          "kind": "FIELD",
+          "name": "CashPayment",
+          "type": "CashPayment",
+          "cardinality": "ONE_TO_ONE"
+        },
+        {
+          "kind": "FIELD",
+          "name": "CardPayment",
+          "type": "CardPayment",
+          "cardinality": "ONE_TO_ONE"
+        }
+      ],
+      "namespace": "test.model"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+/* chaos a9: a block-comment banner before the first token */
+// chaos a9: a line comment before namespace
+namespace chaos.s23.a9comment // a9
+version "1.0.0" // a9
+type C23Box: <"Helper - relocated by the import axis."> // a9
+    lid string (1..1) // a9
+    weight number (0..1) // a9
+    live boolean (0..1) // a9
+func C23IsBig: <"Boolean helper (the bare-call condition class)."> // a9
+    inputs: // a9
+        v number (1..1) // a9
+    output: // a9
+        big boolean (1..1) // a9
+    set big: v > 1000000 // a9
+func C23WholeSet: <"A beyond-long literal as the WHOLE value of a MULTI output, a defaulted number, and an int list literal ADDED to a number list - the whole-SET / ADD conversion seats the 1.0.0 C4Gate rows never carried (seat 5's partial-coverage banking)."> // a9
+    inputs: // a9
+        b C23Box (1..1) // a9
+    output: // a9
+        rs number (0..*) // a9
+    add rs: 9999999999999999999999999 // a9
+    add rs: b -> weight default 0 // a9
+    add rs: [1, 2, 3] // a9
+func C23IntOut: <"An int output takes the exact conversion (the int-output seat)."> // a9
+    inputs: // a9
+        v number (1..1) // a9
+    output: // a9
+        r int (1..1) // a9
+    set r: // a9
+        if C23IsBig(v) // a9
+        then 9999999999999999999999999 // a9
+        else 1 // a9

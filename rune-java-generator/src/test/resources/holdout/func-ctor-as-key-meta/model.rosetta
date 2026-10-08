@@ -1,0 +1,19 @@
+namespace test.fctorkey012
+
+type Foo:
+	[metadata key]
+
+type Bar:
+	b Foo (1..1)
+	[metadata reference]
+	
+func Test:
+	inputs:
+		myInput Foo (1..1)
+		[metadata reference]
+	output:
+		result Bar (1..1)
+	
+	set result: Bar {
+		b: myInput as-key
+	}

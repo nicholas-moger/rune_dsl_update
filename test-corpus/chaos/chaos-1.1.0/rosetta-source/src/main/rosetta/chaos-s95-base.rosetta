@@ -1,0 +1,10 @@
+namespace chaos.s95.base
+version "1.0.0"
+type C95Item: <"REFUSAL-PARITY s95 (base only): a DUPLICATE closure-parameter name (`reduce a, a`) - upstream refuses ('Duplicate name.'); the fork yields two RClosureParameter nodes of which parameter(name) returns the first (seat 8 round 1's banking).">
+    v number (1..1)
+func C95Reduce:
+    inputs:
+        items C95Item (0..*)
+    output:
+        total number (1..1)
+    set total: items extract i [ i -> v ] then reduce a, a [ a + a ]

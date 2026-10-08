@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Rune DSL stats demo - BUILD section, LEGACY leg (CONTRACTS section 7E).
+
+  Generates Java from the merged demo corpus with the RELEASED upstream
+  toolchain: com.regnosys.rosetta:rosetta-maven-plugin:9.83.0, goal `generate`.
+  Its sibling demo/build/build-plus/pom.xml does the same over the SAME corpus
+  with the fork plugin; demo/build/diff-trees.ps1 byte-compares the two trees.
+
+  ====================================================================
+  PARAMETER SURFACE - VERIFIED, NOT GUESSED
+  ====================================================================
+  Every parameter below was read from the cached plugin's own descriptor:
+    <your Maven cache>/com/regnosys/rosetta/rosetta-maven-plugin/
+      9.83.0/rosetta-maven-plugin-9.83.0.jar  ->  META-INF/maven/plugin.xml
+  unzipped for reading to demo/work/tmp/rosetta-maven-plugin-9.83.0/.
+
+  The `generate` mojo (plugin.xml lines 66-251) declares:
+    goal            generate
+    phase           generate-sources          (so `mvn generate-sources` is enough)
+    implementation  com.regnosys.rosetta.maven.RosettaGenerateMojo
+    requiresDependencyResolution  compile
+    threadSafe      true
+    requiredJavaVersion (plugin-wide)  17
+
+  and exactly these parameters (name / type / editable / default-value):
+    addOutputDirectoriesToCompileSourceRoots  boolean  editable  true
+    classPathLookupFilter    java.lang.String  editable  (none)
+    classpathConfigurationLocation  String  editable  ${project.build.directory}/xtext.classpath
+    classpathElements        java.util.List   READ-ONLY ${project.compileClasspathElements}
+    clusteringConfig         org.eclipse.xtext.maven.ClusteringConfig  editable
+    compilerPreserveInformationAboutFormalParameters  Boolean  editable  false
+    compilerSkipAnnotationProcessing  Boolean  editable  false
+    compilerSourceLevel      String  editable  1.6  (from ${maven.compiler.source})
+    compilerTargetLevel      String  editable  1.6  (from ${maven.compiler.target})
+    failOnValidationError    Boolean editable  true
+    incrementalXtextBuild    boolean editable  true
+    javaSourceRoots          List    editable  ${project.compileSourceRoots}
+    languages                List    editable  (none)
+    mojoExecution            MojoExecution  READ-ONLY
+    pluginDependencies       List    READ-ONLY ${plugin.artifacts}
+    project                  MavenProject   READ-ONLY ${project}
+    rosettaConfig            String  editable  (none)
+    sourceRoots              List    editable  ${project.compileSourceRoots}
+    tmpClassDirectory        String  editable  ${project.build.directory}/xtext-temp
+    writeClasspathConfiguration  boolean editable false
+    writeStorageResources    boolean editable  false
+
+  plugin.xml's own words for `sourceRoots` (lines 206-208), verbatim:
+    "Project source roots. List of folders, where the source models are located.
+     The default value is a reference to the project's ${project.compileSourceRoots}.
+     When adding a new entry the default value will be overwritten not extended."
+  -> models come from the `sourceRoots` CONFIG, not from project source roots,
+     once we set it. That is why the four merged corpus roots are wired here
+     directly and no build-helper source-root plumbing is needed.
+
+  plugin.xml's own words for `classpathElements` (line 108): "Project classpath."
+  It is READ-ONLY and bound to ${project.compileClasspathElements} - i.e. the
+  PROJECT's compile classpath, NOT the plugin's own realm. This is the single
+  most important fact about builtins; see below.
+
+  The `languages` / `outputConfigurations` nesting is Xtext's standard bean shape
+  (org.eclipse.xtext.maven.Language + OutputConfiguration): elements `setup`,
+  `outputConfigurations/outputConfiguration/{name,outputDirectory}`, `javaSupport`.
+  The fork plugin mirrors those element names exactly - see
+  rune-maven-plugin/src/main/java/com/regnosys/rosetta/maven/{Language,OutputConfiguration}.java.
+
+  ====================================================================
+  BUILTINS: WHY demo/corpus/builtins IS **NOT** A SOURCE ROOT HERE
+  ====================================================================
+  The plugin does NOT auto-provide builtins from its own plugin realm. It ships
+  org.finos.rune:rune-runtime:9.83.0 in its <dependencies> (plugin.xml lines
+  454-457), but the model-lookup scan runs over `classpathElements`, which is
+  ${project.compileClasspathElements} - the PROJECT's compile classpath. The
+  builtins therefore reach the build only because THIS POM declares the runtime
+  as a project <dependency> below.
+
+  Verified in the local hermetic repo (demo/work/.m2):
+    org/finos/rune/rune-runtime/9.83.0/rune-runtime-9.83.0.jar
+      -> model/annotations.rosetta   (2012 bytes)
+      -> model/basictypes.rosetta    (1891 bytes)
+    com/regnosys/rosetta/com.regnosys.rosetta.lib/9.83.0/...jar
+      -> a 7-entry SHIM whose pom's only dependency is
+         org.finos.rune:rune-runtime:${project.version} (= 9.83.0)
+  So `com.regnosys.rosetta.lib` (the CONTRACTS section 0.5 legacy runtime
+  coordinate) transitively supplies the builtins carrier. Its full compile-scope
+  transitive set is rune-runtime + {xtend.lib, guice, commons-lang3,
+  jackson-databind, jackson-datatype-jdk8} - checked, and NONE of those carry
+  .rosetta entries, so rune-runtime is the ONLY model-bearing jar on this
+  project's classpath.
+
+  Consequence: adding demo/corpus/builtins as a fourth <sourceRoot> would declare
+  namespace com.rosetta.model TWICE (once from the jar, once from disk). It is
+  therefore EXCLUDED. Builtins are still in the parsed workspace, exactly as
+  CONTRACTS section 1 requires - just via the classpath channel, which is what
+  the real 9.83.0 consumers do.
+
+  (Aside, for anyone diffing: demo/corpus/builtins/*.rosetta are CRLF copies of
+  the same bytes the jar carries with LF - content identical line-for-line,
+  including the literal, unfiltered `version "${project.version}"` in both. The
+  builtins are never generated on either leg, so the ending difference cannot
+  reach any output byte.)
+
+  ====================================================================
+  classPathLookupFilter: DELIBERATELY OMITTED ON THIS LEG
+  ====================================================================
+  The real 9.83.0 consumers set it. Verbatim from
+  test-corpus/cdm/cdm-6.20.6/rosetta-source/pom.xml (and character-identical at
+  test-corpus/drr/drr-6.34.1/rosetta-source/pom.xml):
+
+    (XML comment in the consumer pom, transcribed: "Matches the Rosetta lib jar
+     file from the class path - this is used to get the basictype and
+     annotations.rosetta files")
+    <classPathLookupFilter>.*org[\\/]finos[\\/]rune[\\/]rune-runtime.*\.jar</classPathLookupFilter>
+
+  It is omitted here on the strength of this repo's own probe evidence, recorded
+  in scripts/holdout-oracle/pom-template.xml lines 22-29: on THIS box that exact
+  regex "matched 0 of the 22 classpath entries ... builtins then fail to resolve
+  and the build fails loudly", while matching the jar path in isolation - "the
+  mismatch is inside the mojo's entry handling". With the filter omitted the
+  plugin scans EVERY classpath entry, and (per the classpath audit above)
+  rune-runtime is the only model-bearing jar there, so the lookup result and the
+  generated bytes are identical. scripts/holdout-oracle/pom-template.xml - this
+  repo's byte-golden oracle scaffold for the released 9.83.0 plugin - omits it for
+  exactly this reason and is the proven-working configuration on this machine.
+
+  // INTEGRATOR: if the legacy build instead fails with unresolved builtin types
+  // (e.g. cannot resolve `string` / `metadata`), re-enable the consumer regex with
+  //     mvn.cmd -f demo/build/build-legacy/pom.xml -Pcp-filter clean generate-sources ...
+  // The `cp-filter` profile at the bottom of this file adds the CDM/DRR value
+  // verbatim. Maven profiles can only ADD or override configuration, never remove
+  // it, which is why omission is the base state and the filter is the opt-in.
+  //
+  // NOTE the asymmetry with build-plus/pom.xml, which MUST set the filter: the
+  // fork's runner treats a null/blank filter as "scan NOTHING"
+  // (RunePluginRunner.java:180-183), the exact inverse of Xtext's "scan
+  // EVERYTHING". Both legs therefore end up with the same two builtin models by
+  // the route each toolchain can be shown to take on this box.
+
+  ====================================================================
+  PACKAGING = jar, and why nothing is ever compiled
+  ====================================================================
+  `jar` (not `pom`), matching every real consumer and this repo's proven oracle
+  scaffold, so `${project.compileClasspathElements}` and the generate-sources
+  lifecycle binding behave exactly as they do upstream. Nothing is compiled
+  because the measured command stops at `generate-sources`, which precedes
+  `compile`; maven.main.skip / maven.test.skip below make that safe even if
+  someone later runs `mvn install` by hand over ~10k generated files.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.finos.rune.demo</groupId>
+    <artifactId>demo-build-legacy</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+    <name>Rune DSL stats demo - Build (legacy 9.83.0 toolchain)</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- Never compile: the demo runs `generate-sources` only. -->
+        <maven.main.skip>true</maven.main.skip>
+        <maven.test.skip>true</maven.test.skip>
+        <!-- The repo root carries a Maven build-cache extension; a cached
+             "generate-sources" would silently invalidate the timing. -->
+        <maven.build.cache.skip>true</maven.build.cache.skip>
+        <maven.build.cache.enabled>false</maven.build.cache.enabled>
+
+        <!-- ABSOLUTE paths on purpose. Both mojos resolve these strings with
+             Path.of(...) / new File(...), so a CWD-relative value would break
+             whenever Maven is invoked with `-f` from another directory (which is
+             exactly how measure-build.ps1 invokes it). ${project.basedir} is
+             absolute, so every value below normalises to a fixed location. -->
+        <demo.corpus>${project.basedir}/../../corpus</demo.corpus>
+        <demo.out>${project.basedir}/../../work/build-legacy-out</demo.out>
+        <demo.rosettaConfig>${project.basedir}/../rosetta-config.yml</demo.rosettaConfig>
+    </properties>
+
+    <dependencies>
+        <!-- CONTRACTS section 0.5's legacy runtime coordinate. Present ONLY to put
+             the builtins carrier on ${project.compileClasspathElements}; nothing
+             here is compiled against. Transitively: org.finos.rune:rune-runtime:9.83.0,
+             which is the jar holding model/basictypes.rosetta + model/annotations.rosetta.
+
+             // INTEGRATOR: do NOT add com.regnosys.rosetta:com.regnosys.rosetta:9.83.0
+             // (the language jar) as a project dependency. It is not needed - the plugin
+             // already carries org.finos.rune:rune-lang:9.83.0 in its own realm
+             // (plugin.xml lines 448-451) - and with classPathLookupFilter omitted every
+             // project-classpath jar is scanned for models, so any extra model-bearing
+             // jar would risk duplicate declarations. (Checked: that jar happens to hold
+             // no .rosetta entries today, but the rule is what keeps this leg safe.) -->
+        <dependency>
+            <groupId>com.regnosys.rosetta</groupId>
+            <artifactId>com.regnosys.rosetta.lib</artifactId>
+            <version>9.83.0</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.regnosys.rosetta</groupId>
+                <artifactId>rosetta-maven-plugin</artifactId>
+                <version>9.83.0</version>
+                <executions>
+                    <execution>
+                        <id>generate-demo-corpus</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <rosettaConfig>${demo.rosettaConfig}</rosettaConfig>
+
+                            <!-- The merged DRR workspace closure, minus builtins
+                                 (supplied via the classpath - see header). Each
+                                 root holds its *.rosetta files at top level. -->
+                            <sourceRoots>
+                                <sourceRoot>${demo.corpus}/cdm-5.38.0</sourceRoot>
+                                <sourceRoot>${demo.corpus}/iso20022-1.38.0</sourceRoot>
+                                <sourceRoot>${demo.corpus}/drr-6.34.1</sourceRoot>
+                            </sourceRoots>
+
+                            <!-- Byte determinism over build-order cleverness; this
+                                 is the setting this repo's 9.83.0 byte-oracle
+                                 scaffold uses. The fork plugin accepts and ignores
+                                 it (no Xtext build machinery), so the two poms can
+                                 carry the identical value. -->
+                            <incrementalXtextBuild>false</incrementalXtextBuild>
+
+                            <languages>
+                                <language>
+                                    <setup>com.regnosys.rosetta.RosettaStandaloneSetup</setup>
+                                    <outputConfigurations>
+                                        <outputConfiguration>
+                                            <outputDirectory>${demo.out}</outputDirectory>
+                                        </outputConfiguration>
+                                    </outputConfigurations>
+                                </language>
+                            </languages>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <!-- Opt-in fallback, see the header's classPathLookupFilter section.
+             Activate with -Pcp-filter. The value is the CDM 6.20.6 / DRR 6.34.1
+             consumer regex, character for character. -->
+        <profile>
+            <id>cp-filter</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.regnosys.rosetta</groupId>
+                        <artifactId>rosetta-maven-plugin</artifactId>
+                        <version>9.83.0</version>
+                        <executions>
+                            <execution>
+                                <id>generate-demo-corpus</id>
+                                <configuration>
+                                    <classPathLookupFilter>.*org[\\/]finos[\\/]rune[\\/]rune-runtime.*\.jar</classPathLookupFilter>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>

@@ -1,0 +1,18 @@
+namespace chaos.s98.base
+version "1.0.0"
+metaType key string
+metaType reference string
+type C98Part: <"MOJO-CRASH s98 (base only; expectations/mojo-refused.tsv): `empty as-key` at a reference leaf - seat 9's banked witness question, answered: the released 9.83.0 validator ACCEPTS the model (L1-clean, zero error rows) and its GENERATOR CRASHES on it (GenerationException: The null type has no name - FunctionGenerator hoists a local of the null type; the seat-10 probe pa-emptykey and the pin run's own log). The two upstream oracles disagree, so the file is golden-free by a RECORDED verdict (charter § 4b) and the fork's own verdict is measured.">
+    [metadata key]
+    pid string (1..1)
+type C98Whole: <"The output type with a reference leaf.">
+    name string (1..1)
+    partRef C98Part (0..1)
+        [metadata reference]
+func C98EmptyKey:
+    inputs:
+        flag boolean (1..1)
+    output:
+        w C98Whole (1..1)
+    set w -> name: "k"
+    set w -> partRef: empty as-key

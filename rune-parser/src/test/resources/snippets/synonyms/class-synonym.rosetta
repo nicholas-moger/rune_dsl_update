@@ -1,0 +1,12 @@
+namespace test.synonyms
+
+synonym source TestSource
+
+type Party:
+    [synonym TestSource value "PartyData" meta "partyMeta"]
+    name string (1..1)
+    role string (0..1)
+
+type Account:
+    [synonym TestSource value "AccountInfo"]
+    id string (1..1)

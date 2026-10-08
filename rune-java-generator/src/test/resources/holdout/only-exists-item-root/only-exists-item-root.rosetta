@@ -1,0 +1,49 @@
+namespace holdout.onlyexistsitemroot
+version "0.0.0"
+
+type Sub: <"The M6 carrier's nested type (v3.2 seat 12, D52 H3): every attribute optional - an only-exists parent must have no required attribute (the oracle's law).">
+    sname string (0..1)
+    subs string (0..*)
+
+type OptA: <"Choice option A.">
+    av string (0..1)
+
+type OptB: <"Choice option B.">
+    bv string (0..1)
+
+choice Pick: <"The choice whose option is an only-exists leaf.">
+    OptA
+    OptB
+
+type Paths: <"only-exists targets: a bare, a nested, a choice-typed and a multi attribute - every one optional.">
+    p string (0..1)
+    q string (0..1)
+    sub Sub (0..1)
+    pick Pick (0..1)
+    condition ItemRoot: <"THE M6 SHAPE in a data-type condition: an `item ->` root. The released 9.83.0 plugin renders the implicit variable as the shared parent (`MapperS.of(paths)`) with the parent type's attribute list and the LAST feature name selected; the fork's parser returned null for the item root by design and the generator wrote the legacy dotted placeholder `onlyExists(item, [\"item.p\"], ...)` - non-compiling here - before this seat's heal.">
+        item -> p only exists or (item -> p, item -> q) only exists
+    condition ItemTwoHop: <"The item root under a two-hop element and a mixed list beside it.">
+        item -> sub -> sname only exists or (item -> sub -> sname, item -> sub -> subs) only exists
+    condition ItemOption: <"The item root to a choice-option leaf.">
+        if pick exists then item -> pick -> OptA only exists or item -> pick -> OptB only exists
+    condition BareControl: <"THE CONTROL: the bare-symbol form of the same elements - already byte-exact (seat 8), the heal must leave it so.">
+        p only exists or (p, q) only exists
+
+func OnlyItem: <"THE M6 SHAPE at a function seat: the implicit item inside a then-extract lambda (the nine chaos C25Only rows - compiling on the default route and WRONG: the pair gate's 18 one-sided outcomes, `NoSuchMethodException: ...getItem.pick.OptA()`).">
+    inputs:
+        ps Paths (0..*)
+        t Paths (1..1)
+    output:
+        oks boolean (0..*)
+    add oks: ps then extract (item -> p only exists)
+    add oks: ps then extract (item -> pick -> OptA only exists)
+    add oks: ps then extract ((item -> sub -> sname, item -> sub -> subs) only exists)
+
+func OnlyExplicit: <"THE CONTROL at the function seat: the same elements through an EXPLICIT lambda parameter - byte-exact before the seat.">
+    inputs:
+        ps Paths (0..*)
+    output:
+        oks boolean (0..*)
+    add oks: ps extract x [ x -> p only exists ]
+    add oks: ps extract x [ x -> pick -> OptA only exists ]
+    add oks: ps extract x [ (x -> sub -> sname, x -> sub -> subs) only exists ]

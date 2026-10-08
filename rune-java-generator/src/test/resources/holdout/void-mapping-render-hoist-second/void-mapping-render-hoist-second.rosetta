@@ -1,0 +1,21 @@
+namespace holdout.voidhoistsecond
+version "0.0.0"
+
+basicType etoken <"A model-declared basic type - a Void-typed value in the generated Java.">
+
+func ExistsThenConditional: <"A Void conditional operand under exists FOLLOWED by a non-Void conditional in the same expression: does the released plugin's discarded conditional advance the ifThenElseResult index of the kept one? (round 2, spec MF-2 / cq MF-1)">
+    inputs:
+        flag boolean (1..1)
+        t etoken (0..1)
+        u etoken (0..1)
+    output:
+        r boolean (1..1)
+    set r: (if flag then t else u) exists and (if flag then "a" else "b") = "a"
+
+func AddElseless: <"An ELSELESS Void conditional ADDED to a multi output: upstream's coercion early exit or the distributed addAll? (round 2, spec SF-1)">
+    inputs:
+        flag boolean (1..1)
+        t etoken (0..1)
+    output:
+        rs etoken (0..*)
+    add rs: if flag then t

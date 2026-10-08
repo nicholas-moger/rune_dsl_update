@@ -1,0 +1,19 @@
+namespace chaos.s07.a3third.p3
+version "1.0.0"
+import chaos.s07.a3third.p1.*
+import chaos.s07.a3third.p2.*
+type C7Report: <"Report output type with rule references.">
+    utiField string (1..1)
+        [ruleReference C7Utid]
+    notionalField number (1..1)
+        [ruleReference C7Notional]
+corpus Standard "C7 Chaos Standard" C7Std <"The corpus the report's using-standard leg names (the oracle taught the target kind: RosettaCorpus).">
+rule source C7RS
+{
+}
+report C7AUTH C7Reg in T+1
+    from C7Trade
+    when C7Eligible
+    using standard C7Std
+    with type C7Report
+    with source C7RS

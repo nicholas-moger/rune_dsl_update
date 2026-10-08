@@ -1,0 +1,124 @@
+namespace chaos.s05.a1o2
+version "1.0.0"
+type C5Sub: <"List-of-list rung and reference target - relocated by the import axis.">
+    [metadata key]
+    vals number (0..*)
+    name string (1..1)
+func C5Seats: <"The SAME construct (if-exists-then-else-0) at the alias, condition, and set seats.">
+    inputs:
+        it C5Item (1..1)
+    output:
+        r number (1..1)
+    alias seatAlias: if it -> opt exists then it -> opt else 0
+    condition SeatCond:
+        (if it -> opt exists then it -> opt else 0) >= 0
+    set r: (if it -> opt exists then it -> opt else 0) + seatAlias
+func C5Chain: <"then-chain over a list-of-list with implicit-LHS navigation at every hop.">
+    inputs:
+        items C5Item (0..*)
+    output:
+        total number (1..1)
+    set total:
+        items
+            then extract sub
+            then flatten
+            then extract vals
+            then flatten
+            then filter item >= 0
+            then sum
+func C5Deep: <"Nested explicit-lambda extract, depth 3, with postfix chains inside.">
+    inputs:
+        items C5Item (0..*)
+    output:
+        names string (0..*)
+    add names:
+        items
+            then extract x [
+                x -> sub extract y [
+                    y -> name + "-" + (y -> vals count to-string)
+                ]
+            ]
+            then flatten
+func C5Ctor: <"Constructor-field seats: scalar, first, filtered list, nested ctor list.">
+    inputs:
+        nm string (1..1)
+        ns number (0..*)
+    output:
+        it C5Item (1..1)
+    set it:
+        C5Item {
+            one: nm,
+            opt: ns first,
+            many: ns filter item > 0,
+            sub: [C5Sub { vals: ns, name: nm }, C5Sub { vals: [1, 2], name: nm + "2" }],
+            ...
+        }
+func C5Preds: <"contains / default / implicit-LHS compare / join seats.">
+    inputs:
+        items C5Item (0..*)
+        probe number (1..1)
+    output:
+        ok boolean (1..1)
+    alias pool: items extract opt
+    alias ones: items extract one
+    alias joined: ones then join ", "
+    set ok:
+        pool contains probe
+        and ones contains "x"
+        and probe = (pool first default 0)
+        and (items then filter opt exists then count) >= 0
+        and joined exists
+func C5Forms: <"The leftless/then-form + conversion battery (census-driven enrichment: the § 2.4 zero-set forced these).">
+    inputs:
+        items C5Item (0..*)
+        others C5Item (0..*)
+        raws string (0..*)
+    output:
+        verdict string (1..1)
+    alias vals: items extract opt
+    alias solo: items only-element
+    alias soloThen: items then only-element
+    alias neg: -1
+    alias lastV: vals then last
+    alias hiV: vals then max
+    alias loV: vals then min
+    alias uniqRaw: raws distinct
+    alias uniqOnes: (items extract one) then distinct
+    alias disWith: uniqRaw disjoint (others extract one)
+    alias fallback: vals then default [0]
+    alias graded: items then only-element then extract one then switch "a" then 1, default 0
+    alias asInt: "7" to-int
+    alias asEnum: "Spot" to-enum C5KindEnum
+    alias enumsThen: ["Fwd", "Spot"] then extract to-enum C5KindEnum
+    alias strsThen: vals then extract to-string
+    alias anyLeft: items then exists
+    alias noneLeft: others then is absent
+    alias eqForm: (items extract one) then filter = "x"
+    alias boolArm: if anyLeft then (disWith and noneLeft) else (neg < 0)
+    alias lambdaThen: items extract x [ x -> sub then filter item -> vals exists then extract name ] then flatten
+    alias lambdaIte: items extract x [ if x -> opt exists then x -> opt else 0 ]
+    alias soloArm: if anyLeft then (items only-element -> opt) else (others first -> opt)
+    set verdict:
+        if disWith and anyLeft and (neg < 0) and solo exists and soloThen exists
+            and lastV exists and hiV exists and loV exists
+            and uniqOnes count >= eqForm count
+            and (fallback then sum) >= asInt
+            and graded >= 0 and asEnum exists and noneLeft
+            and enumsThen count = strsThen count
+            and boolArm and lambdaThen count >= 0
+            and (lambdaIte sum) >= 0 and soloArm exists
+        then "covered"
+        else "sparse"
+
+metaType key string
+metaType reference string
+enum C5KindEnum: <"to-enum target.">
+    Spot
+    Fwd
+type C5Item: <"The shape battery: single, optional, multi, list-of-list rung, and a meta-wrapped seat (charter 2.2b).">
+    one string (1..1)
+    opt number (0..1)
+    many number (0..*)
+    sub C5Sub (0..*)
+    subRef C5Sub (0..1)
+        [metadata reference]

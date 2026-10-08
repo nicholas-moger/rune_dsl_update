@@ -1,0 +1,31 @@
+namespace holdout.argcoercionbarelocal
+version "0.0.0"
+
+func Check: <"The callee every shape below calls: a `number` (BigDecimal) parameter.">
+    inputs:
+        v number (1..1)
+    output:
+        ok boolean (1..1)
+    set ok: v >= 0
+
+typeAlias Nat: <"THE M5f SHAPE (v3.2 seat 13, D53 - the chaos s27 C27NatCalled rows, 18 of 18 non-compiling by the seat-13 census): an int-grained alias (`number(fractionalDigits: 0)` = Integer in the generated Java) whose condition calls a function with its implicit `item`, where the callee's parameter is `number` (BigDecimal). The condition's item is the datarule method's own parameter - a BARE LOCAL - so the plugin's convertNullSafe coerces it INLINE with no hoist: `check.evaluate((nat == null ? null : BigDecimal.valueOf(nat)))`. The fork spliced the argument flat (`check.evaluate(nat)`, an Integer into a BigDecimal parameter) before this seat.">
+    number(fractionalDigits: 0)
+    condition Called:
+        Check(item)
+
+func CallWithIntInput: <"THE BARE-INPUT SIBLING: a function input typed `int` passed straight to the `number` parameter - the same bare-local coercion at a function's whole-output SET seat (the plugin's inline `(n == null ? null : BigDecimal.valueOf(n))`; the fork's evaluate-arg commit hoists `final Integer integer = n;` first - the question this golden answers).">
+    inputs:
+        n int (1..1)
+    output:
+        ok boolean (1..1)
+    set ok: Check(n)
+
+func CallWithIntNav: <"THE CONTROL (the #277 numCoerceArgHoist class, byte-exact on the vendored cells): a NAVIGATED Integer - not a bare local - into the `number` parameter hoists `final Integer integer = <chain>.get();` and coerces the local; the inline arm must NOT reach it.">
+    inputs:
+        h Holder (1..1)
+    output:
+        ok boolean (1..1)
+    set ok: Check(h -> tally)
+
+type Holder: <"The navigation's holder.">
+    tally int (0..1)

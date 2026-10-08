@@ -1,0 +1,25 @@
+namespace chaos.s32.x16fn.p2
+version "1.0.0"
+import chaos.s32.x16fn.p1.*
+type C32Twin: <"RIVAL - a same-named TYPE in an imported namespace beside the seed's FUNCTION (the F17' type-vs-function flavour).">
+    rivalMark string (0..1)
+func C32Out: <"A function OUTPUT named o - upstream's prune lambda shadows it (IntoDeep, rider 5) - with keyword-named inputs.">
+    inputs:
+        class string (1..1)
+        long number (0..1)
+    output:
+        o C32Keyworded (1..1)
+    set o -> class: class
+    set o -> long: long
+func C32Twin: <"A function whose simple name a rival TYPE takes in the A6 fn variant and the A8 pkg variant.">
+    inputs:
+        s string (1..1)
+    output:
+        t string (1..1)
+    set t: s
+func C32UseList: <"The List-named type at a function seat.">
+    inputs:
+        l List (1..1)
+    output:
+        n int (1..1)
+    set n: l -> items count

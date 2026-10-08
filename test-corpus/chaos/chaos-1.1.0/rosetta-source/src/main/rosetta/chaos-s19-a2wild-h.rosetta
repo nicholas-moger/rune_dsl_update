@@ -1,0 +1,5 @@
+namespace chaos.s19.a2wild.h
+version "1.0.0"
+type C19Part: <"Keyed component - relocated by the import axis.">
+    [metadata key]
+    pid string (1..1)

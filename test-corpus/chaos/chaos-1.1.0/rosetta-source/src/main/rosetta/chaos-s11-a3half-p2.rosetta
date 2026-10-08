@@ -1,0 +1,15 @@
+namespace chaos.s11.a3half.p2
+version "1.0.0"
+import chaos.s11.a3half.p1.*
+func C11CondFn: <"The condition-func target the tested mapping names.">
+    inputs:
+        raw string (1..1)
+    output:
+        ok boolean (1..1)
+    set ok: raw exists
+enum C11KindEnum: <"Enum-value synonyms.">
+    Spot
+        [synonym C11XML value "SPOT"]
+    Fwd
+        [synonym C11XML value "FORWARD"]
+        [synonym C11JSON value "fwd"]

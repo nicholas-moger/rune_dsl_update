@@ -1,0 +1,23 @@
+namespace test.expressions
+
+enum Colour:
+    RED
+    BLUE
+
+func ConvertValid:
+    inputs:
+        s string (1..1)
+        n number (1..1)
+        c Colour (1..1)
+    output:
+        result string (1..1)
+    alias asNum: s to-number
+    alias asInt: s to-int
+    alias asDate: s to-date
+    alias asDateTime: s to-date-time
+    alias asZoned: s to-zoned-date-time
+    alias asTime: s to-time
+    alias asColour: s to-enum Colour
+    alias numStr: n to-string
+    alias colourStr: c to-string
+    set result: n to-string

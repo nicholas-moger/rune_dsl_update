@@ -1,0 +1,20 @@
+/* chaos a9: a block-comment banner before the first token */
+// chaos a9: a line comment before namespace
+namespace chaos.s33.a9comment // a9
+version "1.0.0" // a9
+type C33Extra: <"Helper - relocated by the import axis."> // a9
+    memo string (1..1) // a9
+synonym source C33Src // a9
+body Authority C33AUTH <"Authority with a quote: \"quoted\", a backslash \\ and µ–ü."> // a9
+corpus Regulation "C33 “Chaos” Règlement \"quoted\" \\ back" C33Reg <"Display string with non-ASCII, a quote and a backslash."> // a9
+segment c33article // a9
+type C33Trade: <"Labels, synonyms and docReferences carrying non-ASCII, a quote and a backslash each (D46's REACH beyond the enum seats)."> // a9
+    [synonym C33Src value "Röot \"q\" \\b" path "énvelope"] // a9
+    [docReference C33AUTH C33Reg c33article "3" provision "Provision with µ–ü, a \"quote\" and a back\\slash."] // a9
+    utid string (1..1) // a9
+        [label as "Thé UTI \"quoted\" \\ back"] // a9
+        [synonym C33Src value "ütid \"q\"" path "röot->päth"] // a9
+    notional number (0..1) // a9
+        [label as "Notional µ–§"] // a9
+    extra C33Extra (0..1) // a9
+        [label for memo "Mémo \"q\" \\"] // a9

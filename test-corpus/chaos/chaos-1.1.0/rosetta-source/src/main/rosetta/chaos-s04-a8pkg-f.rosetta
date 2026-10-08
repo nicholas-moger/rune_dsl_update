@@ -1,0 +1,4 @@
+namespace chaos.s04.a8pkg.functions
+version "1.0.0"
+type C4Add: <"RIVAL for the A8 axis (D49, dormant in every other variant): a TYPE named like the seed's function C4Add, placed in the .functions sub-namespace so the POJO and the function generator address ONE Java path - the seat-3 writer seam as a whole-pipeline carrier.">
+    pathMark string (0..1)

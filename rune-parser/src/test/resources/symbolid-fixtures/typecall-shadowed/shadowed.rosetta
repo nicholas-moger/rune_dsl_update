@@ -1,0 +1,14 @@
+namespace com.test
+
+func CreditSupportAmount:
+    inputs:
+        a number (1..1)
+    output:
+        r string (1..1)
+    set r: "fn"
+
+type CreditSupportAmount:
+    a string (1..1)
+
+type Container:
+    c CreditSupportAmount (1..1)

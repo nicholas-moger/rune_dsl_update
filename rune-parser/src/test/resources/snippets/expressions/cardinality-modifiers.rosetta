@@ -1,0 +1,10 @@
+namespace test.expressions
+
+type Foo:
+    values number (0..*)
+    condition AllPositive:
+        values all > 0
+    condition AnyMatch:
+        values any = 42
+    condition AllEqual:
+        values all <> 0

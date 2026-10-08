@@ -1,0 +1,6 @@
+namespace com.test.bar
+
+import com.test.foo.Bar as MyType
+
+type Container:
+    c MyType (1..1)

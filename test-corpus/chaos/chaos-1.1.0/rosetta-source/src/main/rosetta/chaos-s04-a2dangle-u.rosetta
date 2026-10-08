@@ -1,0 +1,4 @@
+namespace chaos.s04.a2dangle.unused
+version "1.0.0"
+type C4PairUnusedT:
+    stub string (0..1)

@@ -1,0 +1,28 @@
+namespace test.voidbuilder
+version "1.0.0"
+
+// v3.2 seat 9 (F8, void-mapping-cast) - THE RENDER-BUILDER GROUP, kept apart so a plugin refusal costs one group: a
+// Void-typed value assigned into a MODEL-typed output (the toBuilder seat - upstream's `mapExpressionIfNotNull` skips the
+// wrap for the empty) and into a model-typed attribute of a deep-path output (the setter seat).
+
+basicType etoken <"A model-declared basic type.">
+
+type Holder: <"A model-typed output target.">
+    name string (0..1)
+
+type Outer: <"A deep-path output target.">
+    holder Holder (0..1)
+
+func IntoHolder: <"A Void value into a model-typed output - the builder seat.">
+    inputs:
+        t etoken (1..1)
+    output:
+        h Holder (1..1)
+    set h: t
+
+func IntoDeep: <"A Void value into a model-typed attribute of the output - the setter seat.">
+    inputs:
+        t etoken (1..1)
+    output:
+        o Outer (1..1)
+    set o -> holder: t

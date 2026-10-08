@@ -1,0 +1,17 @@
+namespace chaos.s30.a4none
+type C30Part: <"Keyed component - relocated by the import axis.">
+    [metadata key]
+    pid string (1..1)
+metaType key string
+metaType reference string
+metaType scheme string
+type C30Whole: <"The ctor / set target: plain, meta, reference and nested seats.">
+    name string (1..1)
+    code string (0..1)
+        [metadata scheme]
+    scores number (0..*)
+    part C30Part (0..1)
+    partRef C30Part (0..1)
+        [metadata reference]
+    parts C30Part (0..*)
+    nested C30Whole (0..1)

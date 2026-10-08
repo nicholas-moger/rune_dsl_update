@@ -1,0 +1,35 @@
+namespace chaos.s18.a3third.p3
+version "1.0.0"
+import chaos.s18.a3third.p1.*
+import chaos.s18.a3third.p2.*
+func C18Pull: <"Choice type guards narrowing the item in each arm.">
+    inputs:
+        eth C18Either (1..1)
+    output:
+        out string (1..1)
+    set out:
+        eth switch
+            C18OptA then item -> av,
+            C18OptB then item -> bv to-string,
+            default "none"
+func C18ToKind: <"to-enum at a SINGLE assignment sink (v3.1 F20) + an extract-embedded switch (F15b) + a choice switch INSIDE a lambda (F29).">
+    inputs:
+        raw string (1..1)
+        eths C18Either (0..*)
+    output:
+        k C18KindEnum (0..1)
+    alias switched: [raw] extract (item switch "r" then "Red", "g" then "Green", default "Blue")
+    alias pulled: eths extract (item switch C18OptA then item -> av, C18OptB then item -> bv to-string, default "none")
+    set k:
+        if (pulled count = switched count) or pulled is absent
+        then raw to-enum C18KindEnum
+func C18Maybe: <"The switch under an OPTIONAL subject - the cardinality-shape dimension.">
+    inputs:
+        k C18KindEnum (0..1)
+    output:
+        hx string (0..1)
+    set hx:
+        if k exists
+        then k switch
+            Red then "ff0000",
+            default "xx"

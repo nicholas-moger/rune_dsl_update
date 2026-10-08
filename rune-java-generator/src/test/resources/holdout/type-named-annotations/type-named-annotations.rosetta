@@ -1,0 +1,50 @@
+namespace holdout.typenamedannotations
+version "0.0.0"
+
+type Multi: <"com.rosetta.model.lib.annotations.Multi - the POJO's annotation on every multi getter (v3.2 seat 11, M1's class): the own class claims first, the annotation is written fully qualified.">
+    xs string (0..*)
+    x string (0..1)
+
+type Required: <"com.rosetta.model.lib.annotations.Required - the POJO's annotation on a required getter.">
+    xs string (0..*)
+    x string (1..1)
+
+type Accessor: <"com.rosetta.model.lib.annotations.Accessor - the POJO's getter annotation.">
+    xs string (0..*)
+    x string (0..1)
+
+type AccessorType: <"com.rosetta.model.lib.annotations.AccessorType - the POJO's getter annotation argument.">
+    xs string (0..*)
+    x string (0..1)
+
+type RosettaAttribute: <"com.rosetta.model.lib.annotations.RosettaAttribute - the POJO's getter annotation.">
+    xs string (0..*)
+    x string (0..1)
+
+type RuneAttribute: <"com.rosetta.model.lib.annotations.RuneAttribute - the POJO's getter and getType annotation.">
+    xs string (0..*)
+    x string (0..1)
+
+type RosettaDataType: <"com.rosetta.model.lib.annotations.RosettaDataType - the POJO's class annotation.">
+    xs string (0..*)
+    x string (0..1)
+
+type RuneDataType: <"com.rosetta.model.lib.annotations.RuneDataType - the POJO's class annotation.">
+    xs string (0..*)
+    x string (0..1)
+
+type RosettaMeta: <"com.rosetta.model.lib.annotations.RosettaMeta - the meta's class annotation.">
+    xs string (0..*)
+    x string (0..1)
+
+type AnnotationRefs: <"A sibling referencing every annotation-named type singly, its own multi string last.">
+    multi Multi (0..1)
+    req Required (0..1)
+    accessor Accessor (0..1)
+    accessorType AccessorType (0..1)
+    rosettaAttribute RosettaAttribute (0..1)
+    runeAttribute RuneAttribute (0..1)
+    rosettaDataType RosettaDataType (0..1)
+    runeDataType RuneDataType (0..1)
+    rosettaMeta RosettaMeta (0..1)
+    names string (0..*)

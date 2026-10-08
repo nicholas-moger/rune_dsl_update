@@ -1,0 +1,20 @@
+namespace test.fsetcplx140
+
+type Bar:
+	foos Foo (0..*)
+
+type Foo:
+	attr string (1..1)
+
+func FuncFoo:
+ 	inputs:
+ 		bar Bar (1..1)
+ 		newFoo Foo (1..1) <"Add single Foo">
+	output:
+		updatedBar Bar (1..1)
+	
+	set updatedBar:
+		bar
+	
+	set updatedBar -> foos:
+		newFoo

@@ -1,0 +1,4 @@
+ENUM test.model.DirectionEnum
+  namespace "test.model"
+  VALUE Up
+  VALUE Down displayName "DOWN"

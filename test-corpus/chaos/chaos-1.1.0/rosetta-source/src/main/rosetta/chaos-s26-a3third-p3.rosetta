@@ -1,0 +1,31 @@
+namespace chaos.s26.a3third.p3
+version "1.0.0"
+import chaos.s26.a3third.p1.*
+import chaos.s26.a3third.p2.*
+type C26OptA: <"Choice option A.">
+    av string (1..1)
+type C26OptB: <"Choice option B.">
+    bv number (1..1)
+choice C26Either: <"Choice-guard subject.">
+    C26OptA
+    C26OptB
+type C26Bag: <"The rule and datarule carrier.">
+    eths C26Either (0..*)
+    kind C26KindEnum (0..1)
+    condition C26Colour: <"A switch in a data rule over an optional enum subject.">
+        if kind exists
+        then (kind switch Red then True, Green then True, default False)
+reporting rule C26PickAv from C26Bag: <"A switch in a reporting rule body - the choice-guarded lambda-direct class.">
+    extract eths then extract (item switch C26OptA then item -> av, C26OptB then item -> bv to-string, default "none")
+reporting rule C26Kind from C26Bag: <"An enum switch in a rule over an optional subject with a bare function-name arm (the vendored lambda-direct class).">
+    extract [kind] then extract (item switch Red then C26Name, default "d")
+func C26Hoist: <"A LITERAL-guarded switch at a then-hoist seat, a bare function-name arm, a disguised to-string arm, a default-operator arm and an ABSENT default (the vendored lambda-direct classes the seat-7 laws do not admit).">
+    inputs:
+        raws string (0..*)
+        k C26KindEnum (1..1)
+    output:
+        outs string (0..*)
+    add outs: raws then extract (item switch "a" then "A", default item) then distinct
+    add outs: [k] extract (item switch Red then C26Name, Green then item to-string, default "d")
+    add outs: [k] extract (item switch Red then (item to-string), default (C26Name(item) default "q"))
+    add outs: [k] extract (item switch Red then "r", Green then "g", Blue then "b")

@@ -1,0 +1,4 @@
+namespace com.test.outer
+
+type ParentAnchor:
+    placeholder string (1..1)

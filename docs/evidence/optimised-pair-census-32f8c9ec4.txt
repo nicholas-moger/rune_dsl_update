@@ -1,0 +1,31 @@
+# Optimised-route paired-execution census (OptimisedNavigationPairGateTest, rune-equivalence) at the exported
+# revision: run at commit 32f8c9ec4 (tree identical to the exported 82e792135) on 2026-09-22 (Surefire:
+# Tests run: 22, Failures: 0, Errors: 0, Skipped: 0, 861.6 s), the overlay step of the development validation
+# chain after its ON-route D11. Population: the 21 function-bearing cells = 10 CDM + 10 DRR releases + the
+# authored chaos 1.1.0 cell (ISO 20022 and Rune FpML carry no function classes and are outside this gate).
+# Per cell: fnClasses = generated function classes, instantiable = classes the harness could instantiate,
+# nonFunctions = declared non-function classes excluded, fnPairs = paired executions (reference Java vs
+# optimised Java on synthesised inputs), fnO1Divergent / fnO3Mismatches / fnOneSided = behaviour differences.
+# Sum of fnPairs over the 21 cells: 150,831. The chaos cell's declared exceptions live in
+# rune-ir-java-optimised/src/test/resources/chaos-optimised-route-broken.txt. Verbatim census lines follow.
+[PairHarness cdm/cdm-5.38.0] fnClasses=377 instantiable=377 skippedNoInstance=0 nonFunctions=0 fnPairs=1131 fnO1Divergent=0 fnO3Mismatches=0 fnOneSided=0
+[PairHarness cdm/cdm-5.39.0] fnClasses=377 instantiable=377 skippedNoInstance=0 nonFunctions=0 fnPairs=1131 fnO1Divergent=0 fnO3Mismatches=0 fnOneSided=0
+[PairHarness cdm/cdm-6.20.2] fnClasses=1280 instantiable=1280 skippedNoInstance=0 nonFunctions=0 fnPairs=3840 fnO1Divergent=0 fnO3Mismatches=0 fnOneSided=0
+[PairHarness cdm/cdm-6.20.3] fnClasses=1280 instantiable=1280 skippedNoInstance=0 nonFunctions=0 fnPairs=3840 fnO1Divergent=0 fnO3Mismatches=0 fnOneSided=0
+[PairHarness cdm/cdm-6.20.4] fnClasses=1280 instantiable=1280 skippedNoInstance=0 nonFunctions=0 fnPairs=3840 fnO1Divergent=0 fnO3Mismatches=0 fnOneSided=0
+[PairHarness cdm/cdm-6.20.5] fnClasses=1280 instantiable=1280 skippedNoInstance=0 nonFunctions=0 fnPairs=3840 fnO1Divergent=0 fnO3Mismatches=0 fnOneSided=0
+[PairHarness cdm/cdm-6.20.6] fnClasses=1280 instantiable=1280 skippedNoInstance=0 nonFunctions=0 fnPairs=3840 fnO1Divergent=0 fnO3Mismatches=0 fnOneSided=0
+[PairHarness cdm/cdm-6.21.0] fnClasses=1281 instantiable=1281 skippedNoInstance=0 nonFunctions=0 fnPairs=3843 fnO1Divergent=0 fnO3Mismatches=0 fnOneSided=0
+[PairHarness cdm/cdm-6.22.0] fnClasses=1281 instantiable=1281 skippedNoInstance=0 nonFunctions=0 fnPairs=3843 fnO1Divergent=0 fnO3Mismatches=0 fnOneSided=0
+[PairHarness cdm/cdm-6.23.0] fnClasses=1281 instantiable=1281 skippedNoInstance=0 nonFunctions=0 fnPairs=3843 fnO1Divergent=0 fnO3Mismatches=0 fnOneSided=0
+[PairHarness drr/drr-5.61.0] fnClasses=2506 instantiable=2506 skippedNoInstance=0 nonFunctions=0 fnPairs=7518 fnO1Divergent=0 fnO3Mismatches=0 fnOneSided=0
+[PairHarness drr/drr-6.34.1] fnClasses=3584 instantiable=3584 skippedNoInstance=0 nonFunctions=0 fnPairs=10752 fnO1Divergent=0 fnO3Mismatches=0 fnOneSided=0
+[PairHarness drr/drr-6.35.0] fnClasses=3584 instantiable=3584 skippedNoInstance=0 nonFunctions=0 fnPairs=10752 fnO1Divergent=0 fnO3Mismatches=0 fnOneSided=0
+[PairHarness drr/drr-6.36.0] fnClasses=3584 instantiable=3584 skippedNoInstance=0 nonFunctions=0 fnPairs=10752 fnO1Divergent=0 fnO3Mismatches=0 fnOneSided=0
+[PairHarness drr/drr-6.37.0] fnClasses=3584 instantiable=3584 skippedNoInstance=0 nonFunctions=0 fnPairs=10752 fnO1Divergent=0 fnO3Mismatches=0 fnOneSided=0
+[PairHarness drr/drr-6.38.0] fnClasses=3584 instantiable=3584 skippedNoInstance=0 nonFunctions=0 fnPairs=10752 fnO1Divergent=0 fnO3Mismatches=0 fnOneSided=0
+[PairHarness drr/drr-7.0.0] fnClasses=4326 instantiable=4326 skippedNoInstance=0 nonFunctions=0 fnPairs=12978 fnO1Divergent=0 fnO3Mismatches=0 fnOneSided=0
+[PairHarness drr/drr-7.1.0] fnClasses=4326 instantiable=4326 skippedNoInstance=0 nonFunctions=0 fnPairs=12978 fnO1Divergent=0 fnO3Mismatches=0 fnOneSided=0
+[PairHarness drr/drr-7.2.0] fnClasses=4326 instantiable=4326 skippedNoInstance=0 nonFunctions=0 fnPairs=12978 fnO1Divergent=0 fnO3Mismatches=0 fnOneSided=0
+[PairHarness drr/drr-7.3.0] fnClasses=4326 instantiable=4326 skippedNoInstance=0 nonFunctions=0 fnPairs=12978 fnO1Divergent=0 fnO3Mismatches=0 fnOneSided=0
+[PairHarness chaos/chaos-1.1.0] fnClasses=1552 instantiable=1550 skippedNoInstance=0 nonFunctions=2 fnPairs=4650 fnO1Divergent=0 fnO3Mismatches=0 fnOneSided=0

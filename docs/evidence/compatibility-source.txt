@@ -1,0 +1,55 @@
+SOURCE EXTRACT — not a new run
+Source: docs/user/testing.md
+Inspected revision: 691e0b160ab7dc189b9d33b5387d8462f36630b5
+
+
+Lines 9–22:
+
+## The guarantee, in one paragraph
+
+rune-dsl-plus generates Java from Rune DSL models and is held to **byte-identity with the upstream
+rune-dsl 9.83.0 generator** on every model release that pins that version — 25 releases of CDM,
+DRR, ISO 20022 and rune-fpml, 174,141 generated files. The guarantee is **no silent wrongness,
+where it is measured**: when the engine cannot justify an output it **refuses** (a named generation
+error with the file and the reason) rather than emitting plausible-looking Java; when it does emit,
+the file is compared to the upstream golden byte for byte, and every difference is either healed or
+listed by name with its upstream-defect evidence. At the v3.1 close (PR #605) the **byte band** —
+the set of generated files that differ from upstream — across the 25-cell matrix is **zero on both
+generation routes**: 174,129 files identical, 0 different, 12 not emitted and waived by name; and
+the five-cell **parity ring** — the five pinned cells whose digest must hold before any change
+merges — reads 34,685 of 34,686. (§ 2 defines both populations.)
+
+Lines 145–166:
+Per measurement it reports
+`identical / mismatches / noGolden / missingOutput` and asserts strict equality; a mismatch names
+the file and the first differing line, a missing output names the file and carries the generation
+error that refused it. Since v3.3 seat 1 (PR #637) the ON-route run also asserts, per cell, seam (FUNCTION / RULE, and DATA_RULE since v3.3 seat 3, PR #639 — the condition bodies through `IRDataRuleGenerator`; 26 × 3 = 78 gate lines per whole run) and axis
+(site, family, untargeted), that the IR-share breakdown it prints EQUALS the declared decline register
+`rune-java-generator/src/test/resources/d11-ir-declines.txt` — a new or grown decline is a red gate, a healed row is deleted in
+the healing commit, and an `@AfterAll` wholeness check fails a declared key a whole run never visited. Since v3.3 seat 5 (PR #641, decision D55) the ON-route run also prints, per cell and declaration kind, `IR declaration reconcile: declarations / expected / factsAsserted / mismatches` — every fact of the declaration IR held against the source, `mismatches == 0` AND `declarations == expected` (the host's own count of the cell's declarations, so nothing can leave silently) — and `IR file writers: newEmitter / oldGenerator / declaredFallbacks` against the committed shrink-only fallback register. Since v3.3 seat 7 (PR #643) a FOURTH line reconciles the `typeAlias` declarations, and since v3.3 seat 8 (PR #644, the property gate) FIVE more, four asserting ITS OWN population and the parent line a FLOOR it counts itself: `PROPERTY IR declaration reconcile` and `DERIVED IR declaration reconcile` over the cell's data types AND choices together (17,665 declarations each over the 25 vendored cells), `PROPERTY IR parent reconcile` over the index's parents (1,776 — a FLOOR, not an equality: `parents` ≥ the host's own count of the cell's distinct transitive supertypes, printed as `supertypes=`; the index's reach beyond it, the item types of specialized properties, is READ), `MODEL IR declaration reconcile` over the models the generator would emit (3,952) and `WRAPPER IR spec reconcile` over the metafield wrapper specs the host itself collects (1,079 = `collectSpecs().size()`), all at 0 mismatches, followed by `DERIVED TWO-READS`, a third read that holds the literal tokens the validator generators WROTE against the IR's own walk with every refused element subtracted by the refusal's own target path (`-> AGREE` on all 26 cells).
+
+Differences that are *known* live in one committed file,
+`rune-java-generator/src/test/resources/d11-known-divergent.txt`, under a seven-category taxonomy
+(decision D34). At the v3.1 close it holds **one** entry — a `*/*/METAFIELD` wildcard for
+`ReferenceWithMetaVoid.java`, which twelve cells on the CDM 6 line (the eight CDM 6.x cells and the
+four DRR 7.x cells that inherit it) each miss exactly once: a wrapper over `java.lang.Void` that upstream's generator
+minted for an attribute whose type never resolved (zero references, no model type; the header
+carries the root-cause analysis and a draft upstream issue, to be filed when this repository is
+public). Every other entry that ever existed was healed and retired; the file's header is the
+ledger of that burn-down.
+
+The ring's 55 measurement lines are hashed into one digest that the merge gate compares against the
+standing value (`9062fc14` = 34,685 / 0 / 1 at every step of v3.1); the band's 275 lines hash the
+same way (`d47fa88f` = 0 / 174,129 / 12 at PR #605), and both routes below must produce the same
+digest.
+
+Lines 70–78:
+the seats: the convergence test (SUPERSEDED at seat 13, #634 — the close paragraph below). Until then the claim read: byte-exact where measured; on
+adversarial input, named gaps, burning down. **The generation-2 cell ran at seat 10 (#631): the 22 gen-1 families converged to ONE byte row — their 6,495 carried-over goldens re-pinned 6,494 byte-identical, the one movement `s22/a1o1/meta/C22TermsMeta.java` upstream's own first-wins reshuffle, which is also the fork's one gen-1 byte row (M13, declared; the #413-class replay pin is the second round's), beside the carried-over D48 class (s17's four declared refusals and fourteen golden-free rows); the twelve fresh families and the band did not — 524 byte rows + 79 missing outputs over
+12,169 goldens (11,566 identical, 95.0 %), 111 golden-free emissions by recorded verdict, 103 resolution rows, 39 route splits,
+110 alias-map rows, 267 optimised-route emissions that do not compile (of the 1,473 overlay files the two-pass census compiles) and 18 one-sided runtime outcomes on the pair
+gate (the implicit-item only-exists root's optimised twin throws where the reference returns; declared as a set — healed at seat 12, #633, the set EMPTY since), in twenty mechanism classes (sixteen KNOWN laws at new seats and four NEW; at least seven of them SILENT non-compiling emission classes the refusal register does not yet guard — measured at round 1 by javac over the fork's 524 default-route byte-mismatch emissions substituted for their goldens (two passes, cascades within the substituted tree included): 436 of the 524 do not compile, the seven silent classes 249 of their 271 rows (M1 105 of 105, M2 79 of 92, M6 16 of 25 — the nine C25Only variants compile on this route too — M7b 24 of 24, M7c 12 of 12, M8a 12 of 12, M12 1 of 1), and four classes the first census had called compiling do not on this route (M5b, M5d, M5e, M9 — 13, 13, 13 and 12 rows), while M11 and M13 compile whole) — so the second round is priced by mechanism in the seat plan's row 11; its first seat (seat 11, #632) healed M1 — the `List`-named type, 105 rows, the loudest silent class — under the released plugin's file-scope first-claim law at the six data-type kinds (D50; five hold-out groups / 232 goldens pinned from the plugin before the code), the declared set 611 → 506 with nothing else moved and the FUNCTION kind's one residual declared; its second seat (seat 12, #633) made the remaining silent classes LOUD first — three register sites (`SWITCH_TERNARY_STUB` 72, `DEEP_PATH_UTIL_UNRESOLVED` 24, `ALIAS_SIGNATURE_RAW_TYPE` 52 on the cell, identical per route; the optimised register 267 → 185 and 185 → 172 after the heals, the alias-law grains 110 → 197 by kind, the golden-free register 111 → 107, the divergence set 506 → 510 with the union unmoved) — then healed three of them under the released plugin's forms with a hold-out group pinned before each (M12 the duplicate closure parameter 1 row, M8a the meta wrapper into a rule's plain output 12, M6 the `item ->` only-exists root 25 — the last a parser fix with no generator code, which also emptied the pair gate's 18 one-sided outcomes and bound 18 of the resolver's 103 declared rows): 38 rows healed on both routes and deleted, 510 → 472, the 25 real cells unmoved on both routes at the second and third heals' trees before their commits and at the chain (`s12b` @ `cd9072079`, after the round-1 receiver heal `s12c` @ `49fdb24a9`, after round 2's gate `s12e` @ `00e899b3c`, after round 3's comment-only head `s12g` @ `e88fce003` (and the docs chains `s12f` @ `5487a2042` / `s12h` @ `954d68b37` beside it) and after round 4's comment-only head `s12i` @ `6375630ec` (and its docs chain `s12j` @ `107c1a3ea`), and after round 5's comment-only head `s12k` @ `e73b208af` (and its docs chain `s12l` @ `aadaba05d`) and after round 6's head `s12m` @ `a558ee09b` (comments + docs), round 7's head `s12n` @ `126137c02` (comments + docs) and round 8's comment-only head `s12o` @ `571d7c8b8` (the chain of record — the last verify-gated chain): the FULL matrix `c1cf575a` = 256 / 185,838 / 216 + 107 at all thirteen),
+and the claim still reads: byte-exact where measured; on adversarial input, named gaps, burning down.**
+
+**The close (seat 13, development PR #634, decision D53 of 2026-09-13):** the convergence test above was NOT met and is superseded, not quietly re-cut — v3.2 closes when **nothing silent remains on the chaos cell**, and at the chain of record `s13d` (`ca31abe18`) it reads: 11,811 of 12,169 files byte-identical on both routes; **53 byte-listed gaps, every one compiling Java** (three mechanism classes, each a declared shrink-only row with its compile verdict recorded — a javac re-census of the remaining silent rows at the seat's design commit read 256 = 203 non-compiling over thirteen classes + 53 compiling-different, and the 203 became named refusals or heals); **316 named refusals** at 14 of the register's 22 refusal sites, every one of the 22 proven able to fire by a control on both routes; **1 declared missing output** (the `ReferenceWithMetaVoid` metafield, the same upstream defect as the real corpora's waiver); **0 silent emissions**. The declared set fell 611 → 370 across the second round; the 25 real cells never moved. The claim now reads: byte-exact on the four real model families; on the adversarial cell 53 byte-listed gaps burning down in v3.3, 316 named refusals, zero silent emissions. "Measured", never "robust".
+

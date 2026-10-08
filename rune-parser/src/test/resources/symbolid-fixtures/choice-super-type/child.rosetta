@@ -1,0 +1,4 @@
+namespace com.test
+
+type ChildOfChoice extends ChoiceParent:
+    a string (1..1)

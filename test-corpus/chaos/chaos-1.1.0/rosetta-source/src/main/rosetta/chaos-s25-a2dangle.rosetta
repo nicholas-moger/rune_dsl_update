@@ -1,0 +1,52 @@
+namespace chaos.s25.a2dangle
+version "1.0.0"
+import chaos.s25.a2dangle.h.*
+import chaos.s25.a2dangle.unused.*
+type C25OptA: <"Choice option A.">
+    pa string (0..1)
+    shared string (0..1)
+type C25OptB: <"Choice option B.">
+    pb string (0..1)
+    shared string (0..1)
+choice C25Pick: <"The choice whose option is an only-exists leaf (the ladder census's leaf class, seat 8).">
+    C25OptA
+    C25OptB
+type C25Paths: <"only-exists targets: a bare, a nested, a choice-typed and a multi attribute.">
+    p string (0..1)
+    q string (0..1)
+    sub C25Sub (0..1)
+    pick C25Pick (0..1)
+    subs C25Sub (0..*)
+    condition C25Bare: <"A bare-symbol leaf with no chain (seat 8's declined edge shape - upstream's verdict UNMEASURED until now).">
+        p only exists or q only exists
+    condition C25Item: <"An item root (the other declined edge shape).">
+        item -> p only exists or (item -> p, item -> q) only exists
+    condition C25TwoHop: <"A two-hop element and a mixed list beside it.">
+        sub -> sname only exists or (sub -> sname, sub -> subs) only exists
+    condition C25Option: <"A choice-option leaf.">
+        if pick exists then pick -> C25OptA only exists or pick -> C25OptB only exists
+func C25Shadow: <"Closure parameters named like an ATTRIBUTE of the item (sub), an explicit parameter at every list-op seat (reduce / sort / min / max / filter), and a then-body implicit item beside an outer explicit parameter.">
+    inputs:
+        ps C25Paths (0..*)
+    output:
+        n number (1..1)
+    alias bySub: ps extract sub [ sub -> sub -> sname ]
+    alias sorted: ps sort sub [ sub -> p ]
+    alias hi: ps max sub [ sub -> q ]
+    alias lo: ps min sub [ sub -> q ]
+    alias kept: ps filter sub [ sub -> p exists ]
+    alias total: ps extract sub [ sub -> subs count ] then reduce a, b [ a + b ]
+    alias mixed: ps extract x [ x -> subs then filter item -> subs exists then count ]
+    set n:
+        (bySub count) + (sorted count) + (kept count) + total + (mixed then sum)
+        + (if hi exists then 1 else 0) + (if lo exists then 1 else 0)
+func C25Only: <"only exists at a function seat: a single path, a two-hop list, under then inside a lambda, and a choice-option leaf through the implicit item.">
+    inputs:
+        ps C25Paths (0..*)
+        t C25Paths (1..1)
+    output:
+        oks boolean (0..*)
+    add oks: t -> p only exists
+    add oks: (t -> sub -> sname, t -> sub -> subs) only exists
+    add oks: ps extract x [ x -> sub -> sname only exists ]
+    add oks: ps then extract (item -> pick -> C25OptA only exists)

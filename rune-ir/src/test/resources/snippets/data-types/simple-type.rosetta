@@ -1,0 +1,5 @@
+namespace test.model
+
+type Foo:
+    bar string (1..1)
+    baz number (0..*)

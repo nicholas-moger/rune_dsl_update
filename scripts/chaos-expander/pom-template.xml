@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The chaos-cell golden ORACLE scaffold pom (v3.2 PR-1; charter § 2.1's
+     pin-chaos-goldens.sh instantiates it - no placeholders beyond the
+     documented clone deltas below).
+
+     A byte-faithful clone of scripts/holdout-oracle/pom-template.xml (the
+     PR #410 scaffold): the RELEASED com.regnosys.rosetta:
+     rosetta-maven-plugin:9.83.0 from ~/.m2 over the staged chaos model dir.
+     THE ORACLE LAW: the released 9.83.0 plugin JARs are the oracle - NEVER
+     the vendored rune-dsl/ source. The holdout template's header carries the
+     full configuration provenance (mirrored from the CDM 6.20.6
+     rosetta-source pom) and its three deliberate deltas (raw un-filtered
+     sourceRoots; the omitted classPathLookupFilter; no rosettaConfig);
+     they all carry over unchanged.
+
+     THE TWO-ORACLE GATING DELTA (charter § 4b): this mojo's validation gate
+     is NOT the same instrument as the L1 validator behind
+     scripts/xtext-oracle/run-oracle.sh - a file can be validator-clean yet
+     mojo-refused ("severe validation error", the holdout formatting-*
+     precedent). pin-chaos-goldens.sh therefore stages the sink MINUS the
+     EXPECTED census (upstream-invalid files have no definable golden) and
+     records any mojo-refused-but-L1-clean file as a NAMED golden-free
+     verdict rather than working around it. -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.finos.rune.chaos</groupId>
+    <artifactId>chaos-golden-oracle</artifactId>
+    <!-- Deliberately loud: instantly recognisable in any golden if the
+         no-filtering invariant ever broke (the holdout convention). -->
+    <version>0.0.0.chaos-oracle</version>
+    <packaging>jar</packaging>
+    <properties>
+        <maven.compiler.release>17</maven.compiler.release>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.finos.rune</groupId>
+            <artifactId>rune-runtime</artifactId>
+            <version>9.83.0</version>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.regnosys.rosetta</groupId>
+                <artifactId>rosetta-maven-plugin</artifactId>
+                <version>9.83.0</version>
+                <executions>
+                    <execution>
+                        <id>generate-rosetta</id>
+                        <phase>generate-sources</phase>
+                        <goals><goal>generate</goal></goals>
+                        <configuration>
+                            <sourceRoots>
+                                <sourceRoot>${project.basedir}/model</sourceRoot>
+                            </sourceRoots>
+                            <incrementalXtextBuild>false</incrementalXtextBuild>
+                            <languages>
+                                <language>
+                                    <setup>com.regnosys.rosetta.RosettaStandaloneSetup</setup>
+                                    <outputConfigurations>
+                                        <outputConfiguration>
+                                            <outputDirectory>src/generated/java/</outputDirectory>
+                                        </outputConfiguration>
+                                    </outputConfigurations>
+                                </language>
+                            </languages>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

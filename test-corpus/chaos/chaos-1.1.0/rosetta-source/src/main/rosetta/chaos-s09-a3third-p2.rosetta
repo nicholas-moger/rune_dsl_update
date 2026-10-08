@@ -1,0 +1,21 @@
+namespace chaos.s09.a3third.p2
+version "1.0.0"
+import chaos.s09.a3third.p1.*
+import chaos.s09.a3third.p3.*
+type C9Keyed: <"The meta-shape battery's keyed root (charter 2.2b) - key AND template.">
+    [metadata key]
+    [metadata template]
+    kid string (1..1)
+type C9Holder: <"Every attribute-level metadata shape, at single AND multi cardinality.">
+    direct C9Keyed (0..1)
+    byRef C9Keyed (0..1)
+        [metadata reference]
+    byRefs C9Keyed (0..*)
+        [metadata reference]
+    coded string (0..1)
+        [metadata scheme]
+    codes string (0..*)
+        [metadata scheme]
+    marked string (0..1)
+        [metadata id]
+    plain C9Plain (0..1)

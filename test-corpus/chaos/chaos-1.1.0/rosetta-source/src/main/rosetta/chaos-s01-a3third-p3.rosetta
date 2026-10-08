@@ -1,0 +1,20 @@
+namespace chaos.s01.a3third.p3
+version "1.0.0"
+import chaos.s01.a3third.p1.*
+import chaos.s01.a3third.p2.*
+func C1Widen: <"Conditional arms of SIBLING SUBTYPES - the common-supertype/wildcard decl class (v3.1 F9).">
+    inputs:
+        b boolean (1..1)
+        m C1Mid (1..1)
+        l C1Leaf (1..1)
+    output:
+        out C1Base (1..1)
+    set out:
+        if b then l else m
+type C1Times: <"Every temporal record type at every cardinality form.">
+    d date (0..1)
+    t time (0..1)
+    dt dateTime (0..1)
+    z zonedDateTime (0..1)
+    ds date (0..*)
+    stamp dateTime (1..1)

@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="1330" viewBox="0 0 480 1330" role="img" aria-labelledby="title desc">
+<title id="title">Language changes can affect several layers</title>
+<desc id="desc">Possible change-impact map, not a mandatory sequence for every change. Rune grammar changes can require regeneration of framework-generated ANTLR 3 parsers; Xcore metamodel changes can require regeneration of framework-generated EMF classes. Shared EMF source-model coupling can affect Rune-owned semantic services and generator or editor consumers. Regenerate and test affected layers. This is a qualitative architecture observation, without elapsed times.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9" fill="none" stroke="#a9b7cb" stroke-width="1.4"/></marker></defs>
+<rect width="480" height="1330" rx="22" fill="#121923"/>
+<g font-family="Segoe UI, Arial, sans-serif">
+<text x="24" y="43" fill="#eef2f8" font-size="29" font-weight="600" text-anchor="start">
+<tspan x="24" dy="0" xml:space="preserve">Language changes can</tspan>
+<tspan x="24" dy="35" xml:space="preserve">affect several layers</tspan>
+</text>
+<text x="24" y="119" fill="#a9b7cb" font-size="19" font-weight="400" text-anchor="start">
+<tspan x="24" dy="0" xml:space="preserve">Possible impact paths</tspan>
+<tspan x="24" dy="26" xml:space="preserve">Regenerate / test affected layers</tspan>
+</text>
+<rect x="24" y="185" width="432" height="90" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="25" y="204" width="4" height="52" rx="2" fill="#a2c6e6"/>
+<text x="47" y="222" fill="#a2c6e6" font-size="23" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Rosetta.xtext grammar</tspan>
+</text>
+<text x="47" y="255" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Rune language definition</tspan>
+</text>
+<rect x="24" y="315" width="432" height="90" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="25" y="334" width="4" height="52" rx="2" fill="#a2c6e6"/>
+<text x="47" y="352" fill="#a2c6e6" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">ANTLR 3 parsers</tspan>
+</text>
+<text x="47" y="385" fill="#a9b7cb" font-size="21" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Framework-generated</tspan>
+</text>
+<rect x="24" y="465" width="432" height="90" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="25" y="484" width="4" height="52" rx="2" fill="#92d5c6"/>
+<text x="47" y="502" fill="#92d5c6" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Xcore metamodels</tspan>
+</text>
+<text x="47" y="535" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Rune source-model definition</tspan>
+</text>
+<rect x="24" y="595" width="432" height="90" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="25" y="614" width="4" height="52" rx="2" fill="#92d5c6"/>
+<text x="47" y="632" fill="#92d5c6" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">EMF classes</tspan>
+</text>
+<text x="47" y="665" fill="#a9b7cb" font-size="21" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Framework-generated</tspan>
+</text>
+<rect x="24" y="765" width="432" height="145" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="25" y="784" width="4" height="107" rx="2" fill="#a6b0ec"/>
+<text x="47" y="802" fill="#a6b0ec" font-size="23" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Rune semantic services</tspan>
+</text>
+<text x="47" y="835" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Rune-owned semantics</tspan>
+<tspan x="47" dy="28" xml:space="preserve">Types · references · cardinality</tspan>
+<tspan x="47" dy="28" xml:space="preserve">Validation</tspan>
+</text>
+<rect x="24" y="980" width="432" height="95" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="25" y="999" width="4" height="57" rx="2" fill="#d0b487"/>
+<text x="47" y="1017" fill="#d0b487" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Generator consumers</tspan>
+</text>
+<text x="47" y="1050" fill="#a9b7cb" font-size="21" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Rune-owned consumer</tspan>
+</text>
+<rect x="24" y="1110" width="432" height="95" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="25" y="1129" width="4" height="57" rx="2" fill="#a2c6e6"/>
+<text x="47" y="1147" fill="#a2c6e6" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Editor consumers</tspan>
+</text>
+<text x="47" y="1180" fill="#a9b7cb" font-size="21" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Rune-owned consumer</tspan>
+</text>
+<polyline points="240,275 240,315" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="240,555 240,595" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="456,360 468,360 468,730 240,730" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6 6"/>
+<polyline points="240,685 240,730" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6 6"/>
+<polyline points="240,730 240,765" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6 6" marker-end="url(#arrow)"/>
+<polyline points="240,910 240,940 12,940 12,1157" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6 6"/>
+<polyline points="12,1027 24,1027" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6 6" marker-end="url(#arrow)"/>
+<polyline points="12,1157 24,1157" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6 6" marker-end="url(#arrow)"/>
+<text x="24" y="1260" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="24" dy="0" xml:space="preserve">Shared EMF source-model coupling</tspan>
+<tspan x="24" dy="29" xml:space="preserve">Qualitative: affected layers vary</tspan>
+</text>
+</g>
+</svg>

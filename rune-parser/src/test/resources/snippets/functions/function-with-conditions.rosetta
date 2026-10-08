@@ -1,0 +1,12 @@
+namespace test.functions
+
+func Validate:
+    inputs:
+        value number (1..1)
+    output:
+        result boolean (1..1)
+    condition Positive:
+        value > 0
+    set result: value > 0
+    post-condition IsTrue:
+        result = True

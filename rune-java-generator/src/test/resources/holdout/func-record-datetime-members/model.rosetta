@@ -1,0 +1,17 @@
+namespace test.frec052
+
+func GetDate:
+	inputs:
+		dt dateTime (1..1)
+	output:
+		result date (1..1)
+	set result:
+		dt -> date
+
+func GetTime:
+	inputs:
+		dt dateTime (1..1)
+	output:
+		result time (1..1)
+	set result:
+		dt -> time

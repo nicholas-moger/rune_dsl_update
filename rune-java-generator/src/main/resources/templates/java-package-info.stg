@@ -1,0 +1,14 @@
+delimiters "$", "$"
+
+packageInfo(model) ::= <<
+/**
+$model.descriptions:{desc |*	
+*	$desc$
+*	<p>
+}$*	
+*
+*/
+
+package $model.packageName$;
+
+>>

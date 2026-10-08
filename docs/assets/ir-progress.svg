@@ -1,0 +1,256 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="990" viewBox="0 0 980 990" role="img" aria-labelledby="ircov-t ircov-d" font-family="'Geist','Segoe UI',system-ui,-apple-system,Helvetica,Arial,sans-serif">
+  <title id="ircov-t">September IR snapshot: writer ownership, expression handling and historical comparisons</title>
+  <desc id="ircov-d">Historical code snapshot, 22 September 2026. IR-fed writer ownership on the reference Java route is 93,703 of 174,141 reference files (53.8 percent) across 25 pinned Rune 9.83 model-release cells and 11 file kinds, excluding chaos: enums, data types and choices with their derived files. These writers still use legacy helpers and templates; this is not independent-emission credit or certification. Function and rule handling measure expression claims, separately from whole files. The upstream comparison tile reports the separately dated 2 September evidence: 174,129 identical files and 12 named non-emissions out of 174,141 references on each compatibility route across those 25 cells and 11 kinds, with line endings normalised. Optimised converted-site and Python root counts were measured on 17 September; the paired-execution census of 150,831 over 21 cells was run on 22 September. Optimised emission remains AST-hosted; Python is exploratory. The intended completion plan is separate in ROADMAP.md.</desc>
+  <rect x="1" y="1" width="978" height="988" rx="16" fill="#0a0d12" stroke="#1c232f" />
+  <text x="46" y="40" font-size="11" font-weight="700" letter-spacing="2" fill="#6b7686">THE IR — SEPTEMBER CODE SNAPSHOT</text>
+  <text x="934" y="40" text-anchor="end" font-size="10" fill="#6b7686">Snapshot: 22 Sep 2026 · scope shown per measure</text>
+  <text x="46" y="66" font-size="18" font-weight="700" fill="#ecf0f6">IR-fed writers own enums, choices, data types and their derived files</text>
+  <text x="46" y="86" font-size="11.5" fill="#8591a6">Historical measures; legacy helpers/templates remain. See the roadmap for intended completion.</text>
+  <text x="46" y="112" font-size="10.5" font-weight="600" letter-spacing="2" fill="#6b7686">IR-FED FILE OWNERSHIP</text>
+  <text x="44" y="148" font-size="36" font-weight="800" letter-spacing="-1.2" fill="#d8b25a">53.8%</text>
+  <text x="46" y="168" font-size="11" fill="#8591a6">93,703 of 174,141 reference files</text>
+  <text x="46" y="183" font-size="10.5" fill="#6b7686">25 releases; chaos excluded</text>
+  <text x="280" y="112" font-size="10.5" font-weight="600" letter-spacing="2" fill="#6b7686">FN-BODY CLAIMS HANDLED</text>
+  <text x="278" y="148" font-size="36" font-weight="800" letter-spacing="-1.2" fill="#C3E455">99.9%</text>
+  <text x="280" y="168" font-size="11" fill="#8591a6">by the old code 18.6% · natively 81.4%</text>
+  <text x="280" y="183" font-size="10.5" fill="#6b7686">DRR 7.x 99.65% · 137 declines per cell</text>
+  <text x="514" y="112" font-size="10.5" font-weight="600" letter-spacing="2" fill="#6b7686">RULE-BODY CLAIMS HANDLED</text>
+  <text x="512" y="148" font-size="36" font-weight="800" letter-spacing="-1.2" fill="#8b7ff0">99.6%</text>
+  <text x="514" y="168" font-size="11" fill="#8591a6">by the old code 20.5% · natively 79.5%</text>
+  <text x="514" y="183" font-size="10.5" fill="#6b7686">DRR 7.0–7.2 98.97% · 7.3 98.95%</text>
+  <text x="748" y="112" font-size="10.5" font-weight="600" letter-spacing="2" fill="#6b7686">UPSTREAM COMPARISON</text>
+  <text x="746" y="148" font-size="36" font-weight="800" letter-spacing="-1.2" fill="#ecf0f6">174,129</text>
+  <text x="748" y="166" font-size="10.5" fill="#8591a6">174,141 refs each · Modes 1 and 2</text>
+  <text x="748" y="180" font-size="9.5" fill="#6b7686">25 cells × 11 kinds · recorded 2 Sep 2026</text>
+  <text x="748" y="193" font-size="9.5" fill="#6b7686">12 non-emissions · 0 differences</text>
+  <line x1="44" y1="200" x2="936" y2="200" stroke="#1c232f" />
+  <text x="46" y="226" font-size="13" font-weight="700" fill="#ecf0f6">At this snapshot <tspan font-weight="400" font-size="11" fill="#8591a6">— every generated file kind on the 25 cells (174,141 files) × the three targets</tspan></text>
+  <text x="302" y="252" font-size="10.5" font-weight="700" letter-spacing="1.5" fill="#C3E455">LEGACY JAVA ROUTE</text>
+  <text x="302" y="265" font-size="9" fill="#6b7686">ast → ir → java</text>
+  <text x="516" y="252" font-size="10.5" font-weight="700" letter-spacing="1.5" fill="#5ab0f0">OPTIMISED JAVA ROUTE</text>
+  <text x="516" y="265" font-size="9" fill="#6b7686">ast → java · the IR consulted to SELECT</text>
+  <text x="730" y="252" font-size="10.5" font-weight="700" letter-spacing="1.5" fill="#8b7ff0">PYTHON (exploratory)</text>
+  <text x="730" y="265" font-size="9" fill="#6b7686">ir → python</text>
+  <rect x="38" y="274" width="904" height="62" rx="8" fill="#11151c" stroke="#1c232f" />
+  <text x="46" y="293" font-size="12" font-weight="700" fill="#ecf0f6">Function bodies</text>
+  <text x="46" y="307" font-size="9.5" fill="#8591a6">27,144 files · 15.6% of the generated Java</text>
+  <text x="46" y="320" font-size="8.5" fill="#6b7686">their expression claims handled by the IR — a sub-file share</text>
+  <text x="46" y="332" font-size="8.5" fill="#6b7686">the FILE is written by the old generator — not from the IR</text>
+  <rect x="302" y="284" width="99" height="15" rx="3" fill="#8b7ff0" />
+  <text x="308" y="295" font-size="9" font-weight="700" letter-spacing="0.6" fill="#0a0d12">HANDLED · 99.9%</text>
+  <rect x="472" y="284" width="34" height="15" rx="3" fill="none" stroke="#4ea3f0" />
+  <text x="489.0" y="295" text-anchor="middle" font-size="9" font-weight="700" fill="#4ea3f0">3.3</text>
+  <text x="302" y="312" font-size="9" fill="#8591a6">natively 81.4% · by the old code 18.6%</text>
+  <text x="302" y="325" font-size="9" fill="#6b7686">expression claims, not whole-file ownership</text>
+  <rect x="516" y="284" width="158" height="15" rx="3" fill="#d8b25a" />
+  <text x="522" y="295" font-size="9" font-weight="700" letter-spacing="0.6" fill="#0a0d12">AST EMITS · THE IR SELECTS</text>
+  <rect x="686" y="284" width="34" height="15" rx="3" fill="none" stroke="#4ea3f0" />
+  <text x="703.0" y="295" text-anchor="middle" font-size="9" font-weight="700" fill="#4ea3f0">Later</text>
+  <text x="516" y="312" font-size="9" fill="#8591a6">13,881 converted sites chosen by the IR</text>
+  <text x="516" y="325" font-size="9" fill="#6b7686">fn + rule bodies · measured 17 Sep 2026</text>
+  <rect x="730" y="284" width="83" height="15" rx="3" fill="#8b7ff0" />
+  <text x="736" y="295" font-size="9" font-weight="700" letter-spacing="0.6" fill="#0a0d12">29% OF ROOTS</text>
+  <rect x="900" y="284" width="34" height="15" rx="3" fill="none" stroke="#4ea3f0" />
+  <text x="917.0" y="295" text-anchor="middle" font-size="9" font-weight="700" fill="#4ea3f0">R&amp;D</text>
+  <text x="730" y="312" font-size="9" fill="#8591a6">1,622 of 5,510 fn-body roots lower</text>
+  <text x="730" y="325" font-size="9" fill="#6b7686">five-cell census · 17 Sep 2026</text>
+  <rect x="38" y="340" width="904" height="62" rx="8" fill="#11151c" stroke="#1c232f" />
+  <text x="46" y="359" font-size="12" font-weight="700" fill="#ecf0f6">Rule + report classes</text>
+  <text x="46" y="373" font-size="9.5" fill="#8591a6">21,583 files · 12.4% of the generated Java</text>
+  <text x="46" y="386" font-size="8.5" fill="#6b7686">21,341 rules · 242 reports — their bodies handled by the IR</text>
+  <text x="46" y="398" font-size="8.5" fill="#6b7686">separate rule / report file population</text>
+  <rect x="302" y="350" width="99" height="15" rx="3" fill="#8b7ff0" />
+  <text x="308" y="361" font-size="9" font-weight="700" letter-spacing="0.6" fill="#0a0d12">HANDLED · 99.6%</text>
+  <rect x="472" y="350" width="34" height="15" rx="3" fill="none" stroke="#4ea3f0" />
+  <text x="489.0" y="361" text-anchor="middle" font-size="9" font-weight="700" fill="#4ea3f0">3.3</text>
+  <text x="302" y="378" font-size="9" fill="#8591a6">natively 79.5% · by the old code 20.5%</text>
+  <text x="302" y="391" font-size="9" fill="#6b7686">expression claims, not whole-file ownership</text>
+  <rect x="516" y="350" width="158" height="15" rx="3" fill="#d8b25a" />
+  <text x="522" y="361" font-size="9" font-weight="700" letter-spacing="0.6" fill="#0a0d12">AST EMITS · THE IR SELECTS</text>
+  <rect x="686" y="350" width="34" height="15" rx="3" fill="none" stroke="#4ea3f0" />
+  <text x="703.0" y="361" text-anchor="middle" font-size="9" font-weight="700" fill="#4ea3f0">Later</text>
+  <text x="516" y="378" font-size="9" fill="#8591a6">its sites are counted in the row above</text>
+  <text x="516" y="391" font-size="9" fill="#6b7686">none emitted from it — re-hosted as future work</text>
+  <rect x="730" y="350" width="86" height="15" rx="3" fill="#1c232f" stroke="#243040" />
+  <text x="736" y="361" font-size="9" font-weight="700" letter-spacing="0.6" fill="#ecf0f6">NOT CENSUSED</text>
+  <rect x="900" y="350" width="34" height="15" rx="3" fill="none" stroke="#4ea3f0" />
+  <text x="917.0" y="361" text-anchor="middle" font-size="9" font-weight="700" fill="#4ea3f0">R&amp;D</text>
+  <text x="730" y="378" font-size="9" fill="#8591a6">rules and reports outside the census</text>
+  <rect x="38" y="406" width="904" height="62" rx="8" fill="#11151c" stroke="#1c232f" />
+  <text x="46" y="425" font-size="12" font-weight="700" fill="#ecf0f6">Data-rule conditions</text>
+  <text x="46" y="439" font-size="9.5" fill="#8591a6">29,206 files · 16.8% of the generated Java</text>
+  <text x="46" y="452" font-size="8.5" fill="#6b7686">through the IR compiler on the legacy route </text>
+  <text x="46" y="464" font-size="8.5" fill="#6b7686">partial emission excluded from file meter</text>
+  <rect x="302" y="416" width="124" height="15" rx="3" fill="#8b7ff0" />
+  <text x="308" y="427" font-size="9" font-weight="700" letter-spacing="0.6" fill="#0a0d12">HANDLED · 98.4–100%</text>
+  <rect x="472" y="416" width="34" height="15" rx="3" fill="none" stroke="#4ea3f0" />
+  <text x="489.0" y="427" text-anchor="middle" font-size="9" font-weight="700" fill="#4ea3f0">3.3</text>
+  <text x="302" y="444" font-size="9" fill="#8591a6">natively 36.4% · by the old code 63.6%</text>
+  <text x="302" y="457" font-size="9" fill="#6b7686">expression claims, not whole-file ownership</text>
+  <rect x="516" y="416" width="63" height="15" rx="3" fill="#1c232f" stroke="#243040" />
+  <text x="522" y="427" font-size="9" font-weight="700" letter-spacing="0.6" fill="#ecf0f6">NO IR · 0%</text>
+  <rect x="686" y="416" width="34" height="15" rx="3" fill="none" stroke="#4ea3f0" />
+  <text x="703.0" y="427" text-anchor="middle" font-size="9" font-weight="700" fill="#4ea3f0">Later</text>
+  <text x="516" y="444" font-size="9" fill="#8591a6">the AST compiler</text>
+  <rect x="730" y="416" width="86" height="15" rx="3" fill="#1c232f" stroke="#243040" />
+  <text x="736" y="427" font-size="9" font-weight="700" letter-spacing="0.6" fill="#ecf0f6">NOT CENSUSED</text>
+  <rect x="900" y="416" width="34" height="15" rx="3" fill="none" stroke="#4ea3f0" />
+  <text x="917.0" y="427" text-anchor="middle" font-size="9" font-weight="700" fill="#4ea3f0">R&amp;D</text>
+  <text x="730" y="444" font-size="9" fill="#8591a6">rules and reports outside the census</text>
+  <rect x="38" y="472" width="904" height="62" rx="8" fill="#11151c" stroke="#1c232f" />
+  <text x="46" y="491" font-size="12" font-weight="700" fill="#ecf0f6">Enums</text>
+  <text x="46" y="505" font-size="9.5" fill="#8591a6">4,542 files · 2.6% of the generated Java</text>
+  <text x="46" y="518" font-size="8.5" fill="#6b7686">written by an IR-fed emitter; legacy helpers retained</text>
+  <text x="46" y="530" font-size="8.5" fill="#6b7686">counted in the historical writer-ownership measure</text>
+  <rect x="302" y="482" width="112" height="15" rx="3" fill="#C3E455" />
+  <text x="308" y="493" font-size="9" font-weight="700" letter-spacing="0.6" fill="#0a0d12">IR-FED · 100%</text>
+  <rect x="472" y="482" width="34" height="15" rx="3" fill="none" stroke="#4ea3f0" />
+  <text x="489.0" y="493" text-anchor="middle" font-size="9" font-weight="700" fill="#4ea3f0">3.3</text>
+  <text x="302" y="510" font-size="9" fill="#8591a6">a new IR emitter writes all 4,542 files</text>
+  <text x="302" y="523" font-size="9" fill="#6b7686">legacy helpers/templates still used</text>
+  <rect x="516" y="482" width="110" height="15" rx="3" fill="#1c232f" stroke="#243040" />
+  <text x="522" y="493" font-size="9" font-weight="700" letter-spacing="0.6" fill="#ecf0f6">NO DECLARATION IR</text>
+  <rect x="686" y="482" width="34" height="15" rx="3" fill="none" stroke="#4ea3f0" />
+  <text x="703.0" y="493" text-anchor="middle" font-size="9" font-weight="700" fill="#4ea3f0">Later</text>
+  <text x="516" y="510" font-size="9" fill="#8591a6">the route builds none</text>
+  <rect x="730" y="482" width="154" height="15" rx="3" fill="#C3E455" />
+  <text x="736" y="493" font-size="9" font-weight="700" letter-spacing="0.6" fill="#0a0d12">FROM THE IR’S THIN SUBSET</text>
+  <rect x="900" y="482" width="34" height="15" rx="3" fill="none" stroke="#4ea3f0" />
+  <text x="917.0" y="493" text-anchor="middle" font-size="9" font-weight="700" fill="#4ea3f0">R&amp;D</text>
+  <text x="730" y="510" font-size="9" fill="#8591a6">declarations emitted</text>
+  <text x="730" y="523" font-size="9" fill="#6b7686">documentation, annotations remain exploratory</text>
+  <rect x="38" y="538" width="904" height="62" rx="8" fill="#11151c" stroke="#1c232f" />
+  <text x="46" y="557" font-size="12" font-weight="700" fill="#ecf0f6">Choices</text>
+  <text x="46" y="571" font-size="9.5" fill="#8591a6">80 files · 0.1% of the generated Java</text>
+  <text x="46" y="584" font-size="8.5" fill="#6b7686">written by an IR-fed emitter; legacy helpers retained</text>
+  <text x="46" y="596" font-size="8.5" fill="#6b7686">with their five derived files, as ONE unit</text>
+  <rect x="302" y="548" width="112" height="15" rx="3" fill="#C3E455" />
+  <text x="308" y="559" font-size="9" font-weight="700" letter-spacing="0.6" fill="#0a0d12">IR-FED · 100%</text>
+  <rect x="472" y="548" width="34" height="15" rx="3" fill="none" stroke="#4ea3f0" />
+  <text x="489.0" y="559" text-anchor="middle" font-size="9" font-weight="700" fill="#4ea3f0">3.3</text>
+  <text x="302" y="576" font-size="9" fill="#8591a6">a new IR emitter writes all 80 files</text>
+  <text x="302" y="589" font-size="9" fill="#6b7686">legacy helpers/templates still used</text>
+  <rect x="516" y="548" width="110" height="15" rx="3" fill="#1c232f" stroke="#243040" />
+  <text x="522" y="559" font-size="9" font-weight="700" letter-spacing="0.6" fill="#ecf0f6">NO DECLARATION IR</text>
+  <rect x="686" y="548" width="34" height="15" rx="3" fill="none" stroke="#4ea3f0" />
+  <text x="703.0" y="559" text-anchor="middle" font-size="9" font-weight="700" fill="#4ea3f0">Later</text>
+  <text x="516" y="576" font-size="9" fill="#8591a6">the route builds none</text>
+  <rect x="730" y="548" width="154" height="15" rx="3" fill="#C3E455" />
+  <text x="736" y="559" font-size="9" font-weight="700" letter-spacing="0.6" fill="#0a0d12">FROM THE IR’S THIN SUBSET</text>
+  <rect x="900" y="548" width="34" height="15" rx="3" fill="none" stroke="#4ea3f0" />
+  <text x="917.0" y="559" text-anchor="middle" font-size="9" font-weight="700" fill="#4ea3f0">R&amp;D</text>
+  <text x="730" y="576" font-size="9" fill="#8591a6">declarations emitted</text>
+  <text x="730" y="589" font-size="9" fill="#6b7686">option types, annotations remain exploratory</text>
+  <rect x="38" y="604" width="904" height="62" rx="8" fill="#11151c" stroke="#1c232f" />
+  <text x="46" y="623" font-size="12" font-weight="700" fill="#ecf0f6">Data types</text>
+  <text x="46" y="637" font-size="9.5" fill="#8591a6">17,585 files · 10.1% of the generated Java</text>
+  <text x="46" y="650" font-size="8.5" fill="#6b7686">written by an IR-fed emitter; legacy helpers retained</text>
+  <text x="46" y="662" font-size="8.5" fill="#6b7686">with their five derived files, as ONE unit</text>
+  <rect x="302" y="614" width="112" height="15" rx="3" fill="#C3E455" />
+  <text x="308" y="625" font-size="9" font-weight="700" letter-spacing="0.6" fill="#0a0d12">IR-FED · 100%</text>
+  <rect x="472" y="614" width="34" height="15" rx="3" fill="none" stroke="#4ea3f0" />
+  <text x="489.0" y="625" text-anchor="middle" font-size="9" font-weight="700" fill="#4ea3f0">3.3</text>
+  <text x="302" y="642" font-size="9" fill="#8591a6">a new IR emitter writes all 17,585 files</text>
+  <text x="302" y="655" font-size="9" fill="#6b7686">legacy helpers/templates still used</text>
+  <rect x="516" y="614" width="110" height="15" rx="3" fill="#1c232f" stroke="#243040" />
+  <text x="522" y="625" font-size="9" font-weight="700" letter-spacing="0.6" fill="#ecf0f6">NO DECLARATION IR</text>
+  <rect x="686" y="614" width="34" height="15" rx="3" fill="none" stroke="#4ea3f0" />
+  <text x="703.0" y="625" text-anchor="middle" font-size="9" font-weight="700" fill="#4ea3f0">Later</text>
+  <text x="516" y="642" font-size="9" fill="#8591a6">the route builds none</text>
+  <rect x="730" y="614" width="154" height="15" rx="3" fill="#C3E455" />
+  <text x="736" y="625" font-size="9" font-weight="700" letter-spacing="0.6" fill="#0a0d12">FROM THE IR’S THIN SUBSET</text>
+  <rect x="900" y="614" width="34" height="15" rx="3" fill="none" stroke="#4ea3f0" />
+  <text x="917.0" y="625" text-anchor="middle" font-size="9" font-weight="700" fill="#4ea3f0">R&amp;D</text>
+  <text x="730" y="642" font-size="9" fill="#8591a6">declarations emitted</text>
+  <text x="730" y="655" font-size="9" fill="#6b7686">qualified types, bounds, annotations remain exploratory</text>
+  <rect x="38" y="670" width="904" height="62" rx="8" fill="#11151c" stroke="#1c232f" />
+  <text x="46" y="689" font-size="12" font-weight="700" fill="#ecf0f6">The data types’ derived files</text>
+  <text x="46" y="703" font-size="9.5" fill="#8591a6">71,096 files · 40.8% of the generated Java</text>
+  <text x="46" y="716" font-size="8.5" fill="#6b7686">validators ×3 · meta registries · deep-path utils</text>
+  <text x="46" y="728" font-size="8.5" fill="#6b7686">written WITH their type, as one unit</text>
+  <rect x="302" y="680" width="112" height="15" rx="3" fill="#C3E455" />
+  <text x="308" y="691" font-size="9" font-weight="700" letter-spacing="0.6" fill="#0a0d12">IR-FED · 100%</text>
+  <rect x="472" y="680" width="34" height="15" rx="3" fill="none" stroke="#4ea3f0" />
+  <text x="489.0" y="691" text-anchor="middle" font-size="9" font-weight="700" fill="#4ea3f0">3.3</text>
+  <text x="302" y="708" font-size="9" fill="#8591a6">the type unit writes all 71,096 files</text>
+  <text x="302" y="721" font-size="9" fill="#6b7686">whole-unit fallback for unsupported cases</text>
+  <rect x="516" y="680" width="110" height="15" rx="3" fill="#1c232f" stroke="#243040" />
+  <text x="522" y="691" font-size="9" font-weight="700" letter-spacing="0.6" fill="#ecf0f6">NO DECLARATION IR</text>
+  <rect x="686" y="680" width="34" height="15" rx="3" fill="none" stroke="#4ea3f0" />
+  <text x="703.0" y="691" text-anchor="middle" font-size="9" font-weight="700" fill="#4ea3f0">Later</text>
+  <text x="516" y="708" font-size="9" fill="#8591a6">the route builds none</text>
+  <rect x="730" y="680" width="77" height="15" rx="3" fill="#1c232f" stroke="#243040" />
+  <text x="736" y="691" font-size="9" font-weight="700" letter-spacing="0.6" fill="#ecf0f6">NOT EMITTED</text>
+  <rect x="900" y="680" width="34" height="15" rx="3" fill="none" stroke="#4ea3f0" />
+  <text x="917.0" y="691" text-anchor="middle" font-size="9" font-weight="700" fill="#4ea3f0">R&amp;D</text>
+  <text x="730" y="708" font-size="9" fill="#8591a6">no validators, registries or wrappers</text>
+  <rect x="38" y="736" width="904" height="62" rx="8" fill="#11151c" stroke="#1c232f" />
+  <text x="46" y="755" font-size="12" font-weight="700" fill="#ecf0f6">The choices’ derived files</text>
+  <text x="46" y="769" font-size="9.5" fill="#8591a6">400 files · 0.2% of the generated Java</text>
+  <text x="46" y="782" font-size="8.5" fill="#6b7686">validators ×3 · meta registries · deep-path utils</text>
+  <text x="46" y="794" font-size="8.5" fill="#6b7686">written WITH their choice, as one unit</text>
+  <rect x="302" y="746" width="112" height="15" rx="3" fill="#C3E455" />
+  <text x="308" y="757" font-size="9" font-weight="700" letter-spacing="0.6" fill="#0a0d12">IR-FED · 100%</text>
+  <rect x="472" y="746" width="34" height="15" rx="3" fill="none" stroke="#4ea3f0" />
+  <text x="489.0" y="757" text-anchor="middle" font-size="9" font-weight="700" fill="#4ea3f0">3.3</text>
+  <text x="302" y="774" font-size="9" fill="#8591a6">the type unit writes all 400 files</text>
+  <text x="302" y="787" font-size="9" fill="#6b7686">whole-unit fallback for unsupported cases</text>
+  <rect x="516" y="746" width="110" height="15" rx="3" fill="#1c232f" stroke="#243040" />
+  <text x="522" y="757" font-size="9" font-weight="700" letter-spacing="0.6" fill="#ecf0f6">NO DECLARATION IR</text>
+  <rect x="686" y="746" width="34" height="15" rx="3" fill="none" stroke="#4ea3f0" />
+  <text x="703.0" y="757" text-anchor="middle" font-size="9" font-weight="700" fill="#4ea3f0">Later</text>
+  <text x="516" y="774" font-size="9" fill="#8591a6">the route builds none</text>
+  <rect x="730" y="746" width="77" height="15" rx="3" fill="#1c232f" stroke="#243040" />
+  <text x="736" y="757" font-size="9" font-weight="700" letter-spacing="0.6" fill="#ecf0f6">NOT EMITTED</text>
+  <rect x="900" y="746" width="34" height="15" rx="3" fill="none" stroke="#4ea3f0" />
+  <text x="917.0" y="757" text-anchor="middle" font-size="9" font-weight="700" fill="#4ea3f0">R&amp;D</text>
+  <text x="730" y="774" font-size="9" fill="#8591a6">no validators, registries or wrappers</text>
+  <rect x="38" y="802" width="904" height="62" rx="8" fill="#11151c" stroke="#1c232f" />
+  <text x="46" y="821" font-size="12" font-weight="700" fill="#ecf0f6">The other derived files</text>
+  <text x="46" y="835" font-size="9.5" fill="#8591a6">2,505 files · 1.4% of the generated Java</text>
+  <text x="46" y="848" font-size="8.5" fill="#6b7686">metafield wrappers · package-info</text>
+  <text x="46" y="860" font-size="8.5" fill="#6b7686">526 label providers</text>
+  <rect x="302" y="812" width="89" height="15" rx="3" fill="#1c232f" stroke="#243040" />
+  <text x="308" y="823" font-size="9" font-weight="700" letter-spacing="0.6" fill="#ecf0f6">NO IR TWIN · 0%</text>
+  <rect x="472" y="812" width="34" height="15" rx="3" fill="none" stroke="#4ea3f0" />
+  <text x="489.0" y="823" text-anchor="middle" font-size="9" font-weight="700" fill="#4ea3f0">3.3</text>
+  <text x="302" y="840" font-size="9" fill="#8591a6">the templates, from the AST</text>
+  <rect x="516" y="812" width="89" height="15" rx="3" fill="#1c232f" stroke="#243040" />
+  <text x="522" y="823" font-size="9" font-weight="700" letter-spacing="0.6" fill="#ecf0f6">NO IR TWIN · 0%</text>
+  <rect x="686" y="812" width="34" height="15" rx="3" fill="none" stroke="#4ea3f0" />
+  <text x="703.0" y="823" text-anchor="middle" font-size="9" font-weight="700" fill="#4ea3f0">Later</text>
+  <text x="516" y="840" font-size="9" fill="#8591a6">the same templates</text>
+  <rect x="730" y="812" width="77" height="15" rx="3" fill="#1c232f" stroke="#243040" />
+  <text x="736" y="823" font-size="9" font-weight="700" letter-spacing="0.6" fill="#ecf0f6">NOT EMITTED</text>
+  <rect x="900" y="812" width="34" height="15" rx="3" fill="none" stroke="#4ea3f0" />
+  <text x="917.0" y="823" text-anchor="middle" font-size="9" font-weight="700" fill="#4ea3f0">R&amp;D</text>
+  <text x="730" y="840" font-size="9" fill="#8591a6">no validators, registries or wrappers</text>
+  <text x="46" y="897" font-size="10.5" font-weight="600" letter-spacing="2" fill="#6b7686">PER TARGET</text>
+  <text x="46" y="911" font-size="9" fill="#6b7686">how much of its output is made from the IR</text>
+  <rect x="302" y="886" width="96" height="12" rx="3" fill="#1c232f" />
+  <rect x="302" y="886" width="51.7" height="12" rx="3" fill="#C3E455" />
+  <text x="406" y="896" font-size="10" font-weight="700" fill="#C3E455">53.8% of files</text>
+  <text x="302" y="911" font-size="9" fill="#6b7686">historical IR-fed writer ownership:</text>
+  <text x="302" y="923" font-size="9" fill="#6b7686">does not establish independent emission</text>
+  <rect x="516" y="886" width="96" height="12" rx="3" fill="#1c232f" />
+  <text x="620" y="896" font-size="10" font-weight="700" fill="#5ab0f0">0% of files</text>
+  <text x="516" y="911" font-size="9" fill="#6b7686">from the IR; the gate: 150,831 paired executions</text>
+  <text x="516" y="923" font-size="9" fill="#6b7686">at zero behaviour difference · 21 cells · 22 Sep 2026</text>
+  <rect x="730" y="886" width="96" height="12" rx="3" fill="#1c232f" />
+  <rect x="730" y="886" width="27.8" height="12" rx="3" fill="#8b7ff0" />
+  <text x="834" y="896" font-size="10" font-weight="700" fill="#8b7ff0">29% of roots</text>
+  <text x="730" y="911" font-size="9" fill="#6b7686">another unit: fn-body roots, five-cell census</text>
+  <rect x="46.0" y="932" width="9" height="9" rx="2" fill="#C3E455" />
+  <text x="60.0" y="940" font-size="9.5" fill="#8591a6">emitted from the IR today</text>
+  <rect x="180.6" y="932" width="9" height="9" rx="2" fill="#d8b25a" />
+  <text x="194.6" y="940" font-size="9.5" fill="#8591a6">the IR is built or consulted; the AST emits</text>
+  <rect x="387.4" y="932" width="9" height="9" rx="2" fill="#8b7ff0" />
+  <text x="401.4" y="940" font-size="9.5" fill="#8591a6">in part — the shares are on the cell</text>
+  <rect x="564.2" y="932" width="9" height="9" rx="2" fill="#1c232f" stroke="#243040" />
+  <text x="578.2" y="940" font-size="9.5" fill="#8591a6">no IR</text>
+  <rect x="621.5" y="930" width="34" height="14" rx="3" fill="none" stroke="#4ea3f0" />
+  <text x="638.5" y="940" text-anchor="middle" font-size="9" font-weight="700" fill="#4ea3f0">Plan</text>
+  <text x="661.5" y="940" font-size="9.5" fill="#8591a6">roadmap scope</text>
+  <text x="46" y="964" font-size="9.5" fill="#6b7686">Legacy IR closure is active. Optimised IR hosting and Python are exploratory further work. See ROADMAP.md.</text>
+</svg>

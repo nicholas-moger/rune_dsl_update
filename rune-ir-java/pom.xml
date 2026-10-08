@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.finos.rune</groupId>
+    <artifactId>rune-ir-java</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>Rune DSL IR-routed Java Generation</name>
+    <description>The IR-routed Java generation route (D43 PR-2): the IR-aware
+        generator/compiler/renderer subclasses that drive declaration and
+        expression emission from the rune-ir substrate while reusing the legacy
+        renderer oracles verbatim (the byte-parity discipline), ported from the
+        frozen IR-lab tree at its HEAD 8c14592 (2026-07-01). Registers the
+        rune-java-generator IRGenerationProvider service (the ServiceLoader
+        inversion of the lab's flag dispatch) — the route activates only behind
+        -Drosetta.generator.ir=true with this jar on the classpath; the shipping
+        generator carries zero IR imports and is byte-identical with the flag
+        off. Depends on rune-ir + rune-java-generator BY DESIGN
+        (legacy-renderer reuse — the D43 module family).</description>
+
+    <properties>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <junit.version>5.11.3</junit.version>
+        <maven.build.cache.skip>true</maven.build.cache.skip>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.finos.rune</groupId>
+            <artifactId>rune-ir</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.finos.rune</groupId>
+            <artifactId>rune-java-generator</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.5.2</version>
+            </plugin>
+        </plugins>
+    </build>
+</project>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Small reviewer example: a real Maven consumer of the locally installed compiler modules.
+
+  It generates Java from the plugin's authored route fixture (rune-maven-plugin/src/test/resources/route-fixture),
+  compiles it against the runtime and runs three JUnit checks (a generated function, a validator accepting a valid
+  value, the same validator rejecting an invalid one). Run it once per replacement route; the route is selected by
+  the JVM system properties on the Maven command line (docs/MODES.md), never by this POM:
+
+    mvn -B -ntp -Dmaven.build.cache.enabled=false -f examples/review/pom.xml clean verify -Dreview.mode=m1 -Drosetta.generator.ir=false -Drosetta.generator.ir.optimised=false
+    mvn -B -ntp -Dmaven.build.cache.enabled=false -f examples/review/pom.xml clean verify -Dreview.mode=m2 -Drosetta.generator.ir=true  -Drosetta.generator.ir.optimised=false
+    mvn -B -ntp -Dmaven.build.cache.enabled=false -f examples/review/pom.xml clean verify -Dreview.mode=m3 -Drosetta.generator.ir=false -Drosetta.generator.ir.optimised=true
+
+  `review.mode` only names the output directory (target/m1, target/m2, target/m3) so the three routes' outputs coexist.
+  The module is deliberately a consumer, not a root reactor: install the compiler modules first (docs/BUILDING.md).
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.finos.rune.examples</groupId>
+  <artifactId>review-example</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.release>21</maven.compiler.release>
+    <rune.version>0.0.1-SNAPSHOT</rune.version>
+    <review.mode>m1</review.mode>
+    <maven.build.cache.enabled>false</maven.build.cache.enabled>
+  </properties>
+  <dependencies>
+    <dependency>
+      <groupId>org.finos.rune</groupId>
+      <artifactId>rune-runtime</artifactId>
+      <version>${rune.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>5.11.3</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  <build>
+    <directory>${project.basedir}/target/${review.mode}</directory>
+    <plugins>
+      <plugin>
+        <groupId>org.finos.rune</groupId>
+        <artifactId>rune-maven-plugin</artifactId>
+        <version>${rune.version}</version>
+        <dependencies>
+          <dependency>
+            <groupId>org.finos.rune</groupId>
+            <artifactId>rune-ir-java</artifactId>
+            <version>${rune.version}</version>
+          </dependency>
+          <dependency>
+            <groupId>org.finos.rune</groupId>
+            <artifactId>rune-ir-java-optimised</artifactId>
+            <version>${rune.version}</version>
+          </dependency>
+        </dependencies>
+        <executions>
+          <execution>
+            <id>generate-review-model</id>
+            <phase>generate-sources</phase>
+            <goals><goal>generate</goal></goals>
+            <configuration>
+              <sourceRoots>
+                <sourceRoot>${project.basedir}/../../rune-maven-plugin/src/test/resources/route-fixture/model</sourceRoot>
+              </sourceRoots>
+              <classPathLookupFilter>.*org[\\/]finos[\\/]rune[\\/]rune-runtime.*\.jar</classPathLookupFilter>
+              <failOnValidationError>true</failOnValidationError>
+              <languages>
+                <language>
+                  <setup>com.regnosys.rosetta.RosettaStandaloneSetup</setup>
+                  <outputConfigurations>
+                    <outputConfiguration>
+                      <outputDirectory>${project.build.directory}/generated-sources/rune</outputDirectory>
+                    </outputConfiguration>
+                  </outputConfigurations>
+                </language>
+              </languages>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.13.0</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.5.2</version>
+      </plugin>
+    </plugins>
+  </build>
+</project>

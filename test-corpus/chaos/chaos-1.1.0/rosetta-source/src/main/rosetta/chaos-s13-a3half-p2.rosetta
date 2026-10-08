@@ -1,0 +1,14 @@
+namespace chaos.s13.a3half.p2
+version "1.0.0"
+import chaos.s13.a3half.p1.*
+rule source C13Bare
+{
+}
+rule source C13Attached extends C13Bare
+{
+    C13Fact:
+        + fid
+            [ruleReference C13Fid]
+        + amt
+            [ruleReference C13Amt]
+}

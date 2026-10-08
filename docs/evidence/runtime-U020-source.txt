@@ -1,0 +1,26 @@
+SOURCE EXTRACT — not a new run
+Source: docs/upgrades/U020-lazy-failure-text-runtime.md
+Inspected revision: 691e0b160ab7dc189b9d33b5387d8462f36630b5
+
+
+Lines 155–174:
+  suite 99/0/0/0 at PR #547.
+- **The differential + smoke gates**: rune-equivalence 22/0/0/0 ×2
+  (cross-JVM), O2 zero over the full pair surface on the edited runtime.
+- **The rings**: gensuite 3,720/0/0/53 with the 56-line OFF channel
+  `e1815d1e` EXACT; the ON probe 55/55 with the 169-line channel `bd0287c3`
+  EXACT — zero emitter drift, as a runtime-only change must show.
+- **The paired same-session 6-fork JMH A/B** (OLD vs NEW runtime, both legs
+  the reference tree, identical workload census 6/6 forks each;
+  `target-547-jmh-drr-{oldrt,newrt}6f1.log`): time 8,527.481 ± 411.588 →
+  2,454.674 ± 258.851 ms/op (**−71.2%**); allocation 30,790.11 ± 121.15 →
+  10,457.24 ± 2.13 MB/op (**−66.0%**); fully disjoint at the iteration
+  level (OLD min 7,651 vs NEW max 3,344 ms).
+
+## Coverage
+
+All five corpus cells (cdm 5.38.0 · cdm 6.20.6 · drr 6.34.1 · iso20022
+1.38.0 · rune-fpml 2.0.0), both generation routes (reference + optimised
+trees ride the same runtime), every formatter-backed producer seat (68/68
+flipped; the 8 fixed-literal seats deliberately eager), every observation
+channel of the carrier (§ 14a closed enumeration — `getError()`,

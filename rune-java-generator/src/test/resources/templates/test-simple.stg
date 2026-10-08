@@ -1,0 +1,12 @@
+delimiters "<", ">"
+
+hello(name) ::= "Hello, <name>!"
+
+nullable(value) ::= "Value: <value>"
+
+multiline(name, items) ::= <<
+Name: <name>
+Items:
+<items:{item | - <item>
+}>
+>>

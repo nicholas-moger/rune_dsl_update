@@ -1,0 +1,22 @@
+{
+  "irFormatVersion": 1,
+  "nodes": [
+    {
+      "kind": "ENUM",
+      "name": "test.model.DirectionEnum",
+      "values": [
+        {
+          "kind": "ENUM_VALUE",
+          "name": "Up",
+          "displayName": null
+        },
+        {
+          "kind": "ENUM_VALUE",
+          "name": "Down",
+          "displayName": "DOWN"
+        }
+      ],
+      "namespace": "test.model"
+    }
+  ]
+}

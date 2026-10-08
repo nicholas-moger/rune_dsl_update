@@ -1,0 +1,17 @@
+namespace chaos.s04.a5uni
+version "1.0.0"
+type C4Pair: <"éüµ – Constructed and segment-set output type.">
+    left number (1..1)
+    right number (1..1)
+func C4Add: <"Minimal set seat.">
+    inputs:
+        a number (1..1)
+        b number (1..1)
+    output:
+        s number (1..1)
+    set s: a + b
+type A5UniProbe: <"Non-ASCII literal probe – müßig 試験.">
+    p string (0..1)
+        [label as "µ–label §7"]
+enum A5UniProbeEnum: <"displayName probe.">
+    V displayName "µ–„display“"

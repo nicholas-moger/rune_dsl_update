@@ -1,0 +1,21 @@
+namespace test.aliasscope
+
+typeAlias Nat: <"An int-grained alias with ONE condition - the wired class is NatNonNeg, its @Inject field natNonNeg.">
+    number(fractionalDigits: 0)
+    condition NonNeg:
+        item >= 0
+
+type Clash: <"Multi attributes named after the wing's own method-scope identifiers (results, o) and its loop index (i) - the scope's numbering law under collision.">
+    results Nat (0..*)
+    o Nat (0..*)
+    i Nat (0..*)
+
+type Loop: <"ONE multi attribute named i - the attribute local and the loop index want the same name in one body scope.">
+    i Nat (0..*)
+
+type FieldClash: <"A multi attribute named after the condition's own @Inject field (natNonNeg) - a body local against a class-scope field.">
+    natNonNeg Nat (0..*)
+
+type SingleNames: <"Single attributes declare no local - only the method's own parameter names are at stake.">
+    results Nat (0..1)
+    o Nat (0..1)

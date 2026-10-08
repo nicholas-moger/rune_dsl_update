@@ -1,0 +1,38 @@
+namespace conformance.p6
+version "1.0.0"
+
+// P6 — THE CORPUS SHAPE: an if/else chain whose first arm is qualified and
+// whose later arms are bare, inside a reporting rule with NO declared output.
+// This is regulation-hkma-rewrite-trade-rule.rosetta:63-74 in miniature, and
+// the mechanism differs from b3 case (a): b3's func declares `output: result
+// ParentEnum`, so its bare arms resolve via CONTAINER expectation. A rule has
+// none — upstream resolves the bare arms via the ELSETHEN fallback (expected =
+// typeof(ifthen)) chaining through the nested conditionals. The conformance
+// suite currently pins the container mechanism only; this case pins the
+// fallback one (which of the corpus's remaining SYMBOL_NOT_FOUND are this
+// shape is measured by the diag-detail run, not assumed).
+//
+// Expected upstream: zero errors; `Lei` binds RosettaEnumValue
+// conformance.p6.LeiFmt.Lei (declared two extends-levels up, typed as Fmt2 by
+// the expected type); `Other` binds RosettaEnumValue conformance.p6.Fmt2.Other.
+
+enum LeiFmt:
+    Lei
+    LeiAndPerson
+
+enum Fmt2 extends LeiFmt:
+    NaturalPerson
+    SWIFTBIC
+    Other
+
+type Party6:
+    role string (0..1)
+    idType string (0..1)
+
+reporting rule P6ChainNoOutput from Party6: <"P6 probe">
+    extract
+        if role exists
+        then Fmt2 -> NaturalPerson
+        else if idType exists
+        then Lei
+        else Other

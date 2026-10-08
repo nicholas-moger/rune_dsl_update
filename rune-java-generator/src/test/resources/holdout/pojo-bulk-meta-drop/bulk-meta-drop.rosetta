@@ -1,0 +1,8 @@
+namespace test.pojo
+
+type Parent:
+    attr string (0..*)
+        [metadata scheme]
+
+type Child extends Parent:
+    override attr string (0..*)

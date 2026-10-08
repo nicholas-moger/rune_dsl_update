@@ -1,0 +1,22 @@
+/* chaos a9: a block-comment banner before the first token */
+// chaos a9: a line comment before namespace
+namespace chaos.s34.a9comment // a9
+version "1.0.0" // a9
+type C34Aux: <"Helper - relocated by the import axis."> // a9
+    aux string (1..1) // a9
+enum C34KindEnum: <"The annotation attribute's enum."> // a9
+    Alpha // a9
+    Beta // a9
+annotation c34owner: <"Annotation with string, number and boolean attributes."> // a9
+    team string (0..1) // a9
+    tier number (0..1) // a9
+    live boolean (0..1) // a9
+annotation c34stage: <"Annotation with a prefix and an enum-typed attribute."> // a9
+    [prefix C34Stage] // a9
+    kind C34KindEnum (0..1) // a9
+type C34Marked: <"Annotated type and attribute - bare, attribute-selecting and prefixed references."> // a9
+    [c34owner team] // a9
+    [c34stage kind] // a9
+    mid string (1..1) // a9
+        [c34owner tier] // a9
+    aux C34Aux (0..1) // a9

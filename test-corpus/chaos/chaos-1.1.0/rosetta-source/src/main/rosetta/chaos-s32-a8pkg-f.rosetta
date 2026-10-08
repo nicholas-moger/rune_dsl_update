@@ -1,0 +1,4 @@
+namespace chaos.s32.a8pkg.functions
+version "1.0.0"
+type C32Twin: <"RIVAL for A8 - a TYPE named like the seed's function C32Twin in the .functions sub-namespace: the POJO and the function generator address ONE Java path (the seat-3 writer seam).">
+    pathMark string (0..1)

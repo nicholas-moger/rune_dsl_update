@@ -1,0 +1,4 @@
+CHOICE test.model.PaymentMethod [abstract=false]
+  namespace "test.model"
+  FIELD CashPayment : CashPayment [ONE_TO_ONE]
+  FIELD CardPayment : CardPayment [ONE_TO_ONE]

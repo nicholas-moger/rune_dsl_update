@@ -1,0 +1,50 @@
+delimiters "<", ">"
+
+// Data-rule condition interface (<pkg>.validation.datarule.<Type><Cond>) —
+// coverage burn-down wave D. Byte laws: the import gap — regular imports +
+// ONE blank line, then the static wildcard import + ONE blank line, or TWO
+// blank lines when no static import (the FUNCTION-template convention; golden
+// AmericanExerciseExpirationTimeChoice carries the two-blank form); the
+// version javadoc on EVERY file (the D11 per-cell stamp; iso20022 keeps the
+// literal ${project.version}); every in-class blank separator carries its
+// indentation tabs and lives inside m.classBody (generator-rendered — see
+// DataRuleGenerator.renderClassBody). Rendered via renderNoIndent, the
+// generator-computed-body convention.
+//
+// v3.2 seat 11 (D50 — the file-scope first-claim law): rendered in TWO steps.
+// dataRuleBody renders the class text with every TYPE position a first-claim
+// sentinel — the annotations and the Validator interface through the token map
+// <t.X>, the subject and the class body's types through the model — then the
+// generator resolves the sentinels in text order from the one seed (the rule
+// class itself), drops the losers' imports, and dataRuleFile wraps the resolved
+// text (m.body) under the package line and the import blocks.
+dataRuleFile(m) ::= <<
+package <m.packageName>;
+
+<m.imports:{imp | import <imp>;
+}>
+<if(m.staticImports)>
+<m.staticImports:{imp | import static <imp>;
+}>
+<else>
+
+<endif>
+<m.body>
+>>
+
+dataRuleBody(m, t) ::= <<
+<if(m.version)>
+/**
+<\ >* @version <m.version>
+<\ >*/
+<else>
+/**
+<\ >* @version
+<\ >*/
+<endif>
+@<t.RosettaDataRule>("<m.className>")
+@<t.ImplementedBy>(<m.className>.Default.class)
+public interface <m.className> extends <t.Validator>\<<m.subjectJavaType>\> {
+<m.classBody>}
+
+>>

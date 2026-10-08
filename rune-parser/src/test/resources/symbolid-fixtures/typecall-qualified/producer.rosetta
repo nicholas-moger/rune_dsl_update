@@ -1,0 +1,4 @@
+namespace com.test.foo
+
+type Bar:
+    a string (1..1)

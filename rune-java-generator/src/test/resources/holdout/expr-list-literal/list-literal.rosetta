@@ -1,0 +1,8 @@
+namespace test.expressions
+
+func MakeList:
+    inputs:
+        x number (1..1)
+    output:
+        result number (0..*)
+    set result: [1, 2, 3]

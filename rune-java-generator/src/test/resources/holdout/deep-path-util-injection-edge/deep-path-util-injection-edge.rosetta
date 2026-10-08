@@ -1,0 +1,87 @@
+namespace test.deeppathedge
+
+import test.deeppathedgetypes.*
+
+type Note: <"Choice option 1 - a text and tags (the chaos C3Note, widened by tags).">
+    text string (1..1)
+    tags string (0..*)
+
+type CashLeg: <"Inner option 1 - shares 'common' with its sibling (the chaos C3CashLeg).">
+    ccy string (1..1)
+    common string (0..1)
+
+type StockLeg: <"Inner option 2 (the chaos C3StockLeg).">
+    ticker string (1..1)
+    common string (0..1)
+
+choice Inner: <"The inner choice (the chaos C3Inner).">
+    CashLeg
+    StockLeg
+
+type Wrap: <"Choice option 2 - wraps the inner choice; shares 'text' and 'tags' with Note (the chaos C3Wrap).">
+    inner Inner (1..1)
+    text string (0..1)
+    tags string (0..*)
+
+choice Outer: <"The nested choice (the chaos C3Outer).">
+    Wrap
+    Note
+
+type Deep: <"The chaos C3Deep shape with a LAMBDA deep call in a type condition (the datarule path).">
+    pick Outer (0..1)
+    picks Inner (0..*)
+    condition LambdaNav:
+        if picks exists
+        then (picks extract [ item ->> common ] then count) <= picks count
+
+func ExplicitParam: <"An explicit lambda parameter as the deep receiver.">
+    inputs:
+        outers Outer (0..*)
+    output:
+        texts string (0..*)
+    add texts:
+        outers extract o [ o ->> text ]
+
+func AliasItem: <"The lambda deep call inside an ALIAS body.">
+    inputs:
+        outers Outer (0..*)
+    output:
+        texts string (0..*)
+    alias picked: outers extract item ->> text
+    add texts: picked
+
+func InCondition: <"The lambda deep call inside a function CONDITION.">
+    inputs:
+        outers Outer (0..*)
+    output:
+        n int (1..1)
+    condition HasText:
+        outers extract [ item ->> text ] then exists
+    set n: outers count
+
+func MaxKey: <"The lambda deep call as a max comparator key.">
+    inputs:
+        outers Outer (0..*)
+    output:
+        top Outer (0..1)
+    set top:
+        outers max [ item ->> text ]
+
+func Sorted: <"The lambda deep call as a sort key.">
+    inputs:
+        outers Outer (0..*)
+    output:
+        sorted Outer (0..*)
+    add sorted:
+        outers sort [ item ->> text ]
+
+func Remote: <"A cross-namespace choice - the util lives in the TYPE's namespace, imported.">
+    inputs:
+        rs ROuter (0..*)
+    output:
+        texts string (0..*)
+    add texts:
+        rs extract item ->> text
+
+reporting rule PickTexts from Deep: <"The lambda deep call in a REPORTING RULE body.">
+    extract picks then extract item ->> common

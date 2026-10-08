@@ -1,0 +1,130 @@
+delimiters "<", ">"
+
+inputParam(inp) ::= <%
+<inp.inputParamDecl>
+%>
+
+evaluateReturnType(m) ::= <%
+<m.evaluateReturnType>
+%>
+
+doEvaluateReturnType(m) ::= <%
+<m.doEvaluateReturnType>
+%>
+
+functionFile(m) ::= <<
+package <m.packageName>;
+
+<m.imports:{imp | import <imp>;
+}>
+<if(m.staticImports)>
+<m.staticImports:{imp | import static <imp>;
+}>
+<else>
+
+<endif>
+<if(m.labelProviderClassName)>
+@RuneLabelProvider(labelProvider=<m.labelProviderClassName>.class)
+<endif>
+<if(m.annotationFragments)><m.annotationFragments:{ann | @<ann>}; separator="\n">
+<endif>
+@ImplementedBy(<m.className>.<m.className>Default.class)
+public abstract class <m.className> implements <if(m.renderAsReportFunction)><m.baseInterfaceFragments; separator=", "><else>RosettaFunction<if(m.isQualify)>,IQualifyFunctionExtension\<<m.qualifyGenericType>\><endif><endif> {
+<m.injectBlock><\t>/**
+<m.javadocParams:{p | <\t>* <p>
+}><\t>*/
+<if(m.overridesEvaluate)>
+<\t>@Override
+<endif>
+<\t>public <evaluateReturnType(m)> evaluate(<m.inputs:{inp | <inputParam(inp)>}; separator=", ">) {
+<if(m.preConditions)>
+<\t><\t>// pre-conditions
+<m.preConditions:{c | <\t><\t>conditionValidator.validate(() -> <c.compiledExpression>,
+<\t><\t><\t>"<c.definition>");
+}; separator="\t\t\n"><\t><\t>
+<endif>
+<if(m.outputNeedsBuilder)>
+<if(m.outputIsMulti)>
+<\t><\t>List\<<m.output.typeName>.<m.output.builderTypeName>\> <m.output.builderName> = doEvaluate(<m.inputs:{inp | <inp.name>}; separator=", ">);
+<\t><\t>
+<\t><\t>final List\<? extends <m.output.typeName>\> <m.output.name>;
+<\t><\t>if (<m.output.builderName> == null) {
+<\t><\t><\t><m.output.name> = null;
+<\t><\t>} else {
+<\t><\t><\t><m.output.name> = <m.output.builderName>.stream().map(<m.output.typeName>::build).collect(Collectors.toList());
+<\t><\t><\t>objectValidator.validate(<m.output.typeName>.class, <m.output.name>);
+<\t><\t>}
+<else>
+<\t><\t><m.output.typeName>.<m.output.builderTypeName> <m.output.builderName> = doEvaluate(<m.inputs:{inp | <inp.name>}; separator=", ">);
+<\t><\t>
+<\t><\t>final <m.output.typeName> <m.output.name>;
+<\t><\t>if (<m.output.builderName> == null) {
+<\t><\t><\t><m.output.name> = null;
+<\t><\t>} else {
+<\t><\t><\t><m.output.name> = <m.output.builderName>.build();
+<\t><\t><\t>objectValidator.validate(<m.output.typeName>.class, <m.output.name>);
+<\t><\t>}
+<endif>
+<else>
+<\t><\t><evaluateReturnType(m)> <m.output.name> = doEvaluate(<m.inputs:{inp | <inp.name>}; separator=", ">);
+<endif>
+<\t><\t>
+<if(m.postConditions)>
+<\t><\t>// post-conditions
+<m.postConditions:{c | <\t><\t>conditionValidator.validate(() -> <c.compiledExpression>,
+<\t><\t><\t>"<c.definition>");
+}; separator="\t\t\n"><\t><\t>
+<endif>
+<\t><\t>return <m.output.name>;
+<\t>}
+
+<\t>protected abstract <doEvaluateReturnType(m)> doEvaluate(<m.inputs:{inp | <inputParam(inp)>}; separator=", ">);<m.aliases:{a |<\n>
+<\t>protected abstract <a.returnType> <a.name>(<a.paramsDecl>);}>
+
+<\t>public static class <m.className>Default extends <m.className> {
+<\t><\t>@Override
+<\t><\t>protected <doEvaluateReturnType(m)> doEvaluate(<m.inputs:{inp | <inputParam(inp)>}; separator=", ">) {
+<m.multiInputNullChecks>
+<if(m.outputIsMulti)>
+<if(m.outputNeedsBuilder)>
+<\t><\t><\t>List\<<m.output.typeName>.<m.output.builderTypeName>\> <m.output.name> = new ArrayList\<\>();
+<else>
+<\t><\t><\t>List\<<m.output.typeName>\> <m.output.name> = new ArrayList\<\>();
+<endif>
+<elseif(m.outputNeedsBuilder)>
+<\t><\t><\t><m.output.typeName>.<m.output.builderTypeName> <m.output.name> = <m.output.typeName>.builder();
+<else>
+<\t><\t><\t><m.output.typeName> <m.output.name> = null;
+<endif>
+<\t><\t><\t>return assignOutput(<m.output.name><if(m.inputs)>, <m.inputs:{inp | <inp.name>}; separator=", "><endif>);
+<\t><\t>}
+<\t><\t>
+<\t><\t>protected <doEvaluateReturnType(m)> assignOutput(<doEvaluateReturnType(m)> <m.output.name><if(m.inputs)>, <m.inputs:{inp | <inputParam(inp)>}; separator=", "><endif>) {
+<m.operations:{op | <\t><\t><\t><op.compiledStatement>
+}; separator="\t\t\t\n"><if(m.operations)><\t><\t><\t>
+<endif>
+<if(m.outputNeedsBuilder)>
+<if(m.outputIsMulti)>
+<\t><\t><\t>return Optional.ofNullable(<m.output.name>)
+<\t><\t><\t><\t>.map(o -> o.stream().map(i -> i.prune()).collect(Collectors.toList()))
+<\t><\t><\t><\t>.orElse(null);
+<else>
+<\t><\t><\t>return Optional.ofNullable(<m.output.name>)
+<\t><\t><\t><\t>.map(o -> o.prune())
+<\t><\t><\t><\t>.orElse(null);
+<endif>
+<else>
+<\t><\t><\t>return <m.output.name>;
+<endif>
+<\t><\t>}
+<m.aliasOverridesBlock><m.helperMethodsBlock><\t>}
+<if(m.isQualify)>
+<\t><\t>
+<\t><\t>@Override
+<\t><\t>public String getNamePrefix() {
+<\t><\t><\t>return "Qualify";
+<\t><\t>}
+<endif>
+}
+
+>>

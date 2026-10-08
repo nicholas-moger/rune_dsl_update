@@ -1,0 +1,15 @@
+//== header
+namespace chaos.s99.seed
+version "0.0.0"
+//== element C99Shadow
+typeAlias Int: <"THE JAVA.LANG SHADOW s99 (base only; no EXPECTED row - the released 9.83.0 validator admits the model and its generator emits goldens that DO NOT COMPILE, rows of the cell's noncompiling-goldens.txt register): alias Int + condition eger = the data-rule class Integer in the namespace's validation.datarule package, which SHADOWS java.lang.Integer for every sibling class of that package (C99NatNonNeg's MapperS of Integer) and for the holder's type-format validator, which imports it beside its List-of-Integer local - the #624 round-3 a18 class the fork REFUSES at BOILERPLATE_NAME_COLLISION at both seats; moved out of s27 at seat 10 because the shadow poisoned s27's own boilerplate measurement (one java.lang-named probe per package).">
+    number(fractionalDigits: 0)
+    condition eger:
+        item <> 8
+typeAlias C99Nat: <"A sibling alias condition in the same datarule package - the class the shadow poisons.">
+    number(fractionalDigits: 0)
+    condition NonNeg:
+        item >= 0
+type C99Holder: <"A multi attribute of the shadowing alias (the type-format validator's List-of-Integer local) beside a single of the sibling.">
+    ig Int (0..*)
+    n C99Nat (0..1)

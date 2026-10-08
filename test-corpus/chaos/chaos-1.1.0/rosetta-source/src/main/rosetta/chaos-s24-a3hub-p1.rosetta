@@ -1,0 +1,5 @@
+namespace chaos.s24.a3hub.p1
+version "1.0.0"
+import chaos.s24.a3hub.p2.*
+type C24Ref: <"Helper - relocated by the import axis.">
+    mark string (1..1)

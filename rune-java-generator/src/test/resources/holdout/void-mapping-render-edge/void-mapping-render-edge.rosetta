@@ -1,0 +1,61 @@
+namespace test.voidrender
+version "1.0.0"
+
+// v3.2 seat 9 (F8, void-mapping-cast) - THE RENDER-EDGE GROUP, kept apart from the edge group so a plugin refusal costs
+// one group: the two `nothing` RENDER laws (a Void-typed value is the EMPTY of the expected type at every coercion seat)
+// at the seats the edge group does not reach - a Void-typed FUNCTION INPUT under `exists` / `is absent` / `single exists`
+// (the IR route's scalar-parameter existence claim seat), a Void feature under `is absent` and a Void LIST feature under
+// `exists`, a Void value assigned into a NON-Void scalar output, into a MULTI output, and ADDED to a multi output.
+
+basicType etoken <"A model-declared basic type.">
+
+type Carrier: <"Void-typed attributes beside a flag.">
+    tok etoken (0..1)
+    toks etoken (0..*)
+    flag boolean (0..1)
+    condition TokAbsent:
+        if flag = True then tok is absent
+    condition ToksExist:
+        if flag = False then toks exists
+
+func InputExists: <"A Void-typed input under exists - the scalar-parameter seat.">
+    inputs:
+        t etoken (0..1)
+    output:
+        r boolean (1..1)
+    set r: t exists
+
+func InputAbsent: <"A Void-typed input under is absent.">
+    inputs:
+        t etoken (0..1)
+    output:
+        r boolean (1..1)
+    set r: t is absent
+
+func InputSingleExists: <"A Void-typed multi input under single exists.">
+    inputs:
+        ts etoken (0..*)
+    output:
+        r boolean (1..1)
+    set r: ts single exists
+
+func IntoString: <"A Void value into a non-Void scalar output.">
+    inputs:
+        t etoken (1..1)
+    output:
+        r string (1..1)
+    set r: t
+
+func IntoList: <"A Void list into a MULTI output.">
+    inputs:
+        ts etoken (0..*)
+    output:
+        rs etoken (0..*)
+    set rs: ts
+
+func AddInto: <"A Void value ADDED to a multi output.">
+    inputs:
+        t etoken (1..1)
+    output:
+        rs etoken (0..*)
+    add rs: t

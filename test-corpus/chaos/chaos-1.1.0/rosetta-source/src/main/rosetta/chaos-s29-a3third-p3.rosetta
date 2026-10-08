@@ -1,0 +1,13 @@
+namespace chaos.s29.a3third.p3
+version "1.0.0"
+import chaos.s29.a3third.p1.*
+import chaos.s29.a3third.p2.*
+type C29Bag: <"The rule and datarule carrier.">
+    outer C29Outer (0..1)
+    outers C29Outer (0..*)
+    condition C29DeepCond: <"A deep path in a data rule.">
+        if outer exists then outer ->> text exists
+reporting rule C29Texts from C29Bag: <"A deep path in a reporting rule body, and a deep path over a multi receiver.">
+    extract outers then extract item ->> text
+reporting rule C29Inner from C29Bag: <"A deep path chained through the inner choice in a rule.">
+    extract outer ->> inners ->> deep

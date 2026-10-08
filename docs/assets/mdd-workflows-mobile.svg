@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="1590" viewBox="0 0 480 1590" role="img" aria-labelledby="title desc">
+<title id="title">Two workflows, shared language services</title>
+<desc id="desc">The model author repeatedly edits models, reads diagnostics, generates or runs and tests behaviour. The language maintainer changes syntax and metamodel, semantics and transforms, emitters, then tests and releases. Reusable language services support both workflows. SDK or library APIs and CLI are access surfaces; an editor can use LSP. These are alongside the workflows rather than mandatory processing stages.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9" fill="none" stroke="#a9b7cb" stroke-width="1.4"/></marker></defs>
+<rect width="480" height="1590" rx="22" fill="#121923"/>
+<g font-family="Segoe UI, Arial, sans-serif">
+<text x="24" y="43" fill="#eef2f8" font-size="29" font-weight="600" text-anchor="start">
+<tspan x="24" dy="0" xml:space="preserve">Two workflows,</tspan>
+<tspan x="24" dy="35" xml:space="preserve">shared language services</tspan>
+</text>
+<text x="24" y="119" fill="#a9b7cb" font-size="19" font-weight="400" text-anchor="start">
+<tspan x="24" dy="0" xml:space="preserve">Different ownership; reusable tooling.</tspan>
+</text>
+<rect x="24" y="165" width="432" height="423" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<text x="48" y="202" fill="#92d5c6" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="48" dy="0" xml:space="preserve">Model author</tspan>
+</text>
+<text x="48" y="231" fill="#a9b7cb" font-size="19" font-weight="400" text-anchor="start">
+<tspan x="48" dy="0" xml:space="preserve">Own a model and its behaviour</tspan>
+</text>
+<rect x="72" y="256" width="360" height="55" rx="9" fill="#121923" stroke="#344153" stroke-width="1.5"/>
+<text x="90" y="290" fill="#eef2f8" font-size="21" font-weight="400" text-anchor="start">
+<tspan x="90" dy="0" xml:space="preserve">Edit model</tspan>
+</text>
+<polyline points="252.0,311 252.0,334" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<rect x="72" y="334" width="360" height="55" rx="9" fill="#121923" stroke="#344153" stroke-width="1.5"/>
+<text x="90" y="368" fill="#eef2f8" font-size="21" font-weight="400" text-anchor="start">
+<tspan x="90" dy="0" xml:space="preserve">Read diagnostics</tspan>
+</text>
+<polyline points="252.0,389 252.0,412" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<rect x="72" y="412" width="360" height="55" rx="9" fill="#121923" stroke="#344153" stroke-width="1.5"/>
+<text x="90" y="446" fill="#eef2f8" font-size="21" font-weight="400" text-anchor="start">
+<tspan x="90" dy="0" xml:space="preserve">Generate or run</tspan>
+</text>
+<polyline points="252.0,467 252.0,490" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<rect x="72" y="490" width="360" height="55" rx="9" fill="#121923" stroke="#344153" stroke-width="1.5"/>
+<text x="90" y="524" fill="#eef2f8" font-size="21" font-weight="400" text-anchor="start">
+<tspan x="90" dy="0" xml:space="preserve">Test behaviour</tspan>
+</text>
+<polyline points="72,517.5 47,517.5 47,283.5 72,283.5" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<rect x="24" y="620" width="432" height="423" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<text x="48" y="657" fill="#a6b0ec" font-size="26" font-weight="600" text-anchor="start">
+<tspan x="48" dy="0" xml:space="preserve">Language maintainer</tspan>
+</text>
+<text x="48" y="686" fill="#a9b7cb" font-size="19" font-weight="400" text-anchor="start">
+<tspan x="48" dy="0" xml:space="preserve">Own the language and toolchain</tspan>
+</text>
+<rect x="72" y="711" width="360" height="55" rx="9" fill="#121923" stroke="#344153" stroke-width="1.5"/>
+<text x="90" y="745" fill="#eef2f8" font-size="21" font-weight="400" text-anchor="start">
+<tspan x="90" dy="0" xml:space="preserve">Syntax + metamodel</tspan>
+</text>
+<polyline points="252.0,766 252.0,789" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<rect x="72" y="789" width="360" height="55" rx="9" fill="#121923" stroke="#344153" stroke-width="1.5"/>
+<text x="90" y="823" fill="#eef2f8" font-size="21" font-weight="400" text-anchor="start">
+<tspan x="90" dy="0" xml:space="preserve">Semantics + transforms</tspan>
+</text>
+<polyline points="252.0,844 252.0,867" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<rect x="72" y="867" width="360" height="55" rx="9" fill="#121923" stroke="#344153" stroke-width="1.5"/>
+<text x="90" y="901" fill="#eef2f8" font-size="21" font-weight="400" text-anchor="start">
+<tspan x="90" dy="0" xml:space="preserve">Emitters</tspan>
+</text>
+<polyline points="252.0,922 252.0,945" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<rect x="72" y="945" width="360" height="55" rx="9" fill="#121923" stroke="#344153" stroke-width="1.5"/>
+<text x="90" y="979" fill="#eef2f8" font-size="21" font-weight="400" text-anchor="start">
+<tspan x="90" dy="0" xml:space="preserve">Test + release</tspan>
+</text>
+<polyline points="72,972.5 47,972.5 47,738.5 72,738.5" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<rect x="24" y="1075" width="432" height="155" rx="14" fill="#18222f" stroke="#a2c6e6" stroke-width="1.5"/>
+<text x="47" y="1115" fill="#a2c6e6" font-size="25" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Shared language services</tspan>
+</text>
+<text x="47" y="1152" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Parser · resolution + checks</tspan>
+<tspan x="47" dy="28" xml:space="preserve">Generation or execution</tspan>
+<tspan x="47" dy="28" xml:space="preserve">Used or maintained by both roles</tspan>
+</text>
+<text x="24" y="1272" fill="#eef2f8" font-size="21" font-weight="600" text-anchor="start">
+<tspan x="24" dy="0" xml:space="preserve">Ways to access the services</tspan>
+</text>
+<rect x="24" y="1300" width="432" height="76" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="25" y="1319" width="4" height="38" rx="2" fill="#a2c6e6"/>
+<text x="47" y="1337" fill="#a2c6e6" font-size="23" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Library / SDK APIs</tspan>
+</text>
+<text x="47" y="1362" fill="#a9b7cb" font-size="18" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Call reusable services directly</tspan>
+</text>
+<rect x="24" y="1386" width="432" height="76" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="25" y="1405" width="4" height="38" rx="2" fill="#d0b487"/>
+<text x="47" y="1423" fill="#d0b487" font-size="23" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">CLI</tspan>
+</text>
+<text x="47" y="1448" fill="#a9b7cb" font-size="18" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Use scripts and command-line tools</tspan>
+</text>
+<rect x="24" y="1472" width="432" height="76" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="25" y="1491" width="4" height="38" rx="2" fill="#92d5c6"/>
+<text x="47" y="1509" fill="#92d5c6" font-size="23" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Editor + LSP</tspan>
+</text>
+<text x="47" y="1534" fill="#a9b7cb" font-size="18" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Editor protocol for language features</tspan>
+</text>
+</g>
+</svg>

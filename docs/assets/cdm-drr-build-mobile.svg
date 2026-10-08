@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="1480" viewBox="0 0 480 1480" role="img" aria-labelledby="title desc">
+<title id="title">Build versioned model libraries</title>
+<desc id="desc">Selected model and Rune toolchain versions configure the build; they are not a transformation stage. Rune CDM/DRR source feeds an Xtext-generated ANTLR 3 lexer/parser for lexing and parsing .rosetta source. Xtext integrates that parsing with EMF source-model objects and resource/reference handling. The following model/services card represents those same source objects and Rune semantic responsibilities, not a second model conversion. Rune services resolve references and check scoping, types, cardinality and validation. Java generators implemented in Java and Xtend produce Java source. Compilation, tests and packaging create versioned libraries. JVM labels identify responsibilities, not an exact number of processes. This build is separate from application execution. The main processing route is a straight vertical spine; the version panel is separate configuration and stays static during the animation.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1 L 8 5 L 0 9" fill="none" stroke="#a9b7cb" stroke-width="1.4"/></marker></defs>
+<rect width="480" height="1480" rx="22" fill="#121923"/>
+<g font-family="Segoe UI, Arial, sans-serif">
+<text x="24" y="43" fill="#eef2f8" font-size="29" font-weight="600" text-anchor="start">
+<tspan x="24" dy="0" xml:space="preserve">Build versioned</tspan>
+<tspan x="24" dy="35" xml:space="preserve">model libraries</tspan>
+</text>
+<text x="24" y="119" fill="#a9b7cb" font-size="19" font-weight="400" text-anchor="start">
+<tspan x="24" dy="0" xml:space="preserve">Source → parse and check → generate</tspan>
+<tspan x="24" dy="26" xml:space="preserve">Then compile, test and package.</tspan>
+</text>
+<rect x="24" y="180" width="432" height="140" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5" stroke-dasharray="7 5"/>
+<rect x="25" y="199" width="4" height="102" rx="2" fill="#a2c6e6"/>
+<text x="47" y="217" fill="#a2c6e6" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Selected versions</tspan>
+</text>
+<text x="47" y="250" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Model + Rune toolchain pins</tspan>
+<tspan x="47" dy="28" xml:space="preserve">Configuration for this build</tspan>
+</text>
+<rect x="47" y="370" width="386" height="95" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="48" y="389" width="4" height="57" rx="2" fill="#a2c6e6"/>
+<text x="70" y="407" fill="#a2c6e6" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">CDM / DRR source</tspan>
+</text>
+<text x="70" y="440" fill="#a9b7cb" font-size="21" font-weight="400" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Rune .rosetta definitions</tspan>
+</text>
+<rect x="24" y="515" width="432" height="530" rx="14" fill="#18222f" stroke="#a6b0ec" stroke-width="1.5"/>
+<text x="47" y="553" fill="#a6b0ec" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="47" dy="0" xml:space="preserve">Build / generation · JVM</tspan>
+</text>
+<rect x="47" y="595" width="386" height="95" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="48" y="614" width="4" height="57" rx="2" fill="#a2c6e6"/>
+<text x="70" y="632" fill="#a2c6e6" font-size="23" font-weight="600" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Xtext / ANTLR 3 parser</tspan>
+</text>
+<text x="70" y="665" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Lexing and parsing .rosetta source</tspan>
+</text>
+<rect x="47" y="730" width="386" height="145" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="48" y="749" width="4" height="107" rx="2" fill="#92d5c6"/>
+<text x="70" y="767" fill="#92d5c6" font-size="23" font-weight="600" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">EMF model + Rune services</tspan>
+</text>
+<text x="70" y="800" fill="#a9b7cb" font-size="19" font-weight="400" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Source-model objects + references</tspan>
+<tspan x="70" dy="26" xml:space="preserve">Scoping · types · cardinality</tspan>
+<tspan x="70" dy="26" xml:space="preserve">Resolution + validation</tspan>
+</text>
+<rect x="47" y="915" width="386" height="110" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="48" y="934" width="4" height="72" rx="2" fill="#d0b487"/>
+<text x="70" y="952" fill="#d0b487" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Java generators</tspan>
+</text>
+<text x="70" y="985" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Java / Xtend implementations</tspan>
+<tspan x="70" dy="28" xml:space="preserve">Use the checked source model</tspan>
+</text>
+<polyline points="24,250 12,250 12,845 24,845" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6 6"/>
+<polyline points="240,465 240,515" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="240,570 240,595" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="240,690 240,730" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="240,875 240,915" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<rect x="47" y="1065" width="386" height="95" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="48" y="1084" width="4" height="57" rx="2" fill="#d0b487"/>
+<text x="70" y="1102" fill="#d0b487" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Generated Java</tspan>
+</text>
+<text x="70" y="1135" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Source code for model libraries</tspan>
+</text>
+<rect x="47" y="1200" width="386" height="95" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="48" y="1219" width="4" height="57" rx="2" fill="#a2c6e6"/>
+<text x="70" y="1237" fill="#a2c6e6" font-size="23" font-weight="600" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Compile · test · package</tspan>
+</text>
+<text x="70" y="1270" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Build the generated libraries</tspan>
+</text>
+<rect x="47" y="1335" width="386" height="95" rx="14" fill="#18222f" stroke="#344153" stroke-width="1.5"/>
+<rect x="48" y="1354" width="4" height="57" rx="2" fill="#92d5c6"/>
+<text x="70" y="1372" fill="#92d5c6" font-size="24" font-weight="600" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Versioned libraries</tspan>
+</text>
+<text x="70" y="1405" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="70" dy="0" xml:space="preserve">Ready for application integration</tspan>
+</text>
+<polyline points="240,1025 240,1065" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="240,1160 240,1200" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<polyline points="240,1295 240,1335" fill="none" stroke="#a9b7cb" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<text x="24" y="1461" fill="#a9b7cb" font-size="20" font-weight="400" text-anchor="start">
+<tspan x="24" dy="0" xml:space="preserve">Build tools can use multiple JVMs.</tspan>
+</text>
+</g>
+</svg>

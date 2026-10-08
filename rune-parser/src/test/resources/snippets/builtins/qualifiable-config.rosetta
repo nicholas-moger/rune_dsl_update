@@ -1,0 +1,4 @@
+namespace test.builtins
+
+isEvent root MyEvent;
+isProduct root MyProduct;

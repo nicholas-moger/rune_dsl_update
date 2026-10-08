@@ -1,0 +1,6 @@
+namespace test.twins.a
+
+typeAlias EvenNat: <"The SAME alias name + condition name as test.twins.b's - the two condition classes share a simple name (EvenNatNonNeg).">
+    number(fractionalDigits: 0)
+    condition NonNeg:
+        item >= 0

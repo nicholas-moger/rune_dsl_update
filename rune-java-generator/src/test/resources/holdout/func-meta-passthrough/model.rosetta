@@ -1,0 +1,14 @@
+namespace test.fmeta010
+
+type Bar:
+	b string (1..1)
+	[metadata scheme]
+	
+func Test:
+	inputs:
+		myInput string (1..1)
+		[metadata scheme]
+	output:
+		result Bar (1..1)
+	
+	set result -> b: myInput

@@ -1,0 +1,16 @@
+{
+  "entry_id": "ac8e311c-3cb0-4326-bc74-fa7204a7a2f9",
+  "corpus": "cdm",
+  "project": "base-model",
+  "version": "6.16.0",
+  "element_kind": "function",
+  "symbol": "__class_rule__:stringbuilder_stringconcat_equivalence",
+  "upstream_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "our_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "classification": "stylistic",
+  "rationale": "Class-rule entry per skill byte-diff-catalogue.md (local) section 4.3 (i)-(iii). Both javac and ECJ lower String + b + c + ... to either a StringBuilder.append() chain or invokedynamic StringConcatFactory depending on --release; both lowerings are valid bytecode for the same source per JVMS section 4. Equivalence class accepted under D19 (local) part 2 with M1 D41-C as the historical taxonomy anchor (~BOTH 1187/1241 body-diff finding pre-rebaseline, PR #6-#8 D11 convergence, 765/765 POJOs byte-identical when normalised). Sentinel hash pair (sha-256 of empty bytes) marks this as a class-rule rather than a per-occurrence entry; the __class_rule__: prefix on symbol is the discriminator. Future Layer-3 lookup must key on symbol prefix, not solely on hash pair.",
+  "status": "accepted",
+  "created_date": "2026-04-25",
+  "last_review": "2026-04-25",
+  "linked_issue": null
+}

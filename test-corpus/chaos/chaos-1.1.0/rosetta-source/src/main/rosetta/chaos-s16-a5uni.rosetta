@@ -1,0 +1,16 @@
+namespace chaos.s16.a5uni
+version "1.0.0"
+type C16Held: <"éüµ – Self-contained helper - relocated by the import axis.">
+    h string (1..1)
+type C16Alpha: <"Choice option 1 - its NAME is the shadowing battery's subject.">
+    a string (1..1)
+type C16Beta: <"Choice option 2.">
+    b string (1..1)
+choice C16Pick: <"The choice whose bare option names the rivals collide with.">
+    C16Alpha
+    C16Beta
+type A5UniProbe: <"Non-ASCII literal probe – müßig 試験.">
+    p string (0..1)
+        [label as "µ–label §7"]
+enum A5UniProbeEnum: <"displayName probe.">
+    V displayName "µ–„display“"

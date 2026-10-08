@@ -1,0 +1,64 @@
+namespace chaos.s29.a2qual
+version "1.0.0"
+import chaos.s29.a2qual.h.C29Leaf
+metaType scheme string
+type C29In1: <"Inner option 1.">
+    deep string (0..1)
+type C29In2: <"Inner option 2.">
+    deep string (0..1)
+choice C29Inner: <"The inner choice, reached through both outer options.">
+    C29In1
+    C29In2
+type C29Note: <"Outer option 1 - every attribute is shared with C29Wrap so the deep path resolves through both.">
+    text string (0..1)
+    leaves C29Leaf (0..*)
+    code string (0..1)
+        [metadata scheme]
+    codes string (0..*)
+        [metadata scheme]
+    inners C29Inner (0..*)
+type C29Wrap: <"Outer option 2 - the same attributes.">
+    text string (0..1)
+    leaves C29Leaf (0..*)
+    code string (0..1)
+        [metadata scheme]
+    codes string (0..*)
+        [metadata scheme]
+    inners C29Inner (0..*)
+choice C29Outer: <"The outer choice.">
+    C29Note
+    C29Wrap
+func C29LoL: <"A deep call on a LIST-OF-LISTS lambda item (seat 6's banked deep-path-lol-item) and a deep path chained through the inner choice.">
+    inputs:
+        outers C29Outer (0..*)
+    output:
+        vs number (0..*)
+    add vs: outers extract o [ o ->> inners ] then extract ins [ ins ->> deep then count ]
+    add vs: outers extract o [ o ->> inners ->> deep then count ]
+func C29InLambda: <"The meta ladder inside an extract lambda with an EXPLICIT filter parameter over deep paths (seat 5's InLambda - DECLARED at the byte bar).">
+    inputs:
+        outers C29Outer (0..*)
+    output:
+        picks string (0..*)
+    set picks:
+        outers extract o [
+            if o ->> code exists
+            then o ->> code
+            else o ->> codes then filter c [ c <> "void" ] then first
+        ]
+func C29Piped: <"then-pipes inside a lambda inside an alias over a deep receiver.">
+    inputs:
+        outers C29Outer (0..*)
+    output:
+        vs number (0..*)
+    alias piped: outers extract o [ o ->> leaves then filter l [ l -> v > 0 ] then extract l2 [ l2 -> v ] ] then flatten
+    add vs: piped
+type C29Bag: <"The rule and datarule carrier.">
+    outer C29Outer (0..1)
+    outers C29Outer (0..*)
+    condition C29DeepCond: <"A deep path in a data rule.">
+        if outer exists then outer ->> text exists
+reporting rule C29Texts from C29Bag: <"A deep path in a reporting rule body, and a deep path over a multi receiver.">
+    extract outers then extract item ->> text
+reporting rule C29Inner from C29Bag: <"A deep path chained through the inner choice in a rule.">
+    extract outer ->> inners ->> deep

@@ -1,0 +1,36 @@
+namespace chaos.s07.a2qual
+version "1.0.0"
+import chaos.s07.a2qual.h.C7Extra
+body Authority C7AUTH <"The chaos authority.">
+corpus Regulation "C7 Chaos Regulation" C7Reg <"The chaos corpus for the report seat.">
+segment c7article
+segment c7field
+type C7Trade: <"The report-from type - label annotations in both grammar forms.">
+    utid string (1..1)
+        [label as "The Trade UTI"]
+    notional number (0..1)
+    extra C7Extra (0..1)
+        [label for memo "The Extra Memo"]
+eligibility rule C7Eligible from C7Trade: <"Report when-gate.">
+    notional exists
+reporting rule C7Utid from C7Trade: <"Reported field with a label.">
+    extract utid
+        as "UTI"
+reporting rule C7Notional from C7Trade: <"Reported numeric with default.">
+    extract notional default 0
+        as "Notional"
+type C7Report: <"Report output type with rule references.">
+    utiField string (1..1)
+        [ruleReference C7Utid]
+    notionalField number (1..1)
+        [ruleReference C7Notional]
+corpus Standard "C7 Chaos Standard" C7Std <"The corpus the report's using-standard leg names (the oracle taught the target kind: RosettaCorpus).">
+rule source C7RS
+{
+}
+report C7AUTH C7Reg in T+1
+    from C7Trade
+    when C7Eligible
+    using standard C7Std
+    with type C7Report
+    with source C7RS

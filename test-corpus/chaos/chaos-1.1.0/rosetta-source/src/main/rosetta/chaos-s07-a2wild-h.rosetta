@@ -1,0 +1,4 @@
+namespace chaos.s07.a2wild.h
+version "1.0.0"
+type C7Extra: <"Self-contained helper - relocated by the import axis.">
+    memo string (1..1)

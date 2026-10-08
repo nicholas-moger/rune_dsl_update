@@ -1,0 +1,44 @@
+namespace chaos.s17.x26enum
+version "1.0.0"
+import chaos.s17.x26enum.rival.C17SideEnum
+type C17Held: <"Self-contained helper - relocated by the import axis.">
+    h string (1..1)
+enum C17SideEnum: <"First enum - owns Buy and Sell.">
+    Buy
+    Sell
+enum C17ActionEnum: <"Second enum in the SAME scope re-using Buy (the E2 wrong-enum class).">
+    Buy
+    Amend
+func C17Which: <"Bare enum-value switch guards - the resolver must pick the input's enum, not a rival.">
+    inputs:
+        s C17SideEnum (1..1)
+    output:
+        r string (1..1)
+    set r:
+        s switch
+            Buy then "side-buy",
+            Sell then "side-sell"
+func C17Act: <"Qualified enum-literal compares beside the bare-guard seat.">
+    inputs:
+        a C17ActionEnum (1..1)
+    output:
+        ok boolean (1..1)
+    set ok: a = C17ActionEnum -> Buy or a = C17ActionEnum -> Amend
+func C17Sift: <"A BARE enum comparand against the pipe item (v3.1 F15c) beside a qualified twin.">
+    inputs:
+        sides C17SideEnum (0..*)
+    output:
+        buys C17SideEnum (0..*)
+    add buys:
+        sides filter item = Buy
+    add buys:
+        sides filter item = C17SideEnum -> Sell
+type C17Books: <"Both colliding enums at attribute seats.">
+    side C17SideEnum (0..1)
+    action C17ActionEnum (0..1)
+    held C17Held (0..1)
+    condition C17Agree:
+        if side exists and action exists
+        then (side = C17SideEnum -> Buy and action = C17ActionEnum -> Buy)
+            or side = C17SideEnum -> Sell
+            or action = C17ActionEnum -> Amend

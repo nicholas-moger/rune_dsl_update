@@ -1,0 +1,10 @@
+namespace test.functions
+
+func BaseFunc:
+    inputs:
+        x number (1..1)
+    output:
+        result number (1..1)
+
+func ChildFunc extends BaseFunc:
+    set result: x + 1

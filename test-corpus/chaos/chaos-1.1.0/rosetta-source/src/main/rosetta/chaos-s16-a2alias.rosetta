@@ -1,0 +1,24 @@
+namespace chaos.s16.a2alias
+version "1.0.0"
+import chaos.s16.a2alias.h.* as C16HeldNs
+import chaos.s16.a2alias.h.C16Held
+type C16Alpha: <"Choice option 1 - its NAME is the shadowing battery's subject.">
+    a string (1..1)
+type C16Beta: <"Choice option 2.">
+    b string (1..1)
+choice C16Pick: <"The choice whose bare option names the rivals collide with.">
+    C16Alpha
+    C16Beta
+func C16Grab: <"Resolves C16Alpha at a type-guard switch seat - the resolution probe.">
+    inputs:
+        p C16Pick (1..1)
+    output:
+        s string (1..1)
+    set s:
+        p switch
+            C16Alpha then "was-alpha",
+            C16Beta then "was-beta",
+            default "neither"
+type C16Slot: <"Resolves C16Alpha at an attribute type seat.">
+    firstPick C16Alpha (0..1)
+    held C16Held (0..1)

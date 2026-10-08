@@ -1,0 +1,16 @@
+namespace chaos.s15.a2qual
+version "1.0.0"
+import chaos.s15.a2qual.h.C15Aux
+basicType c15token <"A model-declared basic type - normally builtin-only; ORACLE-ARBITRATED (charter S15).">
+basicType c15scaled(c15digits int) <"A parameterised model-declared basic type.">
+recordType c15span
+{
+	lo int
+	hi int
+}
+library function C15Half(x number) number
+library function C15Today() date
+type C15Carrier: <"Uses the model-declared builtins beside real ones.">
+    tok c15token (0..1)
+    span c15span (0..1)
+    aux C15Aux (0..1)

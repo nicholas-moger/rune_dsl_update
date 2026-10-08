@@ -1,0 +1,4 @@
+namespace chaos.s06.a2dangle.h
+version "1.0.0"
+type C6Tag: <"Self-contained helper - relocated by the import axis.">
+    caption string (1..1)

@@ -1,0 +1,133 @@
+# The L1 EXPECTED census - charter § 4 (anti-trivialisation bar: every row a
+# deliberate-by-design reason code; an expander artefact is NEVER admissible).
+# Ratified at PR-1 review and FROZEN; growth = a new review.
+# RE-RATIFIED for chaos-1.1.0 (v3.2 seat 10, PR #631 - D49): derived from the
+# l1-s10-run7 dump (oracle 9.83.0, 988 files, records=23875, 104 error rows over
+# 45 files; run8 byte-identical - the dump is deterministic x2; run5/run6 the
+# same rows at 987 files before s99 joined and the s24 / s27 re-admission edits,
+# run3/run4 at 986 before s98), every row printed by
+# target/v32-seat10-instruments/derive-expectations-s10.py (local) and copied
+# here with its reason code - never typed; the gate receipt:
+# target/chaos-expander/logs/l1-gate-s10-run7.txt (local). Every EXPECTED file
+# is ALSO judged ALONE once by pin-chaos-goldens.sh --judge-alone (the seat-9
+# exclusion class retired; the verdicts in judged-alone.tsv), as is every
+# MOJO-REFUSED file of mojo-refused.tsv (the § 4b two-oracles class: L1-clean,
+# generator-refused - s98's `empty as-key`).
+#
+# file<TAB>reason-code<TAB>expected-message-substring<TAB>rows
+#   rows = the PINNED kind-count multiset (e.g. LINKERR=1,VALIDERR=1)
+#   claimed by that row's substring - the cq review's MF-1: a silent
+#   heal OR growth of any occurrence is a verdict change (LAW 73).
+#   '-' on ORACLE-CLEAN rows (zero error rows asserted).
+#
+# THE FORK-SIDE HALVES (charter § 4b): the per-file fork data's single source
+# of truth is fork-diagnostics.tsv, asserted live by ChaosForkDiagnosticsGateTest
+# (the parse grain: the fork parser refuses exactly the a5bom files; since
+# chaos-1.1.0 the VALIDATOR grain too - the s9x band's FORK-REFUSES-VALIDATION
+# rows and the DECLARED FORK-ACCEPTS-DIVERGENT class, each row a priced
+# parser / resolver / validator seat).
+#
+# BOM-REFUSAL: upstream's lexer rejects a UTF-8 BOM before 'namespace'
+# ("extraneous input" at line 1). Deliberate: the refusal-parity probe - the
+# fork must refuse these files BY NAME too (§ 4b pins the fork's diagnostic).
+# One per A5-applicable family: s01-s34 (34 rows).
+chaos-s01-a5bom.rosetta	BOM-REFUSAL	extraneous input	LINKERR=1,VALIDERR=1
+chaos-s02-a5bom.rosetta	BOM-REFUSAL	extraneous input	LINKERR=1,VALIDERR=1
+chaos-s03-a5bom.rosetta	BOM-REFUSAL	extraneous input	LINKERR=1,VALIDERR=1
+chaos-s04-a5bom.rosetta	BOM-REFUSAL	extraneous input	LINKERR=1,VALIDERR=1
+chaos-s05-a5bom.rosetta	BOM-REFUSAL	extraneous input	LINKERR=1,VALIDERR=1
+chaos-s06-a5bom.rosetta	BOM-REFUSAL	extraneous input	LINKERR=1,VALIDERR=1
+chaos-s07-a5bom.rosetta	BOM-REFUSAL	extraneous input	LINKERR=1,VALIDERR=1
+chaos-s08-a5bom.rosetta	BOM-REFUSAL	extraneous input	LINKERR=1,VALIDERR=1
+chaos-s09-a5bom.rosetta	BOM-REFUSAL	extraneous input	LINKERR=1,VALIDERR=1
+chaos-s10-a5bom.rosetta	BOM-REFUSAL	extraneous input	LINKERR=1,VALIDERR=1
+chaos-s11-a5bom.rosetta	BOM-REFUSAL	extraneous input	LINKERR=1,VALIDERR=1
+chaos-s12-a5bom.rosetta	BOM-REFUSAL	extraneous input	LINKERR=1,VALIDERR=1
+chaos-s13-a5bom.rosetta	BOM-REFUSAL	extraneous input	LINKERR=1,VALIDERR=1
+chaos-s14-a5bom.rosetta	BOM-REFUSAL	extraneous input	LINKERR=1,VALIDERR=1
+chaos-s15-a5bom.rosetta	BOM-REFUSAL	extraneous input	LINKERR=1,VALIDERR=1
+chaos-s16-a5bom.rosetta	BOM-REFUSAL	extraneous input	LINKERR=1,VALIDERR=1
+chaos-s17-a5bom.rosetta	BOM-REFUSAL	extraneous input	LINKERR=1,VALIDERR=1
+chaos-s18-a5bom.rosetta	BOM-REFUSAL	extraneous input	LINKERR=1,VALIDERR=1
+chaos-s19-a5bom.rosetta	BOM-REFUSAL	extraneous input	LINKERR=1,VALIDERR=1
+chaos-s20-a5bom.rosetta	BOM-REFUSAL	extraneous input	LINKERR=1,VALIDERR=1
+chaos-s21-a5bom.rosetta	BOM-REFUSAL	extraneous input	LINKERR=1,VALIDERR=1
+chaos-s22-a5bom.rosetta	BOM-REFUSAL	extraneous input	LINKERR=1,VALIDERR=1
+chaos-s23-a5bom.rosetta	BOM-REFUSAL	extraneous input	LINKERR=1,VALIDERR=1
+chaos-s24-a5bom.rosetta	BOM-REFUSAL	extraneous input	LINKERR=1,VALIDERR=1
+chaos-s25-a5bom.rosetta	BOM-REFUSAL	extraneous input	LINKERR=1,VALIDERR=1
+chaos-s26-a5bom.rosetta	BOM-REFUSAL	extraneous input	LINKERR=1,VALIDERR=1
+chaos-s27-a5bom.rosetta	BOM-REFUSAL	extraneous input	LINKERR=1,VALIDERR=1
+chaos-s28-a5bom.rosetta	BOM-REFUSAL	extraneous input	LINKERR=1,VALIDERR=1
+chaos-s29-a5bom.rosetta	BOM-REFUSAL	extraneous input	LINKERR=1,VALIDERR=1
+chaos-s30-a5bom.rosetta	BOM-REFUSAL	extraneous input	LINKERR=1,VALIDERR=1
+chaos-s31-a5bom.rosetta	BOM-REFUSAL	extraneous input	LINKERR=1,VALIDERR=1
+chaos-s32-a5bom.rosetta	BOM-REFUSAL	extraneous input	LINKERR=1,VALIDERR=1
+chaos-s33-a5bom.rosetta	BOM-REFUSAL	extraneous input	LINKERR=1,VALIDERR=1
+chaos-s34-a5bom.rosetta	BOM-REFUSAL	extraneous input	LINKERR=1,VALIDERR=1
+#
+# COLLISION-CAPTURE: the A3xA6 interaction (split + in-file rival enum), and
+# since chaos-1.1.0 its A1xA6 twin (the rival declared FIRST in p2 - D49's
+# order question: the capture is NOT order-dependent, the multiset is the
+# same with the rival first). In the p2 file the RIVAL enum is declared
+# IN-FILE while the original is only imported - upstream binds the in-file
+# rival, whose value set lacks the original's second value, so the imported
+# guard's value is UNRESOLVED (s17: 'Sell'; s31: 'Short', where the switch
+# over the rival also misses its 'Hold' case). Upstream's own recorded
+# resolution answer for the E2 collision class (contrast a6enum, where the
+# rival is the IMPORTED one, the local original wins and the file is clean).
+# The fork must reproduce this binding AND these errors.
+chaos-s17-x36enum-p2.rosetta	COLLISION-CAPTURE	Couldn't resolve reference to RosettaFeature 'Sell'	LINKERR=2,VALIDERR=2
+chaos-s17-x16enum-p2.rosetta	COLLISION-CAPTURE	Couldn't resolve reference to RosettaFeature 'Sell'	LINKERR=2,VALIDERR=2
+chaos-s31-x36enum-p2.rosetta	COLLISION-CAPTURE	Couldn't resolve reference to	LINKERR=2,VALIDERR=2
+chaos-s31-x36enum-p2.rosetta	COLLISION-CAPTURE	Missing the following cases: Hold	VALIDERR=1
+chaos-s31-x16enum-p2.rosetta	COLLISION-CAPTURE	Couldn't resolve reference to	LINKERR=2,VALIDERR=2
+chaos-s31-x16enum-p2.rosetta	COLLISION-CAPTURE	Missing the following cases: Hold	VALIDERR=1
+#
+# ORACLE-CLEAN: the recorded S15-class verdict (charter § 2.2 S15: "the
+# verdict is recorded in expectations/, not assumed") - the model-declared
+# basicType / recordType / libraryFunction / parameterised-basicType family
+# is UPSTREAM-CLEAN at 9.83.0; the gate asserts these files carry ZERO error
+# rows, so the verdict fails loud if it ever stops holding.
+chaos-s15-base.rosetta	ORACLE-CLEAN	-	-
+chaos-s15-a1o1.rosetta	ORACLE-CLEAN	-	-
+# chaos-1.1.0 (D49): s95 was authored INTO the refusal-parity band on the
+# seat-8 banking "upstream refuses a DUPLICATE closure-parameter name
+# (`reduce a, a [ ... ]`)" - and the released 9.83.0 validator ACCEPTS it
+# (zero error rows at l1-s10-run1..4; the 'Duplicate name.' refusal is the
+# NESTED shadow's, s96). Recorded as an upstream-CLEAN verdict: the file gets
+# goldens like any other, and what the plugin emits for the duplicate
+# parameter is the finding the pin run reports.
+chaos-s95-base.rosetta	ORACLE-CLEAN	-	-
+# chaos-1.1.0 (D49, the re-admission cycle): s99 is THE JAVA.LANG SHADOW -
+# alias Int + condition eger = a data-rule class named Integer, which shadows
+# java.lang.Integer for every sibling class of its package. The released
+# 9.83.0 validator ACCEPTS the model (zero error rows at l1-s10-run7/8) and
+# its generator emits goldens that do NOT compile (the cell's
+# noncompiling-goldens.txt register; the fork refuses the shape at
+# BOILERPLATE_NAME_COLLISION - the #624 round-3 a18 class). Moved out of s27
+# at seat 10 because the shadow poisoned s27's own boilerplate measurement.
+chaos-s99-base.rosetta	ORACLE-CLEAN	-	-
+#
+# REFUSAL-PARITY (chaos-1.1.0, D49): the base-only s9x band - one released-
+# plugin refusal per file, each judged ALONE by the pin script. The seed
+# INTENDS the diagnostic; the fork's own verdict per file is the § 4b data
+# (fork-diagnostics.tsv, measured by ChaosForkDiagnosticsGateTest at the
+# validator grain): a fork that ACCEPTS is a DECLARED divergence, priced.
+#   s90 a closure parameter named `e` (grammar; the seat-7 receipt)
+#   s91 a named-parameter inline function after `then` (grammar; seat 6)
+#   s92 an attribute named `e` (grammar; the seat-8 anchor fixture's first cut)
+#   s93 `eth -> av` inside a case arm (linker; seat 7)
+#   s94 bare-item arms joining to `any` (typing; seat 7)
+#   s96 the direct nested lambda shadow (validator 'Duplicate name.'; PR-1)
+#   s97 `with-meta` on a multi-cardinality argument (validator; seat 5's port)
+chaos-s90-base.rosetta	REFUSAL-PARITY	no viable alternative at input 'e'	LINKERR=1,VALIDERR=1
+chaos-s90-base.rosetta	REFUSAL-PARITY	Missing an expression.	VALIDERR=1
+chaos-s91-base.rosetta	REFUSAL-PARITY	no viable alternative at input 'p'	LINKERR=1,VALIDERR=1
+chaos-s91-base.rosetta	REFUSAL-PARITY	Couldn't resolve reference to RosettaSymbol 'items'	LINKERR=1,VALIDERR=1
+chaos-s91-base.rosetta	REFUSAL-PARITY	Missing an expression.	VALIDERR=1
+chaos-s92-base.rosetta	REFUSAL-PARITY	no viable alternative at input 'e'	LINKERR=1,VALIDERR=1
+chaos-s93-base.rosetta	REFUSAL-PARITY	Couldn't resolve reference to RosettaFeature	LINKERR=2,VALIDERR=2
+chaos-s94-base.rosetta	REFUSAL-PARITY	Cannot assign `any`	VALIDERR=2
+chaos-s96-base.rosetta	REFUSAL-PARITY	Duplicate name.	VALIDERR=1
+chaos-s97-base.rosetta	REFUSAL-PARITY	Expecting single cardinality	VALIDERR=1

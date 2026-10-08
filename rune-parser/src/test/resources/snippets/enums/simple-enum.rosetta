@@ -1,0 +1,5 @@
+namespace test.model
+
+enum DirectionEnum:
+    Up
+    Down displayName "DOWN"

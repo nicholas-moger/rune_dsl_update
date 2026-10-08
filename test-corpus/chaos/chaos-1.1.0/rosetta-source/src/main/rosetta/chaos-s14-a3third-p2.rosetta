@@ -1,0 +1,10 @@
+namespace chaos.s14.a3third.p2
+version "1.0.0"
+import chaos.s14.a3third.p1.*
+import chaos.s14.a3third.p3.*
+corpus Regulation "C14 Chaos Act" C14Act <"Primary corpus.">
+corpus Guidance C14Guide <"Secondary corpus without a display string.">
+segment c14article
+segment c14paragraph
+segment c14annex
+segment rationale

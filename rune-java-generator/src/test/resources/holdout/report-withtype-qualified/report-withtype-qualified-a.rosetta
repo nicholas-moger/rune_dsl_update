@@ -1,0 +1,26 @@
+namespace test.rwq.a
+version "0.0.0"
+
+body Authority RwqAUTH <"The authority.">
+corpus Regulation "Rwq Regulation" RwqReg <"The corpus.">
+segment rwqarticle
+
+type RwqTrade: <"The report-from type.">
+    utid string (1..1)
+        [label as "The Trade UTI"]
+    notional number (0..1)
+
+eligibility rule RwqEligible from RwqTrade: <"Report when-gate.">
+    notional exists
+reporting rule RwqUtid from RwqTrade: <"Reported field.">
+    extract utid
+        as "UTI"
+reporting rule RwqNotional from RwqTrade: <"Reported numeric with default.">
+    extract notional default 0
+        as "Notional"
+
+type RwqReport: <"Report output type with rule references.">
+    utiField string (1..1)
+        [ruleReference RwqUtid]
+    notionalField number (1..1)
+        [ruleReference RwqNotional]

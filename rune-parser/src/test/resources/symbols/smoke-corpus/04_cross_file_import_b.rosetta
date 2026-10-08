@@ -1,0 +1,5 @@
+namespace smoke.consumer
+import smoke.lib.*
+type Money:
+    currency Currency (1..1)
+    amount int (1..1)

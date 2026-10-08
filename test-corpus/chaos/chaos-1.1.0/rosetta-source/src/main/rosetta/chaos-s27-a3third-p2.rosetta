@@ -1,0 +1,34 @@
+namespace chaos.s27.a3third.p2
+version "1.0.0"
+import chaos.s27.a3third.p1.*
+import chaos.s27.a3third.p3.*
+typeAlias L: <"alias L + condition ists = the condition class Lists, a boilerplate import the validator writes (BOILERPLATE_NAME_COLLISION - seat 3's banked template seat). The java.lang-named probe (alias Int + condition eger = Integer) lives in s99 ALONE since seat 10: in this package it shadowed java.lang.Integer for every sibling class and poisoned the boilerplate measurement.">
+    number(fractionalDigits: 0)
+    condition ists:
+        item >= 0
+typeAlias Validation: <"+ Result = ValidationResult.">
+    number(fractionalDigits: 0)
+    condition Result:
+        item <= 1000000
+typeAlias Array: <"+ List = ArrayList.">
+    number(fractionalDigits: 0)
+    condition List:
+        item <> 7
+typeAlias C27Hol: <"+ der = C27Holder, the data class whose validator wires it (the header claim, #624 round 3).">
+    number(fractionalDigits: 0)
+    condition der:
+        item >= 0
+typeAlias In: <"+ ject = Inject, the annotation the class header writes first.">
+    number(fractionalDigits: 0)
+    condition ject:
+        item >= 0
+type C27Holder: <"Multi and single attributes of the boilerplate-named-condition aliases, plus attribute locals named i / o / results beside a multi conditioned alias (the scope's numbering law).">
+    l L (0..*)
+    vr Validation (0..1)
+    ar Array (0..*)
+    h C27Hol (0..1)
+    inj In (0..*)
+    i C27Nat (0..*)
+    o C27Nat (0..*)
+    results C27Nat (0..*)
+    ref C27Ref (0..1)

@@ -1,0 +1,37 @@
+namespace test.rsh.a
+version "0.0.0"
+
+body Authority RshAUTH <"The authority.">
+corpus Regulation "Rsh Regulation" RshReg <"The corpus.">
+segment rsharticle
+
+type RshTrade: <"The report-from type.">
+    utid string (1..1)
+        [label as "The Trade UTI"]
+    notional number (0..1)
+
+eligibility rule RshEligible from RshTrade: <"Report when-gate.">
+    notional exists
+reporting rule RshReport from RshTrade: <"A reporting rule that SHARES the report type's name, declared BEFORE the type.">
+    extract utid
+        as "UTI"
+reporting rule RshNotional from RshTrade: <"Reported numeric with default.">
+    extract notional default 0
+        as "Notional"
+
+type RshReport: <"Report output type whose name a reporting rule in the same namespace shares.">
+    utiField string (1..1)
+        [ruleReference RshReport]
+    notionalField number (1..1)
+        [ruleReference RshNotional]
+
+corpus Standard "Rsh Standard" RshStd <"The standard.">
+rule source RshRS
+{
+}
+report RshAUTH RshReg in T+1
+    from RshTrade
+    when RshEligible
+    using standard RshStd
+    with type RshReport
+    with source RshRS

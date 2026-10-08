@@ -1,0 +1,30 @@
+namespace test.voidmap
+version "1.0.0"
+
+// v3.2 seat 9 (F8, void-mapping-cast) - THE ORACLE GROUP, pinned from the RELEASED 9.83.0 plugin BEFORE the code.
+// The chaos s15 shape (36 declared rows: POJO + CARDINALITY_VALIDATOR + ONLY_EXISTS_VALIDATOR, 12 each): a type whose
+// attributes are typed by a MODEL-DECLARED `basicType` and a MODEL-DECLARED `recordType` - names with no Java counterpart.
+// The chaos golden renders java.lang.Void for both (getters, setters, fields, processBasic's class token, the validators'
+// casts); the fork rendered Object (RMissingType at GeneratorModel.astNodeToRType). The sub-shapes: the optional seat
+// (the seed's), the LIST seat and the REQUIRED seat of both kinds beside a real builtin.
+
+basicType vtoken <"A model-declared basic type - normally builtin-only (the chaos s15 charter shape).">
+
+recordType vspan
+{
+	lo int
+	hi int
+}
+
+type Carrier: <"The seed's shape: the model-declared builtins beside a real one, optional.">
+    tok vtoken (0..1)
+    span vspan (0..1)
+    name string (0..1)
+
+type ListCarrier: <"List cardinality over the model-declared types.">
+    toks vtoken (0..*)
+    spans vspan (0..*)
+
+type RequiredCarrier: <"Required cardinality over the model-declared types.">
+    tok vtoken (1..1)
+    span vspan (1..1)

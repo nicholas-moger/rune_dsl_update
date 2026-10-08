@@ -1,0 +1,23 @@
+namespace chaos.s32.a3third.p2
+version "1.0.0"
+import chaos.s32.a3third.p1.*
+import chaos.s32.a3third.p3.*
+type C32Keyworded: <"Attributes named after Java keywords at POJO seats (the func-java-keyword-attr class widened).">
+    class string (0..1)
+    long number (0..1)
+    char string (0..1)
+    this string (0..1)
+    new string (0..*)
+    private string (0..1)
+    return number (0..1)
+    package string (0..1)
+    null string (0..1)
+    var string (0..*)
+    abstract boolean (0..1)
+    throws string (0..1)
+    aux C32Aux (0..1)
+type List: <"A type named List - the model's List.java beside every sibling POJO's java.util.List import (the file-scope law at the POJO seat).">
+    items string (0..*)
+type C32Obj: <"An attribute named o - upstream's equals(Object o) shadows the field it reads (the #624 Clash.java class, reproduced bug-compat) - and one named Class (getClass()).">
+    o string (0..1)
+    Class string (0..1)

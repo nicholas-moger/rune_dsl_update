@@ -1,0 +1,21 @@
+namespace test.fmeta002
+
+metaType scheme string
+
+func A:
+	inputs:
+		myInput string (1..1)
+			[metadata scheme]
+  	output:
+    	result string (1..1)
+      		[metadata scheme]
+     set result: myInput
+
+func B:
+	inputs:
+		myInput string (1..1)
+			[metadata scheme]
+  	output:
+    	result string (1..1)
+  	set result:
+    	A(myInput) -> scheme

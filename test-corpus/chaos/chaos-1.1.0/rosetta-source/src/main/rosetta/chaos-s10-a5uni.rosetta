@@ -1,0 +1,16 @@
+namespace chaos.s10.a5uni
+version "1.0.0"
+type C10Aux: <"éüµ – Self-contained helper - relocated by the import axis.">
+    aux string (1..1)
+annotation c10approved: <"Bare marker annotation.">
+annotation c10owner: <"Annotation with attributes.">
+    team string (0..1)
+    tier number (0..1)
+annotation c10stage: <"Annotation with a prefix.">
+    [prefix C10Stage]
+    live boolean (0..1)
+type A5UniProbe: <"Non-ASCII literal probe – müßig 試験.">
+    p string (0..1)
+        [label as "µ–label §7"]
+enum A5UniProbeEnum: <"displayName probe.">
+    V displayName "µ–„display“"

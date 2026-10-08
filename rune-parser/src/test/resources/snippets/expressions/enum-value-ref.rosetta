@@ -1,0 +1,12 @@
+namespace test.expressions
+
+enum Direction:
+    Up
+    Down
+
+func GetDirection:
+    inputs:
+        x number (1..1)
+    output:
+        result Direction (1..1)
+    set result: Direction -> Up

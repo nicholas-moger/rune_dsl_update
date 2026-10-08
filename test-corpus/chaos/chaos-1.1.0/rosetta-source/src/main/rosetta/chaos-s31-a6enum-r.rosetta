@@ -1,0 +1,5 @@
+namespace chaos.s31.a6enum.rival
+version "1.0.0"
+enum C31SideEnum: <"RIVAL - a same-named enum in an imported namespace whose Long is the WRONG Long.">
+    Long
+    Hold

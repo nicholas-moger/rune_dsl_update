@@ -1,0 +1,6 @@
+namespace com.test.consumer
+
+import com.test.outer.*
+
+reporting rule DelegatesToFunc from com.test.outer.inner.Trade: <"Calls inner.IsSwap via non-aliased wildcard import">
+    extract inner.IsSwap

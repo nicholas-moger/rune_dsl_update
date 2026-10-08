@@ -1,0 +1,25 @@
+namespace chaos.s19.a3third.p3
+version "1.0.0"
+import chaos.s19.a3third.p1.*
+import chaos.s19.a3third.p2.*
+func C19Pick: <"A CONDITIONAL at a constructor-field seat (v3.1 F8) + a segment-set as-key from a bare value (F26).">
+    inputs:
+        n number (1..1)
+        p C19Part (1..1)
+    output:
+        w C19Whole (1..1)
+    set w:
+        C19Whole {
+            name: if n > 0 then "pos" else "neg",
+            opt: if n > 100 then n else empty,
+            ...
+        }
+    set w -> partRef: p as-key
+func C19Grid: <"Nested constructors inside list literals inside a constructor.">
+    inputs:
+        n number (1..1)
+    output:
+        ws C19Whole (0..*)
+    add ws:
+        [C19Whole { name: "a", scores: [n], ... },
+         C19Whole { name: "b", scores: [n, n * 2], ... }]

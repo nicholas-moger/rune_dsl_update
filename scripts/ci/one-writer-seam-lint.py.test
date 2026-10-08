@@ -1,0 +1,231 @@
+#!/usr/bin/env python3
+"""one-writer-seam-lint.py.test — the positive controls of the one-writer seam lint.
+
+PR #624 round 3 (the code-quality review's SF-1), round 4 (MF-1 / SF-1 / SF-2 / N-5), round 5
+(MF-1 / SF-1 / SF-2) and round 6 (cq MF-1 / N-4 / N-5 / N-7, spec N-5): every gate ships a companion that
+builds deliberately-broken inputs and asserts the gate FAILS on each — a gate nobody has seen fail is a
+gate nobody should trust. Sixteen cases over copies of the REAL sources in a temp dir:
+  1. the tree itself                                              -> exit 0 (the law holds at HEAD)
+  2. a second `output.put(` in another method of the base         -> exit 1 (two writers)
+  3. the one `output.put(` moved BEFORE `emit`                    -> exit 1 (the lower bound)
+  4. the seam declaration renamed                                 -> exit 1 (no seam to be inside of)
+  5. a subclass that writes the output map itself                 -> exit 1, ONE hit reported (a `output.put(`
+                                                                     in a comment beside it does not count)
+  6. the one `output.put(` moved just PAST `emit`'s closing brace -> exit 1 (the brace-matched UPPER bound —
+                                                                     inside the old 25-line window)
+  7. case 6 plus `char brace = '{';` inside `emit`                -> exit 1 (round-4 MF-1: the unlexed char
+                                                                     literal that had made the guard PASS)
+  8. a tree with a THIRD subclass that writes, found by discovery -> exit 1 naming it (round-4 SF-2), and NOT
+                                                                     naming two decoys that write too: one that
+                                                                     `extends FunctionGeneratorBase` under a comment
+                                                                     quoting the token, one quoting it in a text
+                                                                     block (round-5 SF-1: a decoy with no writer
+                                                                     could never be named, so the case could not fail)
+  9. case 6 plus a text block holding `{` inside `emit`           -> exit 1 (round-5 MF-1: the unlexed text block
+                                                                     that had made the guard PASS)
+ 10. the base plus a text block inside `emit` holding `}`,
+     `output.put(` and `extends FunctionGenerator` as DATA        -> exit 0 (a correct file is not failed on data)
+ 11. `emit` never closes                                          -> exit 1 (the undecidable-extent belt — round-5
+                                                                     SF-2 R4: deleting it made an undecidable extent
+                                                                     a silent OK)
+ 12. case 6 plus a block comment opened on a code line inside
+     `emit`, a `{` on its middle line, closed two lines later     -> exit 1 "not inside" (round-5 SF-2 R3: the block
+                                                                     state carried across lines)
+ 13. the known-subclass check over a tree whose ONLY problem is
+     the missing name (round-6 cq N-7): a control first, `--known`
+     naming the one subclass the tree holds                        -> exit 0; then naming one it does not -> exit 1
+                                                                     (round-5 SF-2 R5); an EMPTY `--known` -> exit 2
+                                                                     (round-6 cq N-2: a usage error, never a
+                                                                     silently skipped check)
+ 14. a text block still open at the end of `emit`                 -> exit 1 (an unterminated literal is undecidable)
+ 15. case 6 plus a text block inside `emit` closed by `\"\"\"\"`     -> exit 1 "never closes on its line" (round-6 cq
+                                                                     MF-1: javac closes the block at the FIRST three
+                                                                     quotes and rejects the fourth's literal as
+                                                                     unclosed - measured at javac 21; the masker had
+                                                                     blanked the rest of the line and PASSED the
+                                                                     writer past `emit`'s close)
+ 16. case 6 plus a text block inside `emit` opened by the escape
+     `\\u0022\\u0022\\u0022` and holding `{` (javac compiles it)     -> exit 1 "unicode escape" (round-6 spec N-5: JLS 3.3
+                                                                     translates the escape before lexing; the lint
+                                                                     reads the source untranslated, so it FAILS)
+Run from anywhere: python3 scripts/ci/one-writer-seam-lint.py.test
+Each case was seen to FAIL against a deliberately broken lint (the seat's mutation runs point this
+file at the broken copy through the env var ONE_WRITER_SEAM_LINT; the receipt
+target/v32-seat3-instruments/scratch/lint-mutations-r6.status, local): the round-5 lint (commit 17's) on
+13 / 15 / 16 and eighteen single-property mutations whose red sets cover 1 .. 16 between them (round-6 cq SF-1:
+the round-5 receipt had covered 8 .. 14 alone). The OK line names the lint it ran (round-6 cq N-5); an
+assertion of this file's own fails in its own voice, not a traceback (round-6 cq N-4).
+"""
+import io
+import os
+import shutil
+import subprocess
+import sys
+import tempfile
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+LINT = os.environ.get("ONE_WRITER_SEAM_LINT", os.path.join(HERE, "one-writer-seam-lint.py"))
+REPO = os.path.abspath(os.path.join(HERE, "..", ".."))
+BASE = os.path.join(REPO, "rune-java-generator", "src", "main", "java", "com", "regnosys", "rosetta",
+                    "generator", "java", "function", "FunctionGenerator.java")
+SUB = os.path.join(REPO, "rune-ir-java", "src", "main", "java", "com", "regnosys", "rosetta",
+                   "generator", "java", "ir", "IRFunctionGenerator.java")
+SEAM = "private void emit(Map<String, String> output, String filePath, String code, RFunction func) {"
+SEAM_PUT = "        output.put(filePath, code);\n"
+ANCHOR = "    public List<GenerationException> generateWithErrors(Map<String, String> output) {\n"
+TB = '"""'
+
+
+def run(args):
+    p = subprocess.run([sys.executable, LINT] + args, capture_output=True, text=True)
+    return p.returncode, (p.stdout + p.stderr).strip()
+
+
+def write(path, text):
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with io.open(path, "w", encoding="utf-8", newline="") as f:
+        f.write(text)
+
+
+def lint_label():
+    """The lint the run certifies, as the OK line prints it: repo-relative when it is under the repo, else
+    the absolute path the env hook named (round-6 cq N-5)."""
+    p = os.path.abspath(LINT)
+    try:
+        rel = os.path.relpath(p, REPO)
+    except ValueError:                    # another drive on Windows: no relative path exists (round-6 spec re-verification N-1)
+        rel = ".."
+    return (p if rel.startswith("..") else rel).replace(os.sep, "/")
+
+
+def emit_close_index(lines):
+    """The index of the line closing `emit` — the first `    }` at method indentation after the seam."""
+    start = next(i for i, l in enumerate(lines) if SEAM in l)
+    for j in range(start + 1, len(lines)):
+        if lines[j] == "    }":
+            return j
+    raise AssertionError("emit's closing brace not found")
+
+
+def main():
+    try:
+        return cases()
+    except AssertionError as e:                   # this file's own assertions, in its own voice (round-6 cq N-4)
+        print("one-writer-seam-lint.py.test: FAIL - " + str(e))
+        return 1
+
+
+def cases():
+    base = io.open(BASE, encoding="utf-8", newline="").read().replace("\r\n", "\n")
+    sub = io.open(SUB, encoding="utf-8", newline="").read().replace("\r\n", "\n")
+    assert base.count(SEAM) == 1, "the seam declaration must be present once in the tree's FunctionGenerator"
+    assert base.count(SEAM_PUT) == 1 and base.count(ANCHOR) == 1, "the seam's put / the generateWithErrors anchor"
+    tmp = tempfile.mkdtemp(prefix="one-writer-seam-")
+    failures = []
+
+    def expect(case, args, code_want, needle):
+        code, out = run(args)
+        if code != code_want or (needle and needle not in out):
+            failures.append("case %s expected exit %d with %r, got %d: %s" % (case, code_want, needle, code, out[-300:]))
+
+    def inside_emit(lines, inserted):
+        """The lines with `inserted` placed right after the seam declaration."""
+        s = next(i for i, l in enumerate(lines) if SEAM in l)
+        return lines[:s + 1] + inserted + lines[s + 1:]
+
+    try:
+        expect("1 (the tree)", [], 0, "OK - FunctionGenerator writes through emit() alone")
+        # 2. a second writer in another method
+        two = base.replace(ANCHOR, ANCHOR + '        output.put("x", "y");\n')
+        p2 = os.path.join(tmp, "two.java"); write(p2, two)
+        expect("2 (two writers)", ["--source", p2, "--subclass", SUB], 1, "found 2")
+        # 3. the one put moved BEFORE emit (the lower bound)
+        three = base.replace(SEAM_PUT, "").replace(ANCHOR, ANCHOR + '        output.put("x", "y");\n')
+        p3 = os.path.join(tmp, "three.java"); write(p3, three)
+        expect("3 (a writer before the seam)", ["--source", p3, "--subclass", SUB], 1, "not inside `emit`")
+        # 4. the seam renamed
+        four = base.replace(SEAM, SEAM.replace("emit(", "emitRenamed("))
+        p4 = os.path.join(tmp, "four.java"); write(p4, four)
+        expect("4 (the seam renamed)", ["--source", p4, "--subclass", SUB], 1, "declared exactly once")
+        # 5. a subclass that writes the map - ONE real hit; the comment beside it must not count (round-4 N-5)
+        five = sub + '\n// injected by the .test\n// output.put( inside a comment does not count\nclass Extra { void m(java.util.Map<String,String> output) { output.put("a", "b"); } }\n'
+        p5 = os.path.join(tmp, "five.java"); write(p5, five)
+        code, out = run(["--subclass", p5])
+        if code != 1 or "a subclass writes the output map itself" not in out or out.count("output.put(") != 1:
+            failures.append("case 5 (a writing subclass) expected exit 1 with exactly ONE hit reported, got %d: %s" % (code, out[-300:]))
+        # 6. the one put moved just PAST emit's closing brace (inside the old +25 window) - the brace-matched upper bound
+        lines = base.replace(SEAM_PUT, "").split("\n")
+        k = emit_close_index(lines)
+        six_lines = lines[:k + 1] + ['    void extraWriter(Map<String, String> output) { output.put("x", "y"); }'] + lines[k + 1:]
+        p6 = os.path.join(tmp, "six.java"); write(p6, "\n".join(six_lines))
+        expect("6 (a writer just past emit's close)", ["--source", p6, "--subclass", SUB], 1, "not inside `emit`")
+        # 7. case 6 plus a '{' char literal inside emit - round-4 MF-1's red test
+        seven_lines = inside_emit(six_lines, ["        char brace = '{'; /* { */ String s = \"{\";"])
+        p7 = os.path.join(tmp, "seven.java"); write(p7, "\n".join(seven_lines))
+        expect("7 (case 6 + a '{' char literal inside emit)", ["--source", p7, "--subclass", SUB], 1, "not inside `emit`")
+        # 8. discovery: a tree with a third subclass that writes, and two decoys that WRITE but are not subclasses -
+        # a decoy with no writer could never be named (round-5 SF-1), so both decoys carry one
+        root = os.path.join(tmp, "tree")
+        write(os.path.join(root, "mod-third", "src", "main", "java", "x", "Third.java"),
+              "package x;\npublic class Third extends FunctionGenerator {\n    void m(java.util.Map<String, String> output) { output.put(\"a\", \"b\"); }\n}\n")
+        write(os.path.join(root, "mod-clean", "src", "main", "java", "y", "Clean.java"),
+              "package y;\n/* extends FunctionGenerator in a comment does not count */\npublic class Clean extends FunctionGeneratorBase {\n"
+              "    void m(java.util.Map<String, String> output) { output.put(\"a\", \"b\"); }\n}\n")
+        write(os.path.join(root, "mod-text", "src", "main", "java", "z", "Texty.java"),
+              "package z;\npublic class Texty {\n    static final String T = " + TB + "\n        class Q extends FunctionGenerator {\n        " + TB + ";\n"
+              "    void m(java.util.Map<String, String> output) { output.put(\"a\", \"b\"); }\n}\n")
+        code, out = run(["--root", root])
+        if code != 1 or "Third.java" not in out:
+            failures.append("case 8 (a third subclass found by discovery) expected exit 1 naming Third.java, got %d: %s" % (code, out[-300:]))
+        if "Clean.java" in out or "Texty.java" in out:
+            failures.append("case 8: the discovery matched `extends FunctionGeneratorBase`, a comment or a text block: %s" % out[-300:])
+        # 9. case 6 plus a text block holding '{' inside emit - round-5 MF-1's red test
+        nine_lines = inside_emit(six_lines, ["        String tb = " + TB, "            { a brace in a text block", "            " + TB + ";"])
+        p9 = os.path.join(tmp, "nine.java"); write(p9, "\n".join(nine_lines))
+        expect("9 (case 6 + a text block holding '{' inside emit)", ["--source", p9, "--subclass", SUB], 1, "not inside `emit`")
+        # 10. a text block's body is DATA: a correct file carrying '}', the needle and the token inside one must PASS
+        ten_lines = inside_emit(base.split("\n"), ["        String tb = " + TB, "            } output.put(x, y); class Q extends FunctionGenerator {", "            " + TB + ";"])
+        p10 = os.path.join(tmp, "ten.java"); write(p10, "\n".join(ten_lines))
+        expect("10 (text-block data inside emit on a correct file)", ["--source", p10, "--subclass", SUB], 0, "OK - FunctionGenerator writes through emit() alone")
+        # 11. emit never closes - the undecidable-extent belt (round-5 SF-2 R4)
+        eleven_lines = inside_emit(base.split("\n"), ["        if (true) {"] * 5)
+        p11 = os.path.join(tmp, "eleven.java"); write(p11, "\n".join(eleven_lines))
+        expect("11 (emit never closes)", ["--source", p11, "--subclass", SUB], 1, "the extent is undecidable")
+        # 12. case 6 plus a block comment opened on a code line, a '{' on its middle line, closed two lines later (R3)
+        twelve_lines = inside_emit(six_lines, ["        int x = 1; /* a block comment opened on a code line", "        { a brace on the middle line", "        closed here */ int y = 2;"])
+        p12 = os.path.join(tmp, "twelve.java"); write(p12, "\n".join(twelve_lines))
+        expect("12 (case 6 + a multi-line block comment inside emit)", ["--source", p12, "--subclass", SUB], 1, "not inside `emit`")
+        # 13. the known-subclass check (R5) over a tree whose ONLY problem is the missing name (round-6 cq N-7): the control
+        # first - the one subclass the tree holds, found and clean - then a name it does not hold; an empty list is a usage error
+        quiet = os.path.join(tmp, "quiet")
+        write(os.path.join(quiet, "mod-quiet", "src", "main", "java", "q", "Quiet.java"), "package q;\npublic class Quiet extends FunctionGenerator {\n}\n")
+        expect("13 (control: the one known subclass found, the tree clean)", ["--root", quiet, "--known", "Quiet.java"], 0, "1 subclass file(s) write nothing: Quiet.java")
+        expect("13 (a known subclass the tree does not hold)", ["--root", quiet, "--known", "Quiet.java,Missing.java"], 1, "no longer finds the known subclasses")
+        expect("13 (an empty --known is a usage error)", ["--root", quiet, "--known", ""], 2, "--known needs at least one file name")
+        # 14. a text block still open at the end of the file
+        fourteen_lines = inside_emit(base.split("\n"), ["        String tb = " + TB])
+        p14 = os.path.join(tmp, "fourteen.java"); write(p14, "\n".join(fourteen_lines))
+        expect("14 (a text block still open at the end)", ["--source", p14, "--subclass", SUB], 1, "the masked source is undecidable")
+        # 15. case 6 plus a text block closed by FOUR quotes inside emit - round-6 cq MF-1's red test: javac closes the block at
+        # the first three and rejects the fourth's literal as unclosed (measured); the round-5 masker blanked the rest of the
+        # line (the `}` closing the `if`) and PASSED the writer past emit's close
+        fifteen_lines = inside_emit(six_lines, ["        if (func != null) {", "            String tb = " + TB, "                data", "                " + TB + '"; }'])
+        p15 = os.path.join(tmp, "fifteen.java"); write(p15, "\n".join(fifteen_lines))
+        expect("15 (case 6 + a text block closed by four quotes inside emit)", ["--source", p15, "--subclass", SUB], 1, "never closes on its line")
+        # 16. case 6 plus a text block OPENED by the unicode escape \\u0022 x3 (javac compiles it - JLS 3.3) holding '{' - round-6
+        # spec N-5's red test: the lint reads the source untranslated, so the escape is a FAIL, never a guess at the extent
+        sixteen_lines = inside_emit(six_lines, ["        String tb = \\u0022\\u0022\\u0022", "            { a brace behind an escaped delimiter", "            " + TB + ";"])
+        p16 = os.path.join(tmp, "sixteen.java"); write(p16, "\n".join(sixteen_lines))
+        expect("16 (case 6 + a text block opened by a unicode-escaped delimiter inside emit)", ["--source", p16, "--subclass", SUB], 1, "unicode escape")
+    finally:
+        shutil.rmtree(tmp, ignore_errors=True)
+    if failures:
+        for f in failures:
+            print("one-writer-seam-lint.py.test: FAIL - " + f)
+        return 1
+    print("one-writer-seam-lint.py.test: OK (16 cases; lint: %s)" % lint_label())
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

@@ -1,0 +1,156 @@
+#!/usr/bin/env bash
+# Smoke test — argument validation + integration test for the diff
+# workflow. Uses synthetic tmp tree fixtures (Copilot R14 F5) so the
+# missing-prereq + clean-diff + drift-diff paths are exercised
+# deterministically without depending on local corpus state.
+set -euo pipefail
+
+# Resolve REPO_ROOT regardless of cwd (Copilot R14 F12 — convention
+# alignment with scripts/ci/*.sh.test). Without this, the test fails
+# when invoked from any directory other than the repository root.
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+cd "$REPO_ROOT"
+
+SCRIPT="scripts/legacy-vs-fork/diff-as-cloned-vs-regen.sh"
+[[ -f "$SCRIPT" ]] || { echo "FAIL: $SCRIPT missing"; exit 1; }
+
+assert_reject() {
+    local arg="$1" label="$2"
+    if "$SCRIPT" "$arg" >/dev/null 2>&1; then
+        echo "FAIL: $SCRIPT should reject $label input: '$arg'"
+        exit 1
+    fi
+}
+
+# Path traversal
+assert_reject ".."          "path traversal '..'"
+assert_reject "cdm/../etc"  "embedded path traversal"
+
+# Regex bypass — pre-fix, `.*` matched the first cells.txt row and the
+# diff would have run against an unintended cell.
+assert_reject ".*"          "regex bypass '.*'"
+assert_reject "drr/.*"      "regex bypass 'drr/.*'"
+
+# Unknown cell — must fail with the literal-match awk check.
+assert_reject "fake/cell-99" "unknown cell"
+
+# Multi-arg invocation — extras would make users believe more cells diffed
+# than actually did. Reject with exit 2.
+set +e
+"$SCRIPT" cdm/cdm-6.15.0 extra-arg >/dev/null 2>&1
+rc=$?
+set -e
+if [ "$rc" -ne 2 ]; then
+    echo "FAIL: multi-arg rejection should exit 2, got $rc"
+    exit 1
+fi
+
+# Integration test (Copilot R14 F5) — exercise missing-prereq + clean +
+# drift paths against a synthetic tmp tree fixture. Replaces the prior
+# cdm/cdm-5.32.0-conditional pattern (which SKIPped on clean checkouts)
+# with a deterministic fixture that runs everywhere.
+TMP_HARNESS="$(mktemp -d -t diff-it.XXXXXX)"
+cleanup_integration() {
+    rm -rf "$TMP_HARNESS"
+}
+trap cleanup_integration EXIT
+
+CELL="testcorpus/synth-1.0.0"
+SYNTH_CELL_DIR="$TMP_HARNESS/corpus/$CELL"
+GOLDENS="$SYNTH_CELL_DIR/rosetta-source/src/generated"
+SNAP="${GOLDENS}-as-cloned"
+mkdir -p "$GOLDENS/java/com/example"
+mkdir -p "$SNAP/java/com/example"
+echo "synth-pom" > "$SYNTH_CELL_DIR/pom.xml"
+
+SYNTH_CELLS="$TMP_HARNESS/cells.txt"
+printf '%s|1.0.0\n' "$CELL" > "$SYNTH_CELLS"
+
+SYNTH_LOG="$TMP_HARNESS/logs"
+SYNTH_DIFFS="$TMP_HARNESS/diffs"
+SYNTH_SUMMARY="$TMP_HARNESS/summary.md"
+mkdir -p "$SYNTH_LOG" "$SYNTH_DIFFS"
+MARKER="$SYNTH_LOG/regen-$(echo "$CELL" | tr '/' '-').done"
+
+# Sub-case 1: missing-marker → exit 1 with "no legacy regen marker"
+echo "snapshot" > "$SNAP/java/com/example/Stub.java"
+echo "regen" > "$GOLDENS/java/com/example/Stub.java"
+set +e
+OUTPUT=$(TEST_CORPUS="$TMP_HARNESS/corpus" \
+    CELLS_FILE="$SYNTH_CELLS" \
+    LOG_DIR="$SYNTH_LOG" \
+    DIFF_DIR="$SYNTH_DIFFS" \
+    SUMMARY="$SYNTH_SUMMARY" \
+    "$SCRIPT" "$CELL" 2>&1)
+rc=$?
+set -e
+[ "$rc" -eq 1 ] || { echo "FAIL: missing-marker should exit 1, got $rc. Output: $OUTPUT"; exit 1; }
+echo "$OUTPUT" | grep -q "no legacy regen marker" || \
+    { echo "FAIL: missing-marker path not exercised. Output: $OUTPUT"; exit 1; }
+
+# Sub-case 2: clean diff (snapshot == regen, marker present) → exit 0 + verdict=clean
+echo "identical" > "$SNAP/java/com/example/Stub.java"
+echo "identical" > "$GOLDENS/java/com/example/Stub.java"
+date -u +%Y-%m-%dT%H:%M:%SZ > "$MARKER"
+set +e
+OUTPUT=$(TEST_CORPUS="$TMP_HARNESS/corpus" \
+    CELLS_FILE="$SYNTH_CELLS" \
+    LOG_DIR="$SYNTH_LOG" \
+    DIFF_DIR="$SYNTH_DIFFS" \
+    SUMMARY="$SYNTH_SUMMARY" \
+    "$SCRIPT" "$CELL" 2>&1)
+rc=$?
+set -e
+[ "$rc" -eq 0 ] || { echo "FAIL: clean diff should exit 0, got $rc. Output: $OUTPUT"; exit 1; }
+echo "$OUTPUT" | grep -q "verdict=clean" || \
+    { echo "FAIL: clean diff verdict not reported. Output: $OUTPUT"; exit 1; }
+
+# Sub-case 3: drift diff (snapshot != regen, marker present) → exit 1 + verdict=drift
+echo "snapshot-version" > "$SNAP/java/com/example/Stub.java"
+echo "regen-version" > "$GOLDENS/java/com/example/Stub.java"
+set +e
+OUTPUT=$(TEST_CORPUS="$TMP_HARNESS/corpus" \
+    CELLS_FILE="$SYNTH_CELLS" \
+    LOG_DIR="$SYNTH_LOG" \
+    DIFF_DIR="$SYNTH_DIFFS" \
+    SUMMARY="$SYNTH_SUMMARY" \
+    "$SCRIPT" "$CELL" 2>&1)
+rc=$?
+set -e
+[ "$rc" -eq 1 ] || { echo "FAIL: drift diff should exit 1, got $rc. Output: $OUTPUT"; exit 1; }
+echo "$OUTPUT" | grep -q "verdict=drift" || \
+    { echo "FAIL: drift diff verdict not reported. Output: $OUTPUT"; exit 1; }
+DIFF_LOG_FILE="$SYNTH_DIFFS/diff-$(echo "$CELL" | tr '/' '-').log"
+[ -f "$DIFF_LOG_FILE" ] || { echo "FAIL: drift diff did not write $DIFF_LOG_FILE"; exit 1; }
+grep -q "CONTENT_DIFFERS:" "$DIFF_LOG_FILE" || \
+    { echo "FAIL: drift diff log missing CONTENT_DIFFERS details"; exit 1; }
+
+# ISO20022 sub-case (Copilot R15 F2) — exercise path-resolution branch
+# for iso20022/* cells which use rosetta-source/target/classes/generated
+# instead of src/generated.
+ISO_CELL="iso20022/synth-1.0.0"
+ISO_CELL_DIR="$TMP_HARNESS/corpus/$ISO_CELL"
+ISO_GOLDENS="$ISO_CELL_DIR/rosetta-source/target/classes/generated"
+ISO_SNAP="${ISO_GOLDENS}-as-cloned"
+mkdir -p "$ISO_GOLDENS/java/com/example/iso"
+mkdir -p "$ISO_SNAP/java/com/example/iso"
+echo "identical-iso" > "$ISO_GOLDENS/java/com/example/iso/Stub.java"
+echo "identical-iso" > "$ISO_SNAP/java/com/example/iso/Stub.java"
+echo "iso-pom" > "$ISO_CELL_DIR/pom.xml"
+printf '%s|1.0.0\n%s|1.0.0\n' "$CELL" "$ISO_CELL" > "$SYNTH_CELLS"
+ISO_MARKER="$SYNTH_LOG/regen-$(echo "$ISO_CELL" | tr '/' '-').done"
+date -u +%Y-%m-%dT%H:%M:%SZ > "$ISO_MARKER"
+set +e
+OUTPUT=$(TEST_CORPUS="$TMP_HARNESS/corpus" \
+    CELLS_FILE="$SYNTH_CELLS" \
+    LOG_DIR="$SYNTH_LOG" \
+    DIFF_DIR="$SYNTH_DIFFS" \
+    SUMMARY="$SYNTH_SUMMARY" \
+    "$SCRIPT" "$ISO_CELL" 2>&1)
+rc=$?
+set -e
+[ "$rc" -eq 0 ] || { echo "FAIL: iso20022 clean diff should exit 0, got $rc. Output: $OUTPUT"; exit 1; }
+echo "$OUTPUT" | grep -q "verdict=clean" || \
+    { echo "FAIL: iso20022 clean diff verdict not reported. Output: $OUTPUT"; exit 1; }
+
+echo "PASS: diff-as-cloned-vs-regen validation + integration (+ iso20022)"

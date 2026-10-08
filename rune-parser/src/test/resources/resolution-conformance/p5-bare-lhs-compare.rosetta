@@ -1,0 +1,34 @@
+namespace conformance.p5
+version "1.0.0"
+
+// P5 — a BARE enum value on the LEFT of `=`. Upstream's expected type flows
+// only INTO THE RIGHT operand (caseEqualsOperation handles the RIGHT
+// containment only), so a bare value on the left has no expected type and
+// cannot resolve. The fork's Cat 14 is deliberately SYMMETRIC ("the bare
+// operand may sit on either side"), so it binds where upstream refuses.
+//
+// Expected upstream: `Other5` UNRESOLVED (+ errors); the mirrored control in
+// P5RightControl resolves to RosettaEnumValue conformance.p5.Beta5.Other5.
+
+enum Beta5:
+    Other5
+    Extra5
+
+type Party5:
+    kind Beta5 (0..1)
+
+func P5BareLeftOperand:
+    inputs:
+        p Party5 (1..1)
+    output:
+        result boolean (0..1)
+    set result:
+        Other5 = p -> kind
+
+func P5RightControl:
+    inputs:
+        p Party5 (1..1)
+    output:
+        result boolean (0..1)
+    set result:
+        p -> kind = Other5

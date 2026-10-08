@@ -1,0 +1,65 @@
+namespace test.convbig
+
+func IsBig: <"Boolean helper for the bare-call condition (the chaos C4IsBig).">
+    inputs:
+        v number (1..1)
+    output:
+        big boolean (1..1)
+    set big: v > 1000000
+
+func ThenArm: <"The chaos C4Gate shape: the beyond-long literal at a set's then-arm.">
+    inputs:
+        v number (1..1)
+        w number (0..1)
+    output:
+        r number (1..1)
+    set r:
+        if IsBig(v)
+        then 9999999999999999999999999
+        else v + (w default 0)
+
+func ElseArm: <"The literal at the else-arm.">
+    inputs:
+        v number (1..1)
+    output:
+        r number (1..1)
+    set r:
+        if IsBig(v)
+        then v
+        else 9999999999999999999999999
+
+func Whole: <"A whole set, no conditional.">
+    inputs:
+        v number (1..1)
+    output:
+        r number (1..1)
+    set r: 9999999999999999999999999
+
+func ViaAlias: <"Through an alias.">
+    inputs:
+        v number (1..1)
+    output:
+        r number (1..1)
+    alias big: 9999999999999999999999999
+    set r:
+        if IsBig(v)
+        then big
+        else v
+
+func AddSeat: <"An add on a multi output.">
+    inputs:
+        v number (1..1)
+    output:
+        rs number (0..*)
+    add rs: v
+    add rs: 9999999999999999999999999
+
+func MultiThen: <"The then-arm on a multi output.">
+    inputs:
+        v number (1..1)
+    output:
+        rs number (0..*)
+    set rs:
+        if IsBig(v)
+        then 9999999999999999999999999
+        else v

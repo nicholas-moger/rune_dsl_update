@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  demo-harness-analytics — the FORK analytics lane (`plus-jvm`) for the Rune DSL stats demo.
+
+  Depends on rune-parser ONLY: the CONTRACTS section-5 queries are answered from the parsed
+  workspace, with no generator and no runtime involved. That is the point of the comparison.
+
+  THE `legacy-emf` LANE IS NOT IN THIS ARTIFACT, and cannot be. The fork and upstream rune-lang
+  both own the java package `com.regnosys.rosetta.*` with incompatible class shapes (verified:
+  the `parser`, `rosetta`, `types`, `utils` and `validation` sub-packages exist in BOTH
+  org.finos.rune:rune-parser:0.0.1-SNAPSHOT and org.finos.rune:rune-lang:9.83.0), so a single
+  module declaring both dependencies produces a classpath on which Guice dies at graph
+  construction — the failure recorded in scripts/xtext-oracle/pom.xml.
+
+  The legacy analytics lane therefore ships inside demo-harness-legacy, which already has
+  exactly the classpath it needs, under main class demo.harness.analytics.legacy.Main. Both
+  lanes emit the identical CONTRACTS section-4 `analytics` metric shape and run the identical
+  query code (Queries.java, duplicated byte-for-byte apart from its package line), so the
+  cross-lane agreement check is unaffected. See README.md.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.finos.rune.demo</groupId>
+    <artifactId>demo-harness-analytics</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+
+    <name>Rune DSL stats demo :: analytics harness (fork, plus-jvm lane)</name>
+
+    <properties>
+        <maven.compiler.release>21</maven.compiler.release>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <rune.fork.version>0.0.1-SNAPSHOT</rune.fork.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.finos.rune</groupId>
+            <artifactId>rune-parser</artifactId>
+            <version>${rune.fork.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.6.1</version>
+                <executions>
+                    <execution>
+                        <id>copy-deps</id>
+                        <phase>package</phase>
+                        <goals><goal>copy-dependencies</goal></goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                            <includeScope>runtime</includeScope>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.4.1</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>demo.harness.analytics.Main</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

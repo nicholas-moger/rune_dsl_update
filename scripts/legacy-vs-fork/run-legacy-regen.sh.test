@@ -1,0 +1,175 @@
+#!/usr/bin/env bash
+# Smoke test — argument validation + integration test for the destructive
+# rm -rf java/ + mvn invocation + marker-write workflow (via PATH-based
+# mvn mock so the test runs in seconds without external state).
+set -euo pipefail
+
+# Resolve REPO_ROOT regardless of cwd (Copilot R14 F11 — convention
+# alignment with scripts/ci/*.sh.test). Without this, the test fails
+# when invoked from any directory other than the repository root.
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+cd "$REPO_ROOT"
+
+SCRIPT="scripts/legacy-vs-fork/run-legacy-regen.sh"
+[[ -f "$SCRIPT" ]] || { echo "FAIL: $SCRIPT missing"; exit 1; }
+
+assert_reject() {
+    local arg="$1" label="$2"
+    if "$SCRIPT" "$arg" >/dev/null 2>&1; then
+        echo "FAIL: $SCRIPT should reject $label input: '$arg'"
+        exit 1
+    fi
+}
+
+# Path traversal
+assert_reject ".."          "path traversal '..'"
+assert_reject "cdm/../etc"  "embedded path traversal"
+assert_reject "/etc"        "absolute path"
+
+# Regex bypass — pre-fix, these could match cells.txt rows and trigger
+# legacy plugin runs in unintended directories.
+assert_reject ".*"          "regex bypass '.*'"
+assert_reject "drr/.*"      "regex bypass 'drr/.*'"
+
+# Unknown cell — must fail before mvn dispatch.
+assert_reject "fake/cell-99" "unknown cell"
+
+# Multi-arg invocation rejected with exit 2.
+set +e
+"$SCRIPT" cdm/cdm-6.15.0 extra-arg >/dev/null 2>&1
+rc=$?
+set -e
+if [ "$rc" -ne 2 ]; then
+    echo "FAIL: multi-arg rejection should exit 2, got $rc"
+    exit 1
+fi
+
+# Integration test (Copilot R14 F6) — exercise the destructive workflow
+# (rm -rf java/, mvn invocation via PATH-based mock, marker write)
+# against a synthetic tmp tree. Verifies (1) regen-prereq check rejects
+# missing snapshot, (2) java/ tree cleared before mvn, (3) mvn mock
+# invoked successfully, (4) marker written on mvn success.
+TMP_HARNESS="$(mktemp -d -t regen-it.XXXXXX)"
+cleanup_integration() {
+    rm -rf "$TMP_HARNESS"
+}
+trap cleanup_integration EXIT
+
+CELL="testcorpus/synth-1.0.0"
+SYNTH_CELL_DIR="$TMP_HARNESS/corpus/$CELL"
+mkdir -p "$SYNTH_CELL_DIR/rosetta-source/src/generated/java/com/example"
+echo "stale" > "$SYNTH_CELL_DIR/rosetta-source/src/generated/java/com/example/Stale.java"
+echo "synth-pom" > "$SYNTH_CELL_DIR/pom.xml"
+
+# PATH-based mvn mock: a shell script that writes a fake .java file to
+# the cell's expected goldens path and exits 0. Runs from the cell
+# directory (script does `cd "$cell_dir"`), so we detect the layout
+# by inspecting $PWD's cell-rel prefix.
+#
+# iso20022 layout (Copilot R16 F2): iso20022/* cells emit to
+# rosetta-source/target/classes/generated/java; everything else uses
+# rosetta-source/src/generated/java. The original mock hardcoded the
+# src/generated path, so the iso20022 sub-case below wouldn't actually
+# exercise a successful iso regeneration — the harness's new R16 F1
+# snapshot_has_java check after mvn would catch the iso path's
+# missing emission as FAIL. By making the mock layout-aware, we
+# actually verify the iso success path end-to-end.
+MOCK_BIN="$TMP_HARNESS/bin"
+mkdir -p "$MOCK_BIN"
+cat > "$MOCK_BIN/mvn" <<'EOF'
+#!/usr/bin/env bash
+# Mock mvn — emit a fake .java file at the path the harness expects.
+# Detect iso20022 layout by checking $PWD (we're cd'd into the cell).
+if [[ "$PWD" == *"/iso20022/"* ]]; then
+    out="rosetta-source/target/classes/generated/java/com/example"
+else
+    out="rosetta-source/src/generated/java/com/example"
+fi
+mkdir -p "$out"
+echo "public class Emitted {}" > "$out/Emitted.java"
+exit 0
+EOF
+chmod +x "$MOCK_BIN/mvn"
+
+SYNTH_CELLS="$TMP_HARNESS/cells.txt"
+printf '%s|1.0.0\n' "$CELL" > "$SYNTH_CELLS"
+
+SYNTH_LOG="$TMP_HARNESS/logs"
+mkdir -p "$SYNTH_LOG"
+MARKER="$SYNTH_LOG/regen-$(echo "$CELL" | tr '/' '-').done"
+
+# Sub-case 1: missing snapshot → fail-fast (no mvn call)
+set +e
+PATH="$MOCK_BIN:$PATH" \
+TEST_CORPUS="$TMP_HARNESS/corpus" \
+CELLS_FILE="$SYNTH_CELLS" \
+LOG_DIR="$SYNTH_LOG" \
+    "$SCRIPT" "$CELL" >/dev/null 2>&1
+rc=$?
+set -e
+if [ "$rc" -eq 0 ]; then
+    echo "FAIL: regen without snapshot should fail-fast (got rc=0)"
+    exit 1
+fi
+[ ! -f "$MARKER" ] || { echo "FAIL: marker written despite missing-snapshot fail"; exit 1; }
+
+# Sub-case 2: snapshot present → full destructive workflow
+SNAP="$SYNTH_CELL_DIR/rosetta-source/src/generated-as-cloned"
+mkdir -p "$SNAP/java/com/example"
+echo "snapshot-content" > "$SNAP/java/com/example/Original.java"
+
+PATH="$MOCK_BIN:$PATH" \
+TEST_CORPUS="$TMP_HARNESS/corpus" \
+CELLS_FILE="$SYNTH_CELLS" \
+LOG_DIR="$SYNTH_LOG" \
+    "$SCRIPT" "$CELL" >/dev/null 2>&1
+
+# Assertion 1: pre-existing java/ tree (Stale.java) cleared before mvn
+[ ! -f "$SYNTH_CELL_DIR/rosetta-source/src/generated/java/com/example/Stale.java" ] || \
+    { echo "FAIL: stale java/ file not cleared before mvn"; exit 1; }
+
+# Assertion 2: mvn mock's emission landed
+[ -f "$SYNTH_CELL_DIR/rosetta-source/src/generated/java/com/example/Emitted.java" ] || \
+    { echo "FAIL: mvn mock emission missing"; exit 1; }
+
+# Assertion 3: snapshot dir untouched (regen reads it, doesn't modify)
+[ -d "$SNAP" ] || { echo "FAIL: snapshot dir destroyed by regen"; exit 1; }
+SNAP_CONTENT="$(cat "$SNAP/java/com/example/Original.java")"
+[ "$SNAP_CONTENT" = "snapshot-content" ] || \
+    { echo "FAIL: snapshot content corrupted by regen, got '$SNAP_CONTENT'"; exit 1; }
+
+# Assertion 4: marker written on mvn success
+[ -f "$MARKER" ] || { echo "FAIL: marker not written post-regen-success"; exit 1; }
+
+# ISO20022 sub-case (Copilot R15 F2) — exercise path-resolution branch
+# for iso20022/* cells which use rosetta-source/target/classes/generated
+# instead of src/generated.
+ISO_CELL="iso20022/synth-1.0.0"
+ISO_CELL_DIR="$TMP_HARNESS/corpus/$ISO_CELL"
+ISO_GOLDENS="$ISO_CELL_DIR/rosetta-source/target/classes/generated"
+ISO_SNAP="${ISO_GOLDENS}-as-cloned"
+mkdir -p "$ISO_GOLDENS/java/com/example/iso"
+mkdir -p "$ISO_SNAP/java/com/example/iso"
+echo "iso-stale" > "$ISO_GOLDENS/java/com/example/iso/Stale.java"
+echo "iso-snapshot" > "$ISO_SNAP/java/com/example/iso/Original.java"
+echo "iso-pom" > "$ISO_CELL_DIR/pom.xml"
+printf '%s|1.0.0\n%s|1.0.0\n' "$CELL" "$ISO_CELL" > "$SYNTH_CELLS"
+ISO_MARKER="$SYNTH_LOG/regen-$(echo "$ISO_CELL" | tr '/' '-').done"
+PATH="$MOCK_BIN:$PATH" \
+TEST_CORPUS="$TMP_HARNESS/corpus" \
+CELLS_FILE="$SYNTH_CELLS" \
+LOG_DIR="$SYNTH_LOG" \
+    "$SCRIPT" "$ISO_CELL" >/dev/null 2>&1
+[ ! -f "$ISO_GOLDENS/java/com/example/iso/Stale.java" ] || \
+    { echo "FAIL: iso20022 stale java/ not cleared"; exit 1; }
+[ -d "$ISO_SNAP" ] || { echo "FAIL: iso20022 snapshot destroyed by regen"; exit 1; }
+[ -f "$ISO_MARKER" ] || { echo "FAIL: iso20022 marker not written"; exit 1; }
+# Verify mvn mock's iso-layout emission landed (Copilot R16 F2):
+# without this assertion, an empty regen-output bug would slip
+# through because the script's R16 F1 snapshot_has_java check
+# would have rejected an empty path. Confirm the iso emission is
+# present at the target/classes/generated/java path.
+[ -f "$ISO_GOLDENS/java/com/example/Emitted.java" ] || \
+    { echo "FAIL: iso20022 mvn mock did not emit at $ISO_GOLDENS/java/com/example/Emitted.java"; exit 1; }
+
+echo "PASS: run-legacy-regen validation + integration (+ iso20022)"
